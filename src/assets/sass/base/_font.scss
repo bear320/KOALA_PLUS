@@ -1,0 +1,47 @@
+// <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet"/>
+$fontSize: 15px; //變數是數值型態
+
+// $fontFamily: "Noto Sans TC", sans-serif; //思源黑體
+$width: 1200px;
+
+$font_weight: "EL", "R";
+@each $weight in $font_weight {
+    @font-face {
+        font-family: "font-#{$weight}";
+        src: url("@/assets/sass/font/GenSenRounded-#{$weight}.ttc");
+    }
+}
+
+html {
+    font-size: 15px;
+    h1 {
+        font-size: 3rem;
+        color: #333;
+    }
+    h2 {
+        font-size: 2.4rem;
+    }
+    h3 {
+        font-size: 1.6rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
+}
+@media screen and (min-width: 768px) {
+    html {
+        font-size: 12px;
+    }
+    h1 {
+        font-size: 3rem;
+    }
+    h2 {
+        font-size: 2.4rem;
+    }
+    h3 {
+        font-size: 1.6rem;
+    }
+    h4 {
+        font-size: 1.2rem;
+    }
+}
