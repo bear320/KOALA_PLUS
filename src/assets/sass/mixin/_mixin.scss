@@ -1,0 +1,7 @@
+@mixin size($w, $h) {
+    width: $w;
+    height: $h;
+}
+@mixin btnSize($w) {
+    padding: 5px $w;
+}
