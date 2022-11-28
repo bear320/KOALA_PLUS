@@ -1,0 +1,63 @@
+@import "../base/color";
+
+//btn
+%btn {
+    border-radius: 10px;
+    border: solid 0.5px $btn-color;
+    color: $btn-color;
+    font-size: 1.2rem;
+    box-shadow: 0px 2px 2px 2px rgba(101, 101, 101, 0.2);
+    user-select: none;
+    cursor: pointer;
+
+    &:hover {
+        font-weight: 700;
+    }
+}
+
+.btn {
+    &-paramy {
+        @extend %btn;
+        background-color: $btn-color;
+        color: $bg-color;
+
+        &:active {
+            box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.2),
+                inset 0px 2px 2px 2px rgba(0, 0, 0, 0.2);
+        }
+    }
+
+    &-secondary {
+        @extend %btn;
+        background-color: $btn-light-color;
+
+        &:hover {
+            background-color: $btn-color;
+            color: white;
+        }
+    }
+
+    &-lowest {
+        @extend %btn;
+        color: $btn-color;
+        background-color: #fbfef9;
+
+        &:hover {
+            background-color: $btn-light-color;
+        }
+    }
+}
+
+//input
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+    input[type="checkbox"],
+    input[type="radio"] {
+        outline: none;
+        display: inline-block;
+        // vertical-align: top;
+        // position: relative;
+        // margin: 0;
+        cursor: pointer;
+        border: 1px solid $btn-color;
+    }
+}
