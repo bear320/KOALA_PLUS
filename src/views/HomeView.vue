@@ -21,7 +21,6 @@
 
 <script>
 // @ is an alias to /src
-<<<<<<< HEAD
 /* import HelloWorld from "@/components/HelloWorld.vue"; */
 
 export default {
@@ -29,14 +28,5 @@ export default {
     components: {
         HelloWorld,
     }, */
-=======
-import HelloWorld from "@/components/HelloWorld.vue";
-
-export default {
-    name: "HomeView",
-    components: {
-        HelloWorld,
-    },
->>>>>>> 55fb02b90c1a6e4bf06610dafd250766f63d92d7
 };
 </script>
