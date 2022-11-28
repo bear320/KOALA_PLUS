@@ -1,1 +1,16 @@
-@import "commponts/btn";
+// base
+@import "base/color";
+@import "base/common";
+@import "base/font";
+
+//commponts
+@import "components/btn";
+@import "components/card";
+@import "components/form";
+
+//layout
+@import "layout/header";
+@import "layout/footer";
+
+//mixin
+@import "mixin/mixin";

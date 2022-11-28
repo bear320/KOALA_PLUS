@@ -1,46 +1,17 @@
-.btn-lowest, .btn-secondary, .btn-paramy {
-  border-radius: 10px;
-  border: solid 0.5px #33717d;
-  color: #33717d;
-  font-size: 1.2rem;
-  box-shadow: 0px 2px 2px 2px rgba(101, 101, 101, 0.2);
-  user-select: none;
-  cursor: pointer;
-}
-.btn-lowest:hover, .btn-secondary:hover, .btn-paramy:hover {
-  font-weight: 700;
-}
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 8 | @import "components/card";
+ *   |         ^^^^^^^^^^^^^^^^^
+ *   '
+ *   src\assets\sass\style.scss 8:9  root stylesheet */
 
-.btn-paramy {
-  background-color: #33717d;
-  color: #fbfef9;
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 8 \2502  @import \"components/card\";\d\a   \2502          ^^^^^^^^^^^^^^^^^\a   \2575 \a   src\\assets\\sass\\style.scss 8:9  root stylesheet";
 }
-.btn-paramy:active {
-  box-shadow: 0px 2px 2px 2px rgba(0, 0, 0, 0.2), inset 0px 2px 2px 2px rgba(0, 0, 0, 0.2);
-}
-.btn-secondary {
-  background-color: #dfebeb;
-}
-.btn-secondary:hover {
-  background-color: #33717d;
-  color: white;
-}
-.btn-lowest {
-  color: #33717d;
-  background-color: #fbfef9;
-}
-.btn-lowest:hover {
-  background-color: #dfebeb;
-}
-
-@supports (-webkit-appearance: none) or (-moz-appearance: none) {
-  input[type=checkbox],
-  input[type=radio] {
-    outline: none;
-    display: inline-block;
-    cursor: pointer;
-    border: 1px solid #33717d;
-  }
-}
-
-/*# sourceMappingURL=style.css.map */
