@@ -13,18 +13,23 @@ $font_weight: "EL", "R";
 }
 
 html {
+    font-family: font-EL;
     font-size: 15px;
     h1 {
+        font-family: font-R;
         font-size: 3rem;
         color: #333;
     }
     h2 {
+        font-family: font-R;
         font-size: 2.4rem;
     }
     h3 {
+        font-family: font-R;
         font-size: 1.6rem;
     }
     h4 {
+        font-family: font-R;
         font-size: 1.2rem;
     }
 }
