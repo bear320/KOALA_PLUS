@@ -1,4 +1,5 @@
-@mixin size($w, $h) {
-    width: $w;
-    height: $h;
+@import "color";
+::selection {
+    background-color: $darkgreen;
+    color: $bg-color;
 }
