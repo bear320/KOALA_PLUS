@@ -69,20 +69,19 @@
     }
 }
 
-//input
+//input checkbox radio
 @supports (-webkit-appearance: none) or (-moz-appearance: none) {
     input[type="checkbox"],
     input[type="radio"] {
         --active: $btn-color;
         --active-inner: #fff;
-        --focus: 2px $btn-light-color;
         --border: $btn-color;
         --border-hover: $btn-color;
         --background: #fff;
         --disabled: $btn-disable;
         --disabled-inner: $btn-disable;
-        -webkit-appearance: none;
-        -moz-appearance: none;
+
+        appearance: none;
         height: 21px;
         outline: none;
         display: inline-block;
@@ -205,4 +204,23 @@
             --s: 0.5;
         }
     }
+}
+
+//input text
+input[type="text"] {
+    border: solid 1px $btn-light-color;
+    border-radius: 10px;
+    padding: 5px;
+    font-size: 1.2rem;
+    transition: 0.5s;
+
+    &:active {
+        border: solid 1px $btn-color;
+    }
+}
+
+//select
+select {
+    appearance: none;
+    // background-image:
 }
