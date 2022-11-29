@@ -1,6 +1,6 @@
 <template>
-    <header class="container">
-        <nav>
+    <header>
+        <nav class="container">
             <div class="logo">
                 <img src="../img/logo.svg" alt="KOALA+" />
             </div>
@@ -18,16 +18,18 @@ export default {
 </script>
 
 <style lang="scss">
-nav {
+header {
     box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-    @include size(100%, 60px);
+    nav {
+        @include size(100%, 60px);
 
-    .logo {
-        @include size(150px, auto);
-        margin-left: 10%;
+        .logo {
+            @include size(12%, auto);
+            margin-left: 5%;
 
-        img {
-            @include size(100%, 100%);
+            img {
+                @include size(100%, 100%);
+            }
         }
     }
 }
