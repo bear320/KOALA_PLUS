@@ -1,0 +1,48 @@
+//手風琴 template請複製這段
+
+// <Collapse v-model="value">
+//         <Panel name="1">
+//             標題
+//             <template #content>內容</template>
+//         </Panel>
+//         <Panel name="2">
+//             標題
+//             <template #content>內容</template>
+//         </Panel>
+//         <Panel name="3">
+//             標題
+//             <template #content>內容</template>
+//         </Panel>
+//     </Collapse>
+
+@import "../base/color";
+
+.ivu-collapse {
+    width: 60%;
+    margin: 30px auto;
+    .ivu-collapse-item {
+        background-color: rgba(255, 255, 255, 1);
+        text-align: left;
+
+        .ivu-collapse-content {
+            border-top: none;
+            transition: 0.5s;
+            .ivu-collapse-content-box {
+                margin: 0 30px;
+            }
+        }
+    }
+    .ivu-collapse-item.ivu-collapse-item-active {
+        .ivu-collapse-header {
+            box-sizing: border-box;
+            border-top: solid 5px $green;
+            border-bottom: none;
+            font-weight: 700;
+            color: $green;
+
+            .ivu-icon {
+                color: $green;
+            }
+        }
+    }
+}
