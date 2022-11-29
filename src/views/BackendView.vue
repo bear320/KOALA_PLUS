@@ -1,5 +1,5 @@
 <template>
-    <div class="home">我是後台</div>
+    <div class="home">後台登入頁</div>
 </template>
 
 <script>
