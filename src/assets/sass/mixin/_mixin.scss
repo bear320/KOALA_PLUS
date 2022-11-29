@@ -5,3 +5,6 @@
 @mixin btnSize($w) {
     padding: 5px $w;
 }
+@mixin containerSize($w) {
+    width: 1200px;
+}
