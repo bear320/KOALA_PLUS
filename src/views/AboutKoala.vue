@@ -35,7 +35,14 @@
 </template>
 
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            value: "1",
+        };
+    },
+};
 </script>
-
-<style lang="scss"></style>
+<style lang="scss">
+@import "../assets/sass/base/_font";
+</style>
