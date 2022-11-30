@@ -3,9 +3,17 @@
     background-color: $darkgreen;
     color: $bg-color;
 }
-
+html {
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+}
+article {
+    padding-top: 60px !important;
+}
+section {
+    margin-top: 100px; //暫定
+}
 .container {
     width: 1200px;
     margin: 0 auto;
-    // border: solid 1px black;
 }
