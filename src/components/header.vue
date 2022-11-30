@@ -9,7 +9,7 @@
                 </div>
                 <div class="logo">
                     <router-link :to="{ path: '/home' }"
-                        ><img src="../img/logo.svg" alt="KOALA+"
+                        ><img src="../assets/images/logo.svg" alt="KOALA+"
                     /></router-link>
                 </div>
             </div>
@@ -25,7 +25,10 @@
                             :to="{ path: 'my-koala' }"
                             class="playgame"
                         >
-                            <img src="../img/playgame.svg" alt="" />
+                            <img
+                                src="../assets/images/header/playgame.svg"
+                                alt=""
+                            />
                         </router-link>
                     </li>
                 </ul>
@@ -96,7 +99,6 @@ header {
                 li {
                     padding: 20px;
                     a {
-                        font-size: 1.2rem;
                         font-weight: bold;
                         color: $darkgreen;
                         height: 100%;
@@ -111,7 +113,7 @@ header {
                             &::before {
                                 content: "　";
                                 width: 30px;
-                                background-image: url(../img/Leaf.svg);
+                                background-image: url(../assets/images/header/Leaf.svg);
                                 background-size: contain;
                                 margin-right: 10px;
                             }

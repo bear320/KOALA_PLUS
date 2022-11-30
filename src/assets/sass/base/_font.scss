@@ -1,8 +1,8 @@
+@import "color";
+
 // <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet"/>
-$fontSize: 15px; //變數是數值型態
 
 // $fontFamily: "Noto Sans TC", sans-serif; //思源黑體
-$width: 1200px;
 
 $font_weight: "EL", "R";
 @each $weight in $font_weight {
@@ -12,41 +12,73 @@ $font_weight: "EL", "R";
     }
 }
 
-html {
-    font-family: font-EL;
-    font-size: 15px;
-    h1 {
-        font-family: font-R;
-        font-size: 3rem;
-        color: #333;
-    }
-    h2 {
-        font-family: font-R;
-        font-size: 2.4rem;
-    }
-    h3 {
-        font-family: font-R;
-        font-size: 1.6rem;
-    }
-    h4 {
-        font-family: font-R;
-        font-size: 1.2rem;
+$h1: 45px;
+$h2: 36px;
+$h3: 24px;
+$h4: 18px;
+$p: 15px;
+
+@mixin rwd-h1 {
+    @media (max-width: 767px) {
+        font-size: 36px;
     }
 }
-@media screen and (min-width: 768px) {
-    html {
+@mixin rwd-h2 {
+    @media (max-width: 767px) {
+        font-size: 24px;
+    }
+}
+@mixin rwd-h3 {
+    @media (max-width: 767px) {
+        font-size: 18px;
+    }
+}
+@mixin rwd-h4 {
+    @media (max-width: 767px) {
+        font-size: 15px;
+    }
+}
+@mixin rwd-p {
+    @media (max-width: 767px) {
         font-size: 12px;
     }
+}
+
+html {
+    font-family: font-EL;
+    color: $font-color;
+    h1,
+    h2,
+    h3,
+    h4 {
+        font-family: font-R;
+    }
     h1 {
-        font-size: 3rem;
+        font-size: $h1;
+        @include rwd-h1;
     }
     h2 {
-        font-size: 2.4rem;
+        font-size: $h2;
+        @include rwd-h2;
     }
     h3 {
-        font-size: 1.6rem;
+        font-size: $h3;
+        @include rwd-h3;
     }
     h4 {
-        font-size: 1.2rem;
+        font-size: $h4;
+        @include rwd-h4;
+    }
+    p,
+    a {
+        font-size: $p;
+        @include rwd-p;
+    }
+    a {
+        color: $btn-color;
+        &:hover {
+            color: $green;
+            font-weight: 700;
+        }
     }
 }
