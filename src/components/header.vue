@@ -1,15 +1,17 @@
 <template>
-    <header>
+    <header id="navbar">
         <nav class="container">
-            <div class="hamburger" @click="toggle = !toggle">
-                <div class="hb"></div>
-                <div class="hb"></div>
-                <div class="hb"></div>
-            </div>
-            <div class="logo">
-                <router-link :to="{ path: '/home' }"
-                    ><img src="../img/logo.svg" alt="KOALA+"
-                /></router-link>
+            <div>
+                <div class="hamburger" @click="toggle = !toggle">
+                    <div class="hb"></div>
+                    <div class="hb"></div>
+                    <div class="hb"></div>
+                </div>
+                <div class="logo">
+                    <router-link :to="{ path: '/home' }"
+                        ><img src="../img/logo.svg" alt="KOALA+"
+                    /></router-link>
+                </div>
             </div>
             <div>
                 <ul class="list" :class="toggle ? 'show' : ''">
@@ -53,7 +55,8 @@ export default {
                 { name: "關於", sourc: "About" },
                 { name: "無尾熊百科", sourc: "AboutKoala" },
             ],
-            toggle: false,
+            toggle: true,
+            i: 0,
         };
     },
 };
@@ -61,8 +64,11 @@ export default {
 
 <style lang="scss" scoped>
 header {
-    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
     z-index: 999;
+    position: fixed;
+    background-color: #fff;
+    width: 100vw;
     nav {
         @include size(100%, 60px);
         box-sizing: border-box;
@@ -73,8 +79,7 @@ header {
             display: none;
         }
         .logo {
-            @include size(12%, auto);
-            margin-left: 5%;
+            @include size(100%, auto);
 
             img {
                 @include size(100%, 100%);
@@ -89,16 +94,31 @@ header {
                     padding: 20px;
                     a {
                         font-size: 1.2rem;
+                        font-weight: bold;
+                        color: $darkgreen;
+                        height: 100%;
 
                         &:hover {
                             color: $green;
+                        }
+                        &.router-link-exact-active {
+                            color: $green;
+                            transform: translate(-15px, 0);
+
+                            &::before {
+                                content: "　";
+                                width: 30px;
+                                background-image: url(../img/Leaf.svg);
+                                background-size: contain;
+                                margin-right: 10px;
+                            }
                         }
                     }
                 }
                 .playgame {
                     position: fixed;
                     top: 80%;
-                    left: 80%;
+                    user-select: none;
                     @include size(120px, auto);
 
                     img {
@@ -134,14 +154,41 @@ header {
                 flex-direction: column;
                 justify-content: space-between;
                 @include size(20px, 20px);
+                margin: auto 10px;
                 .hb {
                     border-top: solid 5px $green;
                 }
             }
-            .list {
-                @include size(100%, 70%);
-                flex-direction: column;
-                background-color: #fff;
+            .logo {
+                @include size(50%, auto);
+            }
+            div {
+                .list {
+                    @include size(100vw, 50vh);
+                    flex-direction: column;
+                    background-color: rgba(190, 214, 213, 0.6);
+                    backdrop-filter: blur(10px);
+                    @include absolute(65px, 0, 0, 0);
+                    box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
+                    transition: 1s;
+                    justify-content: space-around;
+
+                    li {
+                        transform: translate(0, 50%);
+
+                        .playgame {
+                            position: relative;
+                            top: auto;
+                            left: auto;
+                            width: 40vw;
+                            margin: auto;
+                            transform: translate(0, -20%);
+                        }
+                    }
+                }
+                .show {
+                    transform: translate(-200%, 0);
+                }
             }
         }
     }
