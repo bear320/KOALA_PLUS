@@ -1,5 +1,4 @@
 <template>
-    <Header />
     <article>
         <div>
             <h1>test測試</h1>
@@ -11,15 +10,6 @@
         </div>
     </article>
 </template>
-<script>
-import Header from "@/components/header.vue";
-export default {
-    name: "About",
-    components: {
-        Header,
-    },
-};
-</script>
 
 <style lang="scss">
 @import "../assets/sass/base/common";

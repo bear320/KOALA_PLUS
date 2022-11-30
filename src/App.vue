@@ -1,4 +1,5 @@
 <template>
+    <Header />
     <router-view />
 </template>
 
@@ -12,3 +13,13 @@
     text-align: center;
 }
 </style>
+
+<script>
+import Header from "@/components/header.vue";
+export default {
+    name: "",
+    components: {
+        Header,
+    },
+};
+</script>
