@@ -21,19 +21,22 @@
                         }}</router-link>
                     </li>
                     <li>
-                        <router-link :to="{ path: 'MyKoala' }" class="playgame">
+                        <router-link
+                            :to="{ path: 'my-koala' }"
+                            class="playgame"
+                        >
                             <img src="../img/playgame.svg" alt="" />
                         </router-link>
                     </li>
                 </ul>
                 <ul class="icon">
                     <li>
-                        <router-link :to="{ path: '/Cart1' }">
+                        <router-link :to="{ path: '/cart1' }">
                             <Icon type="md-cart" />
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{ path: '/Member' }">
+                        <router-link :to="{ path: '/member' }">
                             <Icon type="md-person" />
                         </router-link>
                     </li>
@@ -49,11 +52,11 @@ export default {
     data() {
         return {
             items: [
-                { name: "資助認養", sourc: "AllKoalas" },
-                { name: "周邊商城", sourc: "Shop" },
-                { name: "無尾熊園區", sourc: "KoalaPark" },
-                { name: "關於", sourc: "About" },
-                { name: "無尾熊百科", sourc: "AboutKoala" },
+                { name: "資助認養", sourc: "all-koalas" },
+                { name: "周邊商城", sourc: "shop" },
+                { name: "無尾熊園區", sourc: "koala-park" },
+                { name: "關於", sourc: "about" },
+                { name: "無尾熊百科", sourc: "about-koala" },
             ],
             toggle: true,
             i: 0,
