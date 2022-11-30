@@ -5,3 +5,13 @@
 @mixin btnSize($w) {
     padding: 5px $w;
 }
+@mixin containerSize($w) {
+    width: 1200px;
+}
+@mixin absolute($top, $bottom, $left, $right) {
+    position: absolute;
+    top: $top;
+    bottom: $bottom;
+    left: $left;
+    right: $right;
+}
