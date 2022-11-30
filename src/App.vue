@@ -12,16 +12,4 @@
     text-align: center;
     color: #2c3e50;
 }
-
-nav {
-    a {
-        font-weight: bold;
-        color: $darkgreen;
-        height: 100%;
-
-        &.router-link-exact-active {
-            color: $green;
-        }
-    }
-}
 </style>
