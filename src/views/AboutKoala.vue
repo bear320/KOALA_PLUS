@@ -1,4 +1,6 @@
 <template>
+    <Header />
+
     <Collapse v-model="value">
         <Panel name="1">
             問題：無尾熊的尾巴有什麼作用？
@@ -35,7 +37,12 @@
 </template>
 
 <script>
+import Header from "@/components/header.vue";
 export default {
+    name: "AboutKoala",
+    components: {
+        Header,
+    },
     data() {
         return {
             value: "1",
