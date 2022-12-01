@@ -15,3 +15,7 @@
     left: $left;
     right: $right;
 }
+@mixin borderLeft {
+    padding-left: 20px;
+    border-left: solid 5px $green;
+}
