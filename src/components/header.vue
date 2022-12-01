@@ -1,6 +1,6 @@
 <template>
     <header id="navbar">
-        <nav class="container">
+        <nav class="wrapper">
             <div>
                 <div class="hamburger" @click="toggle = !toggle">
                     <div class="hb"></div>
