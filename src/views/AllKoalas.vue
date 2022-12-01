@@ -14,7 +14,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 section:nth-child(1) {
     // margin-top: 60px;
     padding-top: 200px;
