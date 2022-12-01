@@ -1,12 +1,16 @@
 <template lang="">
-    <div>
+    <Header></Header>
+    <article>
         <image-slider :imgs="images"></image-slider>
-    </div>
+    </article>
 </template>
+
 <script>
+import Header from "@/components/header.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
 export default {
     components: {
+        Header,
         ImageSlider,
     },
     data() {

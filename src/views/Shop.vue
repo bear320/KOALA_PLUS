@@ -1,5 +1,5 @@
 <template lang="">
-    <Header></Header>
+    <Header />
     <article>
         <div class="banner-img"></div>
         <div class="container">
