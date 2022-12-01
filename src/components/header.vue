@@ -115,6 +115,7 @@ header {
                                 width: 30px;
                                 background-image: url(../assets/images/header/Leaf.svg);
                                 background-size: contain;
+                                background-repeat: no-repeat;
                                 margin-right: 10px;
                             }
                         }
