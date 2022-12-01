@@ -8,7 +8,7 @@ $font_weight: "EL", "R";
 @each $weight in $font_weight {
     @font-face {
         font-family: "font-#{$weight}";
-        src: url("@/assets/sass/font/GenSenRounded-#{$weight}.ttc");
+        src: url("@/assets/font/GenSenRounded-#{$weight}.ttc");
     }
 }
 
