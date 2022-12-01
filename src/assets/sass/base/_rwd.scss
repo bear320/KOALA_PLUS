@@ -1,8 +1,14 @@
 @media (max-width: 1199px) {
+    .container {
+        width: 95%;
+    }
 }
 
 @media (max-width: 767px) {
-    .container {
-        width: 95%;
+    section {
+        margin-top: 80px;
+    }
+    .banner {
+        height: 260px;
     }
 }

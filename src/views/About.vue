@@ -1,26 +1,109 @@
 <template>
     <Header />
     <article>
-        <div>
-            <h1>test測試</h1>
-            <h2>test測試</h2>
-            <h3>test測試</h3>
-            <h4>test測試</h4>
-            <p>test測試</p>
-            <a href="">test測試</a>
-        </div>
+        <div
+            class="banner"
+            :style="{
+                backgroundImage:
+                    'url(' + require('@/assets/images/about/banner.jpg') + ')',
+            }"
+        ></div>
+        <section>
+            <h1>About Us</h1>
+            <div class="container about">
+                <div class="about-btn">
+                    <a @click="curView = 'one'" :class="{ highLight: isChange }"
+                        >關於我們</a
+                    >
+                    <a @click="curView = 'two'" :class="{ highLight: isChange }"
+                        >資金運用</a
+                    >
+                    <a
+                        @click="(curView = 'three'), changeBox()"
+                        :class="{ highLight: isChange }"
+                        >創始初衷</a
+                    >
+                    <a
+                        @click="curView = 'four'"
+                        :class="{ highLight: isChange }"
+                        >合作夥伴</a
+                    >
+                </div>
+                <keep-alive class="about-content">
+                    <component :is="curView"></component>
+                </keep-alive>
+            </div>
+        </section>
     </article>
 </template>
+
 <script>
 import Header from "@/components/header.vue";
+import one from "@/components/aboutUs/one.vue";
+import two from "@/components/aboutUs/two.vue";
+import three from "@/components/aboutUs/three.vue";
+import four from "@/components/aboutUs/four.vue";
 export default {
-    name: "About",
     components: {
         Header,
+        one,
+        two,
+        three,
+        four,
+    },
+    data() {
+        return {
+            curView: one,
+            isChange: false,
+        };
+    },
+    methods: {
+        changeBox() {
+            this.isChange = !this.isChange;
+        },
     },
 };
 </script>
 
-<style lang="scss">
-@import "../assets/sass/base/common";
+<style lang="scss" scoped>
+html {
+    h1,
+    h2 {
+        font-family: "Inkfree";
+        font-size: 30vh;
+        color: $lightgreen;
+    }
+    section {
+        .about {
+            border-top: solid 1px $lightgreen;
+            border-bottom: solid 1px $lightgreen;
+            padding: 50px 10%;
+            display: flex;
+            justify-content: center;
+
+            .about-btn {
+                border-right: solid 1px $lightgreen;
+                width: 20%;
+                padding: 20px;
+
+                a {
+                    margin: 10px 0;
+                    display: block;
+                }
+            }
+            .about-content {
+                width: 80%;
+                vertical-align: middle;
+                padding: 40px;
+                text-align: left;
+            }
+        }
+        .highLight {
+            color: $green;
+            font-weight: 700;
+            // pointer-events: none;
+            @include borderLeft;
+        }
+    }
+}
 </style>
