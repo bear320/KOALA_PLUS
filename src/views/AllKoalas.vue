@@ -1,10 +1,6 @@
 <template>
     <Header />
-    <article>
-        <p>無尾熊總覽頁</p>
-        <p>無尾熊總覽頁</p>
-        <p>無尾熊總覽頁</p>
-        <p>無尾熊總覽頁</p>
+    <article class="container">
         <p>無尾熊總覽頁</p>
     </article>
 </template>
