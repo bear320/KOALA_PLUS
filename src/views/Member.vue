@@ -1,9 +1,8 @@
 <template>
     <Header />
     <div class="member">
-        <div class="mem-banner-img">
-            <img src="../assets/images/member/banner.jpg" alt="mem-banner" />
-        </div>
+        <div class="banner-img"></div>
+
         <section>
             <div class="tabs">
                 <ul class="tabs_list">
@@ -177,18 +176,24 @@ export default {
 
 <style lang="scss" scoped>
 // .member
-.mem-banner-img {
-    width: 100%;
+.banner-img {
+    background-size: cover;
+    background: url(@/assets/images/member/banner.jpg) no-repeat center/cover;
     height: 480px;
-    img {
-        margin-top: 60px;
-        height: 100%;
-        width: 100%;
-        vertical-align: middle;
-        object-fit: cover;
-        object-position: center center;
-    }
+    margin-bottom: 100px;
 }
+// .mem-banner-img {
+//     width: 100%;
+//     height: 480px;
+//     img {
+//         margin-top: 60px;
+//         height: 100%;
+//         width: 100%;
+//         vertical-align: middle;
+//         object-fit: cover;
+//         object-position: center center;
+//     }
+// }
 //tab
 .tabs {
     .tabs_list {
