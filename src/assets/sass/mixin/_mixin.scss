@@ -16,6 +16,11 @@
     right: $right;
 }
 @mixin borderLeft {
-    padding-left: 10px;
-    border-left: solid 5px $green;
+    &::before {
+        content: "";
+        border-left: solid 5px $green;
+        position: absolute;
+        left: 0;
+        height: 100%;
+    }
 }

@@ -1,9 +1,16 @@
 <template>
-    <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Voluptates
-        molestias modi cum magnam tempora amet maxime voluptatibus ex, sunt
-        ipsa. Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque a
-        reprehenderit eum error maiores earum corrupti placeat aliquid facere
-        rerum.
-    </p>
+    <div>
+        <h3>基金研究</h3>
+        <p>
+            自 1986 年成立以來，AKF 已為研究和保護項目（包括 KHA）撥款超過 1500
+            萬美元。這為製定良好的考拉保護管理決策提供了科學的信息基礎。
+        </p>
+        <h3>教育</h3>
+        <p>
+            資源提供給教育機構、團體和個人。正在進行的 AKF
+            宣傳/媒體發布所產生的公眾意識向公眾傳授考拉保護知識。 AKF
+            旨在讓全球公民對考拉產生自豪感和歸屬感，以便他們參與保護考拉。AKF
+            將其主要公共服務視為提供以科學為基礎且可靠的公共信息。
+        </p>
+    </div>
 </template>

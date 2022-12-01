@@ -12,20 +12,24 @@
             <h1>About Us</h1>
             <div class="container about">
                 <div class="about-btn">
-                    <a @click="curView = 'one'" :class="{ highLight: isChange }"
+                    <a
+                        @click="curView = 'one'"
+                        :class="{ highLight: curView === 'one' }"
                         >關於我們</a
                     >
-                    <a @click="curView = 'two'" :class="{ highLight: isChange }"
+                    <a
+                        @click="curView = 'two'"
+                        :class="{ highLight: curView === 'two' }"
                         >資金運用</a
                     >
                     <a
                         @click="(curView = 'three'), changeBox()"
-                        :class="{ highLight: isChange }"
+                        :class="{ highLight: curView === 'three' }"
                         >創始初衷</a
                     >
                     <a
                         @click="curView = 'four'"
-                        :class="{ highLight: isChange }"
+                        :class="{ highLight: curView === 'four' }"
                         >合作夥伴</a
                     >
                 </div>
@@ -53,15 +57,10 @@ export default {
     },
     data() {
         return {
-            curView: one,
-            isChange: false,
+            curView: "one",
         };
     },
-    methods: {
-        changeBox() {
-            this.isChange = !this.isChange;
-        },
-    },
+    methods: {},
 };
 </script>
 
@@ -84,11 +83,12 @@ html {
             .about-btn {
                 border-right: solid 1px $lightgreen;
                 width: 20%;
-                padding: 20px;
+                padding: 10px;
 
                 a {
                     margin: 10px 0;
                     display: block;
+                    position: relative;
                 }
             }
             .about-content {

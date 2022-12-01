@@ -58,7 +58,7 @@ export default {
                 { name: "資助認養", sourc: "all-koalas" },
                 { name: "周邊商城", sourc: "shop" },
                 { name: "無尾熊園區", sourc: "koala-park" },
-                { name: "關於", sourc: "about" },
+                { name: "關於我們", sourc: "about" },
                 { name: "無尾熊百科", sourc: "about-koala" },
             ],
             toggle: true,
