@@ -1,8 +1,8 @@
 <template>
     <Header />
-    <article>
+    <div class="nav-space wrapper">
         <h1>這頁才是前台首頁！！！</h1>
-    </article>
+    </div>
 </template>
 
 <script>
