@@ -96,6 +96,7 @@ header {
 
             .list {
                 display: flex;
+                align-items: center;
                 li {
                     a {
                         font-weight: bold;

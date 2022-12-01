@@ -39,20 +39,13 @@
 
 <script>
 import Header from "@/components/header.vue";
-export default {
-    components: {
-        Header,
-    },
-};
-</script>
-
-<script>
 import one from "@/components/aboutUs/one.vue";
 import two from "@/components/aboutUs/two.vue";
 import three from "@/components/aboutUs/three.vue";
 import four from "@/components/aboutUs/four.vue";
 export default {
     components: {
+        Header,
         one,
         two,
         three,
@@ -95,6 +88,7 @@ html {
 
                 a {
                     margin: 10px 0;
+                    display: block;
                 }
             }
             .about-content {
