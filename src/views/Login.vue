@@ -410,70 +410,70 @@ export default {
     z-index: 2;
 }
 
-@-webkit-keyframes animar_fondo {
-    from {
-        -webkit-transform: scale(1) translate(0px);
-        -moz-transform: scale(1) translate(0px);
-        -ms-transform: scale(1) translate(0px);
-        -o-transform: scale(1) translate(0px);
-        transform: scale(1) translate(0px);
-    }
-    to {
-        -webkit-transform: scale(1.5) translate(50px);
-        -moz-transform: scale(1.5) translate(50px);
-        -ms-transform: scale(1.5) translate(50px);
-        -o-transform: scale(1.5) translate(50px);
-        transform: scale(1.5) translate(50px);
-    }
-}
-@-o-keyframes identifier {
-    from {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
-        transform: scale(1);
-    }
-    to {
-        -webkit-transform: scale(1.5);
-        -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -o-transform: scale(1.5);
-        transform: scale(1.5);
-    }
-}
-@-moz-keyframes identifier {
-    from {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
-        transform: scale(1);
-    }
-    to {
-        -webkit-transform: scale(1.5);
-        -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -o-transform: scale(1.5);
-        transform: scale(1.5);
-    }
-}
-@keyframes identifier {
-    from {
-        -webkit-transform: scale(1);
-        -moz-transform: scale(1);
-        -ms-transform: scale(1);
-        -o-transform: scale(1);
-        transform: scale(1);
-    }
-    to {
-        -webkit-transform: scale(1.5);
-        -moz-transform: scale(1.5);
-        -ms-transform: scale(1.5);
-        -o-transform: scale(1.5);
-        transform: scale(1.5);
-    }
-}
+// @-webkit-keyframes animar_fondo {
+//     from {
+//         -webkit-transform: scale(1) translate(0px);
+//         -moz-transform: scale(1) translate(0px);
+//         -ms-transform: scale(1) translate(0px);
+//         -o-transform: scale(1) translate(0px);
+//         transform: scale(1) translate(0px);
+//     }
+//     to {
+//         -webkit-transform: scale(1.5) translate(50px);
+//         -moz-transform: scale(1.5) translate(50px);
+//         -ms-transform: scale(1.5) translate(50px);
+//         -o-transform: scale(1.5) translate(50px);
+//         transform: scale(1.5) translate(50px);
+//     }
+// }
+// @-o-keyframes identifier {
+//     from {
+//         -webkit-transform: scale(1);
+//         -moz-transform: scale(1);
+//         -ms-transform: scale(1);
+//         -o-transform: scale(1);
+//         transform: scale(1);
+//     }
+//     to {
+//         -webkit-transform: scale(1.5);
+//         -moz-transform: scale(1.5);
+//         -ms-transform: scale(1.5);
+//         -o-transform: scale(1.5);
+//         transform: scale(1.5);
+//     }
+// }
+// @-moz-keyframes identifier {
+//     from {
+//         -webkit-transform: scale(1);
+//         -moz-transform: scale(1);
+//         -ms-transform: scale(1);
+//         -o-transform: scale(1);
+//         transform: scale(1);
+//     }
+//     to {
+//         -webkit-transform: scale(1.5);
+//         -moz-transform: scale(1.5);
+//         -ms-transform: scale(1.5);
+//         -o-transform: scale(1.5);
+//         transform: scale(1.5);
+//     }
+// }
+// @keyframes identifier {
+//     from {
+//         -webkit-transform: scale(1);
+//         -moz-transform: scale(1);
+//         -ms-transform: scale(1);
+//         -o-transform: scale(1);
+//         transform: scale(1);
+//     }
+//     to {
+//         -webkit-transform: scale(1.5);
+//         -moz-transform: scale(1.5);
+//         -ms-transform: scale(1.5);
+//         -o-transform: scale(1.5);
+//         transform: scale(1.5);
+//     }
+// }
 
 /* LOGIN 裡面的 CONTENT */
 .cont_form_login {
