@@ -1,53 +1,54 @@
 <template lang="">
-    <article>
-        <div class="banner-img"></div>
-        <div class="container">
-            <div class="row">
-                <div class="col-4">
-                    <h1 class="title">週邊商城</h1>
-                    <div class="category-box">
-                        <div
-                            class="category-item"
-                            v-for="(category, index) in categories"
-                            :key="index"
-                            @click="changeCategory(category.category)"
-                        >
-                            {{ category.title }}
-                        </div>
+    <Header></Header>
+    <div class="nav-space">
+        <div class="banner-img banner"></div>
+    </div>
+    <div class="wrapper">
+        <div class="row">
+            <div class="col-4">
+                <h1 class="title">週邊商城</h1>
+                <div class="category-box">
+                    <div
+                        class="category-item"
+                        v-for="(category, index) in categories"
+                        :key="index"
+                        @click="changeCategory(category.category)"
+                    >
+                        {{ category.title }}
                     </div>
                 </div>
-                <div class="col-8">
-                    <div class="row">
-                        <product-card
-                            v-for="(item, index) in source"
-                            :key="item.id"
-                            :proImg="item.images[0]"
-                            :proName="item.name"
-                            :proPrice="item.price"
-                        ></product-card>
-                    </div>
-                    <div class="row">
-                        <div class="col-12 pagenation">
-                            <Icon type="md-skip-backward" />
-                            <Icon
-                                class="bgc"
-                                type="ios-arrow-back"
-                                @click="changePage()"
-                            />
-                            <input class="page" type="text" v-model="curPage" />
-                            of {{ pageTotal }} pages
-                            <Icon
-                                class="bgc"
-                                type="ios-arrow-forward"
-                                @click="changePage()"
-                            />
-                            <Icon type="md-skip-forward" />
-                        </div>
+            </div>
+            <div class="col-8">
+                <div class="row">
+                    <product-card
+                        v-for="(item, index) in source"
+                        :key="item.id"
+                        :proImg="item.images[0]"
+                        :proName="item.name"
+                        :proPrice="item.price"
+                    ></product-card>
+                </div>
+                <div class="row">
+                    <div class="col-12 pagenation">
+                        <Icon type="md-skip-backward" />
+                        <Icon
+                            class="bgc"
+                            type="ios-arrow-back"
+                            @click="changePage()"
+                        />
+                        <input class="page" type="text" v-model="curPage" />
+                        of {{ pageTotal }} pages
+                        <Icon
+                            class="bgc"
+                            type="ios-arrow-forward"
+                            @click="changePage()"
+                        />
+                        <Icon type="md-skip-forward" />
                     </div>
                 </div>
             </div>
         </div>
-    </article>
+    </div>
 </template>
 <script>
 import Header from "@/components/header.vue";
@@ -75,7 +76,6 @@ export default {
         $route: function (q) {
             this.getProduct(q.query);
             this.getPage(q.query);
-            console.log("網址變化了");
         },
     },
     methods: {
@@ -98,16 +98,12 @@ export default {
             }
         },
         getProduct(queryParam) {
-            let apiURL =
-                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours";
-
-            let isHaveCategory = queryParam.category;
-            let page = queryParam.page;
-
-            let test = isHaveCategory
-                ? `${apiURL}?category=${queryParam.category}&sort=name&limit=9&page=${page}`
-                : `${apiURL}?sort=name&limit=9&page=${page}`;
-            fetch(test)
+            const apiURL = new URL(
+                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours"
+            );
+            const searchParams = new URLSearchParams(queryParam);
+            apiURL.search = searchParams;
+            fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
                     this.source = json.dtat.tours;
@@ -129,11 +125,9 @@ export default {
                 .then((json) => {
                     this.pageTotal = Math.ceil(json.dtat.tours.length / 9);
                 });
-            console.log(test);
         },
         changePage() {
             if (this.curPage >= this.pageTotal) return;
-            console.log(this.$route.query.category);
             this.curPage += 1;
             if (!this.$route.query.category) {
                 this.$router.push({
@@ -154,17 +148,14 @@ export default {
         },
     },
     created() {
-        console.log(this.source);
-        this.getProduct(this.$route.query);
+        this.getProduct("?sort=name&limit=9&page=1");
         this.getPage(this.$route.query);
     },
 };
 </script>
 <style lang="scss" scoped>
 .banner-img {
-    background-size: cover;
     background: url(@/assets/images/shop/Koalas_2.png) no-repeat center/cover;
-    height: 480px;
     margin-bottom: 100px;
 }
 
