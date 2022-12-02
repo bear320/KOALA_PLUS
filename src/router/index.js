@@ -15,6 +15,11 @@ import MyKoala from "../views/MyKoala.vue";
 import Product from "../views/Product.vue";
 import Shop from "../views/Shop.vue";
 
+//後台
+import IndexBackstage from "../views/backStage/IndexBackstage.vue";
+// import Article from "../views/backStage/Article.vue";
+// import ArticleNew from "../views/backStage/ArticleNew.vue";
+
 const routes = [
     {
         path: "/",
@@ -25,11 +30,6 @@ const routes = [
         path: "/home",
         name: "home",
         component: HomeView,
-    },
-    {
-        path: "/backend",
-        name: "backend",
-        component: BackendView,
     },
     {
         path: "/about",
@@ -90,6 +90,16 @@ const routes = [
         path: "/shop",
         name: "shop",
         component: Shop,
+    },
+    {
+        path: "/backend",
+        name: "backend",
+        component: BackendView,
+    },
+    {
+        path: "/src/views/backStage/IndexBackstage.vue",
+        name: "indexbackstage",
+        component: IndexBackstage,
     },
 ];
 
