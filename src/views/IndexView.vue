@@ -1,5 +1,6 @@
 <template>
-    <div class="home">
+    <!-- <Header /> -->
+    <section>
         <router-link to="/home">前台</router-link>
         <router-link to="/backend">後台</router-link>
         <router-link to="/about">關於</router-link>
@@ -14,14 +15,19 @@
         <router-link to="/my-koala">我的無尾熊</router-link>
         <router-link to="/product">產品詳情</router-link>
         <router-link to="/shop">周邊商城</router-link>
-    </div>
+    </section>
 </template>
 
 <script>
-export default {};
+// import Header from "@/components/header.vue";
+export default {
+    components: {
+        // Header,
+    },
+};
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 a {
     display: block;
 }

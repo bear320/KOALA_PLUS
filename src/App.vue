@@ -1,5 +1,5 @@
 <template>
-    <Header />
+    <!-- <Header /> -->
     <router-view />
 </template>
 
@@ -15,11 +15,11 @@
 </style>
 
 <script>
-import Header from "@/components/header.vue";
+// import Header from "@/components/header.vue";
 export default {
-    name: "",
-    components: {
-        Header,
-    },
+    // name: "",
+    // components: {
+    //     Header,
+    // },
 };
 </script>

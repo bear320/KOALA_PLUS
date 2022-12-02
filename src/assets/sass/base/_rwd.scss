@@ -1,8 +1,19 @@
-@media (max-width: 1199px) {
+@media (max-width: 1200px) {
+    .container {
+        // width: 95%;
+        max-width: 1200px;
+    }
 }
 
-@media (max-width: 767px) {
-    .container {
-        width: 95%;
+@media (max-width: 768px) {
+    .banner {
+        height: 260px;
+    }
+    .nav-space {
+        padding-top: 80px;
+    }
+    .wrapper {
+        max-width: calc(100% - 80px);
+        margin: 0 auto;
     }
 }

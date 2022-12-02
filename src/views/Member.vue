@@ -1,15 +1,8 @@
 <template>
-    <div>能方便移動整個區塊到對應位置</div>
-    <p>能方便移動整個區塊到對應位置</p>
-    <h1>能方便移動整個區塊到對應位置</h1>
-    <h2>能方便移動整個區塊到對應位置</h2>
-    <h3>能方便移動整個區塊到對應位置</h3>
-    <h4>能方便移動整個區塊到對應位置</h4>
+    <Header />
     <div class="member">
-        <div class="mem-banner-img">
-            <img src="https://fakeimg.pl/1600x480/200" alt="mem-banner" />
-            <!-- <img src="../assets/Koala-banner.jpg" alt="mem-banner" /> -->
-        </div>
+        <div class="banner-img"></div>
+
         <section>
             <div class="tabs">
                 <ul class="tabs_list">
@@ -18,6 +11,7 @@
                         v-for="(item, index) in memsliding"
                         :key="index"
                     >
+                        <!-- :style="{ color: `#ffffff` }" 想要移動過去，字體會變成白色-->
                         {{ item }}
                     </li>
                     <li
@@ -30,18 +24,99 @@
                         class="tabs_content"
                         :style="{ left: `${currentTab * -100}%` }"
                     >
-                        <li class="mem_centre">
+                        <!-- 會員中心內容 -->
+                        <li class="mem_centre content">
                             <div class="mem_basic">
                                 <p>姓氏：Zeng</p>
                                 <p>名字：Charmy</p>
                                 <p>會員ID：P00001</p>
                             </div>
+                            <!-- 會員中心下方內容 -->
                             <div class="mem_main">
-                                <div>左邊</div>
-                                <div>右邊</div>
+                                <!-- 會員中心左邊內容  關於會員帳密內容-->
+                                <div class="tabcontent_txt_group">
+                                    <div class="subtitle">
+                                        <Icon type="ios-create-outline" />
+                                        <span>編輯會員資料</span>
+                                    </div>
+                                    <table class="tabcontent_group">
+                                        <tr class="tabcontent_txt">
+                                            <td>信箱</td>
+                                            <input
+                                                type="text"
+                                                id="mem_email"
+                                                myfield="mem_email"
+                                                value="chermy111@gmail.com"
+                                            />
+                                        </tr>
+                                        <tr class="tabcontent_txt">
+                                            <td>電話</td>
+                                            <input
+                                                type="text"
+                                                id="mem_tel"
+                                                myfield="mem_tel"
+                                                value="0988888888"
+                                            />
+                                        </tr>
+                                        <tr class="tabcontent_txt">
+                                            <td>信箱</td>
+                                            <input
+                                                type="text"
+                                                id="mem_add"
+                                                myfield="mem_add"
+                                                value="桃園市復興路46號8樓"
+                                            />
+                                        </tr>
+                                    </table>
+                                    <button class="btn-paramy">
+                                        編輯會員資料
+                                    </button>
+                                </div>
+                                <!-- 會員中心右邊內容 關於帳號密碼-->
+                                <div class="tabcontent_txt_group">
+                                    <div class="subtitle">
+                                        <Icon type="ios-create-outline" />
+                                        <span>重設會員密碼</span>
+                                        <p>
+                                            為了您的帳戶安全，密碼的長度必須至少為八個字符，並且包含字母和數字字符的任意組合。
+                                            密碼區分大小寫。
+                                            新密碼不能與舊密碼相同。
+                                        </p>
+                                    </div>
+                                    <table class="tabcontent_group">
+                                        <tr class="tabcontent_txt">
+                                            <td>帳號</td>
+                                            <input
+                                                type="text"
+                                                id="mem_account"
+                                                myfield="mem_email"
+                                                value="chermy111"
+                                            />
+                                        </tr>
+                                        <tr class="tabcontent_txt">
+                                            <td>密碼</td>
+                                            <input
+                                                type="password"
+                                                id="mem_password1"
+                                                myfield="mem_password1"
+                                                value="1213456"
+                                            />
+                                        </tr>
+                                        <tr class="tabcontent_txt">
+                                            <td>重新輸入密碼</td>
+                                            <input
+                                                type="password"
+                                                id="mem_password_again"
+                                                myfield="mem_password_again"
+                                                value="123456"
+                                            />
+                                        </tr>
+                                    </table>
+                                    <button class="btn-paramy">修改密碼</button>
+                                </div>
                             </div>
                         </li>
-                        <li class="mem_order">
+                        <li class="mem_order content">
                             <div class="mem_basic">
                                 <p>姓氏：Zeng</p>
                                 <p>名字：Charmy</p>
@@ -50,7 +125,7 @@
 
                             訂單資訊
                         </li>
-                        <li class="mem_coupons">
+                        <li class="mem_coupons content">
                             <div class="mem_basic">
                                 <p>姓氏：Zeng</p>
                                 <p>名字：Charmy</p>
@@ -58,7 +133,7 @@
                             </div>
                             優惠券
                         </li>
-                        <li class="mem_adopt">
+                        <li class="mem_adopt content">
                             <div class="mem_basic">
                                 <p>姓氏：Zeng</p>
                                 <p>名字：Charmy</p>
@@ -71,10 +146,20 @@
             </div>
         </section>
     </div>
+    <!-- <p>Current slide is {{ swiperSlide.isActive ? "active" : "not active" }}</p> -->
+    <div class="ivu-icon">
+        <Icon type="md-search" />
+    </div>
 </template>
 
 <script>
+import Header from "@/components/header.vue";
+// import { useSwiperSlide } from "swiper/vue";
 export default {
+    name: "About",
+    components: {
+        Header,
+    },
     data() {
         return {
             memsliding: ["會員中心", "訂單資訊", "優惠券", "認養紀錄"],
@@ -90,17 +175,25 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.mem-banner-img {
-    width: 100%;
+// .member
+.banner-img {
+    background-size: cover;
+    background: url(@/assets/images/member/banner.jpg) no-repeat center/cover;
     height: 480px;
-    img {
-        height: 100%;
-        width: 100%;
-        vertical-align: middle;
-        object-fit: cover;
-        object-position: center center;
-    }
+    margin-bottom: 100px;
 }
+// .mem-banner-img {
+//     width: 100%;
+//     height: 480px;
+//     img {
+//         margin-top: 60px;
+//         height: 100%;
+//         width: 100%;
+//         vertical-align: middle;
+//         object-fit: cover;
+//         object-position: center center;
+//     }
+// }
 //tab
 .tabs {
     .tabs_list {
@@ -115,7 +208,7 @@ export default {
         z-index: 1;
         outline: #337a7d 1px solid;
         li {
-            width: 80px;
+            width: 100px;
             padding: 10px 20px;
             text-align: center;
             align-items: center;
@@ -131,18 +224,18 @@ export default {
         li:hover {
             box-shadow: 0 24px 18px -15px rgba(119, 120, 107, 0.65);
         }
+        .moving_tab {
+            display: block;
+            background-color: #337a7d;
+            position: absolute;
+            bottom: 0;
+            left: 0%;
+            z-index: -1;
+            height: 2.6rem;
+            transition: left 0.5s;
+        }
     }
 
-    .moving_tab {
-        display: block;
-        background-color: #337a7d;
-        position: absolute;
-        bottom: 0;
-        left: 0%;
-        z-index: -1;
-        height: 1rem;
-        transition: left 0.5s;
-    }
     .wrapper {
         margin: 0 auto;
         width: 1000px;
@@ -152,7 +245,7 @@ export default {
             display: flex;
             position: relative;
             border-radius: 10px;
-            li {
+            .content {
                 width: 1000px;
                 height: 600px;
                 background-color: rgb(110, 158, 110);
@@ -164,13 +257,16 @@ export default {
         }
     }
     // 測試
-    .tabs_content li:nth-child(2) {
+
+    .tabs_content li:nth-child(2).content {
         background-color: #faa;
     }
-    .tabs_content li:nth-child(3) {
+
+    .tabs_content li:nth-child(3).content {
         background-color: #aaf;
     }
-    .tabs_content li:nth-child(4) {
+
+    .tabs_content li:nth-child(4).content {
         background-color: #faf;
     }
 }
@@ -183,23 +279,54 @@ export default {
             padding: 10px;
         }
     }
+    // 會員中心
     .mem_centre {
         .mem_main {
             display: flex;
-            height: 100%;
-            div {
+            flex-wrap: wrap;
+            justify-content: space-evenly;
+            // height: 100%; 會破版
+            .tabcontent_txt_group {
                 width: 50%;
-                height: 100%;
+                .subtitle {
+                    margin-top: 20px;
+                    // background-color: rgb(71, 55, 28);
+                    height: 110px;
+                    p {
+                        line-height: 1.3;
+                        padding: 20px 10px;
+                    }
+                }
+                .tabcontent_group {
+                    display: flex;
+                    flex-direction: column;
+                    tr {
+                        display: flex;
+                        justify-content: center;
+                        padding-top: 10px;
+                        padding-bottom: 10px;
+                        td:nth-child(1) {
+                            padding: 10px;
+                            width: 120px;
+                        }
+                    }
+                }
             }
+
+            // 用來確認區域的顏色
+            .tabcontent_txt_group,
             div:nth-child(1) {
-                flex-shrink: 0;
-                background-color: #aaf;
+                // flex-shrink: 0;
+                background-color: rgb(132, 186, 155);
             }
+            .tabcontent_txt_group,
             div:nth-child(2) {
-                flex-shrink: 0;
-                background-color: #aff;
+                // flex-shrink: 0;
+                background-color: rgb(69, 69, 107);
             }
         }
     }
+}
+@media screen and (max-width: 1199px) {
 }
 </style>

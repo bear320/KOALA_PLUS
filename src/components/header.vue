@@ -1,6 +1,6 @@
 <template>
     <header id="navbar">
-        <nav class="container">
+        <nav class="wrapper">
             <div>
                 <div class="hamburger" @click="toggle = !toggle">
                     <div class="hb"></div>
@@ -58,7 +58,7 @@ export default {
                 { name: "資助認養", sourc: "all-koalas" },
                 { name: "周邊商城", sourc: "shop" },
                 { name: "無尾熊園區", sourc: "koala-park" },
-                { name: "關於", sourc: "about" },
+                { name: "關於我們", sourc: "about" },
                 { name: "無尾熊百科", sourc: "about-koala" },
             ],
             toggle: true,
@@ -96,26 +96,30 @@ header {
 
             .list {
                 display: flex;
+                align-items: center;
                 li {
-                    padding: 20px;
                     a {
                         font-weight: bold;
                         color: $darkgreen;
                         height: 100%;
+                        padding: 20px;
 
                         &:hover {
                             color: $green;
                         }
+
                         &.router-link-exact-active {
                             color: $green;
-                            transform: translate(-15px, 0);
 
                             &::before {
                                 content: "　";
                                 width: 30px;
                                 background-image: url(../assets/images/header/Leaf.svg);
                                 background-size: contain;
+                                background-repeat: no-repeat;
                                 margin-right: 10px;
+                                position: absolute;
+                                transform: translate(-25px, 0);
                             }
                         }
                     }
@@ -124,7 +128,7 @@ header {
                     position: fixed;
                     top: 80%;
                     user-select: none;
-                    @include size(120px, auto);
+                    @include size(180px, auto);
 
                     img {
                         width: 100%;

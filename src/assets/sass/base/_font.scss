@@ -8,8 +8,12 @@ $font_weight: "EL", "R";
 @each $weight in $font_weight {
     @font-face {
         font-family: "font-#{$weight}";
-        src: url("@/assets/sass/font/GenSenRounded-#{$weight}.ttc");
+        src: url("@/assets/font/GenSenRounded-#{$weight}.ttc");
     }
+}
+@font-face {
+    font-family: "Inkfree";
+    src: url("@/assets/font/Inkfree.ttf");
 }
 
 $h1: 45px;
@@ -52,6 +56,7 @@ html {
     h3,
     h4 {
         font-family: font-R;
+        margin: 10px 0;
     }
     h1 {
         font-size: $h1;
