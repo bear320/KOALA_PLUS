@@ -130,9 +130,11 @@ select {
     border: solid 1px $btn-color;
     outline: none;
     border-radius: 5px;
+    background: transparent;
 
     option {
         border-bottom: 0.5 solid $btn-color;
         color: $btn-color;
+        background: transparent;
     }
 }

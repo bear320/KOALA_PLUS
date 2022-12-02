@@ -1,19 +1,22 @@
 @media (max-width: 1200px) {
-    .container {
-        // width: 95%;
-        max-width: 1200px;
+    .wrapper {
+        max-width: calc(100% - 80px);
+    }
+    .banner {
+        width: 100%;
+        // height: 320px;
+        background-attachment: fixed;
+        background-position: center 0;
+        background-size: contain;
     }
 }
 
 @media (max-width: 768px) {
     .banner {
-        height: 260px;
-    }
-    .nav-space {
-        padding-top: 80px;
+        height: 200px;
     }
     .wrapper {
-        max-width: calc(100% - 80px);
         margin: 0 auto;
+        max-width: calc(100% - 30px);
     }
 }

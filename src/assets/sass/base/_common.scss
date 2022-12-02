@@ -6,6 +6,9 @@
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    body {
+        background-color: $bg-color;
+    }
 }
 
 .banner {
@@ -13,6 +16,8 @@ html {
     height: 450px;
     background-attachment: fixed;
     background-position: center 20%;
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 .nav-space {

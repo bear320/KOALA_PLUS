@@ -20,8 +20,12 @@
 .ivu-collapse {
     width: 60%;
     margin: 30px auto;
+    backdrop-filter: blur(4px);
+    background-color: rgba(255, 255, 255, 0.6);
+    border-radius: 10px;
+    box-shadow: 0 0 10px #d9d9d9;
+
     .ivu-collapse-item {
-        background-color: rgba(255, 255, 255, 1);
         text-align: left;
 
         .ivu-collapse-content {
@@ -47,8 +51,8 @@
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .ivu-collapse {
-        width: 100%;
+        width: 80%;
     }
 }
