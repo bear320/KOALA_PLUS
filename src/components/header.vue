@@ -155,7 +155,7 @@ header {
     }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1200px) {
     header {
         nav {
             .hamburger {
@@ -163,7 +163,7 @@ header {
                 flex-direction: column;
                 justify-content: space-between;
                 @include size(20px, 20px);
-                margin: auto 10px;
+                margin: auto 20%;
                 .hb {
                     border-top: solid 5px $green;
                 }
@@ -173,11 +173,11 @@ header {
             }
             div {
                 .list {
-                    @include size(100vw, 50vh);
+                    @include size(100vw, 40vh);
                     flex-direction: column;
                     background-color: rgba(190, 214, 213, 0.6);
                     backdrop-filter: blur(10px);
-                    @include absolute(65px, 0, 0, 0);
+                    @include absolute(60px, 0, 0, 0);
                     box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
                     transition: 1s;
                     justify-content: space-around;
@@ -189,9 +189,13 @@ header {
                             position: relative;
                             top: auto;
                             left: auto;
-                            width: 40vw;
+                            width: 15vw;
                             margin: auto;
                             transform: translate(0, -20%);
+
+                            img {
+                                width: fit-content;
+                            }
                         }
                     }
                 }
@@ -200,6 +204,11 @@ header {
                 }
             }
         }
+    }
+}
+@media (max-width: 768px) {
+    header nav .hamburger {
+        margin: auto 10%;
     }
 }
 </style>

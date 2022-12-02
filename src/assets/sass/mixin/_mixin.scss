@@ -24,3 +24,8 @@
         height: 100%;
     }
 }
+@mixin bgSetting($contain, $position) {
+    background-repeat: no-repeat;
+    background-size: $contain;
+    background-position: $position;
+}
