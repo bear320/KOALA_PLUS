@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <article>
+    <article class="nav-space">
         <div
             class="banner"
             :style="{
@@ -10,7 +10,7 @@
         ></div>
         <section>
             <h1>About Us</h1>
-            <div class="container about">
+            <div class="wrapper about">
                 <div class="about-btn">
                     <a
                         @click="curView = 'one'"
@@ -37,6 +37,13 @@
                     <component :is="curView"></component>
                 </keep-alive>
             </div>
+            <div class="slider">
+                <div class="slide-track">
+                    <div class="slide" v-for="cc in imgs" :key="cc">
+                        <img :src="cc.url" />
+                    </div>
+                </div>
+            </div>
         </section>
     </article>
 </template>
@@ -58,6 +65,56 @@ export default {
     data() {
         return {
             curView: "one",
+            imgs: [
+                {
+                    url: require("../assets/images/about/1.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/2.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/3.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/4.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/5.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/6.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/7.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/8.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/1.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/2.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/3.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/4.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/5.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/6.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/7.jpg"),
+                },
+                {
+                    url: require("../assets/images/about/8.jpg"),
+                },
+            ],
         };
     },
     methods: {},
@@ -83,7 +140,7 @@ html {
             .about-btn {
                 border-right: solid 1px $lightgreen;
                 width: 20%;
-                padding: 10px;
+                padding: 20px;
 
                 a {
                     margin: 10px 0;
@@ -94,7 +151,7 @@ html {
             .about-content {
                 width: 80%;
                 vertical-align: middle;
-                padding: 40px;
+                padding: 20px;
                 text-align: left;
             }
         }
@@ -103,6 +160,65 @@ html {
             font-weight: 700;
             // pointer-events: none;
             @include borderLeft;
+        }
+        .slider {
+            height: 100%;
+            margin: 20px 0;
+            overflow: hidden;
+            position: relative;
+
+            &::before,
+            &::after {
+                background: linear-gradient(
+                    to right,
+                    white 0%,
+                    rgba(255, 255, 255, 0) 100%
+                );
+                content: "";
+                height: 450px;
+                position: absolute;
+                width: 250px;
+                z-index: 2;
+            }
+
+            &::after {
+                right: 0;
+                top: 0;
+                transform: rotateZ(180deg);
+            }
+            &::before {
+                left: 0;
+                top: 0;
+            }
+
+            .slide-track {
+                animation: scroll 40s linear infinite;
+                display: flex;
+                width: calc(360px * 16);
+                justify-content: space-between;
+
+                &:hover {
+                    animation-play-state: paused;
+                }
+            }
+            .slide {
+                height: 450px;
+                width: 350px;
+
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        }
+        @keyframes scroll {
+            0% {
+                transform: translateX(0);
+            }
+            100% {
+                transform: translateX(calc(-360px * 8));
+            }
         }
     }
 }
