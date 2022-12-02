@@ -1,5 +1,4 @@
 <template lang="">
-    <Header></Header>
     <article>
         <div class="banner-img"></div>
         <div class="container">
@@ -7,15 +6,43 @@
                 <div class="col-4">
                     <h1 class="title">週邊商城</h1>
                     <div class="category-box">
-                        <div class="category-item" @click="test">所有分類</div>
-                        <div class="category-item">生活小物</div>
-                        <div class="category-item">玩具/絨毛娃娃</div>
-                        <div class="category-item">服飾</div>
+                        <div
+                            class="category-item"
+                            v-for="(category, index) in categories"
+                            :key="index"
+                            @click="changeCategory(category.category)"
+                        >
+                            {{ category.title }}
+                        </div>
                     </div>
                 </div>
                 <div class="col-8">
                     <div class="row">
-                        <product-card v-for="item in 9"></product-card>
+                        <product-card
+                            v-for="(item, index) in source"
+                            :key="item.id"
+                            :proImg="item.images[0]"
+                            :proName="item.name"
+                            :proPrice="item.price"
+                        ></product-card>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pagenation">
+                            <Icon type="md-skip-backward" />
+                            <Icon
+                                class="bgc"
+                                type="ios-arrow-back"
+                                @click="changePage()"
+                            />
+                            <input class="page" type="text" v-model="curPage" />
+                            of {{ pageTotal }} pages
+                            <Icon
+                                class="bgc"
+                                type="ios-arrow-forward"
+                                @click="changePage()"
+                            />
+                            <Icon type="md-skip-forward" />
+                        </div>
                     </div>
                 </div>
             </div>
@@ -25,6 +52,7 @@
 <script>
 import Header from "@/components/header.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
+import { returnStatement } from "@babel/types";
 export default {
     components: {
         Header,
@@ -32,22 +60,103 @@ export default {
     },
     data() {
         return {
-            testUrl: this.$route.query,
+            source: [],
+            categories: [
+                { title: "所有分類", category: "" },
+                { title: "生活小物", category: "bonbons" },
+                { title: "玩具/絨毛娃娃", category: "raw" },
+                { title: "服飾", category: "bar" },
+            ],
+            curPage: 1,
+            pageTotal: 0,
         };
     },
     watch: {
         $route: function (q) {
+            this.getProduct(q.query);
+            this.getPage(q.query);
             console.log("網址變化了");
         },
     },
     methods: {
-        test() {
-            this.$router.push({ path: "/shop", query: { test: "qq" } });
-            console.log(this.$route.query);
+        changeCategory(category) {
+            if (!category) {
+                this.$router.push({
+                    path: "/shop",
+                    query: { sort: `name`, limit: `9`, page: `1` },
+                });
+            } else {
+                this.$router.push({
+                    path: "/shop",
+                    query: {
+                        category: `${category}`,
+                        sort: `name`,
+                        limit: `9`,
+                        page: `1`,
+                    },
+                });
+            }
+        },
+        getProduct(queryParam) {
+            let apiURL =
+                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours";
+
+            let isHaveCategory = queryParam.category;
+            let page = queryParam.page;
+
+            let test = isHaveCategory
+                ? `${apiURL}?category=${queryParam.category}&sort=name&limit=9&page=${page}`
+                : `${apiURL}?sort=name&limit=9&page=${page}`;
+            fetch(test)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.dtat.tours;
+                });
+        },
+        getPage(queryParam) {
+            let apiURL =
+                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours";
+
+            let isHaveCategory = queryParam.category;
+
+            let test = isHaveCategory
+                ? `${apiURL}?category=${queryParam.category}`
+                : `${apiURL}`;
+
+            this.curPage = queryParam.page ? +queryParam.page : 1;
+            fetch(test)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.pageTotal = Math.ceil(json.dtat.tours.length / 9);
+                });
+            console.log(test);
+        },
+        changePage() {
+            if (this.curPage >= this.pageTotal) return;
+            console.log(this.$route.query.category);
+            this.curPage += 1;
+            if (!this.$route.query.category) {
+                this.$router.push({
+                    path: "/shop",
+                    query: { sort: `name`, limit: `9`, page: this.curPage },
+                });
+            } else {
+                this.$router.push({
+                    path: "/shop",
+                    query: {
+                        category: `${this.$route.query.category}`,
+                        sort: `name`,
+                        limit: `9`,
+                        page: this.curPage,
+                    },
+                });
+            }
         },
     },
     created() {
-        console.log("create");
+        console.log(this.source);
+        this.getProduct(this.$route.query);
+        this.getPage(this.$route.query);
     },
 };
 </script>
@@ -58,15 +167,27 @@ export default {
     height: 480px;
     margin-bottom: 100px;
 }
-.container {
-    background-color: #fa0;
-}
+
 .category-box {
-    // width: 270px;
-    background-color: #3cb;
     margin: 0 auto;
     .category-item {
         cursor: pointer;
+    }
+}
+.pagenation {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    .page {
+        width: 32px;
+        text-align: center;
+    }
+    .bgc {
+        color: #333;
+        background-color: #ccc;
+        padding: 3px 5px;
+        border-radius: 3px;
     }
 }
 </style>
