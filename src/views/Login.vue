@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <section class="main_block">
+    <section class="main_block nav_space wrapper">
         <div class="cotn_principal">
             <div class="cont_centrar">
                 <div class="cont_login">

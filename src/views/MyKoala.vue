@@ -1,6 +1,8 @@
 <template>
     <Header />
-    <article></article>
+    <section class="nav-space wrapper">
+        
+    </section>
 </template>
 
 <script>
