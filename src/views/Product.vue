@@ -1,8 +1,14 @@
 <template lang="">
     <Header></Header>
-    <article>
-        <image-slider :imgs="images"></image-slider>
-    </article>
+    <main class="nav-space">
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-6">
+                    <image-slider :imgs="images"></image-slider>
+                </div>
+            </div>
+        </div>
+    </main>
 </template>
 
 <script>
