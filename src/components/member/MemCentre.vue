@@ -10,7 +10,7 @@
             <!-- 會員中心左邊內容  關於會員帳密內容-->
             <div class="tabcontent_txt_group">
                 <div class="subtitle">
-                    <Icon type="ios-create-outline" />
+                    <Icon type="ios-create-outline" size="20" color="#337a7d" />
                     <span>編輯會員資料</span>
                 </div>
                 <table class="tabcontent_group">
@@ -47,7 +47,7 @@
             <!-- 會員中心右邊內容 關於帳號密碼-->
             <div class="tabcontent_txt_group">
                 <div class="subtitle">
-                    <Icon type="ios-create-outline" />
+                    <Icon type="ios-create" size="20" color="#337a7d" />
                     <span>重設會員密碼</span>
                     <p>
                         為了您的帳戶安全，密碼的長度必須至少為八個字符，並且包含字母和數字字符的任意組合。
@@ -92,158 +92,77 @@
 export default {};
 </script>
 <style lang="scss" scoped>
-// .member
-.banner-img {
-    background-size: cover;
-    background: url(@/assets/images/member/banner.jpg) no-repeat center/cover;
-    height: 480px;
-    margin-bottom: 100px;
-}
-// .mem-banner-img {
-//     width: 100%;
-//     height: 480px;
-//     img {
-//         margin-top: 60px;
-//         height: 100%;
-//         width: 100%;
-//         vertical-align: middle;
-//         object-fit: cover;
-//         object-position: center center;
-//     }
-// }
-//tab
+// .member 會員的會員中心
+
 .tabs {
-    .tabs_list {
-        width: fit-content;
-        display: flex;
-        justify-content: center;
-        margin: 0px auto;
-        border-radius: 50px;
-        background-color: #ffffff;
-        margin-bottom: 20px;
-        position: relative;
-        z-index: 1;
-        outline: #337a7d 1px solid;
-        li {
-            width: 100px;
-            padding: 10px 20px;
-            text-align: center;
-            align-items: center;
-            cursor: pointer;
-            border-radius: 50px;
-
-            a {
-                text-decoration: none;
-                color: #333;
-                vertical-align: baseline;
-            }
-        }
-        li:hover {
-            box-shadow: 0 24px 18px -15px rgba(119, 120, 107, 0.65);
-        }
-        .moving_tab {
-            display: block;
-            background-color: #337a7d;
-            position: absolute;
-            bottom: 0;
-            left: 0%;
-            z-index: -1;
-            height: 2.6rem;
-            transition: left 0.5s;
-        }
-    }
-
     .wrapper {
-        margin: 0 auto;
-        width: 1000px;
-        overflow: hidden;
-        border-radius: 10px;
         .tabs_content {
-            display: flex;
-            position: relative;
-            border-radius: 10px;
+            //會員中心內容 li
             .content {
-                width: 1000px;
-                height: 600px;
-                background-color: rgb(110, 158, 110);
-                flex-shrink: 0;
+                // width: 1000px;
+                // height: 600px;
+                // background-color: rgb(110, 158, 110);
+                // flex-shrink: 0;
 
-                border-radius: 10px;
-                transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
-            }
-        }
-    }
-    // 測試
-
-    .tabs_content li:nth-child(2).content {
-        background-color: #faa;
-    }
-
-    .tabs_content li:nth-child(3).content {
-        background-color: #aaf;
-    }
-
-    .tabs_content li:nth-child(4).content {
-        background-color: #faf;
-    }
-}
-.member {
-    .mem_basic {
-        //會員基本資料
-        display: flex;
-        p {
-            min-width: 100px;
-            padding: 10px;
-        }
-    }
-    // 會員中心
-    .mem_centre {
-        .mem_main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            // height: 100%; 會破版
-            .tabcontent_txt_group {
-                width: 50%;
-                .subtitle {
-                    margin-top: 20px;
-                    // background-color: rgb(71, 55, 28);
-                    height: 110px;
+                // border-radius: 10px;
+                // transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
+                .mem_basic {
+                    //會員基本資料
+                    display: flex;
                     p {
-                        line-height: 1.3;
-                        padding: 20px 10px;
+                        min-width: 100px;
+                        padding: 10px;
                     }
                 }
-                .tabcontent_group {
+                .mem_main {
                     display: flex;
-                    flex-direction: column;
-                    tr {
-                        display: flex;
-                        justify-content: center;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        td:nth-child(1) {
-                            padding: 10px;
-                            width: 120px;
+                    flex-wrap: wrap;
+                    justify-content: space-evenly;
+                    // height: 100%; 會破版
+                    .tabcontent_txt_group {
+                        width: 50%;
+                        .subtitle {
+                            margin-top: 20px;
+                            // background-color: rgb(71, 55, 28);
+                            height: 110px;
+                            Icon {
+                                color: #337a7d;
+                            }
+                            span {
+                                margin: 10px;
+                            }
+                            p {
+                                line-height: 1.3;
+                                padding: 20px 10px;
+                            }
+                        }
+                        button {
+                            padding-left: 15px;
+                            padding-right: 15px;
+                        }
+                        .tabcontent_group {
+                            display: flex;
+                            flex-direction: column;
+                            tr {
+                                display: flex;
+                                justify-content: center;
+                                padding-top: 10px;
+                                padding-bottom: 10px;
+                                td:nth-child(1) {
+                                    padding: 10px;
+                                    width: 120px;
+                                    text-align: left;
+                                }
+                            }
                         }
                     }
                 }
             }
-
-            // 用來確認區域的顏色
-            .tabcontent_txt_group,
-            div:nth-child(1) {
-                // flex-shrink: 0;
-                background-color: rgb(132, 186, 155);
-            }
-            .tabcontent_txt_group,
-            div:nth-child(2) {
-                // flex-shrink: 0;
-                background-color: rgb(69, 69, 107);
-            }
         }
     }
 }
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1200px) {
+}
+@media screen and (max-width: 768px) {
 }
 </style>

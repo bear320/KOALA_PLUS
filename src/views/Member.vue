@@ -1,9 +1,18 @@
 <template>
     <Header />
     <div class="member">
-        <div class="banner-img"></div>
+        <div
+            class="banner"
+            :style="{
+                backgroundImage:
+                    'url(' +
+                    require('@/assets/images/member/banner2.jpg') +
+                    ')',
+            }"
+        ></div>
 
         <section>
+            <h1>Member</h1>
             <div class="tabs">
                 <ul class="tabs_list">
                     <li
@@ -12,7 +21,6 @@
                         :key="index"
                         :class="{ active: currentTab === index }"
                     >
-                        <!-- 想要移動過去，字體會變成白色 -->
                         {{ item }}
                     </li>
                     <li
@@ -47,7 +55,6 @@ import MemOrder from "@/components/member/MemOrder.vue";
 import MemAdopt from "@/components/member/MemAdopt.vue";
 import MemCoupons from "@/components/member/MemCoupons.vue";
 
-// import { useSwiperSlide } from "swiper/vue";
 export default {
     name: "About",
     components: {
@@ -73,25 +80,20 @@ export default {
 
 <style lang="scss" scoped>
 // .member
-.banner-img {
-    background-size: cover;
-    background: url(@/assets/images/member/banner.jpg) no-repeat center/cover;
-    height: 480px;
-    margin-bottom: 100px;
+.member {
+    // .banner-img {
+    //     background-size: cover;
+    //     background: url(@/assets/images/member/banner.jpg) no-repeat
+    //         center/cover;
+    //     height: 480px;
+    //     margin-bottom: 100px;
+    // }
+    h1 {
+        font-family: "Inkfree";
+        font-size: 30vh;
+        color: $lightgreen;
+    }
 }
-// .mem-banner-img {
-//     width: 100%;
-//     height: 480px;
-//     img {
-//         margin-top: 60px;
-//         height: 100%;
-//         width: 100%;
-//         vertical-align: middle;
-//         object-fit: cover;
-//         object-position: center center;
-//     }
-// }
-//tab
 .tabs {
     .tabs_list {
         width: fit-content;
@@ -144,9 +146,9 @@ export default {
             .content {
                 width: 1000px;
                 height: 600px;
-                background-color: rgb(110, 158, 110);
+                // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
-
+                border: solid 2px #337a7d;
                 border-radius: 10px;
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
@@ -166,63 +168,7 @@ export default {
         background-color: #faf;
     }
 }
-.member {
-    .mem_basic {
-        //會員基本資料
-        display: flex;
-        p {
-            min-width: 100px;
-            padding: 10px;
-        }
-    }
-    // 會員中心
-    .mem_centre {
-        .mem_main {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-evenly;
-            // height: 100%; 會破版
-            .tabcontent_txt_group {
-                width: 50%;
-                .subtitle {
-                    margin-top: 20px;
-                    // background-color: rgb(71, 55, 28);
-                    height: 110px;
-                    p {
-                        line-height: 1.3;
-                        padding: 20px 10px;
-                    }
-                }
-                .tabcontent_group {
-                    display: flex;
-                    flex-direction: column;
-                    tr {
-                        display: flex;
-                        justify-content: center;
-                        padding-top: 10px;
-                        padding-bottom: 10px;
-                        td:nth-child(1) {
-                            padding: 10px;
-                            width: 120px;
-                        }
-                    }
-                }
-            }
 
-            // 用來確認區域的顏色
-            .tabcontent_txt_group,
-            div:nth-child(1) {
-                // flex-shrink: 0;
-                background-color: rgb(132, 186, 155);
-            }
-            .tabcontent_txt_group,
-            div:nth-child(2) {
-                // flex-shrink: 0;
-                background-color: rgb(69, 69, 107);
-            }
-        }
-    }
-}
 @media screen and (max-width: 1199px) {
 }
 </style>

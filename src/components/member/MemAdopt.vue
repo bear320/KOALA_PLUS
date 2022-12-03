@@ -1,7 +1,7 @@
 <template lang="">
     <li class="mem_adopt content">
         <div class="mem_basic">
-            <p>姓氏：{{ mem_last_name }}}</p>
+            <p>姓氏：{{ mem_last_name }}</p>
             <p>名字：Charmy</p>
             <p>會員ID：P00001</p>
         </div>
