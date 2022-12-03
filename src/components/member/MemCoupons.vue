@@ -15,4 +15,19 @@ export default {};
 .tabs_content li:nth-child(3).content {
     background-color: #aaf;
 }
+
+.tabs {
+    .wrapper {
+        .mem_coupons {
+            .mem_basic {
+                //會員基本資料
+                display: flex;
+                p {
+                    min-width: 100px;
+                    padding: 10px;
+                }
+            }
+        }
+    }
+}
 </style>

@@ -99,13 +99,6 @@ export default {};
         .tabs_content {
             //會員中心內容 li
             .content {
-                // width: 1000px;
-                // height: 600px;
-                // background-color: rgb(110, 158, 110);
-                // flex-shrink: 0;
-
-                // border-radius: 10px;
-                // transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
                 .mem_basic {
                     //會員基本資料
                     display: flex;
