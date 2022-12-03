@@ -47,18 +47,33 @@
                         1,000
                     </p>
                 </div>
+<<<<<<< HEAD
                 <div class="game_nav_plus btn-open" @click="plus_talkwindow()">
+=======
+                <div class="game_nav_plus btn-open" onclick="plus_talkwindow()">
+>>>>>>> dev
                     <img src="../assets/images/game/pluscircle.png" alt="" />
                 </div>
             </div>
             <div
                 class="game_nav_shop_button btn-open"
+<<<<<<< HEAD
                 @click="shop_talkwindow()"
+=======
+                onclick="shop_talkwindow()"
+>>>>>>> dev
             >
                 <img src="../assets/images/game/game_shop.png" alt="" />
                 <p>商店</p>
             </div>
+<<<<<<< HEAD
             <div class="game_nav_bag_button btn-open" @click="bag_talkwindow()">
+=======
+            <div
+                class="game_nav_bag_button btn-open"
+                onclick="bag_talkwindow()"
+            >
+>>>>>>> dev
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
@@ -73,7 +88,11 @@
                         alt=""
                     />
                 </div>
+<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
+=======
+                <div class="btn-close" onclick="removeActive()">X</div>
+>>>>>>> dev
                 <div class="plus_talkwindow_content">
                     <p>如何獲取尤加利葉幣?</p>
                     <div class="plus_talkwindow_content_txt">
@@ -96,7 +115,11 @@
                     <img src="../assets/images/game/game_shop.png" alt="" />
                     <p>商店</p>
                 </div>
+<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
+=======
+                <div class="btn-close" onclick="removeActive()">X</div>
+>>>>>>> dev
                 <div class="shop_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
@@ -105,7 +128,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_1()"
+=======
+                            onclick="addnum_1()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -121,7 +148,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_2()"
+=======
+                            onclick="addnum_2()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -137,7 +168,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_3()"
+=======
+                            onclick="addnum_3()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -153,7 +188,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_4()"
+=======
+                            onclick="addnum_4()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -169,7 +208,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_5()"
+=======
+                            onclick="addnum_5()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -185,7 +228,11 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="addnum_6()"
+=======
+                            onclick="addnum_6()"
+>>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -204,7 +251,11 @@
                     <img src="../assets/images/game/bag.png" alt="" />
                     <p>倉庫</p>
                 </div>
+<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
+=======
+                <div class="btn-close" onclick="removeActive()">X</div>
+>>>>>>> dev
                 <div class="bag_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
@@ -213,7 +264,11 @@
                         </p>
                         <div
                             class="bag_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="minnum_1()"
+=======
+                            onclick="minnum_1()"
+>>>>>>> dev
                         >
                             <p>餵食</p>
                         </div>
@@ -228,7 +283,11 @@
                         </p>
                         <div
                             class="bag_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="minnum_2()"
+=======
+                            onclick="minnum_2()"
+>>>>>>> dev
                         >
                             <p>餵食</p>
                         </div>
@@ -243,7 +302,11 @@
                         </p>
                         <div
                             class="bag_talkwindow_commodity_button"
+<<<<<<< HEAD
                             @click="minnum_3()"
+=======
+                            onclick="minnum_3()"
+>>>>>>> dev
                         >
                             <p>餵食</p>
                         </div>
@@ -257,7 +320,11 @@
                             剩餘數量：
                         </p>
                         <div class="bag_talkwindow_commodity_button">
+<<<<<<< HEAD
                             <p @click="minnum_4()">餵食</p>
+=======
+                            <p onclick="minnum_4()">餵食</p>
+>>>>>>> dev
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 10 經驗值
@@ -269,7 +336,11 @@
                             剩餘數量：
                         </p>
                         <div class="bag_talkwindow_commodity_button">
+<<<<<<< HEAD
                             <p @click="minnum_5()">餵食</p>
+=======
+                            <p onclick="minnum_5()">餵食</p>
+>>>>>>> dev
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 10 經驗值
@@ -281,7 +352,11 @@
                             剩餘數量：
                         </p>
                         <div class="bag_talkwindow_commodity_button">
+<<<<<<< HEAD
                             <p @click="minnum_6()">餵食</p>
+=======
+                            <p onclick="minnum_6()">餵食</p>
+>>>>>>> dev
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 10 經驗值
@@ -295,6 +370,7 @@
 
 <script>
 import Header from "@/components/header.vue";
+import game from "@/game.js";
 export default {
     components: {
         Header,
@@ -470,6 +546,156 @@ export default {
             }
         },
     },
+<<<<<<< HEAD
+=======
+    methods: {
+        // ============================== 賺遊戲幣的方式 ============================== //
+        plus_talkwindow() {
+            removeActive();
+            document
+                .getElementById("plus_talkwindow")
+                .classList.add("plus_talkwindow_active");
+        },
+
+        // ============================== 虛擬商店 ============================== //
+        shop_talkwindow() {
+            removeActive();
+            document
+                .getElementById("shop_talkwindow")
+                .classList.add("shop_talkwindow_active");
+        },
+
+        // ============================== 遊戲背包 ============================== //
+        bag_talkwindow() {
+            removeActive();
+            document
+                .getElementById("bag_talkwindow")
+                .classList.add("bag_talkwindow_active");
+        },
+
+        // ============================== 關掉彈窗 ============================== //
+        removeActive() {
+            document
+                .getElementById("shop_talkwindow")
+                .classList.remove("shop_talkwindow_active");
+            document
+                .getElementById("bag_talkwindow")
+                .classList.remove("bag_talkwindow_active");
+            document
+                .getElementById("plus_talkwindow")
+                .classList.remove("plus_talkwindow_active");
+        },
+
+        addnum_1() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_1");
+            game_money_1 -= 20;
+            game_money.innerHTML = game_money_1;
+        },
+        minnum_1() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_2() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_2");
+            game_money_2 -= 50;
+            game_money.innerHTML = game_money_2;
+        },
+        minnum_2() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_3() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_3");
+            game_money_3 -= 20;
+            game_money.innerHTML = game_money_3;
+        },
+
+        minnum_3() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_4() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_4");
+            game_money_4 -= 20;
+            game_money.innerHTML = game_money_4;
+        },
+        minnum_4() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_5() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_5");
+            game_money_5 -= 20;
+            game_money.innerHTML = game_money_5;
+        },
+        minnum_5() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_6() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_6");
+            game_money_6 -= 200;
+            game_money.innerHTML = game_money_6;
+        },
+        minnum_6() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+    },
+>>>>>>> dev
 };
 </script>
 
@@ -897,6 +1123,13 @@ img {
     cursor: pointer;
 }
 
+.shop_talkwindow_active,
+.bag_talkwindow_active,
+.plus_talkwindow_active {
+    animation: popup 0.5s;
+    transform: scale(1);
+}
+
 @keyframes popup {
     0% {
         transform: scale(0);
@@ -916,12 +1149,5 @@ img {
     100% {
         transform: scale(1);
     }
-}
-
-.shop_talkwindow_active,
-.bag_talkwindow_active,
-.plus_talkwindow_active {
-    animation: popup 0.5s;
-    transform: scale(1);
 }
 </style>
