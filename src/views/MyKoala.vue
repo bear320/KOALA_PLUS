@@ -47,33 +47,18 @@
                         1,000
                     </p>
                 </div>
-<<<<<<< HEAD
                 <div class="game_nav_plus btn-open" @click="plus_talkwindow()">
-=======
-                <div class="game_nav_plus btn-open" onclick="plus_talkwindow()">
->>>>>>> dev
                     <img src="../assets/images/game/pluscircle.png" alt="" />
                 </div>
             </div>
             <div
                 class="game_nav_shop_button btn-open"
-<<<<<<< HEAD
                 @click="shop_talkwindow()"
-=======
-                onclick="shop_talkwindow()"
->>>>>>> dev
             >
                 <img src="../assets/images/game/game_shop.png" alt="" />
                 <p>商店</p>
             </div>
-<<<<<<< HEAD
             <div class="game_nav_bag_button btn-open" @click="bag_talkwindow()">
-=======
-            <div
-                class="game_nav_bag_button btn-open"
-                onclick="bag_talkwindow()"
-            >
->>>>>>> dev
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
@@ -88,11 +73,7 @@
                         alt=""
                     />
                 </div>
-<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
-=======
-                <div class="btn-close" onclick="removeActive()">X</div>
->>>>>>> dev
                 <div class="plus_talkwindow_content">
                     <p>如何獲取尤加利葉幣?</p>
                     <div class="plus_talkwindow_content_txt">
@@ -115,11 +96,7 @@
                     <img src="../assets/images/game/game_shop.png" alt="" />
                     <p>商店</p>
                 </div>
-<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
-=======
-                <div class="btn-close" onclick="removeActive()">X</div>
->>>>>>> dev
                 <div class="shop_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
@@ -128,11 +105,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_1()"
-=======
-                            onclick="addnum_1()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -148,11 +121,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_2()"
-=======
-                            onclick="addnum_2()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -168,11 +137,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_3()"
-=======
-                            onclick="addnum_3()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -188,11 +153,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_4()"
-=======
-                            onclick="addnum_4()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -208,11 +169,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_5()"
-=======
-                            onclick="addnum_5()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -228,11 +185,7 @@
                         </p>
                         <div
                             class="shop_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="addnum_6()"
-=======
-                            onclick="addnum_6()"
->>>>>>> dev
                         >
                             <img src="../assets/images/game/coin.png" alt="" />
                             <p>20</p>
@@ -251,11 +204,7 @@
                     <img src="../assets/images/game/bag.png" alt="" />
                     <p>倉庫</p>
                 </div>
-<<<<<<< HEAD
                 <div class="btn-close" @click="removeActive()">X</div>
-=======
-                <div class="btn-close" onclick="removeActive()">X</div>
->>>>>>> dev
                 <div class="bag_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
@@ -264,11 +213,7 @@
                         </p>
                         <div
                             class="bag_talkwindow_commodity_button"
-<<<<<<< HEAD
                             @click="minnum_1()"
-=======
-                            onclick="minnum_1()"
->>>>>>> dev
                         >
                             <p>餵食</p>
                         </div>
