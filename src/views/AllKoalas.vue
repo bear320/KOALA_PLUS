@@ -39,18 +39,46 @@
     <section class="koalas wrapper">
         <h2>選擇你要幫助的無尾熊吧！</h2>
         <div class="tab-wrapper">
-            <div class="tab selected"><h3>所有無尾熊</h3></div>
-            <div class="tab"><h3>成年無尾熊</h3></div>
-            <div class="tab"><h3>幼年無尾熊</h3></div>
+            <!-- <div class="tab selected" @click="tabSelected()">
+                <h3>所有無尾熊</h3>
+            </div>
+            <div class="tab" @click="tabSelected()"><h3>成年無尾熊</h3></div>
+            <div class="tab" @click="tabSelected()"><h3>幼年無尾熊</h3></div> -->
+            <div
+                v-for="(tab, index) in koalaTabs"
+                :key="index"
+                class="btn tab"
+                :class="{ selected: isSelected === index }"
+                @click="tabSelected(index)"
+            >
+                <h3>{{ tab }}</h3>
+            </div>
+        </div>
+        <div class="koala-card-wrapper">
+            <KoalaCard v-for="item in 8" :key="item.id"></KoalaCard>
         </div>
     </section>
 </template>
 
 <script>
 import Header from "@/components/header.vue";
+import KoalaCard from "@/components/allKoalas/KoalaCard.vue";
 export default {
     components: {
         Header,
+        KoalaCard,
+    },
+    data() {
+        return {
+            koalaTabs: ["所有無尾熊", "成年無尾熊", "幼年無尾熊"],
+            isSelected: 0, // 第一個 tab 為 selected
+        };
+    },
+    methods: {
+        tabSelected(i) {
+            console.log("run");
+            this.isSelected = i;
+        },
     },
 };
 </script>
@@ -115,7 +143,7 @@ export default {
     .tab-wrapper {
         margin: 50px 0;
         display: flex;
-        justify-content: space-between;
+        justify-content: space-around;
         @include m() {
             margin: 25px 0;
             flex-wrap: wrap;
@@ -126,6 +154,11 @@ export default {
             @include size(30%, $tab-h);
             border-radius: 10px;
             background-color: $btn-light-color;
+            box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+            user-select: none;
+            &:hover {
+                cursor: pointer;
+            }
             @include m() {
                 margin: 8px 0;
                 @include size(75%, $tab-h);
@@ -139,6 +172,11 @@ export default {
             background-color: $green;
             color: white;
         }
+    }
+    .koala-card-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 60px;
     }
 }
 </style>
