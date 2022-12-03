@@ -60,7 +60,10 @@
                 <img src="../assets/images/game/game_shop.png" alt="" />
                 <p>商店</p>
             </div>
-            <div class="game_nav_bag_button btn-open" onclick="bag_talkwindow()">
+            <div
+                class="game_nav_bag_button btn-open"
+                onclick="bag_talkwindow()"
+            >
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
@@ -313,153 +316,153 @@ export default {
             game_money_6: 1000,
         };
     },
-    // methods: {
-    //     // ============================== 賺遊戲幣的方式 ============================== //
-    //     plus_talkwindow() {
-    //         removeActive();
-    //         document
-    //             .getElementById("plus_talkwindow")
-    //             .classList.add("plus_talkwindow_active");
-    //     },
+    methods: {
+        // ============================== 賺遊戲幣的方式 ============================== //
+        plus_talkwindow() {
+            removeActive();
+            document
+                .getElementById("plus_talkwindow")
+                .classList.add("plus_talkwindow_active");
+        },
 
-    //     // ============================== 虛擬商店 ============================== //
-    //     shop_talkwindow() {
-    //         removeActive();
-    //         document
-    //             .getElementById("shop_talkwindow")
-    //             .classList.add("shop_talkwindow_active");
-    //     },
+        // ============================== 虛擬商店 ============================== //
+        shop_talkwindow() {
+            removeActive();
+            document
+                .getElementById("shop_talkwindow")
+                .classList.add("shop_talkwindow_active");
+        },
 
-    //     // ============================== 遊戲背包 ============================== //
-    //     bag_talkwindow() {
-    //         removeActive();
-    //         document
-    //             .getElementById("bag_talkwindow")
-    //             .classList.add("bag_talkwindow_active");
-    //     },
+        // ============================== 遊戲背包 ============================== //
+        bag_talkwindow() {
+            removeActive();
+            document
+                .getElementById("bag_talkwindow")
+                .classList.add("bag_talkwindow_active");
+        },
 
-    //     // ============================== 關掉彈窗 ============================== //
-    //     removeActive() {
-    //         document
-    //             .getElementById("shop_talkwindow")
-    //             .classList.remove("shop_talkwindow_active");
-    //         document
-    //             .getElementById("bag_talkwindow")
-    //             .classList.remove("bag_talkwindow_active");
-    //         document
-    //             .getElementById("plus_talkwindow")
-    //             .classList.remove("plus_talkwindow_active");
-    //     },
-        
-    //     // addnum_1() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_1");
-    //     //     game_money_1 -= 20;
-    //     //     game_money.innerHTML = game_money_1;
-    //     // },
-    //     // minnum_1() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
+        // ============================== 關掉彈窗 ============================== //
+        removeActive() {
+            document
+                .getElementById("shop_talkwindow")
+                .classList.remove("shop_talkwindow_active");
+            document
+                .getElementById("bag_talkwindow")
+                .classList.remove("bag_talkwindow_active");
+            document
+                .getElementById("plus_talkwindow")
+                .classList.remove("plus_talkwindow_active");
+        },
 
-    //     // addnum_2() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_2");
-    //     //     game_money_2 -= 50;
-    //     //     game_money.innerHTML = game_money_2;
-    //     // },
-    //     // minnum_2() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
+        addnum_1() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_1");
+            game_money_1 -= 20;
+            game_money.innerHTML = game_money_1;
+        },
+        minnum_1() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
 
-    //     // addnum_3() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_3");
-    //     //     game_money_3 -= 20;
-    //     //     game_money.innerHTML = game_money_3;
-    //     // },
+        addnum_2() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_2");
+            game_money_2 -= 50;
+            game_money.innerHTML = game_money_2;
+        },
+        minnum_2() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
 
-    //     // minnum_3() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
+        addnum_3() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_3");
+            game_money_3 -= 20;
+            game_money.innerHTML = game_money_3;
+        },
 
-    //     // addnum_4() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_4");
-    //     //     game_money_4 -= 20;
-    //     //     game_money.innerHTML = game_money_4;
-    //     // },
-    //     // minnum_4() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
+        minnum_3() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
 
-    //     // addnum_5() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_5");
-    //     //     game_money_5 -= 20;
-    //     //     game_money.innerHTML = game_money_5;
-    //     // },
-    //     // minnum_5() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
+        addnum_4() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_4");
+            game_money_4 -= 20;
+            game_money.innerHTML = game_money_4;
+        },
+        minnum_4() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
 
-    //     // addnum_6() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     numinnerHTML++;
-    //     //     num.innerHTML = numinnerHTML;
-    //     //     let game_money = document.querySelector(".game_money_6");
-    //     //     game_money_6 -= 200;
-    //     //     game_money.innerHTML = game_money_6;
-    //     // },
-    //     // minnum_6() {
-    //     //     let num = document.getElementById("addtext");
-    //     //     if (num.innerHTML == 0) {
-    //     //         return;
-    //     //     } else {
-    //     //         numinnerHTML--;
-    //     //         num.innerHTML = numinnerHTML;
-    //     //     }
-    //     // },
-    // },
+        addnum_5() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_5");
+            game_money_5 -= 20;
+            game_money.innerHTML = game_money_5;
+        },
+        minnum_5() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+
+        addnum_6() {
+            let num = document.getElementById("addtext");
+            numinnerHTML++;
+            num.innerHTML = numinnerHTML;
+            let game_money = document.querySelector(".game_money_6");
+            game_money_6 -= 200;
+            game_money.innerHTML = game_money_6;
+        },
+        minnum_6() {
+            let num = document.getElementById("addtext");
+            if (num.innerHTML == 0) {
+                return;
+            } else {
+                numinnerHTML--;
+                num.innerHTML = numinnerHTML;
+            }
+        },
+    },
 };
 </script>
 
