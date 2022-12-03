@@ -5,7 +5,7 @@
             <div ref="mainImage" class="main-image">
                 <img
                     v-for="(imgPath, index) in imgs"
-                    :src="imgPath"
+                    :src="require(`@/assets/images/${imgPath}`)"
                     :key="index"
                 />
             </div>
@@ -25,7 +25,7 @@
         <div class="sub-images">
             <img
                 v-for="(imgPath, index) in imgs"
-                :src="imgPath"
+                :src="require(`@/assets/images/${imgPath}`)"
                 :key="index"
                 @click="changeImage(index)"
             />
@@ -65,6 +65,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .image-slider {
+    margin: 0 auto;
     width: 500px;
     .view-box {
         width: 100%;
