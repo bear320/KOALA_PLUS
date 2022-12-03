@@ -1,54 +1,60 @@
 <template lang="">
     <Header></Header>
-    <div class="nav-space">
-        <div class="banner-img banner"></div>
-    </div>
-    <div class="wrapper">
-        <div class="row">
-            <div class="col-4">
-                <h1 class="title">週邊商城</h1>
-                <div class="category-box">
-                    <div
-                        class="category-item"
-                        v-for="(category, index) in categories"
-                        :key="index"
-                        @click="changeCategory(category.category)"
-                    >
-                        {{ category.title }}
+    <main class="nav-space">
+        <div>
+            <div class="banner-img banner"></div>
+        </div>
+        <div class="wrapper">
+            <div class="row">
+                <div class="col-4">
+                    <h1 class="title">週邊商城</h1>
+                    <div class="category-box">
+                        <div
+                            class="category-item"
+                            v-for="(category, index) in categories"
+                            :key="index"
+                            @click="changeCategory(category.category)"
+                        >
+                            {{ category.title }}
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-8">
-                <div class="row">
-                    <product-card
-                        v-for="(item, index) in source"
-                        :key="item.id"
-                        :proImg="item.images[0]"
-                        :proName="item.name"
-                        :proPrice="item.price"
-                    ></product-card>
-                </div>
-                <div class="row">
-                    <div class="col-12 pagenation">
-                        <Icon type="md-skip-backward" />
-                        <Icon
-                            class="bgc"
-                            type="ios-arrow-back"
-                            @click="changePage()"
-                        />
-                        <input class="page" type="text" v-model="curPage" />
-                        of {{ pageTotal }} pages
-                        <Icon
-                            class="bgc"
-                            type="ios-arrow-forward"
-                            @click="changePage()"
-                        />
-                        <Icon type="md-skip-forward" />
+                <div class="col-8">
+                    <div class="row">
+                        <product-card
+                            v-for="(item, index) in source"
+                            :key="item.id"
+                            :proImg="item.images[0]"
+                            :proName="item.name"
+                            :proPrice="item.price"
+                            :proId="item.id"
+                        ></product-card>
+                    </div>
+                    <div class="row">
+                        <div class="col-12 pagenation">
+                            <Icon
+                                type="md-skip-backward"
+                                @click="toFirstPage"
+                            />
+                            <Icon
+                                class="bgc"
+                                type="ios-arrow-back"
+                                @click="previousPage('previous')"
+                            />
+                            <input class="page" type="text" v-model="curPage" />
+                            of {{ pageTotal }} pages
+                            <Icon
+                                class="bgc"
+                                type="ios-arrow-forward"
+                                @click="nextPage('next')"
+                            />
+                            <Icon type="md-skip-forward" @click="toLastPage" />
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </main>
 </template>
 <script>
 import Header from "@/components/header.vue";
@@ -98,6 +104,12 @@ export default {
             }
         },
         getProduct(queryParam) {
+            if (!Object.keys(queryParam).length) {
+                queryParam.sort = "name";
+                queryParam.limit = "9";
+                queryParam.page = "1";
+            }
+
             const apiURL = new URL(
                 "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours"
             );
@@ -126,29 +138,42 @@ export default {
                     this.pageTotal = Math.ceil(json.dtat.tours.length / 9);
                 });
         },
-        changePage() {
+        previousPage() {
+            if (this.curPage <= 1) return;
+            this.curPage -= 1;
+            this.changePage();
+        },
+        nextPage() {
             if (this.curPage >= this.pageTotal) return;
             this.curPage += 1;
+            this.changePage();
+        },
+        toFirstPage() {
+            this.curPage = 1;
+            this.changePage();
+        },
+        toLastPage() {
+            this.curPage = this.pageTotal;
+            this.changePage();
+        },
+        changePage() {
+            const queryParam = { ...this.$route.query };
+            queryParam.page = this.curPage;
             if (!this.$route.query.category) {
                 this.$router.push({
                     path: "/shop",
-                    query: { sort: `name`, limit: `9`, page: this.curPage },
+                    query: queryParam,
                 });
             } else {
                 this.$router.push({
                     path: "/shop",
-                    query: {
-                        category: `${this.$route.query.category}`,
-                        sort: `name`,
-                        limit: `9`,
-                        page: this.curPage,
-                    },
+                    query: queryParam,
                 });
             }
         },
     },
     created() {
-        this.getProduct("?sort=name&limit=9&page=1");
+        this.getProduct(this.$route.query);
         this.getPage(this.$route.query);
     },
 };

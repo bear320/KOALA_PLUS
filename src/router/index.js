@@ -82,7 +82,7 @@ const routes = [
         component: MyKoala,
     },
     {
-        path: "/product",
+        path: "/shop/:id",
         name: "product",
         component: Product,
     },
