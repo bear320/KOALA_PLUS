@@ -5,24 +5,59 @@
             <p>名字：Charmy</p>
             <p>會員ID：P00001</p>
         </div>
-
-        訂單資訊
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>品名</th>
-                    <th>價格</th>
-                    <th>到期日</th>
-                </tr>
-                <tr>
-                    <td></td>
-                </tr>
-            </thead>
-        </table>
+        <!-- 訂單資訊下方內容 -->
+        <div class="mem_main">
+            <div class="mem_order_table">
+                <p>訂單編號: KOA12345678</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>產品名稱</th>
+                            <th>商品編號</th>
+                            <th>商品類別</th>
+                            <th>數量</th>
+                            <th>小計(暫單價)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ prod_name }}</td>
+                            <td>{{ prod_id }}</td>
+                            <td>{{ prod_category }}</td>
+                            <td>{{ ord_qty }}</td>
+                            <td>{{ prod_price }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ prod_name }}</td>
+                            <td>{{ prod_id }}</td>
+                            <td>{{ prod_category }}</td>
+                            <td>{{ ord_qty }}</td>
+                            <td>{{ prod_price }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="mem_state">
+                <button class="btn-lowest">取消訂單</button>
+                <p>總額: $800</p>
+                <div>訂單狀態：{{ ord_sts }}</div>
+            </div>
+        </div>
     </li>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            prod_name: "無尾熊乾髮帽",
+            prod_id: "1022",
+            prod_category: "玩具/絨毛娃娃",
+            ord_qty: 1,
+            prod_price: 200,
+            ord_sts: "處理中",
+        };
+    },
+};
 </script>
 <style lang="scss" scoped>
 .tabs {
@@ -37,7 +72,43 @@ export default {};
                     padding: 10px;
                 }
             }
+            .mem_main {
+                // background-color: beige;
+                width: 100%;
+                display: flex;
+                flex-wrap: wrap;
+                border-bottom: 1px solid #337a7d;
+                .mem_order_table {
+                    width: 80%;
+                }
+                .mem_state {
+                    // background-color: burlywood;
+                    width: 20%;
+                    button {
+                        padding-right: 10px;
+                        padding-left: 10px;
+                    }
+                }
+            }
         }
     }
+}
+table {
+    border-spacing: 0;
+    width: 800px;
+    tr {
+        text-align: center;
+        th {
+            padding: 10px;
+        }
+    }
+    // tbody tr:last-child td:first-child {
+    //     border-radius: 0 0 0 10px;
+    //     background-color: aqua;
+    // }
+    // tbody tr:last-child td:last-child {
+    //     border-radius: 0 0 10px 0;
+    //     background-color: rgb(7, 37, 37);
+    // }
 }
 </style>

@@ -6,6 +6,22 @@
             <p>會員ID：P00001</p>
         </div>
         優惠券
+        <!-- <table>
+            <thead>
+                <th>Country</th>
+                <th>Capital</th>
+                <th>Population</th>
+                <th>Year</th>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>China</td>
+                    <td>Beijing</td>
+                    <td>21,542,000</td>
+                    <td>2010</td>
+                </tr>
+            </tbody>
+        </table> -->
     </li>
 </template>
 <script>
