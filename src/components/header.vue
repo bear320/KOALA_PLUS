@@ -74,7 +74,7 @@ header {
     z-index: 999;
     position: fixed;
     background-color: #fff;
-    width: 100vw;
+    width: 100%;
     nav {
         @include size(100%, 60px);
         box-sizing: border-box;

@@ -5,9 +5,9 @@
 @mixin btnSize($w) {
     padding: 5px $w;
 }
-@mixin containerSize {
-    width: 1200px;
-}
+// @mixin containerSize {
+//     width: 1200px;
+// }
 @mixin absolute($top, $bottom, $left, $right) {
     position: absolute;
     top: $top;
@@ -28,4 +28,14 @@
     background-repeat: no-repeat;
     background-size: $contain;
     background-position: $position;
+}
+@mixin d() {
+    @media all and (max-width: 1200px) {
+        @content;
+    }
+}
+@mixin m() {
+    @media all and (max-width: 768px) {
+        @content;
+    }
 }
