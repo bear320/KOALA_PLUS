@@ -153,9 +153,9 @@ export default {
     //     background-color: #faa;
     // }
 
-    .tabs_content li:nth-child(3).content {
-        background-color: #aaf;
-    }
+    // .tabs_content li:nth-child(3).content {
+    //     background-color: #aaf;
+    // }
 
     .tabs_content li:nth-child(4).content {
         background-color: #faf;

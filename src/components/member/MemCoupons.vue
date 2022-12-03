@@ -5,33 +5,50 @@
             <p>名字：Charmy</p>
             <p>會員ID：P00001</p>
         </div>
-        優惠券
-        <!-- <table>
-            <thead>
-                <th>Country</th>
-                <th>Capital</th>
-                <th>Population</th>
-                <th>Year</th>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>China</td>
-                    <td>Beijing</td>
-                    <td>21,542,000</td>
-                    <td>2010</td>
-                </tr>
-            </tbody>
-        </table> -->
+        <div class="mem_main">
+            <div class="mem_order_table">
+                <p>合計 4 張優惠券</p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>優惠券名稱</th>
+                            <th class="prod_id">優惠券代碼</th>
+                            <th class="prod_category">優惠券獲得日期</th>
+                            <th>優惠券到期日</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>{{ prod_name }}</td>
+                            <td class="prod_id">{{ prod_id }}</td>
+                            <td class="prod_category">{{ prod_category }}</td>
+                            <td>{{ ord_qty }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ prod_name }}</td>
+                            <td class="prod_id">{{ prod_id }}</td>
+                            <td class="prod_category">{{ prod_category }}</td>
+                            <td>{{ ord_qty }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </li>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            prod_name: "周邊商城85折優惠券",
+            prod_id: "#SHOP850001",
+            prod_category: "2023/01/01",
+            ord_qty: "2023/01/01",
+        };
+    },
+};
 </script>
 <style lang="scss" scoped>
-.tabs_content li:nth-child(3).content {
-    background-color: #aaf;
-}
-
 .tabs {
     .wrapper {
         .mem_coupons {
@@ -43,6 +60,16 @@ export default {};
                     padding: 10px;
                 }
             }
+        }
+    }
+}
+table {
+    border-spacing: 0;
+    width: 100%;
+    tr {
+        text-align: center;
+        th {
+            padding: 10px;
         }
     }
 }

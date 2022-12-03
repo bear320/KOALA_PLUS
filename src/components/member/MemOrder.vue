@@ -13,8 +13,8 @@
                     <thead>
                         <tr>
                             <th>產品名稱</th>
-                            <th>商品編號</th>
-                            <th>商品類別</th>
+                            <th class="prod_id">商品編號</th>
+                            <th class="prod_category">商品類別</th>
                             <th>數量</th>
                             <th>小計(暫單價)</th>
                         </tr>
@@ -22,15 +22,15 @@
                     <tbody>
                         <tr>
                             <td>{{ prod_name }}</td>
-                            <td>{{ prod_id }}</td>
-                            <td>{{ prod_category }}</td>
+                            <td class="prod_id">{{ prod_id }}</td>
+                            <td class="prod_category">{{ prod_category }}</td>
                             <td>{{ ord_qty }}</td>
                             <td>{{ prod_price }}</td>
                         </tr>
                         <tr>
                             <td>{{ prod_name }}</td>
-                            <td>{{ prod_id }}</td>
-                            <td>{{ prod_category }}</td>
+                            <td class="prod_id">{{ prod_id }}</td>
+                            <td class="prod_category">{{ prod_category }}</td>
                             <td>{{ ord_qty }}</td>
                             <td>{{ prod_price }}</td>
                         </tr>
@@ -95,20 +95,40 @@ export default {
 }
 table {
     border-spacing: 0;
-    width: 800px;
+    width: 100%;
     tr {
         text-align: center;
         th {
             padding: 10px;
         }
     }
-    // tbody tr:last-child td:first-child {
-    //     border-radius: 0 0 0 10px;
-    //     background-color: aqua;
-    // }
-    // tbody tr:last-child td:last-child {
-    //     border-radius: 0 0 10px 0;
-    //     background-color: rgb(7, 37, 37);
-    // }
+}
+@media screen and (max-width: 1200px) {
+    table {
+        border-spacing: 0;
+        // width: 100%;
+        tr {
+            text-align: center;
+            th {
+            }
+            .prod_id {
+                display: none;
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    table {
+        border-spacing: 0;
+        // width: 100%;
+        tr {
+            text-align: center;
+            th {
+            }
+            .prod_category {
+                display: none;
+            }
+        }
+    }
 }
 </style>
