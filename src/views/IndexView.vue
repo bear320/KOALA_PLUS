@@ -2,7 +2,7 @@
     <!-- <Header /> -->
     <section>
         <router-link to="/home">前台</router-link>
-        <router-link to="/backend">後台</router-link>
+        <router-link to="/bs-login">後台</router-link>
         <router-link to="/about">關於</router-link>
         <router-link to="/about-koala">無尾熊百科</router-link>
         <router-link to="/all-koalas">資助認養</router-link>
