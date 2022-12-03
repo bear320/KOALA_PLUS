@@ -1,76 +1,96 @@
-<template>
-    <Header />
-    <div class="member">
-        <div class="banner-img"></div>
-
-        <section>
-            <div class="tabs">
-                <ul class="tabs_list">
-                    <li
-                        @click="movingTab(index)"
-                        v-for="(item, index) in memsliding"
-                        :key="index"
-                        :class="{ active: currentTab === index }"
-                    >
-                        <!-- 想要移動過去，字體會變成白色 -->
-                        {{ item }}
-                    </li>
-                    <li
-                        :style="{ left: `${currentTab * 25}%` }"
-                        class="moving_tab"
-                    ></li>
-                </ul>
-                <div class="wrapper">
-                    <ul
-                        class="tabs_content"
-                        :style="{ left: `${currentTab * -100}%` }"
-                    >
-                        <!-- 會員中心內容 -->
-                        <MemCentre></MemCentre>
-                        <MemOrder></MemOrder>
-                        <MemCoupons></MemCoupons>
-                        <MemAdopt></MemAdopt>
-                    </ul>
+<template lang="">
+    <li class="mem_centre content">
+        <div class="mem_basic">
+            <p>姓氏：Zeng</p>
+            <p>名字：Charmy</p>
+            <p>會員ID：P00001</p>
+        </div>
+        <!-- 會員中心下方內容 -->
+        <div class="mem_main">
+            <!-- 會員中心左邊內容  關於會員帳密內容-->
+            <div class="tabcontent_txt_group">
+                <div class="subtitle">
+                    <Icon type="ios-create-outline" />
+                    <span>編輯會員資料</span>
                 </div>
+                <table class="tabcontent_group">
+                    <tr class="tabcontent_txt">
+                        <td>信箱</td>
+                        <input
+                            type="text"
+                            id="mem_email"
+                            myfield="mem_email"
+                            value="chermy111@gmail.com"
+                        />
+                    </tr>
+                    <tr class="tabcontent_txt">
+                        <td>電話</td>
+                        <input
+                            type="text"
+                            id="mem_tel"
+                            myfield="mem_tel"
+                            value="0988888888"
+                        />
+                    </tr>
+                    <tr class="tabcontent_txt">
+                        <td>信箱</td>
+                        <input
+                            type="text"
+                            id="mem_add"
+                            myfield="mem_add"
+                            value="桃園市復興路46號8樓"
+                        />
+                    </tr>
+                </table>
+                <button class="btn-paramy">編輯會員資料</button>
             </div>
-        </section>
-    </div>
-    <div class="ivu-icon">
-        <Icon type="md-search" />
-    </div>
+            <!-- 會員中心右邊內容 關於帳號密碼-->
+            <div class="tabcontent_txt_group">
+                <div class="subtitle">
+                    <Icon type="ios-create-outline" />
+                    <span>重設會員密碼</span>
+                    <p>
+                        為了您的帳戶安全，密碼的長度必須至少為八個字符，並且包含字母和數字字符的任意組合。
+                        密碼區分大小寫。 新密碼不能與舊密碼相同。
+                    </p>
+                </div>
+                <table class="tabcontent_group">
+                    <tr class="tabcontent_txt">
+                        <td>帳號</td>
+                        <input
+                            type="text"
+                            id="mem_account"
+                            myfield="mem_email"
+                            value="chermy111"
+                        />
+                    </tr>
+                    <tr class="tabcontent_txt">
+                        <td>密碼</td>
+                        <input
+                            type="password"
+                            id="mem_password1"
+                            myfield="mem_password1"
+                            value="1213456"
+                        />
+                    </tr>
+                    <tr class="tabcontent_txt">
+                        <td>重新輸入密碼</td>
+                        <input
+                            type="password"
+                            id="mem_password_again"
+                            myfield="mem_password_again"
+                            value="123456"
+                        />
+                    </tr>
+                </table>
+                <button class="btn-paramy">修改密碼</button>
+            </div>
+        </div>
+    </li>
 </template>
-
 <script>
-import Header from "@/components/header.vue";
-import MemCentre from "@/components/member/MemCentre.vue";
-import MemOrder from "@/components/member/MemOrder.vue";
-import MemAdopt from "@/components/member/MemAdopt.vue";
-import MemCoupons from "@/components/member/MemCoupons.vue";
-
-// import { useSwiperSlide } from "swiper/vue";
-export default {
-    name: "About",
-    components: {
-        Header,
-        MemCentre,
-        MemOrder,
-        MemCoupons,
-        MemAdopt,
-    },
-    data() {
-        return {
-            memsliding: ["會員中心", "訂單資訊", "優惠券", "認養紀錄"],
-            currentTab: 0,
-        };
-    },
-    methods: {
-        movingTab(index) {
-            this.currentTab = index;
-        },
-    },
-};
+export default {};
 </script>
-
 <style lang="scss" scoped>
 // .member
 .banner-img {
@@ -111,13 +131,15 @@ export default {
             align-items: center;
             cursor: pointer;
             border-radius: 50px;
-            transition: color 0.5s linear;
+
+            a {
+                text-decoration: none;
+                color: #333;
+                vertical-align: baseline;
+            }
         }
         li:hover {
             box-shadow: 0 24px 18px -15px rgba(119, 120, 107, 0.65);
-        }
-        .active {
-            color: #ffffff;
         }
         .moving_tab {
             display: block;
@@ -140,7 +162,6 @@ export default {
             display: flex;
             position: relative;
             border-radius: 10px;
-            transition: left 0.5s linear;
             .content {
                 width: 1000px;
                 height: 600px;
