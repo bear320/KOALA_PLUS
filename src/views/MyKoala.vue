@@ -897,13 +897,6 @@ img {
     cursor: pointer;
 }
 
-.shop_talkwindow_active,
-.bag_talkwindow_active,
-.plus_talkwindow_active {
-    animation: popup 0.5s;
-    transform: scale(1);
-}
-
 @keyframes popup {
     0% {
         transform: scale(0);
@@ -923,5 +916,12 @@ img {
     100% {
         transform: scale(1);
     }
+}
+
+.shop_talkwindow_active,
+.bag_talkwindow_active,
+.plus_talkwindow_active {
+    animation: popup 0.5s;
+    transform: scale(1);
 }
 </style>
