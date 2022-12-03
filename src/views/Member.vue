@@ -81,13 +81,6 @@ export default {
 <style lang="scss" scoped>
 // .member
 .member {
-    // .banner-img {
-    //     background-size: cover;
-    //     background: url(@/assets/images/member/banner.jpg) no-repeat
-    //         center/cover;
-    //     height: 480px;
-    //     margin-bottom: 100px;
-    // }
     h1 {
         font-family: "Inkfree";
         font-size: 30vh;
@@ -156,19 +149,41 @@ export default {
     }
     // 測試
 
-    .tabs_content li:nth-child(2).content {
-        background-color: #faa;
-    }
+    // .tabs_content li:nth-child(2).content {
+    //     background-color: #faa;
+    // }
 
-    .tabs_content li:nth-child(3).content {
-        background-color: #aaf;
-    }
+    // .tabs_content li:nth-child(3).content {
+    //     background-color: #aaf;
+    // }
 
     .tabs_content li:nth-child(4).content {
         background-color: #faf;
     }
 }
 
-@media screen and (max-width: 1199px) {
+@media screen and (max-width: 1200px) {
+    .tabs {
+        .wrapper {
+            width: 600px;
+            .tabs_content {
+                .content {
+                    width: 600px;
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    .tabs {
+        .wrapper {
+            width: 350px;
+            .tabs_content {
+                .content {
+                    width: 350px;
+                }
+            }
+        }
+    }
 }
 </style>
