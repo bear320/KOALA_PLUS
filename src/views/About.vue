@@ -220,6 +220,12 @@ html {
                     margin: 10px 0;
                     display: block;
                     position: relative;
+                    color: $font-color;
+                }
+                .highLight {
+                    color: $green;
+                    pointer-events: none;
+                    @include borderLeft;
                 }
             }
             .about-content {
@@ -229,12 +235,7 @@ html {
                 text-align: left;
             }
         }
-        .highLight {
-            color: $green;
-            font-weight: 700;
-            pointer-events: none;
-            @include borderLeft;
-        }
+
         .slider {
             height: 100%;
             margin: 20px 0;
