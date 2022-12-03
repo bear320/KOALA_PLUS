@@ -340,135 +340,135 @@ export default {
         // let numinnerHTML = 0;
         // let game_money_1 = 1000;
 
-        addnum_1() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_1");
-            game_money_1 -= 20;
-            game_money.innerHTML = game_money_1;
-        },
+        // addnum_1() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_1");
+        //     game_money_1 -= 20;
+        //     game_money.innerHTML = game_money_1;
+        // },
 
-        minnum_1() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_1() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
 
-        // let game_money_2 = 1000;
+        // // let game_money_2 = 1000;
 
-        addnum_2() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_2");
-            game_money_2 -= 50;
-            game_money.innerHTML = game_money_2;
-        },
+        // addnum_2() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_2");
+        //     game_money_2 -= 50;
+        //     game_money.innerHTML = game_money_2;
+        // },
 
-        minnum_2() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_2() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
 
-        // let game_money_3 = 1000;
+        // // let game_money_3 = 1000;
 
-        addnum_3() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_3");
-            game_money_3 -= 20;
-            game_money.innerHTML = game_money_3;
-        },
+        // addnum_3() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_3");
+        //     game_money_3 -= 20;
+        //     game_money.innerHTML = game_money_3;
+        // },
 
-        minnum_3() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_3() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
 
-        // let game_money_4 = 1000;
+        // // let game_money_4 = 1000;
 
-        addnum_4() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_4");
-            game_money_4 -= 20;
-            game_money.innerHTML = game_money_4;
-        },
+        // addnum_4() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_4");
+        //     game_money_4 -= 20;
+        //     game_money.innerHTML = game_money_4;
+        // },
 
-        minnum_4() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_4() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
 
-        // let game_money_5 = 1000;
+        // // let game_money_5 = 1000;
 
-        addnum_5() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_5");
-            game_money_5 -= 20;
-            game_money.innerHTML = game_money_5;
-        },
+        // addnum_5() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_5");
+        //     game_money_5 -= 20;
+        //     game_money.innerHTML = game_money_5;
+        // },
 
-        minnum_5() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_5() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
 
-        // let game_money_6 = 1000;
+        // // let game_money_6 = 1000;
 
-        addnum_6() {
-            let num = document.getElementById("addtext");
-            numinnerHTML++;
-            num.innerHTML = numinnerHTML;
-            let game_money = document.querySelector(".game_money_6");
-            game_money_6 -= 200;
-            game_money.innerHTML = game_money_6;
-        },
+        // addnum_6() {
+        //     let num = document.getElementById("addtext");
+        //     numinnerHTML++;
+        //     num.innerHTML = numinnerHTML;
+        //     let game_money = document.querySelector(".game_money_6");
+        //     game_money_6 -= 200;
+        //     game_money.innerHTML = game_money_6;
+        // },
 
-        minnum_6() {
-            let num = document.getElementById("addtext");
-            // num.innerHTML--;
-            if (num.innerHTML == 0) {
-                return;
-            } else {
-                numinnerHTML--;
-                num.innerHTML = numinnerHTML;
-            }
-        },
+        // minnum_6() {
+        //     let num = document.getElementById("addtext");
+        //     // num.innerHTML--;
+        //     if (num.innerHTML == 0) {
+        //         return;
+        //     } else {
+        //         numinnerHTML--;
+        //         num.innerHTML = numinnerHTML;
+        //     }
+        // },
     },
 };
 </script>
@@ -897,6 +897,13 @@ img {
     cursor: pointer;
 }
 
+.shop_talkwindow_active,
+.bag_talkwindow_active,
+.plus_talkwindow_active {
+    animation: popup 0.5s;
+    transform: scale(1);
+}
+
 @keyframes popup {
     0% {
         transform: scale(0);
@@ -918,10 +925,4 @@ img {
     }
 }
 
-.shop_talkwindow_active,
-.bag_talkwindow_active,
-.plus_talkwindow_active {
-    animation: popup 0.5s;
-    transform: scale(1);
-}
 </style>
