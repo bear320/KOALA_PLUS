@@ -55,7 +55,7 @@ export default {
     data() {
         return {
             items: [
-                { name: "資助認養", sourc: "all-koalas" },
+                { name: "資助認養", sourc: "support" },
                 { name: "周邊商城", sourc: "shop" },
                 { name: "無尾熊園區", sourc: "koala-park" },
                 { name: "關於我們", sourc: "about" },

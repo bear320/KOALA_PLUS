@@ -7,7 +7,7 @@ import IndexView from "../views/IndexView.vue";
 import HomeView from "../views/HomeView.vue";
 import About from "../views/About.vue";
 import AboutKoala from "../views/AboutKoala.vue";
-import AllKoalas from "../views/AllKoalas.vue";
+import Support from "../views/Support.vue";
 import Cart1 from "../views/Cart1.vue";
 import Cart2 from "../views/Cart2.vue";
 import KoalaInfo from "../views/KoalaInfo.vue";
@@ -62,9 +62,14 @@ const routes = [
         component: AboutKoala,
     },
     {
-        path: "/all-koalas",
-        name: "all-koalas",
-        component: AllKoalas,
+        path: "/support",
+        name: "support",
+        component: Support,
+    },
+    {
+        path: "/koala-info",
+        name: "koala-info",
+        component: KoalaInfo,
     },
     {
         path: "/cart1",
@@ -75,11 +80,6 @@ const routes = [
         path: "/cart2",
         name: "cart2",
         component: Cart2,
-    },
-    {
-        path: "/koala-info",
-        name: "koala-info",
-        component: KoalaInfo,
     },
     {
         path: "/koala-park",
