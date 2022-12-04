@@ -2,8 +2,17 @@
     <Header></Header>
     <main class="nav-space">
         <div class="wrapper">
-            <Row>fjslkd</Row>
             <Row>
+                <Col span="24">
+                    <ul class="breadcrumbs">
+                        <li><router-link to="/home">首頁</router-link></li>
+                        <li><router-link to="/shop">週邊商城</router-link></li>
+                        <li><router-link to="#">生活小物</router-link></li>
+                        <li>
+                            <router-link to="#">無尾熊室內拖鞋</router-link>
+                        </li>
+                    </ul>
+                </Col>
                 <Col span="12">
                     <image-slider :imgs="images"></image-slider>
                     <!-- <image-slider :imgs="source.images"></image-slider> -->
@@ -22,11 +31,11 @@
                     <div class="product-price">NTD$&nbsp{{ source.price }}</div>
                     <div class="product-box">
                         <div class="quantity-box">
-                            <div>數量</div>
+                            <div class="quantity-text">數量</div>
                             <input class="quantity" type="number" />
                         </div>
                         <div class="share-box">
-                            <div>Share</div>
+                            <div class="share-text">Share</div>
                             <div class="community-group">
                                 <img
                                     class="community-item"
@@ -51,7 +60,9 @@
                             </div>
                         </div>
                     </div>
-                    <div class="btn-paramy">加到購物車</div>
+                    <div class="btn-box">
+                        <div class="btn-paramy">加到購物車</div>
+                    </div>
                 </Col>
             </Row>
             {{ source }}
@@ -98,6 +109,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.breadcrumbs {
+    display: flex;
+    li {
+        a {
+            color: $font_color;
+        }
+        &::after {
+            content: ">";
+        }
+        &:last-child::after {
+            content: "";
+        }
+        &:last-child a {
+            color: $green;
+        }
+    }
+}
 .product-description {
     text-align: left;
     padding: 0px 60px;
@@ -129,11 +157,27 @@ export default {
     padding: 0px 60px;
     display: flex;
     gap: 20px;
+    margin-bottom: 50px;
+    .quantity-text {
+        text-align: left;
+        margin-bottom: 10px;
+    }
+    .share-text {
+        text-align: left;
+        margin-bottom: 10px;
+    }
     .community-group {
         img {
             width: 20px;
             margin-right: 10px;
         }
+    }
+}
+.btn-box {
+    padding: 0px 60px;
+    .btn-paramy {
+        font-size: $h3;
+        width: 180px;
     }
 }
 </style>
