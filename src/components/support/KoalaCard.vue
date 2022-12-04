@@ -1,8 +1,8 @@
 <template>
     <div class="koala-card">
         <div class="img">
-            <img src="../../assets/images/support/koala1.jpg" />
-            <!-- <img :src="`${kCover}`" /> -->
+            <!-- <img src="../../assets/images/support/koala1.jpg" /> -->
+            <img :src="require(`@/assets/images/support/${kCover}`)" />
         </div>
         <div class="wave end"></div>
         <div class="wave middle"></div>
