@@ -2,6 +2,7 @@
     <div class="koala-card">
         <div class="img">
             <img src="../../assets/images/support/koala1.jpg" />
+            <!-- <img :src="`${kCover}`" /> -->
         </div>
         <div class="wave end"></div>
         <div class="wave middle"></div>

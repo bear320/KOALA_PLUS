@@ -39,3 +39,8 @@
         @content;
     }
 }
+@mixin m500() {
+    @media all and (max-width: 500px) {
+        @content;
+    }
+}
