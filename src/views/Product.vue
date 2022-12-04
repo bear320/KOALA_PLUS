@@ -7,12 +7,21 @@
                     <ul class="breadcrumbs">
                         <li><router-link to="/home">首頁</router-link></li>
                         <li><router-link to="/shop">週邊商城</router-link></li>
-                        <li><router-link to="#">生活小物</router-link></li>
                         <li>
-                            <router-link to="#">無尾熊室內拖鞋</router-link>
+                            <router-link
+                                :to="`/shop?category=${source.category}&sort=name&limit=9&page=1`"
+                                >生活小物</router-link
+                            >
+                        </li>
+                        <li>
+                            <router-link :to="`/shop/${source.id}`"
+                                >無尾熊室內拖鞋</router-link
+                            >
                         </li>
                     </ul>
                 </Col>
+            </Row>
+            <Row>
                 <Col span="12">
                     <image-slider :imgs="images"></image-slider>
                     <!-- <image-slider :imgs="source.images"></image-slider> -->
@@ -65,7 +74,24 @@
                     </div>
                 </Col>
             </Row>
-            {{ source }}
+
+            <Row>
+                <Col span="24">
+                    <div class="rel-text">相關商品</div>
+                </Col>
+            </Row>
+            <div class="row">
+                <product-card
+                    v-for="(item, index) in relProd"
+                    :key="item.id"
+                    :proImg="item.images[0]"
+                    :proName="item.name"
+                    :proPrice="item.price"
+                    :proId="item.id"
+                    :col="'col-3'"
+                    @click="test"
+                ></product-card>
+            </div>
         </div>
     </main>
 </template>
@@ -73,10 +99,12 @@
 <script>
 import Header from "@/components/header.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
+import ProductCard from "@/components/shop/ProductCard.vue";
 export default {
     components: {
         Header,
         ImageSlider,
+        ProductCard,
     },
     data() {
         return {
@@ -87,7 +115,20 @@ export default {
                 "drawing1.png",
             ],
             source: [],
+            relProducts: [],
         };
+    },
+    computed: {
+        relProd() {
+            return this.relProducts.filter((prod) => {
+                return prod.id !== this.source.id;
+            });
+        },
+    },
+    watch: {
+        $route: function (q) {
+            this.getProductDetail();
+        },
     },
     methods: {
         getProductDetail() {
@@ -99,11 +140,38 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.source = json.dtat.tour;
+                })
+                .then(() => {
+                    this.getRelProduct(this.source.category);
                 });
         },
+        getRelProduct(category) {
+            fetch(
+                `https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours?category=${category}&sort=name`
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    this.relProducts = json.dtat.tours;
+                });
+        },
+        test() {
+            this.$nextTick(() => {
+                window.scrollTo({
+                    top: 200,
+                    behavior: "instant",
+                });
+            });
+        },
     },
+
     created() {
         this.getProductDetail();
+    },
+    mounted() {
+        window.scrollTo({
+            top: 200,
+            behavior: "instant",
+        });
     },
 };
 </script>
@@ -111,6 +179,7 @@ export default {
 <style lang="scss" scoped>
 .breadcrumbs {
     display: flex;
+    margin: 100px 0 80px 0;
     li {
         a {
             color: $font_color;
@@ -126,6 +195,7 @@ export default {
         }
     }
 }
+
 .product-description {
     text-align: left;
     padding: 0px 60px;
@@ -179,5 +249,9 @@ export default {
         font-size: $h3;
         width: 180px;
     }
+}
+.rel-text {
+    margin: 110px 0;
+    font-size: $h3;
 }
 </style>
