@@ -169,7 +169,7 @@ export default {
                     name: "Spring",
                     category: "koala",
                     dob: "2020-04-08",
-                    sex: "",
+                    sex: "female",
                     description:
                         "Hi my name is Spring. My carers can tell me with ease for the pink beauty spot on my nose. I was found in 2020 in a busy street of Nelson Bay with no suitable habitat around me. I was moved to PSKH, where I reside in the big girls yard. I am now fully mature and will be a crucial member of the breeding program. Though I may be smaller than some of my yard mates, I am still pretty mighty and can hold my own. My favourite leaf species are swamp mahogany and forest red gum. Please adopt me to help care for me and my fellow koalas here at the koala sanctuary.",
                     images: ["Spring-1.jpg", "Spring-2.jpg", "Spring-3.jpg"],

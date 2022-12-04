@@ -11,13 +11,11 @@
             </div>
             <div class="buttons">
                 <Icon
-                    type="ios-arrow-dropleft"
-                    size="50"
+                    type="ios-arrow-dropleft-circle"
                     @click="moveImage('left')"
                 />
                 <Icon
-                    type="ios-arrow-dropright"
-                    size="50"
+                    type="ios-arrow-dropright-circle"
                     @click="moveImage('right')"
                 />
             </div>
@@ -32,6 +30,7 @@
         </div>
     </div>
 </template>
+
 <script>
 export default {
     props: {
@@ -63,15 +62,32 @@ export default {
     },
 };
 </script>
+
 <style lang="scss" scoped>
+$b-radius: 10px;
+
 .image-slider {
     margin: 0 auto;
     width: 500px;
+    @include m() {
+        width: 400px;
+    }
+    @include m500() {
+        width: 295px;
+    }
     .view-box {
         width: 100%;
-        position: relative;
+        border-radius: $b-radius;
+        border: 1px solid lighten($darkgreen, 50%);
         overflow: hidden;
+        position: relative;
         margin-bottom: 30px;
+        @include m() {
+            margin-bottom: 20px;
+        }
+        @include m500() {
+            margin-bottom: 10px;
+        }
         .main-image {
             display: flex;
             position: relative;
@@ -81,6 +97,12 @@ export default {
                 width: 100%;
                 height: 500px;
                 flex-shrink: 0;
+                @include m() {
+                    height: 400px;
+                }
+                @include m500() {
+                    height: 295px;
+                }
             }
         }
         .buttons {
@@ -93,6 +115,43 @@ export default {
             justify-content: space-between;
             opacity: 0;
             transition: opacity 0.3s ease;
+            i {
+                font-size: 50px;
+                color: #fff;
+                position: relative;
+                @include m() {
+                    font-size: 40px;
+                }
+                @include m500() {
+                    font-size: 30px;
+                }
+                &:hover {
+                    color: $green;
+                    &::after {
+                        background-color: #fff;
+                    }
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    background-color: $green;
+                    top: 50%;
+                    left: 50%;
+                    transform: translate(-50%, -50%);
+                    z-index: -1;
+                    @include m() {
+                        width: 30px;
+                        height: 30px;
+                    }
+                    @include m500() {
+                        width: 20px;
+                        height: 20px;
+                    }
+                }
+            }
         }
         &:hover .buttons {
             opacity: 1;
@@ -106,7 +165,17 @@ export default {
         img {
             width: 100px;
             height: 100%;
+            border-radius: $b-radius;
+            border: 1px solid lighten($darkgreen, 50%);
             cursor: pointer;
+            @include m() {
+                width: 90px;
+                height: 90px;
+            }
+            @include m500() {
+                width: 70px;
+                height: 70px;
+            }
         }
     }
 }
