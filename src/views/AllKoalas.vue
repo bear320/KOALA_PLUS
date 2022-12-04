@@ -1,49 +1,182 @@
 <template>
     <Header />
-    <div class="wrapper nav-space">
-        <Collapse v-model="value">
-            <Panel name="1">
-                問題1：無尾熊的尾巴有什麼作用？
-                <template #content
-                    >無尾熊其實是有尾巴的，但是短小而笨拙，像一個「私家座墊」，讓牠們能長時間舒適地坐在樹上睡覺。</template
-                >
-            </Panel>
-            <Panel name="2">
-                問題2：無尾熊的主食為？
-                <template #content
-                    >無尾熊非常挑食，在六百多種尤加利樹中，只喜歡其中的幾十種。成熟的無尾熊喜歡待在高大的尤加利樹上，每天需攝食超過900公克的尤加利樹葉。由於葉中含豐富的水分，無尾熊日常所需的水分幾乎都從採食尤加利樹葉與嫩芽中獲得，很少飲水。尤加利樹葉中也具有大量的纖維，所以通常需要三天左右的時間才能將其消化完全。除了上述的兩種成分外，尤加利樹葉的營養成分其實是很低的，只有在嫩葉的基部具有較高含量的糖分，這大概也就是無尾熊特別喜愛攝食嫩葉的原因。</template
-                >
-            </Panel>
-            <Panel name="3">
-                問題3：無尾熊一天能睡多久？
-                <template #content
-                    >無尾熊每天花在睡眠及休息的時間約18～20小時，約佔80%的時間。</template
-                >
-            </Panel>
-            <Panel name="4">
-                Koala 一詞原本的意思是什麼呢？
-                <template #content
-                    >Gula 無尾熊
-                    是澳洲原住民語中「不喝水」的意思，無尾熊從樹葉中補充到足夠水分，幾乎不需要喝水，但是牠們有需要時也會到河邊喝水。</template
-                >
-            </Panel>
-            <Panel name="5">
-                問題5：無尾熊是熊科動物嗎？
-                <template #content
-                    >雖然名為無尾「熊」，但不是熊科動物，而是袋類動物。雌性無尾熊與袋鼠一樣腹部有育兒袋，不過袋口是向下的。</template
-                >
-            </Panel>
-        </Collapse>
-    </div>
+    <section class="nav-space">
+        <div
+            class="banner"
+            :style="{
+                backgroundImage:
+                    'url(' + require('@/assets/images/koalas/banner.jpg') + ')',
+            }"
+        ></div>
+    </section>
+    <section class="why">
+        <div class="wrapper">
+            <div class="text">
+                <h2>為什麼要資助 / 認養無尾熊？</h2>
+                <h4>
+                    Koala+
+                    是一家非營利慈善機構，通過資助、認養的捐款及銷售無尾熊相關周邊商品，為因森林大火而受傷的無尾熊們籌集資金。
+                </h4>
+                <h4>
+                    資助 /
+                    領養無尾熊不僅能拯救和治療生病和受傷的無尾熊，並待將來有一天他們能回歸自己的家園；此外，資助認養亦有助於保護無尾熊棲息地、完善無尾熊的研究及宣導無尾熊救援相關教育。
+                </h4>
+                <h4>
+                    雖然你並無法實際擁有一隻真的無尾熊，但透過資助 /
+                    認養無尾熊您可以獲得：
+                    <br />
+                    1. 官方資助/認養證明。
+                    <br />
+                    2.
+                    專屬於您的虛擬無尾熊，您可以餵養無尾熊以協助牠長大，待其長大您將可獲得專屬好禮。
+                </h4>
+            </div>
+            <div class="img">
+                <img src="../assets/images/drawing6.png" alt="" />
+            </div>
+        </div>
+    </section>
+    <section class="koalas wrapper">
+        <h2>選擇你要幫助的無尾熊吧！</h2>
+        <div class="tab-wrapper">
+            <!-- <div class="tab selected" @click="tabSelected()">
+                <h3>所有無尾熊</h3>
+            </div>
+            <div class="tab" @click="tabSelected()"><h3>成年無尾熊</h3></div>
+            <div class="tab" @click="tabSelected()"><h3>幼年無尾熊</h3></div> -->
+            <div
+                v-for="(tab, index) in koalaTabs"
+                :key="index"
+                class="btn tab"
+                :class="{ selected: isSelected === index }"
+                @click="tabSelected(index)"
+            >
+                <h3>{{ tab }}</h3>
+            </div>
+        </div>
+        <div class="koala-card-wrapper">
+            <KoalaCard v-for="item in 8" :key="item.id"></KoalaCard>
+        </div>
+    </section>
 </template>
 
 <script>
 import Header from "@/components/header.vue";
+import KoalaCard from "@/components/allKoalas/KoalaCard.vue";
 export default {
     components: {
         Header,
+        KoalaCard,
+    },
+    data() {
+        return {
+            koalaTabs: ["所有無尾熊", "成年無尾熊", "幼年無尾熊"],
+            isSelected: 0, // 第一個 tab 為 selected
+        };
+    },
+    methods: {
+        tabSelected(i) {
+            console.log("run");
+            this.isSelected = i;
+        },
     },
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.banner {
+    background-position-y: 40px;
+    @include m() {
+        background-position-y: 60px;
+    }
+}
+
+.why {
+    margin-top: 70px;
+    padding-top: 30px;
+    background-color: $lightgreen;
+    .wrapper {
+        display: flex;
+        align-items: center;
+        @include m() {
+            flex-wrap: wrap;
+        }
+        .text {
+            width: 65%;
+            line-height: 2;
+            @include m() {
+                width: 100%;
+            }
+            h2 {
+                text-align: left;
+            }
+            h4 {
+                text-align: justify;
+            }
+            h4:last-child {
+                padding-bottom: 30px;
+            }
+        }
+        .img {
+            width: 35%;
+            @include m() {
+                width: 100%;
+            }
+            img {
+                width: 100%;
+                vertical-align: top;
+                @include m() {
+                    width: 50%;
+                }
+            }
+        }
+    }
+}
+
+.koalas {
+    margin-top: 70px;
+    padding: 30px 0;
+    @include m() {
+        margin-top: 70px;
+        padding: 0;
+    }
+    .tab-wrapper {
+        margin: 50px 0;
+        display: flex;
+        justify-content: space-around;
+        @include m() {
+            margin: 25px 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .tab {
+            $tab-h: 60px;
+            @include size(30%, $tab-h);
+            border-radius: 10px;
+            background-color: $btn-light-color;
+            box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+            user-select: none;
+            &:hover {
+                cursor: pointer;
+            }
+            @include m() {
+                margin: 8px 0;
+                @include size(75%, $tab-h);
+            }
+            h3 {
+                margin-bottom: 0;
+                line-height: $tab-h;
+            }
+        }
+        .selected {
+            background-color: $green;
+            color: white;
+        }
+    }
+    .koala-card-wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        row-gap: 60px;
+    }
+}
+</style>
