@@ -18,7 +18,7 @@ export default {
             // this.$emit("onEvent", this.message);
         },
         scrollBlock() {
-            this.$emit("gotodie");
+            this.$emit("gotoCalendar");
         },
     },
 };

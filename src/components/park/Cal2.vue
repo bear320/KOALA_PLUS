@@ -6,8 +6,10 @@
 
         <table align="center">
             <div class="button-wrapper">
-                <button @click="preMonth()">PreMonth</button>
-                <button @click="nextMonth()">NextMonth</button>
+                <button class="btn-lowest" @click="preMonth()">PreMonth</button>
+                <button class="btn-lowest" @click="nextMonth()">
+                    NextMonth
+                </button>
             </div>
             <tr>
                 <th>週日</th>
@@ -23,7 +25,7 @@
                 <td
                     class="tdd"
                     v-for="(day, index) in allDay"
-                    @click="clickDay(thisYear, thisMonth, day)"
+                    @click="chooseDate"
                 >
                     {{ day }}
 
@@ -44,9 +46,11 @@
                 </td>
             </tr>
         </table>
+        <booking-form v-show="showForm" @closeForm="closeTable"></booking-form>
     </div>
 </template>
 <script>
+import BookingForm from "@/components/park/BookingForm.vue";
 export default {
     name: "Calendar3",
     data() {
@@ -56,6 +60,7 @@ export default {
             thisYear: 2022,
             emptyDay: 0,
             allDay: 31,
+            showForm: false,
             bookStyle: {
                 fontSize: "20px",
                 fontWeight: "600",
@@ -68,6 +73,9 @@ export default {
                 "2022-12-20": { state: "休館" },
             },
         };
+    },
+    components: {
+        BookingForm,
     },
     created() {
         this.getEmptyDay(new Date().getFullYear(), new Date().getMonth());
@@ -144,10 +152,20 @@ export default {
         clickDay(yy, mm, dd) {
             console.log(`${yy}-${mm}-${dd}`);
         },
+        chooseDate() {
+            console.log("showform");
+            this.showForm = true;
+        },
+        closeTable() {
+            this.showForm = false;
+        },
     },
 };
 </script>
 <style scoped>
+.calender-wrapper {
+    position: relative;
+}
 h2 {
     font-size: 40px;
     text-align: center;
@@ -162,10 +180,14 @@ h2 {
 button {
     list-style: none;
     cursor: pointer;
-    height: 30px;
+    /* height: 30px; */
 
     text-align: center;
     line-height: 30px;
+}
+.btn-lowest {
+    padding: 0 10px;
+    margin: 10 10px;
 }
 table {
     width: 960px;

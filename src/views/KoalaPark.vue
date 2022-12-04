@@ -13,7 +13,7 @@
             alt="koala-icon"
         />
 
-        <booking-button @gotodie="scrollToBlock"></booking-button>
+        <booking-button @gotoCalendar="scrollToBlock"></booking-button>
 
         <img
             src="../assets/images/park/drawing7.png"
