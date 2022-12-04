@@ -13,8 +13,20 @@
                         <tr>
                             <th>優惠券名稱</th>
                             <th class="coupon_id">優惠券代碼</th>
-                            <th class="coupon_date">優惠券獲得日期</th>
-                            <th>優惠券到期日</th>
+                            <th class="coupon_date">
+                                優惠券獲得日期<Icon
+                                    type="ios-arrow-down"
+                                    size="20"
+                                />
+                                <!-- color="#337a7d" -->
+                            </th>
+                            <th>
+                                優惠券到期日<Icon
+                                    type="ios-arrow-down"
+                                    size="20"
+                                />
+                                <!-- color="#337a7d" -->
+                            </th>
                         </tr>
                     </thead>
                     <tbody>
@@ -93,20 +105,9 @@ table {
         th {
             padding: 10px;
         }
-    }
-}
-
-@media screen and (max-width: 768px) {
-    table {
-        // width: 100%;
-        tr {
-            th {
-            }
-            .coupon_id {
-                display: none;
-            }
-
-            .coupon_date {
+        .coupon_id,
+        .coupon_date {
+            @include m() {
                 display: none;
             }
         }

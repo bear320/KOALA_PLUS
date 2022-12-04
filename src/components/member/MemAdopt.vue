@@ -98,13 +98,15 @@ table {
     width: 100%;
     tr {
         text-align: center;
+
         th {
             padding: 10px;
         }
-        // include d() {
-        //     .koala_id {
-        //     }
-        // }
+        .koala_id {
+            @include m() {
+                display: none;
+            }
+        }
     }
 }
 </style>

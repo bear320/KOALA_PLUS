@@ -111,27 +111,13 @@ table {
         th {
             padding: 10px;
         }
-    }
-}
-@media screen and (max-width: 1200px) {
-    table {
-        // width: 100%;
-        tr {
-            th {
-            }
-            .prod_id {
+        .prod_id {
+            @include d() {
                 display: none;
             }
         }
-    }
-}
-@media screen and (max-width: 768px) {
-    table {
-        // width: 100%;
-        tr {
-            th {
-            }
-            .prod_category {
+        .prod_category {
+            @include m() {
                 display: none;
             }
         }

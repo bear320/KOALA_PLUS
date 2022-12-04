@@ -74,7 +74,7 @@
                         />
                     </tr>
                     <tr class="tabcontent_txt">
-                        <td>重新輸入密碼</td>
+                        <td>重新輸入</td>
                         <input
                             type="password"
                             id="mem_password_again"
@@ -109,15 +109,21 @@ export default {};
                 }
                 .mem_main {
                     display: flex;
-                    flex-wrap: wrap;
+                    // flex-wrap: wrap;
                     justify-content: space-evenly;
-                    // height: 100%; 會破版
+
+                    @include m() {
+                        display: block;
+                    }
                     .tabcontent_txt_group {
-                        width: 50%;
+                        margin: 10px;
                         .subtitle {
                             margin-top: 20px;
                             // background-color: rgb(71, 55, 28);
-                            height: 110px;
+                            min-height: 150px;
+                            @include m() {
+                                min-height: 50px;
+                            }
                             Icon {
                                 color: #337a7d;
                             }
@@ -127,6 +133,9 @@ export default {};
                             p {
                                 line-height: 1.3;
                                 padding: 20px 10px;
+                                width: 300px;
+                                text-align: justify;
+                                margin: 5px auto;
                             }
                         }
                         button {
@@ -143,7 +152,7 @@ export default {};
                                 padding-bottom: 10px;
                                 td:nth-child(1) {
                                     padding: 10px;
-                                    width: 120px;
+                                    width: 80px;
                                     text-align: left;
                                 }
                             }
@@ -153,9 +162,5 @@ export default {};
             }
         }
     }
-}
-@media screen and (max-width: 1200px) {
-}
-@media screen and (max-width: 768px) {
 }
 </style>
