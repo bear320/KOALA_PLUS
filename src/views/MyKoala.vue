@@ -17,8 +17,16 @@
         <div class="main_block_MainTree">
             <div class="main_block_MainTree_0">
                 <img src="../assets/images/game/MainTree.png" alt="" />
-                <div class="main_block_koala">
-                    <img src="../assets/images/game/koala.png" alt="" />
+                <div>
+                    <div v-if="(game_exp <= 500)" class="main_block_koala_1">
+                    <img src="../assets/images/game/koala_small.png" alt="" />
+                </div>
+                <div v-else-if="(game_exp <= 1000)" class="main_block_koala_2">
+                    <img src="../assets/images/game/koala_middle.png" alt="" />
+                </div>
+                <div v-else class="main_block_koala_3">
+                    <img src="../assets/images/game/koala_large.png" alt="" />
+                </div>
                 </div>
             </div>
         </div>
@@ -53,42 +61,23 @@
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            <div class="game_nav_expbar">
-                <div class=experience_bar > 
+            <div v-if="(expWidth <= 100)" class="game_nav_expbar">
+                <div class=experience_bar> 
                     <div :style="{'width':expWidth + '%'}" :class={expValue:true}></div>
                 </div>
-                <button @click="addpercent">add</button>
-                <button @click="minpercent">minus</button> 
             </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+            <div v-else class="game_nav_expbar">
+                <div class=experience_bar > 
+                    <div :style="{'width':100 + '%'}" :class={expValue:true}></div>
+                </div>
+            </div>
+            <div><p>已達到經驗值：{{game_exp}}</p></div>
+            <div>
+                <div v-if="(500 - game_exp >= 0)"><p>距離下一段經驗值：{{(500 - game_exp)}}</p></div>
+                <div v-else-if="(1000 - game_exp >= 0)"><p>距離下一段經驗值：{{(1000 - game_exp)}}</p></div>
+                <div v-else-if="(2000 - game_exp >= 0)"><p>距離下一段經驗值：{{(2000 - game_exp)}}</p></div>
+                <div v-else><p>距離下一段經驗值：0</p></div>
+            </div>
         </nav>
         <!-- ==================== 談窗畫面 ==================== -->
         <!-- ========== 賺遊戲幣的方式 ========== -->
@@ -293,7 +282,7 @@ export default {
     el: ".game_nav_expbar",
     data() {
         return {
-            game_money: 1000,
+            game_money: 10000,
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
             item_3: "熱銷第一的尤加利葉",
@@ -318,10 +307,14 @@ export default {
             remaining_amount_4: 0,
             remaining_amount_5: 0,
             remaining_amount_6: 0,
-            // title: 'Experience Bar',
-            // progress: '100%',
-            increment:10,
-            expWidth:25,
+            increment_1:10/20,
+            increment_2:20/20,
+            increment_3:125/20,
+            increment_4:225/20,
+            increment_5:350/20,
+            increment_6:500/20,
+            expWidth:0,
+            game_exp:0,
         };
     },
     methods: {
@@ -368,6 +361,8 @@ export default {
         },
         minnum_1: function() {
             this.remaining_amount_1 --;
+            this.expWidth= this.expWidth + this.increment_1;   // 增加經驗值
+            this.game_exp += 10;
         },
         // minnum_1() {
         //     this.remaining_amount_1 --;
@@ -380,6 +375,8 @@ export default {
         },
         minnum_2: function() {
             this.remaining_amount_2 --;
+            this.expWidth= this.expWidth + this.increment_2;   // 增加經驗值
+            this.game_exp += 20;
         },
 
         // ============================== 熱銷第一的尤加利葉 ============================== //
@@ -389,6 +386,8 @@ export default {
         },
         minnum_3: function() {
             this.remaining_amount_3 --;
+            this.expWidth= this.expWidth + this.increment_3;   // 增加經驗值
+            this.game_exp += 50;
         },
 
         // ============================== 經典不敗的尤加利葉 ============================== //
@@ -398,6 +397,8 @@ export default {
         },
         minnum_4: function() {
             this.remaining_amount_4 --;
+            this.expWidth= this.expWidth + this.increment_4;   // 增加經驗值
+            this.game_exp += 90;
         },
 
         // ============================== 通過認證的尤加利葉 ============================== //
@@ -407,6 +408,8 @@ export default {
         },
         minnum_5: function() {
             this.remaining_amount_5 --;
+            this.expWidth= this.expWidth + this.increment_5;   // 增加經驗值
+            this.game_exp += 140;
         },
 
         // ============================== 得過冠軍的尤加利葉 ============================== //
@@ -416,44 +419,9 @@ export default {
         },
         minnum_6: function() {
             this.remaining_amount_6 --;
+            this.expWidth= this.expWidth + this.increment_6;   // 增加經驗值
+            this.game_exp += 210;
         },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // ============================== expbar ============================== //
-        addpercent:function(){
-            this.expWidth= this.expWidth+ this.increment;
-        },
-        minpercent:function(){
-            this.expWidth = this.expWidth-this.increment;
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     },
 };
 </script>
@@ -512,11 +480,25 @@ img {
     bottom: 0;
 }
 
-.main_block_koala {
+.main_block_koala_1 {
     position: absolute;
     bottom: 21%;
     left: 39%;
     width: 30%;
+}
+
+.main_block_koala_2 {
+    position: absolute;
+    bottom: 20%;
+    left: 35%;
+    width: 35%;
+}
+
+.main_block_koala_3 {
+    position: absolute;
+    bottom: 19%;
+    left: 33%;
+    width: 40%;
 }
 
 .main_block_RightTree {
@@ -911,22 +893,7 @@ img {
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* ========== expbar ========== */
-
 .experience_bar {
   background-color:grey;
   height:14px;
