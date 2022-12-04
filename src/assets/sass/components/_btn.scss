@@ -138,3 +138,11 @@ select {
         background: transparent;
     }
 }
+
+textarea {
+    @extend %input;
+    width: 100%;
+    &:focus {
+        border: solid 1px $btn-color;
+    }
+}

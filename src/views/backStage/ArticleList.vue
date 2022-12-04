@@ -3,7 +3,7 @@
     <article class="nav-space wrapper">
         <h1>公告管理</h1>
         <div class="todo">
-            <a href=""
+            <a href="/bs-article-edit" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></a>
             <select name="category" id="articlesCategory">
@@ -25,7 +25,7 @@
             </div>
             <div class="content" v-for="article in articles" :key="article">
                 <p class="star">
-                    <img src="@/assets/images/icon/star.svg" alt="" />
+                    <img src="@/assets/images/icon/star.svg" />
                 </p>
                 <div class="article">
                     <p>{{ article.title }}</p>
@@ -34,7 +34,10 @@
                 <div class="pic"><img :src="article.img" alt="" /></div>
                 <p class="date">{{ article.date }}</p>
                 <p class="tag">{{ article.tag }}</p>
-                <p class="operator">操作</p>
+                <div class="operator">
+                    <img src="@/assets/images/icon/upload.svg" alt="" />
+                    <img src="@/assets/images/icon/edit.svg" alt="" />
+                </div>
             </div>
         </section>
         <section>
@@ -92,12 +95,8 @@ html article {
         }
     }
     h2 {
-        position: relative;
-        padding: 0 30px;
-        margin: 10px 0;
-        transform: translate(-30px, 0);
         color: $green;
-        @include borderLeft;
+        @include borderLeft(30px);
     }
     section {
         h3 {
@@ -112,6 +111,7 @@ html article {
 
             p:first-child {
                 font-weight: 700;
+                font-size: $h4;
             }
         }
         .pic,
@@ -127,6 +127,15 @@ html article {
         .tag,
         .operator {
             width: 10%;
+            display: flex;
+
+            img {
+                margin: 10px;
+
+                &:hover {
+                    stroke: $green;
+                }
+            }
         }
         .title {
             display: flex;
@@ -139,9 +148,9 @@ html article {
         .content {
             display: flex;
             align-items: center;
-            p {
-                padding: 10px;
-            }
+            padding: 10px 0;
+            margin-bottom: 10px;
+            border-bottom: solid 1px $lightgreen;
         }
     }
 }

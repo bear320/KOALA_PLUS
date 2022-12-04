@@ -5,9 +5,6 @@
 @mixin btnSize($w) {
     padding: 5px $w;
 }
-// @mixin containerSize {
-//     width: 1200px;
-// }
 @mixin absolute($top, $bottom, $left, $right) {
     position: absolute;
     top: $top;
@@ -15,7 +12,13 @@
     left: $left;
     right: $right;
 }
-@mixin borderLeft {
+
+//後台可用30px
+@mixin borderLeft($p) {
+    position: relative;
+    padding: 0 $p;
+    margin: 10px 0;
+    transform: translate(-$p, 0);
     &::before {
         content: "";
         border-left: solid 5px $green;
@@ -29,6 +32,7 @@
     background-size: $contain;
     background-position: $position;
 }
+
 @mixin d() {
     @media all and (max-width: 1200px) {
         @content;

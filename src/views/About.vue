@@ -218,7 +218,7 @@ html {
             .about-btn {
                 border-right: solid 1px $lightgreen;
                 width: 20%;
-                padding: 20px;
+                // padding: 20px;
 
                 a {
                     margin: 10px 0;
@@ -232,7 +232,7 @@ html {
                 .highLight {
                     color: $green;
                     pointer-events: none;
-                    @include borderLeft;
+                    @include borderLeft(0);
                 }
             }
             .about-content {
@@ -324,11 +324,7 @@ html {
             }
         }
         h3 {
-            position: relative;
-            padding: 0 30px;
-            margin: 10px 0;
-            transform: translate(-30px, 0);
-            @include borderLeft;
+            @include borderLeft(30px);
         }
         .oneArticle {
             display: flex;
