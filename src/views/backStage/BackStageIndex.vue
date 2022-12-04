@@ -1,6 +1,96 @@
 <template>
     <Header />
-    <h1>後台首頁</h1>
+    <article class="nav-space wrapper">
+        <div class="cards">
+            <div>
+                <div class="top2">
+                    <div class="card">
+                        <a href="">
+                            <h2>資助認養管理</h2>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <a href="">
+                            <h2>訂單管理</h2>
+                        </a>
+                        <div>
+                            <a href="">
+                                <p>未處理</p>
+                                <p>17</p>
+                            </a>
+                            <a href="">
+                                <p>處理中</p>
+                                <p>08</p>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/adminIcon.png"
+                        />
+                        <h2>權限管理</h2>
+                    </a>
+                    <a href="" class="detail">新增管理員帳戶</a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/koalaIcon.png"
+                            alt=""
+                        />
+                        <h2>無尾熊管理</h2>
+                    </a>
+                    <a href="" class="detail">新增無尾熊資訊</a>
+                </div>
+            </div>
+            <div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/bookingIcon.png"
+                            alt=""
+                        />
+                        <h2>園區導覽管理</h2>
+                    </a>
+                    <a href="" class="detail">新增休館管理</a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/articleIcon.png"
+                            alt=""
+                        />
+                        <h2>公告管理</h2>
+                    </a>
+                    <a href="" class="detail">新增公告文章</a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/productIcon.png"
+                            alt=""
+                        />
+                        <h2>商品管理</h2>
+                    </a>
+                    <a href="" class="detail">優惠券管理</a>
+                    <a href="" class="detail2">新增商品資訊</a>
+                </div>
+                <div class="card">
+                    <a href="">
+                        <img
+                            src="@/assets/images/backstageindex/memberIcon.png"
+                            alt=""
+                        />
+                        <h2>會員管理</h2>
+                    </a>
+                    <a href="" class="detail">消費金額查詢</a>
+                    <a href="" class="detail2">黑名單管理</a>
+                </div>
+            </div>
+        </div>
+    </article>
 </template>
 
 <script>
@@ -12,4 +102,106 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+article {
+    height: 100vh;
+
+    .cards {
+        height: 80%;
+    }
+    .cards > div {
+        box-sizing: border-box;
+        width: calc(100% - 80px);
+        height: 50%;
+        display: flex;
+        justify-content: space-between;
+        margin: 20px;
+        .top2 {
+            width: 50%;
+            height: calc(50% - 40px);
+            margin: 0 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .card {
+                width: 100%;
+                margin: 0 10px;
+            }
+            .card:first-child {
+                background-color: rgba(252, 245, 234, 0.6);
+            }
+            .card:last-child {
+                background-color: rgba(252, 239, 239, 0.6);
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+
+                h2 {
+                    margin-bottom: 0;
+                    // width: 40%;
+                    display: inline-block;
+                    line-height: 80px;
+                }
+                div {
+                    display: flex;
+
+                    a p:last-child {
+                        font-size: $h2;
+                        color: #f89c26;
+                    }
+                    a:first-child p:last-child {
+                        color: #ef651c;
+                    }
+                }
+            }
+        }
+        .card {
+            width: 25%;
+            height: 100%;
+            margin: 0 10px;
+            background-color: rgba(241, 254, 244, 0.6);
+            position: relative;
+
+            a {
+                height: 70%;
+                padding: 20px;
+
+                img {
+                    height: 120px;
+                    margin-top: 15%;
+                    margin-right: 10%;
+                }
+            }
+            %detail {
+                display: block;
+                height: 10%;
+                width: 100%;
+                padding: 10px;
+                position: absolute;
+                line-height: 15px;
+                color: $font-color;
+                box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+
+                &:hover {
+                    font-weight: 900;
+                }
+                &:active {
+                    box-shadow: inset 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+                }
+            }
+            .detail {
+                @extend %detail;
+                background-color: #87cc99;
+                bottom: 0;
+                border-radius: 0 0 10px 10px;
+            }
+            .detail2 {
+                @extend %detail;
+                background-color: #aee0bb;
+                bottom: 10%;
+            }
+        }
+    }
+}
+</style>
