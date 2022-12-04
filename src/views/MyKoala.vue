@@ -53,6 +53,15 @@
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
+            <div class="game_nav_expbar">
+                <div>
+                    <div class=progressBarDiv > 
+                        <div :style="{ 'width':progressWidth + '%'}" :class={compClass:true}></div>
+                    </div>
+                    <button style="cursor:pointer" @click="incrementPercent()">Increase</button>
+                    <button style="cursor:pointer" @click="decrementPercent()">Decrease</button> 
+                </div>
+            </div>
         </nav>
         <!-- ==================== 談窗畫面 ==================== -->
         <!-- ========== 賺遊戲幣的方式 ========== -->
@@ -254,6 +263,7 @@ export default {
     components: {
         Header,
     },
+    el: ".game_nav_expbar",
     data() {
         return {
             game_money: 1000,
@@ -281,6 +291,10 @@ export default {
             remaining_amount_4: 0,
             remaining_amount_5: 0,
             remaining_amount_6: 0,
+            title: 'Progress Bar',
+            progress: '100%',
+            increment:10,
+            progressWidth:25,
         };
     },
     methods: {
@@ -320,7 +334,7 @@ export default {
 
 
 
-        // let numinnerHTML = 0;
+        // ============================== 經濟實惠的尤加利葉 ============================== //
         addnum_1: function() {
             this.remaining_amount_1 ++;
             this.game_money -= 20;
@@ -332,6 +346,7 @@ export default {
         //     this.remaining_amount_1 --;
         // },   這個寫法也可以
 
+        // ============================== 物美價廉的尤加利葉 ============================== //
         addnum_2: function() {
             this.remaining_amount_2 ++;
             this.game_money -= 50;
@@ -340,6 +355,7 @@ export default {
             this.remaining_amount_2 --;
         },
 
+        // ============================== 熱銷第一的尤加利葉 ============================== //
         addnum_3: function() {
             this.remaining_amount_3 ++;
             this.game_money -= 125;
@@ -348,6 +364,7 @@ export default {
             this.remaining_amount_3 --;
         },
 
+        // ============================== 經典不敗的尤加利葉 ============================== //
         addnum_4: function() {
             this.remaining_amount_4 ++;
             this.game_money -= 225;
@@ -356,6 +373,7 @@ export default {
             this.remaining_amount_4 --;
         },
 
+        // ============================== 通過認證的尤加利葉 ============================== //
         addnum_5: function() {
             this.remaining_amount_5 ++;
             this.game_money -= 350;
@@ -364,6 +382,7 @@ export default {
             this.remaining_amount_5 --;
         },
 
+        // ============================== 得過冠軍的尤加利葉 ============================== //
         addnum_6: function() {
             this.remaining_amount_6 ++;
             this.game_money -= 500;
@@ -371,6 +390,16 @@ export default {
         minnum_6: function() {
             this.remaining_amount_6 --;
         },
+
+
+
+        // ============================== expbar ============================== //
+        incrementPercent:function(){
+            this.progressWidth= this.progressWidth+ this.increment;
+            },
+        decrementPercent:function(){
+            this.progressWidth = this.progressWidth-this.increment;
+        }
     },
 };
 </script>
@@ -828,4 +857,24 @@ img {
     }
 }
 
+
+
+
+
+/* ========== expbar ========== */
+
+.progressBarDiv{
+  background-color:grey;
+  height:14px;
+  width:100%;
+  
+  margin:8px
+}
+
+.compClass {
+  background:teal;
+  height:14px;
+  max-width:100vw;  
+  // width: 25%; 
+}
 </style>
