@@ -1,6 +1,5 @@
 <template>
     <Header></Header>
-    <article></article>
 </template>
 
 <script>
