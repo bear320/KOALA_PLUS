@@ -65,14 +65,17 @@
     <section class="wrapper bg-img">
         <img src="../assets/images/drawing7.png" alt="" />
     </section>
+    <Footer></Footer>
 </template>
 
 <script>
 import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
 import KoalaCard from "@/components/support/KoalaCard.vue";
 export default {
     components: {
         Header,
+        Footer,
         KoalaCard,
     },
     data() {
