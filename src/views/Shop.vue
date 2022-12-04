@@ -28,6 +28,7 @@
                             :proName="item.name"
                             :proPrice="item.price"
                             :proId="item.id"
+                            :col="'col-4'"
                         ></product-card>
                     </div>
                     <div class="row">
@@ -59,7 +60,6 @@
 <script>
 import Header from "@/components/header.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
-import { returnStatement } from "@babel/types";
 export default {
     components: {
         Header,

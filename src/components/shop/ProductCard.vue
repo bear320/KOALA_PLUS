@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="col-4">
+    <div :class="col">
         <div class="product-card">
             <router-link class="product-img" :to="`/shop/${proId}`">
                 <img src="@/assets/images/shop/product_img.png" />
@@ -21,7 +21,7 @@
 </template>
 <script>
 export default {
-    props: ["proImg", "proName", "proPrice", "proId"],
+    props: ["proImg", "proName", "proPrice", "proId", "col"],
     methods: {
         addToCart() {
             console.log(this.proId);
