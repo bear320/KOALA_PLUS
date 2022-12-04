@@ -538,31 +538,38 @@ img {
 }
 
 /* ========== 遊戲選項列 ========== */
-.game_nav {
-    position: absolute;
-    right: 5%;
-    top: 10%;
-}
+// .game_nav {
+//     position: absolute;
+//     top: 10%;
+//     right: 5%;
+//     bottom: 0;
+//     left: 85%;
+// }
 
 .game_nav_money {
     display: flex;
     justify-content: center;
+    margin-top: 20%;
 }
 
 .game_nav_money_left {
-    width: 160px;
+    width: 140px;
     display: flex;
-    border: 1px solid #96bbbd;
+    // border: 1px solid #96bbbd;
     border-radius: 10px;
 }
 
-/* .game_nav_money_left > img {} */
+.game_nav_money_left > img {
+    margin-top: 3%;
+    width: 50px;
+    height: 52px;
+}
 
 .game_nav_money_left > p {
-    padding-left: 15%;
-    margin-right: 15%;
+    padding-left: 5%;
     line-height: 62px;
     font-size: 28px;
+    margin: auto;
 }
 
 /* .game_nav_plus {} */
@@ -623,7 +630,7 @@ img {
 .plus_talkwindow {
     position: absolute;
     top: 10%;
-    right: 0;
+    right: 10%;
     bottom: 0;
     left: 10%;
     overflow: hidden;
@@ -632,8 +639,12 @@ img {
 }
 
 .plus_talkwindow_block {
-    width: 90%;
+    width: 80%;
     position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    left: 19.5%;
     font-size: 30px;
     text-align: center;
     color: white;
@@ -650,7 +661,7 @@ img {
     display: flex;
     flex-wrap: wrap;
     padding-top: 5%;
-    margin-left: 20%;
+    margin-left: 25%;
 }
 
 /* .plus_talkwindow_image {} */
@@ -664,7 +675,10 @@ img {
 }
 
 .plus_talkwindow_content > p {
+    width: 100%;
     color: #000;
+    font-size: 28px;
+    margin-left: 10%;
 }
 
 .plus_talkwindow_content_txt {
@@ -675,7 +689,8 @@ img {
 .plus_talkwindow_content_txt > p {
     color: #000;
     text-align: left;
-    line-height: 1.5;
+    line-height: 2.5;
+    font-size: 20px;
 }
 
 /* ========== 虛擬商店 ========== */
@@ -684,7 +699,7 @@ img {
     top: 10%;
     right: 30%;
     bottom: 0;
-    left: 20%;
+    left: 26.5%;
     overflow: hidden;
     transform: scale(0);
 }
@@ -715,7 +730,7 @@ img {
 }
 
 .shop_talkwindow_commodity {
-    width: 84%; /* 85以上底圖高度不夠 */
+    width: 85%;
     margin: 2% auto;
     justify-content: center;
     display: flex;
@@ -723,7 +738,7 @@ img {
 }
 
 .shop_talkwindow_commodity > div {
-    width: 25%;
+    width: 26%;
     background-color: #dee8e7;
     margin: auto;
     margin-top: 1.5%;
@@ -754,13 +769,17 @@ img {
     cursor: pointer;
 }
 
-.shop_talkwindow_commodity_button > img {
-    width: 20px;
-    height: 20px;
-    margin-left: 30%;
+.shop_talkwindow_commodity_button > div {
+    display: flex;
 }
 
-.shop_talkwindow_commodity_button > p {
+.shop_talkwindow_commodity_button > div > img {
+    width: 20px;
+    height: 20px;
+    margin-top: 8.5%;
+}
+
+.shop_talkwindow_commodity_button > div > p {
     margin-right: 30%;
     margin-left: 10%;
     font-size: 20px;
@@ -777,7 +796,7 @@ img {
     top: 10%;
     right: 30%;
     bottom: 0;
-    left: 20%;
+    left: 26.5%;
     overflow: hidden;
     transform: scale(0);
 }
@@ -808,7 +827,7 @@ img {
 }
 
 .bag_talkwindow_commodity {
-    width: 84%; /* 85以上底圖高度不夠 */
+    width: 85%;
     margin: 2% auto;
     justify-content: center;
     display: flex;
@@ -816,7 +835,7 @@ img {
 }
 
 .bag_talkwindow_commodity > div {
-    width: 25%;
+    width: 26%;
     background-color: #dee8e7;
     margin: auto;
     margin-top: 1.5%;
@@ -896,17 +915,15 @@ img {
 /* ========== expbar ========== */
 .experience_bar {
   background-color:grey;
-  height:14px;
-  width:100%;
-  
-  margin:8px
+  height:12px;
+  margin:10px;
+  margin-top: 15%;
 }
 
 .expValue {
-  background:teal;
+  background-color:teal;
   height:14px;
   max-width:100%;  
-  // width: 25%; 
 }
 
 .game_nav_expbar {
