@@ -5,7 +5,9 @@
             class="banner"
             :style="{
                 backgroundImage:
-                    'url(' + require('@/assets/images/koalas/banner.jpg') + ')',
+                    'url(' +
+                    require('@/assets/images/support/banner.jpg') +
+                    ')',
             }"
         ></div>
     </section>
@@ -36,14 +38,9 @@
             </div>
         </div>
     </section>
-    <section class="koalas wrapper">
+    <section class="wrapper koalas">
         <h2>選擇你要幫助的無尾熊吧！</h2>
         <div class="tab-wrapper">
-            <!-- <div class="tab selected" @click="tabSelected()">
-                <h3>所有無尾熊</h3>
-            </div>
-            <div class="tab" @click="tabSelected()"><h3>成年無尾熊</h3></div>
-            <div class="tab" @click="tabSelected()"><h3>幼年無尾熊</h3></div> -->
             <div
                 v-for="(tab, index) in koalaTabs"
                 :key="index"
@@ -58,11 +55,14 @@
             <KoalaCard v-for="item in 8" :key="item.id"></KoalaCard>
         </div>
     </section>
+    <section class="wrapper bg-img">
+        <img src="../assets/images/drawing7.png" alt="" />
+    </section>
 </template>
 
 <script>
 import Header from "@/components/header.vue";
-import KoalaCard from "@/components/allKoalas/KoalaCard.vue";
+import KoalaCard from "@/components/support/KoalaCard.vue";
 export default {
     components: {
         Header,
@@ -135,7 +135,7 @@ export default {
 
 .koalas {
     margin-top: 70px;
-    padding: 30px 0;
+    padding: 30px 0 0;
     @include m() {
         margin-top: 70px;
         padding: 0;
@@ -174,9 +174,29 @@ export default {
         }
     }
     .koala-card-wrapper {
+        margin: 50px 0;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         row-gap: 60px;
+        @include m() {
+        }
+    }
+}
+
+.bg-img {
+    position: relative;
+    user-select: none;
+    img {
+        height: 400px;
+        position: absolute;
+        top: -25px;
+        right: 5%;
+        @include m() {
+            height: 300px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
     }
 }
 </style>
