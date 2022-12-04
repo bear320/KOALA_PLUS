@@ -169,7 +169,7 @@ article {
 
                 img {
                     height: 120px;
-                    margin-top: 15%;
+                    margin-top: 10%;
                     margin-right: 10%;
                 }
             }
