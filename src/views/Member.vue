@@ -147,19 +147,6 @@ export default {
             }
         }
     }
-    // 測試
-
-    // .tabs_content li:nth-child(2).content {
-    //     background-color: #faa;
-    // }
-
-    // .tabs_content li:nth-child(3).content {
-    //     background-color: #aaf;
-    // }
-
-    .tabs_content li:nth-child(4).content {
-        background-color: #faf;
-    }
 }
 
 @media screen and (max-width: 1200px) {
