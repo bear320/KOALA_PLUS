@@ -28,3 +28,10 @@ html {
     max-width: 1200px;
     margin: 0 auto;
 }
+.bstitle {
+    display: flex;
+    width: 100%;
+    background-color: $darkgreen;
+    color: white;
+    border-radius: 10px;
+}
