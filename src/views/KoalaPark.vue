@@ -1,6 +1,6 @@
 <template>
     <Header></Header>
-    <article></article>
+    <wrapper></wrapper>
 </template>
 
 <script>
