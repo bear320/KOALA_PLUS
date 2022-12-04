@@ -7,19 +7,23 @@
         <div class="wave middle"></div>
         <div class="wave front"></div>
         <div class="content">
-            <h3>Gabriel</h3>
+            <h3>{{ kName }}</h3>
             <h4>成年</h4>
             <div class="tag-wrapper">
-                <p class="tag">#公</p>
+                <p class="tag">#{{ kSex }}</p>
                 <p class="tag">#4歲</p>
             </div>
-            <router-link to="" class="btn-secondary"> 資助 / 認養 </router-link>
+            <router-link :to="`/support/${kName}`" class="btn-secondary">
+                資助 / 認養
+            </router-link>
         </div>
     </div>
 </template>
 
 <script>
-export default {};
+export default {
+    props: ["kName", "kSex", "kDOB", "kCover"],
+};
 </script>
 
 <style lang="scss" scoped>

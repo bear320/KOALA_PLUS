@@ -67,7 +67,7 @@ const routes = [
         component: Support,
     },
     {
-        path: "/koala-info",
+        path: "/support/:name",
         name: "koala-info",
         component: KoalaInfo,
     },
