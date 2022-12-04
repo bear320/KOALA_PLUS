@@ -5,7 +5,9 @@
             class="banner"
             :style="{
                 backgroundImage:
-                    'url(' + require('@/assets/images/koalas/banner.jpg') + ')',
+                    'url(' +
+                    require('@/assets/images/support/banner.jpg') +
+                    ')',
             }"
         ></div>
     </section>
@@ -60,7 +62,7 @@
 
 <script>
 import Header from "@/components/header.vue";
-import KoalaCard from "@/components/allKoalas/KoalaCard.vue";
+import KoalaCard from "@/components/support/KoalaCard.vue";
 export default {
     components: {
         Header,
