@@ -36,17 +36,30 @@
                 </table>
             </div>
             <div class="mem_state">
-                <button class="btn-lowest">取消訂單</button>
+                <button class="btn-lowest" @click="clickMemUnsubscribe">
+                    取消訂單
+                </button>
                 <p>總額: $800</p>
                 <div>訂單狀態：{{ ord_sts }}</div>
             </div>
         </div>
+        <MemUnsubscribe
+            v-show="showMemUnsubscribe"
+            @closeMem="qq"
+        ></MemUnsubscribe>
     </li>
 </template>
 <script>
+import MemUnsubscribe from "@/components/member/MemUnsubscribe.vue";
 export default {
+    // name: "MemOrder",
+    components: {
+        MemUnsubscribe,
+    },
     data() {
         return {
+            showMemUnsubscribe: false,
+            ord_sts: "處理中",
             orderList: [
                 {
                     prod_name: "無尾熊乾髮帽",
@@ -54,7 +67,6 @@ export default {
                     prod_category: "玩具/絨毛娃娃",
                     ord_qty: 1,
                     prod_price: 200,
-                    ord_sts: "處理中",
                 },
                 {
                     prod_name: "無尾熊乾髮帽2",
@@ -62,10 +74,18 @@ export default {
                     prod_category: "玩具/絨毛娃娃",
                     ord_qty: 1,
                     prod_price: 200,
-                    ord_sts: "處理中",
                 },
             ],
         };
+    },
+    methods: {
+        clickMemUnsubscribe() {
+            console.log(this.showMemUnsubscribe);
+            this.showMemUnsubscribe = true;
+        },
+        qq() {
+            this.showMemUnsubscribe = false;
+        },
     },
 };
 </script>

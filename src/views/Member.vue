@@ -10,7 +10,7 @@
                     ')',
             }"
         ></div>
-
+        <img src="../assets/images/member/MemUnsubscribe_1.png" alt="" />
         <section>
             <h1>Member</h1>
             <div class="tabs">
@@ -53,7 +53,7 @@ import MemAdopt from "@/components/member/MemAdopt.vue";
 import MemCoupons from "@/components/member/MemCoupons.vue";
 
 export default {
-    name: "About",
+    name: "Member",
     components: {
         Header,
         MemCentre,
@@ -135,7 +135,7 @@ export default {
             transition: left 0.5s linear;
             .content {
                 width: 1000px;
-                min-height: 400px;
+                min-height: 1400px;
                 // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
                 border: solid 2px #337a7d;
