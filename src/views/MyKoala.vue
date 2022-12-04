@@ -53,15 +53,42 @@
                 <img src="../assets/images/game/bag.png" alt="" />
                 <p>倉庫</p>
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="game_nav_expbar">
-                <div>
-                    <div class=progressBarDiv > 
-                        <div :style="{ 'width':progressWidth + '%'}" :class={compClass:true}></div>
-                    </div>
-                    <button style="cursor:pointer" @click="incrementPercent()">Increase</button>
-                    <button style="cursor:pointer" @click="decrementPercent()">Decrease</button> 
+                <div class=experience_bar > 
+                    <div :style="{'width':expWidth + '%'}" :class={expValue:true}></div>
                 </div>
+                <button @click="addpercent">add</button>
+                <button @click="minpercent">minus</button> 
             </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         </nav>
         <!-- ==================== 談窗畫面 ==================== -->
         <!-- ========== 賺遊戲幣的方式 ========== -->
@@ -291,10 +318,10 @@ export default {
             remaining_amount_4: 0,
             remaining_amount_5: 0,
             remaining_amount_6: 0,
-            title: 'Progress Bar',
-            progress: '100%',
+            // title: 'Experience Bar',
+            // progress: '100%',
             increment:10,
-            progressWidth:25,
+            expWidth:25,
         };
     },
     methods: {
@@ -393,13 +420,40 @@ export default {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
         // ============================== expbar ============================== //
-        incrementPercent:function(){
-            this.progressWidth= this.progressWidth+ this.increment;
-            },
-        decrementPercent:function(){
-            this.progressWidth = this.progressWidth-this.increment;
-        }
+        addpercent:function(){
+            this.expWidth= this.expWidth+ this.increment;
+        },
+        minpercent:function(){
+            this.expWidth = this.expWidth-this.increment;
+        },
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     },
 };
 </script>
@@ -861,9 +915,19 @@ img {
 
 
 
+
+
+
+
+
+
+
+
+
+
 /* ========== expbar ========== */
 
-.progressBarDiv{
+.experience_bar {
   background-color:grey;
   height:14px;
   width:100%;
@@ -871,10 +935,14 @@ img {
   margin:8px
 }
 
-.compClass {
+.expValue {
   background:teal;
   height:14px;
-  max-width:100vw;  
+  max-width:100%;  
   // width: 25%; 
+}
+
+.game_nav_expbar {
+    cursor: pointer;
 }
 </style>
