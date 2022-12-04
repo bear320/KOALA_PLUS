@@ -1,5 +1,6 @@
 <template>
     <Header />
+
     <article class="nav-space">
         <div
             class="banner"
@@ -102,6 +103,7 @@
             </div>
         </section>
     </article>
+    <Footer />
 </template>
 
 <script>
@@ -110,6 +112,7 @@ import one from "@/components/aboutUs/one.vue";
 import two from "@/components/aboutUs/two.vue";
 import three from "@/components/aboutUs/three.vue";
 import four from "@/components/aboutUs/four.vue";
+import Footer from "@/components/footer.vue";
 export default {
     components: {
         Header,
@@ -117,6 +120,7 @@ export default {
         two,
         three,
         four,
+        Footer,
     },
     data() {
         return {
@@ -221,6 +225,9 @@ html {
                     display: block;
                     position: relative;
                     color: $font-color;
+                    &:hover {
+                        color: $btn-color;
+                    }
                 }
                 .highLight {
                     color: $green;

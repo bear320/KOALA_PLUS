@@ -43,9 +43,6 @@
             </div>
         </section>
     </div>
-    <div class="ivu-icon">
-        <Icon type="md-search" />
-    </div>
 </template>
 
 <script>
@@ -127,7 +124,7 @@ export default {
     }
 
     .wrapper {
-        margin: 0 auto;
+        margin: 30px auto;
         width: 1000px;
         overflow: hidden;
         border-radius: 10px;
@@ -138,7 +135,7 @@ export default {
             transition: left 0.5s linear;
             .content {
                 width: 1000px;
-                height: 600px;
+                min-height: 400px;
                 // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
                 border: solid 2px #337a7d;
@@ -146,19 +143,6 @@ export default {
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
         }
-    }
-    // 測試
-
-    // .tabs_content li:nth-child(2).content {
-    //     background-color: #faa;
-    // }
-
-    // .tabs_content li:nth-child(3).content {
-    //     background-color: #aaf;
-    // }
-
-    .tabs_content li:nth-child(4).content {
-        background-color: #faf;
     }
 }
 

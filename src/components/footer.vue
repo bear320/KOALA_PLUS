@@ -46,7 +46,7 @@
             </div>
             <div class="bt">
                 <p>
-                    本網站為緯育TibaMe_前端設計工程師班學員專題成果作品，本平台僅供學習、展示之用。 
+                    本網站為緯育TibaMe_前端設計工程師班學員專題成果作品，本平台僅供學習、展示之用。
                     若有侵權疑慮，您可以私訊「TibaMe-前端設計工程師養成班」，後續會由專人協助處理。
                 </p>
             </div>
@@ -81,7 +81,7 @@ export default {
 footer {
     height: 500px;
     z-index: 999;
-    position: fixed;
+    // position: fixed;
     background-color: #2e382e;
     width: 100vw;
     display: flex;

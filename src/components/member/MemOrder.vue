@@ -20,19 +20,17 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>{{ prod_name }}</td>
-                            <td class="prod_id">{{ prod_id }}</td>
-                            <td class="prod_category">{{ prod_category }}</td>
-                            <td>{{ ord_qty }}</td>
-                            <td>{{ prod_price }}</td>
-                        </tr>
-                        <tr>
-                            <td>{{ prod_name }}</td>
-                            <td class="prod_id">{{ prod_id }}</td>
-                            <td class="prod_category">{{ prod_category }}</td>
-                            <td>{{ ord_qty }}</td>
-                            <td>{{ prod_price }}</td>
+                        <tr
+                            v-for="(item, index) in orderList"
+                            :key="item.prod_id"
+                        >
+                            <td>{{ item.prod_name }}</td>
+                            <td class="prod_id">{{ item.prod_id }}</td>
+                            <td class="prod_category">
+                                {{ item.prod_category }}
+                            </td>
+                            <td>{{ item.ord_qty }}</td>
+                            <td>{{ item.prod_price }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -49,12 +47,24 @@
 export default {
     data() {
         return {
-            prod_name: "無尾熊乾髮帽",
-            prod_id: "1022",
-            prod_category: "玩具/絨毛娃娃",
-            ord_qty: 1,
-            prod_price: 200,
-            ord_sts: "處理中",
+            orderList: [
+                {
+                    prod_name: "無尾熊乾髮帽",
+                    prod_id: "1022",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                    ord_sts: "處理中",
+                },
+                {
+                    prod_name: "無尾熊乾髮帽2",
+                    prod_id: "1023",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                    ord_sts: "處理中",
+                },
+            ],
         };
     },
 };
@@ -101,31 +111,13 @@ table {
         th {
             padding: 10px;
         }
-    }
-}
-@media screen and (max-width: 1200px) {
-    table {
-        border-spacing: 0;
-        // width: 100%;
-        tr {
-            text-align: center;
-            th {
-            }
-            .prod_id {
+        .prod_id {
+            @include d() {
                 display: none;
             }
         }
-    }
-}
-@media screen and (max-width: 768px) {
-    table {
-        border-spacing: 0;
-        // width: 100%;
-        tr {
-            text-align: center;
-            th {
-            }
-            .prod_category {
+        .prod_category {
+            @include m() {
                 display: none;
             }
         }

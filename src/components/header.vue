@@ -8,7 +8,7 @@
                     <div class="hb"></div>
                 </div>
                 <div class="logo">
-                    <router-link :to="{ path: '/home' }"
+                    <router-link to="/home"
                         ><img src="../assets/images/logo.svg" alt="KOALA+"
                     /></router-link>
                 </div>
@@ -16,15 +16,12 @@
             <div>
                 <ul class="list" :class="toggle ? 'show' : ''">
                     <li v-for="item in items" :key="item">
-                        <router-link :to="{ path: item['sourc'] }">{{
+                        <router-link :to="`/${item['source']}`">{{
                             item["name"]
                         }}</router-link>
                     </li>
                     <li>
-                        <router-link
-                            :to="{ path: 'my-koala' }"
-                            class="playgame"
-                        >
+                        <router-link to="my-koala" class="playgame">
                             <img
                                 src="../assets/images/header/playgame.svg"
                                 alt=""
@@ -34,12 +31,12 @@
                 </ul>
                 <ul class="icon">
                     <li>
-                        <router-link :to="{ path: '/cart1' }">
+                        <router-link to="/cart1">
                             <Icon type="md-cart" />
                         </router-link>
                     </li>
                     <li>
-                        <router-link :to="{ path: '/member' }">
+                        <router-link to="/member">
                             <Icon type="md-person" />
                         </router-link>
                     </li>
@@ -55,11 +52,11 @@ export default {
     data() {
         return {
             items: [
-                { name: "資助認養", sourc: "all-koalas" },
-                { name: "周邊商城", sourc: "shop" },
-                { name: "無尾熊園區", sourc: "koala-park" },
-                { name: "關於我們", sourc: "about" },
-                { name: "無尾熊百科", sourc: "about-koala" },
+                { name: "資助認養", source: "support" },
+                { name: "周邊商城", source: "shop" },
+                { name: "無尾熊園區", source: "koala-park" },
+                { name: "關於我們", source: "about" },
+                { name: "無尾熊百科", source: "about-koala" },
             ],
             toggle: true,
             i: 0,
