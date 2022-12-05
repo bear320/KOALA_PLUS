@@ -21,7 +21,7 @@
                         }}</router-link>
                     </li>
                     <li>
-                        <router-link to="/my-koala" class="playgame">
+                        <router-link to="my-koala" class="playgame">
                             <img
                                 src="../assets/images/header/playgame.svg"
                                 alt=""
