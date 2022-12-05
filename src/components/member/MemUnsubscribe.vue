@@ -1,7 +1,9 @@
 <template lang="">
-    <div class="container">
+    <div class="mem_MemUnsubscribe">
         <div class="inner-container">
-            <img src="@/assets/images/member/MemUnsubscribe_1.png" alt="" />
+            <div class="img MemUnsubscribe_1">
+                <img src="@/assets/images/member/MemUnsubscribe_1.png" alt="" />
+            </div>
 
             <div class="Unsubscribe_main">
                 <h3 class="maintitle">{{ maintitle }}</h3>
@@ -60,40 +62,49 @@ export default {
             this.showbutton = false;
         },
         goBackMemOrder() {
-            this.$emit("closeMem");
+            this.$emit("closeMemUnsubscribe");
         },
     },
 };
 </script>
 <style lang="scss" scoped>
-.container {
-    width: 500px;
-    -webkit-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    top: 50%;
-    left: 50%;
-    margin: 0;
+// .container {
+//     width: 500px;
+//     -webkit-transform: translate(-50%, -50%);
+//     transform: translate(-50%, -50%);
+//     top: 50%;
+//     left: 50%;
+//     margin: 0;
+//     position: absolute;
+//     background: #fefefe;
+//     display: flex;
+//     align-items: center;
+//     justify-content: flex-start;
+//     flex-direction: column;
+//     padding-bottom: 30px;
+//     box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
+//     border-radius: 5px;
+// }
+.mem_MemUnsubscribe {
     position: absolute;
-    background: #fefefe;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding-bottom: 30px;
-    box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
-    border-radius: 5px;
+    z-index: 10;
 }
-
 .inner-container {
     width: 100%;
-}
 
-svg {
-    max-width: 90%;
-    position: relative;
-    left: 5%;
-    margin: 0 auto;
+    .MemUnsubscribe_1 {
+        width: 100%;
+        height: 100%;
+        // position: o;
+        // background-color: red;
+    }
 }
+// svg {
+//     max-width: 90%;
+//     position: relative;
+//     left: 5%;
+//     margin: 0 auto;
+// }
 
 .Unsubscribe_main {
     text-align: center;
@@ -101,47 +112,45 @@ svg {
     max-width: 70%;
     position: relative;
     margin: 0 auto;
-}
-.buttons {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-    align-items: center;
-    button {
-        padding-left: 10px;
-        padding-right: 10px;
+    .buttons {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        align-items: center;
+        button {
+            padding-left: 10px;
+            padding-right: 10px;
+        }
     }
 }
 
-@media (max-width: 699px) {
-    .container {
-        width: 90%;
-    }
-    .Unsubscribe_main {
-        margin-top: 1em;
-        max-width: 90%;
-    }
-}
-@media (max-width: 399px) {
-    .container {
-        padding: 20px;
-    }
-    .Unsubscribe_main {
-        // margin-top: 0em;
-        // max-width: 90%;
-        h2 {
-            font-size: 24px;
-        }
-    }
-    .buttons {
-        flex-direction: column;
-        button {
-            margin-right: 0;
-        }
-    }
-    svg {
-        padding-top: 0;
-    }
-}
+// @media (max-width: 699px) {
+//     .container {
+//         width: 90%;
+//     }
+//     .Unsubscribe_main {
+//         margin-top: 1em;
+//         max-width: 90%;
+//     }
+// }
+// @media (max-width: 399px) {
+//     .container {
+//         padding: 20px;
+//     }
+//     .Unsubscribe_main {
+//         // margin-top: 0em;
+//         // max-width: 90%;
+//         h2 {
+//             font-size: 24px;
+//         }
+//     }
+//     .buttons {
+//         flex-direction: column;
+//         button {
+//             margin-right: 0;
+//         }
+//     }
+
+// }
 </style>
