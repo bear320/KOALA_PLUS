@@ -23,14 +23,16 @@
                         <div class="cont_form_sign_up">
                             <a href="#" @click="ocultar_login_sign_up()">X</a>
                             <h2>建立帳號</h2>
-                            <p>姓氏</p><input type="text" placeholder="Last Name"/><br />
-                            <p>名字</p><input type="text" placeholder="First Name"/><br />
-                            <p>帳號</p><input type="text" placeholder="Your Account"/><br />
-                            <p>信箱</p><input type="text" placeholder="Email" /><br />   <!-- type="email" 比較好，可是會跑版 -->
-                            <button class="btn_email_confirm">信箱認證</button><br />
-                            <p>密碼</p><input type="password" placeholder="Confirm Password"/><br />
-                            <p>密碼認證</p><input class="confirm_password" type="password" placeholder="Confirm Password"/><br />
-                            <button class="btn_sign_up" @click="cambiar_sign_up()">註冊會員</button>
+                            <div><p>姓氏</p><input type="text" placeholder="Last Name"/></div>
+                            <div><p>名字</p><input type="text" placeholder="First Name"/></div>
+                            <div><p>帳號</p><input type="text" placeholder="Your Account"/></div>
+                            <div>
+                                <p>信箱</p><input type="text" placeholder="Email" />   <!-- type="email" 比較好，可是會跑版 -->
+                                <button class="btn_email_confirm">信箱認證</button>
+                            </div>
+                            <div><p>密碼</p><input type="password" placeholder="Confirm Password"/><br /></div>
+                            <div><p>密碼認證</p><input class="confirm_password" type="password" placeholder="Confirm Password"/><br /></div>
+                            <div><button class="btn_sign_up" @click="cambiar_sign_up()">註冊會員</button></div>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="cont_form_login">
@@ -183,6 +185,7 @@ export default {
     // -o-transition: all 0.5s;
     transition: all 0.5s;
     z-index: 2;
+    border-radius: 10px;
 }
 
 .cont_forms_active_sign_up {
@@ -196,6 +199,7 @@ export default {
     // -ms-transition: all 0.5s;
     // -o-transition: all 0.5s;
     transition: all 0.5s;
+    border-radius: 10px;
 }
 
 .cont_forms_active_forget_password {
@@ -209,6 +213,7 @@ export default {
     // -ms-transition: all 0.5s;
     // -o-transition: all 0.5s;
     transition: all 0.5s;
+    border-radius: 10px;
 }
 
 /* 兩個灰色框寬度 */
@@ -277,13 +282,13 @@ export default {
 
 .cont_ba_opcitiy_left > p {
     font-weight: 400;
-    margin-top: 20%;
+    margin-top: 25%;
     color: #2e383f;
 }
 
 .cont_ba_opcitiy_right > p {
     font-weight: 400;
-    margin-top: 15%;
+    margin-top: 20%;
     color: #2e383f;
 }
 /* ---------------------------------- background text ------------------------------------ */
@@ -442,7 +447,7 @@ export default {
     padding: 10px 5px;
     margin-left: 10px;
     margin-top: 20px;
-    width: 260px;
+    width: 230px;
     border: none;
     color: #757575;
 }
@@ -462,11 +467,15 @@ export default {
     margin-top: 10%;
 }
 
+.cont_form_sign_up > div > img {
+    width: 30%;
+}
+
 .cont_form_login > input {
     padding: 15px 5px;
     margin-left: 10px;
     margin-top: 20px;
-    width: 260px;
+    width: 230px;
     border: none;
     text-align: left;
     color: #757575;
@@ -485,7 +494,7 @@ export default {
 }
 
 .cont_form_sign_up > .confirm_password {
-    margin-right: 6.5%;
+    margin-right: 9.5%;
 }
 
 .cont_form_login > h2 {
@@ -498,6 +507,10 @@ export default {
 
 .cont_form_login > p {
     display: inline-block;
+}
+
+.cont_form_login > button {
+    margin-top: 7.5%;
 }
 
 .cont_form_login > div {
@@ -522,15 +535,15 @@ export default {
     text-align: left;
     padding: 15px 5px;
     margin-left: 2%;
-    margin-top: 2%;
-    width: 260px;
+    margin-top: 5%;
+    width: 230px;
     border: none;
     color: #757575;
 }
 
 .cont_form_forget_password > h2 {
     font-size: 24px;
-    margin-top: 12%;
+    margin-top: 25%;
     margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
@@ -551,4 +564,16 @@ export default {
 .cont_form_forget_password > div > img {
     width: 30%;
 }
+
+
+
+
+
+
+
+
+
+
+ // ==================== 手機切版 ==================== //
+ @media screen and (max-width: 1200px) {}
 </style>
