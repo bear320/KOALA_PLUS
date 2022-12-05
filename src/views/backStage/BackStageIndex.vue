@@ -5,12 +5,12 @@
             <div>
                 <div class="top2">
                     <div class="card">
-                        <a href="">
+                        <a href="/bs-support-list">
                             <h2>資助認養管理</h2>
                         </a>
                     </div>
                     <div class="card">
-                        <a href="">
+                        <a href="/bs-order-list">
                             <h2>訂單管理</h2>
                         </a>
                         <div>
@@ -26,48 +26,48 @@
                     </div>
                 </div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-admin-list">
                         <img
                             src="@/assets/images/backstageindex/adminIcon.png"
                         />
                         <h2>權限管理</h2>
                     </a>
-                    <a href="" class="detail">新增管理員帳戶</a>
+                    <a href="/bs-admin-add" class="detail">新增管理員帳戶</a>
                 </div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-koala-list">
                         <img
                             src="@/assets/images/backstageindex/koalaIcon.png"
                             alt=""
                         />
                         <h2>無尾熊管理</h2>
                     </a>
-                    <a href="" class="detail">新增無尾熊資訊</a>
+                    <a href="/bs-koala-add" class="detail">新增無尾熊資訊</a>
                 </div>
             </div>
             <div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-booking-list">
                         <img
                             src="@/assets/images/backstageindex/bookingIcon.png"
                             alt=""
                         />
                         <h2>園區導覽管理</h2>
                     </a>
-                    <a href="" class="detail">新增休館管理</a>
+                    <a href="/bs-booking-dayoff" class="detail">新增休館管理</a>
                 </div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-article-list">
                         <img
                             src="@/assets/images/backstageindex/articleIcon.png"
                             alt=""
                         />
                         <h2>公告管理</h2>
                     </a>
-                    <a href="" class="detail">新增公告文章</a>
+                    <a href="/bs-article-edit" class="detail">新增公告文章</a>
                 </div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-product-list">
                         <img
                             src="@/assets/images/backstageindex/productIcon.png"
                             alt=""
@@ -75,18 +75,17 @@
                         <h2>商品管理</h2>
                     </a>
                     <a href="" class="detail">優惠券管理</a>
-                    <a href="" class="detail2">新增商品資訊</a>
+                    <a href="/bs-product-edit" class="detail2">新增商品資訊</a>
                 </div>
                 <div class="card">
-                    <a href="">
+                    <a href="/bs-member-list">
                         <img
                             src="@/assets/images/backstageindex/memberIcon.png"
                             alt=""
                         />
                         <h2>會員管理</h2>
                     </a>
-                    <a href="" class="detail">消費金額查詢</a>
-                    <a href="" class="detail2">黑名單管理</a>
+                    <a href="/bs-member-blacklist" class="detail">黑名單管理</a>
                 </div>
             </div>
         </div>
@@ -111,15 +110,14 @@ article {
     }
     .cards > div {
         box-sizing: border-box;
-        width: calc(100% - 80px);
+        width: 100%;
         height: 50%;
         display: flex;
         justify-content: space-between;
-        margin: 20px;
+        margin: 20px 0;
         .top2 {
-            width: 50%;
-            height: calc(50% - 40px);
-            margin: 0 10px;
+            width: calc(50% + 20px);
+            margin-right: 20px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
@@ -127,22 +125,24 @@ article {
             .card {
                 width: 100%;
                 margin: 0 10px;
+                text-align: left;
+                h2 {
+                    margin-bottom: 0;
+                    display: inline-block;
+                    line-height: 70px;
+                }
             }
             .card:first-child {
                 background-color: rgba(252, 245, 234, 0.6);
+                height: calc(65% - 20px);
             }
             .card:last-child {
                 background-color: rgba(252, 239, 239, 0.6);
                 display: flex;
                 justify-content: space-between;
                 width: 100%;
+                height: 35%;
 
-                h2 {
-                    margin-bottom: 0;
-                    // width: 40%;
-                    display: inline-block;
-                    line-height: 80px;
-                }
                 div {
                     display: flex;
 
@@ -169,13 +169,13 @@ article {
 
                 img {
                     height: 120px;
-                    margin-top: 15%;
+                    margin-top: 10%;
                     margin-right: 10%;
                 }
             }
             %detail {
                 display: block;
-                height: 10%;
+                height: 12%;
                 width: 100%;
                 padding: 10px;
                 position: absolute;
@@ -199,7 +199,7 @@ article {
             .detail2 {
                 @extend %detail;
                 background-color: #aee0bb;
-                bottom: 10%;
+                bottom: 12%;
             }
         }
     }

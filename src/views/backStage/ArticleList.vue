@@ -15,7 +15,7 @@
         </div>
         <section>
             <h2>草稿</h2>
-            <div class="title">
+            <div class="bstitle">
                 <h3 class="star">標記</h3>
                 <h3 class="article">文章</h3>
                 <h3 class="pic">圖片</h3>
@@ -137,7 +137,7 @@ html article {
                 }
             }
         }
-        .title {
+        .bstitle {
             display: flex;
             width: 100%;
             background-color: $darkgreen;

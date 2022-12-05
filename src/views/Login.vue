@@ -23,14 +23,16 @@
                         <div class="cont_form_sign_up">
                             <a href="#" @click="ocultar_login_sign_up()">X</a>
                             <h2>建立帳號</h2>
-                            <p>姓氏</p><input type="text" placeholder="Last Name"/><br />
-                            <p>名字</p><input type="text" placeholder="First Name"/><br />
-                            <p>帳號</p><input type="text" placeholder="Your Account"/><br />
-                            <p>信箱</p><input type="text" placeholder="Email" /><br />   <!-- type="email" 比較好，可是會跑版 -->
-                            <button class="btn_email_confirm">信箱認證</button><br />
-                            <p>密碼</p><input type="password" placeholder="Confirm Password"/><br />
-                            <p>密碼認證</p><input class="confirm_password" type="password" placeholder="Confirm Password"/><br />
-                            <button class="btn_sign_up" @click="cambiar_sign_up()">註冊會員</button>
+                            <div><p>姓氏</p><input type="text" placeholder="Last Name"/></div>
+                            <div><p>名字</p><input type="text" placeholder="First Name"/></div>
+                            <div><p>帳號</p><input type="text" placeholder="Your Account"/></div>
+                            <div>
+                                <p>信箱</p><input type="text" placeholder="Email" />   <!-- type="email" 比較好，可是會跑版 -->
+                                <button class="btn_email_confirm">信箱認證</button>
+                            </div>
+                            <div><p>密碼</p><input type="password" placeholder="Confirm Password"/><br /></div>
+                            <div><p>密碼認證</p><input class="confirm_password" type="password" placeholder="Confirm Password"/><br /></div>
+                            <div><button class="btn_sign_up" @click="cambiar_sign_up()">註冊會員</button></div>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="cont_form_login">
@@ -151,17 +153,18 @@ export default {
 /* 改整體高度 */
 .cont_login {
     position: relative;
-    width: 1200px;
+    width: 768px;
 }
 
 /* 還沒按下去的背景 height註解掉就會沒東西 */
 .cont_forms {
     position: absolute;
     overflow: hidden;
-    top: -150px;
+    top: 0;
     left: 0px;
-    width: 1200px;
-    height: 350px;
+    right: 0;
+    bottom: 0;
+    width: 768px;
     background-color: #eee;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -172,42 +175,45 @@ export default {
 
 .cont_forms_active_login {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
-    top: -400px;
-    left: 600px;
+    top: -285px;
+    left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
     // -o-transition: all 0.5s;
     transition: all 0.5s;
     z-index: 2;
+    border-radius: 10px;
 }
 
 .cont_forms_active_sign_up {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
-    top: -400px;
+    top: -285px;
     left: 0px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
     // -o-transition: all 0.5s;
     transition: all 0.5s;
+    border-radius: 10px;
 }
 
 .cont_forms_active_forget_password {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
-    top: -400px;
-    left: 600px;
+    top: -285px;
+    left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
     // -o-transition: all 0.5s;
     transition: all 0.5s;
+    border-radius: 10px;
 }
 
 /* 兩個灰色框寬度 */
@@ -264,7 +270,7 @@ export default {
     border-radius: 3px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: 30px;
+    margin-top: 3%;
     cursor: pointer;
 }
 
@@ -276,20 +282,20 @@ export default {
 
 .cont_ba_opcitiy_left > p {
     font-weight: 400;
-    margin-top: 20%;
+    margin-top: 25%;
     color: #2e383f;
 }
 
 .cont_ba_opcitiy_right > p {
     font-weight: 400;
-    margin-top: 15%;
+    margin-top: 20%;
     color: #2e383f;
 }
 /* ---------------------------------- background text ------------------------------------ */
 .cont_ba_opcitiy {
     position: relative;
     background-color: #96bbbd;
-    width: 600px;
+    width: 384px;
     height: 350px;
     border-radius: 3px;
     margin: auto;
@@ -310,6 +316,7 @@ export default {
 }
 .cont_forms_active_sign_up {
     z-index: 2;
+    overflow-y: scroll;
 }
 
 // @-webkit-keyframes animar_fondo {
@@ -437,16 +444,17 @@ export default {
 
 .cont_form_sign_up > input {
     text-align: left;
-    padding: 15px 5px;
+    padding: 10px 5px;
     margin-left: 10px;
     margin-top: 20px;
-    width: 260px;
+    width: 230px;
     border: none;
     color: #757575;
 }
 
 .cont_form_sign_up > h2 {
-    margin-top: 8%;
+    font-size: 24px;
+    margin-top: 12%;
     font-weight: 400;
     color: #757575;
 }
@@ -459,11 +467,15 @@ export default {
     margin-top: 10%;
 }
 
+.cont_form_sign_up > div > img {
+    width: 30%;
+}
+
 .cont_form_login > input {
     padding: 15px 5px;
     margin-left: 10px;
     margin-top: 20px;
-    width: 260px;
+    width: 230px;
     border: none;
     text-align: left;
     color: #757575;
@@ -482,12 +494,13 @@ export default {
 }
 
 .cont_form_sign_up > .confirm_password {
-    margin-right: 6.5%;
+    margin-right: 9.5%;
 }
 
 .cont_form_login > h2 {
-    margin-top: 20%;
-    margin-bottom: 5%;
+    font-size: 24px;
+    margin-top: 12%;
+    // margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
 }
@@ -496,8 +509,16 @@ export default {
     display: inline-block;
 }
 
+.cont_form_login > button {
+    margin-top: 7.5%;
+}
+
 .cont_form_login > div {
-    margin-top: 20%;
+    margin-top: 7.5%;
+}
+
+.cont_form_login > div > img {
+    width: 30%;
 }
 
 .cont_form_login > a,
@@ -513,24 +534,46 @@ export default {
 .cont_form_forget_password > input {
     text-align: left;
     padding: 15px 5px;
-    margin-left: 10px;
-    margin-top: 20px;
-    width: 260px;
+    margin-left: 2%;
+    margin-top: 5%;
+    width: 230px;
     border: none;
     color: #757575;
 }
 
 .cont_form_forget_password > h2 {
-    margin-top: 30%;
+    font-size: 24px;
+    margin-top: 25%;
+    margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
 }
 
-.cont_form_forget_password > h2 {
+.cont_form_forget_password > p {
     display: inline-block;
 }
 
 .cont_form_forget_password > div {
-    margin-top: 30%;
+    margin-top: 10%;
 }
+
+.cont_form_forget_password > button {
+    margin-top: 7.5%;
+}
+
+.cont_form_forget_password > div > img {
+    width: 30%;
+}
+
+
+
+
+
+
+
+
+
+
+ // ==================== 手機切版 ==================== //
+ @media screen and (max-width: 1200px) {}
 </style>
