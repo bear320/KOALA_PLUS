@@ -5,7 +5,7 @@
         <router-link to="/bs-login">後台</router-link>
         <router-link to="/about">關於</router-link>
         <router-link to="/about-koala">無尾熊百科</router-link>
-        <router-link to="/all-koalas">資助認養</router-link>
+        <router-link to="/support">資助認養</router-link>
         <router-link to="/cart1">購物車1</router-link>
         <router-link to="/cart2">購物車2</router-link>
         <router-link to="/koala-info">無尾熊詳情頁</router-link>

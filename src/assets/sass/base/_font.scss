@@ -23,27 +23,27 @@ $h4: 18px;
 $p: 15px;
 
 @mixin rwd-h1 {
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         font-size: 36px;
     }
 }
 @mixin rwd-h2 {
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         font-size: 24px;
     }
 }
 @mixin rwd-h3 {
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         font-size: 18px;
     }
 }
 @mixin rwd-h4 {
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         font-size: 15px;
     }
 }
 @mixin rwd-p {
-    @media (max-width: 767px) {
+    @media (max-width: 768px) {
         font-size: 12px;
     }
 }
