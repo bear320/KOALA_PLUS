@@ -44,8 +44,8 @@
             </div>
         </div>
         <MemUnsubscribe
-            v-show="showMemUnsubscribe"
-            @closeMem="qq"
+            v-show="showMemUnsubscribe === true"
+            @closeMemUnsubscribe="closeMemUnsubscribe_emit"
         ></MemUnsubscribe>
     </li>
 </template>
@@ -75,6 +75,13 @@ export default {
                     ord_qty: 1,
                     prod_price: 200,
                 },
+                {
+                    prod_name: "無尾熊乾髮帽3",
+                    prod_id: "1024",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                },
             ],
         };
     },
@@ -83,7 +90,7 @@ export default {
             console.log(this.showMemUnsubscribe);
             this.showMemUnsubscribe = true;
         },
-        qq() {
+        closeMemUnsubscribe_emit() {
             this.showMemUnsubscribe = false;
         },
     },
@@ -94,6 +101,7 @@ export default {
     .wrapper {
         //訂單訊息內容 li
         .mem_order {
+            // position: relative;
             .mem_basic {
                 //會員基本資料
                 display: flex;

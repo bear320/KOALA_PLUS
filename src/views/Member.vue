@@ -10,7 +10,7 @@
                     ')',
             }"
         ></div>
-        <img src="../assets/images/member/MemUnsubscribe_1.png" alt="" />
+
         <section>
             <h1>Member</h1>
             <div class="tabs">
@@ -82,6 +82,7 @@ export default {
         font-family: "Inkfree";
         font-size: 30vh;
         color: $lightgreen;
+        position: relative;
     }
 }
 .tabs {
