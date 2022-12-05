@@ -2,7 +2,10 @@
     <div :class="col">
         <div class="product-card">
             <router-link class="product-img" :to="`/shop/${proId}`">
-                <img src="@/assets/images/shop/product_img.png" />
+                <img
+                    src="@/assets/images/shop/product_img.png"
+                    @click="scrollToProduct"
+                />
                 <div class="btn-cart">
                     <Icon
                         size="20"
@@ -25,6 +28,12 @@ export default {
     methods: {
         addToCart() {
             console.log(this.proId);
+        },
+        scrollToProduct() {
+            window.scrollTo({
+                top: 200,
+                behavior: "instant",
+            });
         },
     },
 };
