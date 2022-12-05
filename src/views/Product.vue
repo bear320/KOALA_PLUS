@@ -41,7 +41,11 @@
                     <div class="product-box">
                         <div class="quantity-box">
                             <div class="quantity-text">數量</div>
-                            <input class="quantity" type="number" />
+                            <div class="quantity">
+                                <Icon class="md-remove" type="md-remove" />
+                                <input type="number" v-model="quantity" />
+                                <Icon class="md-add" type="md-add" />
+                            </div>
                         </div>
                         <div class="share-box">
                             <div class="share-text">Share</div>
@@ -89,7 +93,6 @@
                     :proPrice="item.price"
                     :proId="item.id"
                     :col="'col-3'"
-                    @click="test"
                 ></product-card>
             </div>
         </div>
@@ -116,6 +119,7 @@ export default {
             ],
             source: [],
             relProducts: [],
+            quantity: 1,
         };
     },
     computed: {
@@ -153,14 +157,6 @@ export default {
                 .then((json) => {
                     this.relProducts = json.dtat.tours;
                 });
-        },
-        test() {
-            this.$nextTick(() => {
-                window.scrollTo({
-                    top: 200,
-                    behavior: "instant",
-                });
-            });
         },
     },
 
@@ -231,6 +227,36 @@ export default {
     .quantity-text {
         text-align: left;
         margin-bottom: 10px;
+    }
+    .quantity {
+        position: relative;
+        input {
+            text-align: center;
+            width: 160px;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .md-remove {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(0%, -50%);
+            color: $font_color;
+            border-right: 1px solid black;
+            padding: 5px;
+        }
+        .md-add {
+            position: absolute;
+            top: 50%;
+            right: 0%;
+            transform: translate(0%, -50%);
+            color: $font_color;
+            border-left: 1px solid black;
+            padding: 5px;
+        }
     }
     .share-text {
         text-align: left;
