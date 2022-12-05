@@ -11,13 +11,14 @@
                     {{ subtitle }}
                 </p>
                 <div class="buttons">
+                    {{ showbutton }}
                     <button
                         class="btn-lowest"
                         id="unsubscribe"
                         @click="GoUnsubscribe"
                         v-show="showbutton"
                     >
-                        是的，取消訂單
+                        取消訂單
                     </button>
                     <button
                         class="btn-paramy"
@@ -25,7 +26,7 @@
                         @click="goBack"
                         v-show="showbutton"
                     >
-                        否，回上一步驟
+                        回上一步
                     </button>
                     <button
                         class="btn-paramy"
@@ -44,6 +45,8 @@
 export default {
     data() {
         return {
+            // 回傳是否取消訂單
+            backmassMemUnsubscribe: false,
             maintitle: "您想取消訂單嗎",
             subtitle:
                 "如果您取消訂單，您將不會收到此筆訂單商品，也取消資助無尾熊。",
@@ -86,17 +89,22 @@ export default {
 //     border-radius: 5px;
 // }
 .mem_MemUnsubscribe {
+    background-color: bisque;
+    width: 440px;
     position: absolute;
     z-index: 10;
-}
-.inner-container {
-    width: 100%;
-
-    .MemUnsubscribe_1 {
+    margin: auto;
+    .inner-container {
         width: 100%;
-        height: 100%;
-        // position: o;
-        // background-color: red;
+
+        .MemUnsubscribe_1 {
+            img {
+                width: 100%;
+                height: 100%;
+            }
+            // position: o;
+            // background-color: red;
+        }
     }
 }
 // svg {

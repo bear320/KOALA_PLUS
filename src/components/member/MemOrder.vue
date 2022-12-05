@@ -16,7 +16,7 @@
                             <th class="prod_id">商品編號</th>
                             <th class="prod_category">商品類別</th>
                             <th>數量</th>
-                            <th>小計(暫單價)</th>
+                            <th>小計</th>
                         </tr>
                     </thead>
                     <tbody>
