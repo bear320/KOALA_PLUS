@@ -13,4 +13,8 @@ module.exports = defineConfig({
             },
         },
     },
+    publicPath: process.env.NODE_ENV === "production" ? "/cgd103/g1/" : "/",
 });
+// module.exports = {
+//     publicPath: process.env.NODE_ENV === "production" ? "/cgd103/g1/" : "/",
+// };
