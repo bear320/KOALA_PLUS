@@ -3,7 +3,7 @@
     <article class="nav-space wrapper">
         <h1>會員管理</h1>
         <div class="todo">
-            <a class="blacklist" href="/bs-article-edit" target="_blank"
+            <a class="blacklist" href="/bs-member-blacklist" target="_blank"
                 ><img src="@/assets/images/icon/black.svg" alt="" />
 
                 <div>查看黑名單</div>
@@ -21,25 +21,6 @@
 
                 <h3 class="black_switch">黑名單</h3>
             </div>
-            <div class="content">
-                <p class="mem_id">P00001</p>
-                <p class="mem_last_name">姓氏</p>
-                <p class="mem_first_name">名字</p>
-                <p class="mem_mob">0988777688</p>
-                <p class="mem_validation">已驗證</p>
-                <p class="mem_account">12312321@gmail.com</p>
-
-                <p class="black_switch">
-                    <Switch size="large" true-color="#337a7d">
-                        <template #open>
-                            <span>ON</span>
-                        </template>
-                        <template #close>
-                            <span>OFF</span>
-                        </template>
-                    </Switch>
-                </p>
-            </div>
 
             <div class="content" v-for="item in memindexs" :key="item.mem_id">
                 <p class="mem_id">{{ item.mem_id }}</p>
@@ -52,10 +33,11 @@
                 <p class="mem_mob">{{ item.mem_mob }}</p>
                 <p class="mem_validation">{{ item.mem_validation }}</p>
                 <p class="mem_account">{{ item.mem_account }}</p>
-                <div class="black_switch">
+                <p class="black_switch">
                     <Switch
                         size="large"
-                        true-color="#13ce66"
+                        true-color="#337a7d"
+                        :before-change="handleBeforeChange"
                         v-model="item.black_switch"
                     >
                         <template #open>
@@ -65,7 +47,7 @@
                             <span>OFF</span>
                         </template>
                     </Switch>
-                </div>
+                </p>
             </div>
         </section>
     </article>
@@ -80,23 +62,54 @@ export default {
                 {
                     mem_id: "P00001",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy",
+                    mem_first_name: "#charmy111",
                     mem_mob: "0988777688",
-                    mem_validation: true,
+                    mem_validation: "已認證",
                     mem_account: "12312321@gmail.com",
                     black_switch: false,
                 },
                 {
                     mem_id: "P00002",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy",
+                    mem_first_name: "#charmy222",
                     mem_mob: "0988777688",
-                    mem_validation: true,
-                    mem_account: "123@gmail.com",
+                    mem_validation: "已認證",
+                    mem_account: "123222@gmail.com",
+                    black_switch: true,
+                },
+                {
+                    mem_id: "P00003",
+                    mem_last_name: "zeng",
+                    mem_first_name: "#charmy333",
+                    mem_mob: "0988777688",
+                    mem_validation: "未認證",
+                    mem_account: "123333@gmail.com",
+                    black_switch: false,
+                },
+                {
+                    mem_id: "P00004",
+                    mem_last_name: "zeng",
+                    mem_first_name: "#charmy444",
+                    mem_mob: "0988777688",
+                    mem_validation: "未認證",
+                    mem_account: "123444@gmail.com",
                     black_switch: true,
                 },
             ],
         };
+    },
+    methods: {
+        handleBeforeChange() {
+            return new Promise((resolve) => {
+                this.$Modal.confirm({
+                    title: "黑名單確認",
+                    content: "您確定要切換開關狀態嗎？",
+                    onOk: () => {
+                        resolve();
+                    },
+                });
+            });
+        },
     },
     components: {
         Header,
@@ -144,14 +157,14 @@ html article {
             margin: 10px auto;
         }
         .mem_id {
-            width: 10%;
+            width: 15%;
         }
         .mem_last_name,
         .mem_first_name {
             width: 10%;
         }
         .mem_mob {
-            width: 20%;
+            width: 15%;
         }
         .mem_validation {
             width: 15%;
