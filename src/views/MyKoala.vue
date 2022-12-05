@@ -76,7 +76,7 @@
                 <div v-if="(500 - game_exp >= 0)"><p>距離下一段經驗值：{{(500 - game_exp)}}</p></div>
                 <div v-else-if="(1000 - game_exp >= 0)"><p>距離下一段經驗值：{{(1000 - game_exp)}}</p></div>
                 <div v-else-if="(2000 - game_exp >= 0)"><p>距離下一段經驗值：{{(2000 - game_exp)}}</p></div>
-                <div v-else><p>距離下一段經驗值：0</p></div>
+                <div v-else-if="(3000 - game_exp >= 0)"><p>距離下一段經驗值：{{(3000 - game_exp)}}</p></div>
             </div>
         </nav>
         <!-- ==================== 談窗畫面 ==================== -->
@@ -580,7 +580,7 @@ img {
 }
 
 .game_nav_shop_button {
-    width: 120px;
+    width: 100px;
     margin: auto;
     margin-top: 30px;
     text-align: center;
@@ -590,8 +590,8 @@ img {
 }
 
 .game_nav_shop_button > img {
-    width: 75px;
-    height: 70px;
+    width: 45px;
+    height: 42px;
     margin-top: 10px;
 }
 
@@ -601,7 +601,7 @@ img {
 }
 
 .game_nav_bag_button {
-    width: 120px;
+    width: 100px;
     margin: auto;
     margin-top: 30px;
     text-align: center;
@@ -611,14 +611,32 @@ img {
 }
 
 .game_nav_bag_button > img {
-    width: 75px;
-    height: 75px;
+    width: 45px;
+    height: 45px;
     margin-top: 10px;
 }
 
 .game_nav_bag_button > p {
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+/* ========== expbar ========== */
+.experience_bar {
+  background-color:grey;
+  height:12px;
+  margin:10px;
+  margin-top: 15%;
+}
+
+.expValue {
+  background-color:teal;
+  height:12px;
+  max-width:100%;  
+}
+
+.game_nav_expbar {
+    cursor: pointer;
 }
 
 .btn-open {
@@ -912,21 +930,15 @@ img {
     }
 }
 
-/* ========== expbar ========== */
-.experience_bar {
-  background-color:grey;
-  height:12px;
-  margin:10px;
-  margin-top: 15%;
-}
 
-.expValue {
-  background-color:teal;
-  height:12px;
-  max-width:100%;  
-}
 
-.game_nav_expbar {
-    cursor: pointer;
-}
+
+
+
+
+
+
+
+ // ==================== 手機切版 ==================== //
+@media screen and (max-width: 1200px) {}
 </style>
