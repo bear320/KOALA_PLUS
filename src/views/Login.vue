@@ -151,17 +151,18 @@ export default {
 /* 改整體高度 */
 .cont_login {
     position: relative;
-    width: 1200px;
+    width: 768px;
 }
 
 /* 還沒按下去的背景 height註解掉就會沒東西 */
 .cont_forms {
     position: absolute;
     overflow: hidden;
-    top: -150px;
+    top: 0;
     left: 0px;
-    width: 1200px;
-    height: 350px;
+    right: 0;
+    bottom: 0;
+    width: 768px;
     background-color: #eee;
     -webkit-transition: all 0.5s;
     -moz-transition: all 0.5s;
@@ -172,10 +173,10 @@ export default {
 
 .cont_forms_active_login {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
     top: -285px;
-    left: 600px;
+    left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
@@ -186,7 +187,7 @@ export default {
 
 .cont_forms_active_sign_up {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
     top: -285px;
     left: 0px;
@@ -199,10 +200,10 @@ export default {
 
 .cont_forms_active_forget_password {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 600px;
+    width: 384px;
     height: 85vh;
     top: -285px;
-    left: 600px;
+    left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
@@ -289,7 +290,7 @@ export default {
 .cont_ba_opcitiy {
     position: relative;
     background-color: #96bbbd;
-    width: 600px;
+    width: 384px;
     height: 350px;
     border-radius: 3px;
     margin: auto;
@@ -310,6 +311,7 @@ export default {
 }
 .cont_forms_active_sign_up {
     z-index: 2;
+    overflow-y: scroll;
 }
 
 // @-webkit-keyframes animar_fondo {
@@ -447,7 +449,7 @@ export default {
 
 .cont_form_sign_up > h2 {
     font-size: 24px;
-    margin-top: 8%;
+    margin-top: 12%;
     font-weight: 400;
     color: #757575;
 }
@@ -488,7 +490,7 @@ export default {
 
 .cont_form_login > h2 {
     font-size: 24px;
-    margin-top: 8%;
+    margin-top: 12%;
     // margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
@@ -528,7 +530,7 @@ export default {
 
 .cont_form_forget_password > h2 {
     font-size: 24px;
-    margin-top: 10%;
+    margin-top: 12%;
     margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
