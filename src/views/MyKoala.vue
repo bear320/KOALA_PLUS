@@ -922,7 +922,7 @@ img {
 
 .expValue {
   background-color:teal;
-  height:14px;
+  height:12px;
   max-width:100%;  
 }
 

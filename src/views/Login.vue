@@ -174,7 +174,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 600px;
     height: 85vh;
-    top: -400px;
+    top: -285px;
     left: 600px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -188,7 +188,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 600px;
     height: 85vh;
-    top: -400px;
+    top: -285px;
     left: 0px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -201,7 +201,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 600px;
     height: 85vh;
-    top: -400px;
+    top: -285px;
     left: 600px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -264,7 +264,7 @@ export default {
     border-radius: 3px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: 30px;
+    margin-top: 3%;
     cursor: pointer;
 }
 
@@ -437,7 +437,7 @@ export default {
 
 .cont_form_sign_up > input {
     text-align: left;
-    padding: 15px 5px;
+    padding: 10px 5px;
     margin-left: 10px;
     margin-top: 20px;
     width: 260px;
@@ -446,6 +446,7 @@ export default {
 }
 
 .cont_form_sign_up > h2 {
+    font-size: 24px;
     margin-top: 8%;
     font-weight: 400;
     color: #757575;
@@ -486,8 +487,9 @@ export default {
 }
 
 .cont_form_login > h2 {
-    margin-top: 20%;
-    margin-bottom: 5%;
+    font-size: 24px;
+    margin-top: 8%;
+    // margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
 }
@@ -497,7 +499,11 @@ export default {
 }
 
 .cont_form_login > div {
-    margin-top: 20%;
+    margin-top: 7.5%;
+}
+
+.cont_form_login > div > img {
+    width: 30%;
 }
 
 .cont_form_login > a,
@@ -513,24 +519,34 @@ export default {
 .cont_form_forget_password > input {
     text-align: left;
     padding: 15px 5px;
-    margin-left: 10px;
-    margin-top: 20px;
+    margin-left: 2%;
+    margin-top: 2%;
     width: 260px;
     border: none;
     color: #757575;
 }
 
 .cont_form_forget_password > h2 {
-    margin-top: 30%;
+    font-size: 24px;
+    margin-top: 10%;
+    margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
 }
 
-.cont_form_forget_password > h2 {
+.cont_form_forget_password > p {
     display: inline-block;
 }
 
 .cont_form_forget_password > div {
-    margin-top: 30%;
+    margin-top: 10%;
+}
+
+.cont_form_forget_password > button {
+    margin-top: 7.5%;
+}
+
+.cont_form_forget_password > div > img {
+    width: 30%;
 }
 </style>
