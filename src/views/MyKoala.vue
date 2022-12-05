@@ -282,7 +282,7 @@ export default {
     el: ".game_nav_expbar",
     data() {
         return {
-            game_money: 10000,
+            game_money: 99999,
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
             item_3: "熱銷第一的尤加利葉",
@@ -940,5 +940,469 @@ img {
 
 
  // ==================== 手機切版 ==================== //
-@media screen and (max-width: 1200px) {}
+@media screen and (max-width: 1200px) {
+    .main_block {
+    width: 100%;
+    height: 98vh;
+    background-color: #d3fdff;
+    display: flex;
+}
+
+.main_block_LeftTree {
+    position: relative;
+    width: 40%;
+}
+
+.main_block_LeftTree_1 {
+    position: absolute;
+    left: 10%;
+    bottom: 0;
+}
+
+.main_block_LeftTree_2 {
+    position: absolute;
+    left: 20%;
+    bottom: 0;
+}
+
+.main_block_LeftTree_3 {
+    position: absolute;
+    left: 30%;
+    bottom: 0;
+}
+
+.main_block_MainTree {
+    position: relative;
+    width: 100%;
+}
+
+.main_block_MainTree_0 {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.main_block_koala_1 {
+    position: absolute;
+    bottom: 21%;
+    left: 39%;
+    width: 30%;
+}
+
+.main_block_koala_2 {
+    position: absolute;
+    bottom: 20%;
+    left: 35%;
+    width: 35%;
+}
+
+.main_block_koala_3 {
+    position: absolute;
+    bottom: 19%;
+    left: 33%;
+    width: 40%;
+}
+
+.main_block_RightTree {
+    position: relative;
+    width: 40%;
+}
+
+.main_block_RightTree_1 {
+    position: absolute;
+    right: 10%;
+    bottom: 0;
+}
+
+.main_block_RightTree_2 {
+    position: absolute;
+    right: 20%;
+    bottom: 0;
+}
+
+.main_block_RightTree_3 {
+    position: absolute;
+    right: 30%;
+    bottom: 0;
+}
+
+.main_block_grass {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+}
+
+.main_block_grass > img {
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+/* ========== 遊戲選項列 ========== */
+// .game_nav {
+//     position: absolute;
+//     top: 10%;
+//     right: 5%;
+//     bottom: 0;
+//     left: 85%;
+// }
+
+.game_nav_money {
+    display: flex;
+    justify-content: center;
+    margin-top: 20%;
+}
+
+.game_nav_money_left {
+    width: 140px;
+    display: flex;
+    // border: 1px solid #96bbbd;
+    border-radius: 10px;
+}
+
+.game_nav_money_left > img {
+    margin-top: 3%;
+    width: 25px;
+    height: 26px;
+}
+
+.game_nav_money_left > p {
+    padding-left: 5%;
+    line-height: 62px;
+    font-size: 28px;
+    margin: auto;
+}
+
+/* .game_nav_plus {} */
+
+.game_nav_plus > img {
+    width: 30px;
+    height: 30px;
+}
+
+.game_nav_shop_button {
+    width: 100px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid #96bbbd;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.game_nav_shop_button > img {
+    width: 45px;
+    height: 42px;
+    margin-top: 10px;
+}
+
+.game_nav_shop_button > p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.game_nav_bag_button {
+    width: 100px;
+    margin: auto;
+    margin-top: 30px;
+    text-align: center;
+    border: 1px solid #96bbbd;
+    border-radius: 10px;
+    filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25));
+}
+
+.game_nav_bag_button > img {
+    width: 45px;
+    height: 45px;
+    margin-top: 10px;
+}
+
+.game_nav_bag_button > p {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+/* ========== expbar ========== */
+.experience_bar {
+  background-color:grey;
+  height:12px;
+  margin:10px;
+  margin-top: 15%;
+}
+
+.expValue {
+  background-color:teal;
+  height:12px;
+  max-width:100%;  
+}
+
+.game_nav_expbar {
+    cursor: pointer;
+}
+
+.btn-open {
+    cursor: pointer;
+}
+
+/* ==================== 談窗畫面 ==================== */
+/* ========== 賺遊戲幣的方式 ========== */
+.plus_talkwindow {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+    bottom: 0;
+    left: 10%;
+    overflow: hidden;
+    margin-right: 20%;
+    transform: scale(0);
+}
+
+.plus_talkwindow_block {
+    width: 80%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    left: 19.5%;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    background-color: #ccc;
+    background-image: url(../assets/images/game/talk_window_background.png);
+    border-radius: 10px;
+}
+
+.plus_talkwindow_content {
+    position: relative;
+    width: 70%;
+    margin: 2% auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 5%;
+    margin-left: 25%;
+}
+
+/* .plus_talkwindow_image {} */
+
+.plus_talkwindow_image > img {
+    width: 389.5px;
+    height: 500px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+
+.plus_talkwindow_content > p {
+    width: 100%;
+    color: #000;
+    font-size: 28px;
+    margin-left: 10%;
+}
+
+.plus_talkwindow_content_txt {
+    padding-top: 5%;
+    padding-bottom: 10%;
+    padding-left: 25%;
+}
+.plus_talkwindow_content_txt > p {
+    color: #000;
+    text-align: left;
+    line-height: 2.5;
+    font-size: 20px;
+}
+
+/* ========== 虛擬商店 ========== */
+.shop_talkwindow {
+    position: absolute;
+    top: 10%;
+    right: 30%;
+    bottom: 0;
+    left: 26.5%;
+    overflow: hidden;
+    transform: scale(0);
+}
+
+.shop_talkwindow_block {
+    position: absolute;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    background-color: #ccc;
+    background-image: url(../assets/images/game/talk_window_background.png);
+    border-radius: 10px;
+}
+
+.shop_talkwindow_title {
+    padding-top: 2%;
+    justify-content: center;
+    display: flex;
+}
+
+.shop_talkwindow_title > img {
+    width: 6%;
+}
+
+.shop_talkwindow_title > p {
+    margin-left: 3%;
+    line-height: 41.78px;
+}
+
+.shop_talkwindow_commodity {
+    width: 85%;
+    margin: 2% auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.shop_talkwindow_commodity > div {
+    width: 26%;
+    background-color: #dee8e7;
+    margin: auto;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    padding: 1.5%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.shop_talkwindow_commodity > div > img {
+    width: 60%;
+    margin-bottom: 10%;
+}
+
+.shop_talkwindow_commodity_introduce_1 {
+    color: #000;
+    font-size: 14px;
+}
+
+.shop_talkwindow_commodity_button {
+    width: 65%;
+    display: flex;
+    margin: 15px auto;
+    padding: 10px;
+    justify-content: space-around;
+    border-radius: 10px;
+    background-color: #579194;
+    cursor: pointer;
+}
+
+.shop_talkwindow_commodity_button > div {
+    display: flex;
+}
+
+.shop_talkwindow_commodity_button > div > img {
+    width: 20px;
+    height: 20px;
+    margin-top: 8.5%;
+}
+
+.shop_talkwindow_commodity_button > div > p {
+    margin-right: 30%;
+    margin-left: 10%;
+    font-size: 20px;
+}
+
+.shop_talkwindow_commodity_introduce_2 {
+    color: #000;
+    font-size: 12px;
+}
+
+/* ========== 遊戲背包 ========== */
+.bag_talkwindow {
+    position: absolute;
+    top: 10%;
+    right: 30%;
+    bottom: 0;
+    left: 26.5%;
+    overflow: hidden;
+    transform: scale(0);
+}
+
+.bag_talkwindow_block {
+    position: absolute;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    background-color: #ccc;
+    background-image: url(../assets/images/game/talk_window_background.png);
+    border-radius: 10px;
+}
+
+.bag_talkwindow_title {
+    padding-top: 2%;
+    justify-content: center;
+    display: flex;
+}
+
+.bag_talkwindow_title > img {
+    width: 6%;
+}
+
+.bag_talkwindow_title > p {
+    margin-left: 3%;
+    line-height: 41.78px;
+}
+
+.bag_talkwindow_commodity {
+    width: 85%;
+    margin: 2% auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.bag_talkwindow_commodity > div {
+    width: 26%;
+    background-color: #dee8e7;
+    margin: auto;
+    margin-top: 1.5%;
+    margin-bottom: 3%;
+    padding: 1.5%;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.bag_talkwindow_commodity > div > img {
+    width: 60%;
+    margin-bottom: 10%;
+}
+
+.bag_talkwindow_commodity_introduce_1 {
+    color: #000;
+    font-size: 14px;
+}
+
+.bag_talkwindow_commodity_button {
+    width: 65%;
+    display: flex;
+    margin: 15px auto;
+    padding: 10px;
+    justify-content: space-around;
+    border-radius: 10px;
+    background-color: #579194;
+    cursor: pointer;
+}
+
+.bag_talkwindow_commodity_button > p {
+    font-size: 14px;
+}
+
+.bag_talkwindow_commodity_introduce_2 {
+    color: #000;
+    font-size: 12px;
+}
+
+/* ========== 關掉彈窗 ========== */
+.btn-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 15px;
+    cursor: pointer;
+}
+
+}
 </style>

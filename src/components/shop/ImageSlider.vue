@@ -65,27 +65,30 @@ export default {
 
 <style lang="scss" scoped>
 $b-radius: 10px;
+$size-l: 450px;
+$size-m: 400px;
+$size-s: 295px;
 
 .image-slider {
     margin: 0 auto;
-    width: 500px;
+    width: $size-l;
     @include m() {
-        width: 400px;
+        width: $size-m;
     }
-    @include m500() {
-        width: 295px;
+    @include media(500) {
+        width: $size-s;
     }
     .view-box {
         width: 100%;
         border-radius: $b-radius;
-        border: 1px solid lighten($darkgreen, 50%);
+        outline: 1px solid lighten($darkgreen, 50%);
         overflow: hidden;
         position: relative;
         margin-bottom: 30px;
         @include m() {
             margin-bottom: 20px;
         }
-        @include m500() {
+        @include media(500) {
             margin-bottom: 10px;
         }
         .main-image {
@@ -95,14 +98,8 @@ $b-radius: 10px;
             transition: left 0.3s linear;
             img {
                 width: 100%;
-                height: 500px;
+                aspect-ratio: 1 / 1;
                 flex-shrink: 0;
-                @include m() {
-                    height: 400px;
-                }
-                @include m500() {
-                    height: 295px;
-                }
             }
         }
         .buttons {
@@ -122,7 +119,7 @@ $b-radius: 10px;
                 @include m() {
                     font-size: 40px;
                 }
-                @include m500() {
+                @include media(500) {
                     font-size: 30px;
                 }
                 &:hover {
@@ -146,7 +143,7 @@ $b-radius: 10px;
                         width: 30px;
                         height: 30px;
                     }
-                    @include m500() {
+                    @include media(500) {
                         width: 20px;
                         height: 20px;
                     }
@@ -159,23 +156,14 @@ $b-radius: 10px;
     }
     .sub-images {
         width: 100%;
-        height: 100px;
         display: flex;
         justify-content: space-between;
         img {
-            width: 100px;
-            height: 100%;
+            width: 22.5%;
+            aspect-ratio: 1 / 1;
             border-radius: $b-radius;
-            border: 1px solid lighten($darkgreen, 50%);
+            outline: 1px solid lighten($darkgreen, 50%);
             cursor: pointer;
-            @include m() {
-                width: 90px;
-                height: 90px;
-            }
-            @include m500() {
-                width: 70px;
-                height: 70px;
-            }
         }
     }
 }
