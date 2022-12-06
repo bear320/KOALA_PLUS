@@ -82,7 +82,7 @@ header {
             display: none;
         }
         .logo {
-            @include size(100%, 150%);
+            @include size(100%, 100%);
 
             img {
                 @include size(100%, 100%);
