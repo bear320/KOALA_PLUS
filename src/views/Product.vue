@@ -97,17 +97,20 @@
             </div>
         </div>
     </main>
+    <Footer></Footer>
 </template>
 
 <script>
 import Header from "@/components/header.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
+import Footer from "@/components/footer.vue";
 export default {
     components: {
         Header,
         ImageSlider,
         ProductCard,
+        Footer,
     },
     data() {
         return {
