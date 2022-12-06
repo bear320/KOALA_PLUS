@@ -13,7 +13,7 @@
             alt="koala-icon"
         />
 
-        <booking-button @gotoCalendar="scrollToBlock"></booking-button>
+        <booking-button @click="scrollBlock()"></booking-button>
 
         <img
             src="../assets/images/park/drawing7.png"
@@ -57,7 +57,6 @@ export default {
         Footer,
     },
 
-    methods: {},
     data() {
         return {
             source: [],
@@ -87,7 +86,7 @@ export default {
         ];
     },
     methods: {
-        scrollToBlock() {
+        scrollBlock() {
             window.scrollTo({
                 top: document.getElementById("calendar").offsetTop,
                 left: 0,
