@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <article class="bs-nav-spcae wrapper">
+    <article class="bs-nav-space wrapper">
         <h1>會員管理</h1>
 
         <section>
