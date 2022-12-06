@@ -45,7 +45,7 @@
             <p>
                 在KOALA+，我們能領養無尾熊，或捐款幫助無尾熊中心的營運。雖然領養無尾熊沒辦法讓您把她帶回家中一起居住，但這筆費用能讓無尾熊得到好的照顧和環境。另外，KOALA+將發行相應的尤加利葉遊戲幣給您，您可以在<a
                     href="/my-koala"
-                    >My Koala遊戲區</a
+                    >"My Koala遊戲區"</a
                 >養成無尾熊，陪他們長大。
             </p>
         </div>
@@ -120,7 +120,7 @@ export default {
         user-select: none;
         .layer {
             position: absolute;
-            width: 120vw;
+            width: 100%;
             @include d() {
             }
             @include m() {
@@ -264,9 +264,6 @@ export default {
         text-align: left;
         font-size: $h4;
         line-height: 28px;
-        a {
-            font-size: $h4;
-        }
     }
     .wedo {
         @include size(55vw, 95vh);
@@ -294,6 +291,9 @@ export default {
 
         p {
             margin-top: 0;
+            a {
+                font-size: $h4;
+            }
         }
     }
 }
