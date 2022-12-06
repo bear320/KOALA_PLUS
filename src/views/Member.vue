@@ -26,7 +26,9 @@
                     <li
                         :style="{ left: `${currentTab * 25}%` }"
                         class="moving_tab"
-                    ></li>
+                    >
+                        {{ liTab }}
+                    </li>
                 </ul>
 
                 <img
@@ -63,6 +65,7 @@ import MemCoupons from "@/components/member/MemCoupons.vue";
 
 export default {
     name: "Member",
+    liTab: "  ",
     components: {
         Header,
         MemCentre,
@@ -92,6 +95,12 @@ export default {
         font-size: 30vh;
         color: $lightgreen;
         position: relative;
+        @include m() {
+            font-size: 20vh;
+        }
+        @include m() {
+            font-size: 15vh;
+        }
     }
 }
 .tabs {
@@ -108,16 +117,25 @@ export default {
         z-index: 1;
         outline: #337a7d 1px solid;
         li {
-            width: 100px;
-            padding: 10px 20px;
+            width: 120px;
+            padding: 10px 10px;
             text-align: center;
             align-items: center;
             cursor: pointer;
             border-radius: 50px;
             transition: color 0.5s linear;
+            @include d() {
+                width: 110px;
+                padding: 5px 5px;
+            }
+            @include m() {
+                width: 80px;
+                font-size: 12px;
+                padding: 3px 3px;
+            }
         }
         li:hover {
-            box-shadow: 0 24px 18px -15px rgba(119, 120, 107, 0.65);
+            box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
         }
         .active {
             color: #ffffff;
@@ -125,12 +143,19 @@ export default {
         .moving_tab {
             display: block;
             background-color: #337a7d;
+
             position: absolute;
             bottom: 0;
             left: 0%;
             z-index: -1;
-            height: 2.6rem;
+            height: 41px;
             transition: left 0.5s;
+            @include d() {
+                height: 31px;
+            }
+            @include m() {
+                height: 24px;
+            }
         }
     }
 
@@ -139,7 +164,9 @@ export default {
         width: 1000px;
         overflow: hidden;
         border-radius: 10px;
-        // position: relative;
+        @include m() {
+            margin: 5px auto;
+        }
         .tabs_content {
             display: flex;
             position: relative;
@@ -152,6 +179,7 @@ export default {
                 // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
                 border: solid 2px #337a7d;
+                // outline: #337a7d 2px solid;
                 border-radius: 10px;
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
@@ -196,10 +224,10 @@ export default {
 @media screen and (max-width: 768px) {
     .tabs {
         .wrapper {
-            width: 350px;
+            width: 296px;
             .tabs_content {
                 .content {
-                    width: 350px;
+                    width: 296px;
                 }
             }
         }
