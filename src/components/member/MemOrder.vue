@@ -1,7 +1,6 @@
 <template lang="">
     <li class="mem_order content">
         <div class="mem_basic">
-            <p>姓氏：Zeng</p>
             <p>名字：Charmy</p>
             <p>會員ID：P00001</p>
         </div>
@@ -44,7 +43,7 @@
                     取消訂單
                 </button>
                 <p>總額: $800</p>
-                <div>訂單狀態：{{ ord_sts }}</div>
+                <div>訂單狀態:{{ ord_sts }}</div>
             </div>
         </div>
     </li>
@@ -132,7 +131,7 @@ export default {
                         @include m() {
                             padding-right: 5px;
                             padding-left: 5px;
-                            font-size: 14px;
+                            font-size: 16px;
                         }
                     }
                 }

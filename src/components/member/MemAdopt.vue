@@ -1,7 +1,6 @@
 <template lang="">
     <li class="mem_adopt content">
         <div class="mem_basic">
-            <p>姓氏：{{ mem_last_name }}</p>
             <p>名字：{{ mem_first_name }}</p>
             <p>會員ID：{{ mem_id }}</p>
         </div>
@@ -45,7 +44,6 @@
 export default {
     data() {
         return {
-            mem_last_name: "Zeng",
             mem_first_name: "Charmy",
             mem_id: "P00001",
             couponsList: [

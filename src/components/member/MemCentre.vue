@@ -1,8 +1,6 @@
 <template lang="">
     <li class="mem_centre content">
         <div class="mem_basic">
-            <!-- <p>姓氏：Zeng</p> -->
-            <!-- <p>名字：Charmy</p> -->
             <p>會員ID：P00001</p>
         </div>
         <!-- 會員中心下方內容 -->
