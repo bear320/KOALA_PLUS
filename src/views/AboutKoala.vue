@@ -57,26 +57,35 @@
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
                     <h4 class="question">{{ question.question }}</h4>
-                    <div
+                    <div v-for="c of question.choices" :key="c" class="choice btn-lowest" >
+                        <label :for="c">
+                            <input :id="c" type="radio" name="ch" v-model="answer" :value="c">{{c}}
+                        </label>
+                    </div>
+                   <!--  <div
                         v-for="c of question.choices"
                         :key="c"
                         class="choice btn-lowest"
                     >
-                        <input
+                    <label :for="c"></label>
+                            <input
                             type="radio"
-                            name="choice"
+                            name="ch"
+                            :id="c"
                             v-model="answer"
-                            :value="c"
+                            value="c"
                         />
                         {{ c }}
-                    </div>
+                    </div> -->
                 </div>
                 <div v-else>
                     <div class="btn-paramy" @click="restart">重做</div>
                 </div>
                 <div class="btn-paramy btn-ab" @click="submit">送出</div>
             </form>
-            <div v-if="questionIndex === 5 && score === 5">aaaaa</div>
+            <div v-if="questionIndex === 5 && score === 5" >
+                    <p  id="copy">獲得折價券：KOALA87</p>    
+            </div>
             <p>得分 : {{ score }} 分</p>
         </div>
     </div>
@@ -116,7 +125,7 @@ const questions = [
             "2.Gula是原住民語中「可愛」的意思",
             "3.Gula是原住民語中「不喝水」的意思",
         ],
-        rightAnswer: "3.Gula 無尾熊 是澳洲原住民語中「不喝水」的意思",
+        rightAnswer: "3.Gula是原住民語中「不喝水」的意思",
     },
     {
         question: "無尾熊是熊科動物嗎？",
@@ -209,7 +218,10 @@ article {
     }
 }
 .choice {
-    margin: 10px;
+    margin: 10px 50px;
+    @include m(){
+        margin: 10px 10px;
+    }
 }
 .bg{
     width: 100%;
