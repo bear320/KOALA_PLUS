@@ -634,7 +634,7 @@ template {
     height: 100vh;
     background-color: #d3fdff;
     display: flex;
-    overflow-y: hidden;
+    overflow: hidden;
 }
 
 .main_block_LeftTree {
@@ -1151,7 +1151,7 @@ template {
         height: 100vh;
         background-color: #d3fdff;
         display: flex;
-        overflow-y: hidden;
+        overflow: hidden;
     }
 
     .main_block_LeftTree {
@@ -1669,7 +1669,7 @@ template {
         height: 100vh;
         background-color: #d3fdff;
         display: flex;
-        overflow-y: hidden;
+        overflow: hidden;
     }
 
     .main_block_LeftTree {
