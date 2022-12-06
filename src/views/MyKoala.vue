@@ -634,6 +634,7 @@ template {
     height: 100vh;
     background-color: #d3fdff;
     display: flex;
+    overflow-y: hidden;
 }
 
 .main_block_LeftTree {
@@ -1150,6 +1151,7 @@ template {
         height: 100vh;
         background-color: #d3fdff;
         display: flex;
+        overflow-y: hidden;
     }
 
     .main_block_LeftTree {
@@ -1667,6 +1669,7 @@ template {
         height: 100vh;
         background-color: #d3fdff;
         display: flex;
+        overflow-y: hidden;
     }
 
     .main_block_LeftTree {
@@ -1706,10 +1709,10 @@ template {
     }
 
     .main_block_MainTree_0 {
-        width: 120%;
+        width: 90%;
         position: absolute;
         bottom: 0;
-        left: -3%;
+        left: 10%;
     }
 
     .main_block_koala_1 {
