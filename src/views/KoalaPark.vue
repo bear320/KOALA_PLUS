@@ -28,7 +28,7 @@
             class="leaf-icon-left"
             alt="leaf-icon-left"
         />
-        <div class="sub-banner">]</div>
+        <div class="sub-banner"></div>
     </div>
     <!-- <div class="sub-banner">
         <img src="../assets/images/park/banner-img.png" alt="" />
@@ -175,9 +175,9 @@ iframe {
 
 .sub-banner {
     background: url(@/assets/images/park/banner-img.png) no-repeat center/cover;
-    margin-bottom: 100px;
+
     width: 100%;
-    height: 40vh;
+    height: 45vh;
     background-position: center center;
     display: flex;
     align-items: center;
