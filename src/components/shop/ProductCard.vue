@@ -1,11 +1,13 @@
 <template lang="">
     <div :class="col">
         <div class="product-card">
-            <router-link class="product-img" :to="`/shop/${proId}`">
-                <img
-                    src="@/assets/images/shop/product_img.png"
-                    @click="scrollToProduct"
-                />
+            <div class="product-head">
+                <router-link class="product-img" :to="`/shop/${proId}`">
+                    <img
+                        src="@/assets/images/shop/product_img.png"
+                        @click="scrollToProduct"
+                    />
+                </router-link>
                 <div class="btn-cart">
                     <Icon
                         size="20"
@@ -14,7 +16,7 @@
                         @click="addToCart"
                     />
                 </div>
-            </router-link>
+            </div>
             <div class="product-body">
                 <div class="product-name">{{ proName }}</div>
                 <div class="product-price">NT.{{ proPrice }}</div>
@@ -27,7 +29,23 @@ export default {
     props: ["proImg", "proName", "proPrice", "proId", "col"],
     methods: {
         addToCart() {
-            console.log(this.proId);
+            // 檢查購物車中是否已存在該商品
+            let cartIndex = this.$store.state.cart.findIndex((item) => {
+                return item.id === this.proId;
+            });
+
+            // 若不存在則加到購物車
+            if (cartIndex < 0) {
+                const setData = {
+                    id: this.proId,
+                    image: this.proImg,
+                    name: this.proName,
+                    quantity: 1,
+                    price: this.proPrice,
+                };
+                this.$store.commit("addToCart", setData);
+                alert("已加到購物車");
+            }
         },
         scrollToProduct() {
             window.scrollTo({
@@ -39,20 +57,23 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product-img {
-    display: block;
-    text-decoration: none;
+.product-head {
     position: relative;
-    &:hover .btn-cart {
-        opacity: 1;
-    }
     &:hover img {
         filter: brightness(0.8);
     }
-    img {
-        width: 100%;
-        vertical-align: top;
-        transition: all 0.3s ease;
+    &:hover .btn-cart {
+        opacity: 1;
+    }
+    .product-img {
+        display: block;
+        text-decoration: none;
+
+        img {
+            width: 100%;
+            vertical-align: top;
+            transition: all 0.3s ease;
+        }
     }
     .btn-cart {
         width: 40px;
