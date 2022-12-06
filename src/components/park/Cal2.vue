@@ -321,7 +321,7 @@ li {
 
 @media screen and (max-width: 768px) {
     h2 {
-        font-size: 20px;
+        font-size: 24px;
     }
     table {
         width: 100%;
