@@ -94,26 +94,29 @@ export default {
         }
     }
 }
-// svg {
-//     max-width: 90%;
-//     position: relative;
-//     left: 5%;
-//     margin: 0 auto;
-// }
 
 .Unsubscribe_main {
     text-align: center;
     margin-top: 0em;
-    max-width: 70%;
+    max-width: 90%;
     position: relative;
     margin: 0 auto;
+    text-align: justify;
+
+    .subtitle {
+        // background-color: red;
+        width: 100%;
+        text-align: justify;
+    }
     .buttons {
         width: 100%;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
         align-items: center;
+
         button {
+            margin: 5px;
             padding-left: 10px;
             padding-right: 10px;
             @include m() {

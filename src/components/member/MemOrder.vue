@@ -7,7 +7,7 @@
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
             <MemUnsubscribe
-                v-show="showMemUnsubscribe === true"
+                v-if="showMemUnsubscribe === true"
                 @closeMemUnsubscribe="closeMemUnsubscribe_emit"
             ></MemUnsubscribe>
             <div class="mem_order_table">

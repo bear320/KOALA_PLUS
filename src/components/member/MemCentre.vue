@@ -153,6 +153,7 @@ export default {};
                                 width: 260px;
                                 text-align: justify;
                                 margin: 5px auto;
+                                min-height: 130px;
                             }
                         }
                         button {

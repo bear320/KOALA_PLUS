@@ -116,6 +116,7 @@ export default {
         position: relative;
         z-index: 1;
         outline: #337a7d 1px solid;
+        box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
         li {
             width: 120px;
             padding: 10px 10px;
@@ -142,19 +143,24 @@ export default {
         }
         .moving_tab {
             display: block;
-            background-color: #337a7d;
-
+            // background-color: #337a7d;
+            background: linear-gradient(
+                257.94deg,
+                #337a7d 35.19%,
+                #579194 68.15%
+            );
             position: absolute;
             bottom: 0;
             left: 0%;
             z-index: -1;
-            height: 41px;
+            height: 36px;
             transition: left 0.5s;
+            transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             @include d() {
-                height: 31px;
+                height: 26px;
             }
             @include m() {
-                height: 24px;
+                height: 18px;
             }
         }
     }
@@ -201,8 +207,8 @@ export default {
             top: 100px;
         }
         @include m() {
-            width: 117px;
-            height: 176px;
+            width: 84px;
+            height: 126px;
             left: 0px;
             top: 300px;
         }
