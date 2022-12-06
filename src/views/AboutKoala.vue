@@ -1,13 +1,18 @@
 <template>
-    <Header />
+   <Header />
+   <article  class="nav-space">
     <div
-        class="banner"
-        :style="{
-            backgroundImage:
-                'url(' + require('@/assets/images/about/banner.jpg') + ')',
-        }"
-    ></div>
-    <article>
+            class="banner"
+            :style="{
+                backgroundImage:
+                    'url(' + require('@/assets/images/banner2.jpg') + ')',
+            }"
+        ></div>
+   </article>
+  
+    <div class="content">
+        <h1>Quiz</h1>
+        
         <Collapse v-model="value">
             <Panel name="1">
                 無尾熊的尾巴有什麼作用？
@@ -41,7 +46,7 @@
                 >
             </Panel>
         </Collapse>
-    </article>
+    </div>
     <!-- 測驗＋背景圖 -->
     <div class="bg-text">
         <div class="bg">
@@ -164,7 +169,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-article {
+.content {
     padding: 60px;
     @include m(){
         padding: 10px;
@@ -233,6 +238,11 @@ article {
         height: 200px; 
     }
 }
+body h1{
+    font-family: "Inkfree";
+    font-size: 30vh;
+    color: $lightgreen;
+    }
 
 
 </style>    

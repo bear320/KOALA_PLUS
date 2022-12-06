@@ -13,7 +13,7 @@
             alt="koala-icon"
         />
 
-        <booking-button @gotoCalendar="scrollToBlock"></booking-button>
+        <booking-button @click="scrollBlock()"></booking-button>
 
         <img
             src="../assets/images/park/drawing7.png"
@@ -57,7 +57,6 @@ export default {
         Footer,
     },
 
-    methods: {},
     data() {
         return {
             source: [],
@@ -87,7 +86,7 @@ export default {
         ];
     },
     methods: {
-        scrollToBlock() {
+        scrollBlock() {
             window.scrollTo({
                 top: document.getElementById("calendar").offsetTop,
                 left: 0,
@@ -175,12 +174,10 @@ iframe {
 
 .sub-banner {
     background: url(@/assets/images/park/banner-img.png) no-repeat center/cover;
-
     width: 100%;
-    height: 45vh;
+    height: 55vh;
     background-position: center center;
     display: flex;
-    align-items: center;
     margin-bottom: 60px;
 }
 
