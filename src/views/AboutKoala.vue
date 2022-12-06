@@ -41,6 +41,18 @@
                 >
             </Panel>
         </Collapse>
+    </article>
+    <!-- 測驗＋背景圖 -->
+    <div class="bg-text">
+        <div class="bg">
+            <div class="ab-tree1">
+                <img src="../assets/images/aboutkoala/background-tree.png" alt="">
+            </div>
+            <div class="ab-tree2">
+                <img src="../assets/images/aboutkoala/background-tree.png" alt="">
+            </div>
+    </div>
+    <div class="test-block">
         <div class="test">
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
@@ -65,15 +77,17 @@
                 <div class="btn-paramy btn-ab" @click="submit">送出</div>
             </form>
             <div v-if="questionIndex === 5 && score === 5">aaaaa</div>
-            <p>總分為 : {{ score }} 分</p>
+            <p>得分 : {{ score }} 分</p>
         </div>
-    </article>
-    <footer />
+    </div>
+    </div>
+    
+    <Footer />
 </template>
 
 <script>
 import Header from "@/components/header.vue";
-import footer from "@/components/footer.vue";
+import Footer from "@/components/footer.vue";
 
 const questions = [
     {
@@ -114,7 +128,7 @@ const questions = [
 export default {
     components: {
         Header,
-        footer,
+        Footer,
     },
     name: "AboutKoala",
     data() {
@@ -152,22 +166,73 @@ export default {
 <style lang="scss" scoped>
 article {
     padding: 60px;
+    @include m(){
+        padding: 10px;
+    }
+}
+.bg-text{
+    @include m(){
+        display: flex;
+        flex-direction: column-reverse;
+    }
 }
 .btn-pamary {
     padding: 10px;
-}
-.btn-ab {
+    .btn-ab {
     @include btnSize(150px);
+    @include m(){
+        width: 80%; 
+        margin: auto;
+    }
 }
+}
+
 .card-ab {
     margin: auto;
     padding: 50px;
     width: 500px;
+    @include m(){
+        width: 80%; 
+        margin: auto;
+    }
 }
 .question {
     margin: 10px;
 }
+.test{
+    margin-top: -300px;
+    @include m(){
+        margin: 0px;
+    }
+    p{
+        margin: 30px;
+    }
+}
 .choice {
     margin: 10px;
 }
-</style>
+.bg{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    @include m(){
+        height: 200px;
+    }
+    
+    .ab-tree2 img{
+        -moz-transform:scaleX(-1);
+        -webkit-transform:scaleX(-1);
+        -o-transform:scaleX(-1);
+        transform:scaleX(-1);    
+       
+    }
+}
+.bg img{
+    @include m(){
+        width: 100%;
+        height: 200px; 
+    }
+}
+
+
+</style>    

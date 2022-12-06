@@ -11,7 +11,8 @@
                 </ul>
                 <div class="center">
                     <li>
-                        <p>▼ 園區時間 ：9AM – 11AM & 2PM – 7PM全年無休</p>
+                        <p>園區時間 ：<br>
+                            9AM – 11AM & 2PM – 7PM全年休館</p>
                     </li>
                 </div>
                 <div class="right">
@@ -92,18 +93,29 @@ footer {
         width: 1200px;
         .top {
             display: flex;
+            justify-content: center;
 
             .list {
                 display: flex;
                 flex-direction: column;
                 align-items: flex-start;
                 font-weight: bold;
+                font-size: 12px;
                 color: white;
                 height: 100%;
+                width: 300px;
                 text-align: start;
+                @include m(){
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    }
                 li {
                     padding: 5px;
                     width: 90%;
+                    @include m(){
+                    text-align: center;
+                    }
                 }
             }
         }
@@ -116,9 +128,17 @@ footer {
     height: 100%;
     padding: 5px;
     list-style: none;
+    text-align: left;
+    @include m(){
+        text-align: center;
+    }
+    p{
+        font-size: 12px;
+
+    }
 }
 .logo {
-    width: 70%;
+    width: 260px;
     margin: auto;
     img {
         width: 80%;
@@ -135,7 +155,7 @@ footer {
         li {
             @include size(40px, 40px);
             list-style: none;
-            margin: 0px 20px;
+            margin: 0px 10px;
             .ivu-icon {
                 transform: scale(2);
                 color: white;
@@ -160,13 +180,7 @@ footer {
         width: 688px;
         .list {
             display: flex;
-            align-items: center;
-            li {
-                text-align: center;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
+            
         }
     }
 

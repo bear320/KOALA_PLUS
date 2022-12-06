@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <article class="nav-space wrapper">
+    <article class="bs-nav-space wrapper">
         <h1>公告管理</h1>
         <div class="todo">
             <a href="/bs-article-edit" target="_blank"

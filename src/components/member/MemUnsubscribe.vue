@@ -90,10 +90,13 @@ export default {
 // }
 .mem_MemUnsubscribe {
     background-color: bisque;
-    width: 440px;
+    width: 280px;
     position: absolute;
     z-index: 10;
-    margin: auto;
+    top: 10%;
+    left: 50%;
+    transform: translate(-50%, 0);
+
     .inner-container {
         width: 100%;
 
@@ -102,8 +105,6 @@ export default {
                 width: 100%;
                 height: 100%;
             }
-            // position: o;
-            // background-color: red;
         }
     }
 }
