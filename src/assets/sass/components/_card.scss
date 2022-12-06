@@ -2,5 +2,6 @@
     backdrop-filter: blur(4px);
     background-color: $card-bgc;
     border-radius: 10px;
-    box-shadow: 0 0 10px #d9d9d9;
+    box-shadow: 0 4 4px rgba(0, 0, 0, 0.25);
+    backdrop-filter: flur(4px);
 }
