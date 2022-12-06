@@ -54,28 +54,56 @@
                         <div class="receiv-info">
                             <Row>
                                 <Col span="24">
-                                    <div class="ship-form">
-                                        <input type="checkbox" />
+                                    <div class="member-form">
+                                        <input
+                                            class="member-equal"
+                                            type="checkbox"
+                                        />
                                         <label for="">與會員資料相同</label>
                                     </div>
                                 </Col>
                                 <Col span="24">
                                     <div class="ship-form">
                                         <label for="">收件人姓名:</label>
-                                        <input type="text" name="" id="" />
+                                        <input
+                                            type="text"
+                                            name=""
+                                            id=""
+                                            placeholder="請輸入真實姓名"
+                                        />
                                     </div>
                                 </Col>
                                 <Col span="24">
                                     <div class="ship-form">
                                         <label for="">手機號碼:</label>
-                                        <input type="text" name="" id="" />
+                                        <input
+                                            type="text"
+                                            name=""
+                                            id=""
+                                            placeholder="請輸入十位數手機號碼，不須輸入標點符號"
+                                        />
                                     </div>
                                 </Col>
                                 <Col span="24">
                                     <div class="ship-form">
                                         <label for="">收件地址:</label>
-                                        <input type="text" name="" id="" />
+                                        <input
+                                            type="text"
+                                            name=""
+                                            id=""
+                                            placeholder="請輸入完整收件地址"
+                                        />
                                     </div>
+                                </Col>
+                            </Row>
+                            <Row justify="center" align="middle" :gutter="200">
+                                <Col>
+                                    <div class="btn-paramy">前往付款</div>
+                                </Col>
+                                <Col>
+                                    <router-link to="/cart1"
+                                        >回上一步</router-link
+                                    >
                                 </Col>
                             </Row>
                         </div>
@@ -149,6 +177,8 @@ main {
             border-radius: 10px;
 
             .order-item {
+                margin-bottom: 30px;
+
                 img {
                     width: 75px;
                     height: 75px;
@@ -158,20 +188,38 @@ main {
 
         .receiv-info {
             background-color: #ffffffdd;
-            padding: 20px 0;
             font-size: $h4;
             margin-bottom: 30px;
             border-radius: 10px;
+            padding: 50px;
             color: $font_color;
 
+            .member-form {
+                display: flex;
+                justify-content: start;
+                align-items: center;
+                margin-bottom: 30px;
+                position: relative;
+                .member-equal {
+                    position: absolute;
+                    top: 50%;
+                    left: -5%;
+                    transform: translate(0%, -50%);
+                }
+            }
             .ship-form {
                 display: flex;
                 justify-content: start;
                 align-items: center;
+                margin-bottom: 30px;
 
                 label {
                     width: 120px;
                     text-align: left;
+                }
+
+                input {
+                    width: 385px;
                 }
             }
         }
