@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <article class="nav-space wrapper">
+    <article class="bs-nav-spcae wrapper">
         <div class="cards">
             <div>
                 <div class="top2">

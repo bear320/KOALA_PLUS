@@ -1,10 +1,16 @@
 <template>
     <Header />
-    <article class="nav-space wrapper">
+    <article class="bs-nav-space wrapper">
         <h1>權限管理</h1>
         <div class="todo">
             <div class="search">
-                <input class="search-bar" type="text" name="search" id="search" placeholder="搜尋">
+                <input
+                    class="search-bar"
+                    type="text"
+                    name="search"
+                    id="search"
+                    placeholder="搜尋"
+                />
             </div>
             <select name="category" id="articlesCategory">
                 <option value="all">所有人員</option>
@@ -27,8 +33,9 @@
                 <p class="lastname-t">＃總經理</p>
                 <p class="date-t">2022/12/15</p>
                 <p class="tag">無法變更權限</p>
-                <div class="state-t"><Switch loading :model-value="true" true-color="#337a7d" /></div>
-                
+                <div class="state-t">
+                    <Switch loading :model-value="true" true-color="#337a7d" />
+                </div>
             </div>
             <!-- 內容 -->
             <div class="content" v-for="article in articles" :key="article">
@@ -48,7 +55,10 @@
                     {{ article.tag }}
                 </p>
                 <div class="state">
-                    <Switch size="large" true-color="#337a7d" :before-change="handleBeforeChange"
+                    <Switch
+                        size="large"
+                        true-color="#337a7d"
+                        :before-change="handleBeforeChange"
                     >
                         <template #open>
                             <span>ON</span>
@@ -74,30 +84,28 @@ export default {
                     fristname: "熊",
                     lastname: "熊",
                     date: "2022/12/25",
-                    tag:"一般權限",
-
-
+                    tag: "一般權限",
                 },
                 {
                     idname: "P00002",
                     fristname: "陳",
                     lastname: "小白",
                     date: "2022/12/25",
-                    tag:"一般權限",
+                    tag: "一般權限",
                 },
                 {
                     idname: "P00003",
                     fristname: "劉",
                     lastname: "小黑",
                     date: "2022/12/25",
-                    tag:"一般權限",
+                    tag: "一般權限",
                 },
                 {
                     idname: "P00004",
                     fristname: "張",
                     lastname: "小華",
                     date: "2022/12/25",
-                    tag:"一般權限",
+                    tag: "一般權限",
                 },
             ],
         };
@@ -115,12 +123,11 @@ export default {
             });
         },
     },
-    
+
     components: {
         Header,
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
@@ -149,7 +156,6 @@ html article {
 
         .pic,
         .date {
-
             img {
                 width: 120px;
                 height: 120px;
@@ -175,11 +181,11 @@ html article {
             background-color: $darkgreen;
             color: white;
             border-radius: 10px;
-            h3{
+            h3 {
                 width: 20%;
             }
         }
-        .content-top{
+        .content-top {
             display: flex;
             margin: 0px 50px;
             justify-content: center;
@@ -187,25 +193,24 @@ html article {
             padding: 10px 0;
             margin-bottom: 10px;
             border-bottom: solid 1px $lightgreen;
-            .idname-t{
+            .idname-t {
                 width: 25%;
             }
-            .fristname-t{
+            .fristname-t {
                 width: 30%;
             }
-            .lastname-t{
+            .lastname-t {
                 width: 30%;
             }
-            .date-t{
+            .date-t {
                 width: 20%;
             }
-            .tag-t{
+            .tag-t {
                 width: 15%;
             }
-            .state-t{
+            .state-t {
                 width: 10%;
             }
-
         }
 
         .content {
@@ -219,26 +224,26 @@ html article {
         }
     }
 }
-.idname{
+.idname {
     width: 25%;
 }
-.fristname{
+.fristname {
     width: 30%;
 }
-.lastname{
+.lastname {
     width: 30%;
 }
-.date{
+.date {
     width: 20%;
 }
-.tag{
+.tag {
     width: 15%;
 }
-.state{
+.state {
     width: 10%;
 }
-.search{
-    border-color:  $darkgreen;
+.search {
+    border-color: $darkgreen;
 }
-// 
+//
 </style>

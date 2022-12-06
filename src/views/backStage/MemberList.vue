@@ -1,6 +1,6 @@
 <template>
     <Header />
-    <article class="nav-space wrapper">
+    <article class="bs-nav-spcae wrapper">
         <h1>會員管理</h1>
         <div class="todo">
             <a class="blacklist" href="/bs-member-blacklist" target="_blank"
