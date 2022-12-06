@@ -95,7 +95,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 .video-container {
-    width: 1200px;
+    width: 100vw;
     height: 100vh;
     margin: auto;
     overflow: hidden;
