@@ -82,7 +82,7 @@ header {
             display: none;
         }
         .logo {
-            @include size(100%, auto);
+            @include size(100%, 150%);
 
             img {
                 @include size(100%, 100%);
@@ -94,6 +94,7 @@ header {
             .list {
                 display: flex;
                 align-items: center;
+                margin-top: 10px;
                 li {
                     a {
                         font-weight: bold;

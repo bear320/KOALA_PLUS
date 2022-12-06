@@ -49,13 +49,17 @@ $p: 15px;
 }
 
 html {
-    font-family: font-EL;
+    font-family: "font-EL";
     color: $font-color;
     h1,
     h2,
     h3,
-    h4 {
-        font-family: font-R;
+    h4,
+    p,
+    a,
+    div,
+    button {
+        font-family: "font-R";
         margin-bottom: 10px;
     }
     h1 {
@@ -78,7 +82,6 @@ html {
     p,
     a {
         font-size: $p;
-        line-height: calc($p + 10px);
         @include rwd-p;
     }
     a {
