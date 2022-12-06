@@ -1,16 +1,13 @@
 <template>
     <Header></Header>
     <section class="wrapper nav-space">
-        <Breadcrumb separator=">" class="breadcrumb">
-            <BreadcrumbItem to="/">Home</BreadcrumbItem>
-            <BreadcrumbItem to="/support">資助認養</BreadcrumbItem>
-            <BreadcrumbItem>{{ temp.name }}</BreadcrumbItem>
-        </Breadcrumb>
-        <!-- <div class="breadcrumb">
-            <router-link to="/home">breadcrumb</router-link>
+        <div class="breadcrumb">
+            <router-link to="/home">Home</router-link>
             <router-link to="/support">資助認養</router-link>
-            <router-link>{{ temp.name }}</router-link>
-        </div> -->
+            <router-link :to="`/support/${temp.name}`">
+                {{ temp.name }}
+            </router-link>
+        </div>
     </section>
     <section class="wrapper">
         <div class="koala-info">
@@ -461,11 +458,25 @@ export default {
     max-width: 1000px;
     margin: 15px auto 0;
     text-align: left;
-    font: 1rem font-EL;
+    font-family: font-EL;
+    color: #515a6e;
+    a {
+        color: #515a6e;
+        padding-right: 20px;
+    }
+    a:last-child {
+        color: $btn-color;
+        font-family: font-R;
+    }
+    a + a::before {
+        content: "›";
+        color: #44514b;
+        margin-right: 20px;
+    }
 }
 .koala-info {
     max-width: 1000px;
-    margin: 15px auto 30px;
+    margin: 15px auto 50px;
     display: flex;
     justify-content: space-around;
     @include m() {
@@ -504,8 +515,7 @@ export default {
             p {
                 font-size: 18px;
                 text-align: justify;
-                @include media(900) {
-                }
+                line-height: 1.5;
             }
         }
     }

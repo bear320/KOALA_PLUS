@@ -13,7 +13,7 @@
         <router-link to="/login">登入註冊</router-link>
         <router-link to="/member">會員專區</router-link>
         <router-link to="/my-koala">我的無尾熊</router-link>
-        <router-link to="/product">產品詳情</router-link>
+        <!-- <router-link to="/product">產品詳情</router-link> -->
         <router-link to="/shop">周邊商城</router-link>
     </section>
 </template>
