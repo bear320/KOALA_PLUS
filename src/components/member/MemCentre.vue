@@ -118,7 +118,7 @@ export default {};
                     .tabcontent_txt_group {
                         margin: 10px;
                         .subtitle {
-                            margin-top: 20px;
+                            margin-top: 10px;
                             // background-color: rgb(71, 55, 28);
                             min-height: 150px;
                             @include m() {
@@ -132,7 +132,7 @@ export default {};
                             }
                             p {
                                 line-height: 1.3;
-                                padding: 20px 10px;
+                                padding: 10px 10px;
                                 width: 300px;
                                 text-align: justify;
                                 margin: 5px auto;

@@ -7,6 +7,10 @@
         </div>
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
+            <MemUnsubscribe
+                v-show="showMemUnsubscribe === true"
+                @closeMemUnsubscribe="closeMemUnsubscribe_emit"
+            ></MemUnsubscribe>
             <div class="mem_order_table">
                 <p>訂單編號: KOA12345678</p>
                 <table class="table">
@@ -43,10 +47,6 @@
                 <div>訂單狀態：{{ ord_sts }}</div>
             </div>
         </div>
-        <MemUnsubscribe
-            v-show="showMemUnsubscribe === true"
-            @closeMemUnsubscribe="closeMemUnsubscribe_emit"
-        ></MemUnsubscribe>
     </li>
 </template>
 <script>
@@ -101,7 +101,7 @@ export default {
     .wrapper {
         //訂單訊息內容 li
         .mem_order {
-            // position: relative;
+            position: relative;
             .mem_basic {
                 //會員基本資料
                 display: flex;
@@ -116,6 +116,7 @@ export default {
                 display: flex;
                 flex-wrap: wrap;
                 border-bottom: 1px solid #337a7d;
+
                 .mem_order_table {
                     width: 80%;
                 }

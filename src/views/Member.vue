@@ -6,7 +6,7 @@
             :style="{
                 backgroundImage:
                     'url(' +
-                    require('@/assets/images/member/banner2.jpg') +
+                    require('@/assets/images/member/koalamem.jpg') +
                     ')',
             }"
         ></div>
@@ -28,6 +28,15 @@
                         class="moving_tab"
                     ></li>
                 </ul>
+
+                <img
+                    class="memleftimg"
+                    width="343"
+                    height="514"
+                    src="@/assets/images/drawing2.png"
+                    alt="會員頁面的無尾熊左圖"
+                />
+
                 <div class="wrapper">
                     <ul
                         class="tabs_content"
@@ -86,6 +95,7 @@ export default {
     }
 }
 .tabs {
+    position: relative;
     .tabs_list {
         width: fit-content;
         display: flex;
@@ -129,20 +139,44 @@ export default {
         width: 1000px;
         overflow: hidden;
         border-radius: 10px;
+        // position: relative;
         .tabs_content {
             display: flex;
             position: relative;
             border-radius: 10px;
             transition: left 0.5s linear;
+
             .content {
                 width: 1000px;
-                min-height: 1400px;
+                min-height: 300px;
                 // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
                 border: solid 2px #337a7d;
                 border-radius: 10px;
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
+        }
+    }
+
+    .memleftimg {
+        width: 168px;
+        height: 252px;
+        position: absolute;
+        left: 0px;
+        top: 100px;
+        z-index: 3;
+        overflow: hidden;
+        @include d() {
+            width: 168px;
+            height: 252px;
+            left: 0px;
+            top: 100px;
+        }
+        @include m() {
+            width: 117px;
+            height: 176px;
+            left: 0px;
+            top: 300px;
         }
     }
 }
