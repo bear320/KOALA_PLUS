@@ -174,12 +174,10 @@ iframe {
 
 .sub-banner {
     background: url(@/assets/images/park/banner-img.png) no-repeat center/cover;
-
     width: 100%;
-    height: 45vh;
+    height: 55vh;
     background-position: center center;
     display: flex;
-    align-items: center;
     margin-bottom: 60px;
 }
 
