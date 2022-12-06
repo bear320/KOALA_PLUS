@@ -1,5 +1,6 @@
 <template>
     <Header />
+    <img class="bg" src="" alt="" />
     <main class="nav-space">
         <div class="wrapper">
             <Row>
@@ -21,46 +22,16 @@
                                 <Col span="6">小計</Col>
                             </Row>
                         </div>
-
-                        <div class="qq" v-for="i in 5">
-                            <Row align="middle">
-                                <Col span="9">
-                                    <Row
-                                        class="gap"
-                                        justify="center"
-                                        align="middle"
-                                    >
-                                        <img
-                                            class="product-img"
-                                            src="https://fakeimg.pl/300x200/200"
-                                        />
-                                        <div class="product-name">
-                                            無尾熊乾髮帽
-                                        </div>
-                                    </Row>
-                                </Col>
-                                <Col span="3">
-                                    <div class="product-price">$350</div>
-                                </Col>
-                                <Col span="6"
-                                    ><div class="quantity">
-                                        <Icon
-                                            class="md-remove"
-                                            type="md-remove"
-                                        />
-                                        <input
-                                            type="number"
-                                            v-model="quantity"
-                                        />
-                                        <Icon
-                                            class="md-add"
-                                            type="md-add"
-                                        /></div
-                                ></Col>
-                                <Col span="6">$350</Col>
-                            </Row>
-                        </div>
                     </div>
+                    <CartItem
+                        v-for="cartItem in cartList"
+                        :key="cartItem.id"
+                        :prodId="cartItem.id"
+                        :prodImg="cartItem.image"
+                        :prodName="cartItem.name"
+                        :prodQuantity="cartItem.quantity"
+                        :prodPrice="cartItem.price"
+                    ></CartItem>
                 </Col>
 
                 <Col span="9">
@@ -72,32 +43,38 @@
                                     class="coupon-input"
                                     type="text"
                                     placeholder="請輸入優惠碼"
+                                    v-model="couponCode"
                                 />
                                 <div class="btn-lowest coupon-submit">送出</div>
                             </div>
                             <div class="coupon-check">
-                                <span class="check-link">按這裡</span
+                                <span class="check-link" @click="openCoupon"
+                                    >按這裡</span
                                 >查看我的優惠代碼
                             </div>
                             <div class="discount-text">優惠折扣</div>
                             <div class="coupon-detail">
-                                <div class="coupon-name">85折優惠折扣券</div>
-                                <div class="coupon-pric">-$285</div>
+                                <div class="coupon-name">{{ couponName }}</div>
+                                <div class="coupon-pric">
+                                    x{{ couponDiscount }}
+                                </div>
                             </div>
                             <div class="product-total">
                                 <div class="total-text">商品總金額</div>
-                                <div class="total-pric">-$1900</div>
+                                <div class="total-pric">${{ sumTotal }}</div>
                             </div>
                             <div class="coupon-discount">
                                 <div class="coupon-name">折扣</div>
-                                <div class="coupon-pric">-$285</div>
+                                <div class="coupon-pric">-${{ discount }}</div>
                             </div>
                             <div class="sum">
                                 <div class="sum-text">總付款金額</div>
-                                <div class="sum-price">NT$1615</div>
+                                <div class="sum-price">
+                                    NT${{ sumTotal - discount }}
+                                </div>
                             </div>
                             <div class="get-coin">
-                                獲得190
+                                獲得{{ sumTotal / 10 }}
                                 <img
                                     src="@/assets/images/product/coin.png"
                                     alt=""
@@ -105,6 +82,12 @@
                             </div>
                             <div class="btn-paramy check-order">確認訂單</div>
                         </div>
+                        <Coupon
+                            v-if="isShowCoupon"
+                            :couponArr="coupon"
+                            @close="closeCoupon"
+                            @updateCoupon="update"
+                        ></Coupon>
                     </div>
                 </Col>
             </Row>
@@ -116,180 +99,214 @@
 <script>
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
+import CartItem from "@/components/cart/CartItem.vue";
+import Coupon from "@/components/cart/Coupon.vue";
 export default {
     components: {
         Header,
         Footer,
+        CartItem,
+        Coupon,
     },
     data() {
         return {
-            quantity: 1,
+            cartList: this.$store.state.cart,
+            couponDiscount: 0,
+            coupon: [
+                {
+                    id: "001",
+                    name: "85折優惠折扣券",
+                    discount: "85折",
+                    value: 0.85,
+                    deadline: 30,
+                    code: "#168168",
+                },
+                {
+                    id: "002",
+                    name: "75折優惠折扣券",
+                    discount: "75折",
+                    value: 0.75,
+                    deadline: 30,
+                    code: "#787878",
+                },
+                {
+                    id: "003",
+                    name: "95折優惠折扣券",
+                    discount: "95折",
+                    value: 0.95,
+                    deadline: 30,
+                    code: "#87878",
+                },
+            ],
+            isShowCoupon: false,
+            couponDiscount: 0,
+            couponCode: "",
+            couponName: "",
         };
+    },
+    computed: {
+        sumTotal() {
+            let sum = 0;
+            this.cartList.map((item) => {
+                sum += item.quantity * item.price;
+            });
+            return sum;
+        },
+        discount() {
+            if (!this.couponDiscount) {
+                return 0;
+            } else {
+                return this.sumTotal - this.sumTotal * this.couponDiscount;
+            }
+        },
+    },
+    methods: {
+        openCoupon() {
+            this.isShowCoupon = true;
+        },
+        closeCoupon() {
+            this.isShowCoupon = false;
+        },
+        update(coupon) {
+            this.couponCode = coupon.code;
+            this.couponDiscount = coupon.value;
+            this.couponName = coupon.name;
+            this.isShowCoupon = false;
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
-main {
+.bg {
     background: url(@/assets/images/backgroundleaf.jpg) no-repeat center/cover;
-    object-fit: cover;
-
-    h1,
-    h3 {
-        text-align: left;
-        padding-left: 10px;
-        color: $font_color;
-    }
-    h3 {
-        color: $green;
-    }
-    .cart-title {
-        background-color: #ffffff60;
-        padding: 20px 0;
-        font-size: $h4;
-        margin-bottom: 30px;
-        border-radius: 10px;
-        color: $font_color;
-    }
-
-    .qq {
-        background-color: #ffffff80;
-        font-size: $p;
-        padding: 20px 0;
-        color: $font_color;
-        margin-bottom: 30px;
-        border-radius: 10px;
-    }
-
-    .gap {
-        gap: 20px;
-    }
-
-    .product-img {
-        width: 100px;
-        height: 100px;
-    }
-
-    .product-price {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    .quantity {
-        position: relative;
-        display: inline-block;
-        input {
-            text-align: center;
-            width: 100px;
-        }
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .md-remove {
-            position: absolute;
-            top: 50%;
-            left: 0%;
-            transform: translate(0%, -50%);
-            color: $font_color;
-            border-right: 1px solid black;
-            padding: 5px;
-        }
-        .md-add {
-            position: absolute;
-            top: 50%;
-            right: 0%;
-            transform: translate(0%, -50%);
-            color: $font_color;
-            border-left: 1px solid black;
-            padding: 5px;
-        }
-    }
-
-    .coupon {
-        background-color: #ffffff60;
-        padding: 30px 35px;
-        border-radius: 10px;
-        .coupon-text {
-            margin-bottom: 30px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: -1;
+}
+main {
+    .wrapper {
+        h1,
+        h3 {
             text-align: left;
+            padding-left: 10px;
+            color: $font_color;
         }
-        .coupon-form {
-            display: flex;
-            // justify-content: center;
-            align-items: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            .coupon-input {
-                border-radius: 0;
-                border: 0;
-                border-bottom: 1px solid #000;
-                background-color: transparent;
-            }
-            .coupon-submit {
-                font-size: $p;
-                padding: 0 20px;
-            }
+        h1 {
+            margin-top: 170px;
         }
-
-        .coupon-check {
-            text-align: left;
-            margin-bottom: 60px;
-            .check-link {
-                font-weight: 700;
-                color: $green;
-                cursor: pointer;
+        h3 {
+            color: $green;
+            position: relative;
+            &::before {
+                content: "";
+                width: 5px;
+                height: 75%;
+                position: absolute;
+                top: 50%;
+                left: 0%;
+                transform: translate(0%, -50%);
+                background-color: $green;
             }
         }
-        .discount-text {
+        .cart-title {
+            background-color: #ffffffdd;
+            padding: 20px 0;
             font-size: $h4;
-            text-align: left;
-            font-weight: 700;
-        }
-        .coupon-detail {
-            display: flex;
-            justify-content: space-between;
-            padding: 15px 0;
-            border-bottom: 1px solid #333;
-            margin-bottom: 20px;
-        }
-        .product-total {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
+            margin-bottom: 30px;
+            border-radius: 10px;
+            color: $font_color;
         }
 
-        .coupon-discount {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 30px;
-        }
-        .sum {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 10px;
-            .sum-text,
-            .sum-price {
+        .coupon {
+            background-color: #ffffffdd;
+            padding: 30px 35px;
+            border-radius: 10px;
+            .coupon-text {
+                margin-bottom: 30px;
+                text-align: left;
+            }
+            .coupon-form {
+                display: flex;
+                // justify-content: center;
+                align-items: center;
+                gap: 30px;
+                margin-bottom: 20px;
+                .coupon-input {
+                    border-radius: 0;
+                    border: 0;
+                    border-bottom: 1px solid #000;
+                    background-color: transparent;
+                }
+                .coupon-submit {
+                    font-size: $p;
+                    padding: 0 20px;
+                }
+            }
+
+            .coupon-check {
+                text-align: left;
+                margin-bottom: 60px;
+                .check-link {
+                    font-weight: 700;
+                    color: $green;
+                    cursor: pointer;
+                }
+            }
+            .discount-text {
                 font-size: $h4;
+                text-align: left;
                 font-weight: 700;
             }
-            .sum-price {
-                color: $green;
+            .coupon-detail {
+                display: flex;
+                justify-content: space-between;
+                padding: 15px 0;
+                border-bottom: 1px solid #333;
+                margin-bottom: 20px;
+            }
+            .product-total {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 15px;
+            }
+
+            .coupon-discount {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 30px;
+            }
+            .sum {
+                display: flex;
+                justify-content: space-between;
+                margin-bottom: 10px;
+                .sum-text,
+                .sum-price {
+                    font-size: $h4;
+                    font-weight: 700;
+                }
+                .sum-price {
+                    color: $green;
+                }
+            }
+
+            .get-coin {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                margin-bottom: 50px;
+                img {
+                    width: 30px;
+                }
             }
         }
 
-        .get-coin {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 50px;
-            img {
-                width: 30px;
-            }
-        }
-        .check-order {
+        .create-order {
+            position: relative;
         }
     }
 }

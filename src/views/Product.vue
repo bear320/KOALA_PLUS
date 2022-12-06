@@ -24,27 +24,36 @@
             <Row>
                 <Col span="12">
                     <image-slider :imgs="images"></image-slider>
-                    <!-- <image-slider :imgs="source.images"></image-slider> -->
                 </Col>
                 <Col span="12">
                     <h1 class="product-name">{{ source.name }}</h1>
                     <p class="product-description">{{ source.description }}</p>
                     <div class="product-additional">
-                        <p class="additional-info">購買此商品可獲得$$$$</p>
+                        <p class="additional-info">
+                            購買此商品可獲得&nbsp{{ coinTotal }}
+                        </p>
                         <img
                             class="additional-img"
                             src="../assets/images/product/coin.png"
                             alt=""
                         />
                     </div>
-                    <div class="product-price">NTD$&nbsp{{ source.price }}</div>
+                    <div class="product-price">NTD$&nbsp{{ sumTotal }}</div>
                     <div class="product-box">
                         <div class="quantity-box">
                             <div class="quantity-text">數量</div>
                             <div class="quantity">
-                                <Icon class="md-remove" type="md-remove" />
+                                <Icon
+                                    class="md-remove"
+                                    type="md-remove"
+                                    @click="changeQuantity('-')"
+                                />
                                 <input type="number" v-model="quantity" />
-                                <Icon class="md-add" type="md-add" />
+                                <Icon
+                                    class="md-add"
+                                    type="md-add"
+                                    @click="changeQuantity('+')"
+                                />
                             </div>
                         </div>
                         <div class="share-box">
@@ -74,7 +83,9 @@
                         </div>
                     </div>
                     <div class="btn-box">
-                        <div class="btn-paramy">加到購物車</div>
+                        <div class="btn-paramy" @click="addToCart">
+                            加到購物車
+                        </div>
                     </div>
                 </Col>
             </Row>
@@ -105,6 +116,7 @@ import Header from "@/components/header.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
 import Footer from "@/components/footer.vue";
+import { returnStatement } from "@babel/types";
 export default {
     components: {
         Header,
@@ -131,10 +143,17 @@ export default {
                 return prod.id !== this.source.id;
             });
         },
+        sumTotal() {
+            return this.source.price * this.quantity;
+        },
+        coinTotal() {
+            return this.sumTotal * 0.1;
+        },
     },
     watch: {
         $route: function (q) {
             this.getProductDetail();
+            this.quantity = 1;
         },
     },
     methods: {
@@ -160,6 +179,39 @@ export default {
                 .then((json) => {
                     this.relProducts = json.dtat.tours;
                 });
+        },
+        changeQuantity(operator) {
+            if (operator === "-") {
+                this.quantity > 1 ? (this.quantity -= 1) : this.quantity;
+            } else {
+                this.quantity += 1;
+            }
+        },
+        addToCart() {
+            // 檢查購物車中是否已存在該商品
+            let cartIndex = this.$store.state.cart.findIndex((item) => {
+                return item.id === this.source.id;
+            });
+
+            // 若不存在則加到購物車
+            if (cartIndex < 0) {
+                const setData = {
+                    id: this.source.id,
+                    image: this.source.images[0],
+                    name: this.source.name,
+                    quantity: this.quantity,
+                    price: this.sumTotal,
+                };
+                this.$store.commit("addToCart", setData);
+                this.quantity = 1;
+                alert("已加到購物車");
+            } else {
+                this.$store.commit({
+                    type: "updateItemQuantity",
+                    index: cartIndex,
+                    quantity: this.quantity,
+                });
+            }
         },
     },
 
@@ -235,6 +287,7 @@ export default {
         position: relative;
         input {
             text-align: center;
+            padding: 0 25px;
             width: 160px;
         }
         input[type="number"]::-webkit-outer-spin-button,
