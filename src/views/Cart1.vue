@@ -80,7 +80,11 @@
                                     alt=""
                                 />
                             </div>
-                            <div class="btn-paramy check-order">確認訂單</div>
+                            <router-link
+                                to="/cart2"
+                                class="btn-paramy check-order"
+                                >確認訂單</router-link
+                            >
                         </div>
                         <Coupon
                             v-if="isShowCoupon"
@@ -226,6 +230,9 @@ main {
             background-color: #ffffffdd;
             padding: 30px 35px;
             border-radius: 10px;
+            a {
+                display: block;
+            }
             .coupon-text {
                 margin-bottom: 30px;
                 text-align: left;
