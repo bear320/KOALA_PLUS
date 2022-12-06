@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_centre content">
         <div class="mem_basic">
-            <p>姓氏：Zeng</p>
-            <p>名字：Charmy</p>
+            <!-- <p>姓氏：Zeng</p> -->
+            <!-- <p>名字：Charmy</p> -->
             <p>會員ID：P00001</p>
         </div>
         <!-- 會員中心下方內容 -->
@@ -14,6 +14,24 @@
                     <span>編輯會員資料</span>
                 </div>
                 <table class="tabcontent_group">
+                    <tr class="tabcontent_txt">
+                        <td>姓氏</td>
+                        <input
+                            type="text"
+                            id="mem_last_name"
+                            myfield="mem_last_name"
+                            value="Zeng"
+                        />
+                    </tr>
+                    <tr class="tabcontent_txt">
+                        <td>名字</td>
+                        <input
+                            type="text"
+                            id="mem_first_name"
+                            myfield="mem_first_name"
+                            value="Charmy"
+                        />
+                    </tr>
                     <tr class="tabcontent_txt">
                         <td>信箱</td>
                         <input
@@ -70,7 +88,7 @@
                             type="password"
                             id="mem_password1"
                             myfield="mem_password1"
-                            value="1213456"
+                            value="123456"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -78,7 +96,7 @@
                         <input
                             type="password"
                             id="mem_password_again"
-                            myfield="mem_password_again"
+                            myfield="mem_password1"
                             value="123456"
                         />
                     </tr>
@@ -117,10 +135,11 @@ export default {};
                     }
                     .tabcontent_txt_group {
                         margin: 10px;
+                        border-radius: 10px;
                         .subtitle {
                             margin-top: 10px;
                             // background-color: rgb(71, 55, 28);
-                            min-height: 150px;
+                            min-height: 40px;
                             @include m() {
                                 min-height: 50px;
                             }
@@ -132,8 +151,8 @@ export default {};
                             }
                             p {
                                 line-height: 1.3;
-                                padding: 10px 10px;
-                                width: 300px;
+                                padding: 10px 5px;
+                                width: 260px;
                                 text-align: justify;
                                 margin: 5px auto;
                             }
@@ -154,7 +173,13 @@ export default {};
                                     padding: 10px;
                                     width: 80px;
                                     text-align: left;
+                                    @include m() {
+                                        width: 60px;
+                                    }
                                 }
+                            }
+                            @include m() {
+                                max-width: 280px;
                             }
                         }
                     }

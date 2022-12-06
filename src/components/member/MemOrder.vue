@@ -108,6 +108,9 @@ export default {
                 p {
                     min-width: 100px;
                     padding: 10px;
+                    @include m() {
+                        padding: 5px;
+                    }
                 }
             }
             .mem_main {
@@ -126,6 +129,11 @@ export default {
                     button {
                         padding-right: 10px;
                         padding-left: 10px;
+                        @include m() {
+                            padding-right: 5px;
+                            padding-left: 5px;
+                            font-size: 14px;
+                        }
                     }
                 }
             }
@@ -139,6 +147,9 @@ table {
         text-align: center;
         th {
             padding: 10px;
+            @include d() {
+                padding: 5px;
+            }
         }
         .prod_id {
             @include d() {
