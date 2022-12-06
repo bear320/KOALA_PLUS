@@ -11,7 +11,7 @@
                     {{ subtitle }}
                 </p>
                 <div class="buttons">
-                    {{ showbutton }}
+                    <!-- {{ showbutton }} -->
                     <button
                         class="btn-lowest"
                         id="unsubscribe"
@@ -71,31 +71,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-// .container {
-//     width: 500px;
-//     -webkit-transform: translate(-50%, -50%);
-//     transform: translate(-50%, -50%);
-//     top: 50%;
-//     left: 50%;
-//     margin: 0;
-//     position: absolute;
-//     background: #fefefe;
-//     display: flex;
-//     align-items: center;
-//     justify-content: flex-start;
-//     flex-direction: column;
-//     padding-bottom: 30px;
-//     box-shadow: 5px 10px 40px 0 rgba(0, 0, 0, 0.2);
-//     border-radius: 5px;
-// }
 .mem_MemUnsubscribe {
-    background-color: bisque;
+    background-color: #d0e8ea;
     width: 280px;
     position: absolute;
     z-index: 10;
-    top: 10%;
+    top: 5%;
     left: 50%;
     transform: translate(-50%, 0);
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
 
     .inner-container {
         width: 100%;
@@ -130,36 +116,11 @@ export default {
         button {
             padding-left: 10px;
             padding-right: 10px;
+            @include m() {
+                padding: 5px;
+                font-size: 15px;
+            }
         }
     }
 }
-
-// @media (max-width: 699px) {
-//     .container {
-//         width: 90%;
-//     }
-//     .Unsubscribe_main {
-//         margin-top: 1em;
-//         max-width: 90%;
-//     }
-// }
-// @media (max-width: 399px) {
-//     .container {
-//         padding: 20px;
-//     }
-//     .Unsubscribe_main {
-//         // margin-top: 0em;
-//         // max-width: 90%;
-//         h2 {
-//             font-size: 24px;
-//         }
-//     }
-//     .buttons {
-//         flex-direction: column;
-//         button {
-//             margin-right: 0;
-//         }
-//     }
-
-// }
 </style>
