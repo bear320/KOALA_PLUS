@@ -2,89 +2,86 @@
     <header id="backStage_navbar">
         <Menu mode="horizontal" active-name="1" class="headernav">
             <MenuItem name="9" class="logoli">
-                <router-link to="/my-koala" class="routerlink logo">
+                <router-link to="/bs-index" class="routerlink logo">
                     <img src="@/assets/images/bglogo.svg" alt="KOALA+" />
                 </router-link>
             </MenuItem>
             <Submenu name="1">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-article-list" class="routerlink">
                         公告管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
+                <router-link to="/bs-article-edit" class="routerlink">
                     <MenuItem name="3-1">新增文章</MenuItem>
                 </router-link>
             </Submenu>
             <Submenu name="2">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-booking-list" class="routerlink">
                         園區導覽管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
-                    <MenuItem name="3-1">預約管理</MenuItem>
-                </router-link>
-                <router-link to="/my-koala" class="routerlink">
+                <router-link to="/bs-booking-dayoff" class="routerlink">
                     <MenuItem name="3-1">新增休館日</MenuItem>
                 </router-link>
             </Submenu>
             <Submenu name="3">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-member-list" class="routerlink">
                         會員管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
+                <router-link to="/bs-member-blacklist" class="routerlink">
                     <MenuItem name="3-1">黑名單明細</MenuItem>
                 </router-link>
             </Submenu>
             <Submenu name="4">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-koala-list" class="routerlink">
                         無尾熊管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
-                    <MenuItem name="3-1">資訊上架</MenuItem>
+                <router-link to="/bs-koala-add" class="routerlink">
+                    <MenuItem name="3-1">新增無尾熊資訊</MenuItem>
                 </router-link>
             </Submenu>
             <Submenu name="5">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
-                        認養訂單管理
+                    <router-link to="/bs-support-list" class="routerlink">
+                        資助認養管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
-                    <MenuItem name="3-1">認養總覽</MenuItem>
-                </router-link>
-                <router-link to="/my-koala" class="routerlink">
-                    <MenuItem name="3-1">資訊統計</MenuItem>
+                <router-link to="/bs-support-statistic" class="routerlink">
+                    <MenuItem name="3-1">數據統計</MenuItem>
                 </router-link>
             </Submenu>
             <Submenu name="6">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-product-list" class="routerlink">
                         商品管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
-                    <MenuItem name="3-1">商品上架</MenuItem>
+                <router-link to="/bs-product-edit" class="routerlink">
+                    <MenuItem name="3-1">新增商品資訊</MenuItem>
+                </router-link>
+                <router-link to="/bs-product-edit" class="routerlink">
+                    <MenuItem name="3-1">優惠券管理</MenuItem>
                 </router-link>
             </Submenu>
             <MenuItem name="7">
-                <router-link to="/my-koala" class="routerlink">
+                <router-link to="/bs-order-list" class="routerlink">
                     訂單管理
                 </router-link>
             </MenuItem>
 
             <Submenu name="8" class="Submenu">
                 <template #title>
-                    <router-link to="/my-koala" class="routerlink">
+                    <router-link to="/bs-admin-list" class="routerlink">
                         權限管理
                     </router-link></template
                 >
-                <router-link to="/my-koala" class="routerlink">
+                <router-link to="/bs-admin-add" class="routerlink">
                     <MenuItem name="3-1">新增管理員帳戶</MenuItem>
                 </router-link>
             </Submenu>
@@ -123,32 +120,30 @@ header {
     width: 100%;
 
     .headernav {
-        // color: #ffffff;
         background-color: $darkgreen;
         @include size(100%, 60px);
         box-sizing: border-box;
         display: flex;
         justify-content: space-around;
-        // .logoli {
-        // text-align: center;
-        // }
-        .logo {
-            // @include size(100%, 100%);
-            text-align: center;
+        .logoli {
+            .logo {
+                @include size(75%, 100%);
+                display: inline-block;
+                text-align: center;
 
-            img {
-                @include size(100%, 100%);
+                img {
+                    @include size(100%, 100%);
+                }
             }
         }
+
         .routerlink {
             color: #ffffff;
         }
         .ivu-menu-item:hover {
-            // color: $darkgreen;
             border-bottom: 2px solid #ffffff;
         }
         .ivu-menu-submenu:hover {
-            // color: $darkgreen;
             border-bottom: 2px solid #ffffff;
         }
 
@@ -189,16 +184,16 @@ header {
                     }
                 }
             }
-            .routerlink {
-                position: fixed;
-                top: 80%;
-                user-select: none;
-                @include size(180px, auto);
+            // .routerlink {
+            //     position: fixed;
+            //     top: 80%;
+            //     user-select: none;
+            //     @include size(180px, auto);
 
-                img {
-                    width: 100%;
-                }
-            }
+            //     img {
+            //         width: 100%;
+            //     }
+            // }
         }
         .icon {
             display: flex;
