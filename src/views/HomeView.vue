@@ -31,15 +31,15 @@
             </h1>
         </div>
     </div>
-    <div class="page">
+    <section class="page">
         <div class="fire">
             <h2>Windfires</h2>
         </div>
         <p>
             森林野火造成成千上萬隻無尾熊喪命、受傷、流離失所。KOALA+致力於救助這些無尾熊，給它們一個能安心養傷、休息的空間。為此，我們需要像您這樣願意一起幫助無尾熊的人加入我們。KOALA+不僅僅是救助團體，更有豐富的教育意義，歡迎您加入我們一起認識無尾熊，幫助無尾熊!
         </p>
-    </div>
-    <div class="page change">
+    </section>
+    <section class="page change">
         <div class="wedo-p">
             <h2>我們能做什麼?</h2>
             <p>
@@ -52,8 +52,8 @@
         <div class="wedo">
             <h2>What can we do?</h2>
         </div>
-    </div>
-    <div class="page colorpage">
+    </section>
+    <section class="page colorpage">
         <div class="wesave-video">
             <iframe
                 width="560"
@@ -78,18 +78,76 @@
                 >有許多可愛的無尾熊周邊商品，商品售價的利潤將用於無尾熊救助行動，您購買可愛周邊的同時也是在幫助無尾熊!
             </p>
         </div>
-    </div>
+    </section>
+    <section class="page">
+        <div class="wrapper">
+            <h2>News</h2>
+            <div class="newscards">
+                <div
+                    class="card article"
+                    v-for="article in articles"
+                    :key="article"
+                >
+                    <div
+                        class="article-img"
+                        :style="{
+                            backgroundImage: 'url(' + article.img + ')',
+                        }"
+                    ></div>
+                    <div class="font">
+                        <a href="" class="article-title">{{ article.title }}</a>
+                        <div class="date">
+                            <p class="article-tag">{{ article.tag }}</p>
+                            <p class="article-date">{{ article.date }}</p>
+                        </div>
+                        <p class="article-content">
+                            {{ article.content }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <Footer />
 </template>
 
 <script>
 import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
 import Parallax from "../../node_modules/parallax-js/src/parallax";
 export default {
     components: {
         Header,
+        Footer,
     },
     data() {
-        return {};
+        return {
+            articles: [
+                {
+                    img: require("../assets/images/about/3.jpg"),
+                    title: "一隻無尾熊寶寶出生了",
+                    tag: "#最新消息",
+                    date: "2022/12/25",
+                    content:
+                        "每年9到11月是無尾熊開始繁殖的交配季節，當無尾熊歲時就開始邁入性成熟年齡、......",
+                },
+                {
+                    img: require("../assets/images/about/8.jpg"),
+                    title: "園區公休通知",
+                    tag: "#園區消息",
+                    date: "2022/12/13",
+                    content:
+                        "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日......",
+                },
+                {
+                    img: require("../assets/images/about/6.jpg"),
+                    title: "寫扣好花錢呢",
+                    tag: "#資金運用",
+                    date: "2022/12/07",
+                    content: "睡不飽就想吃東西，一直吃一直窮一直胖......",
+                },
+            ],
+        };
     },
     mounted() {
         this.intscence();
@@ -251,9 +309,6 @@ export default {
             @include size(100vw, 80vh);
             margin-top: 0;
         }
-        @include m {
-            @include size(100vw, 50vh);
-        }
         h2 {
             font-size: 8vw;
             font-family: "Inkfree";
@@ -263,6 +318,9 @@ export default {
             @include d {
                 font-size: 20vw;
                 -webkit-text-stroke: 2px #920202;
+            }
+            @include m {
+                -webkit-text-stroke: 1px $darkgreen;
             }
         }
     }
@@ -300,7 +358,10 @@ export default {
         @include d {
             @include size(100vw, 75vh);
             background-attachment: local;
-            @include bgSetting(160%, center -10%);
+            @include bgSetting(160%, center left 80%);
+        }
+        @include m {
+            @include bgSetting(240%, center left 70%);
         }
 
         h2 {
@@ -315,6 +376,9 @@ export default {
                 font-size: 13vw;
                 -webkit-text-stroke: 2px $darkgreen;
             }
+            @include m {
+                -webkit-text-stroke: 1px $darkgreen;
+            }
         }
     }
     .wedo-p {
@@ -325,7 +389,10 @@ export default {
         @include d {
             width: 70vw;
             margin-top: 0;
-            transform: translateX(30px);
+            transform: translateX(5vw);
+        }
+        @include m {
+            width: 90vw;
         }
 
         p {
@@ -346,10 +413,24 @@ export default {
     .wesave-p {
         width: 50%;
         text-align: left;
-        margin-left: 50px;
+        margin-left: 30px;
         @include d {
             width: 70%;
             margin-top: 50px;
+            margin-left: 5vw;
+        }
+        @include m {
+            width: 90%;
+        }
+    }
+    .wesave-video {
+        margin-left: 10vw;
+        @include m {
+            width: 80%;
+            margin-left: 0;
+            iframe {
+                width: fit-content;
+            }
         }
     }
 }
@@ -357,6 +438,86 @@ export default {
     @include d {
         display: flex;
         flex-direction: column-reverse;
+    }
+}
+.wrapper {
+    h2 {
+        font-size: 12vw;
+        font-family: "Inkfree";
+        color: $green;
+        @include d {
+            margin-top: 20vh;
+        }
+    }
+    .newscards {
+        display: flex;
+        width: 100%;
+        height: 50vh;
+        margin-top: 10vh;
+        @include d {
+            flex-direction: column;
+            margin-top: 5vh;
+        }
+
+        .article {
+            box-sizing: border-box;
+            width: calc(33.333333% - 20px);
+            height: 40vh;
+            text-align: left;
+            margin: 10px;
+            @include d {
+                width: 100%;
+                height: 35vh;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+
+            p {
+                font-size: $p;
+                @include rwd-p;
+                @include m {
+                    line-height: 18px;
+                }
+            }
+            .article-img {
+                width: 55%;
+                height: 25vh;
+                transform: translate(65%, -20%);
+                border-radius: 5%;
+                background-size: cover;
+                @include d {
+                    height: 80%;
+                    width: 25%;
+                    transform: translate(-10%, 0);
+                }
+            }
+            .font {
+                margin-left: 20px;
+                transform: translateY(-15%);
+                @include d {
+                    transform: translateY(0);
+                    width: 75%;
+                    margin-left: 10px;
+                }
+                .article-title {
+                    font-size: $h4;
+                    @include rwd-h4;
+                    width: 90%;
+                }
+                .date {
+                    display: flex;
+                    color: $lightgreen;
+                    width: 50%;
+                    @include m {
+                        width: 70%;
+                    }
+                }
+                .article-content {
+                    width: 90%;
+                }
+            }
+        }
     }
 }
 </style>
