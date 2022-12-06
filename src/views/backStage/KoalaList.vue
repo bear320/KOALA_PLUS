@@ -1,15 +1,66 @@
 <template>
     <Header />
-    <section class="bs-nav-space wrapper">
+    <section class="bs-nav-space wrapper title-n-action">
         <div class="title">
             <h1>無尾熊管理</h1>
             <img src="@/assets/images/backstageindex/koalaIcon.png" alt="" />
         </div>
         <div class="action">
+            <router-link to="bs-koala-add" target="_blank">
+                <img src="@/assets/images/icon/FilePlus.svg" alt="" />
+            </router-link>
             <div class="search">
                 <input type="search" name="" id="" placeholder="搜尋" />
-                <button></button>
             </div>
+            <select name="" id="">
+                <option value="" selected>排列方式</option>
+                <option value="">名字（正序）</option>
+                <option value="">名字（反序）</option>
+                <option value="">編號（反序）</option>
+                <option value="">編號（反序）</option>
+                <option value="">年齡（大到小）</option>
+                <option value="">年齡（小到大）</option>
+            </select>
+        </div>
+    </section>
+    <section class="wrapper table">
+        <div class="bs-title">
+            <h3 class="kName">名字</h3>
+            <h3 class="kNo">編號</h3>
+            <h3 class="kDOB">出生日期</h3>
+            <h3 class="kSex">性別</h3>
+            <h3 class="kAge">年齡</h3>
+            <h3 class="kListed">上 / 下架</h3>
+            <h3 class="kEdit">編輯</h3>
+        </div>
+        <div class="bs-list" v-for="koala in koalas" :key="koala.id">
+            <p>{{ koala.name }}</p>
+            <p>{{ koala.id }}</p>
+            <p>{{ koala.dob }}</p>
+            <p>{{ koala.sex }}</p>
+            <p>X歲</p>
+            <p>
+                <Switch
+                    size="large"
+                    true-color="#337a7d"
+                    v-model="koala.listed"
+                >
+                    <template #open>
+                        <span>ON</span>
+                    </template>
+                    <template #close>
+                        <span>OFF</span>
+                    </template>
+                </Switch>
+            </p>
+            <p>
+                <router-link
+                    :to="`/bs-koala-edit/${koala.name}`"
+                    target="_blank"
+                >
+                    <img src="@/assets/images/icon/edit.svg" alt="" />
+                </router-link>
+            </p>
         </div>
     </section>
 </template>
@@ -20,27 +71,64 @@ export default {
     components: {
         Header,
     },
+    data() {
+        return {
+            koalas: [
+                {
+                    name: "Emily",
+                    id: "K001",
+                    dob: "2020-03-22",
+                    sex: "母",
+                    listed: true,
+                },
+                {
+                    name: "Gabriel",
+                    id: "K002",
+                    dob: "2019-05-20",
+                    sex: "公",
+                    listed: true,
+                },
+                {
+                    name: "Lucien",
+                    id: "K003",
+                    dob: "2019-10-15",
+                    sex: "公",
+                    listed: true,
+                },
+                {
+                    name: "Camille",
+                    id: "K004",
+                    dob: "2018-04-08",
+                    sex: "母",
+                    listed: true,
+                },
+                {
+                    name: "Mindy",
+                    id: "K005",
+                    dob: "2017-07-10",
+                    sex: "母",
+                    listed: true,
+                },
+                {
+                    name: "Antoine",
+                    id: "K006",
+                    dob: "2015-01-16",
+                    sex: "公",
+                    listed: false,
+                },
+            ],
+        };
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-input[type="search"],
-input[type="email"],
-input[type="submit"],
-input[type="button"],
-input[type="number"],
-select,
-button {
-    /* 移除預設樣式 */
-    appearance: none;
-    /* For Safari and Chrome */
-    -webkit-appearance: none;
-    /* For Firefox */
-    -moz-appearance: none;
-}
-
-section {
+.title-n-action {
+    margin-bottom: 20px;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     .title {
         display: flex;
         column-gap: 20px;
@@ -53,35 +141,41 @@ section {
         }
     }
     .action {
-        .search {
-            display: flex;
-            align-items: center;
-
-            input {
-                width: 150px;
-                height: 50px;
-                padding-left: 10px;
-                background-color: #fff;
-                font-size: 1rem;
-                color: lighten($darkgreen, 20%);
-                border-radius: 10px 0 0 10px;
-                border: 1.5px solid lighten($darkgreen, 20%);
-                border-right: none;
-                outline: none;
-            }
-            button {
-                width: 50px;
-                height: 50px;
-                text-align: center;
-                background: url(@/assets/images/backStageIcon/search-icon.svg)
-                    no-repeat center #fff;
-                font-size: 1rem;
-                color: lighten($darkgreen, 20%);
-                border-radius: 0 10px 10px 0;
-                border: 1.5px solid lighten($darkgreen, 20%);
-                border-left: none;
-                &:hover {
-                    cursor: pointer;
+        display: flex;
+        column-gap: 15px;
+    }
+}
+.table {
+    .bs-title {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $darkgreen;
+        color: white;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        h3 {
+            display: block;
+            width: calc(100% / 7);
+        }
+    }
+    .bs-list {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 10px 0;
+        border-bottom: solid 1px $lightgreen;
+        p {
+            display: block;
+            width: calc(100% / 7);
+            a {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                margin: 0 auto;
+                img {
+                    margin: 10px;
+                    vertical-align: top;
                 }
             }
         }

@@ -459,9 +459,8 @@ export default {
     margin: 15px auto 0;
     text-align: left;
     font-family: font-EL;
-    color: #515a6e;
     a {
-        color: #515a6e;
+        color: lighten(#515a6e, 20%);
         padding-right: 20px;
     }
     a:last-child {
@@ -470,7 +469,7 @@ export default {
     }
     a + a::before {
         content: "›";
-        color: #44514b;
+        color: lighten(#515a6e, 20%);
         margin-right: 20px;
     }
 }
@@ -511,6 +510,9 @@ export default {
                 @include media(900) {
                     font-size: 18px;
                 }
+            }
+            h3 + h3 {
+                margin-top: 10px;
             }
             p {
                 font-size: 18px;

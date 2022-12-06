@@ -30,7 +30,8 @@ export default {
 <style lang="scss" scoped>
 $card-w: 270px;
 $card-b-radius: 10px;
-$img-h: 300px;
+// $img-h: 300px;
+$img-h: 250px;
 
 .koala-card {
     width: $card-w;

@@ -401,9 +401,11 @@ export default {
             }
             h2 {
                 text-align: left;
+                margin-bottom: 10px;
             }
             h4 {
                 text-align: justify;
+                margin-bottom: 10px;
             }
             h4:last-child {
                 padding-bottom: 30px;
@@ -473,22 +475,22 @@ export default {
         row-gap: 60px;
         @include m() {
             justify-content: center;
+            row-gap: 40px;
         }
     }
 }
 
 .bg-img {
-    position: relative;
+    display: flex;
+    justify-content: flex-end;
     user-select: none;
+    @include m() {
+        justify-content: center;
+    }
     img {
         height: 400px;
-        position: absolute;
-        top: -25px;
-        right: 5%;
         @include m() {
             height: 300px;
-            left: 50%;
-            transform: translateX(-50%);
         }
     }
 }
