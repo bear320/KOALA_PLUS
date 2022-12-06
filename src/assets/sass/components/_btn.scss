@@ -123,15 +123,32 @@ input[type="password"] {
         border: solid 1px $btn-color;
     }
 }
+//input search
+input[type="search"] {
+    @extend %input;
+    width: 200px;
+    padding: 5px 10px;
+    margin: 0;
+    border: solid 1px $btn-color;
+    outline: none;
+    border-radius: 5px;
+    background: url(@/assets/images/search-icon.svg) no-repeat 92.5% center;
+    color: $btn-color;
+    line-height: 28px;
+    &:focus {
+        border: solid 1px $btn-color;
+    }
+}
 
 //select
 select {
+    height: 40px;
     padding: 5px 10px;
     border: solid 1px $btn-color;
     outline: none;
     border-radius: 5px;
     background: transparent;
-
+    color: $btn-color;
     option {
         border-bottom: 0.5 solid $btn-color;
         color: $btn-color;

@@ -45,9 +45,6 @@ $b-radius: 10px;
         border-radius: $b-radius $b-radius 0 0;
         border: 1.5px solid $darkgreen;
         border-bottom: none;
-        h3 {
-            margin: 0;
-        }
     }
     .content {
         text-align: left;
@@ -56,6 +53,9 @@ $b-radius: 10px;
         background-color: #fff;
         border-radius: 0 0 $b-radius $b-radius;
         border: 1.5px solid $darkgreen;
+        h4 {
+            margin-bottom: 10px;
+        }
         ul {
             list-style-position: inside;
             li {
@@ -69,6 +69,9 @@ $b-radius: 10px;
                     vertical-align: top;
                 }
             }
+            li + li {
+                margin-top: 10px;
+            }
         }
         h4:last-child {
             text-align: justify;
@@ -78,7 +81,6 @@ $b-radius: 10px;
             width: 100%;
             font: 24px font-R;
             line-height: 2;
-            // border-radius: $b-radius;
             border-width: 1.5px;
         }
     }

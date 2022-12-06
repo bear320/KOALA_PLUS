@@ -167,7 +167,7 @@ const routes = [
         component: KoalaAdd,
     },
     {
-        path: "/bs-koala-edit",
+        path: "/bs-koala-edit/:name",
         name: "koalaEdit",
         component: KoalaEdit,
     },
@@ -202,7 +202,7 @@ const routes = [
         component: SupportList,
     },
     {
-        path: "/bs-support-info",
+        path: "/bs-support-info/:number",
         name: "supportInfo",
         component: SupportInfo,
     },
