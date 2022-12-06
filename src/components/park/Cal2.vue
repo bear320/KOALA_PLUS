@@ -159,6 +159,17 @@ export default {
             let days = monthDays[m];
             let firstDate = new Date(yy, m, d);
 
+            if (m == 1) {
+                if (yy % 400 == 0) {
+                    days = 29;
+                } else if (yy % 100 == 0) {
+                    days = 28;
+                } else if (yy % 4 == 0) {
+                    days = 29;
+                }
+            }
+            this.allDay = days;
+
             console.log(firstDate);
             console.log(days);
             console.log((firstDate.getDay() + days) % 7);
