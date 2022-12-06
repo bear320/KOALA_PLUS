@@ -154,13 +154,17 @@ export default {
             left: 0%;
             z-index: -1;
             height: 36px;
+            height: 41px;
+
             transition: left 0.5s;
             transition-timing-function: cubic-bezier(0.68, -0.55, 0.265, 1.55);
             @include d() {
-                height: 26px;
+                // height: 26px;
+                height: 31px;
             }
             @include m() {
-                height: 18px;
+                // height: 18px;
+                height: 24px;
             }
         }
     }
