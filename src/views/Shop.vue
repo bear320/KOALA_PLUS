@@ -56,13 +56,16 @@
             </div>
         </div>
     </main>
+    <Footer></Footer>
 </template>
 <script>
 import Header from "@/components/header.vue";
+import Footer from "@/components/footer.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
 export default {
     components: {
         Header,
+        Footer,
         ProductCard,
     },
     data() {
