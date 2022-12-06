@@ -42,7 +42,9 @@
             </Panel>
         </Collapse>
     </article>
-    <div class="bg">
+    <!-- 測驗＋背景圖 -->
+    <div class="bg-text">
+        <div class="bg">
             <div class="ab-tree1">
                 <img src="../assets/images/aboutkoala/background-tree.png" alt="">
             </div>
@@ -50,7 +52,7 @@
                 <img src="../assets/images/aboutkoala/background-tree.png" alt="">
             </div>
     </div>
-    <div>
+    <div class="test-block">
         <div class="test">
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
@@ -78,6 +80,8 @@
             <p>得分 : {{ score }} 分</p>
         </div>
     </div>
+    </div>
+    
     <Footer />
 </template>
 
@@ -166,22 +170,40 @@ article {
         padding: 10px;
     }
 }
+.bg-text{
+    @include m(){
+        display: flex;
+        flex-direction: column-reverse;
+    }
+}
 .btn-pamary {
     padding: 10px;
-}
-.btn-ab {
+    .btn-ab {
     @include btnSize(150px);
+    @include m(){
+        width: 80%; 
+        margin: auto;
+    }
 }
+}
+
 .card-ab {
     margin: auto;
     padding: 50px;
     width: 500px;
+    @include m(){
+        width: 80%; 
+        margin: auto;
+    }
 }
 .question {
     margin: 10px;
 }
 .test{
     margin-top: -300px;
+    @include m(){
+        margin: 0px;
+    }
     p{
         margin: 30px;
     }
@@ -193,19 +215,24 @@ article {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    border: 1px solid red;
-   
-
+    @include m(){
+        height: 200px;
+    }
+    
     .ab-tree2 img{
         -moz-transform:scaleX(-1);
         -webkit-transform:scaleX(-1);
         -o-transform:scaleX(-1);
-        transform:scaleX(-1);    border: 1px solid red;
-
-        @include m(){
-        
-    }
+        transform:scaleX(-1);    
+       
     }
 }
+.bg img{
+    @include m(){
+        width: 100%;
+        height: 200px; 
+    }
+}
+
 
 </style>    
