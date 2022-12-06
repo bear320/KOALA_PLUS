@@ -28,10 +28,11 @@
             class="leaf-icon-left"
             alt="leaf-icon-left"
         />
+        <div class="sub-banner">]</div>
     </div>
-    <div class="sub-banner">
+    <!-- <div class="sub-banner">
         <img src="../assets/images/park/banner-img.png" alt="" />
-    </div>
+    </div> -->
     <div class="wrapper">
         <div id="calendar">
             <cal2></cal2>
@@ -157,16 +158,27 @@ iframe {
     overflow: hidden;
 }
 
+// .sub-banner {
+//     width: 100%;
+//     height: 50vh;
+//     margin-bottom: 60px;
+// }
+// .sub-banner img {
+//     width: 100%;
+//     height: 100%;
+//     object-fit: cover;
+//     object-position: center center;
+// }
+
 .sub-banner {
+    background: url(@/assets/images/park/banner-img.png) no-repeat center/cover;
+    margin-bottom: 100px;
     width: 100%;
-    height: 50vh;
+    height: 40vh;
+    background-position: center center;
+    display: flex;
+    align-items: center;
     margin-bottom: 60px;
-}
-.sub-banner img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center center;
 }
 
 @media (min-aspect-ratio: 16/9) {
@@ -177,6 +189,60 @@ iframe {
 @media (max-aspect-ratio: 16/9) {
     .video-container iframe {
         width: 177.78vh;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    .koala-icon {
+        width: 350px;
+        left: -40px;
+        top: 130px;
+    }
+    .leaf-icon-right {
+        width: 350px;
+        right: -35px;
+        top: 500px;
+    }
+    .leaf-icon-left {
+        width: 350px;
+        left: -30px;
+        top: 1300px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .koala-icon {
+        width: 280px;
+        left: -50px;
+        top: 160px;
+    }
+    .leaf-icon-right {
+        width: 270px;
+        right: -40px;
+        top: 600px;
+    }
+    .leaf-icon-left {
+        width: 280px;
+        left: -40px;
+        top: 1350px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .koala-icon {
+        width: 200px;
+        left: -70px;
+        top: 200px;
+    }
+    .leaf-icon-right {
+        width: 250px;
+        right: -40px;
+        top: 650px;
+    }
+    .leaf-icon-left {
+        width: 250px;
+        left: -40px;
+        top: 1350px;
     }
 }
 </style>

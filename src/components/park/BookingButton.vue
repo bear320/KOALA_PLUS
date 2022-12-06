@@ -2,7 +2,7 @@
     <div class="booking-button">
         <h2>導覽資訊</h2>
 
-        <button @click="scrollBlock()">立即預約導覽</button>
+        <button>立即預約導覽</button>
     </div>
 </template>
 <script>
@@ -11,21 +11,12 @@ export default {
     data() {
         return {};
     },
-    methods: {
-        bookingCalendar() {
-            //參數1：字符串:理論上是隨便的，但是需要具有意義
-            //參數2：傳遞的數據
-            // this.$emit("onEvent", this.message);
-        },
-        scrollBlock() {
-            this.$emit("gotoCalendar");
-        },
-    },
+    methods: {},
 };
 </script>
 <style scoped>
 h2 {
-    font-size: 45px;
+    font-size: 2rem;
 }
 
 button {
@@ -41,5 +32,18 @@ button {
     line-height: 40px;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     cursor: pointer;
+}
+
+@media screen and (max-width: 1200px) {
+}
+
+@media screen and (max-width: 768px) {
+    button {
+        width: 200px;
+        height: 50px;
+        padding: 10px 20px;
+        line-height: 20px;
+        font-size: 18px;
+    }
 }
 </style>

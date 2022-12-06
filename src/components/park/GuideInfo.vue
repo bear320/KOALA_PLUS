@@ -5,8 +5,7 @@
             <div class="overlay">
                 <div class="items"></div>
                 <div class="items head">
-                    <p>{{ title }}</p>
-                    <hr />
+                    <h3>{{ title }}</h3>
                 </div>
                 <div class="items price">
                     <p v-html="script" class="new"></p>
@@ -27,7 +26,6 @@ export default {
     data() {
         return {};
     },
-    computed: {},
 };
 </script>
 <style scoped>
@@ -36,9 +34,9 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
 .guide-card {
     position: relative;
     margin: 100px auto;
-    width: 1078px;
-    height: 517px;
-    border: 5px;
+    width: 1100px;
+    height: 530px;
+    border: 10px;
     border-radius: 10px;
     display: flex;
     flex-wrap: wrap;
@@ -49,23 +47,18 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
     transition-timing-function: ease-out;
     transform: rotate3d(0);
 }
-
-.guide-card:hover {
-    transition-duration: 150ms;
-    box-shadow: 0 5px 20px 5px #00000044;
-}
 .guide-card img {
     width: 100%;
     height: 100%;
-    border-radius: 16px;
+    border-radius: 24px;
     margin: auto;
     object-fit: cover;
     object-position: center center;
 }
 
 .container {
-    width: 1078px;
-    height: 517px;
+    width: 1100px;
+    height: 530px;
     position: absolute;
     border: 10px solid white;
     top: 0;
@@ -73,19 +66,15 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
     left: 0;
     bottom: 0;
     margin: auto;
-    -webkit-box-shadow: 0 0 5px #000;
-    box-shadow: 0 0 5px #000;
-    border-radius: 16px;
-}
-
-.container img {
-    position: absolute;
+    box-shadow: 0px 6.48045px 6.48045px rgba(0, 0, 0, 0.25);
+    border-radius: 24px;
 }
 
 .overlay {
-    width: 100%;
-    height: 100%;
+    width: 1078px;
+    height: 517px;
     display: grid;
+    margin: auto;
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 2fr 2fr 1fr;
     background: rgba(77, 77, 77, 0.9);
@@ -97,8 +86,14 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
 }
 
 .items {
-    padding-left: 20px;
     letter-spacing: 3px;
+    width: 80%;
+    margin: auto;
+}
+
+.items p {
+    font-size: 18px;
+    line-height: 25px;
 }
 
 .head {
@@ -108,24 +103,10 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
     transition: all 0.7s;
 }
 
-.head hr {
-    display: block;
-    width: 0;
-    border: none;
-    border-bottom: solid 2px #fef5df;
-    position: absolute;
-    bottom: 0;
-    left: 20px;
-    transition: all 0.5s;
-}
-
 .price {
-    width: 600px;
-    margin: auto;
     font-size: 22px;
-    line-height: 30px;
+    line-height: 10px;
     font-weight: bold;
-    letter-spacing: 5px;
     opacity: 0;
     transform: translateY(40px);
     transition: all 0.7s;
@@ -134,23 +115,6 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
 .price .old {
     text-decoration: line-through;
     color: #b3b3b3;
-}
-
-.cart {
-    font-size: 12px;
-    opacity: 0;
-    letter-spacing: 1px;
-    font-family: "Lato", sans-serif;
-    transform: translateY(40px);
-    transition: all 0.7s;
-}
-
-.cart i {
-    font-size: 16px;
-}
-
-.cart span {
-    margin-left: 10px;
 }
 
 .container:hover .overlay {
@@ -176,5 +140,38 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
     transform: translateY(0px);
     transition-delay: 0.6s;
     opacity: 1;
+}
+@media screen and (max-width: 1200px) {
+    .guide-card {
+        width: 1000px;
+    }
+    .guide-card img {
+        width: 960px;
+    }
+    .container {
+        width: 960px;
+    }
+    .overlay {
+        width: 960px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .guide-card {
+        width: 90%;
+    }
+    .guide-card img {
+        width: 90%;
+    }
+    .container {
+        width: 90%;
+    }
+    .overlay {
+        width: 100%;
+    }
+    .items p {
+        font-size: 16px;
+        line-height: 20px;
+    }
 }
 </style>
