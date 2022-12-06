@@ -38,6 +38,7 @@
             <cal2></cal2>
         </div>
     </div>
+    <Footer></Footer>
 </template>
 
 <script>
@@ -45,6 +46,7 @@ import Header from "@/components/header.vue";
 import BookingButton from "@/components/park/BookingButton.vue";
 import GuideInfo from "@/components/park/GuideInfo.vue";
 import Cal2 from "@/components/park/Cal2.vue";
+import Footer from "@/components/footer.vue";
 export default {
     name: "About",
     components: {
@@ -52,6 +54,7 @@ export default {
         BookingButton,
         GuideInfo,
         Cal2,
+        Footer,
     },
 
     methods: {},

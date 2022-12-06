@@ -28,9 +28,9 @@ export default {
     },
 };
 </script>
-<style scoped>
-/* $hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
-$returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
+<style lang="scss" scoped>
+$hoverEasing: cubic-bezier(0.23, 1, 0.32, 1);
+$returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95);
 .guide-card {
     position: relative;
     margin: 100px auto;
@@ -72,7 +72,7 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
 
 .overlay {
     width: 1078px;
-    height: 517px;
+    height: 510px;
     display: grid;
     margin: auto;
     grid-template-columns: 1fr;
@@ -153,6 +153,21 @@ $returnEasing: cubic-bezier(0.445, 0.05, 0.55, 0.95); */
     }
     .overlay {
         width: 960px;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    .guide-card {
+        width: 90%;
+    }
+    .guide-card img {
+        width: 90%;
+    }
+    .container {
+        width: 90%;
+    }
+    .overlay {
+        width: 100%;
     }
 }
 

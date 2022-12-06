@@ -6,10 +6,8 @@
 
         <table align="center">
             <div class="button-wrapper">
-                <button class="btn-lowest" @click="preMonth()">PreMonth</button>
-                <button class="btn-lowest" @click="nextMonth()">
-                    NextMonth
-                </button>
+                <button class="btn-lowest" @click="preMonth()">上個月</button>
+                <button class="btn-lowest" @click="nextMonth()">下個月</button>
             </div>
             <tr>
                 <th>週日</th>
@@ -21,11 +19,22 @@
                 <th>週六</th>
             </tr>
             <tr class="trr">
-                <td class="tdd" v-for="d in emptyDay"></td>
+                <td
+                    class="tdd"
+                    v-for="d in emptyDay"
+                    style="background: #f8f8f8"
+                ></td>
                 <td
                     class="tdd"
                     v-for="(day, index) in allDay"
-                    @click="chooseDate"
+                    @click="chooseDate(thisYear, thisMonth + 1, day)"
+                    :style="{
+                        backgroundColor: notBookDate?.[
+                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                        ]
+                            ? '#979292'
+                            : '#D8D8D8',
+                    }"
                 >
                     {{ day }}
 
@@ -44,9 +53,39 @@
                         }}
                     </p>
                 </td>
+                <td
+                    class="tdd"
+                    v-for="d in lastEmptyDay"
+                    style="background: #f8f8f8"
+                ></td>
             </tr>
         </table>
-        <booking-form v-show="showForm" @closeForm="closeTable"></booking-form>
+        <booking-form
+            :msg="rsvDate"
+            v-if="showForm"
+            @closeForm="closeTable"
+        ></booking-form>
+        <div class="notice">
+            <ul>
+                預約導覽注意事項：
+                <li>
+                    ◇
+                    為維護參觀品質並遵守場地容留限制，團體導覽人數每日最多20人。
+                </li>
+                <li>
+                    ◇
+                    可供團體預約時段為開放日當日下午13：30-17：00。每次原則30-50分鐘，若遇假日則以月曆顯示開放日期為主。
+                </li>
+                <li>
+                    ◇
+                    一般導覽包含園區及無尾熊救護介紹，若預約有特殊行程或安排，請提前與基地申請。
+                </li>
+                <li>
+                    ◇
+                    預約完成後，請於預約時間前10分鐘到達服務台；若無法依約定時間準時到達者，請務必事先來電告知。
+                </li>
+            </ul>
+        </div>
     </div>
 </template>
 <script>
@@ -64,7 +103,6 @@ export default {
             bookStyle: {
                 fontSize: "20px",
                 fontWeight: "600",
-                backgroundColor: "#979292",
             },
             notBookDate: {
                 "2022-12-2": { state: "已預約" },
@@ -72,6 +110,8 @@ export default {
                 "2022-12-15": { state: "已預約" },
                 "2022-12-20": { state: "休館" },
             },
+            rsvDate: "",
+            lastEmptyDay: 0,
         };
     },
     components: {
@@ -82,7 +122,8 @@ export default {
         this.getAllDay(new Date().getFullYear(), new Date().getMonth());
         this.thisMonth = new Date().getMonth();
         this.thisYear = new Date().getFullYear();
-        // this.thisDate = new Date().getDate();
+        this.thisDate = new Date().getDate();
+        this.getLastEmptyDay(new Date().getFullYear(), new Date().getMonth());
     },
 
     methods: {
@@ -113,6 +154,19 @@ export default {
         //     let firstDay = firstDate.getDay();
         //     return firstDay;
         // },
+        getLastEmptyDay(yy, m, d = 1) {
+            const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+            let days = monthDays[m];
+            let firstDate = new Date(yy, m, d);
+
+            console.log(firstDate);
+            console.log(days);
+            console.log((firstDate.getDay() + days) % 7);
+            this.lastEmptyDay = 7 - [(firstDate.getDay() + days) % 7];
+            if (this.lastEmptyDay > 6) {
+                this.lastEmptyDay = 0;
+            }
+        },
 
         getAllDay(yy, m) {
             const monthDays = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -138,6 +192,7 @@ export default {
             }
             this.getEmptyDay(this.thisYear, this.thisMonth);
             this.getAllDay(this.thisYear, this.thisMonth);
+            this.getLastEmptyDay(this.thisYear, this.thisMonth);
         },
         nextMonth() {
             if (this.thisMonth == 11) {
@@ -148,12 +203,21 @@ export default {
             }
             this.getEmptyDay(this.thisYear, this.thisMonth);
             this.getAllDay(this.thisYear, this.thisMonth);
+            this.getLastEmptyDay(this.thisYear, this.thisMonth);
         },
-        clickDay(yy, mm, dd) {
-            console.log(`${yy}-${mm}-${dd}`);
-        },
-        chooseDate() {
-            console.log("showform");
+
+        chooseDate(yy, mm, dd) {
+            if (this.notBookDate[`${yy}-${mm}-${dd}`]) return;
+            let newMM = mm.toString();
+            if (newMM.length < 2) {
+                newMM = "0" + newMM;
+            }
+            let newDD = dd.toString();
+            if (newDD.length < 2) {
+                newDD = "0" + newDD;
+            }
+
+            this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
         },
         closeTable() {
@@ -165,6 +229,7 @@ export default {
 <style scoped>
 .calender-wrapper {
     position: relative;
+    margin-bottom: 30px;
 }
 h2 {
     font-size: 40px;
@@ -180,24 +245,21 @@ h2 {
 button {
     list-style: none;
     cursor: pointer;
-    /* height: 30px; */
-
+    height: 30px;
     text-align: center;
     line-height: 30px;
 }
 .btn-lowest {
-    padding: 0 10px;
+    padding: 0 20px;
     margin: 10 10px;
 }
 table {
-    width: 960px;
-    height: 600px;
+    width: 80%;
     margin-bottom: 100px;
     margin: auto;
 }
 th,
 td {
-    height: 90px;
     text-align: center;
 }
 th {
@@ -205,6 +267,8 @@ th {
 }
 
 tr {
+    font-size: 18px;
+    font-weight: bold;
     display: grid;
     grid-template-columns: repeat(7, 1fr);
 }
@@ -213,5 +277,66 @@ td {
     cursor: pointer;
     background-color: #d8d8d8;
     border: 1px solid #000;
+    height: 120px;
+}
+.notice {
+    padding-top: 10px;
+    width: 80%;
+    margin: auto;
+    text-align: left;
+}
+ul,
+li {
+    margin: 0;
+    padding: 0;
+    font-size: 18px;
+}
+.notice ul {
+    width: 100%;
+    margin: auto;
+    list-style: none;
+    font-weight: 600;
+}
+.notice li {
+    list-style: none;
+    font-weight: 400;
+}
+@media screen and (max-width: 1200px) {
+    table {
+        width: 75%;
+    }
+    .notice {
+        width: 75%;
+    }
+}
+
+@media screen and (max-width: 1024px) {
+    table {
+        width: 85%;
+    }
+    .notice {
+        width: 85%;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    h2 {
+        font-size: 20px;
+    }
+    table {
+        width: 100%;
+    }
+    th {
+        height: 30px;
+    }
+    td {
+        height: 70px;
+    }
+    .notice {
+        width: 100%;
+    }
+    p {
+        font-size: 16px !important;
+    }
 }
 </style>
