@@ -8,7 +8,7 @@
         <router-link to="/support">資助認養</router-link>
         <router-link to="/cart1">購物車1</router-link>
         <router-link to="/cart2">購物車2</router-link>
-        <router-link to="/koala-info">無尾熊詳情頁</router-link>
+        <!-- <router-link to="/koala-info">無尾熊詳情頁</router-link> -->
         <router-link to="/koala-park">園區資訊</router-link>
         <router-link to="/login">登入註冊</router-link>
         <router-link to="/member">會員專區</router-link>
