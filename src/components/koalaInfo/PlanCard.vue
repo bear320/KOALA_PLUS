@@ -7,7 +7,7 @@
             <h4>方案費用：NT$ {{ pPrice }}</h4>
             <ul>
                 <h4>方案內容：</h4>
-                <li>領養證明 * 1</li>
+                <li>領養 / 資助證明 * 1</li>
                 <li>
                     <img src="../../assets/images/support/coin.svg" alt="" />
                     {{ pPoint }}
