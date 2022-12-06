@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="book-form" :style="modalStyle">
+    <div class="book-form">
         <form id="booking-form" action="" data-form-storage="true">
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
@@ -95,7 +95,7 @@ export default {
             mobile: 0,
             people: "",
             date: "",
-            // isShow: false,
+            isShow: false,
         };
     },
     computed: {
