@@ -1,9 +1,18 @@
 <template>
     <Header></Header>
-    <!-- <section class="wrapper nav-space breadcrumb">
-        <p>我是麵包屑</p>
-    </section> -->
     <section class="wrapper nav-space">
+        <Breadcrumb separator=">" class="breadcrumb">
+            <BreadcrumbItem to="/">Home</BreadcrumbItem>
+            <BreadcrumbItem to="/support">資助認養</BreadcrumbItem>
+            <BreadcrumbItem>{{ temp.name }}</BreadcrumbItem>
+        </Breadcrumb>
+        <!-- <div class="breadcrumb">
+            <router-link to="/home">breadcrumb</router-link>
+            <router-link to="/support">資助認養</router-link>
+            <router-link>{{ temp.name }}</router-link>
+        </div> -->
+    </section>
+    <section class="wrapper">
         <div class="koala-info">
             <div class="img">
                 <ImageSlider :imgs="images"></ImageSlider>
@@ -22,7 +31,7 @@
             </div>
         </div>
     </section>
-    <section class="plans">
+    <section class="plans" id="plans">
         <div class="wrapper">
             <h2>該如何幫助受災的無尾熊呢？</h2>
             <h3>我們提供了兩種幫助無尾熊的方案</h3>
@@ -47,7 +56,10 @@
             <Panel name="1">
                 我捐助的費用將用於何處？
                 <template #content>
-                    根據你所支持的方案不同，您捐助的費用也會用於不同的用途，詳細用途可參考上述方案說明。
+                    <p>
+                        根據您支持的方案不同，您捐助的費用也會用於不同的用途，詳細用途可參考上述
+                        <a href="#plans">方案說明</a> 。
+                    </p>
                 </template>
             </Panel>
             <Panel name="2">
@@ -63,10 +75,45 @@
                 </template>
             </Panel>
             <Panel name="3">
-                乔纳森·伊夫
-                <template #content
-                    >乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</template
-                >
+                資助 / 認養後我會獲得什麼？
+                <template #content>
+                    <p>
+                        根據你所支持的方案不同，您所獲得的東西也會有所不同，詳細說明可參考上述
+                        <a href="#plans">方案說明</a> 。
+                    </p>
+                </template>
+            </Panel>
+            <Panel name="4">
+                可以把認養的無尾熊帶回家嗎？
+                <template #content>
+                    <p>
+                        很抱歉，您並不能將您認養的無尾熊帶回家！領養是一種象徵性的行為，表達你對受災無尾熊的支援。
+                    </p>
+                </template>
+            </Panel>
+            <Panel name="5">
+                多久能收到我的資助 / 認養證明呢？
+                <template #content>
+                    <p>
+                        通常情況下，只要您資助 /
+                        認養成功後，就可以至會員專區中下載屬於您的資助 /
+                        認養證明，若您的證明資訊有誤，請與我們進行聯繫！
+                    </p>
+                </template>
+            </Panel>
+            <Panel name="6">
+                我想詢問其他資助 / 認養的問題呢？
+                <template #content>
+                    <p>
+                        您可以在園區營業時間內透過下列方式與我們進行聯繫：<br />
+                        電話｜
+                        <a href="tel:+12025550156">+1 202 555 0156</a><br />
+                        信箱｜
+                        <a href="mailto:koalaplus@koalaplus.com"
+                            >koalaplus@koalaplus.com</a
+                        ><br />
+                    </p>
+                </template>
             </Panel>
         </Collapse>
     </section>
@@ -410,9 +457,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.breadcrumb {
+    max-width: 1000px;
+    margin: 15px auto 0;
+    text-align: left;
+    font: 1rem font-EL;
+}
 .koala-info {
     max-width: 1000px;
-    margin: 30px auto;
+    margin: 15px auto 30px;
     display: flex;
     justify-content: space-around;
     @include m() {
@@ -430,8 +483,6 @@ export default {
     }
     .text {
         box-sizing: border-box;
-        // padding-left: 30px;
-        // padding-left: 10%;
         padding: 0 5%;
         flex-grow: 1;
         text-align: left;
@@ -451,11 +502,9 @@ export default {
                 }
             }
             p {
-                // line-height: 1.5;
                 font-size: 18px;
                 text-align: justify;
                 @include media(900) {
-                    // line-height: 1.3;
                 }
             }
         }
@@ -481,6 +530,12 @@ export default {
     padding: 30px 0;
     .collapse {
         font: font-R;
+        a {
+            text-decoration: underline;
+        }
+        @include m() {
+            width: 100%;
+        }
     }
 }
 </style>
