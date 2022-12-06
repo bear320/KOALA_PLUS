@@ -11,7 +11,8 @@
                 </ul>
                 <div class="center">
                     <li>
-                        <p>▼ 園區時間 ：9AM – 11AM & 2PM – 7PM全年無休</p>
+                        <p>園區時間 ：<br>
+                            9AM – 11AM & 2PM – 7PM全年休館</p>
                     </li>
                 </div>
                 <div class="right">
@@ -116,6 +117,7 @@ footer {
     height: 100%;
     padding: 5px;
     list-style: none;
+    text-align: left;
 }
 .logo {
     width: 70%;
