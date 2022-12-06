@@ -39,7 +39,7 @@
             森林野火造成成千上萬隻無尾熊喪命、受傷、流離失所。KOALA+致力於救助這些無尾熊，給它們一個能安心養傷、休息的空間。為此，我們需要像您這樣願意一起幫助無尾熊的人加入我們。KOALA+不僅僅是救助團體，更有豐富的教育意義，歡迎您加入我們一起認識無尾熊，幫助無尾熊!
         </p>
     </div>
-    <div class="page">
+    <div class="page change">
         <div class="wedo-p">
             <h2>我們能做什麼?</h2>
             <p>
@@ -206,10 +206,10 @@ export default {
             margin-top: 43%;
             margin-left: 10%;
             @include d() {
-                margin-top: 100%;
+                margin-top: 150%;
             }
             @include m() {
-                margin-top: 75vh;
+                margin-top: 65vh;
             }
         }
         .layer:nth-child(9) {
@@ -247,16 +247,33 @@ export default {
         background-image: url(@/assets/images/index/forest-fire.jpg);
         background-attachment: fixed;
         @include bgSetting(cover, 0 -100px);
+        @include d {
+            @include size(100vw, 80vh);
+            margin-top: 0;
+        }
+        @include m {
+            @include size(100vw, 50vh);
+        }
         h2 {
             font-size: 8vw;
             font-family: "Inkfree";
             -webkit-text-stroke: 3px #920202;
             -webkit-text-fill-color: #ffffff;
             margin-top: 55%;
+            @include d {
+                font-size: 20vw;
+                -webkit-text-stroke: 2px #920202;
+            }
         }
     }
     .fire + p {
         margin-top: 70vh;
+
+        @include d {
+            margin-top: 20px;
+            width: 75vw;
+            margin-left: 5vw;
+        }
     }
 
     p {
@@ -264,6 +281,14 @@ export default {
         text-align: left;
         font-size: $h4;
         line-height: 28px;
+        @include rwd-h4;
+        a {
+            font-size: $h4;
+        }
+
+        @include d {
+            width: 100%;
+        }
     }
     .wedo {
         @include size(55vw, 95vh);
@@ -272,6 +297,11 @@ export default {
         background-image: url(@/assets/images/index/koalahelping.jpg);
         background-attachment: fixed;
         @include bgSetting(100%, left top);
+        @include d {
+            @include size(100vw, 75vh);
+            background-attachment: local;
+            @include bgSetting(160%, center -10%);
+        }
 
         h2 {
             font-family: "Inkfree";
@@ -281,6 +311,10 @@ export default {
             transform: translateX(-20vw);
             width: 120%;
             margin-top: 5%;
+            @include d {
+                font-size: 13vw;
+                -webkit-text-stroke: 2px $darkgreen;
+            }
         }
     }
     .wedo-p {
@@ -288,6 +322,11 @@ export default {
         width: 35vw;
         text-align: left;
         margin-top: 60vh;
+        @include d {
+            width: 70vw;
+            margin-top: 0;
+            transform: translateX(30px);
+        }
 
         p {
             margin-top: 0;
@@ -298,16 +337,26 @@ export default {
     }
 }
 .colorpage {
+    width: 100vw;
     border-radius: 10%;
     background-color: $lightgreen;
+    align-items: center;
+    justify-content: center;
 
-    .wesave-video {
-        margin-left: 10vw;
-    }
     .wesave-p {
-        color: white;
         width: 50%;
         text-align: left;
+        margin-left: 50px;
+        @include d {
+            width: 70%;
+            margin-top: 50px;
+        }
+    }
+}
+.change {
+    @include d {
+        display: flex;
+        flex-direction: column-reverse;
     }
 }
 </style>
