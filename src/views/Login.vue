@@ -313,7 +313,7 @@ export default {
     border-radius: 3px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: 30px;
+    margin-top: 7.5%;
     cursor: pointer;
 }
 
@@ -379,7 +379,7 @@ export default {
     text-align: left;
     padding: 10px 5px;
     margin-left: 1%;
-    margin-top: 1%;
+    margin-top: 0%;
     width: 230px;
     border: none;
     color: #757575;
@@ -397,14 +397,14 @@ export default {
 }
 
 .cont_form_sign_up > div {
-    margin-top: 2%;
+    margin-top: 1%;
 }
 
 .cont_form_login > input {
     padding: 15px 5px;
     margin-left: 10px;
-    margin-top: 3%;
-    margin-bottom: 5%;
+    margin-top: 1%;
+    margin-bottom: 3%;
     width: 230px;
     border: none;
     text-align: left;
@@ -419,8 +419,8 @@ export default {
     border-radius: 10px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: 5%;
-    margin-bottom: 3%;
+    margin-top: 3%;
+    margin-bottom: 1%;
     cursor: pointer;
 }
 
@@ -463,7 +463,7 @@ export default {
     text-align: left;
     padding: 15px 5px;
     margin-left: 2%;
-    margin-top: 2%;
+    margin-top: 1%;
     margin-bottom: 3%;
     width: 230px;
     border: none;
@@ -487,7 +487,7 @@ export default {
 }
 
 .cont_form_forget_password > div > img {
-    margin-top: 20%;
+    margin-top: 12.5%;
     width: 50%;
 }
 
