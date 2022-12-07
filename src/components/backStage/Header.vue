@@ -1,9 +1,22 @@
 <template>
-    <Menu mode="horizontal" v-color="'#fff'" v-bg-color="'#2e382e'">
+    <Menu
+        mode="horizontal"
+        v-color="'#fff'"
+        v-bg-color="'#2e382e'"
+        class="fixed"
+    >
         <div class="wrapper navbar">
-            <MenuItem name="1" v-color="'#fff'">
+            <!-- <MenuItem name="1" v-color="'#fff'">
                 <router-link to="/bs-index"> 首頁 </router-link>
-            </MenuItem>
+            </MenuItem> -->
+            <Submenu name="1" v-color="'#fff'">
+                <template #title>
+                    <router-link to="/bs-index">首頁</router-link>
+                </template>
+                <MenuItem name="1-1">
+                    <router-link to="/home">前台首頁</router-link>
+                </MenuItem>
+            </Submenu>
             <Submenu name="2" v-color="'#fff'">
                 <template #title>
                     <router-link to="/bs-article-list">公告管理</router-link>
@@ -86,14 +99,18 @@
 <script>
 export default {
     data() {
-        return {
-            bgc: "#2e382e",
-        };
+        return {};
     },
 };
 </script>
 
 <style lang="scss" scoped>
+.fixed {
+    position: fixed;
+    width: 100%;
+    margin: 0 auto;
+    background-color: $darkgreen;
+}
 .navbar {
     display: flex;
     justify-content: space-between;

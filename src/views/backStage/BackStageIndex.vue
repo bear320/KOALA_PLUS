@@ -126,7 +126,8 @@ article {
                 width: 100%;
                 margin: 0 10px;
                 text-align: left;
-                // h2 寫錯層級吃不到
+
+                // h2 寫錯層級吃不到，最下面有正確的
                 h2 {
                     margin-bottom: 0;
                     display: inline-block;

@@ -94,8 +94,7 @@ header {
             .list {
                 display: flex;
                 align-items: center;
-                margin-top: 10px;
-                li {
+                li:not(:last-child) {
                     a {
                         font-weight: bold;
                         color: $darkgreen;
@@ -122,9 +121,16 @@ header {
                         }
                     }
                 }
+                li:last-child {
+                    a {
+                        height: 100%;
+                        padding: 20px;
+                    }
+                }
                 .playgame {
                     position: fixed;
                     top: 80%;
+                    left: 80%;
                     user-select: none;
                     @include size(180px, auto);
 
