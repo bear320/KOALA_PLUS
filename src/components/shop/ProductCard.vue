@@ -57,40 +57,57 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.product-head {
-    position: relative;
-    &:hover img {
-        filter: brightness(0.8);
-    }
-    &:hover .btn-cart {
-        opacity: 1;
-    }
-    .product-img {
-        display: block;
-        text-decoration: none;
+.product-card {
+    margin-bottom: 50px;
+    .product-head {
+        position: relative;
+        margin-bottom: 25px;
+        &:hover img {
+            filter: brightness(0.8);
+        }
+        &:hover .btn-cart {
+            opacity: 1;
+        }
+        .product-img {
+            display: block;
+            text-decoration: none;
 
-        img {
-            width: 100%;
-            vertical-align: top;
-            transition: all 0.3s ease;
+            img {
+                width: 100%;
+                vertical-align: top;
+                transition: all 0.3s ease;
+            }
+        }
+        .btn-cart {
+            width: 40px;
+            height: 40px;
+            background-color: $btn-disable;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            border: 1px solid $green;
+            position: absolute;
+            bottom: 2%;
+            right: 2%;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            .md-cart {
+                color: $green;
+            }
         }
     }
-    .btn-cart {
-        width: 40px;
-        height: 40px;
-        background-color: $btn-disable;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        border-radius: 50%;
-        border: 1px solid $green;
-        position: absolute;
-        bottom: 2%;
-        right: 2%;
-        opacity: 0;
-        transition: opacity 0.3s ease;
-        .md-cart {
+
+    .product-body {
+        .product-name {
+            font-size: $h4;
+            margin-bottom: 10px;
+        }
+
+        .product-price {
+            font-size: $h3;
             color: $green;
+            font-weight: 700;
         }
     }
 }

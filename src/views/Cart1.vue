@@ -80,11 +80,14 @@
                                     alt=""
                                 />
                             </div>
-                            <router-link
+                            <!-- @click="checkOrder" -->
+                            <div
                                 to="/cart2"
                                 class="btn-paramy check-order"
-                                >確認訂單</router-link
+                                @click="checkOrder"
                             >
+                                確認訂單
+                            </div>
                         </div>
                         <Coupon
                             v-if="isShowCoupon"
@@ -177,6 +180,13 @@ export default {
             this.couponName = coupon.name;
             this.isShowCoupon = false;
         },
+        checkOrder() {
+            localStorage.setItem("pay", this.sumTotal - this.discount);
+
+            this.$router.push({
+                name: "cart2",
+            });
+        },
     },
 };
 </script>
@@ -194,6 +204,7 @@ export default {
 }
 main {
     .wrapper {
+        margin-bottom: 180px;
         h1,
         h3 {
             text-align: left;
