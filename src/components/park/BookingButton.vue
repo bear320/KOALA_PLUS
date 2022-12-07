@@ -17,6 +17,7 @@ export default {
 <style scoped>
 h2 {
     font-size: 2rem;
+    margin: 40px auto;
 }
 
 button {

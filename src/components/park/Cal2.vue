@@ -34,6 +34,11 @@
                         ]
                             ? '#979292'
                             : '#D8D8D8',
+                        cursor: notBookDate?.[
+                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                        ]
+                            ? 'default'
+                            : 'pointer',
                     }"
                 >
                     {{ day }}
@@ -245,6 +250,7 @@ export default {
 h2 {
     font-size: 40px;
     text-align: center;
+    font-weight: 600;
 }
 .button-wrapper {
     display: flex;
