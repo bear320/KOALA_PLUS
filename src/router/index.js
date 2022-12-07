@@ -228,6 +228,12 @@ const routes = [
         component: () => import("@/views/backStage/ProductEdit.vue"),
     },
     {
+        path: "/bs-coupon-list",
+        name: "CouponList",
+        // component: CouponList,
+        component: () => import("@/views/backStage/CouponList.vue"),
+    },
+    {
         path: "/bs-support-list",
         name: "supportList",
         // component: SupportList,
