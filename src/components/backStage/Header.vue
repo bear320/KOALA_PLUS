@@ -1,216 +1,176 @@
 <template>
-    <header id="backStage_navbar">
-        <Menu mode="horizontal" active-name="1" class="headernav">
-            <MenuItem name="9" class="logoli">
-                <router-link to="/bs-index" class="routerlink logo">
-                    <img src="@/assets/images/bglogo.svg" alt="KOALA+" />
-                </router-link>
+    <Menu mode="horizontal" v-color="'#fff'" v-bg-color="'#2e382e'">
+        <div class="wrapper navbar">
+            <MenuItem name="1" v-color="'#fff'">
+                <router-link to="/bs-index"> 首頁 </router-link>
             </MenuItem>
-            <Submenu name="1">
+            <Submenu name="2" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-article-list" class="routerlink">
-                        公告管理
-                    </router-link></template
-                >
-                <router-link to="/bs-article-edit" class="routerlink">
-                    <MenuItem name="3-1">新增文章</MenuItem>
-                </router-link>
+                    <router-link to="/bs-article-list">公告管理</router-link>
+                </template>
+                <MenuItem name="2-1">
+                    <router-link to="/bs-article-edit">新增文章</router-link>
+                </MenuItem>
             </Submenu>
-            <Submenu name="2">
+            <Submenu name="3" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-booking-list" class="routerlink">
+                    <router-link to="/bs-booking-list">
                         園區導覽管理
-                    </router-link></template
-                >
-                <router-link to="/bs-booking-dayoff" class="routerlink">
-                    <MenuItem name="3-1">新增休館日</MenuItem>
-                </router-link>
+                    </router-link>
+                </template>
+                <MenuItem name="3-1">
+                    <router-link to="/bs-booking-dayoff">
+                        新增休館日期
+                    </router-link>
+                </MenuItem>
             </Submenu>
-            <Submenu name="3">
+            <Submenu name="4" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-member-list" class="routerlink">
-                        會員管理
-                    </router-link></template
-                >
-                <router-link to="/bs-member-blacklist" class="routerlink">
-                    <MenuItem name="3-1">黑名單明細</MenuItem>
-                </router-link>
+                    <router-link to="/bs-member-list">會員管理</router-link>
+                </template>
+                <MenuItem name="4-1">
+                    <router-link to="/bs-member-blacklist">
+                        黑名單
+                    </router-link>
+                </MenuItem>
             </Submenu>
-            <Submenu name="4">
+            <Submenu name="5" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-koala-list" class="routerlink">
-                        無尾熊管理
-                    </router-link></template
-                >
-                <router-link to="/bs-koala-add" class="routerlink">
-                    <MenuItem name="3-1">新增無尾熊資訊</MenuItem>
-                </router-link>
+                    <router-link to="/bs-koala-list">無尾熊管理</router-link>
+                </template>
+                <MenuItem name="5-1">
+                    <router-link to="/bs-koala-add">新增無尾熊</router-link>
+                </MenuItem>
             </Submenu>
-            <Submenu name="5">
+            <Submenu name="6" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-support-list" class="routerlink">
-                        資助認養管理
-                    </router-link></template
-                >
-                <router-link to="/bs-support-statistic" class="routerlink">
-                    <MenuItem name="3-1">數據統計</MenuItem>
-                </router-link>
+                    <router-link to="/bs-support-list"
+                        >資助認養管理</router-link
+                    >
+                </template>
+                <MenuItem name="6-1">
+                    <router-link to="/bs-support-statistic"
+                        >數據統計</router-link
+                    >
+                </MenuItem>
             </Submenu>
-            <Submenu name="6">
+            <Submenu name="7" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-product-list" class="routerlink">
-                        商品管理
-                    </router-link></template
-                >
-                <router-link to="/bs-product-edit" class="routerlink">
-                    <MenuItem name="3-1">新增商品資訊</MenuItem>
-                </router-link>
-                <router-link to="/bs-product-edit" class="routerlink">
-                    <MenuItem name="3-1">優惠券管理</MenuItem>
-                </router-link>
+                    <router-link to="/bs-product-list">商品管理</router-link>
+                </template>
+                <MenuItem name="7-1">
+                    <router-link to="/bs-product-edit">新增商品</router-link>
+                </MenuItem>
+                <MenuItem name="7-2">
+                    <router-link to="/bs-coupon-list">優惠券管理</router-link>
+                </MenuItem>
             </Submenu>
-            <MenuItem name="7">
-                <router-link to="/bs-order-list" class="routerlink">
-                    訂單管理
-                </router-link>
+            <MenuItem name="8" v-color="'#fff'">
+                <router-link to="/bs-order-list">訂單管理</router-link>
             </MenuItem>
-
-            <Submenu name="8" class="Submenu">
+            <Submenu name="9" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-admin-list" class="routerlink">
-                        權限管理
-                    </router-link></template
-                >
-                <router-link to="/bs-admin-add" class="routerlink">
-                    <MenuItem name="3-1">新增管理員帳戶</MenuItem>
-                </router-link>
+                    <router-link to="/bs-admin-list">權限管理</router-link>
+                </template>
+                <MenuItem name="9-1">
+                    <router-link to="/bs-admin-add">新增管理員</router-link>
+                </MenuItem>
             </Submenu>
-        </Menu>
-    </header>
+            <MenuItem name="10" v-color="'#fff'">
+                <router-link to="">登出</router-link>
+            </MenuItem>
+        </div>
+    </Menu>
 </template>
 
 <script>
 export default {
     data() {
         return {
-            items: [
-                { name: "公告管理", source: "bs-article-list" },
-                { name: "園區導覽管理", source: "bs-booking-list" },
-                { name: "會員管理", source: "bs-member-list" },
-                { name: "無尾熊管理", source: "bs-koala-list" },
-                { name: "資助認養管理", source: "bs-support-list" },
-                { name: "商品管理", source: "bs-product-list" },
-                { name: "訂單管理", source: "bs-order-list" },
-                { name: "權限管理", source: "bs-admin-list" },
-            ],
-            toggle: true,
-            i: 0,
+            bgc: "#2e382e",
         };
     },
 };
 </script>
 
 <style lang="scss" scoped>
-header {
-    // #backStage_navbar {
-    box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
-    z-index: 999;
-    position: fixed;
-    background-color: $darkgreen;
-    width: 100%;
-
-    .headernav {
-        background-color: $darkgreen;
-        @include size(100%, 60px);
-        box-sizing: border-box;
-        display: flex;
-        justify-content: space-around;
-        .logoli {
-            .logo {
-                @include size(75%, 100%);
-                display: inline-block;
-                text-align: center;
-
-                img {
-                    @include size(100%, 100%);
-                }
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    li.ivu-menu-item {
+        position: relative;
+        &::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 0;
+            border-bottom: 2px solid #fff;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            display: none;
+        }
+        &:hover {
+            border: none;
+            &::after {
+                display: block;
             }
         }
-
-        .routerlink {
-            color: #ffffff;
+        a {
+            color: #fff;
         }
-        .ivu-menu-item:hover {
-            border-bottom: 2px solid #ffffff;
+    }
+    li.ivu-menu-submenu {
+        position: relative;
+        &::after {
+            position: absolute;
+            content: "";
+            width: 100%;
+            height: 0;
+            border-bottom: 2px solid #fff;
+            bottom: 3px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 999;
+            display: none;
         }
-        .ivu-menu-submenu:hover {
-            border-bottom: 2px solid #ffffff;
+        &:hover {
+            border: none;
+            &::after {
+                display: block;
+            }
         }
-
-        .list {
-            display: flex;
-            align-items: center;
-            li {
-                &:hover {
-                    color: $darkgreen;
-                }
-
-                a {
-                    font-weight: bold;
-                    color: #ffffff;
-                    padding: 20px;
-                    height: 60px;
-                    vertical-align: top;
-                    display: inline-block;
-
+        .ivu-menu-submenu-title {
+            a {
+                color: #fff;
+            }
+        }
+        .ivu-select-dropdown {
+            .ivu-menu-drop-list {
+                .ivu-menu-item {
                     &:hover {
-                        color: $darkgreen;
-                        background-color: #ffffff;
-                    }
-
-                    &.router-link-exact-active {
-                        color: $darkgreen;
-                        background-color: #ffffff;
-                        &::before {
-                            content: "　";
-                            width: 30px;
-                            // background-image: url(../assets/images/header/Leaf.svg);
-                            background-size: contain;
-                            background-repeat: no-repeat;
-                            margin-right: 10px;
-                            position: absolute;
-                            transform: translate(-25px, 0);
+                        border: none;
+                        background: $green;
+                        a {
+                            color: #fff;
+                        }
+                        &::after {
+                            display: none;
                         }
                     }
-                }
-            }
-            // .routerlink {
-            //     position: fixed;
-            //     top: 80%;
-            //     user-select: none;
-            //     @include size(180px, auto);
-
-            //     img {
-            //         width: 100%;
-            //     }
-            // }
-        }
-        .icon {
-            display: flex;
-            height: 60px;
-            li {
-                @include size(40px, 60px);
-
-                .ivu-icon {
-                    margin-top: 50%;
-                    transform: scale(2);
-                    color: #333;
-                    &:hover {
-                        color: $green;
+                    a {
+                        color: lighten(#333, 20%);
                     }
                 }
             }
         }
     }
+}
+// i.ivu-icon.ivu-icon-ios-arrow-down.ivu-menu-submenu-title-icon {
+//     color: red;
+// }
+i.ivu-icon.ivu-icon-ios-arrow-down.ivu-menu-submenu-title-icon:hover {
+    color: red;
 }
 </style>
