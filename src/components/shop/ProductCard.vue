@@ -1,5 +1,5 @@
 <template lang="">
-    <div :class="col">
+    <div :class="`${col}`">
         <div class="product-card">
             <div class="product-head">
                 <router-link class="product-img" :to="`/shop/${proId}`">
