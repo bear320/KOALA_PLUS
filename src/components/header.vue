@@ -161,7 +161,7 @@ header {
                 flex-direction: column;
                 justify-content: space-between;
                 @include size(20px, 20px);
-                margin: auto 20%;
+                margin: auto 30px;
                 .hb {
                     border-top: solid 5px $green;
                 }
@@ -171,7 +171,7 @@ header {
             }
             div {
                 .list {
-                    @include size(100vw, 40vh);
+                    @include size(100vw, 70vh);
                     flex-direction: column;
                     background-color: rgba(190, 214, 213, 0.6);
                     backdrop-filter: blur(10px);
@@ -181,7 +181,9 @@ header {
                     justify-content: space-around;
 
                     li {
-                        transform: translate(0, 50%);
+                        padding: 10px 0;
+                        display: block;
+                        width: 100%;
 
                         .playgame {
                             position: relative;
@@ -189,7 +191,7 @@ header {
                             left: auto;
                             width: 15vw;
                             margin: auto;
-                            transform: translate(0, -20%);
+                            transform: translateY(50%);
 
                             img {
                                 width: fit-content;

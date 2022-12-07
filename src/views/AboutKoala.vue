@@ -1,18 +1,18 @@
 <template>
-   <Header />
-   <article  class="nav-space">
-    <div
+    <Header />
+    <article class="nav-space">
+        <div
             class="banner"
             :style="{
                 backgroundImage:
                     'url(' + require('@/assets/images/banner2.jpg') + ')',
             }"
         ></div>
-   </article>
-  
+    </article>
+
     <div class="content">
         <h1>Quiz</h1>
-        
+
         <Collapse v-model="value">
             <Panel name="1">
                 無尾熊的尾巴有什麼作用？
@@ -51,42 +51,48 @@
     <div class="bg-text">
         <div class="bg">
             <div class="ab-tree1">
-                <img src="../assets/images/aboutkoala/background-tree.png" alt="">
+                <img
+                    src="../assets/images/aboutkoala/background-tree.png"
+                    alt=""
+                />
             </div>
             <div class="ab-tree2">
-                <img src="../assets/images/aboutkoala/background-tree.png" alt="">
+                <img
+                    src="../assets/images/aboutkoala/background-tree.png"
+                    alt=""
+                />
             </div>
-    </div>
-    <div class="test-block">
-        <div class="test">
-            <form class="card card-ab">
-                <div v-if="questionIndex < questions.length">
-                    <h4 class="question">{{ question.question }}</h4>
-                    <div
-                        v-for="c of question.choices"
-                        :key="c"
-                        class="choice btn-lowest"
-                    >
-                        <input
-                            type="radio"
-                            name="choice"
-                            v-model="answer"
-                            :value="c"
-                        />
-                        {{ c }}
+        </div>
+        <div class="test-block">
+            <div class="test">
+                <form class="card card-ab">
+                    <div v-if="questionIndex < questions.length">
+                        <h4 class="question">{{ question.question }}</h4>
+                        <div
+                            v-for="c of question.choices"
+                            :key="c"
+                            class="choice btn-lowest"
+                        >
+                            <input
+                                type="radio"
+                                name="choice"
+                                v-model="answer"
+                                :value="c"
+                            />
+                            {{ c }}
+                        </div>
                     </div>
-                </div>
-                <div v-else>
-                    <div class="btn-paramy" @click="restart">重做</div>
-                </div>
-                <div class="btn-paramy btn-ab" @click="submit">送出</div>
-            </form>
-            <div v-if="questionIndex === 5 && score === 5">aaaaa</div>
-            <p>得分 : {{ score }} 分</p>
+                    <div v-else>
+                        <div class="btn-paramy" @click="restart">重做</div>
+                    </div>
+                    <div class="btn-paramy btn-ab" @click="submit">送出</div>
+                </form>
+                <div v-if="questionIndex === 5 && score === 5">aaaaa</div>
+                <p>得分 : {{ score }} 分</p>
+            </div>
         </div>
     </div>
-    </div>
-    
+
     <Footer />
 </template>
 
@@ -169,14 +175,17 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+.banner {
+    @include bgSetting(center, 90%);
+}
 .content {
     padding: 60px;
-    @include m(){
+    @include m() {
         padding: 10px;
     }
 }
-.bg-text{
-    @include m(){
+.bg-text {
+    @include m() {
         display: flex;
         flex-direction: column-reverse;
     }
@@ -184,65 +193,62 @@ export default {
 .btn-pamary {
     padding: 10px;
     .btn-ab {
-    @include btnSize(150px);
-    @include m(){
-        width: 80%; 
-        margin: auto;
+        @include btnSize(150px);
+        @include m() {
+            width: 80%;
+            margin: auto;
+        }
     }
-}
 }
 
 .card-ab {
     margin: auto;
     padding: 50px;
     width: 500px;
-    @include m(){
-        width: 80%; 
+    @include m() {
+        width: 80%;
         margin: auto;
     }
 }
 .question {
     margin: 10px;
 }
-.test{
+.test {
     margin-top: -300px;
-    @include m(){
+    @include m() {
         margin: 0px;
     }
-    p{
+    p {
         margin: 30px;
     }
 }
 .choice {
     margin: 10px;
 }
-.bg{
+.bg {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    @include m(){
+    @include m() {
         height: 200px;
     }
-    
-    .ab-tree2 img{
-        -moz-transform:scaleX(-1);
-        -webkit-transform:scaleX(-1);
-        -o-transform:scaleX(-1);
-        transform:scaleX(-1);    
-       
+
+    .ab-tree2 img {
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        transform: scaleX(-1);
     }
 }
-.bg img{
-    @include m(){
+.bg img {
+    @include m() {
         width: 100%;
-        height: 200px; 
+        height: 200px;
     }
 }
-body h1{
+body h1 {
     font-family: "Inkfree";
     font-size: 30vh;
     color: $lightgreen;
-    }
-
-
-</style>    
+}
+</style>
