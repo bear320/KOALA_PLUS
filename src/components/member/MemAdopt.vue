@@ -13,7 +13,7 @@
                             <th>無尾熊名字</th>
                             <th class="koala_id">無尾熊編號</th>
                             <th class="sup_date">資助認養時間</th>
-                            <th>資助認養金額</th>
+                            <th class="sup_price">資助認養金額</th>
                             <th>下載領養證明</th>
                         </tr>
                     </thead>
@@ -25,7 +25,7 @@
                             <td>{{ item.koala_name }}</td>
                             <td class="koala_id">{{ item.koala_id }}</td>
                             <td class="sup_date">{{ item.sup_date }}</td>
-                            <td>{{ item.sup_price }}</td>
+                            <td class="sup_price">{{ item.sup_price }}</td>
                             <td>
                                 <Icon
                                     type="md-download"
@@ -101,6 +101,16 @@ table {
             padding: 10px;
         }
         .koala_id {
+            @include m() {
+                display: none;
+            }
+        }
+        .sup_date {
+            @include m() {
+                display: none;
+            }
+        }
+        .sup_price {
             @include m() {
                 display: none;
             }
