@@ -191,10 +191,9 @@ header {
                             left: auto;
                             width: 15vw;
                             margin: auto;
-                            transform: translateY(50%);
 
                             img {
-                                width: fit-content;
+                                width: initial;
                             }
                         }
                     }
@@ -208,7 +207,7 @@ header {
 }
 @media (max-width: 768px) {
     header nav .hamburger {
-        margin: auto 10%;
+        margin: auto 15px;
     }
 }
 </style>
