@@ -17,6 +17,7 @@
         <router-link to="/bs-order-list">訂單管理</router-link>
         <router-link to="/bs-product-list">周邊商品管理</router-link>
         <router-link to="/bs-product-edit">新增／編輯周邊商品</router-link>
+        <router-link to="/bs-coupon-list">優惠券管理</router-link>
         <router-link to="/bs-support-list">資助認養管理</router-link>
         <router-link to="/bs-support-info">資助認養詳情</router-link>
         <router-link to="/bs-support-statistic">資助認養數據</router-link>
