@@ -465,9 +465,6 @@ export default {
         font-size: 12vw;
         font-family: "Inkfree";
         color: $green;
-        @include d {
-            margin-top: 20vh;
-        }
     }
     .newscards {
         display: flex;
@@ -491,6 +488,9 @@ export default {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
+            }
+            @include m {
+                height: 25vh;
             }
 
             &:hover {
@@ -530,6 +530,9 @@ export default {
                     transform: translateY(0);
                     width: 75%;
                     margin-left: 10px;
+                }
+                @include m {
+                    width: 95%;
                 }
                 .article-title {
                     font-size: $h4;
