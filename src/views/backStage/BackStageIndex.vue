@@ -126,6 +126,7 @@ article {
                 width: 100%;
                 margin: 0 10px;
                 text-align: left;
+                // h2 寫錯層級吃不到
                 h2 {
                     margin-bottom: 0;
                     display: inline-block;
@@ -200,6 +201,17 @@ article {
                 @extend %detail;
                 background-color: #aee0bb;
                 bottom: 12%;
+            }
+        }
+    }
+}
+.cards {
+    div {
+        .card {
+            a {
+                h2 {
+                    line-height: 1.5;
+                }
             }
         }
     }

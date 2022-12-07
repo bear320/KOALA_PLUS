@@ -1,14 +1,18 @@
+// layout
+@import "layout/reset";
+@import "layout/grid";
+
 // base
 @import "base/color";
 @import "base/common";
 @import "base/font";
 @import "base/rwd";
 
-//commponts
+// commponts
 @import "components/btn";
 @import "components/card";
 @import "components/form";
 @import "components/collapse";
 
-//mixin
+// mixin
 @import "mixin/mixin";

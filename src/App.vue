@@ -4,8 +4,6 @@
 </template>
 
 <style lang="scss">
-@import "../src/assets/layout/reset.css";
-@import "../src/assets/layout/grid.css";
 #app {
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
