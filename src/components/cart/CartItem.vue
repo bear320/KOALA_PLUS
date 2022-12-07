@@ -1,0 +1,146 @@
+<template lang="">
+    <div class="cart-item">
+        <Row align="middle">
+            <Col span="9">
+                <Row class="gap" justify="center" align="middle">
+                    <img
+                        class="product-img"
+                        src="https://fakeimg.pl/300x200/200"
+                    />
+                    <div class="product-name">{{ itemName }}</div>
+                </Row>
+            </Col>
+            <Col span="3">
+                <div class="product-price">${{ itemPrice }}</div>
+            </Col>
+            <Col span="6"
+                ><div class="quantity">
+                    <Icon
+                        class="md-remove"
+                        type="md-remove"
+                        @click="changeQuantity('-')"
+                    />
+                    <input type="number" v-model="itemQuantity" />
+                    <Icon
+                        class="md-add"
+                        type="md-add"
+                        @click="changeQuantity('+')"
+                    /></div
+            ></Col>
+            <Col span="6">${{ itemTotal }}</Col>
+            <div class="md-close">
+                <Icon type="md-close" color="#333" @click="deleteItem" />
+            </div>
+        </Row>
+    </div>
+</template>
+<script>
+export default {
+    props: ["prodId", "prodImg", "prodName", "prodQuantity", "prodPrice"],
+    data() {
+        return {
+            itemId: this.prodId,
+            itemImage: this.prodImg,
+            itemName: this.prodName,
+            itemQuantity: this.prodQuantity,
+            itemPrice: this.prodPrice,
+        };
+    },
+    computed: {
+        itemTotal() {
+            return this.itemQuantity * this.itemPrice;
+        },
+    },
+    methods: {
+        changeQuantity(operator) {
+            let cartIndex = this.$store.state.cart.findIndex((item) => {
+                return item.id === this.itemId;
+            });
+            if (operator === "-") {
+                this.itemQuantity > 1
+                    ? (this.itemQuantity -= 1)
+                    : this.itemQuantity;
+            } else {
+                this.itemQuantity += 1;
+            }
+            this.$store.commit({
+                type: "updateItemQuantity",
+                index: cartIndex,
+                quantity: this.itemQuantity,
+            });
+        },
+        deleteItem() {
+            this.$store.commit("deleteCartItem", this.itemId);
+        },
+    },
+};
+</script>
+<style lang="scss" scoped>
+.cart-item {
+    background-color: #ffffffdd;
+    font-size: $p;
+    padding: 20px 0;
+    color: $font_color;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    position: relative;
+
+    .gap {
+        gap: 20px;
+    }
+
+    .product-img {
+        width: 100px;
+        height: 100px;
+    }
+
+    .product-name {
+        width: 140px;
+    }
+
+    .product-price {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .quantity {
+        position: relative;
+        display: inline-block;
+        input {
+            text-align: center;
+            width: 100px;
+        }
+        input[type="number"]::-webkit-outer-spin-button,
+        input[type="number"]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+        .md-remove {
+            position: absolute;
+            top: 50%;
+            left: 0%;
+            transform: translate(0%, -50%);
+            color: $font_color;
+            border-right: 1px solid black;
+            padding: 5px;
+        }
+        .md-add {
+            position: absolute;
+            top: 50%;
+            right: 0%;
+            transform: translate(0%, -50%);
+            color: $font_color;
+            border-left: 1px solid black;
+            padding: 5px;
+        }
+    }
+
+    .md-close {
+        position: absolute;
+        top: 50%;
+        right: 3%;
+        transform: translate(0%, -50%);
+    }
+}
+</style>

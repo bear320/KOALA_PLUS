@@ -8,6 +8,7 @@
             <div class="row">
                 <div class="col-4">
                     <h1 class="title">週邊商城</h1>
+                    <h1>{{ this.$store.getters.cartNumber }}</h1>
                     <div class="category-box">
                         <div
                             class="category-item"

@@ -167,7 +167,7 @@ const routes = [
         component: KoalaAdd,
     },
     {
-        path: "/bs-koala-edit",
+        path: "/bs-koala-edit/:id",
         name: "koalaEdit",
         component: KoalaEdit,
     },
@@ -202,7 +202,7 @@ const routes = [
         component: SupportList,
     },
     {
-        path: "/bs-support-info",
+        path: "/bs-support-info/:id",
         name: "supportInfo",
         component: SupportInfo,
     },
@@ -216,6 +216,11 @@ const routes = [
 const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
+    scrollBehavior(to, from, savedPosition) {
+        return {
+            top: 0,
+        };
+    },
 });
 
 export default router;

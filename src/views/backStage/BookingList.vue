@@ -1,46 +1,60 @@
 <template>
     <Header />
-    <article class="bs-nav-space wrapper">
-        <h1>園區導覽管理</h1>
-        <div class="todo">
+    <section class="bs-nav-space wrapper title-n-action">
+        <div class="title">
+            <h1>園區導覽管理</h1>
+            <img src="@/assets/images/backstageindex/articleIcon.png" alt="" />
+            <h2>預約總覽</h2>
+        </div>
+        <div class="action">
             <a href="/bs-article-edit" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></a>
-            <select name="category" id="articlesCategory">
-                <option value="all">所有文章</option>
-                <option value="news">最新消息</option>
-                <option value="parkinfo">園區資訊</option>
-                <option value="moneyinfo">資金運用</option>
+            <div class="search">
+                <input type="search" name="" id="" placeholder="搜尋" />
+            </div>
+            <select name="" id="">
+                <option value="" selected>排列方式</option>
+                <option value="">已預約訂單</option>
+                <option value="">休館日訂單</option>
             </select>
         </div>
-        <section>
-            <h2>預約總覽</h2>
-            <div class="bstitle">
-                <h3 class="star">訂單編號</h3>
-                <h3 class="article">姓名</h3>
-                <h3 class="date">日期</h3>
-                <h3 class="tag">分類</h3>
-                <h3 class="operator">操作</h3>
-            </div>
-            <div class="content" v-for="article in articles" :key="article">
-                <p class="star"></p>
-                <div class="article">
-                    <p>{{ article.title }}</p>
-                    <p>{{ article.content }}</p>
-                </div>
-                <div class="pic"><img :src="article.img" alt="" /></div>
-                <p class="date">{{ article.date }}</p>
-                <p class="tag">{{ article.tag }}</p>
-                <div class="operator">
-                    <img src="@/assets/images/icon/upload.svg" alt="" />
+    </section>
+    <section class="wrapper table">
+        <div class="bs-title">
+            <h3 class="bookNum">編號</h3>
+            <h3 class="bookName">預約者</h3>
+            <h3 class="bookDate">日期</h3>
+            <h3 class="bookPpl">人數</h3>
+            <h3 class="bookConnect">Email / 電話</h3>
+            <h3 class="bookStatus">狀態</h3>
+            <h3 class="bookEdit">編輯</h3>
+        </div>
+        <div class="bs-list" v-for="list in booklist" :key="list.id">
+            <p>{{ list.num }}</p>
+            <p>{{ list.name }}</p>
+            <!-- <p>
+                <router-link
+                    :to="`/bs-support-info/${list.number}`"
+                    target="_blank"
+                >
+                    {{ list.number }}
+                </router-link>
+            </p> -->
+            <p>{{ list.date }}</p>
+            <p>{{ list.ppl }}</p>
+            <p>{{ list.email }}<br />{{ list.mobile }}</p>
+            <p>{{ list.status }}</p>
+            <p>
+                <router-link
+                    :to="`/bs-support-info/${list.number}`"
+                    target="_blank"
+                >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
-                </div>
-            </div>
-        </section>
-        <section>
-            <h2>已上傳</h2>
-        </section>
-    </article>
+                </router-link>
+            </p>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -51,22 +65,33 @@ export default {
     },
     data() {
         return {
-            articles: [
+            booklist: [
                 {
-                    img: require("@/assets/images/about/3.jpg"),
-                    title: "一隻無尾熊寶寶出生了",
-                    tag: "#最新消息",
-                    date: "2022/12/25",
-                    content:
-                        "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。「為了迎接三隻無尾熊寶寶誕生，動物園特別精心打造了育嬰房’」趙明杰笑著說，為讓......",
+                    num: "B221122",
+                    name: "Sara",
+                    date: "2022-12-01",
+                    ppl: 5,
+                    email: "sara168@gmail.com",
+                    mobile: "0988168168",
+                    status: "已預約",
                 },
                 {
-                    img: require("@/assets/images/about/8.jpg"),
-                    title: "園區公休通知",
-                    tag: "#園區消息",
-                    date: "2022/12/13",
-                    content:
-                        "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日，造成不便盡請見諒。",
+                    num: "B221230",
+                    name: "Amy",
+                    date: "2022-12-30",
+                    ppl: 5,
+                    email: "amy888@gmail.com",
+                    mobile: "09884433552",
+                    status: "已預約",
+                },
+                {
+                    num: "B221231",
+                    name: "koala+",
+                    date: "2022-12-31",
+                    ppl: 0,
+                    email: "",
+                    mobile: "",
+                    status: "休館",
                 },
             ],
         };
@@ -75,79 +100,70 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-html article {
+.title-n-action {
+    margin-bottom: 20px;
     text-align: left;
-
-    h1 {
-        display: inline-block;
-        width: 25%;
-        background-image: url(@/assets/images/backstageindex/articleIcon.png);
-        @include bgSetting(contain, right);
-    }
-    .todo {
-        float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+        width: 400px;
         display: flex;
+        column-gap: 20px;
+        flex-wrap: wrap;
+        h1 {
+            display: block;
+        }
+        h2 {
+            padding-left: 500px;
+            color: $green;
+            @include borderLeft(30px);
+        }
         img {
-            margin-right: 15px;
+            margin-left: 5px;
+            height: 67.5px;
         }
     }
-    h2 {
-        color: $green;
-        @include borderLeft(30px);
+    .action {
+        display: flex;
+        column-gap: 15px;
     }
-    section {
+}
+.table {
+    .bs-title {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $darkgreen;
+        color: white;
+        display: flex;
+        justify-items: center;
+        align-items: center;
         h3 {
-            margin-bottom: 0;
-            padding-left: 10px;
+            display: block;
+            width: calc(100% / 7);
         }
-        .star {
-            width: 5%;
-        }
-        .article {
-            width: 45%;
+    }
 
-            p:first-child {
-                font-weight: 700;
-                font-size: $h4;
-            }
-        }
-        .pic,
-        .date {
-            width: 15%;
-
-            img {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        .tag,
-        .operator {
-            width: 10%;
-            display: flex;
-
-            img {
-                margin: 10px;
-
-                &:hover {
-                    stroke: $green;
+    .bs-list {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 10px 0;
+        padding-bottom: 10px;
+        border-bottom: solid 1px $lightgreen;
+        p {
+            display: block;
+            width: calc(100% / 7);
+            a {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                margin: 0 auto;
+                img {
+                    margin: 10px;
+                    vertical-align: top;
                 }
             }
-        }
-        .bstitle {
-            display: flex;
-            width: 100%;
-            background-color: $darkgreen;
-            color: white;
-            border-radius: 10px;
-        }
-
-        .content {
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: solid 1px $lightgreen;
         }
     }
 }
