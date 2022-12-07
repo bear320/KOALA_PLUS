@@ -18,7 +18,7 @@
             </Row>
             <Row :gutter="40">
                 <Col span="10">
-                    <div class="order-detail">
+                    <div class="card order-detail">
                         <div
                             class="order-item"
                             v-for="item in carts"
@@ -51,7 +51,7 @@
                 </Col>
                 <Col span="14">
                     <div>
-                        <div class="receiv-info">
+                        <div class="card receiv-info">
                             <Row>
                                 <Col span="24">
                                     <div class="member-form">
@@ -139,7 +139,7 @@ export default {
     background: url(@/assets/images/backgroundleaf.jpg) no-repeat center/cover;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.3;
     position: fixed;
     top: 0;
     left: 0;
@@ -172,7 +172,6 @@ main {
         }
 
         .order-detail {
-            background-color: #ffffffdd;
             padding: 30px 35px;
             border-radius: 10px;
 
@@ -187,7 +186,6 @@ main {
         }
 
         .receiv-info {
-            background-color: #ffffffdd;
             font-size: $h4;
             margin-bottom: 30px;
             border-radius: 10px;
@@ -221,6 +219,9 @@ main {
                 input {
                     width: 385px;
                 }
+            }
+            .btn-paramy {
+                @include btnSize(20px);
             }
         }
     }

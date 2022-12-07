@@ -14,7 +14,7 @@
             <Row :gutter="40">
                 <Col span="15">
                     <div>
-                        <div class="cart-title">
+                        <div class="card cart-title">
                             <Row>
                                 <Col span="9">品項</Col>
                                 <Col span="3">單價</Col>
@@ -35,7 +35,7 @@
                 </Col>
 
                 <Col span="9">
-                    <div class="create-order">
+                    <div class="card create-order">
                         <div class="coupon">
                             <div class="coupon-text">優惠碼</div>
                             <div class="coupon-form">
@@ -186,7 +186,7 @@ export default {
     background: url(@/assets/images/backgroundleaf.jpg) no-repeat center/cover;
     width: 100%;
     height: 100%;
-    opacity: 0.5;
+    opacity: 0.3;
     position: fixed;
     top: 0;
     left: 0;
@@ -194,6 +194,7 @@ export default {
 }
 main {
     .wrapper {
+        padding-bottom: 10vh;
         h1,
         h3 {
             text-align: left;
@@ -201,7 +202,7 @@ main {
             color: $font_color;
         }
         h1 {
-            margin-top: 170px;
+            margin-top: 80px;
         }
         h3 {
             color: $green;
@@ -218,7 +219,6 @@ main {
             }
         }
         .cart-title {
-            background-color: #ffffffdd;
             padding: 20px 0;
             font-size: $h4;
             margin-bottom: 30px;
@@ -227,7 +227,6 @@ main {
         }
 
         .coupon {
-            background-color: #ffffffdd;
             padding: 30px 35px;
             border-radius: 10px;
             a {
@@ -251,13 +250,13 @@ main {
                 }
                 .coupon-submit {
                     font-size: $p;
-                    padding: 0 20px;
+                    @include btnSize(20px);
                 }
             }
 
             .coupon-check {
                 text-align: left;
-                margin-bottom: 60px;
+                margin-bottom: 20px;
                 .check-link {
                     font-weight: 700;
                     color: $green;

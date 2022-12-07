@@ -1,9 +1,7 @@
 <template lang="">
     <Header></Header>
     <main class="nav-space">
-        <div>
-            <div class="banner-img banner"></div>
-        </div>
+        <div class="banner banner-img"></div>
         <div class="wrapper">
             <div class="row">
                 <div class="col-4">
@@ -184,7 +182,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .banner-img {
-    background: url(@/assets/images/shop/Koalas_2.png) no-repeat center/cover;
+    background-image: url(@/assets/images/banner1.jpg);
+    @include bgSetting(cover, center);
     margin-bottom: 100px;
 }
 

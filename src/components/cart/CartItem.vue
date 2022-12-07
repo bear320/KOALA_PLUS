@@ -1,5 +1,5 @@
 <template lang="">
-    <div class="cart-item">
+    <div class="card cart-item">
         <Row align="middle">
             <Col span="9">
                 <Row class="gap" justify="center" align="middle">

@@ -305,7 +305,7 @@ export default {
         background-image: url(@/assets/images/index/forest-fire.jpg);
         // background-attachment: fixed;
         transition: 2s;
-        @include bgSetting(cover, 0 -100px);
+        @include bgSetting(cover, bottom);
         @include d {
             @include size(100vw, 80vh);
             margin-top: 0;
@@ -333,7 +333,8 @@ export default {
         }
     }
     .fire + p {
-        margin-top: 70vh;
+        margin-top: 80vh;
+        width: 30vw;
 
         @include d {
             margin-top: 20px;
@@ -363,7 +364,7 @@ export default {
         background-image: url(@/assets/images/index/koalahelping.jpg);
         // background-attachment: fixed;
         transition: 2s;
-        @include bgSetting(cover, center);
+        @include bgSetting(cover, right);
         @include d {
             @include size(100vw, 75vh);
             background-attachment: local;
