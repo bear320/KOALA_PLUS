@@ -1,64 +1,53 @@
 <template>
     <Header />
-    <article class="bs-nav-space wrapper">
-        <h1>權限管理</h1>
-        <div class="todo">
+    <section class="bs-nav-space wrapper title-n-action">
+        <div class="title">
+            <h1>權限管理</h1>
+            <img src="@/assets/images/backstageindex/adminIcon.png" alt="" />
+        </div>
+        <div class="action">
             <div class="search">
-                <input
-                    class="search-bar"
-                    type="text"
-                    name="search"
-                    id="search"
-                    placeholder="搜尋"
-                />
+                <input type="search" name="" id="" placeholder="搜尋" />
             </div>
-            <select name="category" id="articlesCategory">
+            <select name="" id="">
                 <option value="all">所有人員</option>
                 <option value="news">登入時間排序</option>
             </select>
         </div>
-        <section>
-            <!-- 標頭 -->
-            <h2>管理員總覽</h2>
-            <div class="bstitle">
-                <h3 class="idname-top">管理員ID</h3>
-                <h3 class="article">管理員姓氏</h3>
-                <h3 class="pic">管理員名字</h3>
-                <h3 class="date">最後登入日期</h3>
-                <h3 class="tag">權限允許狀態</h3>
-            </div>
-            <div class="content-top">
-                <p class="idname-t">00000</p>
-                <p class="fristname-t">超級管理員</p>
-                <p class="lastname-t">＃總經理</p>
-                <p class="date-t">2022/12/15</p>
-                <p class="tag">無法變更權限</p>
-                <div class="state-t">
+    </section>
+    <section class="wrapper table">
+        <div class="bs-title">
+            <h3 class="idname-top">管理員ID</h3>
+            <h3 class="article">管理員姓氏</h3>
+            <h3 class="pic">管理員名字</h3>
+            <h3 class="date">最後登入日期</h3>
+            <h3 class="tag">權限允許狀態</h3>
+        </div>
+        <!-- 第一行 -->
+        <div class="content-top">
+                <div class="idname-t">00000</div>
+                <div class="fristname-t">超級管理員</div>
+                <div class="lastname-t">＃總經理</div>
+                <div class="date-t">2022/12/15</div>
+                <div class="tagsw-1">
+                    <p class="tag">無法變更權限</p>
                     <Switch loading :model-value="true" true-color="#337a7d" />
-                </div>
-            </div>
-            <!-- 內容 -->
-            <div class="content" v-for="article in articles" :key="article">
-                <p class="idname">
-                    {{ article.idname }}
-                </p>
-                <div class="fristname">
-                    <p>{{ article.fristname }}</p>
-                </div>
-                <div class="lastname">
-                    <p>{{ article.lastname }}</p>
-                </div>
-                <div class="date">
-                    <p>{{ article.date }}</p>
-                </div>
-                <p class="tag">
-                    {{ article.tag }}
-                </p>
-                <div class="state">
+                </div>    
+        </div>
+        <!-- 內容 -->
+        <div class="bs-list" v-for="koala in koalas" :key="koala.id">
+            <div>{{ koala.idname }}</div>
+            <div>{{ koala.fristname }}</div>
+            <div>{{ koala.lastname }}</div>
+            <div>{{ koala.date }}</div>
+            
+            <div class="tagsw">
+                <div class="tagsw-tag">{{ koala.tag }}</div>
+                <div>
                     <Switch
                         size="large"
                         true-color="#337a7d"
-                        :before-change="handleBeforeChange"
+                        v-model="koala.listed" :before-change="handleBeforeChange"
                     >
                         <template #open>
                             <span>ON</span>
@@ -69,16 +58,19 @@
                     </Switch>
                 </div>
             </div>
-        </section>
-    </article>
+        </div>
+    </section>
 </template>
 
 <script>
 import Header from "@/components/backStage/Header.vue";
 export default {
+    components: {
+        Header,
+    },
     data() {
         return {
-            articles: [
+            koalas: [
                 {
                     idname: "P00001",
                     fristname: "熊",
@@ -109,6 +101,7 @@ export default {
                 },
             ],
         };
+        
     },
     methods: {
         handleBeforeChange() {
@@ -123,127 +116,98 @@ export default {
             });
         },
     },
-
-    components: {
-        Header,
-    },
+    
 };
+
 </script>
 
 <style lang="scss" scoped>
-html article {
+.title-n-action {
+    margin-bottom: 20px;
     text-align: left;
-
-    h1 {
-        display: inline-block;
-        width: 25%;
-        background-image: url(@/assets/images/backstageindex/articleIcon.png);
-        @include bgSetting(contain, right);
-    }
-    .todo {
-        float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
         display: flex;
-    }
-    h2 {
-        color: $green;
-        @include borderLeft(30px);
-    }
-    section {
-        h3 {
-            margin-bottom: 0;
-            padding-left: 10px;
+        column-gap: 20px;
+        h1 {
+            display: block;
+            width: fit-content;
         }
-
-        .pic,
-        .date {
-            img {
-                width: 120px;
-                height: 120px;
+        img {
+            height: 67.5px;
+        }
+    }
+    .action {
+        display: flex;
+        align-items: center;
+        column-gap: 15px;
+        img {
+            vertical-align: top;
+        }
+    }
+}
+.table {
+    .bs-title {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $darkgreen;
+        color: white;
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        h3 {
+            display: block;
+            width: calc(100% / 5);
+        }
+    }
+    .bs-list {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 20px 0;
+        padding-bottom: 20px;
+        border-bottom: solid 1px $lightgreen;
+        .tagsw{
+            display: flex;
+            justify-content: center;
+            .tagsw-tag{
+                width: 80px;
             }
         }
-
-        .tag,
-        .operator {
-            display: flex;
-
-            img {
-                margin: 10px;
-
-                &:hover {
-                    stroke: $green;
+        div{
+            display: block;
+            width: calc(100% / 5);
+            font-size: 15px;
+            a {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                margin: 0 auto;
+                img {
+                    margin: 10px;
+                    vertical-align: top;
                 }
             }
         }
-        .bstitle {
-            display: flex;
-            justify-content: center;
-            width: 100%;
-            background-color: $darkgreen;
-            color: white;
-            border-radius: 10px;
-            h3 {
-                width: 20%;
-            }
-        }
-        .content-top {
-            display: flex;
-            margin: 0px 50px;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: solid 1px $lightgreen;
-            .idname-t {
-                width: 25%;
-            }
-            .fristname-t {
-                width: 30%;
-            }
-            .lastname-t {
-                width: 30%;
-            }
-            .date-t {
-                width: 20%;
-            }
-            .tag-t {
-                width: 15%;
-            }
-            .state-t {
-                width: 10%;
-            }
-        }
-
-        .content {
-            margin: 0px 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: solid 1px $lightgreen;
-        }
     }
 }
-.idname {
-    width: 25%;
-}
-.fristname {
-    width: 30%;
-}
-.lastname {
-    width: 30%;
-}
-.date {
-    width: 20%;
-}
-.tag {
-    width: 15%;
-}
-.state {
-    width: 10%;
-}
-.search {
-    border-color: $darkgreen;
-}
-//
+.content-top {
+            display: grid;
+            grid-template-columns: repeat(5,1fr);
+            margin: 10px 0;
+            
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: solid 1px $lightgreen;
+            font-size: 15px;
+            .tagsw-1{
+                display: flex;
+                justify-content: center;
+            }
+
+        }
+            
+            
 </style>

@@ -4,7 +4,7 @@
         <h1>訂單管理</h1>
         <div class="todo">
             <div class="search">
-                <input class="search-bar" type="text" name="search" id="search" placeholder="搜尋">
+                <input type="search" name="" id="" placeholder="搜尋" />
             </div>
        
         </div>
