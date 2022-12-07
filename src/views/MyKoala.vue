@@ -883,7 +883,7 @@ template {
 .plus_talkwindow_content {
     position: relative;
     width: 70%;
-    margin: 2% auto;
+    margin: -1% auto;
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -1400,7 +1400,7 @@ template {
     .plus_talkwindow_content {
         position: relative;
         width: 70%;
-        margin: 10% auto;
+        margin: 3% auto;
         justify-content: center;
         display: flex;
         flex-wrap: wrap;
@@ -1923,7 +1923,7 @@ template {
     .plus_talkwindow_content {
         position: relative;
         width: 70%;
-        margin: 10% auto;
+        margin: 0% auto;
         justify-content: center;
         display: flex;
         flex-wrap: wrap;
