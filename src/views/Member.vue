@@ -117,6 +117,15 @@ export default {
         z-index: 1;
         outline: #337a7d 1px solid;
         box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.1);
+        height: 41px;
+        @include d() {
+            // height: 26px;
+            height: 31px;
+        }
+        @include m() {
+            // height: 18px;
+            height: 24px;
+        }
         li {
             width: 120px;
             padding: 10px 10px;
@@ -186,10 +195,8 @@ export default {
             .content {
                 width: 1000px;
                 min-height: 300px;
-                // background-color: rgb(110, 158, 110);
                 flex-shrink: 0;
                 border: solid 2px #337a7d;
-                // outline: #337a7d 2px solid;
                 border-radius: 10px;
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
