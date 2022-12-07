@@ -100,6 +100,8 @@ table {
     width: 100%;
     tr {
         text-align: center;
+        line-height: 30px;
+        height: 30px;
         th {
             padding: 10px;
         }

@@ -126,11 +126,11 @@ export default {
                     // background-color: burlywood;
                     width: 20%;
                     button {
-                        padding-right: 10px;
-                        padding-left: 10px;
+                        padding: 0 10px;
+                        line-height: 30px;
+                        height: 30px;
                         @include m() {
-                            padding-right: 5px;
-                            padding-left: 5px;
+                            padding: 0 5px;
                             font-size: 16px;
                         }
                     }
@@ -144,8 +144,11 @@ table {
     width: 100%;
     tr {
         text-align: center;
+        padding: 10px 0;
+        line-height: 30px;
+        height: 30px;
         th {
-            padding: 10px;
+            // padding: 10px;
             @include d() {
                 padding: 5px;
             }

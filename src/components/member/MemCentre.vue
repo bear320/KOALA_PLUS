@@ -157,8 +157,9 @@ export default {};
                             }
                         }
                         button {
-                            padding-left: 15px;
-                            padding-right: 15px;
+                            padding: 0 20px;
+                            height: 30px;
+                            line-height: 30px;
                         }
                         .tabcontent_group {
                             display: flex;

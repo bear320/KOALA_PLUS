@@ -92,36 +92,35 @@ export default {
                 height: 100%;
             }
         }
-    }
-}
+        .Unsubscribe_main {
+            text-align: center;
+            margin-top: 0em;
+            max-width: 90%;
+            position: relative;
+            margin: 0 auto;
+            text-align: justify;
 
-.Unsubscribe_main {
-    text-align: center;
-    margin-top: 0em;
-    max-width: 90%;
-    position: relative;
-    margin: 0 auto;
-    text-align: justify;
-
-    .subtitle {
-        // background-color: red;
-        width: 100%;
-        text-align: justify;
-    }
-    .buttons {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        flex-wrap: wrap;
-        align-items: center;
-
-        button {
-            margin: 5px;
-            padding-left: 10px;
-            padding-right: 10px;
-            @include m() {
-                padding: 5px;
-                font-size: 15px;
+            .subtitle {
+                // background-color: red;
+                width: 100%;
+                text-align: justify;
+            }
+            .buttons {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                flex-wrap: wrap;
+                align-items: center;
+                line-height: 30px;
+                height: 30px;
+                button {
+                    margin: 5px;
+                    padding: 0 10px;
+                    @include m() {
+                        padding: 5px;
+                        font-size: 15px;
+                    }
+                }
             }
         }
     }
