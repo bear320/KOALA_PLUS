@@ -45,7 +45,7 @@
             <p>
                 在KOALA+，我們能領養無尾熊，或捐款幫助無尾熊中心的營運。雖然領養無尾熊沒辦法讓您把她帶回家中一起居住，但這筆費用能讓無尾熊得到好的照顧和環境。另外，KOALA+將發行相應的尤加利葉遊戲幣給您，您可以在<a
                     href="/my-koala"
-                    >"My Koala遊戲區"</a
+                    >My Koala遊戲區</a
                 >養成無尾熊，陪他們長大。
             </p>
         </div>
@@ -83,7 +83,7 @@
         <div class="wrapper">
             <h2>News</h2>
             <div class="newscards">
-                <div
+                <a
                     class="card article"
                     v-for="article in articles"
                     :key="article"
@@ -95,7 +95,7 @@
                         }"
                     ></div>
                     <div class="font">
-                        <a href="" class="article-title">{{ article.title }}</a>
+                        <p class="article-title">{{ article.title }}</p>
                         <div class="date">
                             <p class="article-tag">{{ article.tag }}</p>
                             <p class="article-date">{{ article.date }}</p>
@@ -104,7 +104,7 @@
                             {{ article.content }}
                         </p>
                     </div>
-                </div>
+                </a>
             </div>
         </div>
     </section>
@@ -303,11 +303,18 @@ export default {
         margin-top: 5vh;
         margin-left: 0;
         background-image: url(@/assets/images/index/forest-fire.jpg);
-        background-attachment: fixed;
+        // background-attachment: fixed;
+        transition: 2s;
         @include bgSetting(cover, 0 -100px);
         @include d {
             @include size(100vw, 80vh);
             margin-top: 0;
+        }
+        &:hover {
+            transform: scale(1.05) translate(-20px, 20px);
+            h2 {
+                transform: translate(40px, -40px);
+            }
         }
         h2 {
             font-size: 8vw;
@@ -315,6 +322,7 @@ export default {
             -webkit-text-stroke: 3px #920202;
             -webkit-text-fill-color: #ffffff;
             margin-top: 55%;
+            transition: 2s;
             @include d {
                 font-size: 20vw;
                 -webkit-text-stroke: 2px #920202;
@@ -353,8 +361,9 @@ export default {
         border-radius: 0 0 0 50%;
         margin-left: 10vw;
         background-image: url(@/assets/images/index/koalahelping.jpg);
-        background-attachment: fixed;
-        @include bgSetting(100%, left top);
+        // background-attachment: fixed;
+        transition: 2s;
+        @include bgSetting(cover, center);
         @include d {
             @include size(100vw, 75vh);
             background-attachment: local;
@@ -362,6 +371,12 @@ export default {
         }
         @include m {
             @include bgSetting(240%, center left 70%);
+        }
+        &:hover {
+            transform: scale(1.05) translate(20px, -20px);
+            h2 {
+                transform: translate(calc(-20vw - 40px), 40px);
+            }
         }
 
         h2 {
@@ -372,6 +387,7 @@ export default {
             transform: translateX(-20vw);
             width: 120%;
             margin-top: 5%;
+            transition: 2s;
             @include d {
                 font-size: 13vw;
                 -webkit-text-stroke: 2px $darkgreen;
@@ -382,7 +398,7 @@ export default {
         }
     }
     .wedo-p {
-        transform: translateX(12vw);
+        transform: translateX(10vw);
         width: 35vw;
         text-align: left;
         margin-top: 60vh;
@@ -421,6 +437,9 @@ export default {
         }
         @include m {
             width: 90%;
+        }
+        h2 {
+            animation: moving 0.5s 3;
         }
     }
     .wesave-video {
@@ -473,6 +492,16 @@ export default {
                 justify-content: space-between;
             }
 
+            &:hover {
+                box-shadow: 0px 0px 20px rgba(51, 113, 125, 0.45);
+                .article-img {
+                    transform: translate(65%, -20%) rotate(5deg);
+                    @include d {
+                        transform: translate(-10%, 0) rotate(5deg);
+                    }
+                }
+            }
+
             p {
                 font-size: $p;
                 @include rwd-p;
@@ -492,6 +521,7 @@ export default {
                     transform: translate(-10%, 0);
                 }
             }
+
             .font {
                 margin-left: 20px;
                 transform: translateY(-15%);
@@ -515,9 +545,18 @@ export default {
                 }
                 .article-content {
                     width: 90%;
+                    color: $font-color;
                 }
             }
         }
+    }
+}
+@keyframes moving {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
     }
 }
 </style>
