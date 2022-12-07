@@ -130,7 +130,6 @@ header {
                 .playgame {
                     position: fixed;
                     top: 80%;
-                    left: 80%;
                     user-select: none;
                     @include size(180px, auto);
 
