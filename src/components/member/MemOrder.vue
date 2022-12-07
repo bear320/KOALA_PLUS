@@ -19,7 +19,7 @@
                             <th class="prod_id">商品編號</th>
                             <th class="prod_category">商品類別</th>
                             <th>數量</th>
-                            <th>小計</th>
+                            <th class="prod_price">小計</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -33,7 +33,7 @@
                                 {{ item.prod_category }}
                             </td>
                             <td>{{ item.ord_qty }}</td>
-                            <td>{{ item.prod_price }}</td>
+                            <td class="prod_price">{{ item.prod_price }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -156,6 +156,11 @@ table {
             }
         }
         .prod_category {
+            @include m() {
+                display: none;
+            }
+        }
+        .prod_price {
             @include m() {
                 display: none;
             }

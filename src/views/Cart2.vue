@@ -47,6 +47,16 @@
                                 </Col>
                             </Row>
                         </div>
+                        <div>
+                            <Row justify="space-between" align="middle">
+                                <Col span="6">
+                                    <div class="pay-text">總付款金額</div>
+                                </Col>
+                                <Col span="6">
+                                    <div class="pay-total">NT${{ pay }}</div>
+                                </Col>
+                            </Row>
+                        </div>
                     </div>
                 </Col>
                 <Col span="14">
@@ -97,10 +107,10 @@
                                 </Col>
                             </Row>
                             <Row justify="center" align="middle" :gutter="200">
-                                <Col>
-                                    <div class="btn-paramy">前往付款</div>
+                                <Col span="12">
+                                    <div class="btn-paramy pay">前往付款</div>
                                 </Col>
-                                <Col>
+                                <Col span="12">
                                     <router-link to="/cart1"
                                         >回上一步</router-link
                                     >
@@ -125,12 +135,13 @@ export default {
         Header,
         Footer,
     },
+
     data() {
         return {
             carts: this.$store.state.cart,
+            pay: localStorage.getItem("pay"),
         };
     },
-    methods: {},
 };
 </script>
 
@@ -147,6 +158,7 @@ export default {
 }
 main {
     .wrapper {
+        margin-bottom: 180px;
         h1,
         h3 {
             text-align: left;
@@ -182,6 +194,14 @@ main {
                     width: 75px;
                     height: 75px;
                 }
+            }
+            .pay-text {
+                font-size: $h4;
+                font-weight: 700;
+            }
+            .pay-total {
+                font-size: $h4;
+                color: $green;
             }
         }
 
@@ -222,6 +242,9 @@ main {
             }
             .btn-paramy {
                 @include btnSize(20px);
+            }
+            .pay {
+                width: 200px;
             }
         }
     }
