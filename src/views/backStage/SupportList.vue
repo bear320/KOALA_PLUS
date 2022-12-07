@@ -136,7 +136,11 @@ export default {
     }
     .action {
         display: flex;
+        align-items: center;
         column-gap: 15px;
+        img {
+            vertical-align: top;
+        }
     }
 }
 .table {
