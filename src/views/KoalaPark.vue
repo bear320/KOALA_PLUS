@@ -67,19 +67,19 @@ export default {
         this.source = [
             {
                 id: 1,
-                src: require(`@/assets/images/park/parkspot01.jpg`),
+                src: require(`@/assets/images/park/parkspot01-less.jpg`),
                 title: "醫療救援與照護",
                 script: "每年，KOALA+都會拯救150多隻在澳州獲救的生病、受傷的無尾熊。<br>接受通報後，專門保護員會先抵達現場，進行全面評估後，若是較受傷情況較嚴峻的無尾熊就會運送至我們的無尾熊醫院接受專門獸醫的治療。",
             },
             {
                 id: 2,
-                src: require(`@/assets/images/park/parkspot02.png`),
+                src: require(`@/assets/images/park/parkspot02-less.png`),
                 title: "半圍欄眷養",
                 script: "無尾熊進入園區後將由獸醫人員進行評估和治療，照護期間，考拉每天都會受到監控並接受專門的飼育員照護。無尾熊也會視其康復時間長短來安置，狀況較好的無尾熊會轉移到半圍欄中。<br><br>我們打造與無尾熊原生棲息相似的空間，讓它們可以在野放前學習攀爬和恢復肌肉力量，提早適應野生棲息地。",
             },
             {
                 id: 3,
-                src: require(`@/assets/images/park/parkspot03.jpg`),
+                src: require(`@/assets/images/park/parkspot03-less.jpg`),
                 title: "園區導覽喚醒公眾意識",
                 script: "除了澳洲大火的破壞，無尾熊棲息地80%是受到人為破壞，KOALA+向教育機構、團體和個人提供教育資源，開放園區導覽，並透過媒體宣傳，傳達無尾熊保護相關知識，藉此喚起公眾意識。  <br><br> 讓全球公民對無尾熊產生自豪感和歸屬感更多人參與保護、愛護無尾熊的行列。」",
             },
