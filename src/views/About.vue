@@ -233,6 +233,11 @@ html {
                     color: $green;
                     pointer-events: none;
                     @include borderLeft(0);
+                    @include m {
+                        &::before {
+                            opacity: 0;
+                        }
+                    }
                 }
             }
             .about-content {
