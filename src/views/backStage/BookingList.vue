@@ -1,45 +1,60 @@
 <template>
     <Header />
-    <article class="bs-nav-space wrapper">
-        <h1>園區導覽管理</h1>
-        <div class="todo">
-            <a href="#" target="_blank"
+    <section class="bs-nav-space wrapper title-n-action">
+        <div class="title">
+            <h1>園區導覽管理</h1>
+            <img src="@/assets/images/backstageindex/articleIcon.png" alt="" />
+            <h2>預約總覽</h2>
+        </div>
+        <div class="action">
+            <a href="/bs-article-edit" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></a>
-            <select name="category" id="articlesCategory">
-                <option value="all">預約訂單</option>
-                <option value="day-off">休館訂單</option>
+            <div class="search">
+                <input type="search" name="" id="" placeholder="搜尋" />
+            </div>
+            <select name="" id="">
+                <option value="" selected>排列方式</option>
+                <option value="">已預約訂單</option>
+                <option value="">休館日訂單</option>
             </select>
         </div>
-        <section>
-            <h2>預約總覽</h2>
-            <div class="bstitle">
-                <h3 class="ord-no">訂單編號</h3>
-                <h3 class="name">姓名</h3>
-                <h3 class="date">預約日期</h3>
-                <h3 class="ppl">人數</h3>
-                <h3 class="connect">Email/電話</h3>
-                <h3 class="status">備註</h3>
-                <h3 class="operator">編輯</h3>
-            </div>
-            <div class="content" v-for="list in orders" :key="list">
-                <p class="ord-no">{{ list.number }}</p>
-                <p class="name">
-                    {{ list.name }}
-                </p>
-                <p class="date">{{ list.date }}</p>
-                <p class="ppl">{{ list.ppl }}</p>
-                <p class="connect">
-                    <span class="email"> {{ list.email }}</span>
-                    <span class="moible"> {{ list.mobile }}</span>
-                </p>
-                <p class="status">{{ list.status }}</p>
-                <p class="operator">
+    </section>
+    <section class="wrapper table">
+        <div class="bs-title">
+            <h3 class="bookNum">編號</h3>
+            <h3 class="bookName">預約者</h3>
+            <h3 class="bookDate">日期</h3>
+            <h3 class="bookPpl">人數</h3>
+            <h3 class="bookConnect">Email / 電話</h3>
+            <h3 class="bookStatus">狀態</h3>
+            <h3 class="bookEdit">編輯</h3>
+        </div>
+        <div class="bs-list" v-for="list in booklist" :key="list.id">
+            <p>{{ list.num }}</p>
+            <p>{{ list.name }}</p>
+            <!-- <p>
+                <router-link
+                    :to="`/bs-support-info/${list.number}`"
+                    target="_blank"
+                >
+                    {{ list.number }}
+                </router-link>
+            </p> -->
+            <p>{{ list.date }}</p>
+            <p>{{ list.ppl }}</p>
+            <p>{{ list.email }}<br />{{ list.mobile }}</p>
+            <p>{{ list.status }}</p>
+            <p>
+                <router-link
+                    :to="`/bs-support-info/${list.number}`"
+                    target="_blank"
+                >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
-                </p>
-            </div>
-        </section>
-    </article>
+                </router-link>
+            </p>
+        </div>
+    </section>
 </template>
 
 <script>
@@ -50,30 +65,30 @@ export default {
     },
     data() {
         return {
-            orders: [
+            booklist: [
                 {
-                    number: 1122,
+                    num: "B221122",
                     name: "Sara",
+                    date: "2022-12-01",
                     ppl: 5,
-                    date: "2022-12-25",
+                    email: "sara168@gmail.com",
+                    mobile: "0988168168",
                     status: "已預約",
-                    email: "sara168@gmail.comn",
-                    mobile: "0928168168",
                 },
                 {
-                    number: 1125,
+                    num: "B221230",
                     name: "Amy",
-                    ppl: 15,
-                    date: "2022-12-13",
-                    email: "amy888@gmail.comn",
-                    mobile: "0928888888",
+                    date: "2022-12-30",
+                    ppl: 5,
+                    email: "amy888@gmail.com",
+                    mobile: "09884433552",
                     status: "已預約",
                 },
                 {
-                    number: 1231,
-                    name: "休館",
-                    ppl: 0,
+                    num: "B221231",
+                    name: "koala+",
                     date: "2022-12-31",
+                    ppl: 0,
                     email: "",
                     mobile: "",
                     status: "休館",
@@ -85,90 +100,69 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-html article {
+.title-n-action {
+    margin-bottom: 20px;
     text-align: left;
-
-    h1 {
-        display: inline-block;
-        width: 25%;
-        background-image: url(@/assets/images/backstageindex/articleIcon.png);
-        @include bgSetting(contain, right);
-    }
-    .todo {
-        float: right;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .title {
+        width: 400px;
         display: flex;
+        column-gap: 20px;
+        flex-wrap: wrap;
+        h1 {
+            display: block;
+        }
+        h2 {
+            padding-left: 500px;
+            color: $green;
+            @include borderLeft(30px);
+        }
         img {
-            margin-right: 15px;
+            margin-left: 5px;
+            height: 67.5px;
         }
     }
-    h2 {
-        color: $green;
-        @include borderLeft(30px);
+    .action {
+        display: flex;
+        column-gap: 15px;
     }
-    section {
+}
+.table {
+    .bs-title {
+        width: 100%;
+        border-radius: 10px;
+        background-color: $darkgreen;
+        color: white;
+        display: flex;
+        justify-items: center;
+        align-items: center;
         h3 {
-            margin-bottom: 0;
-            padding-left: 10px;
+            display: block;
+            width: calc(100% / 7);
         }
-        .ord-no {
-            width: 10%;
-        }
-        .name {
-            width: 10%;
+    }
 
-            p:first-child {
-                font-weight: 700;
-                font-size: $h4;
-            }
-        }
-
-        .date {
-            width: 15%;
-
-            img {
-                width: 120px;
-                height: 120px;
-            }
-        }
-
-        .ppl,
-        .operator {
-            width: 10%;
-            display: flex;
-
-            img {
-                margin: 10px;
-
-                &:hover {
-                    stroke: $green;
+    .bs-list {
+        display: flex;
+        justify-items: center;
+        align-items: center;
+        margin: 10px 0;
+        padding-bottom: 10px;
+        border-bottom: solid 1px $lightgreen;
+        p {
+            display: block;
+            width: calc(100% / 7);
+            a {
+                display: block;
+                width: fit-content;
+                height: fit-content;
+                margin: 0 auto;
+                img {
+                    margin: 10px;
+                    vertical-align: top;
                 }
-            }
-        }
-        .connect {
-            width: 20%;
-            display: flex;
-            flex-direction: column;
-        }
-        .status {
-            width: 10%;
-        }
-        .bstitle {
-            display: flex;
-            width: 100%;
-            background-color: $darkgreen;
-            color: white;
-            border-radius: 10px;
-        }
-
-        .content {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            padding: 10px 0;
-            margin-bottom: 10px;
-            border-bottom: solid 1px $lightgreen;
-            p {
-                text-align: center;
             }
         }
     }
