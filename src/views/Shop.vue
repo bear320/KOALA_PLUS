@@ -282,11 +282,9 @@ export default {
 .category-box {
     margin: 0 auto;
     width: 270px;
-    background-color: #fff;
     padding: 35px;
     text-align: left;
     position: relative;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);    
     .category-item {
         cursor: pointer;
         font-size: $h4;
