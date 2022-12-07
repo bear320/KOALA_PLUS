@@ -30,13 +30,21 @@
             <h3 class="bookStatus">狀態</h3>
             <h3 class="bookEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="list in booklist" :key="list.id">
+        <div
+            class="bs-list"
+            v-for="list in booklist"
+            :key="list.id"
+            :style="{
+                backgroundColor:
+                    list.name === null ? 'rgba(154, 195, 199, 0.2)' : '#D8D8D8',
+            }"
+        >
             <p>{{ list.num }}</p>
             <p>{{ list.name }}</p>
             <!-- <p>
                 <router-link
                     :to="`/bs-support-info/${list.number}`"
-                    target="_blank"
+                    target="_blank" 
                 >
                     {{ list.number }}
                 </router-link>
@@ -86,12 +94,30 @@ export default {
                 },
                 {
                     num: "B221231",
-                    name: "koala+",
+                    name: null,
                     date: "2022-12-31",
                     ppl: 0,
                     email: "",
                     mobile: "",
                     status: "休館",
+                },
+                {
+                    num: "B230101",
+                    name: null,
+                    date: "2023-01-01",
+                    ppl: 0,
+                    email: "",
+                    mobile: "",
+                    status: "休館",
+                },
+                {
+                    num: "B230102",
+                    name: "Handsome",
+                    date: "2023-01-02",
+                    ppl: 6,
+                    email: "handsome888@gmail.com",
+                    mobile: "0988666666",
+                    status: "已預約",
                 },
             ],
         };
@@ -151,6 +177,8 @@ export default {
         margin: 10px 0;
         padding-bottom: 10px;
         border-bottom: solid 1px $lightgreen;
+        border-radius: 5px;
+
         p {
             display: block;
             width: calc(100% / 7);
