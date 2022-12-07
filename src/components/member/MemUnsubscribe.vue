@@ -47,7 +47,7 @@ export default {
         return {
             // 回傳是否取消訂單
             backmassMemUnsubscribe: false,
-            maintitle: "您想取消訂單嗎",
+            maintitle: "您想取消訂單嗎?",
             subtitle:
                 "如果您取消訂單，您將不會收到此筆訂單商品，也取消資助無尾熊。",
             showbutton: true,

@@ -28,7 +28,7 @@
                     {{ item.mem_last_name }}
                 </p>
                 <p class="mem_first_name">
-                    {{ item.mem_last_name }}
+                    {{ item.mem_first_name }}
                 </p>
                 <p class="mem_mob">{{ item.mem_mob }}</p>
                 <p class="mem_validation">{{ item.mem_validation }}</p>
@@ -62,7 +62,7 @@ export default {
                 {
                     mem_id: "P00001",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy111",
+                    mem_first_name: "charmy111",
                     mem_mob: "0988777688",
                     mem_validation: "已認證",
                     mem_account: "12312321@gmail.com",
@@ -71,7 +71,7 @@ export default {
                 {
                     mem_id: "P00002",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy222",
+                    mem_first_name: "charmy222",
                     mem_mob: "0988777688",
                     mem_validation: "已認證",
                     mem_account: "123222@gmail.com",
@@ -80,7 +80,7 @@ export default {
                 {
                     mem_id: "P00003",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy333",
+                    mem_first_name: "charmy333",
                     mem_mob: "0988777688",
                     mem_validation: "未認證",
                     mem_account: "123333@gmail.com",
@@ -89,7 +89,7 @@ export default {
                 {
                     mem_id: "P00004",
                     mem_last_name: "zeng",
-                    mem_first_name: "#charmy444",
+                    mem_first_name: "charmy444",
                     mem_mob: "0988777688",
                     mem_validation: "未認證",
                     mem_account: "123444@gmail.com",
@@ -154,7 +154,10 @@ html article {
             display: flex;
             justify-content: space-around;
             line-height: 1.5;
-            margin: 10px auto;
+            width: 100%;
+            margin: 0 50px;
+            padding: 10px 0;
+            border-bottom: solid 1px rgb(190, 214, 213);
         }
         .mem_id {
             width: 15%;
