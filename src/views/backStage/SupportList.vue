@@ -28,7 +28,7 @@
         </div>
         <div class="bs-list" v-for="order in donateOrders" :key="order.id">
             <p>{{ order.donator }}</p>
-            <p>{{ order.number }}</p>
+            <p>{{ order.id }}</p>
             <!-- <p>
                 <router-link
                     :to="`/bs-support-info/${order.number}`"
@@ -43,7 +43,7 @@
             <p>NT$ {{ order.price }}</p>
             <p>
                 <router-link
-                    :to="`/bs-support-info/${order.number}`"
+                    :to="`/bs-support-info/${order.id}`"
                     target="_blank"
                 >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
@@ -64,7 +64,7 @@ export default {
             donateOrders: [
                 {
                     donator: "Joyce Byers",
-                    number: "S00001",
+                    id: "S00001",
                     date: "2022-12-01",
                     plan: "adopt",
                     koala: "Gabriel",
@@ -72,7 +72,7 @@ export default {
                 },
                 {
                     donator: "Jim Hopper",
-                    number: "S00002",
+                    id: "S00002",
                     date: "2022-12-02",
                     plan: "adopt",
                     koala: "Camille",
@@ -80,7 +80,7 @@ export default {
                 },
                 {
                     donator: "Dustin Henderson",
-                    number: "S00003",
+                    id: "S00003",
                     date: "2022-12-03",
                     plan: "support",
                     koala: "全部",
@@ -88,7 +88,7 @@ export default {
                 },
                 {
                     donator: "Lucas Sinclair",
-                    number: "S00004",
+                    id: "S00004",
                     date: "2022-12-04",
                     plan: "adopt",
                     koala: "全部",
@@ -96,7 +96,7 @@ export default {
                 },
                 {
                     donator: "Nancy Wheeler",
-                    number: "S00005",
+                    id: "S00005",
                     date: "2022-12-05",
                     plan: "adopt",
                     koala: "Lucien",
@@ -104,7 +104,7 @@ export default {
                 },
                 {
                     donator: "Steve Harrington",
-                    number: "S00006",
+                    id: "S00006",
                     date: "2022-12-06",
                     plan: "adopt",
                     koala: "Emily",
@@ -158,6 +158,7 @@ export default {
         justify-items: center;
         align-items: center;
         margin: 10px 0;
+        padding-bottom: 10px;
         border-bottom: solid 1px $lightgreen;
         p {
             display: block;

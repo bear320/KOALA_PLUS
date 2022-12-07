@@ -54,10 +54,7 @@
                 </Switch>
             </p>
             <p>
-                <router-link
-                    :to="`/bs-koala-edit/${koala.name}`"
-                    target="_blank"
-                >
+                <router-link :to="`/bs-koala-edit/${koala.id}`" target="_blank">
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
@@ -164,6 +161,7 @@ export default {
         justify-items: center;
         align-items: center;
         margin: 10px 0;
+        padding-bottom: 10px;
         border-bottom: solid 1px $lightgreen;
         p {
             display: block;
