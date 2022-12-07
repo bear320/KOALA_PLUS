@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-12">
                     <h1 class="title">週邊商城</h1>
                     <!-- <h1>{{ this.$store.getters.cartNumber }}</h1> -->
                     <div class="category-box card">
@@ -43,7 +43,7 @@
                             src="../assets/images/drawing2.png"
                             alt=""
                         />
-                        <div class="price-range">
+                        <!--  <div class="price-range">
                             <div class="range-text">價格區間</div>
                             <div class="range-box">
                                 <input class="input-range" type="text" />
@@ -51,10 +51,10 @@
                                 <input class="input-range" type="text" />
                                 <div>$NTD</div>
                             </div>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
-                <div class="col-8">
+                <div class="col-xl-8 col-lg-8 col-md-8 col-12">
                     <div class="row">
                         <product-card
                             v-for="(item, index) in source"
@@ -63,7 +63,7 @@
                             :proName="item.name"
                             :proPrice="item.price"
                             :proId="item.id"
-                            :col="'col-4'"
+                            :col="'col-xl-4 col-lg-4 col-md-6 col-6'"
                         ></product-card>
                     </div>
                     <div class="row">
@@ -97,7 +97,6 @@
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
-import { returnStatement } from "@babel/types";
 export default {
     components: {
         Header,
@@ -242,6 +241,7 @@ export default {
     justify-content: space-between;
     margin-bottom: 75px;
     .search-box {
+        display: inline-block;
         position: relative;
         input {
             border: 1px solid #333;
@@ -341,6 +341,52 @@ export default {
         background-color: #ccc;
         padding: 3px 5px;
         border-radius: 3px;
+    }
+}
+@media (max-width: 1200px) {
+    .banner {
+        margin-bottom: 50px;
+    }
+    .shop-head {
+        display: block;
+    }
+    .category-box {
+        .side-img {
+            display: none;
+        }
+    }
+}
+@media (max-width: 768px) {
+    .shop-head {
+        display: block;
+        .breadcrumb {
+        }
+        .search-box {
+        }
+    }
+    .title {
+        margin-bottom: 30px;
+        text-align: left;
+    }
+    .category-box {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+
+        .category-item {
+            font-size: $h4;
+            margin-bottom: 0;
+            &:nth-child(1) {
+                font-size: $h4;
+                margin-bottom: 0;
+            }
+            &:nth-child(4) {
+                margin-bottom: 0;
+            }
+        }
     }
 }
 </style>

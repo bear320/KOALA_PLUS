@@ -22,10 +22,12 @@
                 </Col>
             </Row>
             <Row>
-                <Col span="12">
-                    <image-slider :imgs="images"></image-slider>
+                <Col span="24" :xl="12" :md="24">
+                    <div class="img-slider">
+                        <image-slider :imgs="images"></image-slider>
+                    </div>
                 </Col>
-                <Col span="12">
+                <Col span="24" :xl="12" :md="24">
                     <h1 class="product-name">{{ source.name }}</h1>
                     <p class="product-description">{{ source.description }}</p>
                     <div class="product-additional">
@@ -228,112 +230,123 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.breadcrumbs {
-    display: flex;
-    margin: 100px 0 80px 0;
-    li {
-        a {
-            color: $font_color;
-        }
-        &::after {
-            content: ">";
-        }
-        &:last-child::after {
-            content: "";
-        }
-        &:last-child a {
-            color: $green;
+.wrapper {
+    .breadcrumbs {
+        display: flex;
+        margin: 100px 0 80px 0;
+        li {
+            a {
+                color: $font_color;
+            }
+            &::after {
+                content: ">";
+            }
+            &:last-child::after {
+                content: "";
+            }
+            &:last-child a {
+                color: $green;
+            }
         }
     }
-}
 
-.product-description {
-    text-align: left;
-    padding: 0px 60px;
-    line-height: 1.5;
-    margin-bottom: 40px;
-}
-.product-additional {
-    display: flex;
-    align-items: center;
-    padding: 10px 60px;
-    gap: 10px;
-    margin-bottom: 30px;
-    .additional-info {
+    .img-slider {
+        margin-bottom: 30px;
+    }
+    @include m() {
+        .product-name {
+            text-align: left;
+            padding: 60px;
+        }
+    }
+    .product-description {
+        text-align: left;
+        padding: 0px 60px;
+        line-height: 1.5;
+        margin-bottom: 40px;
+    }
+    .product-additional {
+        display: flex;
+        align-items: center;
+        padding: 10px 60px;
+        gap: 10px;
+        margin-bottom: 30px;
+        .additional-info {
+            font-weight: 700;
+            font-size: $h4;
+        }
+        .additional-img {
+            width: 30px;
+        }
+    }
+    .product-price {
+        padding: 0px 60px;
+        text-align: left;
         font-weight: 700;
-        font-size: $h4;
-    }
-    .additional-img {
-        width: 30px;
-    }
-}
-.product-price {
-    padding: 0px 60px;
-    text-align: left;
-    font-weight: 700;
-    font-size: $h3;
-    margin-bottom: 30px;
-}
-.product-box {
-    padding: 0px 60px;
-    display: flex;
-    gap: 20px;
-    margin-bottom: 50px;
-    .quantity-text {
-        text-align: left;
-        margin-bottom: 10px;
-    }
-    .quantity {
-        position: relative;
-        input {
-            text-align: center;
-            padding: 0 25px;
-            width: 160px;
-        }
-        input[type="number"]::-webkit-outer-spin-button,
-        input[type="number"]::-webkit-inner-spin-button {
-            -webkit-appearance: none;
-            margin: 0;
-        }
-        .md-remove {
-            position: absolute;
-            top: 50%;
-            left: 0%;
-            transform: translate(0%, -50%);
-            color: $font_color;
-            border-right: 1px solid black;
-            padding: 5px;
-        }
-        .md-add {
-            position: absolute;
-            top: 50%;
-            right: 0%;
-            transform: translate(0%, -50%);
-            color: $font_color;
-            border-left: 1px solid black;
-            padding: 5px;
-        }
-    }
-    .share-text {
-        text-align: left;
-        margin-bottom: 10px;
-    }
-    .community-group {
-        img {
-            width: 20px;
-            margin-right: 10px;
-        }
-    }
-}
-.btn-box {
-    padding: 0px 60px;
-    .btn-paramy {
         font-size: $h3;
-        width: 180px;
+        margin-bottom: 30px;
     }
-}
-.rel-text {
-    margin: 110px 0;
-    font-size: $h3;
+    .product-box {
+        padding: 0px 60px;
+        display: flex;
+        gap: 20px;
+        margin-bottom: 50px;
+        .quantity-text {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .quantity {
+            position: relative;
+            input {
+                text-align: center;
+                padding: 0 25px;
+                width: 160px;
+            }
+            input[type="number"]::-webkit-outer-spin-button,
+            input[type="number"]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+            .md-remove {
+                position: absolute;
+                top: 50%;
+                left: 0%;
+                transform: translate(0%, -50%);
+                color: $font_color;
+                border-right: 1px solid black;
+                padding: 5px;
+            }
+            .md-add {
+                position: absolute;
+                top: 50%;
+                right: 0%;
+                transform: translate(0%, -50%);
+                color: $font_color;
+                border-left: 1px solid black;
+                padding: 5px;
+            }
+        }
+        .share-text {
+            text-align: left;
+            margin-bottom: 10px;
+        }
+        .community-group {
+            img {
+                width: 20px;
+                margin-right: 10px;
+            }
+        }
+    }
+    .btn-box {
+        padding: 0px 60px;
+        .btn-paramy {
+            font-size: $h3;
+            width: 180px;
+        }
+    }
+    .rel-text {
+        margin: 110px 0;
+        font-size: $h3;
+    }
 }
 </style>
