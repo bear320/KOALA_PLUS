@@ -178,7 +178,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 384px;
     height: 85vh;
-    top: -390px;
+    top: -40vh;
     left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -193,7 +193,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 384px;
     height: 85vh;
-    top: -390px;
+    top: -40vh;
     left: 0px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -208,7 +208,7 @@ export default {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
     width: 384px;
     height: 85vh;
-    top: -390px;
+    top: -40vh;
     left: 384px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
@@ -397,7 +397,7 @@ export default {
 }
 
 .cont_form_sign_up > div {
-    margin-top: 5%;
+    margin-top: 2%;
 }
 
 .cont_form_login > input {
@@ -430,7 +430,7 @@ export default {
 
 .cont_form_login > h2 {
     font-size: 24px;
-    margin-top: 15%;
+    margin-top: 12%;
     margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
@@ -441,12 +441,12 @@ export default {
 }
 
 .cont_form_login > button {
-    margin-top: 7.5%;
+    margin-top: 5%;
 }
 
 .cont_form_login > div > img {
-    margin-top: 10%;
-    width: 50%;
+    margin-top: 7.5%;
+    width: 40%;
 }
 
 .cont_form_login > a,
@@ -463,7 +463,7 @@ export default {
     text-align: left;
     padding: 15px 5px;
     margin-left: 2%;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom: 3%;
     width: 230px;
     border: none;
