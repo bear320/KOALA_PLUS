@@ -20,7 +20,7 @@
                             item["name"]
                         }}</router-link>
                     </li>
-                    <li>
+                    <li v-show="showKoala">
                         <router-link to="/my-koala" class="playgame">
                             <img
                                 src="../assets/images/header/playgame.svg"
@@ -60,7 +60,26 @@ export default {
             ],
             toggle: true,
             i: 0,
+            curWidth: window.innerWidth,
+            showKoala: true,
         };
+    },
+    methods: {
+        curPath() {
+            this.showKoala = this.$route.path === "/my-koala" ? false : true;
+        },
+        koalaShow() {
+            this.curWidth = window.innerWidth;
+            if (this.curWidth <= 768) {
+                this.showKoala = true;
+            } else {
+                this.showKoala = false;
+            }
+        },
+    },
+    created() {
+        window.addEventListener("resize", this.koalaShow);
+        this.curPath();
     },
 };
 </script>

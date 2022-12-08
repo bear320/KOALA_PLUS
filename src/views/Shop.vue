@@ -43,7 +43,7 @@
                             src="../assets/images/drawing2.png"
                             alt=""
                         />
-                        <!--  <div class="price-range">
+                        <div class="price-range">
                             <div class="range-text">價格區間</div>
                             <div class="range-box">
                                 <input class="input-range" type="text" />
@@ -51,7 +51,7 @@
                                 <input class="input-range" type="text" />
                                 <div>$NTD</div>
                             </div>
-                        </div> -->
+                        </div>
                     </div>
                 </div>
                 <div class="col-xl-8 col-lg-8 col-md-8 col-12">
@@ -233,6 +233,9 @@ export default {
     background-image: url(@/assets/images/banner1.jpg);
     @include bgSetting(cover, center);
     margin-bottom: 100px;
+    @include m() {
+        margin-bottom: 15px;
+    }
 }
 
 .shop-head {
@@ -240,6 +243,10 @@ export default {
     align-items: center;
     justify-content: space-between;
     margin-bottom: 75px;
+    @include m() {
+        display: block;
+        margin-bottom: 30px;
+    }
     .search-box {
         display: inline-block;
         position: relative;
@@ -264,6 +271,9 @@ export default {
     text-align: left;
     font-family: font-EL;
     color: #515a6e;
+    @include m() {
+        margin: 0 auto 30px auto;
+    }
     a {
         color: #515a6e;
         padding-right: 20px;
@@ -279,23 +289,55 @@ export default {
     }
 }
 
+.title {
+    margin-bottom: 30px;
+}
+
 .category-box {
     margin: 0 auto;
     width: 270px;
     padding: 35px;
     text-align: left;
     position: relative;
+    @include m() {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        margin-bottom: 30px;
+        flex-wrap: wrap;
+    }
+
     .category-item {
         cursor: pointer;
         font-size: $h4;
         margin-bottom: 25px;
         color: $font_color;
+        @include m() {
+            font-size: $h4;
+            width: calc(100% / 4 - 30px);
+            margin-bottom: 0;
+            text-align: center;
+        }
+
+        @include media(500) {
+            width: calc(100% / 2 - 30px);
+            text-align: center;
+        }
         &:nth-child(1) {
             font-size: $h3;
             margin-bottom: 45px;
+            @include m() {
+                font-size: $h4;
+                margin-bottom: 0;
+            }
         }
         &:nth-child(4) {
             margin-bottom: 90px;
+            @include m() {
+                margin-bottom: 0;
+            }
         }
     }
     .active {
@@ -323,6 +365,9 @@ export default {
         position: absolute;
         top: 0;
         left: -80%;
+        @include d() {
+            display: none;
+        }
     }
 }
 
@@ -341,52 +386,6 @@ export default {
         background-color: #ccc;
         padding: 3px 5px;
         border-radius: 3px;
-    }
-}
-@media (max-width: 1200px) {
-    .banner {
-        margin-bottom: 50px;
-    }
-    .shop-head {
-        display: block;
-    }
-    .category-box {
-        .side-img {
-            display: none;
-        }
-    }
-}
-@media (max-width: 768px) {
-    .shop-head {
-        display: block;
-        .breadcrumb {
-        }
-        .search-box {
-        }
-    }
-    .title {
-        margin-bottom: 30px;
-        text-align: left;
-    }
-    .category-box {
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 30px;
-        margin-bottom: 30px;
-
-        .category-item {
-            font-size: $h4;
-            margin-bottom: 0;
-            &:nth-child(1) {
-                font-size: $h4;
-                margin-bottom: 0;
-            }
-            &:nth-child(4) {
-                margin-bottom: 0;
-            }
-        }
     }
 }
 </style>
