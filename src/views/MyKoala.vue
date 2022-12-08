@@ -692,13 +692,128 @@ template {
     bottom: 20%;
     left: 39%;
     width: 26%;
+    /* animation 參數設定 */
+    animation-name: rotate_2;
+    animation-duration: 10s;
+    animation-delay: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;   
+}
+
+@keyframes rotate_2 {
+    0% {
+        top: 45%;
+        rotate: 5deg;
+    }
+    5% {
+        rotate: 0deg;
+    }
+    10% {
+        rotate: -5deg;
+    }
+    15% {
+        rotate: 0deg;
+    }
+    20% {
+        rotate: 5deg;
+    }
+    25% {
+        top: 30%;
+        rotate: 0deg;
+    }
+    30% {
+        rotate: -5deg;
+    }
+    35% {
+        rotate: 0deg;
+    }
+    40% {
+        rotate: 5deg;
+    }
+    45% {
+        rotate: 0deg;
+    }
+    50% {
+        top: 45%;
+        rotate: -5deg;
+    }
+    55% {
+        rotate: 0deg;
+    }
+    60% {
+        rotate: 5deg;
+    }
+    65% {
+        rotate: 0deg;
+    }
+    70% {
+        rotate: -5deg;
+    }
+    75% {
+        top: 60%;
+        rotate: 0deg;
+    }
+    80% {
+        rotate: 5deg;
+    }
+    85% {
+        rotate: 0deg;
+    }
+    90% {
+        rotate: -5deg;
+    }
+    95% {
+        rotate: 0deg;
+    }
+    100% {
+        top: 45%;
+        rotate: 5deg;
+    }
 }
 
 .main_block_koala_3 {
     position: absolute;
     bottom: 17%;
-    left: 29%;
-    width: 45%;
+    left: 35%;
+    width: 38%;
+    /* animation 參數設定 */
+    animation-name: rotate_3;
+    animation-duration: 10s;
+    animation-delay: 1s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite; 
+}
+
+@keyframes rotate_3 {
+    0% {
+        transform:translate(0, 0) rotate(0deg) translate(0%, 0%) rotate(0deg);
+    }  
+    15% {
+        transform:translate(0, 0) rotate(45deg) translate(15%, -50%) rotate(45deg);
+    }
+    38% {
+        transform:translate(0, 0) rotate(100deg) translate(50%, -100%) rotate(220deg);
+    }
+    60% {
+        transform:translate(0, 0) rotate(90deg) translate(65%, 0%) rotate(220deg);
+    }
+    80% {
+        transform:translate(0, 0) rotate(90deg) translate(65%, 0%) rotate(270deg);
+        rotate: 5deg;
+    }
+    85% {
+        rotate: 0deg;
+    }
+    90% {
+        rotate: -5deg;
+    }
+    95% {
+        rotate: 0deg;
+    }
+    100% {
+        transform:translate(50%, 50%) translate(-50%, -50%);
+        rotate: 5deg;
+    }
 }
 
 .main_block_RightTree {
@@ -1214,8 +1329,8 @@ template {
     .main_block_koala_3 {
         position: absolute;
         bottom: 17%;
-        left: 29%;
-        width: 45%;
+        left: 36%;
+        width: 38%;
     }
 
     .main_block_RightTree {
@@ -1732,8 +1847,8 @@ template {
     .main_block_koala_3 {
         position: absolute;
         bottom: 17%;
-        left: 29%;
-        width: 45%;
+        left: 35%;
+        width: 38%;
     }
 
     .main_block_RightTree {
