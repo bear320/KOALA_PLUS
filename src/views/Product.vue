@@ -2,25 +2,11 @@
     <Header></Header>
     <main class="nav-space">
         <div class="wrapper">
-            <Row>
-                <Col span="24">
-                    <ul class="breadcrumbs">
-                        <li><router-link to="/home">首頁</router-link></li>
-                        <li><router-link to="/shop">週邊商城</router-link></li>
-                        <li>
-                            <router-link
-                                :to="`/shop?category=${source.category}&sort=name&limit=9&page=1`"
-                                >生活小物</router-link
-                            >
-                        </li>
-                        <li>
-                            <router-link :to="`/shop/${source.id}`"
-                                >無尾熊室內拖鞋</router-link
-                            >
-                        </li>
-                    </ul>
-                </Col>
-            </Row>
+            <div class="breadcrumb">
+                <router-link to="/home">Home</router-link>
+                <router-link to="/support">資助認養</router-link>
+                <router-link :to="`/support/`"> QQ </router-link>
+            </div>
             <Row>
                 <Col span="24" :xl="12" :md="24">
                     <div class="img-slider">
@@ -28,65 +14,69 @@
                     </div>
                 </Col>
                 <Col span="24" :xl="12" :md="24">
-                    <h1 class="product-name">{{ source.name }}</h1>
-                    <p class="product-description">{{ source.description }}</p>
-                    <div class="product-additional">
-                        <p class="additional-info">
-                            購買此商品可獲得&nbsp{{ coinTotal }}
+                    <div class="text">
+                        <h1 class="product-name">{{ source.name }}</h1>
+                        <p class="product-description">
+                            {{ source.description }}
                         </p>
-                        <img
-                            class="additional-img"
-                            src="../assets/images/product/coin.png"
-                            alt=""
-                        />
-                    </div>
-                    <div class="product-price">NTD$&nbsp{{ sumTotal }}</div>
-                    <div class="product-box">
-                        <div class="quantity-box">
-                            <div class="quantity-text">數量</div>
-                            <div class="quantity">
-                                <Icon
-                                    class="md-remove"
-                                    type="md-remove"
-                                    @click="changeQuantity('-')"
-                                />
-                                <input type="number" v-model="quantity" />
-                                <Icon
-                                    class="md-add"
-                                    type="md-add"
-                                    @click="changeQuantity('+')"
-                                />
+                        <div class="product-additional">
+                            <p class="additional-info">
+                                購買此商品可獲得&nbsp{{ coinTotal }}
+                            </p>
+                            <img
+                                class="additional-img"
+                                src="../assets/images/product/coin.png"
+                                alt=""
+                            />
+                        </div>
+                        <div class="product-price">NTD$&nbsp{{ sumTotal }}</div>
+                        <div class="product-box">
+                            <div class="quantity-box">
+                                <div class="quantity-text">數量</div>
+                                <div class="quantity">
+                                    <Icon
+                                        class="md-remove"
+                                        type="md-remove"
+                                        @click="changeQuantity('-')"
+                                    />
+                                    <input type="number" v-model="quantity" />
+                                    <Icon
+                                        class="md-add"
+                                        type="md-add"
+                                        @click="changeQuantity('+')"
+                                    />
+                                </div>
+                            </div>
+                            <div class="share-box">
+                                <div class="share-text">Share</div>
+                                <div class="community-group">
+                                    <img
+                                        class="community-item"
+                                        src="../assets/images/product/instagram.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        class="community-item"
+                                        src="../assets/images/product/facebook.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        class="community-item"
+                                        src="../assets/images/product/youtube.png"
+                                        alt=""
+                                    />
+                                    <img
+                                        class="community-item"
+                                        src="../assets/images/product/twitter.png"
+                                        alt=""
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <div class="share-box">
-                            <div class="share-text">Share</div>
-                            <div class="community-group">
-                                <img
-                                    class="community-item"
-                                    src="../assets/images/product/instagram.png"
-                                    alt=""
-                                />
-                                <img
-                                    class="community-item"
-                                    src="../assets/images/product/facebook.png"
-                                    alt=""
-                                />
-                                <img
-                                    class="community-item"
-                                    src="../assets/images/product/youtube.png"
-                                    alt=""
-                                />
-                                <img
-                                    class="community-item"
-                                    src="../assets/images/product/twitter.png"
-                                    alt=""
-                                />
+                        <div class="btn-box">
+                            <div class="btn-paramy" @click="addToCart">
+                                加到購物車
                             </div>
-                        </div>
-                    </div>
-                    <div class="btn-box">
-                        <div class="btn-paramy" @click="addToCart">
-                            加到購物車
                         </div>
                     </div>
                 </Col>
@@ -105,7 +95,7 @@
                     :proName="item.name"
                     :proPrice="item.price"
                     :proId="item.id"
-                    :col="'col-3'"
+                    :col="'col-xl-3 col-lg-3 col-md-6 col-6'"
                 ></product-card>
             </div>
         </div>
@@ -231,7 +221,7 @@ export default {
 
 <style lang="scss" scoped>
 .wrapper {
-    .breadcrumbs {
+    /* .breadcrumbs {
         display: flex;
         margin: 100px 0 80px 0;
         li {
@@ -248,100 +238,124 @@ export default {
                 color: $green;
             }
         }
+    } */
+    .breadcrumb {
+        max-width: 1000px;
+        margin: 15px auto 15px 0;
+        text-align: left;
+        font-family: font-EL;
+        a {
+            color: lighten(#515a6e, 20%);
+            padding-right: 20px;
+        }
+        a:last-child {
+            color: $btn-color;
+            font-family: font-R;
+        }
+        a + a::before {
+            content: "›";
+            color: lighten(#515a6e, 20%);
+            margin-right: 20px;
+        }
     }
 
     .img-slider {
         margin-bottom: 30px;
     }
-    @include m() {
+
+    .text {
+        padding: 0 3%;
         .product-name {
+            margin: 15px 0;
             text-align: left;
-            padding: 60px;
+            @include m() {
+                text-align: left;
+            }
         }
-    }
-    .product-description {
-        text-align: left;
-        padding: 0px 60px;
-        line-height: 1.5;
-        margin-bottom: 40px;
-    }
-    .product-additional {
-        display: flex;
-        align-items: center;
-        padding: 10px 60px;
-        gap: 10px;
-        margin-bottom: 30px;
-        .additional-info {
+        .product-description {
+            text-align: left;
+            // padding: 0px 60px;
+            line-height: 1.5;
+            margin-bottom: 40px;
+        }
+        .product-additional {
+            display: flex;
+            align-items: center;
+            // padding: 10px 60px;
+            gap: 10px;
+            margin-bottom: 30px;
+            .additional-info {
+                font-weight: 700;
+                font-size: $h4;
+            }
+            .additional-img {
+                width: 30px;
+            }
+        }
+        .product-price {
+            // padding: 0px 60px;
+            text-align: left;
             font-weight: 700;
-            font-size: $h4;
-        }
-        .additional-img {
-            width: 30px;
-        }
-    }
-    .product-price {
-        padding: 0px 60px;
-        text-align: left;
-        font-weight: 700;
-        font-size: $h3;
-        margin-bottom: 30px;
-    }
-    .product-box {
-        padding: 0px 60px;
-        display: flex;
-        gap: 20px;
-        margin-bottom: 50px;
-        .quantity-text {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-        .quantity {
-            position: relative;
-            input {
-                text-align: center;
-                padding: 0 25px;
-                width: 160px;
-            }
-            input[type="number"]::-webkit-outer-spin-button,
-            input[type="number"]::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
-            }
-            .md-remove {
-                position: absolute;
-                top: 50%;
-                left: 0%;
-                transform: translate(0%, -50%);
-                color: $font_color;
-                border-right: 1px solid black;
-                padding: 5px;
-            }
-            .md-add {
-                position: absolute;
-                top: 50%;
-                right: 0%;
-                transform: translate(0%, -50%);
-                color: $font_color;
-                border-left: 1px solid black;
-                padding: 5px;
-            }
-        }
-        .share-text {
-            text-align: left;
-            margin-bottom: 10px;
-        }
-        .community-group {
-            img {
-                width: 20px;
-                margin-right: 10px;
-            }
-        }
-    }
-    .btn-box {
-        padding: 0px 60px;
-        .btn-paramy {
             font-size: $h3;
-            width: 180px;
+            margin-bottom: 30px;
+        }
+        .product-box {
+            // padding: 0px 60px;
+            display: flex;
+            gap: 20px;
+            margin-bottom: 50px;
+            .quantity-text {
+                text-align: left;
+                margin-bottom: 10px;
+            }
+            .quantity {
+                position: relative;
+                input {
+                    text-align: center;
+                    padding: 0 25px;
+                    width: 160px;
+                }
+                input[type="number"]::-webkit-outer-spin-button,
+                input[type="number"]::-webkit-inner-spin-button {
+                    -webkit-appearance: none;
+                    margin: 0;
+                }
+                .md-remove {
+                    position: absolute;
+                    top: 50%;
+                    left: 0%;
+                    transform: translate(0%, -50%);
+                    color: $font_color;
+                    border-right: 1px solid black;
+                    padding: 5px;
+                }
+                .md-add {
+                    position: absolute;
+                    top: 50%;
+                    right: 0%;
+                    transform: translate(0%, -50%);
+                    color: $font_color;
+                    border-left: 1px solid black;
+                    padding: 5px;
+                }
+            }
+            .share-text {
+                text-align: left;
+                margin-bottom: 10px;
+            }
+            .community-group {
+                img {
+                    width: 20px;
+                    margin-right: 10px;
+                }
+            }
+        }
+        .btn-box {
+            // padding: 0px 60px;
+            .btn-paramy {
+                font-size: $h3;
+                width: 180px;
+            }
         }
     }
     .rel-text {
