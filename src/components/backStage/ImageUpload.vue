@@ -1,16 +1,29 @@
 <template>
     <div class="upload-wrapper">
-        <div class="upload" v-for="item in 4" :key="item.id">
-            <input
-                type="file"
-                name="uploadImage"
-                :id="item"
-                style="display: none"
+        <input
+            type="file"
+            accept="image/*"
+            multiple="multiple"
+            id="uploadImages"
+            style="display: none"
+            @change="showImages"
+        />
+        <template v-if="previewList.length">
+            <div
+                v-for="(item, index) in previewList"
+                :key="index"
+                class="prevImg"
+            >
+                <img :src="item" class="img-fluid" />
+            </div>
+        </template>
+        <label for="uploadImages">
+            <img
+                src="@/assets/images/uploadImage.svg"
+                alt="上傳圖片"
+                class="uploadLabel"
             />
-            <label :for="item" @change="showImage">
-                <img src="@/assets/images/uploadImage.svg" class="upImages" />
-            </label>
-        </div>
+        </label>
     </div>
 </template>
 
@@ -18,20 +31,26 @@
 export default {
     data() {
         return {
-            // images: [],
+            previewList: [],
+            image_list: [],
         };
     },
     methods: {
-        showImage(e) {
-            this.file = e.target.files[0];
-            if (!this.file) {
-                return;
+        showImages: function (event) {
+            var input = event.target;
+            var count = input.files.length;
+            var index = 0;
+            if (input.files) {
+                while (count--) {
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        this.previewList.push(e.target.result);
+                    };
+                    this.image_list.push(input.files[index]);
+                    reader.readAsDataURL(input.files[index]);
+                    index++;
+                }
             }
-            let reader = new FileReader();
-            reader.onload = function () {
-                this.item.src = read.result;
-            };
-            reader.readAsDataURL(file);
         },
     },
 };
@@ -41,12 +60,21 @@ export default {
 .upload-wrapper {
     display: flex;
     column-gap: 20px;
-    .upload {
+    .prevImg {
         width: fit-content;
         img {
             width: 150px;
             height: 150px;
+            background-color: #fff;
+            border: 1px solid $btn-light-color;
+            border-radius: 10px;
         }
+    }
+}
+label {
+    img {
+        width: 150px;
+        height: 150px;
     }
 }
 </style>
