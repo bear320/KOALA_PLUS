@@ -65,7 +65,8 @@
         <div class="line">
             <div class="cell">
                 <h4>新增圖片：</h4>
-                <UploadImage></UploadImage>
+                <!-- <UploadImage></UploadImage> -->
+                <ImageUpload></ImageUpload>
             </div>
         </div>
         <div class="line">
@@ -80,12 +81,14 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
-import UploadImage from "@/components/backStage/UploadImage.vue";
+// import UploadImage from "@/components/backStage/UploadImage.vue";
+import ImageUpload from "@/components/backStage/ImageUpload.vue";
 
 export default {
     components: {
         Header,
-        UploadImage,
+        // UploadImage,
+        ImageUpload,
     },
 };
 </script>
