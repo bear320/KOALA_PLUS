@@ -11,18 +11,17 @@
                     </div>
                 </Col>
             </Row>
-            <Row :gutter="40">
-                <Col span="15">
-                    <div>
-                        <div class="card cart-title">
-                            <Row>
-                                <Col span="9">品項</Col>
-                                <Col span="3">單價</Col>
-                                <Col span="6">數量</Col>
-                                <Col span="6">小計</Col>
-                            </Row>
-                        </div>
+            <Row :gutter="40" justify="center">
+                <Col :xl="15" :lg="24" :md="24" span="24">
+                    <div class="card cart-title">
+                        <Row>
+                            <Col span="9">品項</Col>
+                            <Col span="3">單價</Col>
+                            <Col span="8" :xl="6" :lg="6">數量</Col>
+                            <Col span="4" :xl="6" :lg="6">小計</Col>
+                        </Row>
                     </div>
+
                     <CartItem
                         v-for="cartItem in cartList"
                         :key="cartItem.id"
@@ -34,7 +33,7 @@
                     ></CartItem>
                 </Col>
 
-                <Col span="9">
+                <Col :xl="9" :lg="24" :md="24" span="24">
                     <div class="card create-order">
                         <div class="coupon">
                             <div class="coupon-text">優惠碼</div>
@@ -234,15 +233,25 @@ main {
             margin-bottom: 30px;
             border-radius: 10px;
             color: $font_color;
+            @include m() {
+                display: none;
+            }
         }
 
         .coupon {
             padding: 30px 35px;
             border-radius: 10px;
+            @include d() {
+                padding: 60px 65px;
+            }
+            @include m() {
+                padding: 10px 15px;
+            }
             a {
                 display: block;
             }
             .coupon-text {
+                font-size: $h3;
                 margin-bottom: 30px;
                 text-align: left;
             }
@@ -252,6 +261,7 @@ main {
                 align-items: center;
                 gap: 30px;
                 margin-bottom: 20px;
+
                 .coupon-input {
                     border-radius: 0;
                     border: 0;
