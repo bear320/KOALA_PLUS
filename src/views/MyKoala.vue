@@ -159,8 +159,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_1 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 20" @click="addnum_1">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_1">
+                            <div v-if="game_money >= 20">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -184,8 +184,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_2 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 50" @click="addnum_2">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_2">
+                            <div v-if="game_money >= 50">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -209,8 +209,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_3 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 125" @click="addnum_3">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_3">
+                            <div v-if="game_money >= 125">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -234,8 +234,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_4 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 225" @click="addnum_4">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_4">
+                            <div v-if="game_money >= 225">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -259,8 +259,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_5 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 350" @click="addnum_5">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_5">
+                            <div v-if="game_money >= 350">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -284,8 +284,8 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_6 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button">
-                            <div v-if="game_money >= 500" @click="addnum_6">
+                        <div class="shop_talkwindow_commodity_button" @click="addnum_6">
+                            <div v-if="game_money >= 500">
                                 <img
                                     src="../assets/images/game/coin.png"
                                     alt=""
@@ -635,6 +635,7 @@ template {
     background-color: #d3fdff;
     display: flex;
     overflow: hidden;
+    user-select: none;
 }
 
 .main_block_LeftTree {
