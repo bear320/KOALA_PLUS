@@ -31,7 +31,6 @@
                 <div class="date-t">2022/12/15</div>
                 <div class="tagsw-1">
                     <p class="tag">無法變更權限</p>
-                    <Switch loading :model-value="true" true-color="#337a7d" />
                 </div>    
         </div>
         <!-- 內容 -->

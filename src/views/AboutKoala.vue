@@ -62,34 +62,27 @@
                     alt=""
                 />
             </div>
-        </div>
-        <div class="test-block">
-            <div class="test">
-                <form class="card card-ab">
-                    <div v-if="questionIndex < questions.length">
-                        <h4 class="question">{{ question.question }}</h4>
-                        <div
-                            v-for="c of question.choices"
-                            :key="c"
-                            class="choice btn-lowest"
-                        >
-                            <input
-                                type="radio"
-                                name="choice"
-                                v-model="answer"
-                                :value="c"
-                            />
-                            {{ c }}
+    </div>
+    <div class="test-block">
+        <div class="test">
+            <form class="card card-ab">
+                <div v-if="questionIndex < questions.length">
+                    <h4 class="question">{{ question.question }}</h4>
+                    <label for="ch">
+                        <div v-for="c of question.choices" :key="c" class="choice btn-lowest">
+                        <input type="radio" name="choice" v-model="answer" :value="c"/>
+                        {{ c }}
                         </div>
-                    </div>
-                    <div v-else>
-                        <div class="btn-paramy" @click="restart">重做</div>
-                    </div>
-                    <div class="btn-paramy btn-ab" @click="submit">送出</div>
-                </form>
-                <div v-if="questionIndex === 5 && score === 5">aaaaa</div>
-                <p>得分 : {{ score }} 分</p>
-            </div>
+                    </label>
+                    
+                </div>
+                <div v-else>
+                    <div class="btn-paramy btn-ab" @click="restart">重做</div>
+                </div>
+                <div class="btn-paramy btn-ab" @click="submit">送出</div>
+            </form>
+            <div class="discount" v-if="questionIndex === 5 && score === 5">恭喜您獲得優惠卷： Koala87</div>
+            <p>得分 : {{ score }} 分</p>
         </div>
     </div>
 
@@ -127,7 +120,7 @@ const questions = [
             "2.Gula是原住民語中「可愛」的意思",
             "3.Gula是原住民語中「不喝水」的意思",
         ],
-        rightAnswer: "3.Gula 無尾熊 是澳洲原住民語中「不喝水」的意思",
+        rightAnswer: "3.Gula是原住民語中「不喝水」的意思",
     },
     {
         question: "無尾熊是熊科動物嗎？",
@@ -191,13 +184,9 @@ export default {
     }
 }
 .btn-pamary {
-    padding: 10px;
     .btn-ab {
-        @include btnSize(150px);
-        @include m() {
-            width: 80%;
-            margin: auto;
-        }
+    @include m(){
+        width: 80%;
     }
 }
 
@@ -224,31 +213,45 @@ export default {
 }
 .choice {
     margin: 10px;
+    text-align: start;
+    padding-left: 10px;
+
 }
-.bg {
+
+.bg{
     width: 100%;
     display: flex;
     justify-content: space-between;
     @include m() {
         height: 200px;
     }
-
-    .ab-tree2 img {
-        -moz-transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        -o-transform: scaleX(-1);
-        transform: scaleX(-1);
+    .bg img{
+    @include m(){
+        width: 100%;
+        height: 200px; 
     }
 }
-.bg img {
-    @include m() {
-        width: 100%;
-        height: 200px;
+    
+    .ab-tree2 img{
+        -moz-transform:scaleX(-1);
+        -webkit-transform:scaleX(-1);
+        -o-transform:scaleX(-1);
+        transform:scaleX(-1);    
+       
     }
+}
+.btn-ab{
+    width: 60px;
+    margin: auto;
+    margin-top: 10px;
 }
 body h1 {
     font-family: "Inkfree";
     font-size: 30vh;
     color: $lightgreen;
+    }
+.discount{
+    margin-top: 20px;
 }
-</style>
+
+</style>    
