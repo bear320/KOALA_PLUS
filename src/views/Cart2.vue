@@ -4,122 +4,69 @@
     <main class="nav-space">
         <div class="wrapper">
             <h1>結帳</h1>
-            <Row :gutter="40">
-                <Col span="10">
-                    <div>
-                        <h3>訂單詳情</h3>
-                    </div>
-                </Col>
-                <Col span="14">
-                    <div>
-                        <h3>收件資訊</h3>
-                    </div>
-                </Col>
-            </Row>
-            <Row :gutter="40">
-                <Col span="10">
+            <div class="checkout-box">
+                <div class="order">
+                    <h3>訂單詳情</h3>
                     <div class="card order-detail">
                         <div
                             class="order-item"
                             v-for="item in carts"
                             :key="item.id"
                         >
-                            <Row justify="center" align="middle">
-                                <Col span="6">
-                                    <div class="item-img">
-                                        <img
-                                            src="https://fakeimg.pl/300x200/200"
-                                        />
-                                    </div>
-                                </Col>
-                                <Col span="8">
-                                    <div class="item-name">{{ item.name }}</div>
-                                </Col>
-                                <Col span="4">
-                                    <div class="item-quantity">
-                                        x{{ item.quantity }}
-                                    </div>
-                                </Col>
-                                <Col span="6">
-                                    <div class="item-total">
-                                        ${{ item.quantity * item.price }}
-                                    </div>
-                                </Col>
-                            </Row>
+                            <div class="item-img">
+                                <img src="https://fakeimg.pl/300x200/200" />
+                            </div>
+                            <div class="item-name">{{ item.name }}</div>
+                            <div class="item-quantity">
+                                x{{ item.quantity }}
+                            </div>
+                            <div class="item-total">
+                                ${{ item.quantity * item.price }}
+                            </div>
                         </div>
-                        <div>
-                            <Row justify="space-between" align="middle">
-                                <Col span="6">
-                                    <div class="pay-text">總付款金額</div>
-                                </Col>
-                                <Col span="6">
-                                    <div class="pay-total">NT${{ pay }}</div>
-                                </Col>
-                            </Row>
+                        <div class="pay-box">
+                            <div class="pay-text">總付款金額</div>
+                            <div class="pay-total">NT${{ pay }}</div>
                         </div>
                     </div>
-                </Col>
-                <Col span="14">
-                    <div>
-                        <div class="card receiv-info">
-                            <Row>
-                                <Col span="24">
-                                    <div class="member-form">
-                                        <input
-                                            class="member-equal"
-                                            type="checkbox"
-                                        />
-                                        <label for="">與會員資料相同</label>
-                                    </div>
-                                </Col>
-                                <Col span="24">
-                                    <div class="ship-form">
-                                        <label for="">收件人姓名:</label>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            id=""
-                                            placeholder="請輸入真實姓名"
-                                        />
-                                    </div>
-                                </Col>
-                                <Col span="24">
-                                    <div class="ship-form">
-                                        <label for="">手機號碼:</label>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            id=""
-                                            placeholder="請輸入十位數手機號碼，不須輸入標點符號"
-                                        />
-                                    </div>
-                                </Col>
-                                <Col span="24">
-                                    <div class="ship-form">
-                                        <label for="">收件地址:</label>
-                                        <input
-                                            type="text"
-                                            name=""
-                                            id=""
-                                            placeholder="請輸入完整收件地址"
-                                        />
-                                    </div>
-                                </Col>
-                            </Row>
-                            <Row justify="center" align="middle" :gutter="200">
-                                <Col span="12">
-                                    <div class="btn-paramy pay">前往付款</div>
-                                </Col>
-                                <Col span="12">
-                                    <router-link to="/cart1"
-                                        >回上一步</router-link
-                                    >
-                                </Col>
-                            </Row>
+                </div>
+                <div class="receiv">
+                    <h3>收件資訊</h3>
+                    <div class="card receiv-info">
+                        <div class="member-form">
+                            <input class="member-equal" type="checkbox" />
+                            <label for="">與會員資料相同</label>
+                        </div>
+                        <div class="ship-form">
+                            <label for="">收件人姓名:</label>
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                placeholder="請輸入真實姓名"
+                            />
+                        </div>
+                        <div class="ship-form">
+                            <label for="">手機號碼:</label>
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                placeholder="請輸入十位數手機號碼，不須輸入標點符號"
+                            />
+                        </div>
+                        <div class="ship-form">
+                            <label for="">收件地址:</label>
+                            <input
+                                type="text"
+                                name=""
+                                id=""
+                                placeholder="請輸入完整收件地址"
+                            />
                         </div>
                     </div>
-                </Col>
-            </Row>
+                </div>
+            </div>
         </div>
     </main>
     <Footer></Footer>
@@ -183,68 +130,109 @@ main {
             }
         }
 
-        .order-detail {
-            padding: 30px 35px;
-            border-radius: 10px;
+        .checkout-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            .order {
+                width: calc(50% - 10px);
+                @include d() {
+                    width: 100%;
+                }
+                box-sizing: border-box;
+                .order-detail {
+                    padding: 30px 35px;
+                    border-radius: 10px;
+                    @include m() {
+                        padding: 15px 35px;
+                    }
+                    .order-item {
+                        margin-bottom: 30px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        .item-img {
+                            width: calc(100% / 4);
 
-            .order-item {
-                margin-bottom: 30px;
-
-                img {
-                    width: 75px;
-                    height: 75px;
+                            img {
+                                width: 75px;
+                                height: 75px;
+                            }
+                        }
+                        .item-name {
+                            width: calc(100% / 4);
+                        }
+                        .item-quantity {
+                            width: calc(100% / 4);
+                        }
+                        .item-total {
+                            width: calc(100% / 4);
+                        }
+                    }
+                    .pay-box {
+                        display: flex;
+                        justify-content: space-between;
+                        .pay-text {
+                            font-size: $h4;
+                            font-weight: 700;
+                            width: calc(100% / 3);
+                        }
+                        .pay-total {
+                            font-size: $h4;
+                            color: $green;
+                            width: calc(100% / 3);
+                        }
+                    }
                 }
             }
-            .pay-text {
-                font-size: $h4;
-                font-weight: 700;
-            }
-            .pay-total {
-                font-size: $h4;
-                color: $green;
-            }
-        }
 
-        .receiv-info {
-            font-size: $h4;
-            margin-bottom: 30px;
-            border-radius: 10px;
-            padding: 50px;
-            color: $font_color;
-
-            .member-form {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                margin-bottom: 30px;
-                position: relative;
-                .member-equal {
-                    position: absolute;
-                    top: 50%;
-                    left: -5%;
-                    transform: translate(0%, -50%);
+            .receiv {
+                width: calc(50% - 10px);
+                @include d() {
+                    width: 100%;
                 }
-            }
-            .ship-form {
-                display: flex;
-                justify-content: start;
-                align-items: center;
-                margin-bottom: 30px;
+                .receiv-info {
+                    font-size: $h4;
+                    margin-bottom: 30px;
+                    border-radius: 10px;
+                    padding: 50px;
+                    color: $font_color;
 
-                label {
-                    width: 120px;
-                    text-align: left;
-                }
+                    .member-form {
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        margin-bottom: 30px;
+                        position: relative;
+                        .member-equal {
+                            position: absolute;
+                            top: 50%;
+                            left: -5%;
+                            transform: translate(0%, -50%);
+                        }
+                    }
+                    .ship-form {
+                        display: flex;
+                        justify-content: start;
+                        align-items: center;
+                        margin-bottom: 30px;
 
-                input {
-                    width: 385px;
+                        label {
+                            width: 120px;
+                            text-align: left;
+                        }
+
+                        input {
+                            width: 385px;
+                        }
+                    }
+                    .btn-paramy {
+                        @include btnSize(20px);
+                    }
+                    .pay {
+                        width: 200px;
+                    }
                 }
-            }
-            .btn-paramy {
-                @include btnSize(20px);
-            }
-            .pay {
-                width: 200px;
             }
         }
     }

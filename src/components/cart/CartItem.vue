@@ -2,18 +2,22 @@
     <div class="card cart-item">
         <Row align="middle">
             <Col span="9">
-                <Row class="gap" justify="center" align="middle">
-                    <img
-                        class="product-img"
-                        src="https://fakeimg.pl/300x200/200"
-                    />
-                    <div class="product-name">{{ itemName }}</div>
+                <Row justify="center" align="middle">
+                    <Col :xl="12" :lg="24" :md="24" span="24">
+                        <img
+                            class="product-img"
+                            src="https://fakeimg.pl/300x200/200"
+                        />
+                    </Col>
+                    <Col :xl="12" :lg="24" :md="24" span="24">
+                        <div class="product-name">{{ itemName }}</div>
+                    </Col>
                 </Row>
             </Col>
             <Col span="3">
                 <div class="product-price">${{ itemPrice }}</div>
             </Col>
-            <Col span="6"
+            <Col span="8" :xl="6" :lg="6"
                 ><div class="quantity">
                     <Icon
                         class="md-remove"
@@ -27,7 +31,7 @@
                         @click="changeQuantity('+')"
                     /></div
             ></Col>
-            <Col span="6">${{ itemTotal }}</Col>
+            <Col span="4" :xl="6" :lg="6">${{ itemTotal }}</Col>
             <div class="md-close">
                 <Icon type="md-close" color="#333" @click="deleteItem" />
             </div>
@@ -85,9 +89,9 @@ export default {
     border-radius: 10px;
     position: relative;
 
-    .gap {
+    /* .gap {
         gap: 20px;
-    }
+    } */
 
     .product-img {
         width: 100px;
@@ -96,6 +100,12 @@ export default {
 
     .product-name {
         width: 140px;
+        @include d() {
+            width: 100%;
+        }
+        @include m() {
+            width: 100%;
+        }
     }
 
     .product-price {
@@ -141,6 +151,11 @@ export default {
         top: 50%;
         right: 3%;
         transform: translate(0%, -50%);
+        @include m() {
+            top: 0%;
+            right: 1%;
+            transform: translate(0%, 0%);
+        }
     }
 }
 </style>
