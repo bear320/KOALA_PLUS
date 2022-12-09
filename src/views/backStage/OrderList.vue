@@ -6,9 +6,25 @@
             <div class="search">
                 <input type="search" name="" id="" placeholder="搜尋" />
             </div>
-       
         </div>
         <section>
+<!-- 會員編號、訂單號碼 -->
+            <div class="accordion">
+                <label for="tab1" >
+                    <div class="line1">
+                        <p>會員編號：{{idname}}</p>
+                        <p>訂購日期：{{date}}</p>
+                        <p>訂單編號：{{number}}</p>
+                    </div>
+                    
+                </label>
+                <div class="box">
+                    <input type="radio" name="tab" id="tab1">
+                    <div class="con">hello</div>
+                </div>
+            </div>
+
+
 
 
 
@@ -139,6 +155,47 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.accordion{
+    width: 1200px;
+    label{
+        width: 100%;
+        display: block;
+        border: 10px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 5px 3px 3px 3px  rgb(190, 190, 190);
+        padding: 10px 50px;
+        cursor: pointer;
+        -webkit-user-select:none;
+        -moz-user-select:none;
+        -o-user-select:none;
+        user-select:none;
+        .line1{
+            display: flex;
+            p{
+            width: calc(100% / 3);
+            }
+        }
+    }
+}
+
+input[type=radio]:checked + .con{
+    background-color: #fff;
+    box-shadow: 1px 1px 1px 1px  rgb(190, 190, 190);
+    height: 400px;
+    
+}
+input[type=radio]{
+    display: none;
+}
+.con{
+    height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 10px;
+    border-radius:10px ;
+}
 .search{
     margin-top: 50px;
 }
