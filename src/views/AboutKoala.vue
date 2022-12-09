@@ -62,26 +62,49 @@
                     alt=""
                 />
             </div>
+        </div>
     </div>
     <div class="test-block">
         <div class="test">
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
                     <h4 class="question">{{ question.question }}</h4>
-                    <label for="ch">
-                        <div v-for="c of question.choices" :key="c" class="choice btn-lowest">
-                        <input type="radio" name="choice" v-model="answer" :value="c"/>
-                        {{ c }}
+                    <!-- <label for="ch">
+                        <div
+                            v-for="c of question.choices"
+                            :key="c"
+                            class="choice btn-lowest"
+                        >
+                            <input
+                                type="radio"
+                                name="choice"
+                                v-model="answer"
+                                :value="c"
+                            />
+                            {{ c }}
+                        </div>
+                    </label> -->
+                    <label :for="c" v-for="c in question.choices" :key="c">
+                        <div class="choice btn-lowest">
+                            <input
+                                type="radio"
+                                :id="c"
+                                name="choice"
+                                v-model="answer"
+                                :value="c"
+                            />
+                            {{ c }}
                         </div>
                     </label>
-                    
                 </div>
                 <div v-else>
                     <div class="btn-paramy btn-ab" @click="restart">重做</div>
                 </div>
                 <div class="btn-paramy btn-ab" @click="submit">送出</div>
             </form>
-            <div class="discount" v-if="questionIndex === 5 && score === 5">恭喜您獲得優惠卷： Koala87</div>
+            <div class="discount" v-if="questionIndex === 5 && score === 5">
+                恭喜您獲得優惠卷： Koala87
+            </div>
             <p>得分 : {{ score }} 分</p>
         </div>
     </div>
@@ -185,8 +208,9 @@ export default {
 }
 .btn-pamary {
     .btn-ab {
-    @include m(){
-        width: 80%;
+        @include m() {
+            width: 80%;
+        }
     }
 }
 
@@ -215,32 +239,30 @@ export default {
     margin: 10px;
     text-align: start;
     padding-left: 10px;
-
 }
 
-.bg{
+.bg {
     width: 100%;
     display: flex;
     justify-content: space-between;
     @include m() {
         height: 200px;
     }
-    .bg img{
-    @include m(){
-        width: 100%;
-        height: 200px; 
+    .bg img {
+        @include m() {
+            width: 100%;
+            height: 200px;
+        }
+    }
+
+    .ab-tree2 img {
+        -moz-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        transform: scaleX(-1);
     }
 }
-    
-    .ab-tree2 img{
-        -moz-transform:scaleX(-1);
-        -webkit-transform:scaleX(-1);
-        -o-transform:scaleX(-1);
-        transform:scaleX(-1);    
-       
-    }
-}
-.btn-ab{
+.btn-ab {
     width: 60px;
     margin: auto;
     margin-top: 10px;
@@ -249,9 +271,8 @@ body h1 {
     font-family: "Inkfree";
     font-size: 30vh;
     color: $lightgreen;
-    }
-.discount{
+}
+.discount {
     margin-top: 20px;
 }
-
-</style>    
+</style>
