@@ -159,20 +159,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_1 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_1">
-                            <div v-if="game_money >= 20">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_1_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 20" class="shop_talkwindow_commodity_button" @click="addnum_1">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_1_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_1_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_1_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -184,20 +188,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_2 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_2">
-                            <div v-if="game_money >= 50">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_2_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 50" class="shop_talkwindow_commodity_button" @click="addnum_2">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_2_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_2_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_2_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -209,20 +217,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_3 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_3">
-                            <div v-if="game_money >= 125">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_3_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 125" class="shop_talkwindow_commodity_button" @click="addnum_3">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_3_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_3_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_3_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -234,20 +246,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_4 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_4">
-                            <div v-if="game_money >= 225">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_4_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 225" class="shop_talkwindow_commodity_button" @click="addnum_4">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_4_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_4_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_4_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -259,20 +275,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_5 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_5">
-                            <div v-if="game_money >= 350">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_5_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 350" class="shop_talkwindow_commodity_button" @click="addnum_5">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_5_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_5_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_5_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -284,20 +304,24 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_6 }}
                         </p>
-                        <div class="shop_talkwindow_commodity_button" @click="addnum_6">
-                            <div v-if="game_money >= 500">
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_6_sellingprice }}</p>
+                        <div>
+                            <div v-if="game_money >= 500" class="shop_talkwindow_commodity_button" @click="addnum_6">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_6_sellingprice }}</p>
+                                </div>
                             </div>
-                            <div v-else>
-                                <img
-                                    src="../assets/images/game/coin.png"
-                                    alt=""
-                                />
-                                <p>{{ item_6_sellingprice }}</p>
+                            <div v-else class="shop_talkwindow_commodity_button">
+                                <div>
+                                    <img
+                                        src="../assets/images/game/coin.png"
+                                        alt=""
+                                    />
+                                    <p>{{ item_6_sellingprice }}</p>
+                                </div>
                             </div>
                         </div>
                         <p class="shop_talkwindow_commodity_introduce_2">
@@ -321,14 +345,17 @@
                         <p class="bag_talkwindow_commodity_introduce_1">
                             剩餘數量：{{ remaining_amount_1 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_1 >= 1"
-                                @click="minnum_1"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_1 >= 1" @click="minnum_1">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_1_exp }} 經驗值
@@ -339,14 +366,17 @@
                         <p class="bag_talkwindow_commodity_introduce_1">
                             剩餘數量：{{ remaining_amount_2 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_2 >= 1"
-                                @click="minnum_2"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_2 >= 1" @click="minnum_2">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_2_exp }} 經驗值
@@ -357,14 +387,17 @@
                         <p class="bag_talkwindow_commodity_introduce_1">
                             剩餘數量：{{ remaining_amount_3 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_3 >= 1"
-                                @click="minnum_3"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_3 >= 1" @click="minnum_3">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_3_exp }} 經驗值
@@ -375,14 +408,17 @@
                         <p class="bag_talkwindow_commodity_introduce_1">
                             剩餘數量：{{ remaining_amount_4 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_4 >= 1"
-                                @click="minnum_4"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_4 >= 1" @click="minnum_4">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_4_exp }} 經驗值
@@ -391,16 +427,19 @@
                     <div>
                         <img src="../assets/images/game/item_5.png" alt="" />
                         <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_5 }}
+                            剩餘數量：{{ remaining_amount_1 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_5 >= 1"
-                                @click="minnum_5"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_5 >= 1" @click="minnum_5">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_5_exp }} 經驗值
@@ -411,14 +450,17 @@
                         <p class="bag_talkwindow_commodity_introduce_1">
                             剩餘數量：{{ remaining_amount_6 }}
                         </p>
-                        <div class="bag_talkwindow_commodity_button">
-                            <div
-                                v-if="remaining_amount_6 >= 1"
-                                @click="minnum_6"
-                            >
-                                <p>餵食</p>
+                        <div>
+                            <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_6 >= 1" @click="minnum_6">
+                                <div>
+                                    <p>餵食</p>
+                                </div>
                             </div>
-                            <div v-else><p>餵食</p></div>
+                            <div class="bag_talkwindow_commodity_button" v-else>
+                                <div>
+                                    <p>餵食</p>
+                                </div>
+                            </div>
                         </div>
                         <p class="bag_talkwindow_commodity_introduce_2">
                             可獲得 {{ item_6_exp }} 經驗值
