@@ -24,7 +24,7 @@
                         >資金運用</a
                     >
                     <a
-                        @click="(curView = 'three'), changeBox()"
+                        @click="curView = 'three'"
                         :class="{ highLight: curView === 'three' }"
                         >創始初衷</a
                     >
