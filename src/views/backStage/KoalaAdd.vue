@@ -9,7 +9,11 @@
             <h2>新增無尾熊</h2>
         </div>
     </section>
-    <form class="wrapper function-wrapper">
+    <form
+        class="wrapper function-wrapper"
+        action=""
+        enctype="multipart/form-data"
+    >
         <div class="line">
             <div class="cell">
                 <label for="koala-name">無尾熊名字：</label>
@@ -64,7 +68,10 @@
         </div>
         <div class="line">
             <div class="cell">
-                <h4>新增圖片：</h4>
+                <h4>
+                    新增圖片：
+                    <span>* 請至少上傳一張圖片，數量上限為四張</span>
+                </h4>
                 <ImageUpload></ImageUpload>
             </div>
         </div>
@@ -169,6 +176,12 @@ export default {
             width: 100%;
             h4 {
                 margin-bottom: 10px;
+                span {
+                    color: lighten($font-color, 30%);
+                    font-size: 1rem;
+                    margin-left: 10px;
+                    text-decoration: underline;
+                }
             }
         }
     }
