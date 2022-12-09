@@ -68,10 +68,12 @@
                 <UploadImage></UploadImage>
             </div>
         </div>
-        <div class="">
-            <button class="btn-paramy">
-                <img src="@/assets/images/icon/confirm.svg" alt="" />確認
-            </button>
+        <div class="line">
+            <div class="cell">
+                <button class="btn-paramy">
+                    <img src="@/assets/images/icon/confirm.svg" alt="" />確認
+                </button>
+            </div>
         </div>
     </form>
 </template>
@@ -170,12 +172,16 @@ export default {
             }
         }
     }
-    .line:nth-child(5) {
+    .line:last-child {
+        margin-bottom: 30px;
         .cell {
             width: 100%;
+            display: flex;
+            justify-content: flex-end;
             button {
                 @include btnSize(30px);
-                float: right;
+                display: flex;
+                align-items: center;
                 img {
                     margin-right: 10px;
                     vertical-align: middle;
@@ -183,7 +189,6 @@ export default {
             }
         }
     }
-
     .line + .line {
         margin-top: 30px;
     }

@@ -34,9 +34,16 @@
         multiple
         type="drag"
         action="//jsonplaceholder.typicode.com/posts/"
-        style="display: inline-block; width: 58px"
+        style="display: inline-block; width: 148px"
     >
-        <div style="width: 58px; height: 58px; line-height: 58px">
+        <div
+            style="
+                width: 148px;
+                height: 148px;
+                line-height: 148px;
+                border-radius: 10px;
+            "
+        >
             <Icon type="ios-camera" size="20"></Icon>
         </div>
     </Upload>
@@ -45,6 +52,7 @@
         :preview-list="['https://file.iviewui.com/images/' + imgName]"
     />
 </template>
+
 <script>
 export default {
     data() {
@@ -74,58 +82,66 @@ export default {
             this.$refs.upload.fileList.splice(fileList.indexOf(file), 1);
         },
         handleSuccess(res, file) {
-            file.url = "https://file.iviewui.com/images/image-demo-3.jpg";
-            file.name = "image-demo-3.jpg";
+            // file.url = "https://file.iviewui.com/images/image-demo-3.jpg";
+            // file.name = "image-demo-3.jpg";
         },
         handleFormatError(file) {
             this.$Notice.warning({
-                title: "The file format is incorrect",
+                title: "圖片格式錯誤",
                 desc:
-                    "File format of " +
+                    "圖片 " +
                     file.name +
-                    " is incorrect, please select jpg or png.",
+                    " 格式錯誤, 請選擇 jpg 或 png 格式之圖片！",
             });
         },
         handleMaxSize(file) {
             this.$Notice.warning({
-                title: "Exceeding file size limit",
-                desc: "File  " + file.name + " is too large, no more than 2M.",
+                title: "上傳圖片超過大小限制",
+                desc:
+                    "圖片 " + file.name + " 檔案過大，上傳圖片不得大於 2MB 。",
             });
         },
         handleBeforeUpload() {
             const check = this.uploadList.length < 5;
             if (!check) {
                 this.$Notice.warning({
-                    title: "Up to five pictures can be uploaded.",
+                    title: "最多只能上傳 4 張圖片",
                 });
             }
             return check;
         },
+        upload() {},
     },
     mounted() {
         this.uploadList = this.$refs.upload.fileList;
     },
 };
 </script>
-<style>
+
+<style lang="scss" scoped>
+$size: 150px;
+$b-radius: 10px;
+
 .demo-upload-list {
     display: inline-block;
-    width: 60px;
-    height: 60px;
+    width: $size;
+    height: $size;
     text-align: center;
     line-height: 60px;
     border: 1px solid transparent;
-    border-radius: 4px;
+    border-radius: $b-radius;
     overflow: hidden;
     background: #fff;
     position: relative;
     box-shadow: 0 1px 1px rgba(0, 0, 0, 0.2);
-    margin-right: 4px;
+    margin-right: 25px;
+
+    img {
+        width: 100%;
+        height: 100%;
+    }
 }
-.demo-upload-list img {
-    width: 100%;
-    height: 100%;
-}
+
 .demo-upload-list-cover {
     display: none;
     position: absolute;
@@ -134,14 +150,29 @@ export default {
     left: 0;
     right: 0;
     background: rgba(0, 0, 0, 0.6);
+
+    i {
+        color: #fff;
+        font-size: 20px;
+        cursor: pointer;
+        margin: 0 2px;
+    }
 }
+
 .demo-upload-list:hover .demo-upload-list-cover {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.demo-upload-list-cover i {
-    color: #fff;
-    font-size: 20px;
-    cursor: pointer;
-    margin: 0 2px;
+</style>
+
+<style lang="scss">
+.ivu-upload {
+    .ivu-upload-drag {
+        border-radius: 10px;
+        &:hover {
+            border: 1px dashed $green !important;
+        }
+    }
 }
 </style>
