@@ -126,17 +126,14 @@ article {
                 width: 100%;
                 margin: 0 10px;
                 text-align: left;
-
-                // h2 寫錯層級吃不到，最下面有正確的
-                h2 {
-                    margin-bottom: 0;
-                    display: inline-block;
-                    line-height: 70px;
-                }
             }
             .card:first-child {
                 background-color: rgba(252, 245, 234, 0.6);
                 height: calc(65% - 20px);
+
+                a h2 {
+                    padding-left: 20px;
+                }
             }
             .card:last-child {
                 background-color: rgba(252, 239, 239, 0.6);
@@ -165,12 +162,20 @@ article {
             background-color: rgba(241, 254, 244, 0.6);
             position: relative;
 
+            &:active {
+                box-shadow: inset 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+            }
+
             a {
                 height: 70%;
                 padding: 20px;
 
+                h2 {
+                    line-height: 1.5;
+                }
+
                 img {
-                    height: 120px;
+                    height: 110px;
                     margin-top: 10%;
                     margin-right: 10%;
                 }
@@ -202,17 +207,6 @@ article {
                 @extend %detail;
                 background-color: #aee0bb;
                 bottom: 12%;
-            }
-        }
-    }
-}
-.cards {
-    div {
-        .card {
-            a {
-                h2 {
-                    line-height: 1.5;
-                }
             }
         }
     }
