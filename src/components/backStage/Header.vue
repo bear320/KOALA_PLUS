@@ -184,10 +184,10 @@ export default {
         }
     }
 }
-// i.ivu-icon.ivu-icon-ios-arrow-down.ivu-menu-submenu-title-icon {
-//     color: red;
-// }
+</style>
+
+<style lang="scss">
 i.ivu-icon.ivu-icon-ios-arrow-down.ivu-menu-submenu-title-icon:hover {
-    color: red;
+    color: #fff;
 }
 </style>
