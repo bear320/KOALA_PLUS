@@ -692,7 +692,6 @@ template {
     bottom: 20%;
     left: 39%;
     width: 26%;
-    /* animation 參數設定 */
     animation-name: rotate_2;
     animation-duration: 10s;
     animation-delay: 1s;
@@ -776,7 +775,6 @@ template {
     bottom: 17%;
     left: 35%;
     width: 38%;
-    /* animation 參數設定 */
     animation-name: rotate_3;
     animation-duration: 10s;
     animation-delay: 1s;
