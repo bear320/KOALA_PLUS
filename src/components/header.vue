@@ -58,7 +58,7 @@ export default {
                 { name: "關於我們", source: "about" },
                 { name: "無尾熊百科", source: "about-koala" },
             ],
-            toggle: true,
+            toggle: false,
             i: 0,
             curWidth: window.innerWidth,
             showKoala: true,
@@ -203,6 +203,7 @@ header {
                     box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
                     transition: 1s;
                     justify-content: space-around;
+                    transform: translate(-200%, 0);
 
                     li {
                         padding: 10px 0;
@@ -223,7 +224,7 @@ header {
                     }
                 }
                 .show {
-                    transform: translate(-200%, 0);
+                    transform: translate(0, 0);
                 }
             }
         }

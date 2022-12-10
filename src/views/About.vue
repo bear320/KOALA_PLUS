@@ -97,8 +97,25 @@
                             <p class="article-tag">{{ article.tag }}</p>
                             <p class="article-date">{{ article.date }}</p>
                         </div>
-                        <p class="article-content">{{ article.content }}</p>
+                        <div class="article-content">{{ article.content }}</div>
                     </div>
+                    <lightbox>
+                        <template #img>
+                            <img :src="article.img" />
+                        </template>
+                        <template #article-title>
+                            <h3>{{ article.title }}</h3>
+                        </template>
+                        <template #article-tag>
+                            <p>{{ article.tag }}</p>
+                        </template>
+                        <template #article-date>
+                            <p>{{ article.date }}</p>
+                        </template>
+                        <template #article-content>
+                            <p>{{ article.content }}</p>
+                        </template>
+                    </lightbox>
                 </div>
             </div>
         </section>
@@ -112,7 +129,9 @@ import one from "@/components/aboutUs/one.vue";
 import two from "@/components/aboutUs/two.vue";
 import three from "@/components/aboutUs/three.vue";
 import four from "@/components/aboutUs/four.vue";
+import lightbox from "@/components/aboutUs/lightbox.vue";
 import Footer from "@/components/footer.vue";
+import Lightbox from "@/components/aboutUs/lightbox.vue";
 export default {
     components: {
         Header,
@@ -121,6 +140,7 @@ export default {
         three,
         four,
         Footer,
+        Lightbox,
     },
     data() {
         return {
@@ -182,7 +202,7 @@ export default {
                     tag: "#最新消息",
                     date: "2022/12/25",
                     content:
-                        "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。「為了迎接三隻無尾熊寶寶誕生，動物園特別精心打造了育嬰房’」趙明杰笑著說，為讓......",
+                        "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。為了迎接三隻無尾熊寶寶誕生，動物園特別精心打造了育嬰房，為讓無尾熊媽媽可以安心照護baby，園方特別將無尾熊一館打造成無尾熊育嬰房兼坐月子中心。此外，考量育嬰需求，動物保母也會特別多採集一些尤加利樹嫩葉為無尾熊媽媽「加菜」，使母體具備足夠營養，讓無尾熊baby長得頭好壯壯。除精心打造育嬰房讓無尾熊寶寶安心成長外，由於這是動物園首次有三隻無尾熊baby接連出生，為讓大眾分享新生命誕生的喜悅，園方也特別舉辦「無尾熊新生兒命名票選活動」，讓喜歡無尾熊的民眾可以透過票選方式選出心中最喜歡的名字，最後票選結果將於十一月底公布，屆時三隻無尾熊寶寶就會以民眾選出的新名字跟大家歡喜亮相。",
                 },
                 {
                     img: require("../assets/images/about/8.jpg"),
@@ -195,12 +215,16 @@ export default {
             ],
         };
     },
-    methods: {},
 };
 </script>
 
 <style lang="scss" scoped>
 html {
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
     h1,
     h2 {
         font-family: "Inkfree";
@@ -334,16 +358,16 @@ html {
         .oneArticle {
             display: flex;
             justify-content: space-around;
-            padding: 5% 0;
+            padding: 20px 0;
             border-bottom: solid 1px $green;
 
             .article-img {
-                width: 20%;
+                width: 15%;
                 @include bgSetting(cover, center);
                 margin-right: 5%;
             }
             .article {
-                width: 80%;
+                width: 85%;
 
                 .article-title {
                     font-size: $h4;
@@ -358,6 +382,16 @@ html {
                     .article-tag {
                         color: $lightgreen;
                         font-weight: 700;
+                    }
+                }
+                .article-content {
+                    display: -webkit-inline-box;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    -webkit-line-clamp: 3;
+
+                    @include m {
+                        -webkit-line-clamp: 2;
                     }
                 }
             }
