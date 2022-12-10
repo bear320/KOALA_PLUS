@@ -28,7 +28,6 @@
             <div class="cell">
                 <label for="koala-sex">性別：</label>
                 <select type="text" name="koala-sex" id="koala-sex" required>
-                    <option value="" selected>性別</option>
                     <option value="male">公</option>
                     <option value="female">母</option>
                 </select>
@@ -47,7 +46,6 @@
                     id="koala-listed"
                     required
                 >
-                    <option value="" selected>上 / 下架</option>
                     <option value="true">上架</option>
                     <option value="false">下架</option>
                 </select>
@@ -138,6 +136,8 @@ export default {
                 width: 100%;
                 display: inline;
                 height: 40px;
+                line-height: 40px;
+                outline: none;
             }
             select,
             input[type="date"] {

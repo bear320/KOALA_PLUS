@@ -77,6 +77,7 @@ export default {
                     dob: "2020-03-22",
                     sex: "母",
                     listed: true,
+                    desc: "I'm Emily.",
                 },
                 {
                     name: "Gabriel",
@@ -84,6 +85,7 @@ export default {
                     dob: "2019-05-20",
                     sex: "公",
                     listed: true,
+                    desc: "I'm Gabriel.",
                 },
                 {
                     name: "Lucien",
@@ -91,6 +93,7 @@ export default {
                     dob: "2019-10-15",
                     sex: "公",
                     listed: true,
+                    desc: "I'm Lucien.",
                 },
                 {
                     name: "Camille",
@@ -98,6 +101,7 @@ export default {
                     dob: "2018-04-08",
                     sex: "母",
                     listed: true,
+                    desc: "I'm Camille.",
                 },
                 {
                     name: "Mindy",
@@ -105,6 +109,7 @@ export default {
                     dob: "2017-07-10",
                     sex: "母",
                     listed: true,
+                    desc: "I'm Mindy.",
                 },
                 {
                     name: "Antoine",
@@ -112,6 +117,7 @@ export default {
                     dob: "2015-01-16",
                     sex: "公",
                     listed: false,
+                    desc: "I'm Antoine.",
                 },
             ],
         };
