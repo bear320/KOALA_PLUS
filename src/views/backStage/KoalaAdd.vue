@@ -16,7 +16,7 @@
     >
         <div class="line">
             <div class="cell">
-                <label for="koala-name">無尾熊名字：</label>
+                <label for="koala-name">名字：</label>
                 <input
                     type="text"
                     name="koala-name"
@@ -28,8 +28,8 @@
             <div class="cell">
                 <label for="koala-sex">性別：</label>
                 <select type="text" name="koala-sex" id="koala-sex" required>
-                    <option value="male">公</option>
-                    <option value="female">母</option>
+                    <option value="Male">公</option>
+                    <option value="Female">母</option>
                 </select>
             </div>
         </div>
@@ -46,8 +46,8 @@
                     id="koala-listed"
                     required
                 >
-                    <option value="true">上架</option>
-                    <option value="false">下架</option>
+                    <option value="1">上架</option>
+                    <option value="0">下架</option>
                 </select>
             </div>
         </div>
@@ -156,6 +156,9 @@ export default {
             // input[type="date"]::-webkit-calendar-picker-indicator {
             //     color: $btn-color;
             // }
+            textarea {
+                padding: 10px;
+            }
             label + input,
             label + select,
             label + textarea {

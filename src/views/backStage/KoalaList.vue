@@ -44,6 +44,8 @@
                     size="large"
                     true-color="#337a7d"
                     v-model="koala.listed"
+                    :true-value="1"
+                    :false-value="0"
                 >
                     <template #open>
                         <span>ON</span>
@@ -76,7 +78,7 @@ export default {
                     id: "K001",
                     dob: "2020-03-22",
                     sex: "母",
-                    listed: true,
+                    listed: 1,
                     desc: "I'm Emily.",
                 },
                 {
@@ -84,7 +86,7 @@ export default {
                     id: "K002",
                     dob: "2019-05-20",
                     sex: "公",
-                    listed: true,
+                    listed: 1,
                     desc: "I'm Gabriel.",
                 },
                 {
@@ -92,7 +94,7 @@ export default {
                     id: "K003",
                     dob: "2019-10-15",
                     sex: "公",
-                    listed: true,
+                    listed: 1,
                     desc: "I'm Lucien.",
                 },
                 {
@@ -100,7 +102,7 @@ export default {
                     id: "K004",
                     dob: "2018-04-08",
                     sex: "母",
-                    listed: true,
+                    listed: 1,
                     desc: "I'm Camille.",
                 },
                 {
@@ -108,7 +110,7 @@ export default {
                     id: "K005",
                     dob: "2017-07-10",
                     sex: "母",
-                    listed: true,
+                    listed: 1,
                     desc: "I'm Mindy.",
                 },
                 {
@@ -116,7 +118,7 @@ export default {
                     id: "K006",
                     dob: "2015-01-16",
                     sex: "公",
-                    listed: false,
+                    listed: 0,
                     desc: "I'm Antoine.",
                 },
             ],
