@@ -13,10 +13,12 @@
                             v-for="item in carts"
                             :key="item.id"
                         >
-                            <div class="item-img">
-                                <img src="https://fakeimg.pl/300x200/200" />
+                            <div class="item-box">
+                                <div class="item-img">
+                                    <img src="https://fakeimg.pl/300x200/200" />
+                                </div>
+                                <div class="item-name">{{ item.name }}</div>
                             </div>
-                            <div class="item-name">{{ item.name }}</div>
                             <div class="item-quantity">
                                 x{{ item.quantity }}
                             </div>
@@ -37,35 +39,40 @@
                             <input class="member-equal" type="checkbox" />
                             <label for="">與會員資料相同</label>
                         </div>
-                        <div class="ship-form">
-                            <label for="">收件人姓名:</label>
-                            <input
-                                type="text"
-                                name=""
-                                id=""
-                                placeholder="請輸入真實姓名"
-                            />
-                        </div>
-                        <div class="ship-form">
-                            <label for="">手機號碼:</label>
-                            <input
-                                type="text"
-                                name=""
-                                id=""
-                                placeholder="請輸入十位數手機號碼，不須輸入標點符號"
-                            />
-                        </div>
-                        <div class="ship-form">
-                            <label for="">收件地址:</label>
-                            <input
-                                type="text"
-                                name=""
-                                id=""
-                                placeholder="請輸入完整收件地址"
-                            />
-                        </div>
+                        <form>
+                            <div class="ship-form">
+                                <label for="">收件人姓名:</label>
+                                <input
+                                    type="text"
+                                    name=""
+                                    id=""
+                                    placeholder="請輸入真實姓名"
+                                />
+                            </div>
+                            <div class="ship-form">
+                                <label for="">手機號碼:</label>
+                                <input
+                                    type="text"
+                                    name=""
+                                    id=""
+                                    placeholder="請輸入十位數手機號碼"
+                                />
+                            </div>
+                            <div class="ship-form">
+                                <label for="">收件地址:</label>
+                                <input
+                                    type="text"
+                                    name=""
+                                    id=""
+                                    placeholder="請輸入完整收件地址"
+                                />
+                            </div>
+                            <div class="pay-box">
+                                <div class="btn-paramy">前往付款</div>
+                                <div class="back-step">回上一步</div>
+                            </div>
+                        </form>
                     </div>
-                    <div></div>
                 </div>
             </div>
         </div>
@@ -152,17 +159,31 @@ main {
                         display: flex;
                         align-items: center;
                         justify-content: center;
-                        .item-img {
-                            width: calc(100% / 4);
+                        .item-box {
+                            display: flex;
+                            flex-wrap: wrap;
+                            align-items: center;
+                            justify-content: center;
+                            width: calc(100% / 2);
 
-                            img {
-                                width: 75px;
-                                height: 75px;
+                            .item-img {
+                                width: 50%;
+                                @include m() {
+                                    width: 100%;
+                                }
+                                img {
+                                    width: 75px;
+                                    height: 75px;
+                                }
+                            }
+                            .item-name {
+                                width: 50%;
+                                @include m() {
+                                    width: 100%;
+                                }
                             }
                         }
-                        .item-name {
-                            width: calc(100% / 4);
-                        }
+
                         .item-quantity {
                             width: calc(100% / 4);
                         }
@@ -215,6 +236,7 @@ main {
                     .ship-form {
                         display: flex;
                         justify-content: start;
+                        flex-wrap: wrap;
                         align-items: center;
                         margin-bottom: 30px;
 
@@ -227,11 +249,13 @@ main {
                             width: 385px;
                         }
                     }
-                    .btn-paramy {
-                        @include btnSize(20px);
-                    }
-                    .pay {
-                        width: 200px;
+                    .pay-box {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        .btn-paramy {
+                            @include btnSize(20px);
+                        }
                     }
                 }
             }
