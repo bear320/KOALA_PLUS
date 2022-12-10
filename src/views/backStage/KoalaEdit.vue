@@ -16,7 +16,7 @@
     >
         <div class="line">
             <div class="cell">
-                <label for="koala-name">無尾熊名字：</label>
+                <label for="koala-name">名字：</label>
                 <input
                     type="text"
                     name="koala-name"
@@ -28,17 +28,27 @@
             </div>
             <div class="cell">
                 <label for="koala-sex">性別：</label>
-                <select type="text" name="koala-sex" id="koala-sex" required>
-                    <option value="male">公</option>
-                    <option value="female">母</option>
-                    <!-- <option
-                        v-for="(koala, index) in temp.sex"
-                        :value="temp.sex"
-                        :key="index"
-                    >
-                        {{ temp.sex }}
-                    </option> -->
+                <select
+                    type="text"
+                    name="koala-sex"
+                    id="koala-sex"
+                    v-model="temp.sex"
+                    required
+                >
+                    <option value="Male">公</option>
+                    <option value="Female">母</option>
                 </select>
+            </div>
+            <div class="cell">
+                <label for="koala-id">編號：</label>
+                <input
+                    type="text"
+                    name="koala-id"
+                    id="koala-id"
+                    v-model="temp.id"
+                    disabled
+                    required
+                />
             </div>
         </div>
         <div class="line">
@@ -58,10 +68,11 @@
                     type="text"
                     name="koala-listed"
                     id="koala-listed"
+                    v-model="temp.listed"
                     required
                 >
-                    <option value="true">上架</option>
-                    <option value="false">下架</option>
+                    <option value="1">上架</option>
+                    <option value="0">下架</option>
                 </select>
             </div>
         </div>
@@ -74,6 +85,7 @@
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
+                    v-model="temp.desc"
                     required
                 ></textarea>
             </div>
@@ -113,48 +125,48 @@ export default {
                     name: "Emily",
                     id: "K001",
                     dob: "2020-03-22",
-                    sex: "母",
-                    listed: true,
+                    sex: "Female",
+                    listed: 1,
                     desc: "I'm Emily.",
                 },
                 {
                     name: "Gabriel",
                     id: "K002",
                     dob: "2019-05-20",
-                    sex: "公",
-                    listed: true,
+                    sex: "Male",
+                    listed: 1,
                     desc: "I'm Gabriel.",
                 },
                 {
                     name: "Lucien",
                     id: "K003",
                     dob: "2019-10-15",
-                    sex: "公",
-                    listed: true,
+                    sex: "Male",
+                    listed: 1,
                     desc: "I'm Lucien.",
                 },
                 {
                     name: "Camille",
                     id: "K004",
                     dob: "2018-04-08",
-                    sex: "母",
-                    listed: true,
+                    sex: "Female",
+                    listed: 1,
                     desc: "I'm Camille.",
                 },
                 {
                     name: "Mindy",
                     id: "K005",
                     dob: "2017-07-10",
-                    sex: "母",
-                    listed: true,
+                    sex: "Female",
+                    listed: 1,
                     desc: "I'm Mindy.",
                 },
                 {
                     name: "Antoine",
                     id: "K006",
                     dob: "2015-01-16",
-                    sex: "公",
-                    listed: false,
+                    sex: "Male",
+                    listed: 0,
                     desc: "I'm Antoine.",
                 },
             ],
@@ -232,6 +244,9 @@ export default {
             // input[type="date"]::-webkit-calendar-picker-indicator {
             //     color: $btn-color;
             // }
+            textarea {
+                padding: 10px;
+            }
             label + input,
             label + select,
             label + textarea {
