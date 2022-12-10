@@ -16,7 +16,7 @@
 //後台可用30px
 @mixin borderLeft($p) {
     position: relative;
-    padding: 0 $p;
+    padding-left: $p;
     margin: 10px 0;
     transform: translate(-$p, 0);
     &::before {

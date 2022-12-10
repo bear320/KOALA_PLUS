@@ -166,6 +166,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+body {
+    @include m {
+        overflow-x: hidden;
+    }
+}
 .container {
     width: 100%;
     height: 100vh;
@@ -303,7 +308,6 @@ export default {
         margin-top: 5vh;
         margin-left: 0;
         background-image: url(@/assets/images/index/forest-fire.jpg);
-        // background-attachment: fixed;
         transition: 2s;
         @include bgSetting(cover, bottom);
         @include d {
@@ -313,7 +317,7 @@ export default {
         &:hover {
             transform: scale(1.05) translate(-20px, 20px);
             h2 {
-                transform: translate(40px, -40px);
+                transform: translate(calc(85% + 40px), -40px);
             }
         }
         h2 {
@@ -321,20 +325,24 @@ export default {
             font-family: "Inkfree";
             -webkit-text-stroke: 3px #920202;
             -webkit-text-fill-color: #ffffff;
-            margin-top: 55%;
+            margin-top: 35%;
+            transform: translate(85%, 0);
             transition: 2s;
             @include d {
                 font-size: 20vw;
                 -webkit-text-stroke: 2px #920202;
+                transform: translate(0, 30%);
             }
             @include m {
                 -webkit-text-stroke: 1px $darkgreen;
+                transform: translate(0, 50%);
             }
         }
     }
     .fire + p {
-        margin-top: 80vh;
-        width: 30vw;
+        margin-top: 65vh;
+        width: 35vw;
+        margin-left: 50px;
 
         @include d {
             margin-top: 20px;
@@ -362,7 +370,6 @@ export default {
         border-radius: 0 0 0 50%;
         margin-left: 10vw;
         background-image: url(@/assets/images/index/koalahelping.jpg);
-        // background-attachment: fixed;
         transition: 2s;
         @include bgSetting(cover, right);
         @include d {
@@ -438,6 +445,7 @@ export default {
         }
         @include m {
             width: 90%;
+            margin-top: 20px;
         }
         h2 {
             animation: moving 0.5s 3;
@@ -447,9 +455,11 @@ export default {
         margin-left: 10vw;
         @include m {
             width: 80%;
-            margin-left: 0;
+            margin: 30px auto;
             iframe {
-                width: fit-content;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
             }
         }
     }
