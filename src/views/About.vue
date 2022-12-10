@@ -131,7 +131,6 @@ import three from "@/components/aboutUs/three.vue";
 import four from "@/components/aboutUs/four.vue";
 import lightbox from "@/components/aboutUs/lightbox.vue";
 import Footer from "@/components/footer.vue";
-import Lightbox from "@/components/aboutUs/lightbox.vue";
 export default {
     components: {
         Header,
@@ -140,7 +139,7 @@ export default {
         three,
         four,
         Footer,
-        Lightbox,
+        lightbox,
     },
     data() {
         return {
