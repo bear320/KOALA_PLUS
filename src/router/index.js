@@ -257,9 +257,13 @@ const router = createRouter({
     history: createWebHistory(process.env.BASE_URL),
     routes,
     scrollBehavior(to, from, savedPosition) {
-        return {
-            top: 0,
-        };
+        //切換不同頁面，滾軸永遠在最上面
+        if (to.name !== from.name)
+            return {
+                top: 0,
+                left: 0,
+                behavior: "smooth",
+            };
     },
 });
 
