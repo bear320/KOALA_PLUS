@@ -32,8 +32,8 @@
                         backgroundColor: notBookDate?.[
                             `${this.thisYear}-${this.thisMonth + 1}-${day}`
                         ]
-                            ? '#979292'
-                            : '#D8D8D8',
+                            ? '#9abdbf'
+                            : 'rgb(190, 214, 213, .3)',
                         cursor: notBookDate?.[
                             `${this.thisYear}-${this.thisMonth + 1}-${day}`
                         ]
@@ -55,6 +55,12 @@
                             notBookDate[
                                 `${this.thisYear}-${this.thisMonth + 1}-${day}`
                             ].state
+                        }}
+                        <br />
+                        {{
+                            notBookDate[
+                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            ].emoji
                         }}
                     </p>
                 </td>
@@ -108,12 +114,19 @@ export default {
             bookStyle: {
                 fontSize: "20px",
                 fontWeight: "600",
+                color: "white",
             },
             notBookDate: {
-                "2022-12-2": { state: "已預約" },
-                "2022-12-8": { state: "休館" },
-                "2022-12-15": { state: "已預約" },
-                "2022-12-20": { state: "休館" },
+                "2022-12-2": {
+                    state: "已預約",
+                    emoji: "🐨",
+                },
+                "2022-12-8": { state: "休館", emoji: "📅" },
+                "2022-12-15": {
+                    state: "已預約",
+                    emoji: "🐨",
+                },
+                "2022-12-20": { state: "休館", emoji: "📅" },
             },
             rsvDate: "",
             lastEmptyDay: 0,
@@ -242,7 +255,7 @@ export default {
     },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .calender-wrapper {
     position: relative;
     margin-bottom: 30px;
@@ -293,9 +306,17 @@ tr {
 td {
     cursor: pointer;
     background-color: #d8d8d8;
-    border: 1px solid #000;
+    border: 1px solid;
+    border-color: $darkgreen;
     height: 120px;
+    display: grid;
+    grid-template-rows: repeat(3, 1fr);
+    p {
+        grid-row: 2/4;
+        align-self: center;
+    }
 }
+
 .notice {
     padding-top: 10px;
     width: 80%;
