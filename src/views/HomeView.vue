@@ -1,36 +1,49 @@
 <template>
     <Header />
-    <div class="container">
-        <div id="scene">
-            <div class="layer" data-depth="0.5" data-friction-x="1">
-                <img src="@/assets/images/index/star.png" />
-            </div>
-            <div class="layer" data-depth="1.5">
-                <img src="@/assets/images/index/fireline.png" />
-            </div>
-            <div class="layer" data-depth="0.1">
-                <img src="@/assets/images/index/treeblur.png" alt="" />
-            </div>
-            <div class="layer" data-depth="1.2" data-friction-x="1">
-                <img src="@/assets/images/index/star.png" />
-            </div>
-            <div class="layer" data-depth="0.7" data-invert-x="false">
-                <img src="@/assets/images/index/fireline2.png" />
-            </div>
-            <div class="layer" data-depth="0.1">
-                <img src="@/assets/images/index/cryingkoala.png" />
-            </div>
-            <div class="layer" data-depth="0.3">
-                <img src="@/assets/images/index/tree.png" alt="" />
-            </div>
-            <div class="layer" data-depth="2">
-                <img src="@/assets/images/index/fireline.png" />
-            </div>
-            <h1 class="layer" data-depth="0.05">
-                <img src="@/assets/images/index/logo.svg" />
-            </h1>
-        </div>
+    <div class="sections-menu">
+        <span
+            class="menu-point"
+            v-bind:class="{ active: activeSection == index }"
+            v-on:click="scrollToSection(index)"
+            v-for="(offset, index) in offsets"
+            v-bind:key="index"
+            v-title="'Go to section ' + (index + 1)"
+        >
+        </span>
     </div>
+    <section class="page">
+        <div class="container">
+            <div id="scene">
+                <div class="layer" data-depth="0.5" data-friction-x="1">
+                    <img src="@/assets/images/index/star.png" />
+                </div>
+                <div class="layer" data-depth="1.5">
+                    <img src="@/assets/images/index/fireline.png" />
+                </div>
+                <div class="layer" data-depth="0.1">
+                    <img src="@/assets/images/index/treeblur.png" alt="" />
+                </div>
+                <div class="layer">
+                    <img src="@/assets/images/index/star.png" />
+                </div>
+                <div class="layer" data-depth="0.7" data-invert-x="false">
+                    <img src="@/assets/images/index/fireline2.png" />
+                </div>
+                <div class="layer">
+                    <img src="@/assets/images/index/cryingkoala.png" />
+                </div>
+                <div class="layer" data-depth="0.3">
+                    <img src="@/assets/images/index/tree.png" alt="" />
+                </div>
+                <div class="layer" data-depth="2">
+                    <img src="@/assets/images/index/fireline.png" />
+                </div>
+                <h1 class="layer" data-depth="0.05">
+                    <img src="@/assets/images/index/logo.svg" />
+                </h1>
+            </div>
+        </div>
+    </section>
     <section class="page">
         <div class="fire">
             <h2>Windfires</h2>
@@ -122,6 +135,11 @@ export default {
     },
     data() {
         return {
+            inMove: false,
+            inMoveDelay: 400,
+            activeSection: 0,
+            offsets: [],
+            touchStartY: 0,
             articles: [
                 {
                     img: require("../assets/images/about/3.jpg"),
@@ -151,6 +169,17 @@ export default {
     },
     mounted() {
         this.intscence();
+        this.calculateSectionOffsets();
+        window.addEventListener("mousewheel", this.handleMouseWheel, {
+            passive: false,
+        });
+
+        window.addEventListener("touchstart", this.touchStart, {
+            passive: false,
+        }); // 手機
+        window.addEventListener("touchmove", this.touchMove, {
+            passive: false,
+        }); // 手機
     },
     methods: {
         intscence() {
@@ -160,8 +189,85 @@ export default {
                 clipRelativeInput: true,
             });
         },
+        calculateSectionOffsets() {
+            let sections = document.getElementsByTagName("section");
+            let length = sections.length;
+
+            for (let i = 0; i < length; i++) {
+                let sectionOffset = sections[i].offsetTop;
+                this.offsets.push(sectionOffset);
+            }
+        },
+        scrollToSection(id, force = false) {
+            if (this.inMove && !force) return false;
+
+            this.activeSection = id;
+            this.inMove = true;
+
+            document.getElementsByTagName("section")[id].scrollIntoView({
+                behavior: "smooth",
+            });
+
+            setTimeout(() => {
+                this.inMove = false;
+            }, this.inMoveDelay);
+        },
+        handleMouseWheel: function (e) {
+            if (e.wheelDelta < 30 && !this.inMove) {
+                this.moveUp();
+            } else if (e.wheelDelta > 30 && !this.inMove) {
+                this.moveDown();
+            }
+
+            e.preventDefault();
+            return false;
+        },
+        moveDown() {
+            this.inMove = true;
+            this.activeSection--;
+
+            if (this.activeSection < 0)
+                this.activeSection = this.offsets.length - 1;
+
+            this.scrollToSection(this.activeSection, true);
+        },
+        moveUp() {
+            this.inMove = true;
+            this.activeSection++;
+
+            if (this.activeSection > this.offsets.length - 1)
+                this.activeSection = 0;
+
+            this.scrollToSection(this.activeSection, true);
+        },
+        touchStart(e) {
+            e.preventDefault();
+
+            this.touchStartY = e.touches[0].clientY;
+        },
+        touchMove(e) {
+            if (this.inMove) return false;
+            e.preventDefault();
+
+            const currentY = e.touches[0].clientY;
+
+            if (this.touchStartY < currentY) {
+                this.moveDown();
+            } else {
+                this.moveUp();
+            }
+
+            this.touchStartY = 0;
+            return false;
+        },
     },
-    destroyed() {},
+    destroyed() {
+        window.removeEventListener("mousewheel", this.handleMouseWheel, {
+            passive: false,
+        });
+        window.removeEventListener("touchstart", this.touchStart); // 手機
+        window.removeEventListener("touchmove", this.touchMove); //手機
+    },
 };
 </script>
 
@@ -170,6 +276,26 @@ body {
     @include m {
         overflow-x: hidden;
     }
+}
+.sections-menu {
+    position: fixed;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 997;
+}
+.sections-menu .menu-point {
+    width: 10px;
+    height: 10px;
+    background-color: $section-green;
+    display: block;
+    margin: 1rem 0;
+    opacity: 0.6;
+    transition: 0.4s ease all;
+}
+.sections-menu .menu-point.active {
+    opacity: 1;
+    transform: scale(1.5);
 }
 .container {
     width: 100%;
@@ -341,7 +467,6 @@ body {
 }
 .page {
     @include size(100vw, 100vh);
-    margin-top: 100px;
     display: flex;
     overflow-x: hidden;
     @include d {
@@ -359,6 +484,9 @@ body {
         @include d {
             @include size(100vw, 80vh);
             margin-top: 0;
+        }
+        @include m {
+            @include size(100vw, 70%);
         }
         &:hover {
             transform: scale(1.05) translate(-20px, 20px);
@@ -395,6 +523,9 @@ body {
             width: 75vw;
             margin-left: 5vw;
         }
+        @include m {
+            @include size(75vw, 30%);
+        }
     }
 
     p {
@@ -419,12 +550,13 @@ body {
         transition: 2s;
         @include bgSetting(cover, right);
         @include d {
-            @include size(100vw, 75vh);
+            @include size(100vw, 75%);
             background-attachment: local;
-            @include bgSetting(160%, center left 80%);
+            @include bgSetting(cover, center left 80%);
         }
         @include m {
             @include bgSetting(240%, center left 70%);
+            @include size(100vw, 65%);
         }
         &:hover {
             transform: scale(1.05) translate(20px, -20px);
@@ -444,9 +576,11 @@ body {
             transition: 2s;
             @include d {
                 font-size: 13vw;
+                margin-top: 15%;
                 -webkit-text-stroke: 2px $darkgreen;
             }
             @include m {
+                margin-top: 105%;
                 -webkit-text-stroke: 1px $darkgreen;
             }
         }
@@ -457,12 +591,13 @@ body {
         text-align: left;
         margin-top: 60vh;
         @include d {
-            width: 70vw;
+            @include size(70vw, 25%);
             margin-top: 0;
             transform: translateX(5vw);
         }
         @include m {
             width: 90vw;
+            @include size(70vw, 35%);
         }
 
         p {
@@ -517,6 +652,8 @@ body {
     }
 }
 .wrapper {
+    margin-top: auto;
+    margin-bottom: auto;
     h2 {
         font-size: 12vw;
         font-family: "Inkfree";
