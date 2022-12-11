@@ -137,25 +137,20 @@ export default {
                 display: inline;
                 height: 40px;
                 line-height: 40px;
-                outline: none;
-            }
-            select,
-            input[type="date"] {
+                padding: 5px 10px;
                 background-color: #fff;
+                outline: none;
                 border: 1px solid $btn-light-color;
                 border-radius: 10px;
                 color: $btn-color;
-                padding: 3px 5px;
                 &:focus {
                     border: solid 1px $btn-color;
                 }
+                &:disabled {
+                    cursor: not-allowed;
+                    background-color: darken(#fff, 2%);
+                }
             }
-            input[type="date"]::-webkit-datetime-edit-text {
-                padding: 0 1rem;
-            }
-            // input[type="date"]::-webkit-calendar-picker-indicator {
-            //     color: $btn-color;
-            // }
             textarea {
                 padding: 10px;
             }

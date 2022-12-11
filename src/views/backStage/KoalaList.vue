@@ -37,7 +37,10 @@
             <p>{{ koala.name }}</p>
             <p>{{ koala.id }}</p>
             <p>{{ koala.dob }}</p>
-            <p>{{ koala.sex }}</p>
+            <p>
+                <span v-if="koala.sex === 'Male'">公</span>
+                <span v-if="koala.sex === 'Female'">母</span>
+            </p>
             <p>X歲</p>
             <p>
                 <Switch
@@ -77,7 +80,7 @@ export default {
                     name: "Emily",
                     id: "K001",
                     dob: "2020-03-22",
-                    sex: "母",
+                    sex: "Female",
                     listed: 1,
                     desc: "I'm Emily.",
                 },
@@ -85,7 +88,7 @@ export default {
                     name: "Gabriel",
                     id: "K002",
                     dob: "2019-05-20",
-                    sex: "公",
+                    sex: "Male",
                     listed: 1,
                     desc: "I'm Gabriel.",
                 },
@@ -93,7 +96,7 @@ export default {
                     name: "Lucien",
                     id: "K003",
                     dob: "2019-10-15",
-                    sex: "公",
+                    sex: "Male",
                     listed: 1,
                     desc: "I'm Lucien.",
                 },
@@ -101,7 +104,7 @@ export default {
                     name: "Camille",
                     id: "K004",
                     dob: "2018-04-08",
-                    sex: "母",
+                    sex: "Female",
                     listed: 1,
                     desc: "I'm Camille.",
                 },
@@ -109,7 +112,7 @@ export default {
                     name: "Mindy",
                     id: "K005",
                     dob: "2017-07-10",
-                    sex: "母",
+                    sex: "Female",
                     listed: 1,
                     desc: "I'm Mindy.",
                 },
@@ -117,7 +120,7 @@ export default {
                     name: "Antoine",
                     id: "K006",
                     dob: "2015-01-16",
-                    sex: "公",
+                    sex: "Male",
                     listed: 0,
                     desc: "I'm Antoine.",
                 },

@@ -29,16 +29,11 @@
         <div class="bs-list" v-for="order in donateOrders" :key="order.id">
             <p>{{ order.donator }}</p>
             <p>{{ order.id }}</p>
-            <!-- <p>
-                <router-link
-                    :to="`/bs-support-info/${order.number}`"
-                    target="_blank"
-                >
-                    {{ order.number }}
-                </router-link>
-            </p> -->
             <p>{{ order.date }}</p>
-            <p>{{ order.plan }}</p>
+            <p>
+                <span v-if="order.plan === 0">認養</span>
+                <span v-if="order.plan === 1">資助</span>
+            </p>
             <p>{{ order.koala }}</p>
             <p>NT$ {{ order.price }}</p>
             <p>
@@ -66,49 +61,55 @@ export default {
                     donator: "Joyce Byers",
                     id: "S00001",
                     date: "2022-12-01",
-                    plan: "adopt",
+                    plan: 0,
                     koala: "Gabriel",
                     price: 1000,
+                    desc: "Joyce Byers 在 2022-12-01 時，領養了無尾熊 Gabriel。",
                 },
                 {
                     donator: "Jim Hopper",
                     id: "S00002",
                     date: "2022-12-02",
-                    plan: "adopt",
+                    plan: 0,
                     koala: "Camille",
                     price: 1000,
+                    desc: "",
                 },
                 {
                     donator: "Dustin Henderson",
                     id: "S00003",
                     date: "2022-12-03",
-                    plan: "support",
-                    koala: "全部",
+                    plan: 1,
+                    koala: "",
                     price: 300,
+                    desc: "",
                 },
                 {
                     donator: "Lucas Sinclair",
                     id: "S00004",
                     date: "2022-12-04",
-                    plan: "adopt",
-                    koala: "全部",
+                    plan: 1,
+                    koala: "",
                     price: 300,
+                    desc: "",
                 },
                 {
                     donator: "Nancy Wheeler",
                     id: "S00005",
                     date: "2022-12-05",
-                    plan: "adopt",
+                    plan: 0,
                     koala: "Lucien",
                     price: 1000,
+                    desc: "",
                 },
                 {
                     donator: "Steve Harrington",
                     id: "S00006",
                     date: "2022-12-06",
-                    plan: "adopt",
+                    plan: 0,
                     koala: "Emily",
                     price: 1000,
+                    desc: "",
                 },
             ],
         };
