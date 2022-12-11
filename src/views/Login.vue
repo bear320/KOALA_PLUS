@@ -24,11 +24,23 @@
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>建立帳號</h2>
                             <form @submit.prevent="login">
-                                <div><p>姓名</p><input class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="userName" required/></div>
-                                <div><p>帳號/信箱</p><input type="text" placeholder="你的信箱或帳號" v-model="account" required/></div>
+                                <div><p>姓名</p><input class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="sign_up_userName" required/></div>
+                                <div><p>帳號/信箱</p><input type="text" placeholder="你的信箱或帳號" v-model="sign_up_account" required/></div>
                                 <div><button class="btn_email_confirm">信箱認證</button></div>
-                                <div><p>密碼</p><input class="content_active_sign_up_move2" type="password" v-model="password" required placeholder="Confirm Password"/></div>
-                                <div><p>密碼認證</p><input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" required/></div>
+                                <div>
+                                    <p class="content_active_sign_up_moveTxt_1">密碼</p>
+                                    <i class="icon_password"></i>
+                                    <input class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password">
+                                    <input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
+                                    <img :src="seen_one ? seenImg : unseenImg" @click="changeType_1()" v-on:mouseover="hoverEye_1" v-on:mouseout="outEye_1" class="sign_up_icon_eye" />
+                                </div>
+                                <div>
+                                    <p class="content_active_sign_up_moveTxt_2">密碼認證</p>
+                                    <i class="icon_password"></i>
+                                    <input class="content_active_sign_up_move3" type="text" v-if="pwdType_two" v-model="sign_up_password_comfirm">
+                                    <input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" v-model="sign_up_password_comfirm" required v-else/>
+                                    <img :src="seen_two ? seenImg : unseenImg" @click="changeType_2()" v-on:mouseover="hoverEye_2" v-on:mouseout="outEye_2" class="sign_up_icon_eye" />
+                                </div>
                                 <div><button class="btn_sign_up" type="submit" @click="sign_up()">註冊會員</button></div>
                             </form>
                         </div>
@@ -37,7 +49,13 @@
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
                                 <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
-                                <div><p>密碼</p><input class="content_active_login_move" type="password" placeholder="Password" v-model="password" required/></div>
+                                <div>
+                                    <p class="content_active_login_moveTxt">密碼</p>
+                                    <i class="icon_password"></i>
+                                    <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password">
+                                    <input class="content_active_login_move4" type="password" placeholder="Password" v-model="login_password" required v-else/>
+                                    <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3()" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye" />
+                                </div>
                                 <button class="btn_login" type="submit" @click="login()">登錄會員</button><br />
                             </form>
                             <button class="btn_login" @click="forget_password()">忘記密碼</button>
@@ -67,9 +85,19 @@ export default {
     },
     data () {
       return {
-        userName: "",
-        account: "",
-        password: "",
+        seen_one: "",
+        seen_two: "",
+        seen_three: "",
+        unseenImg: require("../assets/images/login/eye_close.png"),
+        seenImg: require("../assets/images/login/eye_open.png"),
+        pwdType_one: false,
+        pwdType_two: false,
+        pwdType_three: false,
+        sign_up_userName: "",
+        sign_up_account: "",
+        sign_up_password: "",
+        sign_up_password_comfirm: "",
+        login_password: "",
       }
     },
     methods: {
@@ -131,6 +159,45 @@ export default {
                 document.querySelector(".content_active_login").style.display = "none";
                 document.querySelector(".content_active_forget_password").style.display = "none";
             }, 500);
+        },
+
+        changeType_1: function() {
+            this.seen_one = !this.seen_one;
+            this.pwdType_one = !this.pwdType_one;
+        },
+
+        hoverEye_1: function() {
+            this.seen_one = !this.seen_one;
+        },
+
+        outEye_1:function() {
+            this.seen_one = !this.seen_one;
+        },
+
+        changeType_2: function() {
+            this.seen_two = !this.seen_two;
+            this.pwdType_two = !this.pwdType_two;
+        },
+
+        hoverEye_2: function() {
+            this.seen_two = !this.seen_two;
+        },
+
+        outEye_2:function() {
+            this.seen_two = !this.seen_two;
+        },
+
+        changeType_3: function() {
+            this.seen_three = !this.seen_three;
+            this.pwdType_three = !this.pwdType_three;
+        },
+
+        hoverEye_3: function() {
+            this.seen_three = !this.seen_three;
+        },
+
+        outEye_3:function() {
+            this.seen_three = !this.seen_three;
         },
     },
 };
@@ -530,25 +597,50 @@ export default {
     width: 50%;
 }
 
- // ==================== 改 input 位置 ==================== //
+// ==================== 改 input 位置 ==================== //
 .content_active_sign_up > form > div > .content_active_sign_up_move1 {
     margin-left: 11%;
 }
 
 .content_active_sign_up > form > div > .content_active_sign_up_move2 {
-    margin-left: 11%;
+    margin-left: 10.5%;
 }
 
 .content_active_sign_up > form > div > .content_active_sign_up_move3 {
     margin-left: 6%;
 }
 
-.content_active_login > form > div > .content_active_login_move {
-    margin-left: 10%;
+.content_active_login > form > div > .content_active_login_move4{
+    margin-left: 11%;
 }
 
+.content_active_sign_up_moveTxt_1{
+    padding-left: 4.5%;
+}
 
+.content_active_sign_up_moveTxt_2{
+    padding-left: 5%;
+}
 
+.content_active_login_moveTxt {
+    padding-left: 5%;
+}
+
+// ==================== 眼睛 ==================== //
+
+.sign_up_icon_eye {
+    width: 20px;
+    height: 20px;
+    margin-left: 1.5%;
+    margin-top: 1.5%;
+}
+
+.login_icon_eye {
+    width: 20px;
+    height: 20px;
+    margin-left: 1.5%;
+    margin-top: 3.5%;
+}
 
 
 
@@ -672,6 +764,24 @@ export default {
     .content_active_login > div > img {
         margin-top: 5%;
         width: 35%;
+    }
+
+    .content_active_sign_up > form > div > .content_active_sign_up_move3 {
+        margin-left: 4%;
+    }
+
+    .sign_up_icon_eye {
+        width: 20px;
+        height: 20px;
+        margin-left: 1.5%;
+        margin-top: 2.5%;
+    }
+
+    .login_icon_eye {
+        width: 20px;
+        height: 20px;
+        margin-left: 1.5%;
+        margin-top: 4.5%;
     }
 
 }
