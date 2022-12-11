@@ -29,8 +29,7 @@
         <section>
             <div class="bstitle">
                 <h3 class="mem_id">會員編號</h3>
-                <h3 class="mem_last_name">姓氏</h3>
-                <h3 class="mem_first_name">名字</h3>
+                <h3 class="mem_name">姓名</h3>
                 <h3 class="mem_mob">手機</h3>
                 <h3 class="mem_validation">email驗證</h3>
                 <h3 class="mem_account">Email / 帳號</h3>
@@ -40,11 +39,8 @@
 
             <div class="content" v-for="item in memindexs" :key="item.mem_id">
                 <p class="mem_id">{{ item.mem_id }}</p>
-                <p class="mem_last_name">
-                    {{ item.mem_last_name }}
-                </p>
-                <p class="mem_first_name">
-                    {{ item.mem_first_name }}
+                <p class="mem_name">
+                    {{ item.mem_name }}
                 </p>
                 <p class="mem_mob">{{ item.mem_mob }}</p>
                 <p class="mem_validation">{{ item.mem_validation }}</p>
@@ -77,38 +73,34 @@ export default {
             memindexs: [
                 {
                     mem_id: "P00001",
-                    mem_last_name: "zeng",
-                    mem_first_name: "charmy111",
+                    mem_name: "曾韋翰",
                     mem_mob: "0988777688",
                     mem_validation: "已認證",
-                    mem_account: "12312321@gmail.com",
+                    mem_account: "charmy111@gmail.com",
                     black_switch: false,
                 },
                 {
                     mem_id: "P00002",
-                    mem_last_name: "zeng",
-                    mem_first_name: "charmy222",
+                    mem_name: "王以太",
                     mem_mob: "0988777688",
                     mem_validation: "已認證",
-                    mem_account: "123222@gmail.com",
+                    mem_account: "charmy222@gmail.com",
                     black_switch: true,
                 },
                 {
                     mem_id: "P00003",
-                    mem_last_name: "zeng",
-                    mem_first_name: "charmy333",
+                    mem_name: "鄧紫棋",
                     mem_mob: "0988777688",
                     mem_validation: "未認證",
-                    mem_account: "123333@gmail.com",
+                    mem_account: "charmy333@gmail.com",
                     black_switch: false,
                 },
                 {
                     mem_id: "P00004",
-                    mem_last_name: "zeng",
-                    mem_first_name: "charmy444",
+                    mem_name: "陳昱榕",
                     mem_mob: "0988777688",
                     mem_validation: "未認證",
-                    mem_account: "123444@gmail.com",
+                    mem_account: "charmy444@gmail.com",
                     black_switch: true,
                 },
             ],
@@ -161,33 +153,16 @@ html article {
             }
         }
     }
-    // h1 {
-    //     display: inline-block;
-    //     width: 25%;
-    //     background-image: url(@/assets/images/backstageindex/memberIcon.png);
-    //     @include bgSetting(contain, right);
-    // }
-    .todo {
-        float: right;
-        display: flex;
-        a {
-            text-align: center;
-            img {
-                margin: auto;
-            }
-        }
-    }
 
     section {
         text-align: center;
         margin: 10px 0;
         padding-bottom: 10px;
-        // align-items: center;
         align-self: center;
         h3 {
             margin-bottom: 0;
+            width: calc(100% / 6);
         }
-
         .bstitle,
         .content {
             height: 56px;
@@ -199,25 +174,9 @@ html article {
             margin: 10px 0;
             padding: 10px 0;
             border-bottom: solid 1px rgb(190, 214, 213);
-        }
-        .mem_id {
-            width: 15%;
-        }
-        .mem_last_name,
-        .mem_first_name {
-            width: 10%;
-        }
-        .mem_mob {
-            width: 15%;
-        }
-        .mem_validation {
-            width: 15%;
-        }
-        .mem_account {
-            width: 25%;
-        }
-        .black_switch {
-            width: 10%;
+            p {
+                width: calc(100% / 6);
+            }
         }
     }
 }
