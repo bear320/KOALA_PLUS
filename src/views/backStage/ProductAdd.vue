@@ -6,7 +6,7 @@
             <img src="@/assets/images/backstageindex/productIcon.png" alt="" />
         </div>
         <div class="sub-title">
-            <h2>編輯商品</h2>
+            <h2>新增商品</h2>
         </div>
     </section>
     <form
