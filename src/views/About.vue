@@ -49,24 +49,9 @@
         <section>
             <h2 class="title">FAQS</h2>
             <Collapse v-model="value">
-                <Panel name="1">
-                    我的捐款可以免稅嗎?
-                    <template #content>內容</template>
-                </Panel>
-                <Panel name="2">
-                    我能收到捐款的稅收收據嗎?
-                    <template #content>
-                        對於正在進行的每月捐款，我們會在財政年度結束時向您發送所有收到的每月捐款的稅收收據。對於單筆捐款，我們會在處理完每筆捐款後立即發送收據。
-                        我們接受MasterCard、Visa、JCB信用卡支付，暫不接受行動支付及匯款，造成不便盡請見諒。
-                    </template>
-                </Panel>
-                <Panel name="3">
-                    如何更新我的個人資訊?
-                    <template #content>內容</template>
-                </Panel>
-                <Panel name="4">
-                    標題
-                    <template #content>內容</template>
+                <Panel v-for="FAQ in FAQS" :key="FAQ">
+                    {{ FAQ.title }}
+                    <template #content>{{ FAQ.content }}</template>
                 </Panel>
             </Collapse>
         </section>
@@ -144,6 +129,14 @@ export default {
     data() {
         return {
             curView: "one",
+            FAQS: [
+                { title: "我的捐款可以免稅嗎?", content: "內容" },
+                {
+                    title: "我能收到捐款的稅收收據嗎?",
+                    content:
+                        "對於正在進行的每月捐款，我們會在財政年度結束時向您發送所有收到的每月捐款的稅收收據。對於單筆捐款，我們會在處理完每筆捐款後立即發送收據。我們接受MasterCard、Visa、JCB信用卡支付，暫不接受行動支付及匯款，造成不便盡請見諒。",
+                },
+            ],
             imgs: [
                 {
                     url: require("../assets/images/about/1.jpg"),
