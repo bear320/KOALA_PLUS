@@ -13,21 +13,12 @@
                 </div>
                 <table class="tabcontent_group">
                     <tr class="tabcontent_txt">
-                        <td>姓氏</td>
+                        <td>姓名</td>
                         <input
                             type="text"
-                            id="mem_last_name"
-                            myfield="mem_last_name"
-                            value="Zeng"
-                        />
-                    </tr>
-                    <tr class="tabcontent_txt">
-                        <td>名字</td>
-                        <input
-                            type="text"
-                            id="mem_first_name"
-                            myfield="mem_first_name"
-                            value="Charmy"
+                            id="mem_name"
+                            myfield="mem_name"
+                            value="曾韋翰"
                         />
                     </tr>
                     <tr class="tabcontent_txt">

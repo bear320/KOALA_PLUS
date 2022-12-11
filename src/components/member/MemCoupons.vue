@@ -1,7 +1,7 @@
 <template lang="">
     <li class="mem_coupons content">
         <div class="mem_basic">
-            <p>名字：{{ mem_first_name }}</p>
+            <p>姓名：{{ mem_name }}</p>
             <p>會員ID：{{ mem_id }}</p>
         </div>
         <div class="mem_main">
@@ -48,7 +48,7 @@
 export default {
     data() {
         return {
-            mem_first_name: "Charmy",
+            mem_name: "曾韋翰",
             mem_id: "P00001",
             couponsList: [
                 {

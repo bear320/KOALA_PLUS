@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_order content">
         <div class="mem_basic">
-            <p>名字：Charmy</p>
-            <p>會員ID：P00001</p>
+            <p>姓名：{{ mem_name }}</p>
+            <p>會員ID：{{ mem_id }}</p>
         </div>
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
@@ -57,6 +57,8 @@ export default {
     },
     data() {
         return {
+            mem_name: "曾韋翰",
+            mem_id: "P00001",
             showMemUnsubscribe: false,
             ord_sts: "處理中",
             orderList: [
