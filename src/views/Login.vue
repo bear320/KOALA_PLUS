@@ -1,56 +1,51 @@
 <template>
     <Header></Header>
     <section class="main_block nav_space wrapper">
-        <div class="cotn_principal">
-            <div class="cont_centrar">
-                <div class="cont_login">
-                    <div class="cont_info_log_sign_up">
-                        <div class="col_md_sign_up">
-                            <div class="cont_ba_opcitiy cont_ba_opcitiy_left">
+        <div class="main_content">
+            <div class="main_content_center">
+                <div class="content_login">
+                    <div class="content_login_sign_up">
+                        <div class="content_sign_up_block">
+                            <div class="content_opcitiy content_opcitiy_left">
                                 <p>尚未擁有會員？</p>
-                                <button class="main_block_btn_sign_up" @click="cambiar_sign_up()">註冊會員</button>
+                                <button class="main_block_btn_sign_up" @click="sign_up()">註冊會員</button>
                             </div>
                         </div>
-                        <div class="col_md_login">
-                            <div class="cont_ba_opcitiy cont_ba_opcitiy_right">
+                        <div class="content_login_block">
+                            <div class="content_opcitiy content_opcitiy_right">
                                 <p>已經擁有會員？</p>
-                                <button class="main_block_btn_login" @click="cambiar_login()">登入會員</button><br />
-                                <button class="main_block_btn_login" @click="cambiar_forget_password()">忘記密碼</button>
+                                <button class="main_block_btn_login" @click="login()">登入會員</button><br />
+                                <button class="main_block_btn_login" @click="forget_password()">忘記密碼</button>
                             </div>
                         </div>
                     </div>
-                    <div class="cont_forms">
-                        <div class="cont_form_sign_up">
-                            <a href="#" @click="ocultar_login_sign_up()">X</a>
+                    <div class="content_active">
+                        <div class="content_active_sign_up">
+                            <a href="#" @click="login_sign_up()">X</a>
                             <h2>建立帳號</h2>
-                            <div><p>姓氏</p><input type="text" placeholder="Last Name"/></div>
-                            <div><p>名字</p><input type="text" placeholder="First Name"/></div>
-                            <div><p>帳號</p><input type="text" placeholder="Your Account"/></div>
-                            <div>
-                                <p>信箱</p><input type="text" placeholder="Email" /><br />   <!-- type="email" 比較好，可是會跑版 -->
-                                <button class="btn_email_confirm">信箱認證</button>
-                            </div>
-                            <div><p>密碼</p><input type="password" placeholder="Confirm Password"/><br /></div>
-                            <div><p>密碼認證</p><input class="confirm_password" type="password" placeholder="Confirm Password"/><br /></div>
-                            <div><button class="btn_sign_up" @click="cambiar_sign_up()">註冊會員</button></div>
-                            <!-- <div><img src="../assets/images/login/login_koala.png" alt=""/></div> -->
+                            <div><p>姓名</p><input class="content_active_sign_up_move1" type="text" placeholder="你的名字"/></div>
+                            <div><p>帳號/信箱</p><input type="text" placeholder="Your Account"/></div>
+                            <div><button class="btn_email_confirm">信箱認證</button></div>
+                            <div><p>密碼</p><input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password"/></div>
+                            <div><p>密碼認證</p><input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password"/></div>
+                            <div><button class="btn_sign_up" @click="sign_up()">註冊會員</button></div>
                         </div>
-                        <div class="cont_form_login">
-                            <a href="#" @click="ocultar_login_sign_up()">X</a>
+                        <div class="content_active_login">
+                            <a href="#" @click="login_sign_up()">X</a>
                             <h2>會員登入</h2>
-                            <div><p>帳號</p></div><input type="text" placeholder="Account"/><br />
-                            <div><p>信箱</p></div><input type="text" placeholder="Email" /><br />
-                            <div><p>密碼</p></div><input type="password" placeholder="Password" /><br />
-                            <button class="btn_login" @click="cambiar_login()">登錄會員</button><br />
-                            <button class="btn_login" @click="cambiar_forget_password()">忘記密碼</button>
+                            <div><p>帳號</p><input type="text" placeholder="Account"/></div>
+                            <div><p>信箱</p><input type="text" placeholder="Email" /></div>
+                            <div><p>密碼</p><input type="password" placeholder="Password" /></div>
+                            <button class="btn_login" @click="login()">登錄會員</button><br />
+                            <button class="btn_login" @click="forget_password()">忘記密碼</button>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
-                        <div class="cont_form_forget_password">
-                            <a href="#" @click="ocultar_login_sign_up()">X</a>
+                        <div class="content_active_forget_password">
+                            <a href="#" @click="login_sign_up()">X</a>
                             <h2>忘記密碼</h2>
-                            <div><p>帳號</p></div><input type="text" placeholder="Account"/><br />
-                            <div><p>信箱</p></div><input type="text" placeholder="Email" /><br />
-                            <button class="btn_login" @click="cambiar_forget_password()">驗證信箱</button>
+                            <div><p>帳號</p><input type="text" placeholder="Account"/></div>
+                            <div><p>信箱</p><input type="text" placeholder="Email" /></div>
+                            <button class="btn_login" @click="forget_password()">驗證信箱</button>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                     </div>
@@ -67,63 +62,63 @@ export default {
         Header,
     },
     methods: {
-        cambiar_login() {
-            document.querySelector(".cont_forms").className = "cont_forms cont_forms_active_login";
-            document.querySelector(".cont_form_login").style.display = "block";
-            document.querySelector(".cont_form_sign_up").style.opacity = "0";
-            document.querySelector(".cont_form_forget_password").style.opacity = "0";
+        login() {
+            document.querySelector(".content_active").className = "content_active content_active_active_login";
+            document.querySelector(".content_active_login").style.display = "block";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
+            document.querySelector(".content_active_forget_password").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".cont_form_login").style.opacity = "1";
+                document.querySelector(".content_active_login").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(".cont_form_sign_up").style.display = "none";
-                document.querySelector(".cont_form_forget_password").style.display = "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
             }, 200);
         },
 
-        cambiar_sign_up(at) {
-            document.querySelector(".cont_forms").className = "cont_forms cont_forms_active_sign_up";
-            document.querySelector(".cont_form_sign_up").style.display = "block";
-            document.querySelector(".cont_form_login").style.opacity = "0";
-            document.querySelector(".cont_form_forget_password").style.opacity = "0";
+        sign_up(at) {
+            document.querySelector(".content_active").className = "content_active content_active_active_sign_up";
+            document.querySelector(".content_active_sign_up").style.display = "block";
+            document.querySelector(".content_active_login").style.opacity = "0";
+            document.querySelector(".content_active_forget_password").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".cont_form_sign_up").style.opacity = "1";
+                document.querySelector(".content_active_sign_up").style.opacity = "1";
             }, 100);
 
             setTimeout(function () {
-                document.querySelector(".cont_form_login").style.display = "none";
-                document.querySelector(".cont_form_forget_password").style.display = "none";
+                document.querySelector(".content_active_login").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
             }, 400);
         },
 
-        cambiar_forget_password(at) {
-            document.querySelector(".cont_forms").className = "cont_forms cont_forms_active_forget_password";
-            document.querySelector(".cont_form_forget_password").style.display = "block";
-            document.querySelector(".cont_form_login").style.opacity = "0";
-            document.querySelector(".cont_form_sign_up").style.opacity = "0";
+        forget_password(at) {
+            document.querySelector(".content_active").className = "content_active content_active_active_forget_password";
+            document.querySelector(".content_active_forget_password").style.display = "block";
+            document.querySelector(".content_active_login").style.opacity = "0";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".cont_form_forget_password").style.opacity = "1";
+                document.querySelector(".content_active_forget_password").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(".cont_form_sign_up").style.display = "none";
-                document.querySelector(".cont_form_login").style.display = "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_login").style.display = "none";
             }, 200);
         },
 
-        ocultar_login_sign_up() {
-            document.querySelector(".cont_forms").className = "cont_forms";
-            document.querySelector(".cont_form_sign_up").style.opacity = "0";
-            document.querySelector(".cont_form_login").style.opacity = "0";
+        login_sign_up() {
+            document.querySelector(".content_active").className = "content_active";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
+            document.querySelector(".content_active_login").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".cont_form_sign_up").style.display = "none";
-                document.querySelector(".cont_form_login").style.display = "none";
-                document.querySelector(".cont_form_forget_password").style.display = "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_login").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
             }, 500);
         },
     },
@@ -131,7 +126,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.cotn_principal {
+.main_content {
     position: absolute;
     top: 0;
     right: 0;
@@ -143,7 +138,7 @@ export default {
     height: 100%;
 }
 
-.cont_centrar {
+.main_content_center {
     display: flex;
     align-self: center;
     width: 100%;
@@ -152,13 +147,13 @@ export default {
 }
 
 /* 改整體高度 */
-.cont_login {
+.content_login {
     position: relative;
-    width: 768px;
+    width: 1200px;
 }
 
 /* 還沒按下去的背景 height註解掉就會沒東西 */
-.cont_forms {
+.content_active {
     position: absolute;
     overflow: hidden;
     top: 0;
@@ -174,12 +169,12 @@ export default {
     transition: all 0.5s;
 }
 
-.cont_forms_active_login {
+.content_active_active_login {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 384px;
+    width: 600px;
     height: 85vh;
     top: -40vh;
-    left: 384px;
+    left: 600px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
@@ -189,12 +184,12 @@ export default {
     border-radius: 10px;
 }
 
-.cont_forms_active_sign_up {
+.content_active_active_sign_up {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 384px;
+    width: 600px;
     height: 85vh;
     top: -40vh;
-    left: 0px;
+    left: 0%;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
@@ -204,12 +199,12 @@ export default {
     z-index: 2;
 }
 
-.cont_forms_active_forget_password {
+.content_active_active_forget_password {
     box-shadow: 1px 10px 30px -10px rgba(0, 0, 0, 0.5);
-    width: 384px;
+    width: 600px;
     height: 85vh;
     top: -40vh;
-    left: 384px;
+    left: 600px;
     // -webkit-transition: all 0.5s;
     // -moz-transition: all 0.5s;
     // -ms-transition: all 0.5s;
@@ -219,11 +214,11 @@ export default {
 }
 
 /* 兩個灰色框寬度 */
-.cont_info_log_sign_up {
+.content_login_sign_up {
     position: absolute;
     width: 100%;
     /* height: 280px; */
-    top: -150px;
+    top: -10em;
     z-index: 1;
 }
 
@@ -239,13 +234,13 @@ export default {
     cursor: pointer;
 }
 
-.col_md_login {
+.content_login_block {
     position: relative;
     float: left;
     width: 50%;
 }
 
-.col_md_login > p {
+.content_login_block > p {
     font-weight: 400;
     margin-top: 15px;
     width: 80%;
@@ -276,28 +271,28 @@ export default {
     cursor: pointer;
 }
 
-.col_md_sign_up {
+.content_sign_up_block {
     position: relative;
     float: left;
     width: 50%;
 }
 
-.cont_ba_opcitiy_left > p {
+.content_opcitiy_left > p {
     font-weight: 400;
-    margin-top: 25%;
+    margin-top: 15%;
     color: #2e383f;
 }
 
-.cont_ba_opcitiy_right > p {
+.content_opcitiy_right > p {
     font-weight: 400;
-    margin-top: 20%;
+    margin-top: 10%;
     color: #2e383f;
 }
 /* ---------------------------------- background text ------------------------------------ */
-.cont_ba_opcitiy {
+.content_opcitiy {
     position: relative;
     background-color: #96bbbd;
-    width: 384px;
+    width: 600px;
     height: 350px;
     border-radius: 3px;
     margin: auto;
@@ -318,7 +313,7 @@ export default {
 }
 
 /* LOGIN 裡面的 CONTENT */
-.cont_form_login {
+.content_active_login {
     position: absolute;
     top: 0;
     right: 0;
@@ -335,7 +330,7 @@ export default {
     transition: all 0.5s;
 }
 
-.cont_form_forget_password {
+.content_active_forget_password {
     position: absolute;
     top: 0;
     right: 0;
@@ -352,12 +347,12 @@ export default {
     transition: all 0.5s;
 }
 
-.cont_forms_active_forget_password {
+.content_active_active_forget_password {
     z-index: 2;
 }
 
 /* SIGN UP 裡面的 CONTENT */
-.cont_form_sign_up {
+.content_active_sign_up {
     position: absolute;
     top: 0;
     right: 0;
@@ -375,34 +370,43 @@ export default {
     transition: all 0.5s;
 }
 
-.cont_form_sign_up > div > input {
+.content_active_sign_up > div > input {
     text-align: left;
     padding: 10px 5px;
-    margin-left: 1%;
+    margin-left: 5%;
     margin-top: 0%;
     width: 230px;
     border: none;
     color: #757575;
 }
 
-.cont_form_sign_up > h2 {
+.content_active_sign_up > h2 {
     font-size: 24px;
     margin-top: 12%;
     font-weight: 400;
     color: #757575;
 }
 
-.cont_form_sign_up > p {
+.content_active_sign_up > div > p {
     display: inline-block;
+    padding-top: 1.5%;
 }
 
-.cont_form_sign_up > div {
-    margin-top: 1%;
+.content_active_sign_up > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 7%;
 }
 
-.cont_form_login > input {
+.content_active_login > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.content_active_login > div > input {
     padding: 15px 5px;
-    margin-left: 10px;
+    margin-left: 5%;
     margin-top: 1%;
     margin-bottom: 3%;
     width: 230px;
@@ -419,16 +423,16 @@ export default {
     border-radius: 10px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: 3%;
-    margin-bottom: 1%;
+    margin-top: -5%;
+    margin-left: 37.5%;
     cursor: pointer;
 }
 
-.cont_form_sign_up > .confirm_password {
+.content_active_sign_up > .confirm_password {
     margin-right: 9.5%;
 }
 
-.cont_form_login > h2 {
+.content_active_login > h2 {
     font-size: 24px;
     margin-top: 12%;
     margin-bottom: 5%;
@@ -436,22 +440,23 @@ export default {
     color: #757575;
 }
 
-.cont_form_login > p {
+.content_active_login > div > p {
     display: inline-block;
+    padding-top: 3.5%;
 }
 
-.cont_form_login > button {
+.content_active_login > button {
     margin-top: 5%;
 }
 
-.cont_form_login > div > img {
+.content_active_login > div > img {
     margin-top: 7.5%;
     width: 40%;
 }
 
-.cont_form_login > a,
-.cont_form_sign_up > a,
-.cont_form_forget_password > a {
+.content_active_login > a,
+.content_active_sign_up > a,
+.content_active_forget_password > a {
     color: #757575;
     position: relative;
     float: right;
@@ -459,10 +464,16 @@ export default {
     margin-left: 30px;
 }
 
-.cont_form_forget_password > input {
+.content_active_forget_password > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
+.content_active_forget_password > div > input {
     text-align: left;
     padding: 15px 5px;
-    margin-left: 2%;
+    margin-left: 5%;
     margin-top: 1%;
     margin-bottom: 3%;
     width: 230px;
@@ -470,30 +481,40 @@ export default {
     color: #757575;
 }
 
-.cont_form_forget_password > h2 {
+.content_active_forget_password > h2 {
     font-size: 24px;
-    margin-top: 30%;
+    margin-top: 15%;
     margin-bottom: 5%;
     font-weight: 400;
     color: #757575;
 }
 
-.cont_form_forget_password > p {
+.content_active_forget_password > div > p {
     display: inline-block;
+    padding-top: 3.5%;
 }
 
-.cont_form_forget_password > button {
+.content_active_forget_password > button {
     margin-top: 7.5%;
 }
 
-.cont_form_forget_password > div > img {
+.content_active_forget_password > div > img {
     margin-top: 12.5%;
     width: 50%;
 }
 
+ // ==================== 改 input 位置 ==================== //
+.content_active_sign_up > div > .content_active_sign_up_move1 {
+    margin-left: 11%;
+}
 
+.content_active_sign_up > div > .content_active_sign_up_move2 {
+    margin-left: 11%;
+}
 
-
+.content_active_sign_up > div > .content_active_sign_up_move3 {
+    margin-left: 6%;
+}
 
 
 
@@ -501,21 +522,114 @@ export default {
 
 
  // ==================== 手機切版 ==================== //
- @media screen and (max-width: 768px) {
-    // .col_md_sign_up {
-    //     float: none;
-    // }
+ @media screen and (max-width: 1200px) {
+    .content_sign_up_block {
+        width: 100%;
+    }
 
-    // .col_md_login {
-    //     float: none;
-    // }
+    .content_login_block {
+        width: 100%;
+    }
 
-    // .cont_info_log_sign_up {
-    // position: absolute;
-    // width: 100%;
-    // /* height: 280px; */
-    // top: -335px;
-    // z-index: 1;
-    // }
+    .content_login_sign_up {
+        top: -22em;
+    }
+
+    .content_active_active_sign_up {
+        margin: auto;
+        top: 3vh;
+    }
+
+    .content_active_active_login {
+        margin: auto;
+        top: 3vh;
+        left: 0;
+    }
+
+    .content_active_active_forget_password {
+        margin: auto;
+        top: 3vh;
+        left: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .content_sign_up_block {
+        width: 100%;
+    }
+
+    .content_login_block {
+        width: 100%;
+    }
+
+    .content_opcitiy{
+        width: 75%;
+        height: 30vh;
+    }
+
+    .content_opcitiy_left > p {
+        margin-top: 20%;
+    }
+
+    .content_opcitiy_right > p {
+        margin-top: 0%;
+    }
+
+    .main_block_btn_sign_up {
+        width: 50%;
+    }
+
+    .main_block_btn_login {
+        width: 50%;
+    }
+
+    .content_active_active_sign_up {
+        width: 80%;
+    }
+
+    .content_active_active_login {
+        width: 80%;
+    }
+
+    .content_active_active_forget_password {
+        width: 80%;
+    }
+
+    .content_active_sign_up > div {
+        margin-top: 10%;
+    }
+
+    .content_active_login > div {
+        margin-top: 5%;
+    }
+
+    .content_active_forget_password > div {
+        margin-top: 5%;
+    }
+    
+    .content_active_login > button {
+        margin-top: 5%;
+    }
+
+    .content_active_forget_password > button {
+        margin-top: 15%;
+    }
+
+    .content_active_sign_up > h2 {
+        margin-top: 14%;
+    }
+
+    .content_active_login > h2 {
+        margin-top: 14%;
+    }
+
+    .content_active_forget_password > h2 {
+        margin-top: 14%;
+    }
+    .content_active_login > div > img {
+        margin-top: 5%;
+        width: 35%;
+    }
+
 }
 </style>
