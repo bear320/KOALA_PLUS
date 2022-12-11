@@ -224,26 +224,21 @@ export default {
                 width: 100%;
                 display: inline;
                 height: 40px;
-                line-height: 40;
-                outline: none;
-            }
-            select,
-            input[type="date"] {
+                line-height: 40px;
+                padding: 5px 10px;
                 background-color: #fff;
+                outline: none;
                 border: 1px solid $btn-light-color;
                 border-radius: 10px;
                 color: $btn-color;
-                padding: 3px 5px;
                 &:focus {
                     border: solid 1px $btn-color;
                 }
+                &:disabled {
+                    cursor: not-allowed;
+                    background-color: darken(#fff, 2%);
+                }
             }
-            input[type="date"]::-webkit-datetime-edit-text {
-                padding: 0 1rem;
-            }
-            // input[type="date"]::-webkit-calendar-picker-indicator {
-            //     color: $btn-color;
-            // }
             textarea {
                 padding: 10px;
             }
@@ -259,20 +254,6 @@ export default {
             width: 100%;
             textarea {
                 resize: none;
-            }
-        }
-    }
-    .line:nth-child(4) {
-        .cell {
-            width: 100%;
-            h4 {
-                margin-bottom: 10px;
-                span {
-                    color: lighten($font-color, 30%);
-                    font-size: 1rem;
-                    margin-left: 10px;
-                    text-decoration: underline;
-                }
             }
         }
     }
