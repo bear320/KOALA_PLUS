@@ -7,7 +7,8 @@
             <h2>預約總覽</h2>
         </div>
         <div class="action">
-            <a href="/bs-article-edit" target="_blank"
+            <!-- 改連結 -->
+            <a href="/bs-booking-edit" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></a>
             <div class="search">
@@ -54,10 +55,7 @@
             <p>{{ list.email }}<br />{{ list.mobile }}</p>
             <p>{{ list.status }}</p>
             <p>
-                <router-link
-                    :to="`/bs-support-info/${list.number}`"
-                    target="_blank"
-                >
+                <router-link :to="`/bs-booking-edit`" target="_blank">
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
