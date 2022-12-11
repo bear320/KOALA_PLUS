@@ -122,7 +122,6 @@ export default {
     },
     methods: {
         toggleModal() {
-            console.log("click");
             this.isShow = !this.isShow;
         },
     },

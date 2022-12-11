@@ -176,7 +176,7 @@ body {
     height: 100vh;
     overflow: hidden;
     background-image: url(@/assets/images/index/burning\ forest.jpg);
-    background-attachment: fixed;
+    @include bgSetting(cover, bottom 20%);
 
     #scene {
         height: 100vh;
@@ -189,13 +189,20 @@ body {
             @include m() {
             }
         }
+        .layer:first-child {
+            @include d {
+                animation: layer 3s alternate infinite;
+            }
+        }
         .layer:nth-child(2) {
             margin-top: 32%;
+
             @include d() {
                 margin-top: 85%;
+                animation: layer2 3s alternate infinite;
             }
             @include m() {
-                margin-top: 55vh;
+                margin-top: 45vh;
             }
             img {
                 width: fit-content;
@@ -203,8 +210,11 @@ body {
         }
         .layer:nth-of-type(3) {
             margin-left: -300px;
+
             @include d() {
                 height: 100vh;
+                animation: layer3 3s alternate-reverse infinite;
+
                 img {
                     height: inherit;
                 }
@@ -215,8 +225,10 @@ body {
         .layer:nth-of-type(4) {
             margin-left: 200px;
             margin-top: -100px;
+            animation: layer3 2s alternate-reverse infinite;
             @include d() {
                 height: 100vh;
+
                 img {
                     height: inherit;
                 }
@@ -227,8 +239,11 @@ body {
         .layer:nth-of-type(5) {
             margin-top: 32%;
             margin-left: -200px;
+
             @include d() {
                 margin-top: 100%;
+                margin-left: 250px;
+                animation: layer 2s alternate-reverse infinite;
             }
             @include m() {
                 margin-top: 65vh;
@@ -238,13 +253,14 @@ body {
             margin-top: 28%;
             margin-left: 20%;
             width: 300px;
+            animation: layer3 4s alternate infinite;
             @include d() {
                 margin-top: 50vh;
                 margin-left: 30%;
                 width: 60vw;
             }
             @include m() {
-                margin-top: 60vh;
+                margin-top: 65vh;
                 width: 50vw;
             }
             img {
@@ -254,8 +270,10 @@ body {
         }
         .layer:nth-child(7) {
             margin-left: -230px;
+
             @include d() {
                 height: 100vh;
+                animation: layer2 5s alternate infinite;
                 img {
                     height: inherit;
                     margin-left: -300px;
@@ -268,8 +286,10 @@ body {
         .layer:nth-child(8) {
             margin-top: 43%;
             margin-left: 10%;
+
             @include d() {
                 margin-top: 150%;
+                animation: layer 2s alternate infinite;
             }
             @include m() {
                 margin-top: 65vh;
@@ -283,6 +303,7 @@ body {
                 margin-top: 20%;
                 margin-left: 10%;
                 text-align: left;
+                animation: layer3 2s alternate infinite;
             }
             @include m() {
                 margin-top: 60%;
@@ -292,12 +313,37 @@ body {
                 }
             }
         }
+        @keyframes layer {
+            0% {
+                transform: translate(45.5px, -3.5px);
+            }
+            100% {
+                transform: translate(-45.5px, 3.5px);
+            }
+        }
+        @keyframes layer2 {
+            0% {
+                transform: translate(15.5px, -2.5px);
+            }
+            100% {
+                transform: translate(-15.5px, 2.5px);
+            }
+        }
+        @keyframes layer3 {
+            0% {
+                transform: translate(-5px, 1.5px);
+            }
+            100% {
+                transform: translate(5px, -1.5px);
+            }
+        }
     }
 }
 .page {
     @include size(100vw, 100vh);
     margin-top: 100px;
     display: flex;
+    overflow-x: hidden;
     @include d {
         flex-direction: column;
     }
