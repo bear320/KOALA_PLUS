@@ -23,29 +23,33 @@
                         <div class="content_active_sign_up">
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>建立帳號</h2>
-                            <div><p>姓名</p><input class="content_active_sign_up_move1" type="text" placeholder="你的名字"/></div>
-                            <div><p>帳號/信箱</p><input type="text" placeholder="Your Account"/></div>
-                            <div><button class="btn_email_confirm">信箱認證</button></div>
-                            <div><p>密碼</p><input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password"/></div>
-                            <div><p>密碼認證</p><input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password"/></div>
-                            <div><button class="btn_sign_up" @click="sign_up()">註冊會員</button></div>
+                            <form @submit.prevent="login">
+                                <div><p>姓名</p><input class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="userName" required/></div>
+                                <div><p>帳號/信箱</p><input type="text" placeholder="你的信箱或帳號" v-model="account" required/></div>
+                                <div><button class="btn_email_confirm">信箱認證</button></div>
+                                <div><p>密碼</p><input class="content_active_sign_up_move2" type="password" v-model="password" required placeholder="Confirm Password"/></div>
+                                <div><p>密碼認證</p><input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" required/></div>
+                                <div><button class="btn_sign_up" type="submit" @click="sign_up()">註冊會員</button></div>
+                            </form>
                         </div>
                         <div class="content_active_login">
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>會員登入</h2>
-                            <div><p>帳號</p><input type="text" placeholder="Account"/></div>
-                            <div><p>信箱</p><input type="text" placeholder="Email" /></div>
-                            <div><p>密碼</p><input type="password" placeholder="Password" /></div>
-                            <button class="btn_login" @click="login()">登錄會員</button><br />
+                            <form @submit.prevent="login">
+                                <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
+                                <div><p>密碼</p><input class="content_active_login_move" type="password" placeholder="Password" v-model="password" required/></div>
+                                <button class="btn_login" type="submit" @click="login()">登錄會員</button><br />
+                            </form>
                             <button class="btn_login" @click="forget_password()">忘記密碼</button>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>忘記密碼</h2>
-                            <div><p>帳號</p><input type="text" placeholder="Account"/></div>
-                            <div><p>信箱</p><input type="text" placeholder="Email" /></div>
-                            <button class="btn_login" @click="forget_password()">驗證信箱</button>
+                            <form @submit.prevent="login">
+                                <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
+                                <button class="btn_login" type="submit" @click="forget_password()">驗證信箱</button>
+                            </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                     </div>
@@ -60,6 +64,13 @@ import Header from "@/components/header.vue";
 export default {
     components: {
         Header,
+    },
+    data () {
+      return {
+        userName: "",
+        account: "",
+        password: "",
+      }
     },
     methods: {
         login() {
@@ -370,7 +381,7 @@ export default {
     transition: all 0.5s;
 }
 
-.content_active_sign_up > div > input {
+.content_active_sign_up > form > div > input {
     text-align: left;
     padding: 10px 5px;
     margin-left: 5%;
@@ -387,15 +398,21 @@ export default {
     color: #757575;
 }
 
-.content_active_sign_up > div > p {
+.content_active_sign_up > form > div > p {
     display: inline-block;
     padding-top: 1.5%;
 }
 
-.content_active_sign_up > div {
+.content_active_sign_up > form > div {
     display: flex;
     justify-content: center;
     margin-top: 7%;
+}
+
+.content_active_login > form > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
 }
 
 .content_active_login > div {
@@ -404,7 +421,7 @@ export default {
     margin-top: 3%;
 }
 
-.content_active_login > div > input {
+.content_active_login > form > div > input {
     padding: 15px 5px;
     margin-left: 5%;
     margin-top: 1%;
@@ -428,7 +445,7 @@ export default {
     cursor: pointer;
 }
 
-.content_active_sign_up > .confirm_password {
+.content_active_sign_up > form > .confirm_password {
     margin-right: 9.5%;
 }
 
@@ -440,9 +457,13 @@ export default {
     color: #757575;
 }
 
-.content_active_login > div > p {
+.content_active_login > form > div > p {
     display: inline-block;
     padding-top: 3.5%;
+}
+
+.content_active_login > form > button {
+    margin-top: 5%;
 }
 
 .content_active_login > button {
@@ -464,13 +485,19 @@ export default {
     margin-left: 30px;
 }
 
+.content_active_forget_password > form > div {
+    display: flex;
+    justify-content: center;
+    margin-top: 3%;
+}
+
 .content_active_forget_password > div {
     display: flex;
     justify-content: center;
     margin-top: 3%;
 }
 
-.content_active_forget_password > div > input {
+.content_active_forget_password > form > div > input {
     text-align: left;
     padding: 15px 5px;
     margin-left: 5%;
@@ -489,12 +516,12 @@ export default {
     color: #757575;
 }
 
-.content_active_forget_password > div > p {
+.content_active_forget_password > form > div > p {
     display: inline-block;
     padding-top: 3.5%;
 }
 
-.content_active_forget_password > button {
+.content_active_forget_password > form > button {
     margin-top: 7.5%;
 }
 
@@ -504,16 +531,20 @@ export default {
 }
 
  // ==================== 改 input 位置 ==================== //
-.content_active_sign_up > div > .content_active_sign_up_move1 {
+.content_active_sign_up > form > div > .content_active_sign_up_move1 {
     margin-left: 11%;
 }
 
-.content_active_sign_up > div > .content_active_sign_up_move2 {
+.content_active_sign_up > form > div > .content_active_sign_up_move2 {
     margin-left: 11%;
 }
 
-.content_active_sign_up > div > .content_active_sign_up_move3 {
+.content_active_sign_up > form > div > .content_active_sign_up_move3 {
     margin-left: 6%;
+}
+
+.content_active_login > form > div > .content_active_login_move {
+    margin-left: 10%;
 }
 
 
@@ -595,23 +626,35 @@ export default {
         width: 80%;
     }
 
-    .content_active_sign_up > div {
+    .content_active_sign_up > form > div {
         margin-top: 10%;
+    }
+
+    .content_active_login > form > div {
+        margin-top: 5%;
     }
 
     .content_active_login > div {
         margin-top: 5%;
     }
 
+    .content_active_forget_password > form > div {
+        margin-top: 15%;
+    }
+
     .content_active_forget_password > div {
         margin-top: 5%;
     }
     
-    .content_active_login > button {
-        margin-top: 5%;
+    .content_active_login > form > button {
+        margin-top: 8%;
     }
 
-    .content_active_forget_password > button {
+    .content_active_login > button {
+        margin-top: 12%;
+    }
+
+    .content_active_forget_password > form > button {
         margin-top: 15%;
     }
 
