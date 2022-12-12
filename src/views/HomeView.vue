@@ -3,7 +3,7 @@
     <div class="sections-menu">
         <span
             class="menu-point"
-            :class="{ active: activeSection == index }"
+            :class="{ active: activeSection === index }"
             @click="scrollToSection(index)"
             v-for="(offset, index) in offsets"
             :key="index"
@@ -172,9 +172,9 @@ export default {
     mounted() {
         this.intscence();
         this.calculateSectionOffsets();
-        window.addEventListener("mousewheel", this.handleMouseWheel, {
-            passive: false,
-        });
+        // window.addEventListener("mousewheel", this.handleMouseWheel, {
+        //     passive: false,
+        // });
 
         window.addEventListener("touchstart", this.touchStart, {
             passive: false,
