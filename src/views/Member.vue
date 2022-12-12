@@ -73,6 +73,7 @@ export default {
         MemOrder,
         MemCoupons,
         MemAdopt,
+        Footer,
     },
     data() {
         return {
