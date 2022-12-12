@@ -13,6 +13,17 @@ module.exports = defineConfig({
             },
         },
     },
+    devServer: {
+        proxy: {
+            "/api_server": {
+                target: "http://localhost/api/",
+                changeOrigin: true,
+                pathRewrite: {
+                    "^/api_server": "",
+                },
+            },
+        },
+    },
     publicPath: process.env.NODE_ENV === "production" ? "/cgd103/g1/" : "/",
 });
 // module.exports = {

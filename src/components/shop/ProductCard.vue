@@ -3,10 +3,7 @@
         <div class="product-card">
             <div class="product-head">
                 <router-link class="product-img" :to="`/shop/${proId}`">
-                    <img
-                        src="@/assets/images/shop/product_img.png"
-                        @click="scrollToProduct"
-                    />
+                    <img :src="img" @click="scrollToProduct" />
                 </router-link>
                 <div class="btn-cart">
                     <Icon
@@ -27,6 +24,11 @@
 <script>
 export default {
     props: ["proImg", "proName", "proPrice", "proId", "col"],
+    data() {
+        return {
+            img: require(`@/assets/images/shop/${this.proImg}`),
+        };
+    },
     methods: {
         addToCart() {
             // 檢查購物車中是否已存在該商品
