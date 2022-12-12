@@ -11,19 +11,22 @@
                         :to="`/shop?category=${this.$route.query.category}&sort=name&limit=9&page=1`"
                         v-if="this.$route.query.category"
                     >
-                        {{ curCategory }}
                     </router-link>
                 </div>
 
                 <div class="search-box">
-                    <input type="text" placeholder="搜尋" />
+                    <input
+                        type="text"
+                        placeholder="搜尋"
+                        v-model="searchText"
+                        @change.lazy="searchProduct"
+                    />
                     <Icon size="24" type="md-search" class="md-search" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-xl-4 col-lg-4 col-md-4 col-12">
                     <h1 class="title">週邊商城</h1>
-                    <!-- <h1>{{ this.$store.getters.cartNumber }}</h1> -->
                     <div class="category-box card">
                         <div
                             class="category-item"
@@ -58,11 +61,10 @@
                     <div class="row">
                         <product-card
                             v-for="(item, index) in source"
-                            :key="item.id"
-                            :proImg="item.images[0]"
-                            :proName="item.name"
-                            :proPrice="item.price"
-                            :proId="item.id"
+                            :key="item.prod_id"
+                            :proImg="item.prod_img1"
+                            :proName="item.prod_name"
+                            :proPrice="item.prod_price"
                             :col="'col-xl-4 col-lg-4 col-md-6 col-6'"
                         ></product-card>
                     </div>
@@ -108,23 +110,24 @@ export default {
             source: [],
             categories: [
                 { title: "所有分類", category: undefined },
-                { title: "生活小物", category: "bonbons" },
-                { title: "玩具/絨毛娃娃", category: "raw" },
-                { title: "服飾", category: "bar" },
+                { title: "生活小物", category: "daily" },
+                { title: "玩具/絨毛娃娃", category: "doll" },
+                { title: "服飾", category: "apparel" },
             ],
             curPage: 1,
             pageTotal: 0,
+            searchText: "",
         };
     },
     watch: {
         $route: function (q) {
             this.getProduct(q.query);
-            this.getPage(q.query);
+            /* this.getPage(q.query); */
         },
     },
     computed: {
         // 暫時用，串到真正的資料庫後會刪掉
-        curCategory() {
+        /* curCategory() {
             if (this.$route.query.category === "bonbons") {
                 return "生活小物";
             } else if (this.$route.query.category === "raw") {
@@ -132,21 +135,33 @@ export default {
             } else if (this.$route.query.category === "bar") {
                 return "服飾";
             }
-        },
+        }, */
     },
     methods: {
+        searchProduct() {
+            if (!this.searchText) return;
+            this.$router.push({
+                path: "/shop",
+                query: {
+                    search: this.searchText,
+                    order: `prod_name`,
+                    limit: `9`,
+                    page: `1`,
+                },
+            });
+        },
         changeCategory(category) {
             if (!category) {
                 this.$router.push({
                     path: "/shop",
-                    query: { sort: `name`, limit: `9`, page: `1` },
+                    query: { order: `prod_name`, limit: `9`, page: `1` },
                 });
             } else {
                 this.$router.push({
                     path: "/shop",
                     query: {
                         category: `${category}`,
-                        sort: `name`,
+                        order: `prod_name`,
                         limit: `9`,
                         page: `1`,
                     },
@@ -155,23 +170,29 @@ export default {
         },
         getProduct(queryParam) {
             if (!Object.keys(queryParam).length) {
-                queryParam.sort = "name";
+                queryParam.order = "prod_name";
                 queryParam.limit = "9";
                 queryParam.page = "1";
             }
 
             const apiURL = new URL(
-                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours"
+                "http://localhost/cgd103_g1/api/getProducts.php"
             );
             const searchParams = new URLSearchParams(queryParam);
             apiURL.search = searchParams;
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json.dtat.tours;
+                    this.source = json;
+                    if (!this.source.length) {
+                        throw new Error("查無相關結果");
+                    }
+                })
+                .catch((error) => {
+                    alert(error);
                 });
         },
-        getPage(queryParam) {
+        /* getPage(queryParam) {
             let apiURL =
                 "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours";
 
@@ -187,14 +208,14 @@ export default {
                 .then((json) => {
                     this.pageTotal = Math.ceil(json.dtat.tours.length / 9);
                 });
-        },
+        }, */
         previousPage() {
             if (this.curPage <= 1) return;
             this.curPage -= 1;
             this.changePage();
         },
         nextPage() {
-            if (this.curPage >= this.pageTotal) return;
+            /* if (this.curPage >= this.pageTotal) return; */
             this.curPage += 1;
             this.changePage();
         },
@@ -224,7 +245,12 @@ export default {
     },
     created() {
         this.getProduct(this.$route.query);
-        this.getPage(this.$route.query);
+        /*  this.getPage(this.$route.query); */
+        /* fetch("http://localhost/cgd103_g1/api/getProducts.php")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+            }); */
     },
 };
 </script>
