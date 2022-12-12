@@ -12,6 +12,7 @@
     </div>
     <div class="container">
         <div id="scene">
+            <div class="bg" data-depth="0.2"></div>
             <h1 class="layer logo" data-depth="0.5">
                 <img src="@/assets/images/index/logo.svg" />
             </h1>
@@ -56,7 +57,7 @@ export default {
     height: 100vh;
     overflow: hidden;
     background-image: url(@/assets/images/member/indexkoalabgimg.jpeg);
-    @include bgSetting(cover, bottom 20%);
+    @include bgSetting(cover, bottom 10%);
     #scene {
         height: 30vh;
         user-select: none;
@@ -68,11 +69,21 @@ export default {
             }
         }
         .logo {
-            margin-top: 5%;
+            margin-top: 3% !important;
+            left: 33% !important;
             margin: 0 auto;
             filter: drop-shadow(5px 5px 1px rgba(7, 97, 125, 1));
         }
+        .bg {
+            width: 100%;
+            height: 100vh;
+            margin-top: 5%;
+            overflow: hidden;
+            background-image: url(@/assets/images/member/transparentFog03.png);
+            @include bgSetting(cover, bottom 10%);
+        }
     }
+
     .link_group {
         display: flex;
         justify-content: space-around;
