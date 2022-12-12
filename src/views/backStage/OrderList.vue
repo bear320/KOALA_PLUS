@@ -9,140 +9,119 @@
         </div>
         <section>
 <!-- 會員編號、訂單號碼 -->
-            <div class="accordion">
-                <label for="tab1" >
-                    <div class="line1">
-                        <p>會員編號：{{idname}}</p>
-                        <p>訂購日期：{{date}}</p>
-                        <p>訂單編號：{{number}}</p>
-                    </div>
-                    
-                </label>
-                <div class="box">
-                    <input type="radio" name="tab" id="tab1">
-                    <div class="con">hello</div>
+
+        <div class="accordion" v-for="article in articles" :key="article">
+            <label for="tab1" >
+                <div class="line1" >
+                    <p>▼會員編號：{{ article.idname}}</p>
+                    <p>訂購日期：{{ article.date}}</p>
+                    <p>訂單編號：{{ article.number}}</p>
                 </div>
-            </div>
-
-
-
-
-
-<!-- 會員編號、訂單號碼 -->
-            <div class="content" v-for="article in articles" :key="article">
-                <div class="num">
-                    <div class="id">
-                       
-                        <p> <Icon type="md-contact" />{{ article.id }}</p>
+            </label>
+            <div class="box">
+                <input type="radio" name="tab" id="tab1">
+                <div class="con">
+                    <div class="con-1">
+                        <p>圖片</p>
+                        <p>產品名稱</p>
+                        <p>品號</p>
+                        <p>單價</p>
+                        <p>數量</p>
+                        <p>小計</p>
                     </div>
-                    <div class="listnum">
-                        <p>訂單編號： {{ article.listnum }}</p>
+        <!-- 訂單內容 -->
+                    <div class="con-2" v-for="product in products" :key="product">
+                        <p class="pic">
+                            <img :src="product.png" alt="" />
+                        </p>
+                        <p class="product">
+                            {{ product.product }}
+                        </p>
+                        <p class="pnum">
+                            {{ product.pnum }}
+                        </p>
+                        <p class="price">
+                            ${{ product.price }}NTD
+                        </p>
+                        <p class="quantity">
+                            {{ product.quantity }}
+                        </p>
+                        <p class="sumtotal">
+                            {{ product.sumtotal }}
+                        </p>
                     </div>
-                </div>
 
-<!-- 訂單內容 -->
-
-                <div class="details card">
-                    <div class="top" v-for="article in articles" :key="article">
-                        <div class="titleall">
-                            <p class="title">{{ article.title }}</p>
-                            <p class="pnumtitle">{{ article.pnumtitle }}</p>
-                            <p class="pricetitle">{{ article.pricetitle }}</p>
-                            <p class="quantitytitle">{{ article.quantitytitle }}</p>
-                            <p class="total">{{ article.total }}</p>
-                        </div>
-                        <div class="d-card">
-                            <div class="pro">
-                                <div class="pic"><img :src="article.img" alt="" /></div>
-                                <p class="product">
-                                    {{ article.product }}
-                                </p>
-                                <div class="pnum">
-                                    <p> {{ article.pnum }}</p>
-                                </div>
-                                <div class="price">
-                                    <p> ${{ article.price }}NTD</p>
-                                </div>
-                                <div class="quantity">
-                                    <p> {{ article.quantity }}</p>
-                                </div>
-                                <div class="sumtotal">
-                                    <p> {{ article.sumtotal }}</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="bottom">
-                        <div class="info">
-                                <p class="add">寄送地址：{{ article.add }}</p>
-                                <p class="btdate">訂單成立時間：{{ article.btdate }}</p>
-                                <div class="state">
-                                    訂單狀態：
-                                    <select name="category" id="articlesCategory">
+        <!-- 訂單資訊 -->
+                    <div class="con-3">
+                        <div class="left">
+                            <p class="add">寄送地址：{{ article.add }}</p>
+                            <p class="btdate">訂單成立時間：{{ article.btdate }}</p>
+                            <div class="state">
+                                訂單狀態：
+                                <select name="category" id="articlesCategory">
                                     <option value="訂單準備中">訂單準備中</option>
                                     <option value="訂單已出貨">訂單已出貨</option>
                                     <option value="訂單已完成">訂單已完成</option>
                                     <option value="訂單未完成">訂單未完成</option>
-                                    </select>
-                                </div>
-                                
+                                </select>
+                            </div>
                         </div>
-                        <div class="discountall">
-                            <p class="discount">折扣：{{ article.discount }}NTD</p>
-                            <p class="sumtotal">總價：＄{{ article.sumtotal }} NTD</p>
+                        <div class="right">
+                            <p>折扣：{{ article.discount }}</p>
+                            <p>總價：{{ article.sumtotal }}</p>
                         </div>
-                    </div>
                     
+                        
+                    </div>
+                </div>
             </div>
         </div>
-            <!-- 內容 -->
-           
+
+
+
         </section>
     </article>
 </template>
-     
+
 <script>
 import Header from "@/components/backStage/Header.vue";
 export default {
     data() {
         return {
             articles: [
-            {
-                id: "P00001",
-                listnum: "K0000001",
-                img :require("@/assets/images/about/3.jpg"),
-                product:"無尾熊居家室內拖鞋",
-                pnum: "123",
-                price:"500",
-                quantity:"2",
-                sumtotal: "1000",
-                title:"產品名稱",
-                pnumtitle:"品號",
-                pricetitle:"單價",
-                quantitytitle:"數量",
-                total:"小計",
-                add:"桃園市中壢區復興路46號9樓",
-                btdate:"2022-01-08",
-                sumtotal: "2000",
-                discount:"50"
-            },
-            {
-                id: "P00002",
-                listnum: "K0000002",
-                img :require("@/assets/images/about/3.jpg"),
-                product:"無尾熊居家室內拖鞋",
-                pnum: "123",
-                price:"500",
-                quantity:"2",
-                sumtotal: "1000",
-                add:"桃園市中壢區復興路46號9樓",
-                btdate:"2022-01-08",
-                sumtotal: "2000",
-                discount:"50"
+                {
+                idname: "P00001",
+                date: "2020-11-11",
+                number:"000000001",
 
-            },
-             
+                add:"桃園市中壢區復興路46號9樓",
+                btdate:"2022-01-08",
+                sumtotal: "2000",
+                discount:"50"
+                },
+                {
+                idname: "P00001",
+                date: "2020-11-11",
+                number:"000000001",
+
+                add:"桃園市中壢區復興路46號9樓",
+                btdate:"2022-01-08",
+                sumtotal: "2000",
+                discount:"50"
+                },
+                
             ],
+            products: [
+                {
+                    img :require("@/assets/images/shop/product_img.png"),
+                    product:"無尾熊居家室內拖鞋",
+                    pnum: "123",
+                    price:"500",
+                    quantity:"2",
+                    sumtotal: "1000",
+                },
+               
+            ]
         };
     },
     methods: {
@@ -157,6 +136,7 @@ export default {
 <style lang="scss" scoped>
 
 .accordion{
+    margin-top: 50px;
     width: 1200px;
     label{
         width: 100%;
@@ -164,13 +144,15 @@ export default {
         border: 10px;
         background-color: #fff;
         border-radius: 10px;
-        box-shadow: 5px 3px 3px 3px  rgb(190, 190, 190);
+        box-shadow: 3px 3px 3px 3px  rgb(190, 190, 190);
         padding: 10px 50px;
         cursor: pointer;
         -webkit-user-select:none;
         -moz-user-select:none;
         -o-user-select:none;
         user-select:none;
+        text-align: center;
+
         .line1{
             display: flex;
             p{
@@ -182,7 +164,7 @@ export default {
 
 input[type=radio]:checked + .con{
     background-color: #fff;
-    box-shadow: 1px 1px 1px 1px  rgb(190, 190, 190);
+    box-shadow:  3px 3px 8px 3px   rgb(163, 163, 163);
     height: 400px;
     
 }
@@ -195,6 +177,44 @@ input[type=radio]{
     transition: 0.5s;
     margin-top: 10px;
     border-radius:10px ;
+    
+
+    .con-1{
+        height: 30px;
+        display:flex;
+        margin: 10px 50px;
+        text-align: center;
+        border-bottom: .5px solid gray;
+
+        p{
+           width: calc(100% / 6);
+           margin-bottom: 10px;
+        }
+    }
+    .con-2{
+        height: 150px;
+        display:flex;
+        margin: 10px 50px;
+        text-align: center;
+        align-items: center;
+        border-bottom: .5px solid gray;
+        p{
+           width: calc(100% / 6);
+           padding: 10px 0px ;
+        }
+    }
+    .con-3{
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 50px;
+        p , div{
+                margin: 10px;
+            }
+        .right{
+            margin-right: 50px;
+        }
+    }
 }
 .search{
     margin-top: 50px;
