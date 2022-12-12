@@ -257,6 +257,20 @@ export default {
             }
         }
     }
+    .line:nth-child(4) {
+        .cell {
+            width: 100%;
+            h4 {
+                margin-bottom: 10px;
+                span {
+                    color: lighten($font-color, 30%);
+                    font-size: 1rem;
+                    margin-left: 10px;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
     .line:last-child {
         margin-bottom: 30px;
         .cell {

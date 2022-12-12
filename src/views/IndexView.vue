@@ -1,34 +1,99 @@
 <template>
-    <!-- <Header /> -->
-    <section>
-        <router-link to="/home">前台</router-link>
-        <router-link to="/bs-login">後台</router-link>
-        <router-link to="/about">關於</router-link>
-        <router-link to="/about-koala">無尾熊百科</router-link>
-        <router-link to="/support">資助認養</router-link>
-        <router-link to="/cart1">購物車1</router-link>
-        <router-link to="/cart2">購物車2</router-link>
-        <!-- <router-link to="/koala-info">無尾熊詳情頁</router-link> -->
-        <router-link to="/koala-park">園區資訊</router-link>
-        <router-link to="/login">登入註冊</router-link>
-        <router-link to="/member">會員專區</router-link>
-        <router-link to="/my-koala">我的無尾熊</router-link>
-        <!-- <router-link to="/product">產品詳情</router-link> -->
-        <router-link to="/shop">周邊商城</router-link>
-    </section>
+    <div class="sections-menu">
+        <span
+            class="menu-point"
+            v-bind:class="{ active: activeSection == index }"
+            v-on:click="scrollToSection(index)"
+            v-for="(offset, index) in offsets"
+            v-bind:key="index"
+            v-title="'Go to section ' + (index + 1)"
+        >
+        </span>
+    </div>
+    <div class="container">
+        <div id="scene">
+            <h1 class="layer logo" data-depth="0.5">
+                <img src="@/assets/images/index/logo.svg" />
+            </h1>
+        </div>
+        <div class="link_group">
+            <div class="frontDesk link">
+                <router-link to="/home">前台</router-link>
+            </div>
+            <div class="Backstage link">
+                <router-link to="/bs-login"> 後台 </router-link>
+            </div>
+        </div>
+    </div>
 </template>
 
 <script>
-// import Header from "@/components/header.vue";
+import Parallax from "../../node_modules/parallax-js/src/parallax";
 export default {
     components: {
         // Header,
+    },
+    mounted() {
+        this.intscence();
+    },
+    methods: {
+        intscence() {
+            var scene = document.getElementById("scene");
+            var parallaxInstance = new Parallax(scene, {
+                relativeInput: true,
+                clipRelativeInput: true,
+            });
+        },
+
+        destroyed() {},
     },
 };
 </script>
 
 <style lang="scss" scoped>
-a {
-    display: block;
+.container {
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-image: url(@/assets/images/member/indexkoalabgimg.jpeg);
+    @include bgSetting(cover, bottom 20%);
+    #scene {
+        height: 30vh;
+        user-select: none;
+        .layer {
+            position: absolute;
+            @include d() {
+            }
+            @include m() {
+            }
+        }
+        .logo {
+            margin-top: 5%;
+            margin: 0 auto;
+            filter: drop-shadow(5px 5px 1px rgba(7, 97, 125, 1));
+        }
+    }
+    .link_group {
+        display: flex;
+        justify-content: space-around;
+        .link {
+            color: #337a7d;
+            background-color: #fbfafa;
+            opacity: 0.61;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            text-align: center;
+            position: relative;
+            a {
+                display: inline-block;
+                position: absolute;
+                font-size: 50px;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+    }
 }
 </style>

@@ -47,16 +47,16 @@
                 <!-- 轉出來的證書 -->
                 <!-- <div class="certificate_img"> -->
                 <div class="adopt_certificate">
-                    <img
+                    <!-- <img
                         class="certificatebg"
-                        src="@/assets/images/member/Certificate01.svg"
+                        src="@/assets/images/member/Certificate02.svg"
                         alt="會員頁面的無尾熊左圖"
-                    />
+                    /> -->
                     <p class="certificate_name">{{ mem_name }}</p>
 
-                    <p class="certificate_koala">
+                    <!-- <p class="certificate_koala">
                         {{ couponsList[certificate_Index].koala_name }}
-                    </p>
+                    </p> -->
                     <p class="certificate_date">
                         {{ couponsList[certificate_Index].sup_date }}
                     </p>
@@ -117,7 +117,7 @@ export default {
             // 這是轉出來的
             html2canvas(this.$refs.html2canvas, {
                 width: 600,
-                height: 426,
+                height: 485,
                 backgroundColor: null,
                 useCORS: true, // 解决文件跨域问题
             }).then((canvas) => {
@@ -180,49 +180,45 @@ table {
 
 .adopt_certificate {
     width: 600px;
-    height: 426px;
+    height: 425px;
     position: relative;
-    // background-color: pink;
-    // background-image: url("@/assets/images/member/Certificate01.svg");
-    .certificatebg {
-        width: 100%;
-        height: 100%;
+    background-color: pink;
+    background-image: url("@/assets/images/member/Certificate02.svg");
+    background-size: contain;
+    // .certificatebg {
+    //     width: 100%;
+    //     height: 100%;
+    // }
+    @include d() {
+        width: 300px;
+        height: 283px;
     }
     .certificate_name {
         position: relative;
-        width: fit-content;
-        background-color: red;
-        top: 29%;
-        left: 50%;
+        top: 65%;
+        left: 39%;
+        transform: translate(-65%, -50%);
+        @include d() {
+            top: 65%;
+            left: 39%;
+        }
     }
-    .certificate_koala {
-        position: relative;
-    }
+    // .certificate_koala {
+    //     position: relative;
+    //     width: fit-content;
+    //     padding: 10px;
+    //     top: 50%;
+    //     left: 67%;
+    //     transform: translate(-65%, -50%);
+    //     color: #ffffff;
+    //     font-weight: 700;
+    // }
 
     .certificate_date {
         position: relative;
+        top: 75%;
+        left: 42%;
+        transform: translate(-65%, -50%);
     }
 }
-
-// #capture {
-//     margin: 0 auto;
-//     width: 100%;
-//     height: 100%;
-//     overflow: hidden;
-// }
-// textarea {
-//     width: 100%;
-//     padding: 2rem 0.5rem;
-//     background: transparent;
-//     border: 0;
-//     text-align: center;
-//     color: #fff;
-//     // font-family: "Noto Sans", sans-serif;
-//     font-weight: 700;
-//     font-size: 2rem;
-//     resize: none;
-//     overflow: hidden;
-//     max-height: 100%;
-//     min-height: 100%;
-// }
 </style>

@@ -222,6 +222,12 @@ const routes = [
         component: () => import("@/views/backStage/ProductList.vue"),
     },
     {
+        path: "/bs-product-add",
+        name: "productAdd",
+        // component: ProductEdit,
+        component: () => import("@/views/backStage/ProductAdd.vue"),
+    },
+    {
         path: "/bs-product-edit",
         name: "productEdit",
         // component: ProductEdit,

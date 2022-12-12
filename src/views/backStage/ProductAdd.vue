@@ -2,11 +2,11 @@
     <Header />
     <section class="bs-nav-space wrapper title-wrapper">
         <div class="title">
-            <h1>園區導覽管理</h1>
-            <img src="@/assets/images/backstageindex/articleIcon.png" alt="" />
+            <h1>商品管理</h1>
+            <img src="@/assets/images/backstageindex/productIcon.png" alt="" />
         </div>
         <div class="sub-title">
-            <h2>新增休館日期</h2>
+            <h2>新增商品</h2>
         </div>
     </section>
     <form
@@ -16,76 +16,61 @@
     >
         <div class="line">
             <div class="cell">
-                <label for="rsv_date">休館日期：</label>
-                <input type="date" name="rsv_date" id="rsv_date" required />
+                <label for="prod-name">商品名稱：</label>
+                <input type="text" name="prod-name" id="prod-name" required />
             </div>
-
             <div class="cell">
-                <label for="rsv_ppl">人數：</label>
-                <select type="number" name="rsv_date" id="rsv_date" required>
-                    <option disabled value="">選擇人數</option>
-                    <option value=""></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
-        </div>
-        <div class="line">
-            <div class="cell">
-                <label for="rsv_id">編號：</label>
-                <input
-                    type="text"
-                    name="rsv_id"
-                    id="rsv_id"
-                    disabled
-                    required
-                />
-            </div>
-        </div>
-        <div class="line">
-            <div class="cell">
-                <label for="rsv_status">預約狀態：</label>
+                <label for="prod-category">商品分類</label>
                 <select
                     type="text"
-                    name="rsv_status"
-                    id="rsv_status"
-                    v-model="temp.sex"
+                    name="prod-category"
+                    id="prod-category"
                     required
                 >
-                    <option value="0">休館</option>
+                    <option value="daily">生活小物</option>
+                    <option value="doll">玩具/絨毛娃娃</option>
+                    <option value="apparel">服飾</option>
+                </select>
+            </div>
+            <div class="cell">
+                <label for="prod-price">單價：</label>
+                <input type="text" name="prod-price" id="prod-price" required />
+            </div>
+        </div>
+        <div class="line">
+            <div class="cell">
+                <label for="prod-listed">上 / 下架：</label>
+                <select
+                    type="text"
+                    name="prod-listed"
+                    id="prod-listed"
+                    required
+                >
+                    <option value="1">上架</option>
+                    <option value="0">下架</option>
                 </select>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <label for="rsv_ps">備註：</label>
+                <label for="prod-desc">描述：</label>
                 <textarea
-                    name="rsv_ps"
-                    id="rsv_ps"
-                    cols="10"
-                    rows="5"
-                    placeholder="請輸入備註內容"
-                    v-model="temp.desc"
+                    name="prod-desc"
+                    id="prod-desc"
+                    cols="30"
+                    rows="10"
+                    placeholder="請輸入描述內容"
                     required
                 ></textarea>
+            </div>
+        </div>
+        <div class="line">
+            <div class="cell">
+                <h4>
+                    新增圖片：
+                    <span>* 請至少上傳一張圖片，數量上限為四張</span>
+                </h4>
+                <ImageUpload></ImageUpload>
             </div>
         </div>
         <div class="line">
@@ -181,7 +166,7 @@ export default {
             }
         }
     }
-    .line:nth-child(4) {
+    .line:nth-child(3) {
         .cell {
             width: 100%;
             textarea {

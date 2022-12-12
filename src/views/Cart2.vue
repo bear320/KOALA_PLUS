@@ -69,7 +69,9 @@
                             </div>
                             <div class="pay-box">
                                 <div class="btn-paramy">前往付款</div>
-                                <div class="back-step">回上一步</div>
+                                <div class="back-step" @click="goBack">
+                                    回上一步
+                                </div>
                             </div>
                         </form>
                     </div>
@@ -97,6 +99,11 @@ export default {
             pay: localStorage.getItem("pay"),
         };
     },
+    methods: {
+        goBack() {
+            window.history.go(-1);
+        },
+    },
 };
 </script>
 
@@ -122,6 +129,9 @@ main {
         }
         h1 {
             margin-top: 170px;
+            @include m() {
+                margin-top: 80px;
+            }
         }
         h3 {
             color: $green;

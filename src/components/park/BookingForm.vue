@@ -83,7 +83,7 @@
             </div>
 
             <button type="submit" class="btn btn-primary" @click.prevent="next">
-                Submit
+                確認預約
             </button>
 
             <div class="orderList" v-show="isOrder">

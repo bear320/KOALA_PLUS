@@ -6,7 +6,7 @@
             <img src="@/assets/images/backstageindex/productIcon.png" alt="" />
         </div>
         <div class="action">
-            <router-link to="bs-product-edit" target="_blank">
+            <router-link to="bs-product-add" target="_blank">
                 <img src="@/assets/images/icon/FilePlus.svg" alt="" />
             </router-link>
             <div class="search">
@@ -54,7 +54,7 @@
                 </Switch>
             </p>
             <p>
-                <router-link :to="`/bs-koala-edit/${koala.id}`" target="_blank">
+                <router-link :to="`/bs-product-edit`" target="_blank">
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
