@@ -54,6 +54,7 @@
             </div>
         </section>
     </div>
+    <Footer />
 </template>
 
 <script>
@@ -62,7 +63,7 @@ import MemCentre from "@/components/member/MemCentre.vue";
 import MemOrder from "@/components/member/MemOrder.vue";
 import MemAdopt from "@/components/member/MemAdopt.vue";
 import MemCoupons from "@/components/member/MemCoupons.vue";
-
+import Footer from "@/components/footer.vue";
 export default {
     name: "Member",
     liTab: "  ",
