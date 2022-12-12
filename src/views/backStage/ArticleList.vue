@@ -28,7 +28,10 @@
                 v-for="(article, index) in articles"
                 :key="index"
             >
-                <div :class="`star star${index}`" @click="marked = !marked">
+                <div
+                    :class="`star star${index}`"
+                    @click="article.isMarked = !article.isMarked"
+                >
                     <svg
                         version="1.1"
                         xmlns="http://www.w3.org/2000/svg"
@@ -41,7 +44,10 @@
                     >
                         <path
                             style="fill: currentColor,stoke: black;"
-                            :class="[`${index}`, { starmark: marked }]"
+                            :class="[
+                                `${index}`,
+                                { starmark: article.isMarked },
+                            ]"
                             d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
 	c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
 	c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
@@ -80,6 +86,7 @@ export default {
         return {
             articles: [
                 {
+                    isMarked: true,
                     img: require("@/assets/images/about/3.jpg"),
                     title: "一隻無尾熊寶寶出生了",
                     tag: "#最新消息",
@@ -88,6 +95,7 @@ export default {
                         "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為......",
                 },
                 {
+                    isMark: false,
                     img: require("@/assets/images/about/8.jpg"),
                     title: "園區公休通知",
                     tag: "#園區消息",

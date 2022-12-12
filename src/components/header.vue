@@ -91,6 +91,7 @@ header {
     position: fixed;
     background-color: #fff;
     width: 100%;
+    top: 0;
     nav {
         @include size(100%, 60px);
         box-sizing: border-box;

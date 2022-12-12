@@ -3,15 +3,15 @@
     <div class="sections-menu">
         <span
             class="menu-point"
-            v-bind:class="{ active: activeSection == index }"
-            v-on:click="scrollToSection(index)"
+            :class="{ active: activeSection == index }"
+            @click="scrollToSection(index)"
             v-for="(offset, index) in offsets"
-            v-bind:key="index"
+            :key="index"
             v-title="'Go to section ' + (index + 1)"
         >
         </span>
     </div>
-    <section class="page">
+    <div class="page">
         <div class="container">
             <div id="scene">
                 <div class="layer" data-depth="0.5" data-friction-x="1">
@@ -43,16 +43,16 @@
                 </h1>
             </div>
         </div>
-    </section>
-    <section class="page">
+    </div>
+    <div class="page">
         <div class="fire">
             <h2>Windfires</h2>
         </div>
         <p>
             森林野火造成成千上萬隻無尾熊喪命、受傷、流離失所。KOALA+致力於救助這些無尾熊，給它們一個能安心養傷、休息的空間。為此，我們需要像您這樣願意一起幫助無尾熊的人加入我們。KOALA+不僅僅是救助團體，更有豐富的教育意義，歡迎您加入我們一起認識無尾熊，幫助無尾熊!
         </p>
-    </section>
-    <section class="page change">
+    </div>
+    <div class="page change">
         <div class="wedo-p">
             <h2>我們能做什麼?</h2>
             <p>
@@ -65,8 +65,8 @@
         <div class="wedo">
             <h2>What can we do?</h2>
         </div>
-    </section>
-    <section class="page colorpage">
+    </div>
+    <div class="page colorpage">
         <div class="wesave-video">
             <iframe
                 width="560"
@@ -91,8 +91,8 @@
                 >有許多可愛的無尾熊周邊商品，商品售價的利潤將用於無尾熊救助行動，您購買可愛周邊的同時也是在幫助無尾熊!
             </p>
         </div>
-    </section>
-    <section class="page">
+    </div>
+    <div class="page">
         <div class="wrapper">
             <h2>News</h2>
             <div class="newscards">
@@ -120,8 +120,10 @@
                 </a>
             </div>
         </div>
-    </section>
-    <Footer />
+    </div>
+    <div class="page footer">
+        <Footer />
+    </div>
 </template>
 
 <script>
@@ -136,7 +138,7 @@ export default {
     data() {
         return {
             inMove: false,
-            inMoveDelay: 400,
+            inMoveDelay: 500,
             activeSection: 0,
             offsets: [],
             touchStartY: 0,
@@ -176,10 +178,10 @@ export default {
 
         window.addEventListener("touchstart", this.touchStart, {
             passive: false,
-        }); // 手機
+        });
         window.addEventListener("touchmove", this.touchMove, {
             passive: false,
-        }); // 手機
+        });
     },
     methods: {
         intscence() {
@@ -190,7 +192,7 @@ export default {
             });
         },
         calculateSectionOffsets() {
-            let sections = document.getElementsByTagName("section");
+            let sections = document.getElementsByClassName("page");
             let length = sections.length;
 
             for (let i = 0; i < length; i++) {
@@ -204,7 +206,7 @@ export default {
             this.activeSection = id;
             this.inMove = true;
 
-            document.getElementsByTagName("section")[id].scrollIntoView({
+            document.getElementsByClassName("page")[id].scrollIntoView({
                 behavior: "smooth",
             });
 
@@ -213,9 +215,9 @@ export default {
             }, this.inMoveDelay);
         },
         handleMouseWheel: function (e) {
-            if (e.wheelDelta < 30 && !this.inMove) {
+            if (e.wheelDelta < 100 && !this.inMove) {
                 this.moveUp();
-            } else if (e.wheelDelta > 30 && !this.inMove) {
+            } else if (e.wheelDelta > 100 && !this.inMove) {
                 this.moveDown();
             }
 
@@ -265,9 +267,19 @@ export default {
         window.removeEventListener("mousewheel", this.handleMouseWheel, {
             passive: false,
         });
-        window.removeEventListener("touchstart", this.touchStart); // 手機
-        window.removeEventListener("touchmove", this.touchMove); //手機
+        window.removeEventListener("touchstart", this.touchStart, {
+            passive: false,
+        });
+        window.removeEventListener("touchmove", this.touchMove, {
+            passive: false,
+        });
     },
+    // beforeRouteLeave(to, from, next) {
+    //     if (this.scrolled) {
+    //         window.scrollTo(0, 0);
+    //     }
+    //     next();
+    // },
 };
 </script>
 
@@ -282,21 +294,27 @@ body {
     right: 1rem;
     top: 50%;
     transform: translateY(-50%);
-    z-index: 997;
+    z-index: 999;
+    @include d {
+        display: none;
+    }
+
+    .menu-point {
+        width: 10px;
+        height: 10px;
+        background-color: $section-green;
+        display: block;
+        margin: 1rem 0;
+        opacity: 0.6;
+        transition: 0.4s ease all;
+        cursor: pointer;
+    }
+    .menu-point.active {
+        opacity: 1;
+        transform: scale(1.5);
+    }
 }
-.sections-menu .menu-point {
-    width: 10px;
-    height: 10px;
-    background-color: $section-green;
-    display: block;
-    margin: 1rem 0;
-    opacity: 0.6;
-    transition: 0.4s ease all;
-}
-.sections-menu .menu-point.active {
-    opacity: 1;
-    transform: scale(1.5);
-}
+
 .container {
     width: 100%;
     height: 100vh;
@@ -467,6 +485,7 @@ body {
 }
 .page {
     @include size(100vw, 100vh);
+    margin-top: 60px;
     display: flex;
     overflow-x: hidden;
     @include d {
@@ -486,12 +505,18 @@ body {
             margin-top: 0;
         }
         @include m {
-            @include size(100vw, 70%);
+            @include size(100vw, 55%);
         }
         &:hover {
             transform: scale(1.05) translate(-20px, 20px);
+            @include d {
+                transform: scale(1.005) translate(-10px, 10px);
+            }
             h2 {
                 transform: translate(calc(85% + 40px), -40px);
+                @include d {
+                    transform: translate(10px, 10px);
+                }
             }
         }
         h2 {
@@ -524,7 +549,7 @@ body {
             margin-left: 5vw;
         }
         @include m {
-            @include size(75vw, 30%);
+            @include size(85vw, 45%);
         }
     }
 
@@ -556,13 +581,7 @@ body {
         }
         @include m {
             @include bgSetting(240%, center left 70%);
-            @include size(100vw, 65%);
-        }
-        &:hover {
-            transform: scale(1.05) translate(20px, -20px);
-            h2 {
-                transform: translate(calc(-20vw - 40px), 40px);
-            }
+            @include size(100vw, 55%);
         }
 
         h2 {
@@ -580,8 +599,20 @@ body {
                 -webkit-text-stroke: 2px $darkgreen;
             }
             @include m {
-                margin-top: 105%;
+                margin-top: 75%;
                 -webkit-text-stroke: 1px $darkgreen;
+            }
+        }
+        &:hover {
+            transform: scale(1.05) translate(20px, -20px);
+            @include d {
+                transform: scale(1.005) translate(-10px, 10px);
+            }
+            h2 {
+                transform: translate(calc(-20vw - 40px), 40px);
+                @include d {
+                    transform: translate(calc(-20vw), 20px);
+                }
             }
         }
     }
@@ -597,7 +628,7 @@ body {
         }
         @include m {
             width: 90vw;
-            @include size(70vw, 35%);
+            @include size(90vw, 45%);
         }
 
         p {
@@ -627,6 +658,7 @@ body {
         @include m {
             width: 90%;
             margin-top: 20px;
+            padding-bottom: 30px;
         }
         h2 {
             animation: moving 0.5s 3;
@@ -636,7 +668,7 @@ body {
         margin-left: 10vw;
         @include m {
             width: 80%;
-            margin: 30px auto;
+            margin: 10px auto;
             iframe {
                 width: 100%;
                 height: 100%;
@@ -663,10 +695,9 @@ body {
         display: flex;
         width: 100%;
         height: 50vh;
-        margin-top: 10vh;
         @include d {
             flex-direction: column;
-            margin-top: 5vh;
+            margin-bottom: 5vh;
         }
 
         .article {
@@ -683,7 +714,7 @@ body {
                 justify-content: space-between;
             }
             @include m {
-                height: 25vh;
+                height: 15vh;
             }
 
             &:hover {
@@ -746,6 +777,13 @@ body {
                 }
             }
         }
+    }
+}
+.footer {
+    background-color: $darkgreen;
+
+    #footer {
+        margin-top: auto;
     }
 }
 @keyframes moving {
