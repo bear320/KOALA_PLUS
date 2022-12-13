@@ -53,12 +53,12 @@
         </div>
         <div class="koala-card-wrapper">
             <KoalaCard
-                v-for="koala in koalaInfo"
-                :key="koala.id"
-                :kName="koala.name"
-                :kSex="koala.sex"
-                :kDOB="koala.dob"
-                :kCover="koala.images[0]"
+                v-for="koala in source"
+                :key="koala.koala_id"
+                :kName="koala.koala_name"
+                :kSex="koala.koala_sex"
+                :kDOB="koala.koala_dob"
+                :kCover="koala.koala_img1"
             ></KoalaCard>
         </div>
     </section>
@@ -364,6 +364,7 @@ export default {
                     price: 1000,
                 },
             ],
+            source: [],
         };
     },
     methods: {
@@ -371,6 +372,23 @@ export default {
             console.log("run");
             this.isSelected = i;
         },
+        getKoalas() {
+            const apiURL = new URL("http://localhost:8888/api/getKoalas.php");
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json;
+                    if (!this.source.length) {
+                        throw new Error("查無相關結果");
+                    }
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+    },
+    created() {
+        this.getKoalas(this.$route.query);
     },
 };
 </script>
