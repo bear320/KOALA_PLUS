@@ -8,11 +8,19 @@
         <div class="wave middle"></div>
         <div class="wave front"></div>
         <div class="content">
-            <h3>{{ kName }}</h3>
-            <h4>成年</h4>
+            <div class="name-wrapper">
+                <h3>{{ kName }}</h3>
+                <p class="sex-sign">
+                    <Icon v-if="kSex === 'Male'" type="md-male" />
+                    <Icon v-if="kSex === 'Female'" type="md-female" />
+                </p>
+            </div>
             <div class="tag-wrapper">
-                <p class="tag">#{{ kSex }}</p>
-                <p class="tag">#4歲</p>
+                <p>
+                    <span v-if="kAge >= 3"># 成年</span>
+                    <span v-if="kAge < 3"># 幼年</span>
+                </p>
+                <p class="tag"># {{ kAge }} 歲</p>
             </div>
             <router-link :to="`/support/${kName}`" class="btn-secondary">
                 資助 / 認養
@@ -23,7 +31,7 @@
 
 <script>
 export default {
-    props: ["kName", "kSex", "kDOB", "kCover"],
+    props: ["kName", "kSex", "kDOB", "kAge", "kCover"],
 };
 </script>
 
@@ -92,6 +100,30 @@ $img-h: 250px;
             color: lighten($font_color, 30%);
         }
 
+        .name-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            column-gap: 10px;
+            color: lighten($font_color, 30%);
+            .sex-sign {
+                .ivu-icon-md-male {
+                    color: LightSkyBlue;
+                    &:hover {
+                        color: LightSkyBlue;
+                        cursor: default;
+                    }
+                }
+                .ivu-icon-md-female {
+                    color: LightPink;
+                    &:hover {
+                        color: LightPink;
+                        cursor: default;
+                    }
+                }
+            }
+        }
+
         .tag-wrapper {
             display: flex;
             justify-content: center;
@@ -99,7 +131,25 @@ $img-h: 250px;
 
             .tag {
                 width: 30%;
+                .ivu-icon-md-male {
+                    color: LightSkyBlue;
+                    &:hover {
+                        color: LightSkyBlue;
+                        cursor: default;
+                    }
+                }
+                .ivu-icon-md-female {
+                    color: LightPink;
+                    &:hover {
+                        color: LightPink;
+                        cursor: default;
+                    }
+                }
             }
+        }
+
+        .name-wrapper + .tag-wrapper {
+            margin-top: 15px;
         }
 
         .btn-secondary {
