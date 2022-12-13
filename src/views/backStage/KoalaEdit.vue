@@ -96,7 +96,8 @@
                     新增圖片：
                     <span>* 請至少上傳一張圖片，數量上限為四張</span>
                 </h4>
-                <ImageUpload></ImageUpload>
+                <!-- <ImageUpload></ImageUpload> -->
+                <ImageEdit></ImageEdit>
             </div>
         </div>
         <div class="line">
@@ -112,11 +113,13 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
+import ImageEdit from "@/components/backStage/ImageEdit.vue";
 
 export default {
     components: {
         Header,
-        ImageUpload,
+        // ImageUpload,
+        ImageEdit,
     },
     data() {
         return {

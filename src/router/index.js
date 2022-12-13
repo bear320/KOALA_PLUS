@@ -72,7 +72,7 @@ const routes = [
         component: () => import("@/views/Support.vue"),
     },
     {
-        path: "/support/:name",
+        path: "/support/:koala_name",
         name: "koala-info",
         // component: KoalaInfo,
         component: () => import("@/views/KoalaInfo.vue"),
