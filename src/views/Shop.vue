@@ -99,6 +99,7 @@
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -175,9 +176,7 @@ export default {
                 queryParam.page = "1";
             }
 
-            const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getProducts.php"
-            );
+            const apiURL = new URL(`${BASE_URL}/getProducts.php`);
             const searchParams = new URLSearchParams(queryParam);
             apiURL.search = searchParams;
             fetch(apiURL)

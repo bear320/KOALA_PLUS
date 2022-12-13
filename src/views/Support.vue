@@ -73,6 +73,7 @@
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import KoalaCard from "@/components/support/KoalaCard.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -373,7 +374,6 @@ export default {
         tabSelected(i) {
             this.isSelected = i;
             if (i === 0) {
-                console.log("QQ");
                 this.cache = this.source;
             } else if (i === 1) {
                 this.cache = this.source.filter((item) => {
@@ -386,9 +386,7 @@ export default {
             }
         },
         getKoalas() {
-            const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getKoalas.php"
-            );
+            const apiURL = new URL(`${BASE_URL}/getKoalas.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

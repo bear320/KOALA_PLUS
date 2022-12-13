@@ -172,9 +172,9 @@ export default {
     mounted() {
         this.intscence();
         this.calculateSectionOffsets();
-        // window.addEventListener("mousewheel", this.handleMouseWheel, {
-        //     passive: false,
-        // });
+        window.addEventListener("mousewheel", this.handleMouseWheel, {
+            passive: false,
+        });
 
         window.addEventListener("touchstart", this.touchStart, {
             passive: false,
@@ -263,7 +263,7 @@ export default {
             return false;
         },
     },
-    destroyed() {
+    unmounted() {
         window.removeEventListener("mousewheel", this.handleMouseWheel, {
             passive: false,
         });
@@ -414,6 +414,7 @@ body {
         }
         .layer:nth-child(7) {
             margin-left: -230px;
+            margin-top: -20px;
 
             @include d() {
                 height: 100vh;
