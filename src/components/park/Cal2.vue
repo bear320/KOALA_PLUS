@@ -57,11 +57,19 @@
                             ].state
                         }}
                         <br />
-                        {{
+                        <p v-if="notBookDate[
+                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            ].state==='已預約'">🐨</p>
+                        <p v-else-if="notBookDate[
+                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            ].state==='休館'">📅</p>
+
+                        
+                        <!-- {{
                             notBookDate[
                                 `${this.thisYear}-${this.thisMonth + 1}-${day}`
                             ].emoji
-                        }}
+                        }} -->
                     </p>
                 </td>
                 <td
@@ -116,21 +124,28 @@ export default {
                 fontWeight: "600",
                 color: "white",
             },
-            notBookDate: {
-                "2022-12-2": {
-                    state: "已預約",
-                    emoji: "🐨",
-                },
-                "2022-12-8": { state: "休館", emoji: "📅" },
-                "2022-12-15": {
-                    state: "已預約",
-                    emoji: "🐨",
-                },
-                "2022-12-20": { state: "休館", emoji: "📅" },
-            },
+            notBookDate: {},
+                
+                // "2022-12-2": {
+                //     state: "已預約",
+                //   /*   emoji: "🐨", */
+                // },
+                // "2022-12-8": { state: "休館", /* emoji: "📅"  */},
+                // "2022-12-15": {
+                //     state: "已預約",
+                //     /* emoji: "🐨", */
+                // },
+                // "2022-12-20": { state: "休館", /* emoji: "📅" */ },
+            // },
             rsvDate: "",
             lastEmptyDay: 0,
+     
         };
+    },
+    computed:{
+        QQ(){
+            return true
+        }
     },
     components: {
         BookingForm,
@@ -142,9 +157,26 @@ export default {
         this.thisYear = new Date().getFullYear();
         this.thisDate = new Date().getDate();
         this.getLastEmptyDay(new Date().getFullYear(), new Date().getMonth());
+        this.getResvDetail();
     },
 
     methods: {
+        getResvDetail() {
+            // const productId = this.$route.params.id;
+            console.log('QQ');
+            const apiURL = new URL(
+                `http://localhost/cgd103_g1/api/getReservation.php`
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.notBookDate = json.notBookDate;
+                    console.log(this.notBookDate);
+                })
+               
+        },
+
         test(X) {
             let ccc = false;
             this.notBookDate.find((e) => {
