@@ -81,6 +81,7 @@
         </table>
         <booking-form
             :msg="rsvDate"
+            :callback="getResvDetail"
             v-if="showForm"
             @closeForm="closeTable"
         ></booking-form>
@@ -159,13 +160,21 @@ export default {
         this.getLastEmptyDay(new Date().getFullYear(), new Date().getMonth());
         this.getResvDetail();
     },
+    watch: {
+    notBookDate: {
+        handler: function() {
+            this.getResvDetail();
+        },
+        deep: true
+    }
+},
 
     methods: {
         getResvDetail() {
             // const productId = this.$route.params.id;
             console.log('QQ');
             const apiURL = new URL(
-                `http://localhost/cgd103_g1/api/getReservation.php`
+                `http://localhost/cgd103_g1/public/api/getReservation.php`
             );
             fetch(apiURL)
                 .then((res) => res.json())
@@ -175,22 +184,6 @@ export default {
                     console.log(this.notBookDate);
                 })
                
-        },
-
-        test(X) {
-            let ccc = false;
-            this.notBookDate.find((e) => {
-                console.log(e);
-                if (`${this.thisYear}-${this.thisMonth + 1}-${X}` === e) {
-                    ccc = true;
-                }
-            });
-            return ccc;
-            // e === `${this.thisYear}-${this.thisMonth + 1}-${X}`
-            // return (
-            //     `${this.thisYear}-${this.thisMonth + 1}-${X}` ===
-            //     this.notBookDate[0]
-            // );
         },
         getEmptyDay(yy, m, d = 1) {
             let firstDate = new Date(yy, m, d);
@@ -339,12 +332,12 @@ td {
     cursor: pointer;
     background-color: #d8d8d8;
     border: 1px solid;
-    border-color: $darkgreen;
+    border-color: #888;
     height: 120px;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     p {
-        grid-row: 2/4;
+        grid-row: 2/3;
         align-self: center;
     }
 }
@@ -400,7 +393,7 @@ li {
         height: 30px;
     }
     td {
-        height: 70px;
+        height: 80px;
     }
     .notice {
         width: 100%;

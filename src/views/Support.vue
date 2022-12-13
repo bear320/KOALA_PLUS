@@ -387,7 +387,7 @@ export default {
         },
         getKoalas() {
             const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/api/getKoalas.php"
+                "http://localhost/cgd103_g1/public/api/getKoalas.php"
             );
             fetch(apiURL)
                 .then((res) => res.json())

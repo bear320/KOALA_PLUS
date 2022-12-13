@@ -1,53 +1,48 @@
 <template lang="">
     <div class="book-form">
-        <form
-            id="bookingForm"
-            data-form-storage="true"
-            enctype="multipart/form-data"
-            method="post"
-        >
+        <form id="booking-form" action="" data-form-storage="true">
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
             <button id="close" @click="closeIt">X</button>
             <div class="form-group">
-                <label for="rsv_name">name</label>
+                <label for="book-name">name</label>
                 <input
                     type="text"
                     class="form-control"
-                    id="rsv_name"
-                    name="rsv_name"
+                    id="book-name"
+                    name="book-name"
                     placeholder="booking name"
                     v-model.trim="name"
                 />
             </div>
             <div class="form-group">
-                <label for="rsv_mobile">手機</label>
+                <label for="mobile">手機</label>
                 <input
                     type="mobile"
                     class="form-control"
-                    id="rsv_mobile"
-                    name="rsv_mobile"
+                    id="mobile"
+                    name="mobile"
                     placeholder="mobile"
                     v-model="mobile"
                 />
             </div>
             <div class="form-group">
-                <label for="rsv_email">Email</label>
+                <label for="book-email">Email</label>
                 <input
                     type="email"
                     class="form-control"
-                    id="rsv_email"
-                    name="rsv_email"
+                    id="book-email"
+                    name="email"
                     placeholder="name@example.com"
                     v-model="email"
                 />
             </div>
             <div class="form-group">
-                <label for="rsv_ppl">預約導覽人數</label>
+                <label for="people">預約導覽人數</label>
                 <select
                     class="form-control"
-                    id="rsv_ppl"
-                    name="rsv_ppl"
+                    id="book-people"
+                    name="book-people"
                     v-model="people"
                 >
                     <option disabled value="">選擇人數</option>
@@ -73,13 +68,13 @@
                     <option value="20">20</option>
                 </select>
             </div>
-            <div class="rsv_date">
+            <div class="form-group">
                 <label for="start">預約日期:</label>
                 <input
                     type="date"
-                    id="rsv_date"
+                    id="book-date"
                     class="form-control"
-                    name="rsv_date"
+                    name="book-date"
                     v-model="orderDate"
                     min="2022-01-01"
                     max="2023-12-31"
@@ -87,12 +82,7 @@
                 <label for="">您選擇的預約日期： {{ orderDate }}</label>
             </div>
 
-            <button
-                type="submit"
-                id="btnInsert"
-                class="btn btn-primary"
-                @click.prevent="next"
-            >
+            <button type="submit" class="btn btn-primary" @click.prevent="next">
                 確認預約
             </button>
 
@@ -116,7 +106,7 @@
 </template>
 <script>
 export default {
-    props: ["msg", "callback"],
+    props: ["msg"],
     data() {
         return {
             email: "",
@@ -148,25 +138,6 @@ export default {
         next() {
             console.log("next");
             this.isOrder = true;
-            const payload = {
-                rsv_date: this.orderDate,
-                rsv_ppl: this.people,
-                rsv_name: this.name,
-                rsv_mobile: this.mobile,
-                rsv_email: this.email,
-                rsv_status: "已預約",
-                rsv_ps: "",
-            };
-
-            fetch("http://localhost/cgd103_g1/public/api/resv_insert.php", {
-                method: "POST",
-                body: new URLSearchParams(payload),
-            })
-                .then((res) => res.text())
-                .then((result) => {
-                    console.log(result);
-                    this.callback();
-                });
         },
     },
 };

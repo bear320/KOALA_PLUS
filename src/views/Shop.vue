@@ -176,7 +176,7 @@ export default {
             }
 
             const apiURL = new URL(
-                "http://localhost/cgd103_g1/api/getProducts.php"
+                "http://localhost/cgd103_g1/public/api/getProducts.php"
             );
             const searchParams = new URLSearchParams(queryParam);
             apiURL.search = searchParams;
