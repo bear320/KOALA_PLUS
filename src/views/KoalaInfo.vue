@@ -4,8 +4,8 @@
         <div class="breadcrumb">
             <router-link to="/home">Home</router-link>
             <router-link to="/support">資助認養</router-link>
-            <router-link :to="`/support/${temp.koala_name}`">
-                {{ temp.koala_name }}
+            <router-link :to="`/support/${source.koala_name}`">
+                {{ source.koala_name }}
             </router-link>
         </div>
     </section>
@@ -16,14 +16,14 @@
             </div>
             <div class="text">
                 <div class="paragraph">
-                    <h1>{{ temp.koala_name }}</h1>
+                    <h1>{{ source.koala_name }}</h1>
                 </div>
                 <div class="paragraph">
-                    <h3>性別： {{ temp.koala_sex }}</h3>
-                    <h3>生日： {{ temp.koala_dob }}</h3>
+                    <h3>性別： {{ source.koala_sex }}</h3>
+                    <h3>生日： {{ source.koala_dob }}</h3>
                 </div>
                 <div class="paragraph">
-                    <p>{{ temp.koala_info }}</p>
+                    <p>{{ source.koala_info }}</p>
                 </div>
             </div>
         </div>
@@ -122,6 +122,7 @@ import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
 import PlanCard from "@/components/koalaInfo/PlanCard.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -419,7 +420,7 @@ export default {
             //         price: 1000,
             //     },
             // ],
-            source: [],
+            source: {},
             temp: [],
             plans: [
                 {
@@ -445,13 +446,16 @@ export default {
     },
     methods: {
         getKoalas() {
-            const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getKoalas.php"
-            );
+            const apiURL = new URL(`${BASE_URL}/getKoalas.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json;
+                    let [temp] = json.filter((item) => {
+                        return (
+                            item.koala_name === this.$route.params.koala_name
+                        );
+                    });
+                    this.source = temp;
                 })
                 .catch((error) => {
                     alert(error);
@@ -460,11 +464,6 @@ export default {
     },
     created() {
         this.getKoalas();
-        [this.temp] = [
-            ...this.source.filter((item) => {
-                return item.koala_name === this.$route.params.name;
-            }),
-        ];
     },
 };
 </script>
