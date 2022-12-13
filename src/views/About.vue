@@ -130,11 +130,30 @@ export default {
         return {
             curView: "one",
             FAQS: [
-                { title: "我的捐款可以免稅嗎?", content: "內容" },
                 {
-                    title: "我能收到捐款的稅收收據嗎?",
+                    title: "為什麼捐款很重要？",
                     content:
-                        "對於正在進行的每月捐款，我們會在財政年度結束時向您發送所有收到的每月捐款的稅收收據。對於單筆捐款，我們會在處理完每筆捐款後立即發送收據。我們接受MasterCard、Visa、JCB信用卡支付，暫不接受行動支付及匯款，造成不便盡請見諒。",
+                        "捐款可以幫助KOALA+提供必要的資金，以支持我們進行重要的工作，例如幫助有需要的無尾熊、保護環境、改善社會、進行環境教育等。",
+                },
+                {
+                    title: "我該如何捐款？",
+                    content:
+                        "您可以通過KOALA+網站捐款，或購買KOALA+相關週邊產品，或者與捐款接收組織聯繫以索取更多信息。",
+                },
+                {
+                    title: "捐款是否有扣稅優惠？",
+                    content:
+                        "是的，在大多數情況下，捐款是可以抵扣稅的。請聯繫您的稅務顧問或捐款接收組織，了解更多相關信息。",
+                },
+                {
+                    title: "捐款是否會收到收據?",
+                    content:
+                        "是的，如果您捐款給KOALA+，您可以下載領養證明，作為您的捐款收據，通常可以使用捐款收據作為抵稅的證明。",
+                },
+                {
+                    title: "捐款可以退款嗎?",
+                    content:
+                        "很遺憾，捐款無法退款，如有任何疑問請聯繫客服人員。",
                 },
             ],
             imgs: [
@@ -352,6 +371,10 @@ html {
             justify-content: space-around;
             padding: 20px 0;
             border-bottom: solid 1px $green;
+            height: 20vh;
+            @include d {
+                height: 15vh;
+            }
 
             .article-img {
                 width: 15%;

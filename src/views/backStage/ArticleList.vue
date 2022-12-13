@@ -15,6 +15,9 @@
         </div>
         <section>
             <h2>草稿</h2>
+        </section>
+        <section>
+            <h2>已上傳</h2>
             <div class="bstitle">
                 <h3 class="star"></h3>
                 <h3 class="article">文章</h3>
@@ -69,9 +72,6 @@
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </div>
             </div>
-        </section>
-        <section>
-            <h2>已上傳</h2>
         </section>
     </article>
 </template>

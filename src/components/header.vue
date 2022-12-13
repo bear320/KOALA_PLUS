@@ -53,7 +53,7 @@ export default {
         return {
             items: [
                 { name: "資助認養", source: "support" },
-                { name: "周邊商城", source: "shop" },
+                { name: "週邊商城", source: "shop" },
                 { name: "無尾熊園區", source: "koala-park" },
                 { name: "關於我們", source: "about" },
                 { name: "無尾熊百科", source: "about-koala" },
