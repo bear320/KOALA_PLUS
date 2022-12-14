@@ -118,6 +118,7 @@ export default {
     }
 }
 .table {
+    margin-bottom: 60px;
     .bs-title {
         width: 100%;
         border-radius: 10px;

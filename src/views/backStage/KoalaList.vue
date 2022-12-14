@@ -23,22 +23,22 @@
     </section>
     <section class="wrapper table">
         <div class="bs-title">
-            <h3 class="kName">名字</h3>
             <h3 class="kNo">編號</h3>
-            <h3 class="kDOB">出生日期</h3>
+            <h3 class="kName">名字</h3>
             <h3 class="kSex">性別</h3>
+            <h3 class="kDOB">出生日期</h3>
             <h3 class="kAge">年齡</h3>
             <h3 class="kListed">上 / 下架</h3>
             <h3 class="kEdit">編輯</h3>
         </div>
         <div class="bs-list" v-for="koala in source" :key="koala.koala_id">
-            <p>{{ koala.koala_name }}</p>
             <p>{{ koala.koala_id }}</p>
-            <p>{{ koala.koala_dob }}</p>
+            <p>{{ koala.koala_name }}</p>
             <p>
                 <span v-if="koala.koala_sex === 'Male'">公</span>
                 <span v-if="koala.koala_sex === 'Female'">母</span>
             </p>
+            <p>{{ koala.koala_dob }}</p>
             <p>{{ koala.koala_age }}</p>
             <p>
                 <Switch
