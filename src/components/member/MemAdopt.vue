@@ -33,7 +33,9 @@
                                     type="md-download"
                                     size="20"
                                     color="#337a7d"
-                                    @click="showcouponsList(index)"
+                                    @click="
+                                        showcouponsList(mem_name, item.sup_date)
+                                    "
                                 />
                             </td>
                         </tr>
@@ -52,13 +54,13 @@
                         src="@/assets/images/member/Certificate02.svg"
                         alt="會員頁面的無尾熊左圖"
                     /> -->
-                    <p class="certificate_name">{{ mem_name }}</p>
+                    <p class="certificate_name">{{ tempName }}</p>
 
                     <!-- <p class="certificate_koala">
                         {{ couponsList[certificate_Index].koala_name }}
                     </p> -->
                     <p class="certificate_date">
-                        {{ couponsList[certificate_Index].sup_date }}
+                        {{ tempDate }}
                     </p>
                 </div>
                 <!-- </div> -->
@@ -76,6 +78,8 @@ export default {
             mem_name: "曾韋翰",
             mem_id: "P00001",
             imgUrl: "",
+            tempName: "",
+            tempDate: "",
             certificate_Index: 0,
             couponsList: [
                 {
@@ -109,12 +113,11 @@ export default {
             ],
         };
     },
-    mounted() {
-        this.toImage();
-    },
+    mounted() {},
     methods: {
         toImage() {
             // 這是轉出來的
+            this.imgUrl = "";
             html2canvas(this.$refs.html2canvas, {
                 width: 600,
                 height: 485,
@@ -126,9 +129,14 @@ export default {
                 this.imgUrl = url;
             });
         },
-        showcouponsList(index) {
-            console.log(index);
-            this.certificate_Index = index;
+        showcouponsList(name, date) {
+            console.log(name, date);
+            this.tempName = name;
+            this.tempDate = date;
+            /*  this.certificate_Index = index; */
+            this.$nextTick(function () {
+                this.toImage();
+            });
         },
     },
 };
