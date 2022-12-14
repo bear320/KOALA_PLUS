@@ -47,6 +47,7 @@ import BookingButton from "@/components/park/BookingButton.vue";
 import GuideInfo from "@/components/park/GuideInfo.vue";
 import Cal2 from "@/components/park/Cal2.vue";
 import Footer from "@/components/footer.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "About",
     components: {

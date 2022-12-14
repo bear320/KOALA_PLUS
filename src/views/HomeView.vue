@@ -263,7 +263,7 @@ export default {
             return false;
         },
     },
-    destroyed() {
+    unmounted() {
         window.removeEventListener("mousewheel", this.handleMouseWheel, {
             passive: false,
         });

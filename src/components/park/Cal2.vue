@@ -23,45 +23,45 @@
                     class="tdd"
                     v-for="d in emptyDay"
                     style="background: #f8f8f8"
-                ></td>
-                <td
+                    ></td>
+                    <td
                     class="tdd"
                     v-for="(day, index) in allDay"
                     @click="chooseDate(thisYear, thisMonth + 1, day)"
                     :style="{
                         backgroundColor: notBookDate?.[
-                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                         ]
-                            ? '#9abdbf'
-                            : 'rgb(190, 214, 213, .3)',
+                        ? '#9abdbf'
+                        : 'rgb(190, 214, 213, .3)',
                         cursor: notBookDate?.[
-                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                         ]
-                            ? 'default'
-                            : 'pointer',
+                        ? 'default'
+                        : 'pointer',
                     }"
                 >
-                    {{ day }}
-
+                {{ day}}
                     <p
                         v-if="
                             notBookDate?.[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ]
                         "
                         :style="bookStyle"
-                    >
+                    >   
+                        <!-- {{day}} -->
                         {{
                             notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state
                         }}
                         <br />
                         <p v-if="notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state==='已預約'">🐨</p>
                         <p v-else-if="notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state==='休館'">📅</p>
 
                         
@@ -81,6 +81,7 @@
         </table>
         <booking-form
             :msg="rsvDate"
+            :callback="getResvDetail"
             v-if="showForm"
             @closeForm="closeTable"
         ></booking-form>
@@ -109,6 +110,7 @@
 </template>
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
+// import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
     data() {
@@ -157,16 +159,22 @@ export default {
         this.thisYear = new Date().getFullYear();
         this.thisDate = new Date().getDate();
         this.getLastEmptyDay(new Date().getFullYear(), new Date().getMonth());
-        this.getResvDetail();
+        this.getResvDetail();       
     },
+    watch: {
+    notBookDate: {
+        handler: function() {
+            this.getResvDetail();
+        },
+        deep: true
+    }
+},
 
     methods: {
         getResvDetail() {
             // const productId = this.$route.params.id;
             console.log('QQ');
-            const apiURL = new URL(
-                `http://localhost/cgd103_g1/api/getReservation.php`
-            );
+            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getReservation.php");
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -175,22 +183,6 @@ export default {
                     console.log(this.notBookDate);
                 })
                
-        },
-
-        test(X) {
-            let ccc = false;
-            this.notBookDate.find((e) => {
-                console.log(e);
-                if (`${this.thisYear}-${this.thisMonth + 1}-${X}` === e) {
-                    ccc = true;
-                }
-            });
-            return ccc;
-            // e === `${this.thisYear}-${this.thisMonth + 1}-${X}`
-            // return (
-            //     `${this.thisYear}-${this.thisMonth + 1}-${X}` ===
-            //     this.notBookDate[0]
-            // );
         },
         getEmptyDay(yy, m, d = 1) {
             let firstDate = new Date(yy, m, d);
@@ -242,7 +234,10 @@ export default {
                     days = 29;
                 }
             }
+
             this.allDay = days;
+            // this.allDay = days.toString().padStart(2, '0')
+            
         },
         preMonth() {
             if (this.thisMonth == 0) {
@@ -280,6 +275,8 @@ export default {
 
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
+            console.log(newDD);
+            console.log(newMM);
         },
         closeTable() {
             this.showForm = false;
@@ -339,12 +336,12 @@ td {
     cursor: pointer;
     background-color: #d8d8d8;
     border: 1px solid;
-    border-color: $darkgreen;
+    border-color: #888;
     height: 120px;
     display: grid;
     grid-template-rows: repeat(3, 1fr);
     p {
-        grid-row: 2/4;
+        grid-row: 2/3;
         align-self: center;
     }
 }
@@ -400,7 +397,7 @@ li {
         height: 30px;
     }
     td {
-        height: 70px;
+        height: 80px;
     }
     .notice {
         width: 100%;
