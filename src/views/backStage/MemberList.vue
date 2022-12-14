@@ -43,14 +43,18 @@
                     {{ item.mem_name }}
                 </p>
                 <p class="mem_mob">{{ item.mem_mob }}</p>
-                <p class="mem_validation">{{ item.mem_validation }}</p>
+                <p class="mem_validation">
+                    {{ item.mem_validation === 0 ? "未認證" : "已認證" }}
+                </p>
                 <p class="mem_account">{{ item.mem_account }}</p>
                 <p class="black_switch">
                     <Switch
                         size="large"
                         true-color="#337a7d"
+                        :true-value="1"
+                        :false-value="0"
                         :before-change="handleBeforeChange"
-                        v-model="item.black_switch"
+                        v-model="item.mem_state"
                     >
                         <template #open>
                             <span>ON</span>
@@ -70,40 +74,7 @@ import Header from "@/components/backStage/Header.vue";
 export default {
     data() {
         return {
-            memindexs: [
-                {
-                    mem_id: "P00001",
-                    mem_name: "曾韋翰",
-                    mem_mob: "0988777688",
-                    mem_validation: "已認證",
-                    mem_account: "charmy111@gmail.com",
-                    black_switch: false,
-                },
-                {
-                    mem_id: "P00002",
-                    mem_name: "王以太",
-                    mem_mob: "0988777688",
-                    mem_validation: "已認證",
-                    mem_account: "charmy222@gmail.com",
-                    black_switch: true,
-                },
-                {
-                    mem_id: "P00003",
-                    mem_name: "鄧紫棋",
-                    mem_mob: "0988777688",
-                    mem_validation: "未認證",
-                    mem_account: "charmy333@gmail.com",
-                    black_switch: false,
-                },
-                {
-                    mem_id: "P00004",
-                    mem_name: "陳昱榕",
-                    mem_mob: "0988777688",
-                    mem_validation: "未認證",
-                    mem_account: "charmy444@gmail.com",
-                    black_switch: true,
-                },
-            ],
+            memindexs: [],
         };
     },
     methods: {
@@ -121,6 +92,14 @@ export default {
     },
     components: {
         Header,
+    },
+    created() {
+        fetch("http://localhost/cgd103_g1/public/api/getMember.php")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.memindexs = json;
+            });
     },
 };
 </script>
