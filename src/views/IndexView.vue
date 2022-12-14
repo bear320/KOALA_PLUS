@@ -26,7 +26,13 @@
             </div>
         </div>
         <div class="TibaMe">
-            本網站為緯育TibaMe前端工程師班第79期學員專題作品，本平台僅供學習、展示之用。
+            <p>
+                本網站為緯育TibaMe前端工程師班第79期學員專題作品，本平台僅供學習、展示之用。
+            </p>
+            <p>
+                若有抵觸有關著作權，或有第三人主張侵害智慧財產權等情事均由學員負法律上責任，緯育公司概不負責。
+            </p>
+            <p>若有侵權疑慮請私訊［緯育TibaMe］，後續會由專人協助處理。</p>
         </div>
     </div>
 </template>
@@ -93,6 +99,8 @@ export default {
         .link {
             color: #337a7d;
             background-color: #fbfafa;
+            // background-color: rgba(254, 250, 224, 0.7);
+            box-shadow: 0px 0px 30px 0px rgb(252 241 173);
             opacity: 0.61;
             width: 300px;
             height: 300px;
@@ -108,10 +116,14 @@ export default {
                 transform: translate(-50%, -50%);
             }
         }
+        .link:hover {
+            background-color: #fbfafa;
+            opacity: 0.9;
+        }
     }
     .TibaMe {
         position: relative;
-        bottom: -20px;
+        bottom: -29px;
         font-weight: 600;
     }
 }

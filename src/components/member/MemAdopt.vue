@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_adopt content">
         <div class="mem_basic">
-            <p>姓名：{{ mem_name }}</p>
-            <p>會員ID：{{ mem_id }}</p>
+            <p>姓名：{{ memindexs.mem_name }}</p>
+            <p>會員ID：{{ memindexs.mem_id }}</p>
         </div>
         <div class="mem_main">
             <div class="mem_coupons_table">
@@ -75,12 +75,11 @@ import html2canvas from "html2canvas";
 export default {
     data() {
         return {
-            mem_name: "曾韋翰",
-            mem_id: "P00001",
             imgUrl: "",
             tempName: "",
             tempDate: "",
             certificate_Index: 0,
+            memindexs: [],
             couponsList: [
                 {
                     sup_id: "S00001",
@@ -138,6 +137,14 @@ export default {
                 this.toImage();
             });
         },
+    },
+    created() {
+        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.memindexs = json;
+            });
     },
 };
 </script>
