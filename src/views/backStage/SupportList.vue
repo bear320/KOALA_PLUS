@@ -38,7 +38,7 @@
             <p>NT$ {{ order.sup_price }}</p>
             <p>
                 <router-link
-                    :to="`/bs-support-info/${order.id}`"
+                    :to="`/bs-support-info/${order.sup_id}`"
                     target="_blank"
                 >
                     <img src="@/assets/images/icon/edit.svg" alt="" />

@@ -246,7 +246,7 @@ const routes = [
         component: () => import("@/views/backStage/SupportList.vue"),
     },
     {
-        path: "/bs-support-info/:id",
+        path: "/bs-support-info/:sup_id",
         name: "supportInfo",
         // component: SupportInfo,
         component: () => import("@/views/backStage/SupportInfo.vue"),
