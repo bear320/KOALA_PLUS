@@ -18,24 +18,24 @@
     </section>
     <section class="wrapper table">
         <div class="bs-title">
-            <h3 class="dSupporter">捐助者</h3>
             <h3 class="dNum">編號</h3>
+            <h3 class="dSupporter">捐助者</h3>
             <h3 class="dDate">日期</h3>
             <h3 class="dPlan">方案</h3>
             <h3 class="dKoala">無尾熊</h3>
             <h3 class="dPrice">價格</h3>
             <h3 class="dEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="order in donateOrders" :key="order.id">
-            <p>{{ order.donator }}</p>
-            <p>{{ order.id }}</p>
-            <p>{{ order.date }}</p>
+        <div class="bs-list" v-for="order in source" :key="order.id">
+            <p>{{ order.sup_id }}</p>
+            <p>{{ order.mem_name }}</p>
+            <p>{{ order.sup_date }}</p>
             <p>
-                <span v-if="order.plan === 0">認養</span>
-                <span v-if="order.plan === 1">資助</span>
+                <span v-if="order.sup_plan === 0">認養</span>
+                <span v-if="order.sup_plan === 1">資助</span>
             </p>
-            <p>{{ order.koala }}</p>
-            <p>NT$ {{ order.price }}</p>
+            <p>{{ order.koala_name }}</p>
+            <p>NT$ {{ order.sup_price }}</p>
             <p>
                 <router-link
                     :to="`/bs-support-info/${order.id}`"
@@ -56,63 +56,36 @@ export default {
     },
     data() {
         return {
-            donateOrders: [
-                {
-                    donator: "Joyce Byers",
-                    id: "S00001",
-                    date: "2022-12-01",
-                    plan: 0,
-                    koala: "Gabriel",
-                    price: 1000,
-                    desc: "Joyce Byers 在 2022-12-01 時，領養了無尾熊 Gabriel。",
-                },
-                {
-                    donator: "Jim Hopper",
-                    id: "S00002",
-                    date: "2022-12-02",
-                    plan: 0,
-                    koala: "Camille",
-                    price: 1000,
-                    desc: "",
-                },
-                {
-                    donator: "Dustin Henderson",
-                    id: "S00003",
-                    date: "2022-12-03",
-                    plan: 1,
-                    koala: "",
-                    price: 300,
-                    desc: "",
-                },
-                {
-                    donator: "Lucas Sinclair",
-                    id: "S00004",
-                    date: "2022-12-04",
-                    plan: 1,
-                    koala: "",
-                    price: 300,
-                    desc: "",
-                },
-                {
-                    donator: "Nancy Wheeler",
-                    id: "S00005",
-                    date: "2022-12-05",
-                    plan: 0,
-                    koala: "Lucien",
-                    price: 1000,
-                    desc: "",
-                },
-                {
-                    donator: "Steve Harrington",
-                    id: "S00006",
-                    date: "2022-12-06",
-                    plan: 0,
-                    koala: "Emily",
-                    price: 1000,
-                    desc: "",
-                },
-            ],
+            source: [],
         };
+    },
+    methods: {
+        getSupportList() {
+            // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1/public/api/getSupportList.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.map((item) => {
+                        return {
+                            sup_id: +item.sup_id,
+                            mem_id: +item.mem_id,
+                            sup_date: item.sup_date,
+                            koala_id: +item.koala_id,
+                            sup_plan: +item.sup_plan,
+                            sup_price: item.sup_price,
+                        };
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+    },
+    created() {
+        this.getSupportList();
     },
 };
 </script>
