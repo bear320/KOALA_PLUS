@@ -24,26 +24,32 @@
         </div>
         <!-- 第一行 -->
         <div class="content-top">
-                <div class="idname-t">00000</div>
-                <div class="adname-t">＃總經理</div>
-                <div class="date-t">2022/12/15</div>
-                <div class="tagsw-1">
-                    <p class="tag">無法變更權限</p>
-                </div>    
+            <div class="idname-t">00000</div>
+            <div class="adname-t">＃總經理</div>
+            <div class="date-t">2022/12/15</div>
+            <div class="tagsw-1">
+                <p class="tag">無法變更權限</p>
+            </div>
         </div>
         <!-- 內容 -->
-        <div class="bs-list" v-for="koala in koalas" :key="koala.id">
-            <div>{{ koala.idname }}</div>
-            <div>{{ koala.adname }}</div>
-            <div>{{ koala.date }}</div>
-            
+        <div class="bs-list" v-for="admin in source" :key="admin.emp_id">
+            <div>{{ admin.emp_account }}</div>
+            <div>{{ admin.emp_name }}</div>
+            <div>{{ admin.emp_last_login }}</div>
+
             <div class="tagsw">
-                <div class="tagsw-tag">{{ koala.tag }}</div>
+                <div class="emp_validation">
+                    {{ admin.emp_validation === 0 ? "無權限" : "一般權限" }}
+                </div>
+
                 <div>
                     <Switch
                         size="large"
                         true-color="#337a7d"
-                        v-model="koala.listed" :before-change="handleBeforeChange"
+                        :true-value="1"
+                        :false-value="0"
+                        v-model="admin.emp_validation"
+                        :before-change="handleBeforeChange"
                     >
                         <template #open>
                             <span>ON</span>
@@ -61,41 +67,17 @@
 <script>
 import { BASE_URL } from "@/assets/js/common.js";
 import Header from "@/components/backStage/Header.vue";
+import { throwStatement } from "@babel/types";
 export default {
     components: {
         Header,
     },
     data() {
         return {
-            koalas: [
-                {
-                    idname: "P00001",
-                    adname: "Apple",
-                    date: "2022/12/25",
-                    tag: "一般權限",
-                },
-                {
-                    idname: "P00002",
-                    adname: "Sunny",
-                    date: "2022/12/25",
-                    tag: "一般權限",
-                },
-                {
-                    idname: "P00003",
-                    adname: "Jessie",
-                    date: "2022/12/25",
-                    tag: "一般權限",
-                },
-                {
-                    idname: "P00004",
-                    adname: "Amber",
-                    date: "2022/12/25",
-                    tag: "一般權限",
-                },
-            ],
+            source: [],
         };
-        
     },
+
     methods: {
         handleBeforeChange() {
             return new Promise((resolve) => {
@@ -105,37 +87,36 @@ export default {
                     onOk: () => {
                         resolve();
                     },
-                    
                 });
-                
             });
-            
         },
-    },  
-    methods: {
-    testApi(){
-        this.axios.get(`${BASE_URL}/test.php`).then(e=>{
-            console.log(e)})}},
-
-    getKoalas(){
-        // const apiURL = new URL(`${BASE_URL}/getKoalas.php`);
-        const apiURL = new URL("http://localhost:8888/cgd103_g1/public/api/getKoalas.php");
-        fetch(apiURL)
-            .then((res) => res.json())
-            .then((json) =>{
-                this.source = json;
-                this.cache = json;
-        })
-        .catch((error) =>{
-            alert(error);
-        });
+        getAdminList() {
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1_dev/public/api/getAdminList.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.map((item) => {
+                        return {
+                            emp_id: +item.emp_id,
+                            emp_account: item.emp_account,
+                            emp_psw: item.emp_psw,
+                            emp_name: item.emp_name,
+                            emp_validation: +item.emp_validation,
+                            emp_last_login: item.emp_last_login,
+                        };
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
     },
-    created(){
-        this.getKoalas();
-    }
+    created() {
+        this.getAdminList();
+    },
 };
-
-        
 </script>
 
 <style lang="scss" scoped>
@@ -186,14 +167,14 @@ export default {
         margin: 20px 0;
         padding-bottom: 20px;
         border-bottom: solid 1px $lightgreen;
-        .tagsw{
+        .tagsw {
             display: flex;
             justify-content: center;
-            .tagsw-tag{
+            .emp_validation {
                 width: 80px;
             }
         }
-        div{
+        div {
             display: block;
             width: calc(100% / 4);
             font-size: 15px;
@@ -211,20 +192,17 @@ export default {
     }
 }
 .content-top {
-            display: grid;
-            grid-template-columns: repeat(4,1fr);
-            margin: 10px 0;
-            
-            align-items: center;
-            padding: 20px 0;
-            border-bottom: solid 1px $lightgreen;
-            font-size: 15px;
-            .tagsw-1{
-                display: flex;
-                justify-content: center;
-            }
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 10px 0;
 
-        }
-            
-            
+    align-items: center;
+    padding: 20px 0;
+    border-bottom: solid 1px $lightgreen;
+    font-size: 15px;
+    .tagsw-1 {
+        display: flex;
+        justify-content: center;
+    }
+}
 </style>
