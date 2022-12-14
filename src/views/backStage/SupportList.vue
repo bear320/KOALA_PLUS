@@ -71,9 +71,9 @@ export default {
                     this.source = json.map((item) => {
                         return {
                             sup_id: +item.sup_id,
-                            mem_id: +item.mem_id,
+                            mem_name: item.mem_name,
                             sup_date: item.sup_date,
-                            koala_id: +item.koala_id,
+                            koala_name: item.koala_name,
                             sup_plan: +item.sup_plan,
                             sup_price: item.sup_price,
                         };
