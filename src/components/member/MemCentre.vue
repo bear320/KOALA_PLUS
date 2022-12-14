@@ -1,11 +1,12 @@
 <template lang="">
     <li class="mem_centre content">
         <div class="mem_basic">
-            <p>會員ID：P00001</p>
+            <p>會員ID：{{ memindexs.mem_id }}</p>
         </div>
         <!-- 會員中心下方內容 -->
         <div class="mem_main">
             <!-- 會員中心左邊內容  關於會員帳密內容-->
+
             <div class="tabcontent_txt_group">
                 <div class="subtitle">
                     <Icon type="ios-create-outline" size="20" color="#337a7d" />
@@ -18,38 +19,44 @@
                             type="text"
                             id="mem_name"
                             myfield="mem_name"
-                            value="曾韋翰"
+                            v-model="memindexs.mem_name"
+                            ref="mem_name"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>信箱</td>
                         <input
                             type="text"
-                            id="mem_email"
-                            myfield="mem_email"
-                            value="chermy111@gmail.com"
+                            id="mem_account"
+                            myfield="mem_account"
+                            v-model="memindexs.mem_account"
+                            ref="mem_account"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>電話</td>
                         <input
                             type="text"
-                            id="mem_tel"
-                            myfield="mem_tel"
-                            value="0988888888"
+                            id="mem_mob"
+                            myfield="mem_mob"
+                            v-model="memindexs.mem_mob"
+                            ref="mem_mob"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
-                        <td>信箱</td>
+                        <td>地址</td>
                         <input
                             type="text"
                             id="mem_add"
                             myfield="mem_add"
-                            value="桃園市復興路46號8樓"
+                            v-model="memindexs.mem_add"
+                            ref="mem_add"
                         />
                     </tr>
                 </table>
-                <button class="btn-paramy">編輯會員資料</button>
+                <button class="btn-paramy" @click="editMemInfo">
+                    編輯會員資料
+                </button>
             </div>
             <!-- 會員中心右邊內容 關於帳號密碼-->
             <div class="tabcontent_txt_group">
@@ -63,40 +70,100 @@
                 </div>
                 <table class="tabcontent_group">
                     <tr class="tabcontent_txt">
-                        <td>帳號</td>
+                        <td>原密碼</td>
                         <input
                             type="text"
-                            id="mem_account"
-                            myfield="mem_email"
-                            value="chermy111"
+                            id="mem_psw"
+                            myfield="mem_psw"
+                            ref="mem_psw"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>密碼</td>
                         <input
-                            type="password"
+                            type="text"
                             id="mem_password1"
                             myfield="mem_password1"
-                            value="123456"
+                            ref="mem_password1"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>重新輸入</td>
                         <input
-                            type="password"
+                            type="text"
                             id="mem_password_again"
                             myfield="mem_password1"
-                            value="123456"
+                            ref="mem_password2"
                         />
                     </tr>
                 </table>
-                <button class="btn-paramy">修改密碼</button>
+                <button class="btn-paramy" @click="editMempsw">修改密碼</button>
             </div>
         </div>
     </li>
 </template>
 <script>
-export default {};
+export default {
+    data() {
+        return {
+            memindexs: [],
+        };
+    },
+    methods: {
+        editMemInfo() {
+            console.log("editMemInfo");
+
+            const postMemMainData = {
+                mem_name: this.$refs.mem_name.value,
+                mem_account: this.$refs.mem_account.value,
+                mem_mob: this.$refs.mem_mob.value,
+                mem_add: this.$refs.mem_add.value,
+            };
+            console.log(postMemMainData);
+
+            fetch(
+                "http://localhost/cgd103_g1/public/api/editMember.php?mem_id=1001&type=1",
+                {
+                    method: "POST",
+                    body: new URLSearchParams(postMemMainData),
+                }
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                });
+        },
+        editMempsw() {
+            console.log("editMempsw");
+            //要自行用VUE判斷 新密碼再次輸入要相同。
+            const postMemMainData = {
+                mem_oldpsw: this.$refs.mem_psw.value,
+                mem_newpsw: this.$refs.mem_password1.value,
+            };
+            console.log(postMemMainData);
+
+            fetch(
+                "http://localhost/cgd103_g1/public/api/editMember.php?mem_id=1001&type=2",
+                {
+                    method: "POST",
+                    body: new URLSearchParams(postMemMainData),
+                }
+            )
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                });
+        },
+    },
+    created() {
+        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.memindexs = json;
+            });
+    },
+};
 </script>
 <style lang="scss" scoped>
 // .member 會員的會員中心

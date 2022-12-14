@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_order content">
         <div class="mem_basic">
-            <p>姓名：{{ mem_name }}</p>
-            <p>會員ID：{{ mem_id }}</p>
+            <p>姓名：{{ memindexs.mem_name }}</p>
+            <p>會員ID：{{ memindexs.mem_id }}</p>
         </div>
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
@@ -57,10 +57,9 @@ export default {
     },
     data() {
         return {
-            mem_name: "曾韋翰",
-            mem_id: "P00001",
             showMemUnsubscribe: false,
             ord_sts: "處理中",
+            memindexs: [],
             orderList: [
                 {
                     prod_name: "無尾熊乾髮帽",
@@ -94,6 +93,13 @@ export default {
         closeMemUnsubscribe_emit() {
             this.showMemUnsubscribe = false;
         },
+    },
+    created() {
+        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
+            .then((res) => res.json())
+            .then((json) => {
+                this.memindexs = json;
+            });
     },
 };
 </script>
