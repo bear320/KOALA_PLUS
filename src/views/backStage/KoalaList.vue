@@ -14,9 +14,7 @@
             </div>
             <select name="" id="">
                 <option value="" selected>排列方式</option>
-                <option value="">名字（正序）</option>
-                <option value="">名字（反序）</option>
-                <option value="">編號（反序）</option>
+                <option value="">編號（正序）</option>
                 <option value="">編號（反序）</option>
                 <option value="">年齡（大到小）</option>
                 <option value="">年齡（小到大）</option>
@@ -33,33 +31,36 @@
             <h3 class="kListed">上 / 下架</h3>
             <h3 class="kEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="koala in koalas" :key="koala.id">
-            <p>{{ koala.name }}</p>
-            <p>{{ koala.id }}</p>
-            <p>{{ koala.dob }}</p>
+        <div class="bs-list" v-for="koala in source" :key="koala.koala_id">
+            <p>{{ koala.koala_name }}</p>
+            <p>{{ koala.koala_id }}</p>
+            <p>{{ koala.koala_dob }}</p>
             <p>
-                <span v-if="koala.sex === 'Male'">公</span>
-                <span v-if="koala.sex === 'Female'">母</span>
+                <span v-if="koala.koala_sex === 'Male'">公</span>
+                <span v-if="koala.koala_sex === 'Female'">母</span>
             </p>
-            <p>X歲</p>
+            <p>{{ koala.koala_age }}</p>
             <p>
                 <Switch
                     size="large"
                     true-color="#337a7d"
-                    v-model="koala.listed"
+                    v-model.number="koala.koala_listed"
                     :true-value="1"
                     :false-value="0"
                 >
                     <template #open>
-                        <span>ON</span>
+                        <span>上架</span>
                     </template>
                     <template #close>
-                        <span>OFF</span>
+                        <span>下架</span>
                     </template>
                 </Switch>
             </p>
             <p>
-                <router-link :to="`/bs-koala-edit/${koala.id}`" target="_blank">
+                <router-link
+                    :to="`/bs-koala-edit/${koala.koala_id}`"
+                    target="_blank"
+                >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
@@ -69,63 +70,48 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
     },
     data() {
         return {
-            koalas: [
-                {
-                    name: "Emily",
-                    id: "K001",
-                    dob: "2020-03-22",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Emily.",
-                },
-                {
-                    name: "Gabriel",
-                    id: "K002",
-                    dob: "2019-05-20",
-                    sex: "Male",
-                    listed: 1,
-                    desc: "I'm Gabriel.",
-                },
-                {
-                    name: "Lucien",
-                    id: "K003",
-                    dob: "2019-10-15",
-                    sex: "Male",
-                    listed: 1,
-                    desc: "I'm Lucien.",
-                },
-                {
-                    name: "Camille",
-                    id: "K004",
-                    dob: "2018-04-08",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Camille.",
-                },
-                {
-                    name: "Mindy",
-                    id: "K005",
-                    dob: "2017-07-10",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Mindy.",
-                },
-                {
-                    name: "Antoine",
-                    id: "K006",
-                    dob: "2015-01-16",
-                    sex: "Male",
-                    listed: 0,
-                    desc: "I'm Antoine.",
-                },
-            ],
+            source: [],
         };
+    },
+    methods: {
+        getKoalaList() {
+            // const apiURL = new URL(`${BASE_URL}/getKoalaList.php`);
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1/public/api/getKoalaList.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.map((item) => {
+                        return {
+                            koala_id: +item.koala_id,
+                            koala_name: item.koala_name,
+                            koala_dob: item.koala_dob,
+                            koala_age: +item.koala_age,
+                            koala_sex: item.koala_sex,
+                            koala_info: item.koala_info,
+                            koala_listed: +item.koala_listed,
+                            koala_img1: item.koala_img1,
+                            koala_img2: item.koala_img2,
+                            koala_img3: item.koala_img3,
+                            koala_img4: item.koala_img4,
+                        };
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+    },
+    created() {
+        this.getKoalaList();
     },
 };
 </script>
@@ -158,6 +144,7 @@ export default {
     }
 }
 .table {
+    margin-bottom: 60px;
     .bs-title {
         width: 100%;
         border-radius: 10px;
