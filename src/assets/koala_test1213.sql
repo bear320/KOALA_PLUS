@@ -249,7 +249,7 @@ KEY `dx_prod_price` (`prod_price`),
  
  -- 管理者
    CREATE TABLE `employee`(
- `emp_id` int unsigned NOT NULL COMMENT '管理員編號',
+ `emp_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '管理員編號',
  `emp_account` varchar(100)  NOT NULL DEFAULT '' COMMENT '管理員帳號', 
  `emp_psw` varchar(20) NOT NULL DEFAULT '' COMMENT '管理員密碼',
  `emp_name` varchar(100) NOT NULL DEFAULT '' COMMENT '管理員姓名',
