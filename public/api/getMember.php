@@ -7,5 +7,5 @@ $sql = "select * from tibamefe_cgd103g1.member";
 
 $members = $pdo->query($sql);
 $prodRows = $members->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($prodRows);            
+echo json_encode($prodRows);
 ?>

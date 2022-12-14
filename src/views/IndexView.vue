@@ -25,6 +25,9 @@
                 <router-link to="/bs-login"> 後台 </router-link>
             </div>
         </div>
+        <div class="TibaMe">
+            本網站為緯育TibaMe前端工程師班第79期學員專題作品，本平台僅供學習、展示之用。
+        </div>
     </div>
 </template>
 
@@ -105,6 +108,11 @@ export default {
                 transform: translate(-50%, -50%);
             }
         }
+    }
+    .TibaMe {
+        position: relative;
+        bottom: -20px;
+        font-weight: 600;
     }
 }
 </style>

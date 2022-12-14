@@ -85,6 +85,7 @@ export default {
                     content: "您確定要切換開關狀態嗎？",
                     onOk: () => {
                         resolve();
+                        // console.log(this.$Modal);
                     },
                 });
             });
@@ -97,7 +98,7 @@ export default {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php")
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 this.memindexs = json;
             });
     },
