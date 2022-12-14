@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 import Header from "@/components/backStage/Header.vue";
 export default {
     components: {
@@ -104,13 +105,37 @@ export default {
                     onOk: () => {
                         resolve();
                     },
+                    
                 });
+                
             });
+            
         },
+    },  
+    methods: {
+    testApi(){
+        this.axios.get(`${BASE_URL}/test.php`).then(e=>{
+            console.log(e)})}},
+
+    getKoalas(){
+        // const apiURL = new URL(`${BASE_URL}/getKoalas.php`);
+        const apiURL = new URL("http://localhost:8888/cgd103_g1/public/api/getKoalas.php");
+        fetch(apiURL)
+            .then((res) => res.json())
+            .then((json) =>{
+                this.source = json;
+                this.cache = json;
+        })
+        .catch((error) =>{
+            alert(error);
+        });
     },
-    
+    created(){
+        this.getKoalas();
+    }
 };
 
+        
 </script>
 
 <style lang="scss" scoped>
