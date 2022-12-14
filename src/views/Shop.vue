@@ -8,9 +8,10 @@
                     <router-link to="/home">Home</router-link>
                     <router-link to="/shop">週邊商城</router-link>
                     <router-link
-                        :to="`/shop?category=${this.$route.query.category}&sort=name&limit=9&page=1`"
+                        :to="`/shop?category=${this.$route.query.category}&order=prod_name&limit=9&page=1`"
                         v-if="this.$route.query.category"
                     >
+                        {{ curCategory }}
                     </router-link>
                 </div>
 
@@ -49,10 +50,24 @@
                         <div class="price-range">
                             <div class="range-text">價格區間</div>
                             <div class="range-box">
-                                <input class="input-range" type="text" />
+                                <input
+                                    class="input-range"
+                                    type="text"
+                                    v-model.number="lowerLimit"
+                                />
                                 <span>~</span>
-                                <input class="input-range" type="text" />
+                                <input
+                                    class="input-range"
+                                    type="text"
+                                    v-model.number="upperLimit"
+                                />
                                 <div>$NTD</div>
+                            </div>
+                            <div
+                                class="btn-paramy search-price"
+                                @click="priceRange"
+                            >
+                                搜尋
                             </div>
                         </div>
                     </div>
@@ -65,10 +80,11 @@
                             :proImg="item.prod_img1"
                             :proName="item.prod_name"
                             :proPrice="item.prod_price"
+                            :proId="item.prod_id"
                             :col="'col-xl-4 col-lg-4 col-md-6 col-6'"
                         ></product-card>
                     </div>
-                    <div class="row">
+                    <div class="row row-box">
                         <div class="col-12 pagenation">
                             <Icon
                                 type="md-skip-backward"
@@ -115,30 +131,68 @@ export default {
                 { title: "玩具/絨毛娃娃", category: "doll" },
                 { title: "服飾", category: "apparel" },
             ],
-            curPage: 1,
+            curPage: +this.$route.query.page,
             pageTotal: 0,
             searchText: "",
+            lowerLimit: "",
+            upperLimit: "",
         };
     },
     watch: {
         $route: function (q) {
             this.getProduct(q.query);
-            /* this.getPage(q.query); */
         },
     },
     computed: {
-        // 暫時用，串到真正的資料庫後會刪掉
-        /* curCategory() {
-            if (this.$route.query.category === "bonbons") {
+        curCategory() {
+            if (this.$route.query.category === "daily") {
                 return "生活小物";
-            } else if (this.$route.query.category === "raw") {
+            } else if (this.$route.query.category === "doll") {
                 return "玩具/絨毛娃娃";
-            } else if (this.$route.query.category === "bar") {
+            } else if (this.$route.query.category === "apparel") {
                 return "服飾";
             }
-        }, */
+        },
     },
     methods: {
+        priceRange() {
+            if (this.upperLimit && this.lowerLimit) {
+                console.log("GG");
+                this.$router.push({
+                    path: "/shop",
+                    query: {
+                        gte: this.upperLimit,
+                        lte: this.lowerLimit,
+                        order: `prod_name`,
+                        limit: `9`,
+                        page: `1`,
+                    },
+                });
+            } else if (this.upperLimit || this.lowerLimit) {
+                if (this.lowerLimit) {
+                    this.$router.push({
+                        path: "/shop",
+                        query: {
+                            lte: this.lowerLimit,
+                            order: `prod_name`,
+                            limit: `9`,
+                            page: `1`,
+                        },
+                    });
+                } else {
+                    this.$router.push({
+                        path: "/shop",
+                        query: {
+                            gte: this.upperLimit,
+                            order: `prod_name`,
+                            limit: `9`,
+                            page: `1`,
+                        },
+                    });
+                }
+            }
+            this.curPage = 1;
+        },
         searchProduct() {
             if (!this.searchText) return;
             this.$router.push({
@@ -150,6 +204,9 @@ export default {
                     page: `1`,
                 },
             });
+            this.curPage = 1;
+            this.lowerLimit = "";
+            this.upperLimit = "";
         },
         changeCategory(category) {
             if (!category) {
@@ -168,6 +225,9 @@ export default {
                     },
                 });
             }
+            this.curPage = 1;
+            this.lowerLimit = "";
+            this.upperLimit = "";
         },
         getProduct(queryParam) {
             if (!Object.keys(queryParam).length) {
@@ -176,45 +236,33 @@ export default {
                 queryParam.page = "1";
             }
 
-            const apiURL = new URL(`${BASE_URL}/getProducts.php`);
+            /*  const apiURL = new URL(`${BASE_URL}/getProducts.php`); */
+            const apiURL = new URL(
+                `http://localhost/cgd103_g1/public/api/getProducts.php`
+            );
             const searchParams = new URLSearchParams(queryParam);
             apiURL.search = searchParams;
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json;
+                    this.source = json.prods;
+                    this.pageTotal = Math.ceil(json.prodCount / 9);
                     if (!this.source.length) {
                         throw new Error("查無相關結果");
                     }
                 })
                 .catch((error) => {
-                    alert(error);
+                    /* alert(error); */
                 });
         },
-        /* getPage(queryParam) {
-            let apiURL =
-                "https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours";
 
-            let isHaveCategory = queryParam.category;
-
-            let test = isHaveCategory
-                ? `${apiURL}?category=${queryParam.category}`
-                : `${apiURL}`;
-
-            this.curPage = queryParam.page ? +queryParam.page : 1;
-            fetch(test)
-                .then((res) => res.json())
-                .then((json) => {
-                    this.pageTotal = Math.ceil(json.dtat.tours.length / 9);
-                });
-        }, */
         previousPage() {
             if (this.curPage <= 1) return;
             this.curPage -= 1;
             this.changePage();
         },
         nextPage() {
-            /* if (this.curPage >= this.pageTotal) return; */
+            if (this.curPage >= this.pageTotal) return;
             this.curPage += 1;
             this.changePage();
         },
@@ -244,12 +292,6 @@ export default {
     },
     created() {
         this.getProduct(this.$route.query);
-        /*  this.getPage(this.$route.query); */
-        /* fetch("http://localhost/cgd103_g1/api/getProducts.php")
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-            }); */
     },
 };
 </script>
@@ -312,6 +354,10 @@ export default {
         color: #44514b;
         margin-right: 20px;
     }
+}
+
+.row-box {
+    margin-bottom: 150px;
 }
 
 .title {
@@ -382,7 +428,12 @@ export default {
             gap: 20px;
             .input-range {
                 width: 55px;
+                margin-bottom: 10px;
             }
+        }
+        .search-price {
+            text-align: center;
+            cursor: pointer;
         }
     }
     .side-img {
