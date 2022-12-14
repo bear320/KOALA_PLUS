@@ -23,7 +23,7 @@
                     id="sup-id"
                     required
                     disabled
-                    v-model="temp.id"
+                    v-model="source.sup_id"
                 />
             </div>
             <div class="cell">
@@ -32,7 +32,7 @@
                     type="text"
                     name="sup-date"
                     id="sup-date"
-                    v-model="temp.date"
+                    v-model="source.sup_date"
                     disabled
                     required
                 />
@@ -43,7 +43,7 @@
                     type="text"
                     name="sup-donator"
                     id="sup-donator"
-                    v-model="temp.donator"
+                    v-model="source.mem_name"
                     disabled
                     required
                 />
@@ -56,7 +56,7 @@
                     type="text"
                     name="sup-plan"
                     id="sup-plan"
-                    v-model="temp.plan"
+                    v-model="source.sup_plan"
                     disabled
                     required
                 >
@@ -70,7 +70,7 @@
                     type="text"
                     name="sup-koala"
                     id="sup-koala"
-                    v-model="temp.koala"
+                    v-model="source.koala_name"
                     disabled
                     required
                 />
@@ -81,7 +81,7 @@
                     type="text"
                     name="sup-price"
                     id="sup-price"
-                    v-model="temp.price"
+                    v-model="source.sup_price"
                     disabled
                     required
                 />
@@ -96,7 +96,7 @@
                     cols="30"
                     rows="10"
                     placeholder="請輸入訂單備註"
-                    v-model="temp.desc"
+                    v-model="source.sup_note"
                     required
                 ></textarea>
             </div>
@@ -122,71 +122,32 @@ export default {
     },
     data() {
         return {
-            donateOrders: [
-                {
-                    donator: "Joyce Byers",
-                    id: "S00001",
-                    date: "2022-12-01",
-                    plan: 0,
-                    koala: "Gabriel",
-                    price: 1000,
-                    desc: "Joyce Byers 在 2022-12-01 時，領養了無尾熊 Gabriel。",
-                },
-                {
-                    donator: "Jim Hopper",
-                    id: "S00002",
-                    date: "2022-12-02",
-                    plan: 0,
-                    koala: "Camille",
-                    price: 1000,
-                    desc: "",
-                },
-                {
-                    donator: "Dustin Henderson",
-                    id: "S00003",
-                    date: "2022-12-03",
-                    plan: 1,
-                    koala: "",
-                    price: 300,
-                    desc: "",
-                },
-                {
-                    donator: "Lucas Sinclair",
-                    id: "S00004",
-                    date: "2022-12-04",
-                    plan: 1,
-                    koala: "",
-                    price: 300,
-                    desc: "",
-                },
-                {
-                    donator: "Nancy Wheeler",
-                    id: "S00005",
-                    date: "2022-12-05",
-                    plan: 0,
-                    koala: "Lucien",
-                    price: 1000,
-                    desc: "",
-                },
-                {
-                    donator: "Steve Harrington",
-                    id: "S00006",
-                    date: "2022-12-06",
-                    plan: 0,
-                    koala: "Emily",
-                    price: 1000,
-                    desc: "",
-                },
-            ],
+            source: {},
             temp: [],
         };
     },
+    methods: {
+        getSupportList() {
+            // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1/public/api/getSupportList.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    let [temp] = json.filter((item) => {
+                        console.log(this.$route.params);
+                        return item.sup_id === this.$route.params.sup_id;
+                    });
+                    this.source = temp;
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+    },
     created() {
-        [this.temp] = [
-            ...this.donateOrders.filter((item) => {
-                return item.id === this.$route.params.id;
-            }),
-        ];
+        this.getSupportList();
     },
 };
 </script>
