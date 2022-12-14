@@ -63,7 +63,7 @@
                 </div>
                 <!-- </div> -->
             </div>
-            <img :src="imgUrl" />
+            <img :src="imgUrl" class="return_img" />
         </div>
     </li>
 </template>
@@ -219,6 +219,16 @@ table {
         top: 75%;
         left: 42%;
         transform: translate(-65%, -50%);
+    }
+}
+.return_img {
+    @include d() {
+        width: 550px;
+        height: 444px;
+    }
+    @include m() {
+        width: 275px;
+        height: 222px;
     }
 }
 </style>
