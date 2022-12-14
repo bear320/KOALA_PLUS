@@ -173,7 +173,7 @@ export default {
                     this.$router.push({
                         path: "/shop",
                         query: {
-                            lte: this.lowerLimit,
+                            gte: this.lowerLimit,
                             order: `prod_name`,
                             limit: `9`,
                             page: `1`,
@@ -183,7 +183,7 @@ export default {
                     this.$router.push({
                         path: "/shop",
                         query: {
-                            gte: this.upperLimit,
+                            lte: this.upperLimit,
                             order: `prod_name`,
                             limit: `9`,
                             page: `1`,
