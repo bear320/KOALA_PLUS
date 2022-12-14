@@ -26,10 +26,13 @@
                     <!-- true-color="#337a7d" -->
                     <Switch
                         size="large"
-                        v-model="item.black_switch"
-                        loading
-                        :model-value="false"
+                        true-color="#337a7d"
+                        :true-value="1"
+                        :false-value="0"
+                        v-model="item.mem_state"
                     >
+                        <!-- loading
+                        :model-value="false" -->
                         <template #open>
                             <span>ON</span>
                         </template>
@@ -49,30 +52,30 @@ export default {
     data() {
         return {
             memindexs: [
-                {
-                    mem_id: "P00001",
-                    mem_name: "曾韋翰",
-                    mem_mob: "0988777688",
-                    mem_account: "charmy111@gmail.com",
-                    mem_add: "桃園市復興路46號8樓",
-                    black_switch: false,
-                },
-                {
-                    mem_id: "P00002",
-                    mem_name: "韋禮安",
-                    mem_mob: "0988777688",
-                    mem_account: "charmy222@gmail.com",
-                    mem_add: "桃園市復興路46號9樓",
-                    black_switch: true,
-                },
-                {
-                    mem_id: "P00003",
-                    mem_name: "王以太",
-                    mem_mob: "0988777688",
-                    mem_account: "charmy333@gmail.com",
-                    mem_add: "桃園市復興路46號10樓",
-                    black_switch: false,
-                },
+                // {
+                //     mem_id: "P00001",
+                //     mem_name: "曾韋翰",
+                //     mem_mob: "0988777688",
+                //     mem_account: "charmy111@gmail.com",
+                //     mem_add: "桃園市復興路46號8樓",
+                //     black_switch: false,
+                // },
+                // {
+                //     mem_id: "P00002",
+                //     mem_name: "韋禮安",
+                //     mem_mob: "0988777688",
+                //     mem_account: "charmy222@gmail.com",
+                //     mem_add: "桃園市復興路46號9樓",
+                //     black_switch: true,
+                // },
+                // {
+                //     mem_id: "P00003",
+                //     mem_name: "王以太",
+                //     mem_mob: "0988777688",
+                //     mem_account: "charmy333@gmail.com",
+                //     mem_add: "桃園市復興路46號10樓",
+                //     black_switch: false,
+                // },
             ],
         };
     },
@@ -91,6 +94,14 @@ export default {
     },
     components: {
         Header,
+    },
+    created() {
+        fetch("http://localhost/cgd103_g1/public/api/getMember.php")
+            .then((res) => res.json())
+            .then((json) => {
+                // console.log(json);
+                this.memindexs = json;
+            });
     },
 };
 </script>
