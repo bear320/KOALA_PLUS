@@ -23,45 +23,45 @@
                     class="tdd"
                     v-for="d in emptyDay"
                     style="background: #f8f8f8"
-                ></td>
-                <td
+                    ></td>
+                    <td
                     class="tdd"
                     v-for="(day, index) in allDay"
                     @click="chooseDate(thisYear, thisMonth + 1, day)"
                     :style="{
                         backgroundColor: notBookDate?.[
-                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                         ]
-                            ? '#9abdbf'
-                            : 'rgb(190, 214, 213, .3)',
+                        ? '#9abdbf'
+                        : 'rgb(190, 214, 213, .3)',
                         cursor: notBookDate?.[
-                            `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                            `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                         ]
-                            ? 'default'
-                            : 'pointer',
+                        ? 'default'
+                        : 'pointer',
                     }"
                 >
-                    {{ day }}
-
+                {{ day}}
                     <p
                         v-if="
                             notBookDate?.[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ]
                         "
                         :style="bookStyle"
-                    >
+                    >   
+                        <!-- {{day}} -->
                         {{
                             notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state
                         }}
                         <br />
                         <p v-if="notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state==='已預約'">🐨</p>
                         <p v-else-if="notBookDate[
-                                `${this.thisYear}-${this.thisMonth + 1}-${day}`
+                                `${this.thisYear}-${(this.thisMonth + 1)<10? '0' +(this.thisMonth + 1): (this.thisMonth + 1)}-${day < 10 ? '0' + day : day }`
                             ].state==='休館'">📅</p>
 
                         
@@ -110,7 +110,7 @@
 </template>
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
-import { BASE_URL } from "@/assets/js/common.js";
+// import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
     data() {
@@ -159,7 +159,7 @@ export default {
         this.thisYear = new Date().getFullYear();
         this.thisDate = new Date().getDate();
         this.getLastEmptyDay(new Date().getFullYear(), new Date().getMonth());
-        this.getResvDetail();
+        this.getResvDetail();       
     },
     watch: {
     notBookDate: {
@@ -174,7 +174,7 @@ export default {
         getResvDetail() {
             // const productId = this.$route.params.id;
             console.log('QQ');
-            const apiURL = new URL(`${BASE_URL}/getReservation.php`);
+            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getReservation.php");
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -234,7 +234,10 @@ export default {
                     days = 29;
                 }
             }
+
             this.allDay = days;
+            // this.allDay = days.toString().padStart(2, '0')
+            
         },
         preMonth() {
             if (this.thisMonth == 0) {
@@ -272,6 +275,8 @@ export default {
 
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
+            console.log(newDD);
+            console.log(newMM);
         },
         closeTable() {
             this.showForm = false;
