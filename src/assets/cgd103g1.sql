@@ -290,21 +290,21 @@ CREATE TABLE `orders`(
 `ord_add` varchar(300) COMMENT '收件地址',
 `ord_ship` tinyint NOT NULL DEFAULT '0' COMMENT '訂單處理狀況(0: 訂單準備中, 1: 訂單已出貨, 2: 訂單已完成, 3: 訂單未完成)',
 PRIMARY KEY (`ord_id`), 
- FOREIGN KEY (`mem_id`) REFERENCES member(`mem_id`),
- FOREIGN KEY(`coupon_id`) REFERENCES my_coupon(`coupon_id`),
- KEY `dx_ord_date` (`ord_date`), 
- KEY `dx_ord_sum` (`ord_sum`), 
- KEY `dx_ord_disc` (`ord_disc`), 
- KEY `dx_ord_pay` (`ord_pay`),
- KEY `dx_ord_person` (`ord_person`), 
- KEY `dx_ord_phone` (`ord_phone`), 
- KEY `dx_ord_add` (`ord_add`), 
- KEY `dx_ord_ship` (`ord_ship`)
-)ENGINE=InnoDB AUTO_INCREMENT=12001 DEFAULT CHARSET=utf8mb4 COMMENT='商品訂單';
+FOREIGN KEY (`mem_id`) REFERENCES member(`mem_id`),
+FOREIGN KEY(`coupon_id`) REFERENCES my_coupon(`coupon_id`),
+KEY `dx_ord_date` (`ord_date`), 
+KEY `dx_ord_sum` (`ord_sum`), 
+KEY `dx_ord_disc` (`ord_disc`), 
+KEY `dx_ord_pay` (`ord_pay`),
+KEY `dx_ord_person` (`ord_person`), 
+KEY `dx_ord_phone` (`ord_phone`), 
+KEY `dx_ord_add` (`ord_add`), 
+KEY `dx_ord_ship` (`ord_ship`)
+)ENGINE=InnoDB AUTO_INCREMENT=09001 DEFAULT CHARSET=utf8mb4 COMMENT='商品訂單';
 INSERT INTO tibamefe_cgd103g1 . `orders`(`mem_id`, `coupon_id`, `ord_date`, `ord_sum`, `ord_disc`, `ord_pay`, `ord_person`, `ord_phone`, `ord_add`, `ord_ship`) VALUES
-('1001', '4001', '2022-10-01', '2400', '360', '2040', '曾韋翰', '0911111111', '桃園市復興路46號1樓', '3'),
-('1002', '4002', '2022-11-01', '3600', '360', '3240', '徐志摩', '0922222222', '桃園市復興路46號2樓', '3'),
-('1003', '4003', '2022-12-15', '4800', '240', '4560', '劉以豪', '0933333333', '桃園市復興路46號3樓', '0');
+('09001', '1001', '4001', '2022-10-01', '2400', '360', '2040', '曾韋翰', '0911111111', '桃園市復興路46號1樓', '3'),
+('09002', '1002', '4002', '2022-11-01', '3600', '360', '3240', '徐志摩', '0922222222', '桃園市復興路46號2樓', '3'),
+('09003', '1003', '4003', '2022-12-15', '4800', '240', '4560', '劉以豪', '0933333333', '桃園市復興路46號3樓', '0');
 
 
 -- 商品訂單詳情
@@ -320,9 +320,9 @@ KEY `dx_ord_qty` (`ord_qty`),
 KEY `prod_price` (`prod_price`)
 )ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='訂單項目明細';
 INSERT INTO tibamefe_cgd103g1 . `order_list`(`ord_id`, `prod_id`, `ord_qty`, `prod_price`) VALUES
-('12001', '5001', '2', '300'),
-('12001', '5002', '2', '900'),
-('12002', '5003', '2', '1100'),
-('12002', '5004', '2', '700'),
-('12003', '5005', '2', '1000'),
-('12003', '5006', '2', '1400');
+('09001', '5001', '2', '300'),
+('09001', '5002', '2', '900'),
+('09002', '5003', '2', '1100'),
+('09002', '5004', '2', '700'),
+('09003', '5005', '2', '1000'),
+('09003', '5006', '2', '1400');
