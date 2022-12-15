@@ -164,7 +164,8 @@ export default {
             })
                 .then((res) => res.text())
                 .then((result) => {
-                    console.log(result);
+                    console.log("QQ", result);
+                    alert(result);
                     this.callback();
                 });
         },

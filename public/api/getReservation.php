@@ -9,8 +9,18 @@ $sql = "select * from tibamefe_cgd103g1.reservation";
     $sql = "select * from tibamefe_cgd103g1.product where prod_category='{$category}' order by {$order} limit 9 offset 0;";
 } */
 
+// pagination
+
+$limit = 10;
+$page = $_GET["page"] - 1;
+$offset = $page * $limit;
+$sql = "select * from tibamefe_cgd103g1.reservation order by rsv_id desc limit {$limit} offset {$offset}";
+$sql2 = "select count(*) as 'resv_total' from tibamefe_cgd103g1.reservation";
+
 $reservation = $pdo->query($sql);
+$rsvCount = $pdo->query($sql2);
 $prodRows = $reservation->fetchAll(PDO::FETCH_ASSOC);
+$prodRows2 = $rsvCount->fetchColumn();
 $notBookDate = array();
 foreach ($prodRows as $row) {
     $notBookDate[$row['rsv_date']] = array(
@@ -24,6 +34,7 @@ foreach ($prodRows as $row) {
         "ps" => $row['rsv_ps'],
     );
 }
-echo json_encode(array("notBookDate" => $notBookDate,"bookList"=>$prodRows));
+echo json_encode(array("notBookDate" => $notBookDate,"bookList"=>$prodRows,"rsvCount"=>$prodRows2));
+// echo json_encode(array("test" => $notBookDate,"qq"=>$prodRows2));
 // echo json_encode($prodRows);            
 ?>
