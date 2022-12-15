@@ -129,7 +129,7 @@ export default {
             });
         },
         showcouponsList(name, date) {
-            console.log(name, date);
+            // console.log(name, date);
             this.tempName = name;
             this.tempDate = date;
             /*  this.certificate_Index = index; */
@@ -142,7 +142,7 @@ export default {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 this.memindexs = json;
             });
     },

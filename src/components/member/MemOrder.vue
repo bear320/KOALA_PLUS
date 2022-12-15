@@ -87,7 +87,7 @@ export default {
     },
     methods: {
         clickMemUnsubscribe() {
-            console.log(this.showMemUnsubscribe);
+            // console.log(this.showMemUnsubscribe);
             this.showMemUnsubscribe = true;
         },
         closeMemUnsubscribe_emit() {
