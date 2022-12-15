@@ -138,7 +138,7 @@ export default {
     data() {
         return {
             inMove: false,
-            inMoveDelay: 3000,
+            inMoveDelay: 2200,
             activeSection: 0,
             offsets: [],
             touchStartY: 0,
@@ -215,9 +215,9 @@ export default {
             }, this.inMoveDelay);
         },
         handleMouseWheel: function (e) {
-            if (e.wheelDelta < 100 && !this.inMove) {
+            if (e.wheelDelta < 120 && !this.inMove) {
                 this.moveUp();
-            } else if (e.wheelDelta > 100 && !this.inMove) {
+            } else if (e.wheelDelta > 120 && !this.inMove) {
                 this.moveDown();
             }
 
@@ -261,6 +261,15 @@ export default {
 
             this.touchStartY = 0;
             return false;
+
+            // if (e.wheelDelta < 100 && !this.inMove) {
+            //     this.moveUp();
+            // } else if (e.wheelDelta > 100 && !this.inMove) {
+            //     this.moveDown();
+            // }
+
+            // e.preventDefault();
+            // return false;
         },
     },
     unmounted() {
