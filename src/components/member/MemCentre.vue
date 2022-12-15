@@ -76,6 +76,8 @@
                             id="mem_psw"
                             myfield="mem_psw"
                             ref="mem_psw"
+                            v-model="passwordcheck"
+                            @keyup.enter="memPageDown"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -85,6 +87,7 @@
                             id="mem_password1"
                             myfield="mem_password1"
                             ref="mem_password1"
+                            v-model="newpassword"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -93,7 +96,8 @@
                             type="text"
                             id="mem_password_again"
                             myfield="mem_password1"
-                            ref="mem_password2"
+                            ref="mem_passwordconfirm"
+                            v-model="newpasswordconfirm"
                         />
                     </tr>
                 </table>
@@ -107,6 +111,9 @@ export default {
     data() {
         return {
             memindexs: [],
+            passwordcheck: "",
+            newpassword: "",
+            newpasswordconfirm: "",
         };
     },
     methods: {
@@ -129,18 +136,29 @@ export default {
                 }
             )
                 .then((res) => res.json())
-                .then((result) => {
-                    console.log(result);
+                .then((status) => {
+                    // console.log(status);
+                    alert(status.msg);
                 });
+            if (this.passwordcheck != "") {
+                alert("有輸入內容");
+                if (this.newpassword == this.newpasswordconfirm) {
+                    alert("相同");
+                } else {
+                    alert("密碼不相同");
+                }
+            } else {
+                // alert("密碼不可為空白");
+            }
         },
         editMempsw() {
-            console.log("editMempsw");
+            // console.log("editMempsw");
             //要自行用VUE判斷 新密碼再次輸入要相同。
             const postMemMainData = {
                 mem_oldpsw: this.$refs.mem_psw.value,
                 mem_newpsw: this.$refs.mem_password1.value,
             };
-            console.log(postMemMainData);
+            // console.log(postMemMainData);
 
             fetch(
                 "http://localhost/cgd103_g1/public/api/editMember.php?mem_id=1001&type=2",
@@ -150,19 +168,33 @@ export default {
                 }
             )
                 .then((res) => res.json())
-                .then((result) => {
-                    console.log(result);
+                .then((status) => {
+                    console.log(status);
+                    alert(status.msg);
                 });
+            if (this.passwordcheck != "") {
+                alert("有輸入內容");
+                console.log(this.newpassword);
+                console.log(this.newpasswordconfirm);
+                if (this.newpassword == this.newpasswordconfirm) {
+                    alert("相同");
+                } else {
+                    alert("密碼不相同");
+                }
+            } else {
+                // alert("密碼不可為空白");
+            }
         },
     },
     created() {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 this.memindexs = json;
             });
     },
+    computed() {},
 };
 </script>
 <style lang="scss" scoped>

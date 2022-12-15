@@ -81,7 +81,7 @@ export default {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 this.memindexs = json;
             });
     },
