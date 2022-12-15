@@ -9,57 +9,20 @@
             <h2>新增休館日期</h2>
         </div>
     </section>
-    <form
-        class="wrapper function-wrapper"
-        action=""
-        enctype="multipart/form-data"
-    >
+    <form class="wrapper function-wrapper" enctype="multipart/form-data">
         <div class="line">
             <div class="cell">
                 <label for="rsv_date">休館日期：</label>
-                <input type="date" name="rsv_date" id="rsv_date" required />
-            </div>
-
-            <div class="cell">
-                <label for="rsv_ppl">人數：</label>
-                <select type="number" name="rsv_date" id="rsv_date" required>
-                    <option disabled value="">選擇人數</option>
-                    <option value=""></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
-                </select>
-            </div>
-        </div>
-        <div class="line">
-            <div class="cell">
-                <label for="rsv_id">編號：</label>
                 <input
-                    type="text"
-                    name="rsv_id"
-                    id="rsv_id"
-                    disabled
+                    type="date"
+                    name="rsv_date"
+                    id="rsv_date"
+                    v-model="orderDate"
                     required
                 />
             </div>
         </div>
+
         <div class="line">
             <div class="cell">
                 <label for="rsv_status">預約狀態：</label>
@@ -67,10 +30,10 @@
                     type="text"
                     name="rsv_status"
                     id="rsv_status"
-                    v-model="temp.sex"
-                    required
+                    v-model="status"
+                    disabled
                 >
-                    <option value="0">休館</option>
+                    <option selected value="休館">休館</option>
                 </select>
             </div>
         </div>
@@ -83,15 +46,18 @@
                     cols="10"
                     rows="5"
                     placeholder="請輸入備註內容"
-                    v-model="temp.desc"
+                    v-model="ps"
                     required
                 ></textarea>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
-                    <img src="@/assets/images/icon/confirm.svg" alt="" />確認
+                <button class="btn-paramy" id="btnInsert" @click.prevent="next">
+                    <img
+                        src="@/assets/images/icon/confirm.svg"
+                        alt=""
+                    />新增休館日
                 </button>
             </div>
         </div>
@@ -109,8 +75,37 @@ export default {
     },
     data() {
         return {
-            temp: [],
+            people: 0,
+            orderDate: "",
+            status: "休館",
+            ps: "",
         };
+    },
+    methods: {
+        next() {
+            console.log("next");
+            const payload = {
+                rsv_date: this.orderDate,
+                rsv_ppl: 0,
+                rsv_name: "koala+",
+                rsv_mobile: null,
+                rsv_email: null,
+                rsv_status: "休館",
+                rsv_ps: "",
+            };
+
+            fetch("http://localhost/cgd103_g1/public/api/resv_insert.php", {
+                method: "POST",
+                body: new URLSearchParams(payload),
+            })
+                .then((res) => res.text())
+                .then((result) => {
+                    console.log(result);
+                    result = JSON.parse(result);
+                    // this.callback();
+                    alert(result);
+                });
+        },
     },
 };
 </script>
@@ -181,7 +176,7 @@ export default {
             }
         }
     }
-    .line:nth-child(4) {
+    .line:nth-child(3) {
         .cell {
             width: 100%;
             textarea {

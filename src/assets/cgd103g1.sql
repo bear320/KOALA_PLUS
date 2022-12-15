@@ -149,7 +149,7 @@ CREATE TABLE `my_coupon`(
 `mem_id` int unsigned NOT NULL COMMENT '會員編號', 
 `coupon_id` int unsigned NOT NULL COMMENT '優惠券編號',
 `coupon_code` varchar(50) NOT NULL DEFAULT '' COMMENT '優惠券代碼',
-`coupon_get_date` date NOT NULL DEFAULT '2022-12-01' COMMENT '獲得日期',
+`coupon_get_date` date NOT NULL DEFAULT '2022-12-01' COMMENT '獲得日期', 
 `coupon_exp_date` date NOT NULL DEFAULT '2022-12-31' COMMENT '使用期限',
 `coupon_status` tinyint NOT NULL DEFAULT '0' COMMENT '優惠券狀態(0: 未使用,1: 已使用)',
 PRIMARY KEY (`mem_id`, `coupon_id`), 
@@ -160,6 +160,16 @@ KEY `dx_coupon_get_date` (`coupon_get_date`),
 KEY `dx_coupon_exp_date` (`coupon_exp_date`), 
 KEY `dx_coupon_status` (`coupon_status`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='我的優惠券';
+INSERT INTO `tibamefe_cgd103g1`.`my_coupon` ( `mem_id`,`coupon_id`, `coupon_code`, `coupon_get_date`, `coupon_exp_date`,`coupon_status`) VALUES 
+('1001', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
+('1002', '4001', 'koala85', '2022-12-20', '2023-02-20', '0');
+
+
+-- 給佳政參考的php指令
+-- $coupRow["valid"]
+-- $days = 30;
+-- $sql = "SELECT ADDDATE(current_date(), INTERVAL {$coupRow["valid"]} DAY)"
+-- SELECT ADDDATE(current_date(), INTERVAL 30 DAY)
 
 
 -- 周邊商品
@@ -280,7 +290,7 @@ INSERT INTO tibamefe_cgd103g1 . `employee`(`emp_account`,`emp_psw`,`emp_name`,`e
 CREATE TABLE `orders`(
 `ord_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '訂單編號',
 `mem_id` int unsigned NOT NULL COMMENT '會員編號',
-`coupon_id` int unsigned NOT NULL COMMENT '優惠券編號',
+`coupon_id` int unsigned COMMENT '優惠券編號',
 `ord_date` date NOT NULL DEFAULT '2022-12-01' COMMENT '訂單成立日期',
 `ord_sum` int unsigned NOT NULL COMMENT '商城消費總額',
 `ord_disc` int unsigned NOT NULL COMMENT '折扣金額',
@@ -302,9 +312,8 @@ KEY `dx_ord_add` (`ord_add`),
 KEY `dx_ord_ship` (`ord_ship`)
 )ENGINE=InnoDB AUTO_INCREMENT=09001 DEFAULT CHARSET=utf8mb4 COMMENT='商品訂單';
 INSERT INTO tibamefe_cgd103g1 . `orders`(`mem_id`, `coupon_id`, `ord_date`, `ord_sum`, `ord_disc`, `ord_pay`, `ord_person`, `ord_phone`, `ord_add`, `ord_ship`) VALUES
-('09001', '1001', '4001', '2022-10-01', '2400', '360', '2040', '曾韋翰', '0911111111', '桃園市復興路46號1樓', '3'),
-('09002', '1002', '4002', '2022-11-01', '3600', '360', '3240', '徐志摩', '0922222222', '桃園市復興路46號2樓', '3'),
-('09003', '1003', '4003', '2022-12-15', '4800', '240', '4560', '劉以豪', '0933333333', '桃園市復興路46號3樓', '0');
+('1001', '4001', '2022-10-01', '2400', '360', '2040', '曾韋翰', '0911111111', '桃園市復興路46號1樓', '3');
+-- ('1002', '4002', '2022-11-01', '3600', '360', '3240', '徐志摩', '0922222222', '桃園市復興路46號2樓', '3')
 
 
 -- 商品訂單詳情
@@ -320,9 +329,5 @@ KEY `dx_ord_qty` (`ord_qty`),
 KEY `prod_price` (`prod_price`)
 )ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='訂單項目明細';
 INSERT INTO tibamefe_cgd103g1 . `order_list`(`ord_id`, `prod_id`, `ord_qty`, `prod_price`) VALUES
-('09001', '5001', '2', '300'),
-('09001', '5002', '2', '900'),
-('09002', '5003', '2', '1100'),
-('09002', '5004', '2', '700'),
-('09003', '5005', '2', '1000'),
-('09003', '5006', '2', '1400');
+('12019', '5001', '2', '300'), 
+('12019', '5002', '2', '900');

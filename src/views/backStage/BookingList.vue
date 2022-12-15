@@ -8,9 +8,9 @@
         </div>
         <div class="action">
             <!-- 改連結 -->
-            <a href="/bs-booking-edit" target="_blank"
-                ><img src="@/assets/images/icon/FilePlus.svg" alt=""
-            /></a>
+            <router-link to="/bs-booking-dayoff" target="_blank">
+                <img src="@/assets/images/icon/FilePlus.svg" alt=""
+            /></router-link>
             <div class="search">
                 <input type="search" name="" id="" placeholder="搜尋" />
             </div>
@@ -54,7 +54,7 @@
             </p> -->
             <p>{{ list.rsv_date }}</p>
             <p>{{ list.rsv_ppl }}</p>
-            <p>{{ list.rsv_email }}<br />{{ list.mobile }}</p>
+            <p>{{ list.rsv_email }}<br />{{ list.rsv_mobile }}</p>
             <p>{{ list.rsv_status }}</p>
             <p>
                 <router-link
@@ -66,6 +66,25 @@
             </p>
         </div>
     </section>
+    <div class="pagination p1">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': currentPage == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <!--   <a href="#"><li>2</li></a>
+            <a href="#"><li>3</li></a>
+            <a href="#"><li>4</li></a>
+            <a href="#"><li>5</li></a>
+            <a href="#"><li>6</li></a> -->
+            <a @click="nextPage"><li>></li></a>
+        </ul>
+    </div>
 </template>
 
 <script>
@@ -77,19 +96,78 @@ export default {
     data() {
         return {
             booklist: [],
+            totalPage: 0,
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
         };
+    },
+    watch: {
+        $route: function () {
+            console.log(this.$route.query);
+            console.log(this.currentPage);
+            if (!Object.keys(this.$route.query).length) {
+                console.log("空物件");
+                this.currentPage = 1;
+                this.getResvDetail();
+            }
+            this.getResvDetail();
+        },
     },
     methods: {
         getResvDetail() {
             // const productId = this.$route.params.id;
             const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getReservation.php"
+                `http://localhost/cgd103_g1/public/api/getReservation.php?limit=9&page=${this.currentPage}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
                     this.booklist = json.bookList;
+                    this.totalPage = Math.ceil(json.rsvCount / 10);
                 });
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                // console.log(this.currentPage);
+                // console.log(this.totalPage);
+                return;
+            } else {
+                this.currentPage--;
+                this.$router.push({
+                    path: "/bs-booking-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        nextPage() {
+            console.log("QQ");
+
+            if (this.currentPage === this.totalPage) {
+                // console.log(this.currentPage);
+                // console.log(this.totalPage);
+                return;
+            } else {
+                this.currentPage++;
+                this.$router.push({
+                    path: "/bs-booking-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.$router.push({
+                path: "/bs-booking-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                },
+            });
         },
     },
     created() {
@@ -148,7 +226,7 @@ export default {
         justify-items: center;
         align-items: center;
         margin: 10px 0;
-        padding-bottom: 10px;
+        padding: 10px 0;
         border-bottom: solid 1px $lightgreen;
         border-radius: 5px;
 
@@ -167,5 +245,123 @@ export default {
             }
         }
     }
+}
+a {
+    text-decoration: none;
+}
+
+p,
+li,
+a {
+    font-size: 14px;
+}
+
+/* GRID */
+
+.twelve {
+    width: 100%;
+}
+.eleven {
+    width: 91.53%;
+}
+.ten {
+    width: 83.06%;
+}
+.nine {
+    width: 74.6%;
+}
+.eight {
+    width: 66.13%;
+}
+.seven {
+    width: 57.66%;
+}
+.six {
+    width: 49.2%;
+}
+.five {
+    width: 40.73%;
+}
+.four {
+    width: 32.26%;
+}
+.three {
+    width: 23.8%;
+}
+.two {
+    width: 15.33%;
+}
+.one {
+    width: 6.866%;
+}
+
+/* COLUMNS */
+
+.col {
+    display: block;
+    float: left;
+    margin: 1% 0 1% 1.6%;
+}
+
+.col:first-of-type {
+    margin-left: 0;
+}
+
+.container {
+    width: 100%;
+    max-width: 940px;
+    margin: 0 auto;
+    position: relative;
+    text-align: center;
+}
+
+/* CLEARFIX */
+
+.cf:before,
+.cf:after {
+    content: " ";
+    display: table;
+}
+
+.cf:after {
+    clear: both;
+}
+
+.cf {
+    *zoom: 1;
+}
+
+/* GENERAL STYLES */
+
+.pagination {
+    padding: 30px 0;
+}
+
+.pagination ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.pagination a {
+    display: inline-block;
+    padding: 10px 18px;
+    color: #222;
+}
+
+/* ONE */
+
+.p1 a {
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    padding: 0;
+    text-align: center;
+}
+
+.p1 a.is-active {
+    background-color: #2ecc71;
+    border-radius: 100%;
+    color: #fff;
 }
 </style>
