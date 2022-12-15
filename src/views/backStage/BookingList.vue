@@ -34,14 +34,16 @@
         <div
             class="bs-list"
             v-for="list in booklist"
-            :key="list.id"
+            :key="list.rsv_id"
             :style="{
                 backgroundColor:
-                    list.name === null ? 'rgba(154, 195, 199, 0.2)' : '#D8D8D8',
+                    list.rsv_name === `koala+`
+                        ? 'rgba(154, 195, 199, 0.2)'
+                        : '#D8D8D8',
             }"
         >
-            <p>{{ list.num }}</p>
-            <p>{{ list.name }}</p>
+            <p>{{ list.rsv_id }}</p>
+            <p>{{ list.rsv_name }}</p>
             <!-- <p>
                 <router-link
                     :to="`/bs-support-info/${list.number}`"
@@ -50,12 +52,15 @@
                     {{ list.number }}
                 </router-link>
             </p> -->
-            <p>{{ list.date }}</p>
-            <p>{{ list.ppl }}</p>
-            <p>{{ list.email }}<br />{{ list.mobile }}</p>
-            <p>{{ list.status }}</p>
+            <p>{{ list.rsv_date }}</p>
+            <p>{{ list.rsv_ppl }}</p>
+            <p>{{ list.rsv_email }}<br />{{ list.mobile }}</p>
+            <p>{{ list.rsv_status }}</p>
             <p>
-                <router-link :to="`/bs-booking-edit`" target="_blank">
+                <router-link
+                    :to="`/bs-booking-edit/${list.rsv_id}`"
+                    target="_blank"
+                >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
@@ -71,54 +76,24 @@ export default {
     },
     data() {
         return {
-            booklist: [
-                {
-                    num: "B221122",
-                    name: "Sara",
-                    date: "2022-12-01",
-                    ppl: 5,
-                    email: "sara168@gmail.com",
-                    mobile: "0988168168",
-                    status: "已預約",
-                },
-                {
-                    num: "B221230",
-                    name: "Amy",
-                    date: "2022-12-30",
-                    ppl: 5,
-                    email: "amy888@gmail.com",
-                    mobile: "09884433552",
-                    status: "已預約",
-                },
-                {
-                    num: "B221231",
-                    name: null,
-                    date: "2022-12-31",
-                    ppl: 0,
-                    email: "",
-                    mobile: "",
-                    status: "休館",
-                },
-                {
-                    num: "B230101",
-                    name: null,
-                    date: "2023-01-01",
-                    ppl: 0,
-                    email: "",
-                    mobile: "",
-                    status: "休館",
-                },
-                {
-                    num: "B230102",
-                    name: "Handsome",
-                    date: "2023-01-02",
-                    ppl: 6,
-                    email: "handsome888@gmail.com",
-                    mobile: "0988666666",
-                    status: "已預約",
-                },
-            ],
+            booklist: [],
         };
+    },
+    methods: {
+        getResvDetail() {
+            // const productId = this.$route.params.id;
+            const apiURL = new URL(
+                "http://localhost/cgd103_g1/public/api/getReservation.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.booklist = json.bookList;
+                });
+        },
+    },
+    created() {
+        this.getResvDetail();
     },
 };
 </script>

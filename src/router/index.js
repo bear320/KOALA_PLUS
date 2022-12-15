@@ -174,7 +174,7 @@ const routes = [
         component: () => import("@/views/backStage/BookingDayOff.vue"),
     },
     {
-        path: "/bs-booking-edit",
+        path: "/bs-booking-edit/:id",
         name: "bookingEdit",
         // component: BookingEdit,
         component: () => import("@/views/backStage/BookingEdit.vue"),
