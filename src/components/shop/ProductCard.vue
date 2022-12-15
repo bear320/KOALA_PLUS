@@ -51,7 +51,7 @@ export default {
         },
         scrollToProduct() {
             window.scrollTo({
-                top: 200,
+                top: 0,
                 behavior: "instant",
             });
         },

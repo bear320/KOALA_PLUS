@@ -96,12 +96,12 @@
             </Row>
             <div class="row">
                 <product-card
-                    v-for="(item, index) in relProd"
-                    :key="item.id"
-                    :proImg="item.images[0]"
-                    :proName="item.name"
-                    :proPrice="item.price"
-                    :proId="item.id"
+                    v-for="(item, index) in relProducts"
+                    :key="item.prod_id"
+                    :proImg="item.prod_img1"
+                    :proName="item.prod_name"
+                    :proPrice="item.prod_price"
+                    :proId="item.prod_id"
                     :col="'col-xl-3 col-lg-3 col-md-6 col-6'"
                 ></product-card>
             </div>
@@ -174,10 +174,12 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json;
-                    this.images = json.images.filter((item) => {
+                    this.source = json.prod_detail;
+                    this.images = json.prod_detail.images.filter((item) => {
                         return item !== null;
                     });
+                    this.relProducts = json.relProd;
+                    console.log(this.relProducts);
                 });
         },
         /* getRelProduct(category) {
