@@ -24,6 +24,6 @@ foreach ($prodRows as $row) {
         "ps" => $row['rsv_ps'],
     );
 }
-echo json_encode(array("notBookDate" => $notBookDate));
+echo json_encode(array("notBookDate" => $notBookDate,"bookList"=>$prodRows));
 // echo json_encode($prodRows);            
 ?>

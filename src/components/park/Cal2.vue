@@ -163,10 +163,10 @@ export default {
     },
     watch: {
     notBookDate: {
-        handler: function() {
+       /*  handler: function() {
             this.getResvDetail();
         },
-        deep: true
+        deep: true */
     }
 },
 

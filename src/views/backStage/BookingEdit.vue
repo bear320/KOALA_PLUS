@@ -13,18 +13,33 @@
         class="wrapper function-wrapper"
         action=""
         enctype="multipart/form-data"
+        method="post"
+        data-form-storage="true"
+        id="bookingEditForm"
     >
         <div class="line">
             <div class="cell">
                 <label for="rsv_date">預約日期：</label>
-                <input type="date" name="rsv_date" id="rsv_date" required />
+                <input
+                    type="date"
+                    name="rsv_date"
+                    id="rsv_date"
+                    v-model="temp.rsv_date"
+                    required
+                />
             </div>
 
             <div class="cell">
                 <label for="rsv_ppl">人數：</label>
-                <select type="number" name="rsv_date" id="rsv_date" required>
+                <select
+                    type="number"
+                    name="rsv_ppl"
+                    id="rsv_ppl"
+                    v-model="temp.rsv_ppl"
+                    required
+                >
                     <option disabled value="">選擇人數</option>
-                    <option value="1">1</option>
+                    <!--    <option value="1">1</option>
                     <option value="2">2</option>
                     <option value="3">3</option>
                     <option value="4">4</option>
@@ -43,7 +58,8 @@
                     <option value="17">17</option>
                     <option value="18">18</option>
                     <option value="19">19</option>
-                    <option value="20">20</option>
+                    <option value="20">20</option> -->
+                    <option v-for="i in 20" :key="i" :value="i">{{ i }}</option>
                 </select>
             </div>
         </div>
@@ -54,6 +70,7 @@
                     type="phone"
                     name="rsv_mobile"
                     id="rsv_mobile"
+                    v-model="temp.rsv_mobile"
                     required
                 />
             </div>
@@ -64,6 +81,7 @@
                     name="rsv_id"
                     id="rsv_id"
                     disabled
+                    v-model="temp.rsv_id"
                     required
                 />
             </div>
@@ -71,7 +89,13 @@
         <div class="line">
             <div class="cell">
                 <label for="rsv_email">Email：</label>
-                <input type="email" name="rsv_email" id="rsv_email" required />
+                <input
+                    type="email"
+                    name="rsv_email"
+                    id="rsv_email"
+                    v-model="temp.rsv_email"
+                    required
+                />
             </div>
 
             <div class="cell">
@@ -80,11 +104,11 @@
                     type="text"
                     name="rsv_status"
                     id="rsv_status"
-                    v-model="temp.sex"
+                    v-model="temp.rsv_status"
                     required
                 >
-                    <option value="0">休館</option>
-                    <option value="1">已預約</option>
+                    <option value="休館">休館</option>
+                    <option value="已預約">已預約</option>
                 </select>
             </div>
         </div>
@@ -97,14 +121,14 @@
                     cols="10"
                     rows="5"
                     placeholder="請輸入備註內容"
-                    v-model="temp.desc"
+                    v-model="temp.rsv_ps"
                     required
                 ></textarea>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" id="btnInsert" @click.prevent="next">
                     <img src="@/assets/images/icon/confirm.svg" alt="" />確認
                 </button>
             </div>
@@ -121,10 +145,46 @@ export default {
         Header,
         ImageUpload,
     },
+    props: ["msg", "callback"],
     data() {
         return {
-            temp: [],
+            temp: {},
         };
+    },
+    created() {
+        console.log(this.$route.params.id);
+        fetch(
+            `http://localhost/cgd103_g1/public/api/getResvPage.php?bookId=${this.$route.params.id}`
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                this.temp = json[0];
+                console.log(this.temp);
+            });
+    },
+    methods: {
+        next() {
+            const payload = {
+                rsv_id: this.temp.rsv_id,
+                rsv_date: this.temp.rsv_date,
+                rsv_ppl: this.temp.rsv_ppl,
+                rsv_name: this.temp.rsv_name,
+                rsv_mobile: this.temp.rsv_mobile,
+                rsv_email: this.temp.rsv_email,
+                rsv_status: this.temp.rsv_status,
+                rsv_ps: this.temp.rsv_ps,
+            };
+            // console.log(payload);
+            fetch("http://localhost/cgd103_g1/public/api/resvPage_insert.php", {
+                method: "POST",
+                body: new URLSearchParams(payload),
+            })
+                .then((res) => res.text())
+                .then((result) => {
+                    console.log(result);
+                    // this.callback();
+                });
+        },
     },
 };
 </script>
