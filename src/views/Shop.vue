@@ -131,7 +131,7 @@ export default {
                 { title: "玩具/絨毛娃娃", category: "doll" },
                 { title: "服飾", category: "apparel" },
             ],
-            curPage: +this.$route.query.page,
+            curPage: +this.$route.query.page ? +this.$route.query.page : 1,
             pageTotal: 0,
             searchText: "",
             lowerLimit: "",
@@ -260,19 +260,37 @@ export default {
             if (this.curPage <= 1) return;
             this.curPage -= 1;
             this.changePage();
+            window.scrollTo({
+                top: 500,
+                behavior: "instant",
+            });
         },
         nextPage() {
             if (this.curPage >= this.pageTotal) return;
             this.curPage += 1;
             this.changePage();
+            window.scrollTo({
+                top: 500,
+                behavior: "instant",
+            });
         },
         toFirstPage() {
+            if (this.curPage <= 1) return;
             this.curPage = 1;
             this.changePage();
+            window.scrollTo({
+                top: 500,
+                behavior: "instant",
+            });
         },
         toLastPage() {
+            if (this.curPage >= this.pageTotal) return;
             this.curPage = this.pageTotal;
             this.changePage();
+            window.scrollTo({
+                top: 500,
+                behavior: "instant",
+            });
         },
         changePage() {
             const queryParam = { ...this.$route.query };
