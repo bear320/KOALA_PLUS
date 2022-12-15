@@ -4,8 +4,15 @@
         <div class="wrapper">
             <div class="breadcrumb">
                 <router-link to="/home">Home</router-link>
-                <router-link to="/support">資助認養</router-link>
-                <router-link :to="`/support/`"> QQ </router-link>
+                <router-link to="/shop">周邊商城</router-link>
+                <router-link
+                    :to="`/shop?category=${source.prod_category}&order=prod_name&limit=9&page=1`"
+                >
+                    {{ breadCategory }}
+                </router-link>
+                <router-link :to="`/support/`">
+                    {{ source.prod_name }}
+                </router-link>
             </div>
             <Row>
                 <Col span="24" :xl="12" :md="24">
@@ -15,9 +22,9 @@
                 </Col>
                 <Col span="24" :xl="12" :md="24">
                     <div class="text">
-                        <h1 class="product-name">{{ source.name }}</h1>
+                        <h1 class="product-name">{{ source.prod_name }}</h1>
                         <p class="product-description">
-                            {{ source.description }}
+                            {{ source.prod_info }}
                         </p>
                         <div class="product-additional">
                             <p class="additional-info">
@@ -118,25 +125,35 @@ export default {
     },
     data() {
         return {
-            images: [
-                "banner1.jpg",
-                "banner2.jpg",
-                "banner3.jpg",
-                "drawing1.png",
-            ],
+            images: [],
             source: [],
             relProducts: [],
             quantity: 1,
         };
     },
     computed: {
+        breadCategory() {
+            switch (this.source.prod_category) {
+                case "daily":
+                    return "生活小物";
+                    break;
+                case "apparel":
+                    return "服飾";
+                    break;
+                case "doll":
+                    return "玩具/絨毛娃娃";
+                    break;
+                default:
+                    break;
+            }
+        },
         relProd() {
             return this.relProducts.filter((prod) => {
                 return prod.id !== this.source.id;
             });
         },
         sumTotal() {
-            return this.source.price * this.quantity;
+            return this.source.prod_price * this.quantity;
         },
         coinTotal() {
             return this.sumTotal * 0.1;
@@ -152,18 +169,18 @@ export default {
         getProductDetail() {
             const productId = this.$route.params.id;
             const apiURL = new URL(
-                `https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours/${productId}`
+                `http://localhost/cgd103_g1/public/api/getProductDetail.php?proId=${productId}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json.dtat.tour;
-                })
-                .then(() => {
-                    this.getRelProduct(this.source.category);
+                    this.source = json;
+                    this.images = json.images.filter((item) => {
+                        return item !== null;
+                    });
                 });
         },
-        getRelProduct(category) {
+        /* getRelProduct(category) {
             fetch(
                 `https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours?category=${category}&sort=name`
             )
@@ -171,7 +188,7 @@ export default {
                 .then((json) => {
                     this.relProducts = json.dtat.tours;
                 });
-        },
+        }, */
         changeQuantity(operator) {
             if (operator === "-") {
                 this.quantity > 1 ? (this.quantity -= 1) : this.quantity;
@@ -212,7 +229,7 @@ export default {
     },
     mounted() {
         window.scrollTo({
-            top: 200,
+            top: 0,
             behavior: "instant",
         });
     },

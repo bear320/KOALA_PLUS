@@ -5,7 +5,7 @@
             <div ref="mainImage" class="main-image">
                 <img
                     v-for="(imgPath, index) in imgs"
-                    :src="require(`@/assets/images/${imgPath}`)"
+                    :src="require(`@/assets/images/shop/${imgPath}`)"
                     :key="index"
                 />
             </div>
@@ -23,7 +23,7 @@
         <div class="sub-images">
             <img
                 v-for="(imgPath, index) in imgs"
-                :src="require(`@/assets/images/${imgPath}`)"
+                :src="require(`@/assets/images/shop/${imgPath}`)"
                 :key="index"
                 @click="changeImage(index)"
             />
