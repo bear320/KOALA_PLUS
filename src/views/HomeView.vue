@@ -138,7 +138,7 @@ export default {
     data() {
         return {
             inMove: false,
-            inMoveDelay: 2000,
+            inMoveDelay: 3000,
             activeSection: 0,
             offsets: [],
             touchStartY: 0,
