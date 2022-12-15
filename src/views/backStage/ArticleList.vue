@@ -84,28 +84,56 @@ export default {
     },
     data() {
         return {
-            articles: [
-                {
-                    isMarked: true,
-                    img: require("@/assets/images/about/3.jpg"),
-                    title: "一隻無尾熊寶寶出生了",
-                    tag: "#最新消息",
-                    date: "2022/12/25",
-                    content:
-                        "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為......",
-                },
-                {
-                    isMark: false,
-                    img: require("@/assets/images/about/8.jpg"),
-                    title: "園區公休通知",
-                    tag: "#園區消息",
-                    date: "2022/12/13",
-                    content:
-                        "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日，造成不便盡請見諒。",
-                },
-            ],
-            marked: false,
+            source: [],
+            // articles: [
+            //     {
+            //         isMarked: true,
+            //         img: require("@/assets/images/about/3.jpg"),
+            //         title: "一隻無尾熊寶寶出生了",
+            //         tag: "#最新消息",
+            //         date: "2022/12/25",
+            //         content:
+            //             "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為......",
+            //     },
+            //     {
+            //         isMark: false,
+            //         img: require("@/assets/images/about/8.jpg"),
+            //         title: "園區公休通知",
+            //         tag: "#園區消息",
+            //         date: "2022/12/13",
+            //         content:
+            //             "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日，造成不便盡請見諒。",
+            //     },
+            // ],
         };
+    },
+    methods: {
+        getArticleList() {
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1_dev/public/api/getArticleList.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.map((item) => {
+                        return {
+                            news_id: +item.news_id,
+                            isMark: +item.news_star,
+                            img: +item.news_img,
+                            title: +item.news_title,
+                            tag: +item.news_category,
+                            date: +item.news_date,
+                            content: +item.news_content,
+                        };
+                    });
+                })
+                .catch((error) => {
+                    alert(error);
+                });
+        },
+    },
+    created() {
+        this.getArticleList();
     },
 };
 </script>
