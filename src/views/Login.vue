@@ -66,7 +66,7 @@
                             <h2>忘記密碼</h2>
                             <form @submit.prevent="login">
                                 <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
-                                <button class="btn_login" type="submit" @click="forget_password()">驗證信箱</button>
+                                <button class="btn_login" type="submit" @click="sendEmail()">驗證信箱</button>
                             </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
@@ -79,9 +79,11 @@
 
 <script>
 import Header from "@/components/header.vue";
+import emailjs from 'emailjs-com';
 export default {
     components: {
         Header,
+        emailjs,
     },
     data () {
       return {
@@ -199,6 +201,21 @@ export default {
         outEye_3:function() {
             this.seen_three = !this.seen_three;
         },
+        
+        sendEmail() {
+            const templateParams = {
+                user: this.form.name,
+                userMail:this.form.email,
+                emailContent: "收件內容寫在這邊"
+            };
+
+            emailjs.send("gmail"/*service_id*/, template_21xikzb, templateParams, X1x5cmen7BlWhZ2yb)
+            .then(() => {
+                console.log("成功");
+            }, (error) => {
+                console.log("失敗", error);
+            });
+        }
     },
 };
 </script>
