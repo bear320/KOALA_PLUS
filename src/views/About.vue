@@ -58,15 +58,24 @@
         <section>
             <h2 class="title">News</h2>
             <div class="wrapper articles">
-                <select name="category" id="articlesCategory">
-                    <option value="all">所有文章</option>
-                    <option value="news">最新消息</option>
-                    <option value="parkinfo">園區資訊</option>
-                    <option value="moneyinfo">資金運用</option>
+                <p>選了啥:{{ selectedCategory }}</p>
+                <select
+                    name="category"
+                    id="artclesCategory"
+                    v-model="selectedCategory"
+                >
+                    <option value="undefined" selected>所有文章</option>
+                    <option
+                        :value="article.news_category"
+                        v-for="article in articles"
+                        :key="article"
+                    >
+                        {{ article.news_category }}
+                    </option>
                 </select>
                 <div
                     class="oneArticle"
-                    v-for="article in articles"
+                    v-for="(article, idx) in articles"
                     :key="article"
                 >
                     <div
@@ -79,7 +88,12 @@
                         }"
                     ></div>
                     <div class="article">
-                        <a class="article-title">{{ article.news_title }}</a>
+                        <button
+                            @click="openLightbox(idx)"
+                            class="article-title"
+                        >
+                            {{ article.news_title }}
+                        </button>
                         <div class="tag">
                             <p class="article-tag">
                                 {{ article.news_category }}
@@ -90,7 +104,7 @@
                             {{ article.news_content }}
                         </div>
                     </div>
-                    <lightbox>
+                    <lightbox ref="lightbox">
                         <template #img>
                             <img
                                 :src="
@@ -217,6 +231,7 @@ export default {
                 },
             ],
             articles: [],
+            selectedCategory: undefined,
         };
     },
     methods: {
@@ -228,9 +243,18 @@ export default {
                     console.log(this.articles);
                 });
         },
+        openLightbox(idx) {
+            this.$refs.lightbox[idx].isShow = true;
+        },
     },
     created() {
         this.getArticleList();
+    },
+    watch: {
+        selectedCategory: function (value) {
+            let oneArticle = document.querySelector("oneArticle");
+            let category = document.getElementById("artclesCategory").value;
+        },
     },
 };
 </script>
@@ -393,6 +417,14 @@ html {
                 .article-title {
                     font-size: $h4;
                     @include rwd-h4;
+                    cursor: pointer;
+                    font-weight: 700;
+                    background-color: transparent;
+                    border: 0;
+                    color: $btn-color;
+                    &:hover {
+                        color: $green;
+                    }
                 }
                 .tag {
                     display: flex;

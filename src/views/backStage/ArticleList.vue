@@ -6,11 +6,19 @@
             <a href="/bs-article-edit" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></a>
-            <select name="category" id="articlesCategory">
-                <option value="all">所有文章</option>
-                <option value="news">最新消息</option>
-                <option value="parkinfo">園區資訊</option>
-                <option value="moneyinfo">資金運用</option>
+            <select
+                name="category"
+                id="artclesCategory"
+                v-model="selectedCategory"
+            >
+                <option value="undefined" selected>所有文章</option>
+                <option
+                    :value="article.news_category"
+                    v-for="article in articles"
+                    :key="article"
+                >
+                    {{ article.news_category }}
+                </option>
             </select>
         </div>
         <section>
@@ -33,7 +41,7 @@
             >
                 <div
                     :class="`star star${index}`"
-                    @click="article.isMarked = !article.isMarked"
+                    @click="article.news_star = !article.news_star"
                 >
                     <svg
                         version="1.1"
@@ -49,7 +57,7 @@
                             style="fill: currentColor,stoke: black;"
                             :class="[
                                 `${index}`,
-                                { starmark: article.isMarked },
+                                { starmark: article.news_star },
                             ]"
                             d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
 	c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
@@ -135,6 +143,7 @@ html article {
         .star {
             width: 5%;
             cursor: pointer;
+            user-select: none;
 
             svg {
                 width: 25px;

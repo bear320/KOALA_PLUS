@@ -19,7 +19,6 @@
                 </div>
             </div>
         </div>
-        <a @click="isShow = true">閱讀全文</a>
     </div>
 </template>
 <style lang="scss" scoped>
@@ -34,11 +33,11 @@ button {
 
 .modal-mask {
     position: fixed;
-    z-index: 10;
+    z-index: 990;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     display: table;
     background-color: rgba(56, 57, 56, 0.5);
 }
