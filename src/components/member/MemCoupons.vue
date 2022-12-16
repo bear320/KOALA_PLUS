@@ -13,10 +13,12 @@
                             <th>優惠券名稱</th>
                             <th class="coupon_id">優惠券代碼</th>
                             <th class="coupon_date">
-                                優惠券獲得日期<Icon
-                                    type="ios-arrow-down"
-                                    size="20"
-                                />
+                                優惠券獲得日期
+                                <div class="iconlayout" @click="iconchange">
+                                    <Icon type="ios-arrow-down" size="20" />
+                                    <Icon type="ios-arrow-up" size="20" />
+                                </div>
+
                                 <!-- color="#337a7d" -->
                             </th>
                             <th>
@@ -24,6 +26,7 @@
                                     type="ios-arrow-down"
                                     size="20"
                                 />
+                                <Icon type="ios-arrow-up" size="20" />
                                 <!-- color="#337a7d" -->
                             </th>
                         </tr>
@@ -49,6 +52,7 @@ export default {
     data() {
         return {
             memindexs: [],
+
             couponsList: [
                 {
                     coupon_name: "周邊商城6折優惠券",
@@ -79,7 +83,7 @@ export default {
     },
     created() {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
-            .then((res) => res.json())
+            // .then((res) => res.json())
             .then((json) => {
                 // console.log(json);
                 this.memindexs = json;
