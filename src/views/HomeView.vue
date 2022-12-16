@@ -104,17 +104,22 @@
                     <div
                         class="article-img"
                         :style="{
-                            backgroundImage: 'url(' + article.img + ')',
+                            backgroundImage:
+                                'url(' +
+                                require(`@/assets/images/about/${article.news_img}`) +
+                                ')',
                         }"
                     ></div>
                     <div class="font">
-                        <p class="article-title">{{ article.title }}</p>
+                        <p class="article-title">{{ article.news_title }}</p>
                         <div class="date">
-                            <p class="article-tag">{{ article.tag }}</p>
-                            <p class="article-date">{{ article.date }}</p>
+                            <p class="article-tag">
+                                {{ article.news_category }}
+                            </p>
+                            <p class="article-date">{{ article.news_date }}</p>
                         </div>
                         <p class="article-content">
-                            {{ article.content }}
+                            {{ article.news_content }}
                         </p>
                     </div>
                 </a>
@@ -138,35 +143,11 @@ export default {
     data() {
         return {
             inMove: false,
-            inMoveDelay: 2200,
+            inMoveDelay: 2000,
             activeSection: 0,
             offsets: [],
             touchStartY: 0,
-            articles: [
-                {
-                    img: require("../assets/images/about/3.jpg"),
-                    title: "一隻無尾熊寶寶出生了",
-                    tag: "#最新消息",
-                    date: "2022/12/25",
-                    content:
-                        "每年9到11月是無尾熊開始繁殖的交配季節，當無尾熊歲時就開始邁入性成熟年齡、......",
-                },
-                {
-                    img: require("../assets/images/about/8.jpg"),
-                    title: "園區公休通知",
-                    tag: "#園區消息",
-                    date: "2022/12/13",
-                    content:
-                        "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日......",
-                },
-                {
-                    img: require("../assets/images/about/6.jpg"),
-                    title: "寫扣好花錢呢",
-                    tag: "#資金運用",
-                    date: "2022/12/07",
-                    content: "睡不飽就想吃東西，一直吃一直窮一直胖......",
-                },
-            ],
+            articles: [],
         };
     },
     mounted() {
@@ -184,6 +165,15 @@ export default {
         });
     },
     methods: {
+        getArticleList() {
+            fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
+                .then((res) => res.json())
+                .then((json) => {
+                    this.articles = json;
+                    console.log(this.articles);
+                });
+        },
+
         intscence() {
             var scene = document.getElementById("scene");
             var parallaxInstance = new Parallax(scene, {
@@ -283,12 +273,9 @@ export default {
             passive: false,
         });
     },
-    // beforeRouteLeave(to, from, next) {
-    //     if (this.scrolled) {
-    //         window.scrollTo(0, 0);
-    //     }
-    //     next();
-    // },
+    created() {
+        this.getArticleList();
+    },
 };
 </script>
 
@@ -784,6 +771,10 @@ body {
                 .article-content {
                     width: 90%;
                     color: $font-color;
+                    display: -webkit-inline-box;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    -webkit-line-clamp: 2;
                 }
             }
         }
