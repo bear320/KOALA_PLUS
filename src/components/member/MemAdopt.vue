@@ -20,14 +20,22 @@
                     </thead>
                     <tbody>
                         <tr
-                            v-for="(item, index) in couponsList"
-                            :key="item.sup_id"
+                            v-for="(couponsLists, index) in couponsLists"
+                            :key="index"
                         >
-                            <td class="sup_id">{{ item.sup_id }}</td>
-                            <td class="sup_date">{{ item.sup_date }}</td>
-                            <td class="sup_plan">{{ item.sup_plan }}</td>
-                            <td class="koala_name">{{ item.koala_name }}</td>
-                            <td class="sup_price">{{ item.sup_price }}</td>
+                            <td class="sup_id">{{ couponsLists.sup_id }}</td>
+                            <td class="sup_date">
+                                {{ couponsLists.sup_date }}
+                            </td>
+                            <td class="sup_plan">
+                                {{ couponsLists.sup_plan }}
+                            </td>
+                            <td class="koala_name">
+                                {{ couponsLists.koala_name }}
+                            </td>
+                            <td class="sup_price">
+                                {{ couponsLists.sup_price }}
+                            </td>
                             <td>
                                 <Icon
                                     type="md-download"
@@ -80,35 +88,35 @@ export default {
             tempDate: "",
             certificate_Index: 0,
             memindexs: [],
-            couponsList: [
-                {
-                    sup_id: "S00001",
-                    sup_date: "2022/11/15",
-                    sup_plan: "認養",
-                    koala_name: "jennykoala",
-                    sup_price: "$1000",
-                },
-                {
-                    sup_id: "S00002",
-                    sup_date: "2022/12/01",
-                    sup_plan: "資助",
-                    koala_name: "",
-                    sup_price: "$300",
-                },
-                {
-                    sup_id: "S00003",
-                    sup_date: "2022/12/21",
-                    sup_plan: "資助",
-                    koala_name: "",
-                    sup_price: "$300",
-                },
-                {
-                    sup_id: "S00004",
-                    sup_date: "2022/11/19",
-                    sup_plan: "認養",
-                    koala_name: "Duffy",
-                    sup_price: "$1000",
-                },
+            couponsLists: [
+                // {
+                //     sup_id: "S00001",
+                //     sup_date: "2022/11/15",
+                //     sup_plan: "認養",
+                //     koala_name: "jennykoala",
+                //     sup_price: "$1000",
+                // },
+                // {
+                //     sup_id: "S00002",
+                //     sup_date: "2022/12/01",
+                //     sup_plan: "資助",
+                //     koala_name: "",
+                //     sup_price: "$300",
+                // },
+                // {
+                //     sup_id: "S00003",
+                //     sup_date: "2022/12/21",
+                //     sup_plan: "資助",
+                //     koala_name: "",
+                //     sup_price: "$300",
+                // },
+                // {
+                //     sup_id: "S00004",
+                //     sup_date: "2022/11/19",
+                //     sup_plan: "認養",
+                //     koala_name: "Duffy",
+                //     sup_price: "$1000",
+                // },
             ],
         };
     },
@@ -138,12 +146,20 @@ export default {
             });
         },
     },
+
     created() {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json);
                 this.memindexs = json;
+            });
+        fetch(
+            "http://localhost/cgd103_g1/public/api/postmemAdopt.php?mem_id=1001"
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.couponsLists = json;
             });
     },
 };
