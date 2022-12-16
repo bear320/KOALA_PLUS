@@ -56,17 +56,17 @@
                                     <input class="content_active_login_move4" type="password" placeholder="Password" v-model="login_password" required v-else/>
                                     <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3()" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye" />
                                 </div>
-                                <button class="btn_login" type="submit" @click="login()">登錄會員</button><br />
+                                <button class="btn_login" type="submit" @click="login">登錄會員</button><br />
                             </form>
-                            <button class="btn_login" @click="forget_password()">忘記密碼</button>
+                            <button class="btn_login" @click="forget_password">忘記密碼</button>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>忘記密碼</h2>
-                            <form @submit.prevent="login">
+                            <form>
                                 <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
-                                <button class="btn_login" type="submit" @click="sendEmail()">驗證信箱</button>
+                                <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
@@ -100,6 +100,7 @@ export default {
         sign_up_password: "",
         sign_up_password_comfirm: "",
         login_password: "",
+        account: "",
       }
     },
     methods: {
@@ -202,14 +203,17 @@ export default {
             this.seen_three = !this.seen_three;
         },
         
-        sendEmail() {
+        sendEmail(e) {
+            e.preventDefault();
+            
             const templateParams = {
-                user: this.form.name,
-                userMail:this.form.email,
+                user: 'Charmy',
+                userMail:'charmytseng0118@gmail.com',
                 emailContent: "收件內容寫在這邊"
             };
 
-            emailjs.send("gmail"/*service_id*/, template_21xikzb, templateParams, X1x5cmen7BlWhZ2yb)
+            // emailjs.send("servise id", 'template_21xikzb', templateParams, 'X1x5cmen7BlWhZ2yb')
+            emailjs.send("gmail", 'template_21xikzb', this.templateParams, 'X1x5cmen7BlWhZ2yb')
             .then(() => {
                 console.log("成功");
             }, (error) => {
