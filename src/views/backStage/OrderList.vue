@@ -68,9 +68,9 @@
                             <p class="quantity">
                                 {{ orderlist.ord_qty }}
                             </p>
-                            <!-- <p class="sumtotal"> {{orderlist.prod_price * orderlist.ord_qty}}元</p> -->
                             <p class="sumtotal">
                                 {{ orderlist.prod_price * orderlist.ord_qty }}
+                                元
                             </p>
                         </div>
 
@@ -105,7 +105,9 @@
                             </div>
                             <div class="right">
                                 <p>折扣：{{ item.ord_disc }} 元</p>
-                                <p>總價：{{ item.ord_sum }} 元</p>
+                                <p>
+                                    總價：{{ item.ord_sum - item.ord_disc }} 元
+                                </p>
                             </div>
                         </div>
                     </div>
