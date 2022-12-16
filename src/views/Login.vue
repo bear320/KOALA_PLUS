@@ -10,7 +10,7 @@
                                 <p>尚未擁有會員？</p>
                                 <button
                                     class="main_block_btn_sign_up"
-                                    @click="sign_up()"
+                                    @click="sign_up"
                                 >
                                     註冊會員
                                 </button>
@@ -21,13 +21,13 @@
                                 <p>已經擁有會員？</p>
                                 <button
                                     class="main_block_btn_login"
-                                    @click="login()"
+                                    @click="login"
                                 >
                                     登入會員</button
                                 ><br />
                                 <button
                                     class="main_block_btn_login"
-                                    @click="forget_password()"
+                                    @click="forget_password"
                                 >
                                     忘記密碼
                                 </button>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="content_active">
                         <div class="content_active_sign_up">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <!-- <a href="#" @click="login_sign_up">X</a> -->
                             <h2>建立帳號</h2>
                             <form @submit.prevent="login">
                                 <div>
@@ -84,7 +84,7 @@
                                     />
                                     <img
                                         :src="seen_one ? seenImg : unseenImg"
-                                        @click="changeType_1()"
+                                        @click="changeType_1"
                                         v-on:mouseover="hoverEye_1"
                                         v-on:mouseout="outEye_1"
                                         class="sign_up_icon_eye"
@@ -111,7 +111,7 @@
                                     />
                                     <img
                                         :src="seen_two ? seenImg : unseenImg"
-                                        @click="changeType_2()"
+                                        @click="changeType_2"
                                         v-on:mouseover="hoverEye_2"
                                         v-on:mouseout="outEye_2"
                                         class="sign_up_icon_eye"
@@ -121,7 +121,7 @@
                                     <button
                                         class="btn_sign_up"
                                         type="submit"
-                                        @click="sign_up()"
+                                        @click="sign_up"
                                     >
                                         註冊會員
                                     </button>
@@ -129,7 +129,7 @@
                             </form>
                         </div>
                         <div class="content_active_login">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <!-- <a href="#" @click="login_sign_up">X</a> -->
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
                                 <div>
@@ -162,23 +162,23 @@
                                     />
                                     <img
                                         :src="seen_three ? seenImg : unseenImg"
-                                        @click="changeType_3()"
+                                        @click="changeType_3"
                                         v-on:mouseover="hoverEye_3"
                                         v-on:mouseout="outEye_3"
                                         class="login_icon_eye"
                                     />
                                 </div>
-                                <button class="btn_login" type="submit" @click="login()">登錄會員</button><br />
+                                <button class="btn_login" type="submit" @click="login">登錄會員</button><br />
                             </form>
-                            <button class="btn_login" @click="forget_password()">忘記密碼</button>
+                            <button class="btn_login" @click="forget_password">忘記密碼</button>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="content_active_forget_password">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <!-- <a href="#" @click="login_sign_up">X</a> -->
                             <h2>忘記密碼</h2>
-                            <form @submit.prevent="login">
-                                <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
-                                <button class="btn_login" type="submit" @click="sendEmail()">驗證信箱</button>
+                            <form>
+                                <div><p>帳號/信箱</p><input id="aaa" type="text" placeholder="Account" v-model="forget_password_account" required/></div>
+                                <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
                             <div>
                                 <img
@@ -217,7 +217,12 @@ export default {
         sign_up_password: "",
         sign_up_password_comfirm: "",
         login_password: "",
+
+        forget_password_account: "",
       }
+    },
+    mounted() {
+        this.login();
     },
     methods: {
         login() {
@@ -353,15 +358,37 @@ export default {
         outEye_3: function () {
             this.seen_three = !this.seen_three;
         },
+
+
+
+
+        email_confirm(){
+            let auth = true;
+
+            if( auth )
+                this.$router.push('/');
+            else
+                alert('login failed');
+        },
+
+
+
+
+
+
+
+
+
         
-        sendEmail() {
+        sendEmail(e) {
+            e.preventDefault();
+            let aaa= document.getElementById("aaa");
             const templateParams = {
-                user: this.form.name,
-                userMail:this.form.email,
-                emailContent: "收件內容寫在這邊"
+                // user: e.target.account,
+                userMail: e.target.account,
             };
 
-            emailjs.send("gmail"/*service_id*/, template_21xikzb, templateParams, X1x5cmen7BlWhZ2yb)
+            emailjs.send("gmail", "template_21xikzb", this.templateParams, "X1x5cmen7BlWhZ2yb")
             .then(() => {
                 console.log("成功");
             }, (error) => {
