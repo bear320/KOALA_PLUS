@@ -158,7 +158,7 @@ export default {
         )
             .then((res) => res.json())
             .then((json) => {
-                console.log(json);
+                // console.log(json);
                 this.couponsLists = json;
             });
     },
