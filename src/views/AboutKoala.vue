@@ -11,7 +11,7 @@
     </article>
 
     <div class="content">
-        <h1>Quiz</h1>
+        <h1>About Koala</h1>
 
         <Collapse v-model="value">
             <Panel name="1">
@@ -64,8 +64,10 @@
             </div>
         </div>
     </div>
+
     <div class="test-block">
         <div class="test">
+            <h1>Quiz</h1>
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
                     <h4 class="question">{{ question.question }}</h4>

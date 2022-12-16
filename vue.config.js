@@ -25,6 +25,7 @@ module.exports = defineConfig({
         },
     },
     publicPath: process.env.NODE_ENV === "production" ? "/cgd103/g1/" : "/",
+    filenameHashing: false, // 去除檔案打包後檔名後之 Hash
 });
 // module.exports = {
 //     publicPath: process.env.NODE_ENV === "production" ? "/cgd103/g1/" : "/",
