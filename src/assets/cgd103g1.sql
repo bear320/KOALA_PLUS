@@ -329,5 +329,5 @@ KEY `dx_ord_qty` (`ord_qty`),
 KEY `prod_price` (`prod_price`)
 )ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='訂單項目明細';
 INSERT INTO tibamefe_cgd103g1 . `order_list`(`ord_id`, `prod_id`, `ord_qty`, `prod_price`) VALUES
-('12019', '5001', '2', '300'), 
-('12019', '5002', '2', '900');
+('09001', '5001', '2', '300'), 
+('09001', '5002', '2', '900');
