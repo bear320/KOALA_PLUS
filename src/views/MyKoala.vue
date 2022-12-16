@@ -87,17 +87,12 @@
 
             <div v-if="expWidth <= 100" class="game_nav_expbar">
                 <div class="experience_bar">
-                    <div
-                        :style="{ width: expWidth + '%' }"
-                        :class="{ expValue: true }"
-                    ></div>
+                    <div :style="{ width: expWidth + '%' }" :class="{ expValue: true }"></div>
                 </div>
             </div>
             <div v-else class="game_nav_expbar">
                 <div class="experience_bar">
-                    <div
-                        :style="{ width: 100 + '%' }"
-                        :class="{ expValue: true }"
+                    <div :style="{ width: 100 + '%' }" :class="{ expValue: true }"
                     ></div>
                 </div>
             </div>
@@ -113,9 +108,6 @@
                 </div>
                 <div v-else-if="2000 - game_exp >= 0">
                     <p>距離下一段經驗值：{{ 2000 - game_exp }}</p>
-                </div>
-                <div v-else-if="3000 - game_exp >= 0">
-                    <p>距離下一段經驗值：{{ 3000 - game_exp }}</p>
                 </div>
             </div>
         </nav>
@@ -508,10 +500,10 @@ export default {
             remaining_amount_6: 0,
             increment_1: 10 / 20,
             increment_2: 20 / 20,
-            increment_3: 125 / 20,
-            increment_4: 225 / 20,
-            increment_5: 350 / 20,
-            increment_6: 500 / 20,
+            increment_3: 50 / 20,
+            increment_4: 90 / 20,
+            increment_5: 140 / 20,
+            increment_6: 210 / 20,
             expWidth: 0,
             game_exp: 0,
         };
