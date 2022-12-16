@@ -11,7 +11,7 @@
                 @closeMemUnsubscribe="closeMemUnsubscribe_emit"
             ></MemUnsubscribe>
             <div class="mem_order_table">
-                <p>訂單編號: KOA12345678</p>
+                <p>訂單編號: {{ order.ord_id }}</p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -23,10 +23,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
-                            v-for="(item, index) in orderList"
-                            :key="item.prod_id"
-                        >
+                        <tr v-for="(item, index) in order" :key="item.prod_id">
                             <td>{{ item.prod_name }}</td>
                             <td class="prod_id">{{ item.prod_id }}</td>
                             <td class="prod_category">
@@ -39,11 +36,15 @@
                 </table>
             </div>
             <div class="mem_state">
-                <button class="btn-lowest" @click="clickMemUnsubscribe">
+                <button
+                    v-show="ord_sts < 1"
+                    class="btn-lowest"
+                    @click="clickMemUnsubscribe"
+                >
                     取消訂單
                 </button>
                 <p>總額: $800</p>
-                <div>訂單狀態:{{ ord_sts }}</div>
+                <div>訂單狀態:{{ sts_map[ord_sts] }}</div>
             </div>
         </div>
     </li>
@@ -51,37 +52,38 @@
 <script>
 import MemUnsubscribe from "@/components/member/MemUnsubscribe.vue";
 export default {
-    // name: "MemOrder",
     components: {
         MemUnsubscribe,
     },
     data() {
         return {
             showMemUnsubscribe: false,
-            ord_sts: "處理中",
+            ord_sts: 1,
             memindexs: [],
+            order: [],
+            sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
             orderList: [
-                {
-                    prod_name: "無尾熊乾髮帽",
-                    prod_id: "1022",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
-                {
-                    prod_name: "無尾熊乾髮帽2",
-                    prod_id: "1023",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
-                {
-                    prod_name: "無尾熊乾髮帽3",
-                    prod_id: "1024",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
+                // {
+                //     prod_name: "無尾熊乾髮帽",
+                //     prod_id: "1022",
+                //     prod_category: "玩具/絨毛娃娃",
+                //     ord_qty: 1,
+                //     prod_price: 200,
+                // },
+                // {
+                //     prod_name: "無尾熊乾髮帽2",
+                //     prod_id: "1023",
+                //     prod_category: "玩具/絨毛娃娃",
+                //     ord_qty: 1,
+                //     prod_price: 200,
+                // },
+                // {
+                //     prod_name: "無尾熊乾髮帽3",
+                //     prod_id: "1024",
+                //     prod_category: "玩具/絨毛娃娃",
+                //     ord_qty: 1,
+                //     prod_price: 200,
+                // },
             ],
         };
     },
@@ -98,7 +100,16 @@ export default {
         fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
             .then((res) => res.json())
             .then((json) => {
+                // console.log(json);
                 this.memindexs = json;
+            });
+        fetch(
+            "http://localhost/cgd103_g1/public/api/postmemOrder.php?mem_id=1001"
+        )
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.order = json;
             });
     },
 };
