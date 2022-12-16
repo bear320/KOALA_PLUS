@@ -168,47 +168,17 @@
                                         class="login_icon_eye"
                                     />
                                 </div>
-                                <button
-                                    class="btn_login"
-                                    type="submit"
-                                    @click="login()"
-                                >
-                                    登錄會員</button
-                                ><br />
+                                <button class="btn_login" type="submit" @click="login()">登錄會員</button><br />
                             </form>
-                            <button
-                                class="btn_login"
-                                @click="forget_password()"
-                            >
-                                忘記密碼
-                            </button>
-                            <div>
-                                <img
-                                    src="../assets/images/login/login_koala.png"
-                                    alt=""
-                                />
-                            </div>
+                            <button class="btn_login" @click="forget_password()">忘記密碼</button>
+                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up()">X</a>
                             <h2>忘記密碼</h2>
                             <form @submit.prevent="login">
-                                <div>
-                                    <p>帳號/信箱</p>
-                                    <input
-                                        type="text"
-                                        placeholder="Account"
-                                        v-model="account"
-                                        required
-                                    />
-                                </div>
-                                <button
-                                    class="btn_login"
-                                    type="submit"
-                                    @click="sendEmail()"
-                                >
-                                    驗證信箱
-                                </button>
+                                <div><p>帳號/信箱</p><input type="text" placeholder="Account" v-model="account" required/></div>
+                                <button class="btn_login" type="submit" @click="sendEmail()">驗證信箱</button>
                             </form>
                             <div>
                                 <img
@@ -232,22 +202,22 @@ export default {
         Header,
         emailjs,
     },
-    data() {
-        return {
-            seen_one: "",
-            seen_two: "",
-            seen_three: "",
-            unseenImg: require("../assets/images/login/eye_close.png"),
-            seenImg: require("../assets/images/login/eye_open.png"),
-            pwdType_one: false,
-            pwdType_two: false,
-            pwdType_three: false,
-            sign_up_userName: "",
-            sign_up_account: "",
-            sign_up_password: "",
-            sign_up_password_comfirm: "",
-            login_password: "",
-        };
+    data () {
+      return {
+        seen_one: "",
+        seen_two: "",
+        seen_three: "",
+        unseenImg: require("../assets/images/login/eye_close.png"),
+        seenImg: require("../assets/images/login/eye_open.png"),
+        pwdType_one: false,
+        pwdType_two: false,
+        pwdType_three: false,
+        sign_up_userName: "",
+        sign_up_account: "",
+        sign_up_password: "",
+        sign_up_password_comfirm: "",
+        login_password: "",
+      }
     },
     methods: {
         login() {
@@ -383,33 +353,21 @@ export default {
         outEye_3: function () {
             this.seen_three = !this.seen_three;
         },
-
+        
         sendEmail() {
             const templateParams = {
                 user: this.form.name,
-                userMail: this.form.email,
-                emailContent: "收件內容寫在這邊",
+                userMail:this.form.email,
+                emailContent: "收件內容寫在這邊"
             };
 
-            emailjs
-                .send(
-                    "gmail" /*service_id*/,
-                    template_21xikzb,
-                    templateParams,
-                    X1x5cmen7BlWhZ2yb
-                )
-                .then(
-                    () => {
-                        console.log("成功");
-                    },
-                    (error) => {
-                        console.log("失敗", error);
-                    }
-                );
-        },
-    },
-    mounted() {
-        this.login();
+            emailjs.send("gmail"/*service_id*/, template_21xikzb, templateParams, X1x5cmen7BlWhZ2yb)
+            .then(() => {
+                console.log("成功");
+            }, (error) => {
+                console.log("失敗", error);
+            });
+        }
     },
 };
 </script>
