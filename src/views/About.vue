@@ -64,7 +64,6 @@
                     <option value="parkinfo">園區資訊</option>
                     <option value="moneyinfo">資金運用</option>
                 </select>
-                <h3 class="month">2022/12</h3>
                 <div
                     class="oneArticle"
                     v-for="article in articles"
@@ -73,32 +72,43 @@
                     <div
                         class="article-img"
                         :style="{
-                            backgroundImage: 'url(' + article.img + ')',
+                            backgroundImage:
+                                'url(' +
+                                require(`@/assets/images/about/${article.news_img}`) +
+                                ')',
                         }"
                     ></div>
                     <div class="article">
-                        <a class="article-title">{{ article.title }}</a>
+                        <a class="article-title">{{ article.news_title }}</a>
                         <div class="tag">
-                            <p class="article-tag">{{ article.tag }}</p>
-                            <p class="article-date">{{ article.date }}</p>
+                            <p class="article-tag">
+                                {{ article.news_category }}
+                            </p>
+                            <p class="article-date">{{ article.news_date }}</p>
                         </div>
-                        <div class="article-content">{{ article.content }}</div>
+                        <div class="article-content">
+                            {{ article.news_content }}
+                        </div>
                     </div>
                     <lightbox>
                         <template #img>
-                            <img :src="article.img" />
+                            <img
+                                :src="
+                                    require(`@/assets/images/about/${article.news_img}`)
+                                "
+                            />
                         </template>
                         <template #article-title>
-                            <h3>{{ article.title }}</h3>
+                            <h3>{{ article.news_title }}</h3>
                         </template>
                         <template #article-tag>
-                            <p>{{ article.tag }}</p>
+                            <p>{{ article.news_category }}</p>
                         </template>
                         <template #article-date>
-                            <p>{{ article.date }}</p>
+                            <p>{{ article.news_date }}</p>
                         </template>
                         <template #article-content>
-                            <p>{{ article.content }}</p>
+                            <p>{{ article.news_content }}</p>
                         </template>
                     </lightbox>
                 </div>
@@ -206,25 +216,21 @@ export default {
                     url: require("../assets/images/about/8.jpg"),
                 },
             ],
-            articles: [
-                {
-                    img: require("../assets/images/about/3.jpg"),
-                    title: "一隻無尾熊寶寶出生了",
-                    tag: "#最新消息",
-                    date: "2022/12/25",
-                    content:
-                        "每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。為了迎接三隻無尾熊寶寶誕生，動物園特別精心打造了育嬰房，為讓無尾熊媽媽可以安心照護baby，園方特別將無尾熊一館打造成無尾熊育嬰房兼坐月子中心。此外，考量育嬰需求，動物保母也會特別多採集一些尤加利樹嫩葉為無尾熊媽媽「加菜」，使母體具備足夠營養，讓無尾熊baby長得頭好壯壯。除精心打造育嬰房讓無尾熊寶寶安心成長外，由於這是動物園首次有三隻無尾熊baby接連出生，為讓大眾分享新生命誕生的喜悅，園方也特別舉辦「無尾熊新生兒命名票選活動」，讓喜歡無尾熊的民眾可以透過票選方式選出心中最喜歡的名字，最後票選結果將於十一月底公布，屆時三隻無尾熊寶寶就會以民眾選出的新名字跟大家歡喜亮相。",
-                },
-                {
-                    img: require("../assets/images/about/8.jpg"),
-                    title: "園區公休通知",
-                    tag: "#園區消息",
-                    date: "2022/12/13",
-                    content:
-                        "因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日，造成不便盡請見諒。",
-                },
-            ],
+            articles: [],
         };
+    },
+    methods: {
+        getArticleList() {
+            fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
+                .then((res) => res.json())
+                .then((json) => {
+                    this.articles = json;
+                    console.log(this.articles);
+                });
+        },
+    },
+    created() {
+        this.getArticleList();
     },
 };
 </script>
