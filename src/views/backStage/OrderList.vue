@@ -8,77 +8,109 @@
             </div>
         </div>
         <section>
-<!-- 會員編號、訂單號碼 -->
+            <!-- 會員編號、訂單號碼 -->
 
-        <div class="accordion" v-for="article in articles" :key="article">
-            <label for="tab1" >
-                <div class="line1" >
-                    <p>▼會員編號：{{ article.idname}}</p>
-                    <p>訂購日期：{{ article.date}}</p>
-                    <p>訂單編號：{{ article.number}}</p>
-                </div>
-            </label>
-            <div class="box">
-                <input type="radio" name="tab" id="tab1">
-                <div class="con">
-                    <div class="con-1">
-                        <p>圖片</p>
-                        <p>產品名稱</p>
-                        <p>品號</p>
-                        <p>單價</p>
-                        <p>數量</p>
-                        <p>小計</p>
-                    </div>
-        <!-- 訂單內容 -->
-                    <div class="con-2" v-for="product in products" :key="product">
-                        <p class="pic">
-                            <img :src="product.png" alt="" />
-                        </p>
-                        <p class="product">
-                            {{ product.product }}
-                        </p>
-                        <p class="pnum">
-                            {{ product.pnum }}
-                        </p>
-                        <p class="price">
-                            ${{ product.price }}NTD
-                        </p>
-                        <p class="quantity">
-                            {{ product.quantity }}
-                        </p>
-                        <p class="sumtotal">
-                            {{ product.sumtotal }}
+            <div class="accordion" v-for="item in orders" :key="item.ord_id">
+                <label :for="`tab-${item.ord_id}`">
+                    <div class="line1">
+                        <p>會員編號：{{ item.mem_id }}</p>
+                        <p>訂購日期：{{ item.ord_date }}</p>
+                        <p>訂單編號：{{ item.ord_id }}</p>
+                        <p>
+                            訂單狀態：
+                            <span v-if="item.ord_ship == '0'">訂單處理中</span>
+                            <span v-if="item.ord_ship == '1'">訂單已出貨</span>
+                            <span v-if="item.ord_ship == '2'">訂單已完成</span>
+                            <span v-if="item.ord_ship == '3'">訂單未完成</span>
                         </p>
                     </div>
+                </label>
+                <div class="box">
+                    <input
+                        type="checkbox"
+                        name="tab"
+                        :id="`tab-${item.ord_id}`"
+                    />
+                    <div class="con">
+                        <div class="con-1">
+                            <p>圖片</p>
+                            <p>商品名稱</p>
+                            <p>商品編號</p>
+                            <p>單價</p>
+                            <p>數量</p>
+                            <p>小計</p>
+                        </div>
+                        <!-- 訂單內容 -->
+                        <div
+                            class="con-2"
+                            v-for="orderlist in filterResult[item.ord_id]"
+                            :key="orderlist.prod_id"
+                        >
+                            <p class="pic">
+                                <!--  <img
+                                    :src="`/images/shop/${orderlist.prod_img1}`"
+                                    alt=""
+                                /> -->
+                                <img
+                                    :src="
+                                        require(`@/assets/images/shop/${orderlist.prod_img1}`)
+                                    "
+                                    alt=""
+                                />
+                            </p>
+                            <p class="product">
+                                {{ orderlist.prod_name }}
+                            </p>
+                            <p class="pnum">
+                                {{ orderlist.prod_id }}
+                            </p>
+                            <p class="price">{{ orderlist.prod_price }} 元</p>
+                            <p class="quantity">
+                                {{ orderlist.ord_qty }}
+                            </p>
+                            <!-- <p class="sumtotal"> {{orderlist.prod_price * orderlist.ord_qty}}元</p> -->
+                            <p class="sumtotal">
+                                {{ orderlist.prod_price * orderlist.ord_qty }}
+                            </p>
+                        </div>
 
-        <!-- 訂單資訊 -->
-                    <div class="con-3">
-                        <div class="left">
-                            <p class="add">寄送地址：{{ article.add }}</p>
-                            <p class="btdate">訂單成立時間：{{ article.btdate }}</p>
-                            <div class="state">
-                                訂單狀態：
-                                <select name="category" id="articlesCategory">
-                                    <option value="訂單準備中">訂單準備中</option>
-                                    <option value="訂單已出貨">訂單已出貨</option>
-                                    <option value="訂單已完成">訂單已完成</option>
-                                    <option value="訂單未完成">訂單未完成</option>
-                                </select>
+                        <!-- 訂單資訊 -->
+                        <div class="con-3">
+                            <div class="left">
+                                <p class="ord_person">
+                                    收件人：{{
+                                        item.ord_person
+                                    }}
+                                    ，收件人電話：{{ item.ord_phone }}
+                                </p>
+
+                                <p class="add">寄送地址：{{ item.ord_add }}</p>
+                                <p class="btdate">
+                                    訂單成立時間：{{ item.ord_date }}
+                                </p>
+                                <div class="state">
+                                    訂單狀態：
+                                    <select
+                                        id="ord_ship"
+                                        name="ord_ship"
+                                        v-model="item.ord_ship"
+                                        required
+                                    >
+                                        <option :value="0">訂單準備中</option>
+                                        <option :value="1">訂單已出貨</option>
+                                        <option :value="2">訂單已完成</option>
+                                        <option :value="3">訂單未完成</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="right">
+                                <p>折扣：{{ item.ord_disc }} 元</p>
+                                <p>總價：{{ item.ord_sum }} 元</p>
                             </div>
                         </div>
-                        <div class="right">
-                            <p>折扣：{{ article.discount }}</p>
-                            <p>總價：{{ article.sumtotal }}</p>
-                        </div>
-                    
-                        
                     </div>
                 </div>
             </div>
-        </div>
-
-
-
         </section>
     </article>
 </template>
@@ -88,140 +120,147 @@ import Header from "@/components/backStage/Header.vue";
 export default {
     data() {
         return {
-            articles: [
-                {
-                idname: "P00001",
-                date: "2020-11-11",
-                number:"000000001",
-
-                add:"桃園市中壢區復興路46號9樓",
-                btdate:"2022-01-08",
-                sumtotal: "2000",
-                discount:"50"
-                },
-                {
-                idname: "P00001",
-                date: "2020-11-11",
-                number:"000000001",
-
-                add:"桃園市中壢區復興路46號9樓",
-                btdate:"2022-01-08",
-                sumtotal: "2000",
-                discount:"50"
-                },
-                
-            ],
-            products: [
-                {
-                    img :require("@/assets/images/shop/product_img.png"),
-                    product:"無尾熊居家室內拖鞋",
-                    pnum: "123",
-                    price:"500",
-                    quantity:"2",
-                    sumtotal: "1000",
-                },
-               
-            ]
+            orders: [],
+            orderlists: [],
         };
     },
+    computed: {
+        filterResult() {
+            return this.orderlists.reduce(function (results, org) {
+                (results[org.ord_id] = results[org.ord_id] || []).push(org);
+                return results;
+            }, {});
+        },
+    },
     methods: {
+        getAllOrders() {
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1/public/api/getAllOrders.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.orders = json;
+                });
+        },
+        getOrderLists() {
+            const apiURL = new URL(
+                "http://localhost:8888/cgd103_g1/public/api/getOrderLists.php"
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log("orderlist");
+                    console.log(json);
+                    this.orderlists = json;
+                });
+        },
+    },
+    created() {
+        this.getAllOrders();
+        this.getOrderLists();
     },
     components: {
         Header,
     },
 };
-
 </script>
 
 <style lang="scss" scoped>
-
-.accordion{
-    margin-top: 50px;
+section {
+    margin-bottom: 50px;
+}
+.accordion {
+    margin-top: 30px;
     width: 1200px;
-    label{
+    label {
         width: 100%;
         display: block;
         border: 10px;
-        background-color: #fff;
+        background-color: $darkgreen;
+        color: #fff;
         border-radius: 10px;
-        box-shadow: 3px 3px 3px 3px  rgb(190, 190, 190);
+        box-shadow: 3px 3px 3px 3px rgb(190, 190, 190);
         padding: 10px 50px;
         cursor: pointer;
-        -webkit-user-select:none;
-        -moz-user-select:none;
-        -o-user-select:none;
-        user-select:none;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        user-select: none;
         text-align: center;
 
-        .line1{
+        .line1 {
             display: flex;
-            p{
-            width: calc(100% / 3);
+            p {
+                width: calc(100% / 3);
             }
         }
     }
 }
 
-input[type=radio]:checked + .con{
+input[type="checkbox"]:checked + .con {
+    display: block;
     background-color: #fff;
-    box-shadow:  3px 3px 8px 3px   rgb(163, 163, 163);
-    height: 400px;
-    
+    box-shadow: 3px 3px 8px 3px rgb(163, 163, 163);
+    height: fit-content;
 }
-input[type=radio]{
+input[type="checkbox"] + .con {
     display: none;
 }
-.con{
+input[type="checkbox"] {
+    display: none;
+}
+.con {
     height: 0px;
     overflow: hidden;
     transition: 0.5s;
     margin-top: 10px;
-    border-radius:10px ;
-    
+    border-radius: 10px;
 
-    .con-1{
+    .con-1 {
         height: 30px;
-        display:flex;
+        display: flex;
         margin: 10px 50px;
         text-align: center;
-        border-bottom: .5px solid gray;
+        border-bottom: 0.5px solid gray;
 
-        p{
-           width: calc(100% / 6);
-           margin-bottom: 10px;
+        p {
+            width: calc(100% / 6);
+            margin-bottom: 10px;
         }
     }
-    .con-2{
+    .con-2 {
         height: 150px;
-        display:flex;
+        display: flex;
         margin: 10px 50px;
         text-align: center;
         align-items: center;
-        border-bottom: .5px solid gray;
-        p{
-           width: calc(100% / 6);
-           padding: 10px 0px ;
+        border-bottom: 0.5px solid gray;
+        p {
+            width: calc(100% / 6);
+            padding: 10px 0px;
         }
     }
-    .con-3{
+    .con-3 {
         height: 150px;
         display: flex;
         justify-content: space-between;
-        margin: 10px 50px;
-        p , div{
-                margin: 10px;
-            }
-        .right{
+        margin: 10px 50px 25px;
+        p,
+        div {
+            margin: 10px;
+        }
+        .right {
             margin-right: 50px;
         }
     }
 }
-.search{
+.search {
     margin-top: 50px;
 }
-h1{
-        margin-top: 50px;
-
+h1 {
+    margin-top: 50px;
 }
 html article {
     text-align: left;
@@ -261,7 +300,7 @@ html article {
             background-color: $darkgreen;
             color: white;
             border-radius: 10px;
-            h3{
+            h3 {
                 width: 20%;
             }
         }
@@ -272,58 +311,52 @@ html article {
         }
     }
 }
-.num{
+.num {
     display: flex;
     justify-content: space-between;
     margin-top: 50px;
-  
 }
-.card{
+.card {
     border-radius: 10px;
 }
-.d-card{
+.d-card {
     background-color: #fff;
     border-bottom: 1px solid #eee;
     margin: 0px 50px;
 }
-.pro{
+.pro {
     display: flex;
     justify-content: space-around;
     align-items: center;
 }
-.titleall{
+.titleall {
     display: flex;
     font-weight: 700;
     margin-top: 20px;
     padding: 20px;
-    .title{
+    .title {
         margin-left: 300px;
         width: 30%;
     }
-    .pnumtitle{
+    .pnumtitle {
         width: 25%;
-
     }
-    .pricetitle{
+    .pricetitle {
         width: 25%;
-
     }
-    .quantitytitle{
+    .quantitytitle {
         width: 20%;
-
     }
-    .total{
+    .total {
         width: 15%;
-
     }
-
 }
-.bottom{
+.bottom {
     display: flex;
     justify-content: space-between;
     margin: 50px 50px;
 }
-.bottom{
+.bottom {
     padding-bottom: 50px;
 }
 </style>
