@@ -16,11 +16,14 @@ $page = $_GET["page"] - 1; //pagination
 $offset = $page * $limit; //pagination
 $sql = "select * from tibamefe_cgd103g1.reservation order by rsv_id desc limit {$limit} offset {$offset}"; 
 $sql2 = "select count(*) as 'resv_total' from tibamefe_cgd103g1.reservation"; //pagination
+// 
 
 $reservation = $pdo->query($sql);
 $rsvCount = $pdo->query($sql2); //pagination
+$allBookedDay = $pdo->query($sql3);
 $prodRows = $reservation->fetchAll(PDO::FETCH_ASSOC); 
 $prodRows2 = $rsvCount->fetchColumn();  //pagination
+
 $notBookDate = array();
 foreach ($prodRows as $row) {
     $notBookDate[$row['rsv_date']] = array(
