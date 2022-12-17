@@ -3,11 +3,11 @@ header("Access-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
 require_once "./connect_cgd103g1.php";
 
-$koalaId = $_GET["koalaId"];
+$koalaName = $_GET["koalaName"];
 
 $sql = "SELECT *, TIMESTAMPDIFF(YEAR, koala_dob, CURDATE()) 'koala_age'
 FROM tibamefe_cgd103g1.koala
-WHERE koala_id = {$koalaId}";
+WHERE koala_name = '{$koalaName}'";
 
 $koala = $pdo->query($sql);
 $koalaRow = $koala->fetch(PDO::FETCH_ASSOC);

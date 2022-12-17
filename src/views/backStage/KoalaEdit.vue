@@ -138,10 +138,10 @@ export default {
         };
     },
     methods: {
-        getKoalaInfo() {
-            const koalaId = this.$route.params.koala_id;
+        getKoalaEditInfo() {
+            const koalaName = this.$route.params.koala_name;
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaId=${koalaId}`
+                `http://localhost:8888/cgd103_g1/public/api/getKoalaEditInfo.php?koalaName=${koalaName}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
@@ -151,7 +151,7 @@ export default {
         },
     },
     created() {
-        this.getKoalaInfo();
+        this.getKoalaEditInfo();
     },
 };
 </script>

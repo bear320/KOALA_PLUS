@@ -58,7 +58,7 @@
             </p>
             <p>
                 <router-link
-                    :to="`/bs-koala-edit/${koala.koala_id}`"
+                    :to="`/bs-koala-edit/${koala.koala_name}`"
                     target="_blank"
                 >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
