@@ -17,16 +17,32 @@
                 <li>{{ pGift2 }} * 1</li>
             </ul>
             <h4>{{ pDesc }}</h4>
-            <button class="btn-secondary">{{ pBtn }}</button>
+            <button class="btn-secondary" @click="showIndex(index)">
+                {{ pBtn }}
+            </button>
         </div>
     </div>
 </template>
 
 <script>
 export default {
-    props: ["pName", "pPrice", "pPoint", "pGift1", "pGift2", "pDesc", "pBtn"],
+    props: [
+        "pName",
+        "pPrice",
+        "pPoint",
+        "pGift1",
+        "pGift2",
+        "pDesc",
+        "pBtn",
+        "index",
+    ],
     data() {
         return {};
+    },
+    methods: {
+        showIndex(i) {
+            alert(i);
+        },
     },
 };
 </script>
