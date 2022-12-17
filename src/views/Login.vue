@@ -101,7 +101,7 @@
                                 <div>
                                     <p class="content_active_login_moveTxt">密碼</p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_login_move4" type="password" v-if="pwdType_three" v-model="login_password"/>
+                                    <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password" required/>
                                     <input class="content_active_login_move4"  type="password" placeholder="Password" v-model="login_password" required v-else  @keyup="login"/>
                                     <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye"/>
                                 </div>
@@ -165,8 +165,23 @@ export default {
         forget_password_account: "",
       }
     },
-    
+    mounted() {
+        this.login();
+    },
+    created() {
+        this.getArticleList();
+    },
     methods: {
+        getArticleList(){
+            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php")
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.memindexs = json;
+            });
+        },
+
+
         login() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_login";
@@ -333,24 +348,12 @@ export default {
 
 
 
-        email_confirm(){
-            let auth = true;
-
-            if( auth )
-                this.$router.push('/');
-            else
-                alert('login failed');
-        },
 
 
 
 
 
 
-
-
-
-        
         sendEmail(e) {
             e.preventDefault();
             const templateParams = {
@@ -367,64 +370,55 @@ export default {
         },
 
 
+
+
+
+
+
+
+
+
+        // email_confirm(){
+        //     let auth = true;
+
+        //     if( auth )
+        //         this.$router.push('/');
+        //     else
+        //         alert('login failed');
+        // },
+
+
+
+
+
+
+
+
+
+
         // email 認證
-    // loginVal() {
-    //     if (this.username != '' && this.password != '') {
-    //         axios.post('response.php', {
-    //             request: 1,
-    //             login_account: this.login_account,
-    //             login_password: this.login_password
-    //         })
-    //         .then(function(response) {
-    //             console.log(response);
-    //             if (response.data[0].status == 1) {
-    //             alert('Login Successfully');
-    //             } else {
-    //                 alert("User does not exist");
-    //             }
-    //         })
-    //         .catch(function(error) {
-    //             console.log(error);
-    //         });
-    //     } else {
-    //         alert('Please enter login_account & login_password');
-    //     }
-    // },
-
-
-
-
-
-
-        
-
-    
-
-
-
-
-
-
-
-
-
-
-
-        getArticleList(){
-            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php")
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-                this.memindexs = json;
-            });
-        }
-        
-    },
-        created() {
-        this.getArticleList();
-    },
-    mounted() {
-        this.login();
+        // loginVal() {
+        //     if (this.username != '' && this.password != '') {
+        //         axios.post('response.php', {
+        //             request: 1,
+        //             login_account: this.login_account,
+        //             login_password: this.login_password
+        //         })
+        //         .then(function(response) {
+        //             console.log(response);
+        //             if (response.data[0].status == 1) {
+        //             alert('Login Successfully');
+        //             } else {
+        //                 alert("User does not exist");
+        //             }
+        //         })
+        //         .catch(function(error) {
+        //             console.log(error);
+        //         });
+        //     } else {
+        //         alert('Please enter login_account & login_password');
+        //     }
+        // },
     },
 };
 </script>
