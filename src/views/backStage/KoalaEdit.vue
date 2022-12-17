@@ -16,6 +16,17 @@
     >
         <div class="line">
             <div class="cell">
+                <label for="koala-id">編號：</label>
+                <input
+                    type="text"
+                    name="koala-id"
+                    id="koala-id"
+                    v-model="source.koala_id"
+                    disabled
+                    required
+                />
+            </div>
+            <div class="cell">
                 <label for="koala-name">名字：</label>
                 <input
                     type="text"
@@ -23,7 +34,7 @@
                     id="koala-name"
                     placeholder="請輸入名字"
                     required
-                    v-model="temp.name"
+                    v-model="source.koala_name"
                 />
             </div>
             <div class="cell">
@@ -32,23 +43,12 @@
                     type="text"
                     name="koala-sex"
                     id="koala-sex"
-                    v-model="temp.sex"
+                    v-model="source.koala_sex"
                     required
                 >
                     <option value="Male">公</option>
                     <option value="Female">母</option>
                 </select>
-            </div>
-            <div class="cell">
-                <label for="koala-id">編號：</label>
-                <input
-                    type="text"
-                    name="koala-id"
-                    id="koala-id"
-                    v-model="temp.id"
-                    disabled
-                    required
-                />
             </div>
         </div>
         <div class="line">
@@ -58,7 +58,18 @@
                     type="date"
                     name="koala-dob"
                     id="koala-dob"
-                    v-model="temp.dob"
+                    v-model="source.koala_dob"
+                    required
+                />
+            </div>
+            <div class="cell">
+                <label for="koala-dob">年齡：</label>
+                <input
+                    type="text"
+                    name="koala-dob"
+                    id="koala-dob"
+                    v-model="source.koala_age"
+                    disabled
                     required
                 />
             </div>
@@ -68,7 +79,7 @@
                     type="text"
                     name="koala-listed"
                     id="koala-listed"
-                    v-model="temp.listed"
+                    v-model="source.koala_listed"
                     required
                 >
                     <option value="1">上架</option>
@@ -85,7 +96,7 @@
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
-                    v-model="temp.desc"
+                    v-model="source.koala_info"
                     required
                 ></textarea>
             </div>
@@ -123,65 +134,24 @@ export default {
     },
     data() {
         return {
-            koalas: [
-                {
-                    name: "Emily",
-                    id: "K001",
-                    dob: "2020-03-22",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Emily.",
-                },
-                {
-                    name: "Gabriel",
-                    id: "K002",
-                    dob: "2019-05-20",
-                    sex: "Male",
-                    listed: 1,
-                    desc: "I'm Gabriel.",
-                },
-                {
-                    name: "Lucien",
-                    id: "K003",
-                    dob: "2019-10-15",
-                    sex: "Male",
-                    listed: 1,
-                    desc: "I'm Lucien.",
-                },
-                {
-                    name: "Camille",
-                    id: "K004",
-                    dob: "2018-04-08",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Camille.",
-                },
-                {
-                    name: "Mindy",
-                    id: "K005",
-                    dob: "2017-07-10",
-                    sex: "Female",
-                    listed: 1,
-                    desc: "I'm Mindy.",
-                },
-                {
-                    name: "Antoine",
-                    id: "K006",
-                    dob: "2015-01-16",
-                    sex: "Male",
-                    listed: 0,
-                    desc: "I'm Antoine.",
-                },
-            ],
-            temp: [],
+            source: [],
         };
     },
+    methods: {
+        getKoalaInfo() {
+            const koalaId = this.$route.params.koala_id;
+            const apiURL = new URL(
+                `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaId=${koalaId}`
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.source = json.koalaInfo;
+                });
+        },
+    },
     created() {
-        [this.temp] = [
-            ...this.koalas.filter((item) => {
-                return item.id === this.$route.params.id;
-            }),
-        ];
+        this.getKoalaInfo();
     },
 };
 </script>
