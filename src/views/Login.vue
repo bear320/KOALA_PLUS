@@ -172,6 +172,18 @@ export default {
         this.getArticleList();
     },
     methods: {
+        getArticleList(){
+            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php",{mode: 'no-cors'})
+            .then((respons) => respons.json())
+            .then((json) => {
+                console.log(json);
+                this.memindexs = json;
+            })
+            .catch((error) => { // 當初出現錯誤時跑 catch
+                console.log(error);
+            })
+        },
+
         login() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_login";
@@ -221,9 +233,9 @@ export default {
                 );
                 
                 // 從伺服器取得資料後的處理
-                xhr.onload = function(res) {
+                xhr.onload = function(response) {
                   // 處理回傳資料的程式碼
-                    if(this.login_account == this.mem_account || this.login_password == this.mem_psw) {
+                    if(response[0].code == 1) {
                         thisvue.errorFlag = false;
                         window.location.href = "http://localhost:8080/home"
                     }
@@ -259,18 +271,6 @@ export default {
                 //     }
                 // })
             }
-        },
-
-        getArticleList(){
-            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php",{mode: 'no-cors'})
-            .then((respons) => respons.json())
-            .then((json) => {
-                console.log(json);
-                this.memindexs = json;
-            })
-            .catch((error) => { // 當初出現錯誤時跑 catch
-                console.log(error);
-            })
         },
 
         sign_up() {
