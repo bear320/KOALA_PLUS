@@ -9,7 +9,7 @@ $login_psw = empty( $_GET["mem_psw"] ) ? ( $_POST["mem_psw"] ?? "" ) : $_GET["me
 // $sql = "select * from tibamefe_cgd103g1.employee;";
 
 if($login_account != "" & $login_psw != "") {
-    $connect = new mysql("localhost:3306", "root", "", "personal");
+    $connect = new mysql("localhost:8080", "root", "", "personal");
     if($connent != null) {
         $sql = " select * from tibamefe_cgd103g1.employee where mem_account = '$login_account' or mem_psw = '$login_psw'; ";
         $result = $connent -> query($sql);

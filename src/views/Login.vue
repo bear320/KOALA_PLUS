@@ -181,7 +181,6 @@ export default {
             });
         },
 
-
         login() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_login";
@@ -211,8 +210,8 @@ export default {
             // ==============================   驗證   ============================== //
             let thisvue = this;
             if(thisvue.login_account == "" || thisvue.login_password == "") {
-                thisvue.errorMsg = "請輸入帳號和密碼";
-                thisvue.errorFlag = true;
+                // thisvue.errorMsg = "請輸入帳號和密碼";
+                // thisvue.errorFlag = true;
             }
             else {
                 $.ajax({
