@@ -1,12 +1,12 @@
 <template lang="">
-    <div class="card cart-item">
+    <div class="card cart-item" will-change>
         <Row align="middle">
             <Col span="9">
                 <Row justify="center" align="middle">
                     <Col :xl="12" :lg="24" :md="24" span="24">
                         <img
                             class="product-img"
-                            src="https://fakeimg.pl/300x200/200"
+                            :src="require(`@/assets/images/shop/${itemImage}`)"
                         />
                     </Col>
                     <Col :xl="12" :lg="24" :md="24" span="24">
@@ -61,20 +61,22 @@ export default {
                 return item.id === this.itemId;
             });
             if (operator === "-") {
-                this.itemQuantity > 1
-                    ? (this.itemQuantity -= 1)
-                    : this.itemQuantity;
+                if (this.itemQuantity === 1) return;
+                this.itemQuantity -= 1;
             } else {
                 this.itemQuantity += 1;
             }
-            this.$store.commit({
-                type: "updateItemQuantity",
-                index: cartIndex,
-                quantity: this.itemQuantity,
+            this.$store.dispatch("addToCart", {
+                memId: 1001,
+                prodId: +this.itemId,
+                cartQty: this.itemQuantity,
             });
         },
         deleteItem() {
-            this.$store.commit("deleteCartItem", this.itemId);
+            this.$store.dispatch("deleteCartItem", {
+                memId: 1001,
+                prodId: +this.itemId,
+            });
         },
     },
 };

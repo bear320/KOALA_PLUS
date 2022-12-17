@@ -23,13 +23,13 @@
                     </div>
 
                     <CartItem
-                        v-for="cartItem in cartList"
-                        :key="cartItem.id"
-                        :prodId="cartItem.id"
-                        :prodImg="cartItem.image"
-                        :prodName="cartItem.name"
-                        :prodQuantity="cartItem.quantity"
-                        :prodPrice="cartItem.price"
+                        v-for="cartItem in $store.state.cart"
+                        :key="cartItem.prod_id"
+                        :prodId="+cartItem.prod_id"
+                        :prodImg="cartItem.prod_img1"
+                        :prodName="cartItem.prod_name"
+                        :prodQuantity="+cartItem.cart_qty"
+                        :prodPrice="+cartItem.prod_price"
                     ></CartItem>
                 </Col>
 
@@ -60,20 +60,22 @@
                             </div>
                             <div class="product-total">
                                 <div class="total-text">商品總金額</div>
-                                <div class="total-pric">${{ sumTotal }}</div>
+                                <div class="total-pric">
+                                    ${{ productTotal }}
+                                </div>
                             </div>
                             <div class="coupon-discount">
                                 <div class="coupon-name">折扣</div>
-                                <div class="coupon-pric">-${{ discount }}</div>
+                                <div class="coupon-pric">
+                                    -${{ totalDiscount }}
+                                </div>
                             </div>
                             <div class="sum">
                                 <div class="sum-text">總付款金額</div>
-                                <div class="sum-price">
-                                    NT${{ sumTotal - discount }}
-                                </div>
+                                <div class="sum-price">NT${{ payTotal }}</div>
                             </div>
                             <div class="get-coin">
-                                獲得{{ sumTotal / 10 }}
+                                獲得{{ getCoin }}
                                 <img
                                     src="@/assets/images/product/coin.png"
                                     alt=""
@@ -116,9 +118,9 @@ export default {
     },
     data() {
         return {
-            cartList: this.$store.state.cart,
+            /* cartList: this.$store.state.cart, */
             couponDiscount: 0,
-            coupon: [
+            /*     coupon: [
                 {
                     id: "001",
                     name: "85折優惠折扣券",
@@ -143,27 +145,25 @@ export default {
                     deadline: 30,
                     code: "#87878",
                 },
-            ],
+            ], */
             isShowCoupon: false,
-            couponDiscount: 0,
+            couponDiscount: this.$store.state.discount,
             couponCode: "",
             couponName: "",
         };
     },
     computed: {
-        sumTotal() {
-            let sum = 0;
-            this.cartList.map((item) => {
-                sum += item.quantity * item.price;
-            });
-            return sum;
+        productTotal() {
+            return this.$store.getters.productTotal;
         },
-        discount() {
-            if (!this.couponDiscount) {
-                return 0;
-            } else {
-                return this.sumTotal - this.sumTotal * this.couponDiscount;
-            }
+        totalDiscount() {
+            return this.$store.getters.totalDiscount;
+        },
+        payTotal() {
+            return this.$store.getters.payTotal;
+        },
+        getCoin() {
+            return this.$store.getters.getCoin;
         },
     },
     methods: {
