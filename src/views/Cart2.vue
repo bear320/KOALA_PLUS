@@ -10,25 +10,31 @@
                     <div class="card order-detail">
                         <div
                             class="order-item"
-                            v-for="item in carts"
-                            :key="item.id"
+                            v-for="item in $store.state.cart"
+                            :key="item.prod_id"
                         >
                             <div class="item-box">
                                 <div class="item-img">
-                                    <img src="https://fakeimg.pl/300x200/200" />
+                                    <img
+                                        :src="
+                                            require(`@/assets/images/shop/${item.prod_img1}`)
+                                        "
+                                    />
                                 </div>
-                                <div class="item-name">{{ item.name }}</div>
+                                <div class="item-name">
+                                    {{ item.prod_name }}
+                                </div>
                             </div>
                             <div class="item-quantity">
-                                x{{ item.quantity }}
+                                x{{ item.cart_qty }}
                             </div>
                             <div class="item-total">
-                                ${{ item.quantity * item.price }}
+                                ${{ item.cart_qty * item.prod_price }}
                             </div>
                         </div>
-                        <div class="pay-box">
+                        <div class="total-box">
                             <div class="pay-text">總付款金額</div>
-                            <div class="pay-total">NT${{ pay }}</div>
+                            <div class="pay-total">NT${{ payTotal }}</div>
                         </div>
                     </div>
                 </div>
@@ -95,9 +101,13 @@ export default {
 
     data() {
         return {
-            carts: this.$store.state.cart,
-            pay: localStorage.getItem("pay"),
+            /* carts: this.$store.state.cart, */
         };
+    },
+    computed: {
+        payTotal() {
+            return this.$store.getters.payTotal;
+        },
     },
     methods: {
         goBack() {
@@ -201,7 +211,7 @@ main {
                             width: calc(100% / 4);
                         }
                     }
-                    .pay-box {
+                    .total-box {
                         display: flex;
                         justify-content: space-between;
                         .pay-text {
@@ -265,6 +275,9 @@ main {
                         align-items: center;
                         .btn-paramy {
                             @include btnSize(20px);
+                        }
+                        .back-step {
+                            cursor: pointer;
                         }
                     }
                 }

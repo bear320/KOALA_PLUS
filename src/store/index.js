@@ -3,38 +3,66 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         cart: [],
+        discount: 0.85,
+        // mem_id: 1001
+        user: { mem_id: 1001 },
     },
     getters: {
-        // 獲取購物車數量
-        cartNumber(state) {
-            return state.cart.length;
+        productTotal(state) {
+            return state.cart.reduce(
+                (sum, item) => (sum += item.prod_price * item.cart_qty),
+                0
+            );
+        },
+        totalDiscount(state, getters) {
+            return getters.productTotal - getters.productTotal * state.discount;
+        },
+        payTotal(_, getters) {
+            return getters.productTotal - getters.totalDiscount;
+        },
+        getCoin(_, getters) {
+            return getters.productTotal / 10;
         },
     },
     mutations: {
-        //取得購物車內容
-        getCart(state, payload) {
+        // 更新使用者的購物車狀態
+        updateMemCart(state, payload) {
             state.cart = payload;
-        },
-        // 加入購物車
-        addToCart(state, payload) {
-            state.cart.push(payload);
-            const jsonCart = JSON.stringify(state.cart);
-            localStorage.setItem("cart", jsonCart);
-        },
-        updateItemQuantity(state, payload) {
-            state.cart[payload.index].quantity = payload.quantity;
-            const jsonCart = JSON.stringify(state.cart);
-            localStorage.setItem("cart", jsonCart);
-        },
-        deleteCartItem(state, payload) {
-            let itemIndex = state.cart.findIndex((item) => {
-                return item.id === payload;
-            });
-            state.cart.splice(itemIndex, 1);
-            const jsonCart = JSON.stringify(state.cart);
-            localStorage.setItem("cart", jsonCart);
+            console.log(state.cart);
         },
     },
-    actions: {},
+    actions: {
+        // 取得使用者的購物車資訊
+        async getMemCart(context) {
+            const res = await fetch(
+                `http://localhost/cgd103_g1/public/api/getMemberCart.php?memId=${context.state.user.mem_id}`
+            );
+            const cartList = await res.json();
+            context.commit("updateMemCart", cartList);
+        },
+        // 加入購物車
+        async addToCart(context, payload) {
+            const res = await fetch(
+                "http://localhost/cgd103_g1/public/api/postAddCart.php",
+                {
+                    method: "POST",
+                    body: new URLSearchParams(payload),
+                }
+            );
+            context.dispatch("getMemCart");
+        },
+
+        // 刪除購物車項目
+        async deleteCartItem(context, payload) {
+            const res = await fetch(
+                "http://localhost/cgd103_g1/public/api/postMemberCartItem.php",
+                {
+                    method: "POST",
+                    body: new URLSearchParams(payload),
+                }
+            );
+            context.dispatch("getMemCart");
+        },
+    },
     modules: {},
 });

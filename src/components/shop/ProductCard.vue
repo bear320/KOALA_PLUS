@@ -31,23 +31,11 @@ export default {
     },
     methods: {
         addToCart() {
-            // 檢查購物車中是否已存在該商品
-            let cartIndex = this.$store.state.cart.findIndex((item) => {
-                return item.id === this.proId;
+            this.$store.dispatch("addToCart", {
+                memId: 1001,
+                prodId: +this.proId,
+                cartQty: 1,
             });
-
-            // 若不存在則加到購物車
-            if (cartIndex < 0) {
-                const setData = {
-                    id: this.proId,
-                    image: this.proImg,
-                    name: this.proName,
-                    quantity: 1,
-                    price: this.proPrice,
-                };
-                this.$store.commit("addToCart", setData);
-                alert("已加到購物車");
-            }
         },
         scrollToProduct() {
             window.scrollTo({
