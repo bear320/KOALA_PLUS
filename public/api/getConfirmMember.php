@@ -9,11 +9,13 @@ $login_psw = empty( $_GET["mem_psw"] ) ? ( $_POST["mem_psw"] ?? "" ) : $_GET["me
 // $sql = "select * from tibamefe_cgd103g1.employee;";
 
 if($login_account != "" & $login_psw != "") {
-    $connect = new mysql("localhost:8080", "root", "", "personal");
+    // mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
+    $connect = new mysqli("localhost", "root", "CharmyTseng0118", "tibamefe_cgd103g1", 3306);
+    // $connect -> set_charset('utf8mb4');
     if($connent != null) {
         $sql = " select * from tibamefe_cgd103g1.employee where mem_account = '$login_account' or mem_psw = '$login_psw'; ";
         $result = $connent -> query($sql);
-        $resArray = mysql_fetch_array($result);
+        $resArray = mysqli_fetch_array($result);
         if($resArray["user_password"] == $login_psw) {
             $_SESSION["zzz_user_id"] = $resArray["user_id"];
             $result_array[0] = ["code"=>"1", "msg"=>"登陸成功"];
@@ -32,7 +34,7 @@ else {
 }
 
 
-$admin = $pdo->query($sql);
-$adminRows = $admin->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($adminRows);            
+// $admin = $pdo->query($sql);
+// $adminRows = $admin->fetchAll(PDO::FETCH_ASSOC);
+// echo json_encode($adminRows);            
 ?>
