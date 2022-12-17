@@ -215,6 +215,19 @@ INSERT INTO `tibamefe_cgd103g1`.`product` (`prod_name`, `prod_price`, `prod_info
 ('無尾熊娃娃-白', '500', '無尾熊毛絨玩具由 ppcotton 材料製成，經久耐用。無尾熊毛絨玩具採用毛絨工藝製作，這款公仔具有無尾熊的外觀，是送給孩子的紀念品。無尾熊毛絨玩具可以放在任何地方。適用於家庭、辦公室、汽車和櫥櫃裝飾。優雅和藝術氣息，非常適合家庭和辦公室裝飾。你的心情會很愉快。本產品可以放置在任何地方。適用於家庭、辦公室、汽車和櫥櫃裝飾。', '1','doll','prod13-1.jpg','prod13-2.jpg','prod13-3.jpg','prod13-4.jpg'),
 ('無尾熊大娃娃', '1300', '適用於臥室、客廳、家庭、辦公室等。辦公室枕頭：下班後放鬆身心給孩子和朋友的好禮物：正在尋找購買禮物的靈感？隨時帶回家。這將是您最好的購買之一。這款無尾熊動物玩具是很棒的生日、聖誕節或情人節禮物。您的孩子和朋友會喜歡這種毛絨玩具，因為它真的很可愛。可愛逼真的無尾熊可以與您或您的朋友一起度過孤獨的時光。你所有的壞情緒和工作壓力都會消失！當您不在或您的孩子不開心時，可以幫助您的孩子感到放鬆和快樂。', '1','doll','prod14-1.jpg','prod14-2.jpg','prod14-3.jpg','prod14-4.jpg');
 
+-- 購物車
+CREATE TABLE `cart`(
+mem_id int unsigned NOT NULL COMMENT '會員編號',
+prod_id int unsigned NOT NULL COMMENT '商品編號',
+cart_qty int unsigned NOT NULL COMMENT '商品數量',
+PRIMARY KEY (`mem_id`, `prod_id`), 
+FOREIGN KEY (`mem_id`) REFERENCES member(`mem_id`),
+FOREIGN KEY(`prod_id`) REFERENCES product(`prod_id`),
+KEY cart_qty (`cart_qty`)
+)ENGINE=InnoDB CHARSET=utf8mb4 COMMENT='購物車';
+INSERT INTO tibamefe_cgd103g1 . `cart`(`mem_id`,`prod_id`,`cart_qty`) VALUES
+('1001', '5001', '2'), 
+('1001', '5002', '5');
 
 -- 預約導覽
 CREATE TABLE `reservation`(
@@ -236,10 +249,12 @@ KEY `dx_rsv_status` (`rsv_status`),
 KEY `dx_rsv_ps` (`rsv_ps`)
 )ENGINE=InnoDB AUTO_INCREMENT=06001 DEFAULT CHARSET=utf8mb4 COMMENT='導覽預約';
 INSERT INTO `tibamefe_cgd103g1`.`reservation` ( `rsv_date`, `rsv_ppl`,  `rsv_name`, `rsv_mobile`,`rsv_email`,`rsv_status`,`rsv_ps`) VALUES 
+( '2022-12-08', '12', 'Handsome', '0911222333','handsome@gmail.com','已預約','預約導覽Handsome'),
 ( '2022-12-16', '16', 'Sara', '0988168168','sara168@gmail.com','已預約','預約導覽Sara'),
 ( '2022-12-19', '0', 'koala+', '','','休館','休館日'),
 ( '2022-12-22', '8', 'Amy', '0908188188','amy188@gmail.com','已預約',''),
-( '2022-12-31', '0', 'koala+', '','','休館','跨年');
+( '2022-12-31', '0', 'koala+', '','','休館','跨年'),
+( '2023-01-01', '0', 'koala+', '','','休館','元旦');
 
 
 -- 公告
