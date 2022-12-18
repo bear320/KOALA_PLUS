@@ -61,6 +61,11 @@ $b-radius: 10px;
         border-radius: $b-radius $b-radius 0 0;
         border: 1.5px solid $darkgreen;
         border-bottom: none;
+        h3 {
+            @include m() {
+                font-size: 24px;
+            }
+        }
     }
     .content {
         text-align: left;
@@ -79,10 +84,17 @@ $b-radius: 10px;
                 font: 18px font-R;
                 line-height: 1.5;
                 margin-bottom: 10px;
+                @include m() {
+                    font-size: 15px;
+                }
                 img {
                     width: 27px;
                     height: 27px;
                     vertical-align: top;
+                    @include m() {
+                        width: 22.5px;
+                        height: 22.5px;
+                    }
                 }
             }
             li + li {
