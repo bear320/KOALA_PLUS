@@ -1,133 +1,164 @@
 <template>
     <Header />
-    <div class="sections-menu">
-        <span
-            class="menu-point"
-            :class="{ active: activeSection === index }"
-            @click="scrollToSection(index)"
-            v-for="(offset, index) in offsets"
-            :key="index"
-            v-title="'Go to section ' + (index + 1)"
-        >
-        </span>
-    </div>
-    <div class="page">
-        <div class="container">
-            <div id="scene">
-                <div class="layer" data-depth="0.5" data-friction-x="1">
-                    <img src="@/assets/images/index/star.png" />
-                </div>
-                <div class="layer" data-depth="1.5">
-                    <img src="@/assets/images/index/fireline.png" />
-                </div>
-                <div class="layer" data-depth="0.1">
-                    <img src="@/assets/images/index/treeblur.png" alt="" />
-                </div>
-                <div class="layer">
-                    <img src="@/assets/images/index/star.png" />
-                </div>
-                <div class="layer" data-depth="0.7" data-invert-x="false">
-                    <img src="@/assets/images/index/fireline2.png" />
-                </div>
-                <div class="layer">
-                    <img src="@/assets/images/index/cryingkoala.png" />
-                </div>
-                <div class="layer" data-depth="0.3">
-                    <img src="@/assets/images/index/tree.png" alt="" />
-                </div>
-                <div class="layer" data-depth="2">
-                    <img src="@/assets/images/index/fireline.png" />
-                </div>
-                <h1 class="layer" data-depth="0.05">
-                    <img src="@/assets/images/index/logo.svg" />
-                </h1>
-            </div>
+    <div @mousewheel="handleMouseWheel">
+        <div class="sections-menu">
+            <span
+                class="menu-point"
+                :class="{ active: activeSection === index }"
+                @click="scrollToSection(index)"
+                v-for="(offset, index) in offsets"
+                :key="index"
+                v-title="'Go to section ' + (index + 1)"
+            >
+            </span>
         </div>
-    </div>
-    <div class="page">
-        <div class="fire">
-            <h2>Windfires</h2>
-        </div>
-        <p>
-            森林野火造成成千上萬隻無尾熊喪命、受傷、流離失所。KOALA+致力於救助這些無尾熊，給它們一個能安心養傷、休息的空間。為此，我們需要像您這樣願意一起幫助無尾熊的人加入我們。KOALA+不僅僅是救助團體，更有豐富的教育意義，歡迎您加入我們一起認識無尾熊，幫助無尾熊!
-        </p>
-    </div>
-    <div class="page change">
-        <div class="wedo-p">
-            <h2>我們能做什麼?</h2>
-            <p>
-                在KOALA+，我們能領養無尾熊，或捐款幫助無尾熊中心的營運。雖然領養無尾熊沒辦法讓您把她帶回家中一起居住，但這筆費用能讓無尾熊得到好的照顧和環境。另外，KOALA+將發行相應的尤加利葉遊戲幣給您，您可以在<a
-                    href="/my-koala"
-                    >My Koala遊戲區</a
-                >養成無尾熊，陪他們長大。
-            </p>
-        </div>
-        <div class="wedo">
-            <h2>What can we do?</h2>
-        </div>
-    </div>
-    <div class="page colorpage">
-        <div class="wesave-video">
-            <iframe
-                width="560"
-                height="315"
-                src="https://www.youtube.com/embed/yVnV2ejyYYo"
-                title="YouTube video player"
-                frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-            ></iframe>
-        </div>
-        <div class="wesave-p">
-            <h2>我們能幫助他們!</h2>
-            <p>
-                KOALA+自成立起，已幫助非常多無尾熊度過森林野火的劫難，而這一路走來都是因為有許多善心人士溫暖的幫助，讓我們與所有無尾熊救助機構向您說聲感謝!您的幫助是我們所有救助行動的開端，如您需要領養證明書，可至<a
-                    href="/member"
-                    >會員中心-認養證明</a
-                >免費下載，如您想看一看無尾熊們的生活環境，也可以來<a
-                    href="/koala-park"
-                    >預約導覽無尾熊園區</a
-                >，我們由衷歡迎您的參訪，更別忘了<a href="/shop">周邊商城</a
-                >有許多可愛的無尾熊周邊商品，商品售價的利潤將用於無尾熊救助行動，您購買可愛周邊的同時也是在幫助無尾熊!
-            </p>
-        </div>
-    </div>
-    <div class="page">
-        <div class="wrapper">
-            <h2>News</h2>
-            <div class="newscards">
-                <a
-                    class="card article"
-                    v-for="article in articles"
-                    :key="article"
-                >
-                    <div
-                        class="article-img"
-                        :style="{
-                            backgroundImage:
-                                'url(' +
-                                require(`@/assets/images/about/${article.news_img}`) +
-                                ')',
-                        }"
-                    ></div>
-                    <div class="font">
-                        <p class="article-title">{{ article.news_title }}</p>
-                        <div class="date">
-                            <p class="article-tag">
-                                {{ article.news_category }}
-                            </p>
-                            <p class="article-date">{{ article.news_date }}</p>
-                        </div>
-                        <p class="article-content">
-                            {{ article.news_content }}
-                        </p>
+        <div class="page">
+            <div class="container">
+                <div id="scene">
+                    <div class="layer" data-depth="0.5" data-friction-x="1">
+                        <img src="@/assets/images/index/star.png" />
                     </div>
-                </a>
+                    <div class="layer" data-depth="1.5">
+                        <img src="@/assets/images/index/fireline.png" />
+                    </div>
+                    <div class="layer" data-depth="0.1">
+                        <img src="@/assets/images/index/treeblur.png" alt="" />
+                    </div>
+                    <div class="layer">
+                        <img src="@/assets/images/index/star.png" />
+                    </div>
+                    <div class="layer" data-depth="0.7" data-invert-x="false">
+                        <img src="@/assets/images/index/fireline2.png" />
+                    </div>
+                    <div class="layer">
+                        <img src="@/assets/images/index/cryingkoala.png" />
+                    </div>
+                    <div class="layer" data-depth="0.3">
+                        <img src="@/assets/images/index/tree.png" alt="" />
+                    </div>
+                    <div class="layer" data-depth="2">
+                        <img src="@/assets/images/index/fireline.png" />
+                    </div>
+                    <h1 class="layer" data-depth="0.05">
+                        <img src="@/assets/images/index/logo.svg" />
+                    </h1>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="page footer">
-        <Footer />
+        <div class="page">
+            <div class="fire">
+                <h2>Windfires</h2>
+            </div>
+            <p>
+                森林野火造成成千上萬隻無尾熊喪命、受傷、流離失所。KOALA+致力於救助這些無尾熊，給它們一個能安心養傷、休息的空間。為此，我們需要像您這樣願意一起幫助無尾熊的人加入我們。KOALA+不僅僅是救助團體，更有豐富的教育意義，歡迎您加入我們一起認識無尾熊，幫助無尾熊!
+            </p>
+        </div>
+        <div class="page change">
+            <div class="wedo-p">
+                <h2>我們能做什麼?</h2>
+                <p>
+                    在KOALA+，我們能領養無尾熊，或捐款幫助無尾熊中心的營運。雖然領養無尾熊沒辦法讓您把她帶回家中一起居住，但這筆費用能讓無尾熊得到好的照顧和環境。另外，KOALA+將發行相應的尤加利葉遊戲幣給您，您可以在<a
+                        href="/my-koala"
+                        >My Koala遊戲區</a
+                    >養成無尾熊，陪他們長大。
+                </p>
+            </div>
+            <div class="wedo">
+                <h2>What can we do?</h2>
+            </div>
+        </div>
+        <div class="page colorpage">
+            <div class="wesave-video">
+                <iframe
+                    width="560"
+                    height="315"
+                    src="https://www.youtube.com/embed/yVnV2ejyYYo"
+                    title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowfullscreen
+                ></iframe>
+            </div>
+            <div class="wesave-p">
+                <h2>我們能幫助他們!</h2>
+                <p>
+                    KOALA+自成立起，已幫助非常多無尾熊度過森林野火的劫難，而這一路走來都是因為有許多善心人士溫暖的幫助，讓我們與所有無尾熊救助機構向您說聲感謝!您的幫助是我們所有救助行動的開端，如您需要領養證明書，可至<a
+                        href="/member"
+                        >會員中心-認養證明</a
+                    >免費下載，如您想看一看無尾熊們的生活環境，也可以來<a
+                        href="/koala-park"
+                        >預約導覽無尾熊園區</a
+                    >，我們由衷歡迎您的參訪，更別忘了<a href="/shop">周邊商城</a
+                    >有許多可愛的無尾熊周邊商品，商品售價的利潤將用於無尾熊救助行動，您購買可愛周邊的同時也是在幫助無尾熊!
+                </p>
+            </div>
+        </div>
+        <div class="page">
+            <div class="wrapper">
+                <h2>News</h2>
+                <div class="newscards">
+                    <div
+                        class="card article"
+                        v-for="(article, idx) in articles"
+                        :key="article"
+                    >
+                        <teleport to="body">
+                            <lightbox ref="lightbox">
+                                <template #img>
+                                    <img
+                                        :src="
+                                            require(`@/assets/images/about/${article.news_img}`)
+                                        "
+                                    />
+                                </template>
+                                <template #article-title>
+                                    <h3>{{ article.news_title }}</h3>
+                                </template>
+                                <template #article-tag>
+                                    <p>{{ article.news_category }}</p>
+                                </template>
+                                <template #article-date>
+                                    <p>{{ article.news_date }}</p>
+                                </template>
+                                <template #article-content>
+                                    <p>{{ article.news_content }}</p>
+                                </template>
+                            </lightbox>
+                        </teleport>
+                        <div @click="openLightbox(idx)">
+                            <div
+                                class="article-img"
+                                :style="{
+                                    backgroundImage:
+                                        'url(' +
+                                        require(`@/assets/images/about/${article.news_img}`) +
+                                        ')',
+                                }"
+                            ></div>
+                            <div class="font">
+                                <p class="article-title">
+                                    {{ article.news_title }}
+                                </p>
+                                <div class="date">
+                                    <p class="article-tag">
+                                        {{ article.news_category }}
+                                    </p>
+                                    <p class="article-date">
+                                        {{ article.news_date }}
+                                    </p>
+                                </div>
+                                <p class="article-content">
+                                    {{ article.news_content }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="page footer">
+            <Footer />
+        </div>
     </div>
 </template>
 
@@ -135,10 +166,12 @@
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import Parallax from "../../node_modules/parallax-js/src/parallax";
+import lightbox from "@/components/aboutUs/lightbox.vue";
 export default {
     components: {
         Header,
         Footer,
+        lightbox,
     },
     data() {
         return {
@@ -153,16 +186,6 @@ export default {
     mounted() {
         this.intscence();
         this.calculateSectionOffsets();
-        window.addEventListener("mousewheel", this.handleMouseWheel, {
-            passive: false,
-        });
-
-        window.addEventListener("touchstart", this.touchStart, {
-            passive: false,
-        });
-        window.addEventListener("touchmove", this.touchMove, {
-            passive: false,
-        });
     },
     methods: {
         getArticleList() {
@@ -205,6 +228,7 @@ export default {
             }, this.inMoveDelay);
         },
         handleMouseWheel: function (e) {
+            console.log(e);
             if (e.wheelDelta < 120 && !this.inMove) {
                 this.moveUp();
             } else if (e.wheelDelta > 120 && !this.inMove) {
@@ -232,47 +256,12 @@ export default {
 
             this.scrollToSection(this.activeSection, true);
         },
-        touchStart(e) {
-            e.preventDefault();
 
-            this.touchStartY = e.touches[0].clientY;
-        },
-        touchMove(e) {
-            if (this.inMove) return false;
-            e.preventDefault();
-
-            const currentY = e.touches[0].clientY;
-
-            if (this.touchStartY < currentY) {
-                this.moveDown();
-            } else {
-                this.moveUp();
-            }
-
-            this.touchStartY = 0;
-            return false;
-
-            // if (e.wheelDelta < 100 && !this.inMove) {
-            //     this.moveUp();
-            // } else if (e.wheelDelta > 100 && !this.inMove) {
-            //     this.moveDown();
-            // }
-
-            // e.preventDefault();
-            // return false;
+        openLightbox(idx) {
+            this.$refs.lightbox[idx].isShow = true;
         },
     },
-    unmounted() {
-        window.removeEventListener("mousewheel", this.handleMouseWheel, {
-            passive: false,
-        });
-        window.removeEventListener("touchstart", this.touchStart, {
-            passive: false,
-        });
-        window.removeEventListener("touchmove", this.touchMove, {
-            passive: false,
-        });
-    },
+
     created() {
         this.getArticleList();
     },
@@ -316,7 +305,7 @@ body {
     height: 100vh;
     overflow: hidden;
     background-image: url(@/assets/images/index/burning\ forest.jpg);
-    @include bgSetting(cover, bottom 20%);
+    @include bgSetting(cover, bottom);
 
     #scene {
         height: 100vh;
@@ -342,7 +331,7 @@ body {
                 animation: layer2 3s alternate infinite;
             }
             @include m() {
-                margin-top: 45vh;
+                margin-top: 50vh;
             }
             img {
                 width: fit-content;
@@ -422,6 +411,7 @@ body {
             }
             @include m() {
                 margin-left: -150px;
+                margin-top: 0px;
             }
         }
         .layer:nth-child(8) {
@@ -608,7 +598,7 @@ body {
             h2 {
                 transform: translate(calc(-20vw - 40px), 40px);
                 @include d {
-                    transform: translate(calc(-20vw), 20px);
+                    transform: translate(calc(-20vw), -20px);
                 }
             }
         }
@@ -680,6 +670,13 @@ body {
         flex-direction: column-reverse;
     }
 }
+.lightbox {
+    img {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+    }
+}
 .wrapper {
     margin-top: auto;
     margin-bottom: auto;
@@ -703,6 +700,7 @@ body {
             height: 40vh;
             text-align: left;
             margin: 10px;
+            cursor: pointer;
             @include d {
                 width: 100%;
                 height: 35vh;
@@ -759,6 +757,8 @@ body {
                     font-size: $h4;
                     @include rwd-h4;
                     width: 90%;
+                    color: $green;
+                    font-weight: 700;
                 }
                 .date {
                     display: flex;

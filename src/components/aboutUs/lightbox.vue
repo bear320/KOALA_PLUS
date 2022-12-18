@@ -69,6 +69,12 @@ button {
         width: 40%;
         height: 60vh;
         overflow: hidden;
+
+        // &::slotted(img) {
+        //     width: 100%;
+        //     height: 100%;
+        //     object-fit: cover;
+        // } 不知為啥沒用
         @include d {
             width: 65vw;
             height: 35vh;

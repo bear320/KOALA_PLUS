@@ -356,12 +356,6 @@ html {
             .slide {
                 height: 450px;
                 width: 350px;
-
-                img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
             }
         }
         @keyframes scroll {
