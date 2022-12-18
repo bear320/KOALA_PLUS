@@ -174,7 +174,7 @@ export default {
         getResvDetail() {
             // const productId = this.$route.params.id;
             console.log('QQ');
-            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getReservation.php");
+            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
