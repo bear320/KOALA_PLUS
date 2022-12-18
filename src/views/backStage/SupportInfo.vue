@@ -122,32 +122,24 @@ export default {
     },
     data() {
         return {
-            source: {},
-            temp: [],
+            source: [],
         };
     },
     methods: {
-        getSupportList() {
-            // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
+        getSupportInfo() {
+            const supportId = this.$route.params.sup_id;
             const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getSupportList.php"
+                `http://localhost:8888/cgd103_g1/public/api/getSupportInfo.php?supportId=${supportId}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    let [temp] = json.filter((item) => {
-                        console.log(this.$route.params);
-                        return item.sup_id === this.$route.params.sup_id;
-                    });
-                    this.source = temp;
-                })
-                .catch((error) => {
-                    alert(error);
+                    this.source = json.supportInfo;
                 });
         },
     },
     created() {
-        this.getSupportList();
+        this.getSupportInfo();
     },
 };
 </script>

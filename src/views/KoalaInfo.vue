@@ -12,15 +12,26 @@
     <section class="wrapper">
         <div class="koala-info">
             <div class="img">
-                <ImageSlider :imgs="images"></ImageSlider>
+                <ImageSlider :imgs="this.source.koala_images"></ImageSlider>
             </div>
             <div class="text">
                 <div class="paragraph">
                     <h1>{{ source.koala_name }}</h1>
+                    <h2 class="sex-sign">
+                        <Icon
+                            v-if="source.koala_sex === 'Male'"
+                            type="md-male"
+                        />
+                        <Icon
+                            v-if="source.koala_sex === 'Female'"
+                            type="md-female"
+                        />
+                    </h2>
                 </div>
                 <div class="paragraph">
                     <h3>性別： {{ source.koala_sex }}</h3>
                     <h3>生日： {{ source.koala_dob }}</h3>
+                    <h3>年齡： {{ source.koala_age }}</h3>
                 </div>
                 <div class="paragraph">
                     <p>{{ source.koala_info }}</p>
@@ -34,7 +45,7 @@
             <h3>我們提供了兩種幫助無尾熊的方案</h3>
             <div class="plan-wrapper">
                 <PlanCard
-                    v-for="plan in plans"
+                    v-for="(plan, index) in plans"
                     :key="plan.id"
                     :pName="plan.pName"
                     :pPrice="plan.pPrice"
@@ -43,6 +54,7 @@
                     :pGift2="plan.pGift2"
                     :pDesc="plan.pDesc"
                     :pBtn="plan.pBtn"
+                    :index="index"
                 ></PlanCard>
             </div>
         </div>
@@ -120,7 +132,7 @@
 <script>
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
-import ImageSlider from "@/components/shop/ImageSlider.vue";
+import ImageSlider from "@/components/support/ImageSlider.vue";
 import PlanCard from "@/components/koalaInfo/PlanCard.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
@@ -138,8 +150,7 @@ export default {
                 "banner3.jpg",
                 "drawing1.png",
             ],
-            source: {},
-            temp: [],
+            source: [],
             plans: [
                 {
                     pName: "認養單隻無尾熊",
@@ -163,30 +174,29 @@ export default {
         };
     },
     methods: {
-        getKoalas() {
-            const apiURL = new URL(`${BASE_URL}/getKoalas.php`);
+        getKoalaInfo() {
+            const koalaName = this.$route.params.koala_name;
+            // const apiURL = new URL(`${BASE_URL}/getKoalaIngo.php`);
+            const apiURL = new URL(
+                `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaName=${koalaName}`
+            );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    let [temp] = json.filter((item) => {
-                        return (
-                            item.koala_name === this.$route.params.koala_name
-                        );
-                    });
-                    this.source = temp;
-                })
-                .catch((error) => {
-                    alert(error);
+                    this.source = json.koalaInfo;
                 });
         },
     },
     created() {
-        this.getKoalas();
+        this.getKoalaInfo();
     },
 };
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+    max-width: calc(100% - 80px);
+}
 .breadcrumb {
     max-width: 1000px;
     margin: 15px auto 0;
@@ -250,7 +260,29 @@ export default {
             p {
                 font-size: 18px;
                 text-align: justify;
-                line-height: 1.5;
+                line-height: 2;
+            }
+        }
+        .paragraph:first-child {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            column-gap: 10px;
+            .sex-sign {
+                .ivu-icon-md-male {
+                    color: LightSkyBlue;
+                    &:hover {
+                        color: LightSkyBlue;
+                        cursor: default;
+                    }
+                }
+                .ivu-icon-md-female {
+                    color: LightPink;
+                    &:hover {
+                        color: LightPink;
+                        cursor: default;
+                    }
+                }
             }
         }
     }
@@ -281,6 +313,16 @@ export default {
         @include m() {
             width: 100%;
         }
+    }
+}
+</style>
+<style lang="scss">
+.ivu-collapse-header {
+    height: fit-content !important;
+    line-height: 2.5 !important;
+    font-size: 18px;
+    @include m() {
+        font-size: 15px;
     }
 }
 </style>

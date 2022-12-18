@@ -46,6 +46,20 @@
             </p>
         </div>
     </section>
+    <section class="pagination">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': currentPage == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <a @click="nextPage"><li>></li></a>
+        </ul>
+    </section>
 </template>
 
 <script>
@@ -57,18 +71,29 @@ export default {
     data() {
         return {
             source: [],
+            totalPage: 0,
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
         };
+    },
+    watch: {
+        $route: function () {
+            if (!Object.keys(this.$route.query).length) {
+                this.currentPage = 1;
+                this.getSupportList();
+            }
+            this.getSupportList();
+        },
     },
     methods: {
         getSupportList() {
             // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
             const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getSupportList.php"
+                `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json.map((item) => {
+                    this.source = json.support.map((item) => {
                         return {
                             sup_id: +item.sup_id,
                             mem_name: item.mem_name,
@@ -78,10 +103,49 @@ export default {
                             sup_price: item.sup_price,
                         };
                     });
+                    this.totalPage = Math.ceil(json.supportCount / 10);
                 })
                 .catch((error) => {
-                    alert(error);
+                    // alert(error);
                 });
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                return;
+            } else {
+                this.currentPage--;
+                this.$router.push({
+                    path: "/bs-support-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        nextPage() {
+            if (this.currentPage === this.totalPage) {
+                return;
+            } else {
+                this.currentPage++;
+                this.$router.push({
+                    path: "/bs-support-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.$router.push({
+                path: "/bs-support-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                },
+            });
         },
     },
     created() {
@@ -118,7 +182,6 @@ export default {
     }
 }
 .table {
-    margin-bottom: 60px;
     .bs-title {
         width: 100%;
         border-radius: 10px;
@@ -153,6 +216,31 @@ export default {
                 }
             }
         }
+    }
+}
+.pagination {
+    padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
     }
 }
 </style>

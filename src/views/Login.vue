@@ -102,7 +102,7 @@
                                     <p class="content_active_login_moveTxt">密碼</p>
                                     <i class="icon_password"></i>
                                     <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password" required/>
-                                    <input class="content_active_login_move4"  type="password" placeholder="Password" v-model="login_password" required v-else  @keyup="login"/>
+                                    <input class="content_active_login_move4"  type="password" placeholder="Password" v-model="login_password" required v-else/>
                                     <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye"/>
                                 </div>
                                 <label class="errorMsg" v-if="errorFlag" v-cloak>{{ errorMsg }}</label><br />
@@ -173,12 +173,15 @@ export default {
     },
     methods: {
         getArticleList(){
-            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php")
-            .then((res) => res.json())
+            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php",{mode: 'no-cors'})
+            .then((respons) => respons.json())
             .then((json) => {
                 console.log(json);
                 this.memindexs = json;
-            });
+            })
+            .catch((error) => { // 當初出現錯誤時跑 catch
+                console.log(error);
+            })
         },
 
         login() {
@@ -214,29 +217,63 @@ export default {
                 // thisvue.errorFlag = true;
             }
             else {
-                $.ajax({
-                    type: "POST",
-                    url: "../../public/api/getConfirmMember.php",
-                    data: {
+                // 建立一個 XMLHttpRequest 物件
+                let xhr = new XMLHttpRequest();
+
+                // 使用 open() 發送請求，並且需要帶入三個參數
+                // 參數分別是 HTTP方法、處理請求的網址、取得資料的方式（同步/非同步）
+                xhr.open("POST", "http://localhost/cgd103_g1/public/api/getConfirmMember.php", true);
+
+                // 送出請求，小括號內可帶入其他參數進行傳送
+                xhr.send(
+                    {
                         login_account: thisvue.login_account,
                         login_password: thisvue.login_password
-                    },
-                    success: function(res) {
-                        if(res[0].code == 1) {
-                            thisvue.errorFlag = false;
-                            window.location.href = "../views/HomeView.vue"
-                        }
-                        else {
-                            thisvue.errorMsg = "帳號或密碼錯誤";
-                            thisvue.login_password = "";
-                            thisvue.errorFlag = true;
-                        }
                     }
-                })
+                );
+                
+                // 從伺服器取得資料後的處理
+                xhr.onload = function(response) {
+                  // 處理回傳資料的程式碼
+                    if(response[0].code == 1) {
+                        thisvue.errorFlag = false;
+                        window.location.href = "http://localhost:8080/home"
+                    }
+                    else {
+                        thisvue.errorMsg = "帳號或密碼錯誤";
+                        thisvue.login_password = "";
+                        thisvue.errorFlag = true;
+                    }
+                //   console.log('成功');
+                };
+                xhr.onerror = function (err) {
+                  console.log('錯誤', err)
+                };
+                // const ajax = new XMLHttpRequest(); //AJAX 通訊初始
+				// ajax.open("POST", form.getAttribute("action"), true); 
+                // $.ajax({
+                //     type: "POST",
+                //     url: "../../public/api/getConfirmMember.php",
+                //     data: {
+                //         login_account: thisvue.login_account,
+                //         login_password: thisvue.login_password
+                //     },
+                //     success: function(res) {
+                //         if(res[0].code == 1) {
+                //             thisvue.errorFlag = false;
+                //             window.location.href = "../views/HomeView.vue"
+                //         }
+                //         else {
+                //             thisvue.errorMsg = "帳號或密碼錯誤";
+                //             thisvue.login_password = "";
+                //             thisvue.errorFlag = true;
+                //         }
+                //     }
+                // })
             }
         },
 
-        sign_up(at) {
+        sign_up() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_sign_up";
             document.querySelector(".content_active_sign_up").style.display =
@@ -261,7 +298,7 @@ export default {
             }, 400);
         },
 
-        forget_password(at) {
+        forget_password() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_forget_password";
             document.querySelector(

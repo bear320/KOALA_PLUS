@@ -182,15 +182,6 @@ export default {
                     console.log(this.relProducts);
                 });
         },
-        /* getRelProduct(category) {
-            fetch(
-                `https://learnnodejs-3s6rmmfxwq-de.a.run.app/api/v1/tours?category=${category}&sort=name`
-            )
-                .then((res) => res.json())
-                .then((json) => {
-                    this.relProducts = json.dtat.tours;
-                });
-        }, */
         changeQuantity(operator) {
             if (operator === "-") {
                 this.quantity > 1 ? (this.quantity -= 1) : this.quantity;
@@ -199,30 +190,11 @@ export default {
             }
         },
         addToCart() {
-            // 檢查購物車中是否已存在該商品
-            let cartIndex = this.$store.state.cart.findIndex((item) => {
-                return item.id === this.source.id;
+            this.$store.dispatch("addToCart", {
+                memId: 1001,
+                prodId: +this.$route.params.id,
+                cartQty: this.quantity,
             });
-
-            // 若不存在則加到購物車
-            if (cartIndex < 0) {
-                const setData = {
-                    id: this.source.id,
-                    image: this.source.images[0],
-                    name: this.source.name,
-                    quantity: this.quantity,
-                    price: this.sumTotal,
-                };
-                this.$store.commit("addToCart", setData);
-                this.quantity = 1;
-                alert("已加到購物車");
-            } else {
-                this.$store.commit({
-                    type: "updateItemQuantity",
-                    index: cartIndex,
-                    quantity: this.quantity,
-                });
-            }
         },
     },
 

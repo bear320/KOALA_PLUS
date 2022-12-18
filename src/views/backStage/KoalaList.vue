@@ -58,13 +58,27 @@
             </p>
             <p>
                 <router-link
-                    :to="`/bs-koala-edit/${koala.koala_id}`"
+                    :to="`/bs-koala-edit/${koala.koala_name}`"
                     target="_blank"
                 >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
         </div>
+    </section>
+    <section class="pagination">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': currentPage == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <a @click="nextPage"><li>></li></a>
+        </ul>
     </section>
 </template>
 
@@ -78,36 +92,81 @@ export default {
     data() {
         return {
             source: [],
+            totalPage: 0,
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
         };
+    },
+    watch: {
+        $route: function () {
+            if (!Object.keys(this.$route.query).length) {
+                this.currentPage = 1;
+                this.getKoalaList();
+            }
+            this.getKoalaList();
+        },
     },
     methods: {
         getKoalaList() {
             // const apiURL = new URL(`${BASE_URL}/getKoalaList.php`);
             const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getKoalaList.php"
+                `http://localhost:8888/cgd103_g1/public/api/getKoalaList.php?limit=10&page=${this.currentPage}`
             );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json.map((item) => {
+                    this.source = json.koalas.map((item) => {
                         return {
                             koala_id: +item.koala_id,
                             koala_name: item.koala_name,
+                            koala_sex: item.koala_sex,
                             koala_dob: item.koala_dob,
                             koala_age: +item.koala_age,
-                            koala_sex: item.koala_sex,
-                            koala_info: item.koala_info,
                             koala_listed: +item.koala_listed,
-                            koala_img1: item.koala_img1,
-                            koala_img2: item.koala_img2,
-                            koala_img3: item.koala_img3,
-                            koala_img4: item.koala_img4,
                         };
                     });
+                    this.totalPage = Math.ceil(json.koalaCount / 10);
                 })
                 .catch((error) => {
-                    alert(error);
+                    // alert(error);
                 });
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                return;
+            } else {
+                this.currentPage--;
+                this.$router.push({
+                    path: "/bs-koala-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        nextPage() {
+            if (this.currentPage === this.totalPage) {
+                return;
+            } else {
+                this.currentPage++;
+                this.$router.push({
+                    path: "/bs-koala-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                    },
+                });
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.$router.push({
+                path: "/bs-koala-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                },
+            });
         },
     },
     created() {
@@ -144,7 +203,6 @@ export default {
     }
 }
 .table {
-    margin-bottom: 60px;
     .bs-title {
         width: 100%;
         border-radius: 10px;
@@ -179,6 +237,31 @@ export default {
                 }
             }
         }
+    }
+}
+.pagination {
+    padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
     }
 }
 </style>
