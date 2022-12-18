@@ -107,10 +107,12 @@ export default {
     },
     methods: {
         getKoalaList() {
-            // const apiURL = new URL(`${BASE_URL}/getKoalaList.php`);
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getKoalaList.php?limit=10&page=${this.currentPage}`
+                `${BASE_URL}/getKoalaList.php?limit=10&page=${this.currentPage}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getKoalaList.php?limit=10&page=${this.currentPage}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

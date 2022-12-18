@@ -114,7 +114,7 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
-
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -129,8 +129,11 @@ export default {
         getSupportInfo() {
             const supportId = this.$route.params.sup_id;
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getSupportInfo.php?supportId=${supportId}`
+                `${BASE_URL}/getSupportInfo.php?supportId=${supportId}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getSupportInfo.php?supportId=${supportId}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

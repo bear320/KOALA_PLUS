@@ -1,7 +1,6 @@
 <template lang="">
     <div class="image-slider">
         <div class="view-box">
-            <!-- :style="{ left: `-${this.curIndex * 100}%` }" -->
             <div ref="mainImage" class="main-image">
                 <img
                     v-for="(imgPath, index) in imgs"

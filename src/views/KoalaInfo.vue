@@ -144,12 +144,6 @@ export default {
     },
     data() {
         return {
-            images: [
-                "banner1.jpg",
-                "banner2.jpg",
-                "banner3.jpg",
-                "drawing1.png",
-            ],
             source: [],
             plans: [
                 {
@@ -176,14 +170,19 @@ export default {
     methods: {
         getKoalaInfo() {
             const koalaName = this.$route.params.koala_name;
-            // const apiURL = new URL(`${BASE_URL}/getKoalaIngo.php`);
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaName=${koalaName}`
+                `${BASE_URL}/getKoalaInfo.php?koalaName=${koalaName}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaName=${koalaName}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
                     this.source = json.koalaInfo;
+                })
+                .catch((error) => {
+                    // alert(error);
                 });
         },
     },

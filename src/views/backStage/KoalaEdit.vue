@@ -125,7 +125,7 @@
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
 import ImageEdit from "@/components/backStage/ImageEdit.vue";
-
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -141,8 +141,11 @@ export default {
         getKoalaEditInfo() {
             const koalaName = this.$route.params.koala_name;
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getKoalaEditInfo.php?koalaName=${koalaName}`
+                `${BASE_URL}/getKoalaEditInfo.php?koalaName=${koalaName}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getKoalaEditInfo.php?koalaName=${koalaName}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

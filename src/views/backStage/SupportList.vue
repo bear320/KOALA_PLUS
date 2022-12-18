@@ -64,6 +64,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -86,10 +87,12 @@ export default {
     },
     methods: {
         getSupportList() {
-            // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
             const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
+                `${BASE_URL}/getSupportList.php?limit=10&page=${this.currentPage}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
