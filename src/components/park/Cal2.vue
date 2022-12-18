@@ -110,7 +110,7 @@
 </template>
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
-// import { BASE_URL } from "@/assets/js/common.js";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
     data() {
@@ -174,7 +174,7 @@ export default {
         getResvDetail() {
             // const productId = this.$route.params.id;
             console.log('QQ');
-            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
+            const apiURL = new URL(`${BASE_URL}/getReservation.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
