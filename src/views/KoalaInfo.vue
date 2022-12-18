@@ -194,6 +194,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+    max-width: calc(100% - 80px);
+}
 .breadcrumb {
     max-width: 1000px;
     margin: 15px auto 0;
@@ -310,6 +313,16 @@ export default {
         @include m() {
             width: 100%;
         }
+    }
+}
+</style>
+<style lang="scss">
+.ivu-collapse-header {
+    height: fit-content !important;
+    line-height: 2.5 !important;
+    font-size: 18px;
+    @include m() {
+        font-size: 15px;
     }
 }
 </style>
