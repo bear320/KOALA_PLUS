@@ -162,6 +162,12 @@ const routes = [
         component: () => import("@/views/backStage/ArticleEdit.vue"),
     },
     {
+        path: "/bs-article-add",
+        name: "articleAdd",
+        // component: ArticleAdd,
+        component: () => import("@/views/backStage/ArticleAdd.vue"),
+    },
+    {
         path: "/bs-booking-list",
         name: "bookingList",
         // component: BookingList,
