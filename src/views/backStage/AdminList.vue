@@ -91,9 +91,7 @@ export default {
             });
         },
         getAdminList() {
-            const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1_dev/public/api/getAdminList.php"
-            );
+            const apiURL = new URL(`${BASE_URL}/getAdminList.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -107,9 +105,6 @@ export default {
                             emp_last_login: item.emp_last_login,
                         };
                     });
-                })
-                .catch((error) => {
-                    alert(error);
                 });
         },
     },

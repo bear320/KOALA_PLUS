@@ -156,9 +156,25 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log("orderlist");
                     console.log(json);
                     this.orderlists = json;
+                });
+        },
+        postOrderList() {
+            const apiURL = new URL(`${BASE_URL}/postOrderList.php`);
+            const orderList = {
+                ord_id: Number(this.orders.ord_id),
+                ord_ship: this.orders.ord_ship,
+            };
+            console.log(orderList);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(orderList),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
                 });
         },
     },
