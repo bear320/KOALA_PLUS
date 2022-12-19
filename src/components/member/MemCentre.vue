@@ -118,8 +118,6 @@ export default {
     },
     methods: {
         editMemInfo() {
-            console.log("editMemInfo");
-
             const postMemMainData = {
                 mem_name: this.$refs.mem_name.value,
                 mem_account: this.$refs.mem_account.value,
@@ -128,27 +126,32 @@ export default {
             };
             console.log(postMemMainData);
 
-            fetch(
-                "http://localhost/cgd103_g1/public/api/editMember.php?mem_id=1001&type=1",
-                {
-                    method: "POST",
-                    body: new URLSearchParams(postMemMainData),
-                }
-            )
-                .then((res) => res.json())
-                .then((status) => {
-                    // console.log(status);
-                    alert(status.msg);
-                });
-            if (this.passwordcheck != "") {
-                alert("有輸入內容");
-                if (this.newpassword == this.newpasswordconfirm) {
-                    alert("相同");
+            let getCookie = document.cookie;
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/editMember.php?type=1",
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        body: new URLSearchParams(postMemMainData),
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((status) => {
+                        alert(status.msg);
+                    });
+                if (this.passwordcheck != "") {
+                    alert("有輸入內容");
+                    if (this.newpassword == this.newpasswordconfirm) {
+                        alert("相同");
+                    } else {
+                        alert("密碼不相同");
+                    }
                 } else {
-                    alert("密碼不相同");
+                    // alert("密碼不可為空白");
                 }
             } else {
-                // alert("密碼不可為空白");
+                alert("登入失效");
             }
         },
         editMempsw() {
@@ -160,39 +163,69 @@ export default {
             };
             // console.log(postMemMainData);
 
-            fetch(
-                "http://localhost/cgd103_g1/public/api/editMember.php?mem_id=1001&type=2",
-                {
-                    method: "POST",
-                    body: new URLSearchParams(postMemMainData),
-                }
-            )
-                .then((res) => res.json())
-                .then((status) => {
-                    console.log(status);
-                    alert(status.msg);
-                });
-            if (this.passwordcheck != "") {
-                alert("有輸入內容");
-                console.log(this.newpassword);
-                console.log(this.newpasswordconfirm);
-                if (this.newpassword == this.newpasswordconfirm) {
-                    alert("相同");
+            let getCookie = document.cookie;
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/editMember.php?type=2",
+                    {
+                        method: "POST",
+                        credentials: "include",
+                        body: new URLSearchParams(postMemMainData),
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((status) => {
+                        console.log(status);
+                        alert(status.msg);
+                    });
+                if (this.passwordcheck != "") {
+                    alert("有輸入內容");
+                    console.log(this.newpassword);
+                    console.log(this.newpasswordconfirm);
+                    if (this.newpassword == this.newpasswordconfirm) {
+                        alert("相同");
+                    } else {
+                        alert("密碼不相同");
+                    }
                 } else {
-                    alert("密碼不相同");
+                    // alert("密碼不可為空白");
                 }
             } else {
-                // alert("密碼不可為空白");
+                alert("登入失效");
             }
         },
     },
     created() {
-        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json);
-                this.memindexs = json;
-            });
+        let getCookie = document.cookie;
+        if (getCookie) {
+            // const createdurl = "http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1002";
+            fetch(
+                "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
+                {
+                    // method: "POST",
+                    // mode: "cors", //same-origin,no-cors,*cors
+                    credentials: "include", //*omit,same-origin,include
+                    // redirect: "follow", //*follow,manual,error
+                    // referrer: "no-referrer", //*client,no-referrer
+                    // headers: {
+                    //     "Access-Control-Allow-Origin": "http://localhost:8080",
+                    //     "Content-Type": "application/json",
+                    // },
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    if (json.status) {
+                        this.memindexs = json.list;
+                        return true;
+                    }
+                    alert("獲取數據失敗");
+                });
+        } else {
+            alert("登入失效");
+            //跳轉 login url
+        }
     },
     computed() {},
 };

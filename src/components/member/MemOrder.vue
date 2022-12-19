@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_order content">
         <div class="mem_basic">
-            <p>姓名：{{ memindexs.mem_name }}</p>
-            <p>會員ID：{{ memindexs.mem_id }}</p>
+            <p>姓名：{{ userid }}</p>
+            <p>會員ID：{{ username }}</p>
         </div>
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
@@ -57,6 +57,8 @@ export default {
     },
     data() {
         return {
+            userid: "",
+            username: "",
             showMemUnsubscribe: false,
             ord_sts: 1,
             memindexs: [],
@@ -97,20 +99,26 @@ export default {
         },
     },
     created() {
-        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json);
-                this.memindexs = json;
-            });
-        fetch(
-            "http://localhost/cgd103_g1/public/api/postmemOrder.php?mem_id=1001"
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-                this.order = json;
-            });
+        let getCookie = document.cookie;
+        if (getCookie) {
+            fetch("http://localhost/cgd103_g1/public/api/postmemOrder.php", {
+                credentials: "include",
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    if (json.status) {
+                        this.order = json.list;
+                        this.userid = json.userid;
+                        this.username = json.username;
+                        return true;
+                    }
+                    alert("獲取數據失敗");
+                });
+        } else {
+            alert("登入失效");
+            //跳轉 login url
+        }
     },
 };
 </script>

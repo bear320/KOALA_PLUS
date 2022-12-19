@@ -95,10 +95,15 @@ export default {
         Header,
     },
     created() {
-        fetch("http://localhost/cgd103_g1/public/api/getMember.php")
+        fetch(
+            "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
+            {
+                credentials: "include",
+            }
+        )
             .then((res) => res.json())
             .then((json) => {
-                // console.log(json);
+                console.log(json);
                 this.memindexs = json;
             });
     },
