@@ -76,7 +76,7 @@ export default {
                     alert("獲取數據失敗");
                 });
         } else {
-            alert("登入失效");
+            // alert("登入失效");
             //跳轉 login url
         }
     },
