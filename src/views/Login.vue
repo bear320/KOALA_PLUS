@@ -19,7 +19,12 @@
                         <div class="content_login_block">
                             <div class="content_opcitiy content_opcitiy_right">
                                 <p>已經擁有會員？</p>
-                                <button class="main_block_btn_login" @click="login">登入會員</button><br />
+                                <button
+                                    class="main_block_btn_login"
+                                    @click="login"
+                                >
+                                    登入會員</button
+                                ><br />
                                 <button
                                     class="main_block_btn_login"
                                     @click="forget_password"
@@ -46,16 +51,37 @@
                                 </div>
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input type="text" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
+                                    <input
+                                        type="text"
+                                        placeholder="你的信箱或帳號"
+                                        v-model="sign_up_account"
+                                        required
+                                    />
                                 </div>
                                 <div>
-                                    <button class="btn_email_confirm">信箱認證</button>
+                                    <button class="btn_email_confirm">
+                                        信箱認證
+                                    </button>
                                 </div>
                                 <div>
-                                    <p class="content_active_sign_up_moveTxt_1">密碼</p>
+                                    <p class="content_active_sign_up_moveTxt_1">
+                                        密碼
+                                    </p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password"/>
-                                    <input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
+                                    <input
+                                        class="content_active_sign_up_move2"
+                                        type="text"
+                                        v-if="pwdType_one"
+                                        v-model="sign_up_password"
+                                    />
+                                    <input
+                                        class="content_active_sign_up_move2"
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        v-model="sign_up_password"
+                                        required
+                                        v-else
+                                    />
                                     <img
                                         :src="seen_one ? seenImg : unseenImg"
                                         @click="changeType_1"
@@ -69,8 +95,20 @@
                                         密碼認證
                                     </p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_sign_up_move3" type="text" v-if="pwdType_two" v-model="sign_up_password_comfirm"/>
-                                    <input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" v-model="sign_up_password_comfirm" required v-else/>
+                                    <input
+                                        class="content_active_sign_up_move3"
+                                        type="text"
+                                        v-if="pwdType_two"
+                                        v-model="sign_up_password_comfirm"
+                                    />
+                                    <input
+                                        class="confirm_password content_active_sign_up_move3"
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        v-model="sign_up_password_comfirm"
+                                        required
+                                        v-else
+                                    />
                                     <img
                                         :src="seen_two ? seenImg : unseenImg"
                                         @click="changeType_2"
@@ -96,27 +134,87 @@
                             <form @submit.prevent="login">
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input type="text" placeholder="Account" v-model="login_account" required/>
+                                    <input
+                                        type="text"
+                                        placeholder="Account"
+                                        v-model="login_account"
+                                        required
+                                    />
                                 </div>
                                 <div>
-                                    <p class="content_active_login_moveTxt">密碼</p>
+                                    <p class="content_active_login_moveTxt">
+                                        密碼
+                                    </p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password" required/>
-                                    <input class="content_active_login_move4"  type="password" placeholder="Password" v-model="login_password" required v-else/>
-                                    <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye"/>
+                                    <input
+                                        class="content_active_login_move4"
+                                        type="text"
+                                        v-if="pwdType_three"
+                                        v-model="login_password"
+                                        required
+                                    />
+                                    <input
+                                        class="content_active_login_move4"
+                                        type="password"
+                                        placeholder="Password"
+                                        v-model="login_password"
+                                        required
+                                        v-else
+                                    />
+                                    <img
+                                        :src="seen_three ? seenImg : unseenImg"
+                                        @click="changeType_3"
+                                        v-on:mouseover="hoverEye_3"
+                                        v-on:mouseout="outEye_3"
+                                        class="login_icon_eye"
+                                    />
                                 </div>
-                                <label class="errorMsg" v-if="errorFlag" v-cloak>{{ errorMsg }}</label><br />
-                                <button class="btn_login" type="submit" @click="login" value="Login">登錄會員</button><br />
+                                <label
+                                    class="errorMsg"
+                                    v-if="errorFlag"
+                                    v-cloak
+                                    >{{ errorMsg }}</label
+                                ><br />
+                                <button
+                                    class="btn_login"
+                                    type="submit"
+                                    @click="login"
+                                    value="Login"
+                                >
+                                    登錄會員</button
+                                ><br />
                             </form>
-                            <button class="btn_login" @click="forget_password">忘記密碼</button>
-                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
+                            <button class="btn_login" @click="forget_password">
+                                忘記密碼
+                            </button>
+                            <div>
+                                <img
+                                    src="../assets/images/login/login_koala.png"
+                                    alt=""
+                                />
+                            </div>
                         </div>
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
                             <form>
-                                <div><p>帳號/信箱</p><input id="aaa" type="text" placeholder="Account" v-model="forget_password_account" required/></div>
-                                <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
+                                <div>
+                                    <p>帳號/信箱</p>
+                                    <input
+                                        id="aaa"
+                                        type="text"
+                                        placeholder="Account"
+                                        v-model="forget_password_account"
+                                        required
+                                    />
+                                </div>
+                                <button
+                                    class="btn_login"
+                                    type="submit"
+                                    @click="sendEmail"
+                                >
+                                    驗證信箱
+                                </button>
                             </form>
                             <div>
                                 <img
@@ -140,30 +238,28 @@ export default {
         Header,
         emailjs,
     },
-    data () {
-      return {
-        login_account: "",
-        login_password: "",
-        errorFlag: false,
-        errorMsg: "",
+    data() {
+        return {
+            login_account: "",
+            login_password: "",
+            errorFlag: false,
+            errorMsg: "",
 
+            seen_one: "",
+            seen_two: "",
+            seen_three: "",
+            unseenImg: require("../assets/images/login/eye_close.png"),
+            seenImg: require("../assets/images/login/eye_open.png"),
+            pwdType_one: false,
+            pwdType_two: false,
+            pwdType_three: false,
+            sign_up_userName: "",
+            sign_up_account: "",
+            sign_up_password: "",
+            sign_up_password_comfirm: "",
 
-
-        seen_one: "",
-        seen_two: "",
-        seen_three: "",
-        unseenImg: require("../assets/images/login/eye_close.png"),
-        seenImg: require("../assets/images/login/eye_open.png"),
-        pwdType_one: false,
-        pwdType_two: false,
-        pwdType_three: false,
-        sign_up_userName: "",
-        sign_up_account: "",
-        sign_up_password: "",
-        sign_up_password_comfirm: "",
-
-        forget_password_account: "",
-      }
+            forget_password_account: "",
+        };
     },
     mounted() {
         this.login();
@@ -172,16 +268,20 @@ export default {
         this.getArticleList();
     },
     methods: {
-        getArticleList(){
-            fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php",{mode: 'no-cors'})
-            .then((respons) => respons.json())
-            .then((json) => {
-                console.log(json);
-                this.memindexs = json;
-            })
-            .catch((error) => { // 當初出現錯誤時跑 catch
-                console.log(error);
-            })
+        getArticleList() {
+            fetch(
+                "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                { mode: "no-cors" }
+            )
+                .then((respons) => respons.json())
+                .then((json) => {
+                    console.log(json);
+                    this.memindexs = json;
+                })
+                .catch((error) => {
+                    // 當初出現錯誤時跑 catch
+                    console.log(error);
+                });
         },
 
         login() {
@@ -209,48 +309,65 @@ export default {
                 ).style.display = "none";
             }, 200);
 
-
             // ==============================   驗證   ============================== //
             let thisvue = this;
-            if(thisvue.login_account == "" || thisvue.login_password == "") {
+            if (thisvue.login_account == "" || thisvue.login_password == "") {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
                 // thisvue.errorFlag = true;
-            }
-            else {
-                // 建立一個 XMLHttpRequest 物件
+            } else {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                    {
+                        method: "post",
+                        credentials: "include",
+                        body: new URLSearchParams({
+                            mem_account: this.login_account,
+                            mem_psw: this.login_password,
+                        }),
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        if (json.code) {
+                            console.log("成功");
+                        }
+                    });
+                /* // 建立一個 XMLHttpRequest 物件
                 let xhr = new XMLHttpRequest();
 
                 // 使用 open() 發送請求，並且需要帶入三個參數
                 // 參數分別是 HTTP方法、處理請求的網址、取得資料的方式（同步/非同步）
-                xhr.open("POST", "http://localhost/cgd103_g1/public/api/getConfirmMember.php", true);
+                xhr.open(
+                    "POST",
+                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                    true
+                );
 
                 // 送出請求，小括號內可帶入其他參數進行傳送
-                xhr.send(
-                    {
-                        login_account: thisvue.login_account,
-                        login_password: thisvue.login_password
-                    }
-                );
-                
+                xhr.send({
+                    login_account: thisvue.login_account,
+                    login_password: thisvue.login_password,
+                });
+
                 // 從伺服器取得資料後的處理
-                xhr.onload = function(response) {
-                  // 處理回傳資料的程式碼
-                    if(response[0].code == 1) {
+                xhr.onload = function (response) {
+                    // 處理回傳資料的程式碼
+                    if (response[0].code == 1) {
                         thisvue.errorFlag = false;
-                        window.location.href = "http://localhost:8080/home"
-                    }
-                    else {
+                        window.location.href = "http://localhost:8080/home";
+                    } else {
                         thisvue.errorMsg = "帳號或密碼錯誤";
                         thisvue.login_password = "";
                         thisvue.errorFlag = true;
                     }
-                //   console.log('成功');
+                    //   console.log('成功');
                 };
                 xhr.onerror = function (err) {
-                  console.log('錯誤', err)
-                };
+                    console.log("錯誤", err);
+                }; */
                 // const ajax = new XMLHttpRequest(); //AJAX 通訊初始
-				// ajax.open("POST", form.getAttribute("action"), true); 
+                // ajax.open("POST", form.getAttribute("action"), true);
                 // $.ajax({
                 //     type: "POST",
                 //     url: "../../public/api/getConfirmMember.php",
@@ -381,15 +498,6 @@ export default {
             this.seen_three = !this.seen_three;
         },
 
-
-
-
-
-
-
-
-
-
         sendEmail(e) {
             e.preventDefault();
             const templateParams = {
@@ -397,22 +505,22 @@ export default {
                 userMail: e.target.account,
             };
 
-            emailjs.send("gmail", "template_21xikzb", this.templateParams, "X1x5cmen7BlWhZ2yb")
-            .then(() => {
-                console.log("成功");
-            }, (error) => {
-                console.log("失敗", error);
-            });
+            emailjs
+                .send(
+                    "gmail",
+                    "template_21xikzb",
+                    this.templateParams,
+                    "X1x5cmen7BlWhZ2yb"
+                )
+                .then(
+                    () => {
+                        console.log("成功");
+                    },
+                    (error) => {
+                        console.log("失敗", error);
+                    }
+                );
         },
-
-
-
-
-
-
-
-
-
 
         // email_confirm(){
         //     let auth = true;
@@ -422,15 +530,6 @@ export default {
         //     else
         //         alert('login failed');
         // },
-
-
-
-
-
-
-
-
-
 
         // email 認證
         // loginVal() {
