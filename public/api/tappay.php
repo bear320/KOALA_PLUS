@@ -1,10 +1,10 @@
 <?php
 header('Access-Control-Allow-Origin:*');
 header("Content-Type:application/json;charset=utf-8");
-$prime = 'test_3a2fb2b7e892b914a03c95dd4dd5dc7970c908df67a49527c0a648b2bc9'; // 請將這裡替換成您取得的 Prime
-// $prime = $_GET['prime']; // 請將這裡替換成您取得的 Prime
+// $prime = 'test_3a2fb2b7e892b914a03c95dd4dd5dc7970c908df67a49527c0a648b2bc9'; // 請將這裡替換成您取得的 Prime
+$prime = $_GET['prime']; // 請將這裡替換成您取得的 Prime
 $partner_key = "partner_YNtWVqJYUfL2NXpwQVOO6X4wCAgNuxojfrYWIbxz236ugjEFHIv0xkqy"; // 請將這裡替換成您的 Tappay 帳號的 API Key
-$merchant_id = "shiba198345_CTBC_Union_Pay"; // 請將這裡替換成您的 Tappay 帳號的 Merchant ID
+$merchant_id = "shiba198345_TAISHIN"; // 請將這裡替換成您的 Tappay 帳號的 Merchant ID
 
 $header = array(
     "Content-Type: application/json",

@@ -21,9 +21,9 @@ export default {
     // },
     created() {
         // 如果存在會員資訊，存取他的會員資料
-        if (this.$store.state.user) {
+        /* if (this.$store.state.user) {
             this.$store.dispatch("getMemCart");
-        }
+        } */
     },
     watch: {
         // 監測登入狀態，若有會員登入則執行程式
