@@ -10,14 +10,18 @@
                 <img src="@/assets/images/icon/FilePlus.svg" alt="" />
             </router-link>
             <div class="search">
-                <input type="search" name="" id="" placeholder="搜尋" />
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="搜尋無尾熊名字"
+                    v-model.trim="search"
+                    @change="changeVal"
+                />
             </div>
-            <select name="" id="">
-                <option value="" selected>排列方式</option>
-                <option value="">編號（正序）</option>
-                <option value="">編號（反序）</option>
-                <option value="">年齡（大到小）</option>
-                <option value="">年齡（小到大）</option>
+            <select name="sort" id="sort" v-model="sort" @change="changeVal">
+                <option value="0">排列：編號（小到大）</option>
+                <option value="1">排列：編號（大到小）</option>
             </select>
         </div>
     </section>
@@ -91,6 +95,8 @@ export default {
     },
     data() {
         return {
+            sort: 0,
+            search: "",
             source: [],
             totalPage: 0,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
@@ -100,16 +106,22 @@ export default {
         $route: function () {
             if (!Object.keys(this.$route.query).length) {
                 this.currentPage = 1;
-                this.getKoalaList();
+                this.getKoalaList(this.$route.query);
             }
-            this.getKoalaList();
+            this.getKoalaList(this.$route.query);
         },
     },
     methods: {
-        getKoalaList() {
-            const apiURL = new URL(
-                `${BASE_URL}/getKoalaList.php?limit=10&page=${this.currentPage}`
-            );
+        getKoalaList(queryParam) {
+            if (!Object.keys(queryParam).length) {
+                queryParam.limit = 10;
+                queryParam.page = 1;
+                queryParam.sort = 0;
+                queryParam.search = this.search;
+            }
+            const apiURL = new URL(`${BASE_URL}/getKoalaList.php`);
+            const searchParam = new URLSearchParams(queryParam);
+            apiURL.search = searchParam;
             // const apiURL = new URL(
             //     `http://localhost:8888/cgd103_g1/public/api/getKoalaList.php?limit=10&page=${this.currentPage}`
             // );
@@ -142,6 +154,8 @@ export default {
                     query: {
                         limit: `10`,
                         page: this.currentPage,
+                        sort: this.sort,
+                        search: this.search,
                     },
                 });
             }
@@ -156,6 +170,8 @@ export default {
                     query: {
                         limit: `10`,
                         page: this.currentPage,
+                        sort: this.sort,
+                        search: this.search,
                     },
                 });
             }
@@ -167,12 +183,28 @@ export default {
                 query: {
                     limit: `10`,
                     page: this.currentPage,
+                    sort: this.sort,
+                    search: this.search,
+                },
+            });
+        },
+        changeVal() {
+            this.$router.push({
+                path: "/bs-koala-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                    sort: this.sort,
+                    search: this.search,
                 },
             });
         },
     },
     created() {
-        this.getKoalaList();
+        this.$router.push({
+            path: "/bs-koala-list",
+        });
+        this.getKoalaList(this.$route.query);
     },
 };
 </script>
