@@ -13,10 +13,10 @@
                     id="search"
                     placeholder="搜尋資助／認養編號"
                     v-model.trim="search"
-                    @change="changeQQ"
+                    @change="changeVal"
                 />
             </div>
-            <select name="sort" id="sort" v-model="sort" @change="changeQQ">
+            <select name="sort" id="sort" v-model="sort" @change="changeVal">
                 <option value="0">排列：編號（大到小）</option>
                 <option value="1">排列：編號（小到大）</option>
             </select>
@@ -105,7 +105,7 @@ export default {
             const searchParam = new URLSearchParams(queryParam);
             apiURL.search = searchParam;
             // ?page=${this.currentPage}&sort=${this.sort}&search=3002
-            console.log(queryParam);
+            // console.log(queryParam);
             // const apiURL = new URL(
             //     `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
             // );
@@ -172,7 +172,7 @@ export default {
                 },
             });
         },
-        changeQQ() {
+        changeVal() {
             this.$router.push({
                 path: "/bs-support-list",
                 query: {
