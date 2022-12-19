@@ -47,7 +47,7 @@
                         </div>
                         <form>
                             <div class="ship-form">
-                                <label for="">收件人姓名:</label>
+                                <label for="">收件人姓名：</label>
                                 <input
                                     type="text"
                                     name=""
@@ -56,7 +56,7 @@
                                 />
                             </div>
                             <div class="ship-form">
-                                <label for="">手機號碼:</label>
+                                <label for="">手機號碼：</label>
                                 <input
                                     type="text"
                                     name=""
@@ -65,7 +65,7 @@
                                 />
                             </div>
                             <div class="ship-form">
-                                <label for="">收件地址:</label>
+                                <label for="">收件地址：</label>
                                 <input
                                     type="text"
                                     name=""
@@ -73,37 +73,50 @@
                                     placeholder="請輸入完整收件地址"
                                 />
                             </div>
-                            <div>
-                                <p class="test">卡號</p>
+                            <div class="tappay-wrapper">
+                                <h4 class="test">信用卡卡號：</h4>
                                 <div
                                     class="tpfield"
                                     id="card-number"
                                     ref="number"
                                 ></div>
-                                <p for="card-number" class="test">到期日</p>
+                                <h4 for="card-number" class="test">
+                                    卡片到期日：
+                                </h4>
                                 <div
                                     class="tpfield"
                                     id="card-expiration-date"
                                     ref="expirationDate"
                                 ></div>
-                                <p for="card-number" class="test">CCV</p>
+                                <h4 for="card-number" class="test">
+                                    卡片安全碼(CCV)：
+                                </h4>
                                 <div
                                     class="tpfield"
                                     id="card-ccv"
                                     ref="ccv"
                                 ></div>
-                                <buttnon @click="onSubmit"
-                                    >拜託串成功啦QQ</buttnon
-                                >
+                                <div class="btn-wrapper">
+                                    <!-- 這是 TapPay 原生按鈕 -->
+                                    <buttnon
+                                        class="tappay-btn"
+                                        @click="onSubmit"
+                                    >
+                                        前往付款
+                                    </buttnon>
+                                    <div class="back-step" @click="goBack">
+                                        回上一步
+                                    </div>
+                                </div>
                             </div>
-                            <div class="pay-box">
+                            <!-- <div class="pay-box">
                                 <div class="btn-paramy" @click="test">
                                     前往付款
                                 </div>
                                 <div class="back-step" @click="goBack">
                                     回上一步
                                 </div>
-                            </div>
+                            </div> -->
                         </form>
                     </div>
                 </div>
@@ -260,37 +273,43 @@ export default {
                 // Style all elements
                 input: {
                     color: "gray",
+                    "font-size": "18px",
+                    "line-height": "1.5",
                 },
                 // Styling ccv field
                 "input.cvc": {
-                    "font-size": "16px",
+                    "font-size": "18px",
                     height: "10px",
                 },
                 // Styling expiration-date field
                 "input.expiration-date": {
-                    // 'font-size': '16px'
+                    "font-size": "18px",
                 },
                 // Styling card-number field
                 "input.card-number": {
-                    // 'font-size': '16px'
+                    "font-size": "18px",
+                },
+                // Styling placeholder
+                "::placeholder": {
+                    color: "#c4cdd4",
                 },
                 // style focus state
                 ":focus": {
-                    // 'color': 'black'
+                    color: "#33717d",
                 },
                 // style valid state
                 ".valid": {
-                    color: "green",
+                    color: "#33717d",
                 },
                 // style invalid state
                 ".invalid": {
-                    color: "red",
+                    color: "IndianRed",
                 },
                 // Media queries
                 // Note that these apply to the iframe, not the root window.
                 "@media screen and (max-width: 400px)": {
                     input: {
-                        color: "orange",
+                        color: "#33717d",
                     },
                 },
             },
@@ -318,11 +337,42 @@ export default {
 }
 .tpfield {
     height: 40px;
-    width: 300px;
-    border: 1px solid gray;
-    margin: 5px 0;
+    width: 385px;
+    margin: 5px 0 30px;
     padding: 5px;
+    border-radius: 10px;
+    border: 1px solid $btn-light-color;
+    background-color: #fff;
 }
+.btn-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .tappay-btn {
+        padding: 5px 20px;
+        border-radius: 10px;
+        border: solid 0.5px $btn-color;
+        font-size: 1.2rem;
+        color: $bg-color;
+        background-color: $btn-color;
+        box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+        cursor: pointer;
+        user-select: none;
+        &:hover {
+            font-weight: 700;
+        }
+        &:active {
+            box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2),
+                inset 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+        }
+    }
+    .back-step {
+        padding: 5px 20px;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+
 .bg {
     background: url(@/assets/images/backgroundleaf.jpg) no-repeat center/cover;
     width: 100%;
