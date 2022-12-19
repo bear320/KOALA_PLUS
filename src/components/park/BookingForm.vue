@@ -10,7 +10,7 @@
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
             <button id="close" @click="closeIt">X</button>
             <div class="form-group">
-                <label for="rsv_name">name</label>
+                <label for="rsv_name">姓名</label>
                 <input
                     type="text"
                     class="form-control"
@@ -110,6 +110,9 @@
                     <br />
                     電話：{{ mobile }}
                 </div>
+                <div class="btn-secondary confrimbtn" @click="closeIt">
+                    確定預約
+                </div>
             </div>
         </form>
     </div>
@@ -121,7 +124,7 @@ export default {
         return {
             email: "",
             name: "",
-            mobile: 0,
+            mobile: "",
             people: "",
             orderDate: this.msg,
             isShow: false,
@@ -262,6 +265,13 @@ h2 {
     background-color: #337a7d;
     color: white;
     cursor: pointer;
+}
+.confrimbtn {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 5px 10px;
 }
 @media screen and (max-width: 768px) {
     h2 {

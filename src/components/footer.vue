@@ -9,7 +9,7 @@
                         園區地址：7 Green Swamp Road, Nyora, New South Wales,
                         2646 Australia
                     </li>
-                    <li>營業時間：週二至週日 08:00 - 18:00</li>
+                    <li>營業時間：全年無休 08:00 - 18:00</li>
                 </ul>
                 <div class="top-right">
                     <div class="logo">

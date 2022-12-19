@@ -1,5 +1,6 @@
 <template lang="">
     <Header></Header>
+
     <div class="video-container">
         <iframe
             src="https://www.youtube.com/embed/L2fRuAoxepc?controls=0&amp;start=178&autoplay=1&mute=1&playsinline=1&loop=1&playlist=L2fRuAoxepc"
@@ -38,6 +39,7 @@
             <cal2></cal2>
         </div>
     </div>
+
     <Footer></Footer>
 </template>
 
@@ -46,6 +48,7 @@ import Header from "@/components/header.vue";
 import BookingButton from "@/components/park/BookingButton.vue";
 import GuideInfo from "@/components/park/GuideInfo.vue";
 import Cal2 from "@/components/park/Cal2.vue";
+import SearchForm from "@/components/park/SearchForm.vue";
 import Footer from "@/components/footer.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
@@ -56,6 +59,7 @@ export default {
         GuideInfo,
         Cal2,
         Footer,
+        SearchForm,
     },
 
     data() {
