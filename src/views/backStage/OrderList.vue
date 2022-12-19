@@ -119,6 +119,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     data() {
         return {
@@ -136,9 +137,10 @@ export default {
     },
     methods: {
         getAllOrders() {
-            const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getAllOrders.php"
-            );
+            // const apiURL = new URL(
+            //     "http://localhost:8888/cgd103_g1/public/api/getAllOrders.php"
+            // );
+            const apiURL = new URL(`${BASE_URL}/getAllOrders.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -147,9 +149,10 @@ export default {
                 });
         },
         getOrderLists() {
-            const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getOrderLists.php"
-            );
+            // const apiURL = new URL(
+            //     "http://localhost:8888/cgd103_g1/public/api/getOrderLists.php"
+            // );
+            const apiURL = new URL(`${BASE_URL}/getOrderLists.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
