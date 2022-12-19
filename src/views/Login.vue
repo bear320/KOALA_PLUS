@@ -41,90 +41,31 @@
                             <form @submit.prevent="login">
                                 <div>
                                     <p>姓名</p>
-                                    <input
-                                        class="content_active_sign_up_move1"
-                                        type="text"
-                                        placeholder="你的名字"
-                                        v-model="sign_up_userName"
-                                        required
-                                    />
+                                    <input class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="sign_up_userName" required/>
                                 </div>
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input
-                                        type="text"
-                                        placeholder="你的信箱或帳號"
-                                        v-model="sign_up_account"
-                                        required
-                                    />
+                                    <input type="email" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
                                 </div>
                                 <div>
-                                    <button class="btn_email_confirm">
-                                        信箱認證
-                                    </button>
+                                    <div class="btn_email_confirm">信箱認證</div>
                                 </div>
                                 <div>
-                                    <p class="content_active_sign_up_moveTxt_1">
-                                        密碼
-                                    </p>
+                                    <p class="content_active_sign_up_moveTxt_1">密碼</p>
                                     <i class="icon_password"></i>
-                                    <input
-                                        class="content_active_sign_up_move2"
-                                        type="text"
-                                        v-if="pwdType_one"
-                                        v-model="sign_up_password"
-                                    />
-                                    <input
-                                        class="content_active_sign_up_move2"
-                                        type="password"
-                                        placeholder="Confirm Password"
-                                        v-model="sign_up_password"
-                                        required
-                                        v-else
-                                    />
-                                    <img
-                                        :src="seen_one ? seenImg : unseenImg"
-                                        @click="changeType_1"
-                                        v-on:mouseover="hoverEye_1"
-                                        v-on:mouseout="outEye_1"
-                                        class="sign_up_icon_eye"
-                                    />
+                                    <input class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password"/>
+                                    <input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
+                                    <img :src="seen_one ? seenImg : unseenImg" @click="changeType_1" v-on:mouseover="hoverEye_1" v-on:mouseout="outEye_1" class="sign_up_icon_eye"/>
                                 </div>
                                 <div>
-                                    <p class="content_active_sign_up_moveTxt_2">
-                                        密碼認證
-                                    </p>
+                                    <p class="content_active_sign_up_moveTxt_2">密碼認證</p>
                                     <i class="icon_password"></i>
-                                    <input
-                                        class="content_active_sign_up_move3"
-                                        type="text"
-                                        v-if="pwdType_two"
-                                        v-model="sign_up_password_comfirm"
-                                    />
-                                    <input
-                                        class="confirm_password content_active_sign_up_move3"
-                                        type="password"
-                                        placeholder="Confirm Password"
-                                        v-model="sign_up_password_comfirm"
-                                        required
-                                        v-else
-                                    />
-                                    <img
-                                        :src="seen_two ? seenImg : unseenImg"
-                                        @click="changeType_2"
-                                        v-on:mouseover="hoverEye_2"
-                                        v-on:mouseout="outEye_2"
-                                        class="sign_up_icon_eye"
-                                    />
+                                    <input class="content_active_sign_up_move3" type="text" v-if="pwdType_two" v-model="sign_up_password_comfirm"/>
+                                    <input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" v-model="sign_up_password_comfirm" required v-else/>
+                                    <img :src="seen_two ? seenImg : unseenImg" @click="changeType_2" v-on:mouseover="hoverEye_2" v-on:mouseout="outEye_2" class="sign_up_icon_eye"/>
                                 </div>
                                 <div>
-                                    <button
-                                        class="btn_sign_up"
-                                        type="submit"
-                                        @click="sign_up"
-                                    >
-                                        註冊會員
-                                    </button>
+                                    <button class="btn_sign_up"  type="submit"  @click="sign_up">註冊會員</button>
                                 </div>
                             </form>
                         </div>
@@ -265,24 +206,24 @@ export default {
         this.login();
     },
     created() {
-        this.getArticleList();
+        // this.getArticleList();
     },
     methods: {
-        getArticleList() {
-            fetch(
-                "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
-                { mode: "no-cors" }
-            )
-                .then((respons) => respons.json())
-                .then((json) => {
-                    console.log(json);
-                    this.memindexs = json;
-                })
-                .catch((error) => {
-                    // 當初出現錯誤時跑 catch
-                    console.log(error);
-                });
-        },
+        // getArticleList() {
+        //     fetch(
+        //         "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+        //        /*  { mode: "no-cors" } */
+        //     )
+        //         .then((respons) => respons.json())
+        //         .then((json) => {
+        //             console.log(json);
+        //             this.memindexs = json;
+        //         })
+        //         .catch((error) => {
+        //             // 當初出現錯誤時跑 catch
+        //             console.log(error);
+        //         });
+        // },
 
         login() {
             document.querySelector(".content_active").className =
@@ -309,7 +250,7 @@ export default {
                 ).style.display = "none";
             }, 200);
 
-            // ==============================   驗證   ============================== //
+            // ==============================   登入驗證   ============================== //
             let thisvue = this;
             if (thisvue.login_account == "" || thisvue.login_password == "") {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
@@ -333,60 +274,7 @@ export default {
                             console.log("成功");
                         }
                     });
-                /* // 建立一個 XMLHttpRequest 物件
-                let xhr = new XMLHttpRequest();
 
-                // 使用 open() 發送請求，並且需要帶入三個參數
-                // 參數分別是 HTTP方法、處理請求的網址、取得資料的方式（同步/非同步）
-                xhr.open(
-                    "POST",
-                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
-                    true
-                );
-
-                // 送出請求，小括號內可帶入其他參數進行傳送
-                xhr.send({
-                    login_account: thisvue.login_account,
-                    login_password: thisvue.login_password,
-                });
-
-                // 從伺服器取得資料後的處理
-                xhr.onload = function (response) {
-                    // 處理回傳資料的程式碼
-                    if (response[0].code == 1) {
-                        thisvue.errorFlag = false;
-                        window.location.href = "http://localhost:8080/home";
-                    } else {
-                        thisvue.errorMsg = "帳號或密碼錯誤";
-                        thisvue.login_password = "";
-                        thisvue.errorFlag = true;
-                    }
-                    //   console.log('成功');
-                };
-                xhr.onerror = function (err) {
-                    console.log("錯誤", err);
-                }; */
-                // const ajax = new XMLHttpRequest(); //AJAX 通訊初始
-                // ajax.open("POST", form.getAttribute("action"), true);
-                // $.ajax({
-                //     type: "POST",
-                //     url: "../../public/api/getConfirmMember.php",
-                //     data: {
-                //         login_account: thisvue.login_account,
-                //         login_password: thisvue.login_password
-                //     },
-                //     success: function(res) {
-                //         if(res[0].code == 1) {
-                //             thisvue.errorFlag = false;
-                //             window.location.href = "../views/HomeView.vue"
-                //         }
-                //         else {
-                //             thisvue.errorMsg = "帳號或密碼錯誤";
-                //             thisvue.login_password = "";
-                //             thisvue.errorFlag = true;
-                //         }
-                //     }
-                // })
             }
         },
 
@@ -413,7 +301,39 @@ export default {
                     ".content_active_forget_password"
                 ).style.display = "none";
             }, 400);
+
+            // ==============================   帳號是否重複   ============================== //
+            
         },
+
+        async sign_up() {
+            try {
+                // 發送 HTTP 請求
+                const response = await fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php", {
+                    method: 'POST',
+                    // headers: {
+                    //   'Content-Type': 'application/json'
+                    // },
+                    body: JSON.stringify({
+                        mem_account: this.login_account
+                    })
+                    });
+                // 解析響應數據
+                const data = await response.json();
+                // 判斷帳號是否註冊
+                if (data.exists) {
+                    // 帳號已經註冊，更新組件狀態
+                    this.usernameTaken = true;
+                } else {
+                  this.usernameTaken = false;
+                }
+            } catch (error) {
+                // 處理錯誤
+                console.error(error);
+            }
+        },
+
+
 
         forget_password() {
             document.querySelector(".content_active").className =
@@ -522,38 +442,7 @@ export default {
                 );
         },
 
-        // email_confirm(){
-        //     let auth = true;
 
-        //     if( auth )
-        //         this.$router.push('/');
-        //     else
-        //         alert('login failed');
-        // },
-
-        // email 認證
-        // loginVal() {
-        //     if (this.username != '' && this.password != '') {
-        //         axios.post('response.php', {
-        //             request: 1,
-        //             login_account: this.login_account,
-        //             login_password: this.login_password
-        //         })
-        //         .then(function(response) {
-        //             console.log(response);
-        //             if (response.data[0].status == 1) {
-        //             alert('Login Successfully');
-        //             } else {
-        //                 alert("User does not exist");
-        //             }
-        //         })
-        //         .catch(function(error) {
-        //             console.log(error);
-        //         });
-        //     } else {
-        //         alert('Please enter login_account & login_password');
-        //     }
-        // },
     },
 };
 </script>
