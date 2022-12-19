@@ -20,16 +20,19 @@ export default {
     //     Header,
     // },
     created() {
-        // 將localStorage中的cart存進cartData中
-        let cartData = JSON.parse(localStorage.getItem("cart"));
-        // 當localStorage中沒有cart時，cartData為null
-        // 呼叫store中的getCart並將空陣列傳遞過去
-        if (!cartData) {
-            this.$store.commit("getCart", []);
-        } else {
-            // 反之將cartData傳遞過去
-            this.$store.commit("getCart", cartData);
+        // 如果存在會員資訊，存取他的會員資料
+        if (this.$store.state.user) {
+            this.$store.dispatch("getMemCart");
         }
+    },
+    watch: {
+        // 監測登入狀態，若有會員登入則執行程式
+        "$store.state.user"(newValue) {
+            // 待補中
+            console.log(newValue);
+            // 更新購物車的資訊
+            // this.$store.dispatch("getMemCart");
+        },
     },
 };
 </script>

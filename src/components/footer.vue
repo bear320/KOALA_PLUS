@@ -2,26 +2,24 @@
     <footer id="footer">
         <div class="wrapper">
             <div class="top">
-                <ul class="list">
-                    <li v-for="item in items" :key="item">
-                        <div :to="{ path: item['sourc'] }">
-                            {{ item["name"] }}
-                        </div>
-                    </li>
-                </ul>
-                <div class="center">
+                <ul class="info">
+                    <li>聯絡電話：+1 202 555 0156</li>
+                    <li>連絡信箱：koalaplus@koalaplus.com</li>
                     <li>
-                        <p>園區時間 ：<br>
-                            9AM – 11AM & 2PM – 7PM全年休館</p>
+                        園區地址：7 Green Swamp Road, Nyora, New South Wales,
+                        2646 Australia
                     </li>
-                </div>
-                <div class="right">
+                    <li>營業時間：週二至週日 08:00 - 18:00</li>
+                </ul>
+                <div class="top-right">
                     <div class="logo">
-                        <router-link :to="{ path: '/home' }"
-                            ><img src="../assets/images/logo.svg" alt="KOALA+"
+                        <router-link :to="{ path: '/home' }">
+                            <img
+                                src="../assets/images/logo_white.svg"
+                                alt="KOALA+"
                         /></router-link>
                     </div>
-                    <div class="ft-link">
+                    <ul class="ft-link">
                         <li>
                             <router-link :to="{ path: '/home' }">
                                 <Icon type="logo-facebook" />
@@ -42,12 +40,14 @@
                                 <Icon type="logo-twitter" />
                             </router-link>
                         </li>
-                    </div>
+                    </ul>
                 </div>
             </div>
             <div class="bt">
                 <p>
                     本網站為緯育TibaMe_前端設計工程師班學員專題成果作品，本平台僅供學習、展示之用。
+                </p>
+                <p>
                     若有侵權疑慮，您可以私訊「TibaMe-前端設計工程師養成班」，後續會由專人協助處理。
                 </p>
             </div>
@@ -61,14 +61,14 @@ export default {
     data() {
         return {
             items: [
-                { name: "▼ 聯絡電話: +1 202 555 0156", sourc: "koala-phone" },
+                { name: "聯絡電話：+1 202 555 0156", source: "koala-phone" },
                 {
-                    name: "▼ Email:koalaplus@koalaplus.com",
-                    sourc: "koala-email",
+                    name: "連絡信箱：koalaplus@koalaplus.com",
+                    source: "koala-email",
                 },
                 {
-                    name: "▼ 園區地址: 7 Green Swamp Road, Nyora, New South Wales, 2646 Australia",
-                    sourc: "koala-address",
+                    name: "園區地址：7 Green Swamp Road, Nyora, New South Wales, 2646 Australia",
+                    source: "koala-address",
                 },
             ],
             toggle: true,
@@ -80,117 +80,87 @@ export default {
 
 <style lang="scss" scoped>
 footer {
-    height: 500px;
-    z-index: 999;
-    // position: fixed;
-    background-color: #2e382e;
-    width: 100vw;
+    width: 100%;
+    padding: 50px 0;
+    color: #fff;
+    background-color: $darkgreen;
     display: flex;
-    align-items: center;
     justify-content: center;
-
+    align-items: center;
+    z-index: 999;
+    @include m() {
+        padding: 25px 0;
+    }
     .wrapper {
-        width: 1200px;
+        @include m() {
+            max-width: calc(100% - 80px);
+        }
         .top {
+            padding: 30px;
+            border-bottom: 1px solid #fff;
             display: flex;
             justify-content: center;
-
-            .list {
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                font-weight: bold;
-                font-size: 12px;
-                color: white;
-                height: 100%;
-                width: 300px;
-                text-align: start;
-                @include m(){
+            align-items: center;
+            column-gap: 30px;
+            @include m() {
+                flex-direction: column-reverse;
+                row-gap: 30px;
+            }
+            .info {
+                line-height: 2;
+                text-align: left;
+            }
+            .top-right {
+                .logo {
+                    width: 260px;
+                    margin: auto;
+                    img {
+                        width: 80%;
+                        vertical-align: top;
+                    }
+                }
+                .ft-link {
                     display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    }
-                li {
-                    padding: 5px;
-                    width: 90%;
-                    @include m(){
-                    text-align: center;
+                    justify-content: center;
+                    column-gap: 20px;
+                    li {
+                        display: flex;
+                        justify-content: space-around;
+                        align-items: center;
+                        i {
+                            font-size: 30px;
+                            color: #fff;
+                            &:hover {
+                                cursor: pointer;
+                            }
+                        }
                     }
                 }
             }
         }
-    }
-}
-
-.center {
-    font-weight: bold;
-    color: white;
-    height: 100%;
-    padding: 5px;
-    list-style: none;
-    text-align: left;
-    @include m(){
-        text-align: center;
-    }
-    p{
-        font-size: 12px;
-
-    }
-}
-.logo {
-    width: 260px;
-    margin: auto;
-    img {
-        width: 80%;
-        filter: brightness(800);
-    }
-}
-.right {
-    display: flex;
-    flex-direction: column;
-    .ft-link {
-        display: flex;
-        margin: auto;
-
-        li {
-            @include size(40px, 40px);
-            list-style: none;
-            margin: 0px 10px;
-            .ivu-icon {
-                transform: scale(2);
-                color: white;
-                &:hover {
-                    color: $green;
-                }
-            }
+        .bt {
+            margin: 0 auto;
+            padding: 30px;
+            line-height: 2;
         }
     }
 }
-.bt {
-    border-top: 1px solid white;
-    margin: 0px 200px;
-    padding: 30px;
-    color: white;
-    display: flex;
-    justify-content: center;
-}
 
-@media screen and (max-width: 1200px) {
-    .all {
-        width: 688px;
-        .list {
-            display: flex;
-            
-        }
-    }
+// @media screen and (max-width: 1200px) {
+//     .all {
+//         width: 688px;
+//         .list {
+//             display: flex;
+//         }
+//     }
 
-    .top {
-        display: flex;
-        flex-direction: column-reverse;
-    }
-    .bt {
-        margin: 0px;
-        padding: 30px;
-    }
-}
+//     .top {
+//         display: flex;
+//         flex-direction: column-reverse;
+//     }
+//     .bt {
+//         margin: 0px;
+//         padding: 30px;
+//     }
+// }
 </style>

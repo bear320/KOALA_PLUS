@@ -192,7 +192,7 @@ const routes = [
         component: () => import("@/views/backStage/KoalaAdd.vue"),
     },
     {
-        path: "/bs-koala-edit/:id",
+        path: "/bs-koala-edit/:koala_name",
         name: "koalaEdit",
         // component: KoalaEdit,
         component: () => import("@/views/backStage/KoalaEdit.vue"),

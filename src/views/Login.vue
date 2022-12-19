@@ -10,7 +10,7 @@
                                 <p>尚未擁有會員？</p>
                                 <button
                                     class="main_block_btn_sign_up"
-                                    @click="sign_up()"
+                                    @click="sign_up"
                                 >
                                     註冊會員
                                 </button>
@@ -21,13 +21,13 @@
                                 <p>已經擁有會員？</p>
                                 <button
                                     class="main_block_btn_login"
-                                    @click="login()"
+                                    @click="login"
                                 >
                                     登入會員</button
                                 ><br />
                                 <button
                                     class="main_block_btn_login"
-                                    @click="forget_password()"
+                                    @click="forget_password"
                                 >
                                     忘記密碼
                                 </button>
@@ -36,7 +36,7 @@
                     </div>
                     <div class="content_active">
                         <div class="content_active_sign_up">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <a href="#" @click="login_sign_up">X</a>
                             <h2>建立帳號</h2>
                             <form @submit.prevent="login">
                                 <div>
@@ -84,7 +84,7 @@
                                     />
                                     <img
                                         :src="seen_one ? seenImg : unseenImg"
-                                        @click="changeType_1()"
+                                        @click="changeType_1"
                                         v-on:mouseover="hoverEye_1"
                                         v-on:mouseout="outEye_1"
                                         class="sign_up_icon_eye"
@@ -111,7 +111,7 @@
                                     />
                                     <img
                                         :src="seen_two ? seenImg : unseenImg"
-                                        @click="changeType_2()"
+                                        @click="changeType_2"
                                         v-on:mouseover="hoverEye_2"
                                         v-on:mouseout="outEye_2"
                                         class="sign_up_icon_eye"
@@ -121,7 +121,7 @@
                                     <button
                                         class="btn_sign_up"
                                         type="submit"
-                                        @click="sign_up()"
+                                        @click="sign_up"
                                     >
                                         註冊會員
                                     </button>
@@ -129,7 +129,7 @@
                             </form>
                         </div>
                         <div class="content_active_login">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <a href="#" @click="login_sign_up">X</a>
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
                                 <div>
@@ -137,7 +137,7 @@
                                     <input
                                         type="text"
                                         placeholder="Account"
-                                        v-model="account"
+                                        v-model="login_account"
                                         required
                                     />
                                 </div>
@@ -151,6 +151,7 @@
                                         type="text"
                                         v-if="pwdType_three"
                                         v-model="login_password"
+                                        required
                                     />
                                     <input
                                         class="content_active_login_move4"
@@ -162,24 +163,28 @@
                                     />
                                     <img
                                         :src="seen_three ? seenImg : unseenImg"
-                                        @click="changeType_3()"
+                                        @click="changeType_3"
                                         v-on:mouseover="hoverEye_3"
                                         v-on:mouseout="outEye_3"
                                         class="login_icon_eye"
                                     />
                                 </div>
+                                <label
+                                    class="errorMsg"
+                                    v-if="errorFlag"
+                                    v-cloak
+                                    >{{ errorMsg }}</label
+                                ><br />
                                 <button
                                     class="btn_login"
                                     type="submit"
-                                    @click="login()"
+                                    @click="login"
+                                    value="Login"
                                 >
                                     登錄會員</button
                                 ><br />
                             </form>
-                            <button
-                                class="btn_login"
-                                @click="forget_password()"
-                            >
+                            <button class="btn_login" @click="forget_password">
                                 忘記密碼
                             </button>
                             <div>
@@ -190,22 +195,23 @@
                             </div>
                         </div>
                         <div class="content_active_forget_password">
-                            <a href="#" @click="login_sign_up()">X</a>
+                            <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
-                            <form @submit.prevent="login">
+                            <form>
                                 <div>
                                     <p>帳號/信箱</p>
                                     <input
+                                        id="aaa"
                                         type="text"
                                         placeholder="Account"
-                                        v-model="account"
+                                        v-model="forget_password_account"
                                         required
                                     />
                                 </div>
                                 <button
                                     class="btn_login"
                                     type="submit"
-                                    @click="sendEmail()"
+                                    @click="sendEmail"
                                 >
                                     驗證信箱
                                 </button>
@@ -234,6 +240,11 @@ export default {
     },
     data() {
         return {
+            login_account: "",
+            login_password: "",
+            errorFlag: false,
+            errorMsg: "",
+
             seen_one: "",
             seen_two: "",
             seen_three: "",
@@ -246,10 +257,33 @@ export default {
             sign_up_account: "",
             sign_up_password: "",
             sign_up_password_comfirm: "",
-            login_password: "",
+
+            forget_password_account: "",
         };
     },
+    mounted() {
+        this.login();
+    },
+    created() {
+        this.getArticleList();
+    },
     methods: {
+        getArticleList() {
+            fetch(
+                "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                { mode: "no-cors" }
+            )
+                .then((respons) => respons.json())
+                .then((json) => {
+                    console.log(json);
+                    this.memindexs = json;
+                })
+                .catch((error) => {
+                    // 當初出現錯誤時跑 catch
+                    console.log(error);
+                });
+        },
+
         login() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_login";
@@ -274,9 +308,89 @@ export default {
                     ".content_active_forget_password"
                 ).style.display = "none";
             }, 200);
+
+            // ==============================   驗證   ============================== //
+            let thisvue = this;
+            if (thisvue.login_account == "" || thisvue.login_password == "") {
+                // thisvue.errorMsg = "請輸入帳號和密碼";
+                // thisvue.errorFlag = true;
+            } else {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                    {
+                        method: "post",
+                        credentials: "include",
+                        body: new URLSearchParams({
+                            mem_account: this.login_account,
+                            mem_psw: this.login_password,
+                        }),
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        if (json.code) {
+                            console.log("成功");
+                        }
+                    });
+                /* // 建立一個 XMLHttpRequest 物件
+                let xhr = new XMLHttpRequest();
+
+                // 使用 open() 發送請求，並且需要帶入三個參數
+                // 參數分別是 HTTP方法、處理請求的網址、取得資料的方式（同步/非同步）
+                xhr.open(
+                    "POST",
+                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                    true
+                );
+
+                // 送出請求，小括號內可帶入其他參數進行傳送
+                xhr.send({
+                    login_account: thisvue.login_account,
+                    login_password: thisvue.login_password,
+                });
+
+                // 從伺服器取得資料後的處理
+                xhr.onload = function (response) {
+                    // 處理回傳資料的程式碼
+                    if (response[0].code == 1) {
+                        thisvue.errorFlag = false;
+                        window.location.href = "http://localhost:8080/home";
+                    } else {
+                        thisvue.errorMsg = "帳號或密碼錯誤";
+                        thisvue.login_password = "";
+                        thisvue.errorFlag = true;
+                    }
+                    //   console.log('成功');
+                };
+                xhr.onerror = function (err) {
+                    console.log("錯誤", err);
+                }; */
+                // const ajax = new XMLHttpRequest(); //AJAX 通訊初始
+                // ajax.open("POST", form.getAttribute("action"), true);
+                // $.ajax({
+                //     type: "POST",
+                //     url: "../../public/api/getConfirmMember.php",
+                //     data: {
+                //         login_account: thisvue.login_account,
+                //         login_password: thisvue.login_password
+                //     },
+                //     success: function(res) {
+                //         if(res[0].code == 1) {
+                //             thisvue.errorFlag = false;
+                //             window.location.href = "../views/HomeView.vue"
+                //         }
+                //         else {
+                //             thisvue.errorMsg = "帳號或密碼錯誤";
+                //             thisvue.login_password = "";
+                //             thisvue.errorFlag = true;
+                //         }
+                //     }
+                // })
+            }
         },
 
-        sign_up(at) {
+        sign_up() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_sign_up";
             document.querySelector(".content_active_sign_up").style.display =
@@ -301,7 +415,7 @@ export default {
             }, 400);
         },
 
-        forget_password(at) {
+        forget_password() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_forget_password";
             document.querySelector(
@@ -384,19 +498,19 @@ export default {
             this.seen_three = !this.seen_three;
         },
 
-        sendEmail() {
+        sendEmail(e) {
+            e.preventDefault();
             const templateParams = {
-                user: this.form.name,
-                userMail: this.form.email,
-                emailContent: "收件內容寫在這邊",
+                // user: e.target.account,
+                userMail: e.target.account,
             };
 
             emailjs
                 .send(
-                    "gmail" /*service_id*/,
-                    template_21xikzb,
-                    templateParams,
-                    X1x5cmen7BlWhZ2yb
+                    "gmail",
+                    "template_21xikzb",
+                    this.templateParams,
+                    "X1x5cmen7BlWhZ2yb"
                 )
                 .then(
                     () => {
@@ -407,9 +521,39 @@ export default {
                     }
                 );
         },
-    },
-    mounted() {
-        this.login();
+
+        // email_confirm(){
+        //     let auth = true;
+
+        //     if( auth )
+        //         this.$router.push('/');
+        //     else
+        //         alert('login failed');
+        // },
+
+        // email 認證
+        // loginVal() {
+        //     if (this.username != '' && this.password != '') {
+        //         axios.post('response.php', {
+        //             request: 1,
+        //             login_account: this.login_account,
+        //             login_password: this.login_password
+        //         })
+        //         .then(function(response) {
+        //             console.log(response);
+        //             if (response.data[0].status == 1) {
+        //             alert('Login Successfully');
+        //             } else {
+        //                 alert("User does not exist");
+        //             }
+        //         })
+        //         .catch(function(error) {
+        //             console.log(error);
+        //         });
+        //     } else {
+        //         alert('Please enter login_account & login_password');
+        //     }
+        // },
     },
 };
 </script>

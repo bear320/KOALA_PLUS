@@ -9,11 +9,7 @@
             <h2>資助認養詳情</h2>
         </div>
     </section>
-    <form
-        class="wrapper function-wrapper"
-        action=""
-        enctype="multipart/form-data"
-    >
+    <form class="wrapper function-wrapper" enctype="multipart/form-data">
         <div class="line">
             <div class="cell">
                 <label for="sup-id">編號：</label>
@@ -97,13 +93,12 @@
                     rows="10"
                     placeholder="請輸入訂單備註"
                     v-model="source.sup_note"
-                    required
                 ></textarea>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" @click.prevent="postSupportUpdate">
                     <img src="@/assets/images/icon/confirm.svg" alt="" />確認
                 </button>
             </div>
@@ -114,7 +109,7 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
-
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -122,32 +117,49 @@ export default {
     },
     data() {
         return {
-            source: {},
-            temp: [],
+            source: [],
         };
     },
     methods: {
-        getSupportList() {
-            // const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
+        getSupportInfo() {
+            const supportId = this.$route.params.sup_id;
             const apiURL = new URL(
-                "http://localhost:8888/cgd103_g1/public/api/getSupportList.php"
+                `${BASE_URL}/getSupportInfo.php?supportId=${supportId}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getSupportInfo.php?supportId=${supportId}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    let [temp] = json.filter((item) => {
-                        console.log(this.$route.params);
-                        return item.sup_id === this.$route.params.sup_id;
-                    });
-                    this.source = temp;
-                })
-                .catch((error) => {
-                    alert(error);
+                    this.source = json.supportInfo;
+                });
+        },
+        postSupportUpdate() {
+            const supportId = this.$route.params.sup_id;
+            console.log(supportId);
+            const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
+            const supportUpdate = {
+                sup_id: Number(this.source.sup_id),
+                sup_note: this.source.sup_note,
+            };
+            console.log(supportUpdate);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(supportUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                    if (confirm("是否關閉此分頁？")) {
+                        window.close();
+                    }
                 });
         },
     },
     created() {
-        this.getSupportList();
+        this.getSupportInfo();
     },
 };
 </script>

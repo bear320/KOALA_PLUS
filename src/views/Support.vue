@@ -123,6 +123,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+    @include m() {
+        max-width: calc(100% - 80px);
+    }
+}
+
 .banner {
     background-position-y: 40px;
     @include m() {
