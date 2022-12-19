@@ -33,7 +33,7 @@
         </div>
         <div
             class="bs-list"
-            v-for="list in booklist"
+            v-for="(list, index) in booklist"
             :key="list.rsv_id"
             :style="{
                 backgroundColor:
@@ -63,10 +63,13 @@
                 >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
+                <span @click="deleteList(index)">
+                    <img src="@/assets/images/icon/delete.svg" alt=""
+                /></span>
             </p>
         </div>
     </section>
-    <div class="pagination p1">
+    <div class="pagination">
         <ul>
             <a @click="prePage"><li>&lt;</li></a>
             <a
@@ -123,6 +126,27 @@ export default {
                 .then((json) => {
                     this.booklist = json.bookList;
                     this.totalPage = Math.ceil(json.rsvCount / 10);
+                });
+        },
+        deleteList(index) {
+            console.log(this.booklist[index].rsv_id);
+            const apiURL = new URL(
+                `http://localhost/cgd103_g1/public/api/deleteRsv.php`
+            );
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams({
+                    rsv_id: this.booklist[index].rsv_id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    // console.log(this.booklist);
+
+                    // this.callback();
+                    alert(result);
+                    location.reload();
                 });
         },
         prePage() {
@@ -241,6 +265,20 @@ export default {
                 img {
                     margin: 10px;
                     vertical-align: top;
+                }
+            }
+            &:last-child {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                gap: 15px;
+                a,
+                span {
+                    margin: 0;
+                    img {
+                        vertical-align: top;
+                        margin: 0;
+                    }
                 }
             }
         }

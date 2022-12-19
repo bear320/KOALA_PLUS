@@ -85,6 +85,9 @@
             v-if="showForm"
             @closeForm="closeTable"
         ></booking-form>
+        <button @click="showSearchForm" class="showSearchForm btn-secondary">查詢預約</button>
+        <search-form v-if="showSearch" @closeList="closeTable"></search-form>
+        
         <div class="notice">
             <ul>
                 預約導覽注意事項：
@@ -110,7 +113,8 @@
 </template>
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
-// import { BASE_URL } from "@/assets/js/common.js";
+import SearchForm from "@/components/park/SearchForm.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
     data() {
@@ -121,6 +125,7 @@ export default {
             emptyDay: 0,
             allDay: 31,
             showForm: false,
+            showSearch:false,
             bookStyle: {
                 fontSize: "20px",
                 fontWeight: "600",
@@ -145,12 +150,11 @@ export default {
         };
     },
     computed:{
-        QQ(){
-            return true
-        }
+      
     },
     components: {
         BookingForm,
+        SearchForm
     },
     created() {
         this.getEmptyDay(new Date().getFullYear(), new Date().getMonth());
@@ -280,7 +284,15 @@ export default {
         },
         closeTable() {
             this.showForm = false;
+            this.showSearch=false;
+           
         },
+        showSearchForm(){
+            console.log("openJohn");
+            this.showSearch=true;
+
+
+        }
     },
 };
 </script>
@@ -368,6 +380,11 @@ li {
     list-style: none;
     font-weight: 400;
 }
+.showSearchForm {
+    margin-top: 30px;
+    padding: 0 10px;
+}
+
 @media screen and (max-width: 1200px) {
     table {
         width: 75%;

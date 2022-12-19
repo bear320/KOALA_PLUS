@@ -164,7 +164,10 @@ KEY `dx_coupon_status` (`coupon_status`)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='我的優惠券';
 INSERT INTO `tibamefe_cgd103g1`.`my_coupon` ( `mem_id`,`coupon_id`, `coupon_code`, `coupon_get_date`, `coupon_exp_date`,`coupon_status`) VALUES 
 ('1001', '4001', 'koala95', '2022-12-20', '2023-02-20', '0'),
+('1001', '4002', 'koala90', '2022-12-20', '2023-02-20', '0'),
+('1001', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1002', '4002', 'koala90', '2022-12-20', '2023-02-20', '0'),
+('1002', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1003', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1004', '4004', 'koala60', '2022-12-20', '2023-02-20', '0');
 
