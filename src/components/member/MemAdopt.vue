@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_adopt content">
         <div class="mem_basic">
-            <p>姓名：{{ memindexs.mem_name }}</p>
-            <p>會員ID：{{ memindexs.mem_id }}</p>
+            <p>姓名：{{ userid }}</p>
+            <p>會員ID：{{ username }}</p>
         </div>
         <div class="mem_main">
             <div class="mem_coupons_table">
@@ -83,41 +83,14 @@ import html2canvas from "html2canvas";
 export default {
     data() {
         return {
+            userid: "",
+            username: "",
             imgUrl: "",
             tempName: "",
             tempDate: "",
             certificate_Index: 0,
             memindexs: [],
-            couponsLists: [
-                // {
-                //     sup_id: "S00001",
-                //     sup_date: "2022/11/15",
-                //     sup_plan: "認養",
-                //     koala_name: "jennykoala",
-                //     sup_price: "$1000",
-                // },
-                // {
-                //     sup_id: "S00002",
-                //     sup_date: "2022/12/01",
-                //     sup_plan: "資助",
-                //     koala_name: "",
-                //     sup_price: "$300",
-                // },
-                // {
-                //     sup_id: "S00003",
-                //     sup_date: "2022/12/21",
-                //     sup_plan: "資助",
-                //     koala_name: "",
-                //     sup_price: "$300",
-                // },
-                // {
-                //     sup_id: "S00004",
-                //     sup_date: "2022/11/19",
-                //     sup_plan: "認養",
-                //     koala_name: "Duffy",
-                //     sup_price: "$1000",
-                // },
-            ],
+            couponsLists: [],
         };
     },
     mounted() {},
@@ -148,19 +121,26 @@ export default {
     },
 
     created() {
-        fetch("http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1001")
-            .then((res) => res.json())
-            .then((json) => {
-                this.memindexs = json;
-            });
-        fetch(
-            "http://localhost/cgd103_g1/public/api/postmemAdopt.php?mem_id=1001"
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                // console.log(json);
-                this.couponsLists = json;
-            });
+        let getCookie = document.cookie;
+        if (getCookie) {
+            fetch("http://localhost/cgd103_g1/public/api/postmemAdopt.php", {
+                credentials: "include",
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    if (json.status) {
+                        this.couponsLists = json.list;
+                        this.userid = json.userid;
+                        this.username = json.username;
+                        return true;
+                    }
+                    alert("獲取數據失敗");
+                });
+        } else {
+            alert("登入失效");
+            //跳轉 login url
+        }
     },
 };
 </script>

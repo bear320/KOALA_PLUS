@@ -1,8 +1,19 @@
 <?php 
-header('Access-Control-Allow-Origin:*');
-header("Content-Type:application/json;charset=utf-8");
+/**
+ * 編輯會員資料/會員密碼接口
+ * 接 components / MemCentre.vue
+*/
+
+//header設置
+require_once("./headerUse.php");
+//驗證登入
+require_once("./verifyFrontLogin.php");
+//DB連線設置
 require_once("./connect_cgd103g1.php");
-$id = empty( $_GET["mem_id"] ) ? ( $_POST["mem_id"] ?? "" ) : $_GET["mem_id"];
+
+//參數處理
+$mem_id = empty( $_GET["mem_id"] ) ? ( $_POST["mem_id"] ?? "" ) : $_GET["mem_id"];
+$userid = !isset($getUser["mem_id"])?$mem_id:$getUser["mem_id"];
 $type = empty( $_GET["type"] ) ? ( $_POST["type"] ?? "" ) : $_GET["type"]; //請求類型(1:編輯會員資料,2:重設會員密碼)
 
 $resDate = [
@@ -27,7 +38,7 @@ switch ( $type ) {
             return true;
         }
 
-        $upSql = "UPDATE tibamefe_cgd103g1.member SET {$setSql} WHERE mem_id = {$id} "; //針對某會員 id 修改
+        $upSql = "UPDATE tibamefe_cgd103g1.member SET {$setSql} WHERE mem_id = {$userid} "; //針對某會員 id 修改
         try { 
             $res = $pdo->query( $upSql );
             if( $res ){
@@ -51,7 +62,7 @@ switch ( $type ) {
         }
         
         // 搜索一次自身,並確認原密碼有無錯誤
-        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE mem_id = {$id}";
+        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE mem_id = {$userid}";
         $res = $pdo->query($sql);
         $getMember = $res->fetch(PDO::FETCH_ASSOC);
         $user_oldpws = $getMember["mem_psw"]??'';
@@ -67,7 +78,7 @@ switch ( $type ) {
         }
 
         // 沒有錯誤,更新新密碼
-        $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_psw = '{$_POST["mem_newpsw"]}' WHERE mem_id = {$id} "; //針對某會員 id 修改
+        $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_psw = '{$_POST["mem_newpsw"]}' WHERE mem_id = {$userid} "; //針對某會員 id 修改
         try { 
             $res = $pdo->query( $upSql );
             if( $res ){
