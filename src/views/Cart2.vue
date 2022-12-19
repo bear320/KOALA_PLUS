@@ -73,6 +73,29 @@
                                     placeholder="請輸入完整收件地址"
                                 />
                             </div>
+                            <div>
+                                <p class="test">卡號</p>
+                                <div
+                                    class="tpfield"
+                                    id="card-number"
+                                    ref="number"
+                                ></div>
+                                <p for="card-number" class="test">到期日</p>
+                                <div
+                                    class="tpfield"
+                                    id="card-expiration-date"
+                                    ref="expirationDate"
+                                ></div>
+                                <p for="card-number" class="test">CCV</p>
+                                <div
+                                    class="tpfield"
+                                    id="card-ccv"
+                                    ref="ccv"
+                                ></div>
+                                <buttnon @click="onSubmit"
+                                    >拜託串成功啦QQ</buttnon
+                                >
+                            </div>
                             <div class="pay-box">
                                 <div class="btn-paramy" @click="test">
                                     前往付款
@@ -86,43 +109,8 @@
                 </div>
             </div>
         </div>
-        <form
-            action="http://localhost/cgd103_g1/public/api/sample_Credit_CreateOrder.php"
-            method="post"
-        >
-            <input
-                type="hidden"
-                name="mem_id"
-                :value="$store.state.user.mem_id"
-            />
-            <!-- <button type="submit">送出</button> -->
-        </form>
     </main>
 
-    <section>
-        <div class="tpfield" id="card-number">
-            <div class="form-group">
-                <label for="number">卡號</label>
-                <div class="form-control" ref="number"></div>
-                <small>(可填入： 4242 4242 4242 4242)</small>
-            </div>
-        </div>
-        <div class="tpfield" id="card-expiration-date">
-            <div class="form-group">
-                <label for="cardExpirationDate">卡片到期日</label>
-                <div class="form-control" ref="expirationDate"></div>
-                <small>(可填入： 01/23)</small>
-            </div>
-        </div>
-        <div class="tpfield" id="card-ccv">
-            <div class="form-group">
-                <label for="cardCcv">後三碼</label>
-                <div class="form-control" ref="ccv"></div>
-                <small>(可填入： 123)</small>
-            </div>
-        </div>
-        <buttnon @click="onSubmit">拜託串成功啦QQ</buttnon>
-    </section>
     <Footer></Footer>
 </template>
 
@@ -276,6 +264,7 @@ export default {
                 // Styling ccv field
                 "input.cvc": {
                     "font-size": "16px",
+                    height: "10px",
                 },
                 // Styling expiration-date field
                 "input.expiration-date": {
@@ -324,6 +313,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.test {
+    text-align: left;
+}
+.tpfield {
+    height: 40px;
+    width: 300px;
+    border: 1px solid gray;
+    margin: 5px 0;
+    padding: 5px;
+}
 .bg {
     background: url(@/assets/images/backgroundleaf.jpg) no-repeat center/cover;
     width: 100%;
