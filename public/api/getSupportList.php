@@ -20,8 +20,7 @@ switch ($sort) {
             JOIN tibamefe_cgd103g1.koala k ON s.koala_id = k.koala_id
             WHERE sup_id LIKE '%{$search}%'
             ORDER BY sup_id DESC LIMIT {$limit} OFFSET {$offset};";
-            $sql2 =
-                "SELECT count(*) AS 'sup_count' FROM tibamefe_cgd103g1.support";
+            $sql2 = "SELECT count(*) AS 'sup_count' FROM tibamefe_cgd103g1.support WHERE sup_id LIKE '%{$search}%'";
         } else {
             $sql1 = "SELECT s.sup_id, m.mem_name 'mem_name', s.sup_date, s.sup_plan, k.koala_name 'koala_name', s.sup_price, s.sup_note
             FROM tibamefe_cgd103g1.support s
@@ -42,8 +41,7 @@ switch ($sort) {
             JOIN tibamefe_cgd103g1.koala k ON s.koala_id = k.koala_id
             WHERE sup_id LIKE '%{$search}%'
             ORDER BY sup_id ASC LIMIT {$limit} OFFSET {$offset};";
-            $sql2 =
-                "SELECT count(*) AS 'sup_count' FROM tibamefe_cgd103g1.support";
+            $sql2 = "SELECT count(*) AS 'sup_count' FROM tibamefe_cgd103g1.support WHERE sup_id LIKE '%{$search}%'";
         } else {
             $sql1 = "SELECT s.sup_id, m.mem_name 'mem_name', s.sup_date, s.sup_plan, k.koala_name 'koala_name', s.sup_price, s.sup_note
             FROM tibamefe_cgd103g1.support s

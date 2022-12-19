@@ -12,14 +12,11 @@
                     name="search"
                     id="search"
                     placeholder="搜尋資助／認養編號"
+                    v-model.trim="search"
+                    @change="changeQQ"
                 />
             </div>
-            <select
-                name="sort"
-                id="sort"
-                v-model="sort"
-                @change="this.getSupportList"
-            >
+            <select name="sort" id="sort" v-model="sort" @change="changeQQ">
                 <option value="0">排列：編號（大到小）</option>
                 <option value="1">排列：編號（小到大）</option>
             </select>
@@ -81,6 +78,7 @@ export default {
     data() {
         return {
             sort: 0,
+            search: "",
             source: [],
             totalPage: 0,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
@@ -90,16 +88,24 @@ export default {
         $route: function () {
             if (!Object.keys(this.$route.query).length) {
                 this.currentPage = 1;
-                this.getSupportList();
+                this.getSupportList(this.$route.query);
             }
-            this.getSupportList();
+            this.getSupportList(this.$route.query);
         },
     },
     methods: {
-        getSupportList() {
-            const apiURL = new URL(
-                `${BASE_URL}/getSupportList.php?page=${this.currentPage}&sort=${this.sort}`
-            );
+        getSupportList(queryParam) {
+            if (!Object.keys(queryParam).length) {
+                queryParam.limit = 10;
+                queryParam.page = 1;
+                queryParam.sort = 0;
+                queryParam.search = this.search;
+            }
+            const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
+            const searchParam = new URLSearchParams(queryParam);
+            apiURL.search = searchParam;
+            // ?page=${this.currentPage}&sort=${this.sort}&search=3002
+            console.log(queryParam);
             // const apiURL = new URL(
             //     `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
             // );
@@ -132,6 +138,8 @@ export default {
                     query: {
                         limit: `10`,
                         page: this.currentPage,
+                        sort: this.sort,
+                        search: this.search,
                     },
                 });
             }
@@ -146,6 +154,8 @@ export default {
                     query: {
                         limit: `10`,
                         page: this.currentPage,
+                        sort: this.sort,
+                        search: this.search,
                     },
                 });
             }
@@ -157,12 +167,28 @@ export default {
                 query: {
                     limit: `10`,
                     page: this.currentPage,
+                    sort: this.sort,
+                    search: this.search,
+                },
+            });
+        },
+        changeQQ() {
+            this.$router.push({
+                path: "/bs-support-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                    sort: this.sort,
+                    search: this.search,
                 },
             });
         },
     },
     created() {
-        this.getSupportList();
+        this.$router.push({
+            path: "/bs-support-list",
+        });
+        this.getSupportList(this.$route.query);
     },
 };
 </script>
