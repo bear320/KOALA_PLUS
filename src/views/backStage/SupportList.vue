@@ -7,12 +7,21 @@
         </div>
         <div class="action">
             <div class="search">
-                <input type="search" name="" id="" placeholder="搜尋" />
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="搜尋資助／認養編號"
+                />
             </div>
-            <select name="" id="">
-                <option value="" selected>排列方式</option>
-                <option value="">日期（近到遠）</option>
-                <option value="">日期（遠到近）</option>
+            <select
+                name="sort"
+                id="sort"
+                v-model="sort"
+                @change="this.getSupportList"
+            >
+                <option value="0">排列：編號（大到小）</option>
+                <option value="1">排列：編號（小到大）</option>
             </select>
         </div>
     </section>
@@ -71,6 +80,7 @@ export default {
     },
     data() {
         return {
+            sort: 0,
             source: [],
             totalPage: 0,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
@@ -88,7 +98,7 @@ export default {
     methods: {
         getSupportList() {
             const apiURL = new URL(
-                `${BASE_URL}/getSupportList.php?limit=10&page=${this.currentPage}`
+                `${BASE_URL}/getSupportList.php?page=${this.currentPage}&sort=${this.sort}`
             );
             // const apiURL = new URL(
             //     `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
