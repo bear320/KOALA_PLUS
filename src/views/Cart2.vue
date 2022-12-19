@@ -74,7 +74,9 @@
                                 />
                             </div>
                             <div class="pay-box">
-                                <div class="btn-paramy">前往付款</div>
+                                <div class="btn-paramy" @click="test">
+                                    前往付款
+                                </div>
                                 <div class="back-step" @click="goBack">
                                     回上一步
                                 </div>
@@ -84,7 +86,43 @@
                 </div>
             </div>
         </div>
+        <form
+            action="http://localhost/cgd103_g1/public/api/sample_Credit_CreateOrder.php"
+            method="post"
+        >
+            <input
+                type="hidden"
+                name="mem_id"
+                :value="$store.state.user.mem_id"
+            />
+            <!-- <button type="submit">送出</button> -->
+        </form>
     </main>
+
+    <section>
+        <div class="tpfield" id="card-number">
+            <div class="form-group">
+                <label for="number">卡號</label>
+                <div class="form-control" ref="number"></div>
+                <small>(可填入： 4242 4242 4242 4242)</small>
+            </div>
+        </div>
+        <div class="tpfield" id="card-expiration-date">
+            <div class="form-group">
+                <label for="cardExpirationDate">卡片到期日</label>
+                <div class="form-control" ref="expirationDate"></div>
+                <small>(可填入： 01/23)</small>
+            </div>
+        </div>
+        <div class="tpfield" id="card-ccv">
+            <div class="form-group">
+                <label for="cardCcv">後三碼</label>
+                <div class="form-control" ref="ccv"></div>
+                <small>(可填入： 123)</small>
+            </div>
+        </div>
+        <buttnon @click="onSubmit">拜託串成功啦QQ</buttnon>
+    </section>
     <Footer></Footer>
 </template>
 
@@ -113,6 +151,174 @@ export default {
         goBack() {
             window.history.go(-1);
         },
+        async test() {
+            const res = await fetch(
+                "http://localhost/cgd103_g1/public/api/sample_Credit_CreateOrder.php",
+                {
+                    method: "post",
+                    headers: {
+                        "Content-Type": "application/x-www-form-urlencoded",
+                    },
+                    body: new URLSearchParams({ test: "QQ" }),
+                }
+            );
+
+            /*  const qq = await res.json(); */
+            console.log(res);
+
+            /*  window.location.assign(res.url); */
+        },
+        updateStatus(field) {
+            switch (field) {
+                case 0:
+                    //欄位已填好，並且沒有問題
+                    // console.log("field is ok");
+                    break;
+                case 1:
+                    //欄位還沒有填寫
+                    // console.log("field is empty");
+                    break;
+                case 2:
+                    //欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor
+                    // console.log("field has error");
+                    break;
+                case 3:
+                    //使用者正在輸入中
+                    // console.log("usertyping");
+                    break;
+                default:
+                // console.log("error!");
+            }
+        },
+
+        // 觸發去取得狀態
+        onSubmit() {
+            const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+            console.log("tset");
+            if (tappayStatus.canGetPrime === false) {
+                // can not get prime
+                return;
+            }
+            console.log("有執行這行唷");
+
+            // Get prime
+            TPDirect.card.getPrime((result) => {
+                if (result.status !== 0) {
+                    // get prime error
+                    console.log(result.msg);
+                    return;
+                }
+
+                let prime = result.card.prime;
+                console.log(prime);
+                this.submitPrime(prime);
+            });
+        },
+
+        async submitPrime(prime) {
+            try {
+                // 要把得到的Prime Token 送給後端,
+                /*  let payReslut = await apiPayByPrime(prime); */
+                let payReslut = await fetch(
+                    `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`
+                );
+                let test = await payReslut.json();
+                console.log(test);
+                if (payReslut.result.status === 0) {
+                    this.$notify({
+                        group: "paidSuccess",
+                        type: "success",
+                        text: "付款成功, （僅為展示頁面,不會進行出貨）",
+                    });
+
+                    this.createAnOrder();
+                    this.setStep(3);
+                } else {
+                    this.$notify({
+                        group: "paidFail",
+                        type: "warn",
+                        text: "無法進行付款",
+                    });
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+    },
+    mounted() {
+        TPDirect.setupSDK(
+            126868,
+            "app_DW5s6l3IyRtBeiHXgHJ1zWvEIl3gC6Dzb38wl1f4mPHSTMvvha462aLYzU1X",
+            "sandbox"
+        );
+        const fields = {
+            number: {
+                element: this.$refs.number,
+                placeholder: "**** **** **** ****",
+            },
+            expirationDate: {
+                element: this.$refs.expirationDate,
+                placeholder: "MM/YY",
+            },
+            ccv: {
+                element: this.$refs.ccv,
+                placeholder: "後三碼",
+            },
+        };
+
+        TPDirect.card.setup({
+            fields: fields,
+            styles: {
+                // Style all elements
+                input: {
+                    color: "gray",
+                },
+                // Styling ccv field
+                "input.cvc": {
+                    "font-size": "16px",
+                },
+                // Styling expiration-date field
+                "input.expiration-date": {
+                    // 'font-size': '16px'
+                },
+                // Styling card-number field
+                "input.card-number": {
+                    // 'font-size': '16px'
+                },
+                // style focus state
+                ":focus": {
+                    // 'color': 'black'
+                },
+                // style valid state
+                ".valid": {
+                    color: "green",
+                },
+                // style invalid state
+                ".invalid": {
+                    color: "red",
+                },
+                // Media queries
+                // Note that these apply to the iframe, not the root window.
+                "@media screen and (max-width: 400px)": {
+                    input: {
+                        color: "orange",
+                    },
+                },
+            },
+        });
+
+        TPDirect.card.onUpdate((update) => {
+            if (update.canGetPrime) {
+                //全部欄位皆為正確 可以呼叫 getPrime
+                this.disabledBtnPay = false;
+            } else {
+                this.disabledBtnPay = false;
+            }
+
+            this.updateStatus(update.status.number);
+            this.updateStatus(update.status.expiry);
+            this.updateStatus(update.status.number);
+        });
     },
 };
 </script>
