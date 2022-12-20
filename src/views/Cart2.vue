@@ -219,27 +219,20 @@ export default {
         async submitPrime(prime) {
             try {
                 // 要把得到的Prime Token 送給後端,
-                /*  let payReslut = await apiPayByPrime(prime); */
+                console.log("交易進行中");
                 let payReslut = await fetch(
                     `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`
                 );
-                let test = await payReslut.json();
-                console.log(test);
-                if (payReslut.result.status === 0) {
-                    this.$notify({
-                        group: "paidSuccess",
-                        type: "success",
-                        text: "付款成功, （僅為展示頁面,不會進行出貨）",
-                    });
+                // 不明白為何回傳的是字串
+                let resText = await payReslut.json();
+                // 這邊再把他轉為json物件
+                let payStatus = JSON.parse(resText);
+                console.log(payStatus);
 
-                    this.createAnOrder();
-                    this.setStep(3);
+                if (payStatus.status === 0) {
+                    console.log("付款成功");
                 } else {
-                    this.$notify({
-                        group: "paidFail",
-                        type: "warn",
-                        text: "無法進行付款",
-                    });
+                    console.log("付款失敗");
                 }
             } catch (err) {
                 console.log(err);
