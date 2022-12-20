@@ -13,7 +13,7 @@
                     id="search"
                     placeholder="搜尋資助／認養編號"
                     v-model.trim="search"
-                    @change="changeVal"
+                    @input="changeVal"
                 />
             </div>
             <select name="sort" id="sort" v-model="sort" @change="changeVal">
