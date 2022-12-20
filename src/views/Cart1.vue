@@ -120,14 +120,14 @@ export default {
         return {
             /* cartList: this.$store.state.cart, */
             couponDiscount: 0,
-            /*     coupon: [
+            coupon: [
                 {
                     id: "001",
                     name: "85折優惠折扣券",
                     discount: "85折",
                     value: 0.85,
                     deadline: 30,
-                    code: "#168168",
+                    code: "koala85",
                 },
                 {
                     id: "002",
@@ -135,7 +135,7 @@ export default {
                     discount: "75折",
                     value: 0.75,
                     deadline: 30,
-                    code: "#787878",
+                    code: "koala90",
                 },
                 {
                     id: "003",
@@ -143,10 +143,26 @@ export default {
                     discount: "95折",
                     value: 0.95,
                     deadline: 30,
-                    code: "#87878",
+                    code: "koala95",
                 },
-            ], */
-            isShowCoupon: false,
+                /*  {
+                    id: "003",
+                    name: "95折優惠折扣券",
+                    discount: "95折",
+                    value: 0.95,
+                    deadline: 30,
+                    code: "koala95",
+                },
+                {
+                    id: "003",
+                    name: "95折優惠折扣券",
+                    discount: "95折",
+                    value: 0.95,
+                    deadline: 30,
+                    code: "koala95",
+                }, */
+            ],
+            isShowCoupon: true,
             couponDiscount: this.$store.state.discount,
             couponCode: "",
             couponName: "",
