@@ -126,6 +126,9 @@
             </Panel>
         </Collapse>
     </section>
+    <section class="tradingModal">
+        <ModalForTrading></ModalForTrading>
+    </section>
     <Footer></Footer>
 </template>
 
@@ -134,6 +137,7 @@ import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import ImageSlider from "@/components/support/ImageSlider.vue";
 import PlanCard from "@/components/koalaInfo/PlanCard.vue";
+import ModalForTrading from "@/components/ModalForTrading.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
@@ -141,6 +145,7 @@ export default {
         Footer,
         ImageSlider,
         PlanCard,
+        ModalForTrading,
     },
     data() {
         return {

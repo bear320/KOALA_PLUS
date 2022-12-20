@@ -205,6 +205,7 @@ export default {
                 .then((res) => res.text())
                 .then((result) => {
                     console.log("QQ", result);
+                    result = JSON.parse(result);
                     alert(result);
                     this.callback();
                 });
