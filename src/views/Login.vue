@@ -25,10 +25,10 @@
                         <div class="content_active_sign_up">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>建立帳號</h2>
-                            <form @submit.prevent="login">
+                            <form @submit.prevent="sign_up" id="sign_up_form" method="post" enctype="multipart/form-data">
                                 <div>
                                     <p>姓名</p>
-                                    <input class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="sign_up_userName" required/>
+                                    <input name="mem_name" class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="sign_up_userName" required/>
                                 </div>
                                 <div>
                                     <p>帳號/信箱</p>
@@ -36,13 +36,13 @@
                                     <span id="idMsg">{{ idMsg }}</span>	 
                                 </div>
                                 <div>
-                                    <div class="btn_email_confirm" id="btnCheckId" @click="checkId">信箱認證</div>
+                                    <div class="btn_email_confirm" @click="check_account">信箱認證</div>
                                 </div>
                                 <div>
                                     <p class="content_active_sign_up_moveTxt_1">密碼</p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password"/>
-                                    <input class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
+                                    <input name="mem_psw" class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password"/>
+                                    <input name="mem_psw" class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
                                     <img :src="seen_one ? seenImg : unseenImg" @click="changeType_1" v-on:mouseover="hoverEye_1" v-on:mouseout="outEye_1" class="sign_up_icon_eye"/>
                                 </div>
                                 <div>
@@ -133,9 +133,10 @@ export default {
     },
     mounted() {
         this.login();
-        // window.addEventListener("load", function(){
-        //     document.getElementById("mem_account").addEventListener("change", checkId) 
-        // }, false);
+        // ======================================== 註冊會員加進資料庫 ======================================== //
+        // function $id(id){
+	    //     return document.getElementById(id);
+        // };
     },
     methods: {
         // ======================================== 關閉彈窗 click事件 ======================================== //
@@ -160,28 +161,18 @@ export default {
 
         // ======================================== Login click事件 ======================================== //
         login() {
-            document.querySelector(".content_active").className =
-                "content_active content_active_active_login";
-            document.querySelector(".content_active_login").style.display =
-                "block";
-            document.querySelector(".content_active_sign_up").style.opacity =
-                "0";
-            document.querySelector(
-                ".content_active_forget_password"
-            ).style.opacity = "0";
+            document.querySelector(".content_active").className = "content_active content_active_active_login";
+            document.querySelector(".content_active_login").style.display = "block";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
+            document.querySelector(".content_active_forget_password").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".content_active_login").style.opacity =
-                    "1";
+                document.querySelector(".content_active_login").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.display = "none";
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.display = "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
             }, 200);
 
             // ======================================== 登入驗證 ======================================== //
@@ -217,53 +208,46 @@ export default {
 
         // ======================================== sign_up click事件 ======================================== //
         sign_up() {
-            document.querySelector(".content_active").className =
-                "content_active content_active_active_sign_up";
-            document.querySelector(".content_active_sign_up").style.display =
-                "block";
+            document.querySelector(".content_active").className = "content_active content_active_active_sign_up";
+            document.querySelector(".content_active_sign_up").style.display = "block";
             document.querySelector(".content_active_login").style.opacity = "0";
-            document.querySelector(
-                ".content_active_forget_password"
-            ).style.opacity = "0";
+            document.querySelector( ".content_active_forget_password").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.opacity = "1";
-            }, 100);
-
-            setTimeout(function () {
-                document.querySelector(".content_active_login").style.display =
-                    "none";
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.display = "none";
+                document.querySelector(".content_active_sign_up").style.opacity = "1";
             }, 400);
 
+            setTimeout(function () {
+                document.querySelector(".content_active_login").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
+            }, 200);
+
             // ======================================== 註冊會員加進資料庫 ======================================== //
-            // let url="http://localhost/cgd103_g1/public/api//getSignUp.php?memId=" + document.getElementById("memId").value;
-            let url="http://localhost/cgd103_g1/public/api//getSignUp.php"
-            fetch(url)
-            .then(response=>{
-                return response.json(); //已parse完畢, 且傳回promise物件
-            })
-            .then(data=>{
-                if(data.memName){
-                    document.getElementById("showPanel").innerHTML = `姓名: ${data.memName}, 電話:${data.tel}`;
-                }else{
-                    document.getElementById("showPanel").innerHTML = `<h5>查無此會員資料</h5>`;
-                }
-            
-            })
-            .catch(error=>{})
+            let url="http://localhost/cgd103_g1/public/api/getSignUp.php"
+            // window.addEventListener("DOMContentLoaded", function(){
+	            
+		        let xhr = new XMLHttpRequest();
+		        xhr.onload = function(){
+		        	let result = JSON.parse(xhr.responseText);
+		        	alert(result.msg);
+		        }
+		        xhr.open("post", url, true);
+		        let formData = new FormData();
+		        formData.append("mem_name", document.getElementsByName("mem_name"));
+		        formData.append("mem_account", document.getElementsByName("mem_account"));
+		        formData.append("mem_psw", document.getElementsByName("mem_psw"));
+		        xhr.send(formData);
+                console.log("zzz")
+	            
+            // })
         },
 
         // ======================================== Email 後臺比對 ======================================== //
-        checkId() {  
+        check_account() {  
         //產生XMLHttpRequest物件
         var xhr = new XMLHttpRequest();
         xhr.onload = function(){
-            console.log("=====",xhr.status);
+            // console.log("=====",xhr.status);
             document.getElementById("idMsg").innerText = xhr.responseText;
         }
         let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
@@ -273,27 +257,18 @@ export default {
 
         // ======================================== forget_password click事件 ======================================== //
         forget_password() {
-            document.querySelector(".content_active").className =
-                "content_active content_active_active_forget_password";
-            document.querySelector(
-                ".content_active_forget_password"
-            ).style.display = "block";
+            document.querySelector(".content_active").className = "content_active content_active_active_forget_password";
+            document.querySelector(".content_active_forget_password").style.display = "block";
             document.querySelector(".content_active_login").style.opacity = "0";
-            document.querySelector(".content_active_sign_up").style.opacity =
-                "0";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.opacity = "1";
+                document.querySelector(".content_active_forget_password").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.display = "none";
-                document.querySelector(".content_active_login").style.display =
-                    "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_login").style.display = "none";
             }, 200);
         },
 
