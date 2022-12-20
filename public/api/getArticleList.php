@@ -3,7 +3,7 @@ header('Access-Control-Allow-Origin:*');
 header("Content-Type:application/json;charset=utf-8");
 require_once("./connect_cgd103g1.php");
 
-$sql = "select * from tibamefe_cgd103g1.news;";
+$sql = "select * from tibamefe_cgd103g1.news order by news_id DESC";
 
 $news = $pdo->query($sql);
 $newsRows = $news->fetchAll(PDO::FETCH_ASSOC);

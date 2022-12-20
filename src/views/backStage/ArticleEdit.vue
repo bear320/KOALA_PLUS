@@ -2,41 +2,61 @@
     <Header />
     <article class="bs-nav-space wrapper">
         <h1>公告管理</h1>
-        <h2>新增文章</h2>
-        <label for="upload">
-            <input
-                type="radio"
-                name="todo"
-                id="upload"
-                checked
-            />文章立即上傳更新
-        </label>
-        <label for="save">
-            <input type="radio" name="todo" id="save" />文章僅先暫存為草稿
-        </label>
-        <div>
-            <p>標題:</p>
-            <input type="text" />
-        </div>
-        <div class="display">
+        <h2>編輯文章</h2>
+        <form action="" enctype="multipart/form-data" method="post">
+            <label>
+                <input
+                    type="radio"
+                    name="status"
+                    v-model="edit.news_status"
+                    :true-value="1"
+                    checked
+                    required
+                />文章立即上傳更新
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="status"
+                    v-model="edit.news_status"
+                    :true-value="0"
+                />文章僅先暫存為草稿
+            </label>
             <div>
-                <p>分類:</p>
-                <select name="category" id="articlesCategory">
-                    <option value="news">最新消息</option>
-                    <option value="parkinfo">園區資訊</option>
-                    <option value="moneyinfo">資金運用</option>
-                </select>
+                <p>標題:</p>
+                <input type="text" v-model="edit.news_title" required />
+            </div>
+            <div class="display">
+                <div>
+                    <p>分類:</p>
+                    <select
+                        name="category"
+                        id="artclesCategory"
+                        v-model="edit.news_category"
+                    >
+                        <option value="#最新消息">#最新消息</option>
+                        <option value="#園區資訊">#園區資訊</option>
+                        <option value="#資金運用">#資金運用</option>
+                    </select>
+                </div>
+                <div>
+                    <p>圖片:</p>
+                    <input type="file" id="upload" />
+                </div>
             </div>
             <div>
-                <p>圖片:</p>
-                <input type="file" id="upload" />
+                <p>內文:</p>
+                <textarea
+                    name=""
+                    id=""
+                    cols="30"
+                    rows="10"
+                    v-model="edit.news_content"
+                    required
+                ></textarea>
             </div>
-        </div>
-        <div>
-            <p>內文:</p>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <button class="btn-paramy">
+        </form>
+        <button class="btn-paramy" id="btnInsert" @click.prevent="next">
             <img src="@/assets/images/icon/confirm.svg" alt="" />確認
         </button>
     </article>
@@ -44,9 +64,30 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
+    },
+    data() {
+        return {
+            edit: [],
+        };
+    },
+    methods: {
+        getArticleInfo() {
+            const apiURL = new URL(
+                `${BASE_URL}/getArticlePage.php?newsId=${this.$route.params.news_id}`
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.edit = json;
+                });
+        },
+    },
+    create() {
+        this.getArticleInfo();
     },
 };
 </script>

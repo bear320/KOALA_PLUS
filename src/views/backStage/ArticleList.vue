@@ -83,8 +83,9 @@
                 <p class="date">{{ article.news_date }}</p>
                 <p class="tag">{{ article.news_category }}</p>
                 <div class="operator">
-                    <img src="@/assets/images/icon/upload.svg" alt="" />
-                    <img src="@/assets/images/icon/edit.svg" alt="" />
+                    <router-link :to="`/bs-article-edit/${article.news_id}`"
+                        ><img src="@/assets/images/icon/edit.svg" alt=""
+                    /></router-link>
                 </div>
             </div>
         </section>

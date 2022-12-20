@@ -156,7 +156,7 @@ const routes = [
         component: () => import("@/views/backStage/ArticleList.vue"),
     },
     {
-        path: "/bs-article-edit",
+        path: "/bs-article-edit/:news_id",
         name: "articleEdit",
         // component: ArticleEdit,
         component: () => import("@/views/backStage/ArticleEdit.vue"),
