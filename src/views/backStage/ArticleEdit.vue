@@ -9,7 +9,7 @@
                     type="radio"
                     name="status"
                     v-model="edit.news_status"
-                    :true-value="1"
+                    value="1"
                     checked
                     required
                 />文章立即上傳更新
@@ -19,7 +19,7 @@
                     type="radio"
                     name="status"
                     v-model="edit.news_status"
-                    :true-value="0"
+                    value="0"
                 />文章僅先暫存為草稿
             </label>
             <div>
@@ -34,9 +34,9 @@
                         id="artclesCategory"
                         v-model="edit.news_category"
                     >
-                        <option value="#最新消息">#最新消息</option>
-                        <option value="#園區資訊">#園區資訊</option>
-                        <option value="#資金運用">#資金運用</option>
+                        <option value="最新消息">#最新消息</option>
+                        <option value="園區資訊">#園區資訊</option>
+                        <option value="資金運用">#資金運用</option>
                     </select>
                 </div>
                 <div>
@@ -83,10 +83,11 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.edit = json;
+                    console.log(this.edit);
                 });
         },
     },
-    create() {
+    created() {
         this.getArticleInfo();
     },
 };
