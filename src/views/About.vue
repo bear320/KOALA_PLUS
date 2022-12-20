@@ -140,6 +140,7 @@ import three from "@/components/aboutUs/three.vue";
 import four from "@/components/aboutUs/four.vue";
 import lightbox from "@/components/aboutUs/lightbox.vue";
 import Footer from "@/components/footer.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -236,7 +237,8 @@ export default {
     },
     methods: {
         getArticleList() {
-            fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
+            const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
+            fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
                     this.articles = json;
