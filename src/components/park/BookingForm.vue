@@ -1,10 +1,12 @@
 <template lang="">
     <div class="book-form">
         <form
+            ref="form"
             id="bookingForm"
             data-form-storage="true"
             enctype="multipart/form-data"
             method="post"
+            @submit="sendEmail"
         >
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
@@ -15,7 +17,7 @@
                     type="text"
                     class="form-control"
                     id="rsv_name"
-                    name="rsv_name"
+                    name="user_name"
                     placeholder="booking name"
                     v-model.trim="name"
                 />
@@ -26,18 +28,18 @@
                     type="mobile"
                     class="form-control"
                     id="rsv_mobile"
-                    name="rsv_mobile"
+                    name="mobile"
                     placeholder="mobile"
                     v-model="mobile"
                 />
             </div>
             <div class="form-group">
-                <label for="rsv_email">Email</label>
+                <label>Email</label>
                 <input
                     type="email"
                     class="form-control"
                     id="rsv_email"
-                    name="rsv_email"
+                    name="user_email"
                     placeholder="name@example.com"
                     v-model="email"
                 />
@@ -47,7 +49,7 @@
                 <select
                     class="form-control"
                     id="rsv_ppl"
-                    name="rsv_ppl"
+                    name="people"
                     v-model="people"
                 >
                     <option disabled value="">選擇人數</option>
@@ -79,7 +81,7 @@
                     type="date"
                     id="rsv_date"
                     class="form-control"
-                    name="rsv_date"
+                    name="time"
                     v-model="orderDate"
                     min="2022-01-01"
                     max="2023-12-31"
@@ -89,7 +91,7 @@
 
             <button
                 type="submit"
-                id="btnInsert"
+                value="Send"
                 class="btn btn-primary"
                 @click.prevent="next"
             >
@@ -98,8 +100,8 @@
 
             <div class="orderList" v-show="isOrder">
                 <div class="order-info">
-                    預約編號：No.{{ orderDate }}
-                    <br />
+                    <!-- 預約編號：No.{{ orderDate }} -->
+                    <!-- <br /> -->
                     預約日期：{{ orderDate }}
                     <br />
                     姓名：{{ name }}
@@ -115,10 +117,23 @@
                 </div>
             </div>
         </form>
+        <!-- <form ref="form" @submit.prevent="sendEmail">
+            <label>Name</label>
+            <input type="text" name="user_name" />
+            <label>Email</label>
+            <input type="email" name="user_email" />
+            <label>Message</label>
+            <textarea name="message"></textarea>
+            <input type="submit" value="Send" />
+        </form> -->
     </div>
 </template>
 <script>
+import emailjs from "emailjs-com";
 export default {
+    components: {
+        emailjs,
+    },
     props: ["msg", "callback"],
     data() {
         return {
@@ -139,6 +154,28 @@ export default {
         //     },
     },
     methods: {
+        sendEmail() {
+            // emailjs
+            //     .send(
+            //         "service_i2cup6l",
+            //         "template_muwk0v8",
+            //         {
+            //             user_email: this.email,
+            //             user_name: this.name,
+            //             start: this.start,
+            //             time: this.time,
+            //         },
+            //         "s-jQKrTjLZGe8RcQR"
+            //     )
+            //     .then(
+            //         (result) => {
+            //             console.log("SUCCESS!", result.text);
+            //         },
+            //         (error) => {
+            //             console.log("FAILED...", error.text);
+            //         }
+            //     );
+        },
         // toggleModal() {
         //     console.log("click");
         //     this.isShow = !this.isShow;
@@ -171,6 +208,27 @@ export default {
                     alert(result);
                     this.callback();
                 });
+            emailjs
+                .send(
+                    "service_i2cup6l",
+                    "template_muwk0v8",
+                    {
+                        user_email: this.email,
+                        user_name: this.name,
+                        time: this.orderDate,
+                        people: this.people,
+                        mobile: this.mobile,
+                    },
+                    "s-jQKrTjLZGe8RcQR"
+                )
+                .then(
+                    (result) => {
+                        console.log("SUCCESS!", result.text);
+                    },
+                    (error) => {
+                        console.log("FAILED...", error.text);
+                    }
+                );
         },
     },
 };
