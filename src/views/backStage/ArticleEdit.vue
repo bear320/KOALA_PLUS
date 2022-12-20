@@ -9,7 +9,7 @@
                     type="radio"
                     name="status"
                     v-model="edit.news_status"
-                    :true-value="1"
+                    value="1"
                     checked
                     required
                 />文章立即上傳更新
@@ -19,7 +19,7 @@
                     type="radio"
                     name="status"
                     v-model="edit.news_status"
-                    :true-value="0"
+                    value="0"
                 />文章僅先暫存為草稿
             </label>
             <div>
@@ -34,14 +34,17 @@
                         id="artclesCategory"
                         v-model="edit.news_category"
                     >
-                        <option value="#最新消息">#最新消息</option>
-                        <option value="#園區資訊">#園區資訊</option>
-                        <option value="#資金運用">#資金運用</option>
+                        <option value="最新消息">#最新消息</option>
+                        <option value="園區資訊">#園區資訊</option>
+                        <option value="資金運用">#資金運用</option>
                     </select>
                 </div>
                 <div>
                     <p>圖片:</p>
-                    <input type="file" id="upload" />
+                    <label class="btn-lowest imgupload"
+                        ><Icon type="md-image" />上傳圖片
+                        <input type="file" accept="image" style="display: none"
+                    /></label>
                 </div>
             </div>
             <div>
@@ -86,7 +89,7 @@ export default {
                 });
         },
     },
-    create() {
+    created() {
         this.getArticleInfo();
     },
 };
@@ -109,7 +112,6 @@ html article {
     label {
         font-size: $h4;
         display: block;
-        margin: 15px 0;
     }
     div {
         margin: 10px;
@@ -127,6 +129,15 @@ html article {
         img {
             margin-right: 10px;
             vertical-align: middle;
+        }
+    }
+    input[type="text"] {
+        width: 40%;
+    }
+    .imgupload {
+        @include btnSize(15px);
+        i {
+            color: $btn-color;
         }
     }
 }

@@ -35,7 +35,11 @@
             <h3 class="kListed">上 / 下架</h3>
             <h3 class="kEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="koala in source" :key="koala.koala_id">
+        <div
+            class="bs-list"
+            v-for="(koala, index) in source"
+            :key="koala.koala_id"
+        >
             <p>{{ koala.koala_id }}</p>
             <p>{{ koala.koala_name }}</p>
             <p>
@@ -51,6 +55,7 @@
                     v-model.number="koala.koala_listed"
                     :true-value="1"
                     :false-value="0"
+                    @on-change="switchListed(index)"
                 >
                     <template #open>
                         <span>上架</span>
@@ -198,6 +203,27 @@ export default {
                     search: this.search,
                 },
             });
+        },
+        switchListed(index) {
+            // console.log(this.source[index].koala_id);
+            // console.log(this.source[index].koala_listed);
+            const koalaId = this.source[index].koala_id;
+            const koalaListed = this.source[index].koala_listed;
+            const apiURL = new URL(`${BASE_URL}/postKoalaListed.php`);
+            const postKoalaListed = {
+                koala_id: Number(koalaId),
+                koala_listed: Number(koalaListed),
+            };
+            console.log(postKoalaListed);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(postKoalaListed),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                });
         },
     },
     created() {

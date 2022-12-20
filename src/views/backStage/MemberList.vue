@@ -16,7 +16,7 @@
                 <div class="search">
                     <input
                         type="search"
-                        @click="search_func"
+                        @input="search_func"
                         name="search_mem_name"
                         id="search_mem_name"
                         placeholder="輸入姓名搜尋"
