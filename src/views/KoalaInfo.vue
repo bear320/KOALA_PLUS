@@ -126,9 +126,7 @@
             </Panel>
         </Collapse>
     </section>
-    <section class="tradingModal">
-        <ModalForTrading></ModalForTrading>
-    </section>
+    <ModalForTrading style="display: none"></ModalForTrading>
     <Footer></Footer>
 </template>
 
@@ -319,6 +317,18 @@ export default {
         }
     }
 }
+// .modal {
+//     width: 100%;
+//     height: 100%;
+//     background-color: #0005;
+//     position: fixed;
+//     top: 0;
+//     left: 0;
+//     z-index: 999;
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+// }
 </style>
 <style lang="scss">
 .ivu-collapse-header {
