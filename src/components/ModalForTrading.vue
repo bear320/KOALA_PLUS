@@ -63,6 +63,7 @@ $loader-size: 100px;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
 
     .tradingModal {
         .modal-wrapper {
@@ -70,7 +71,6 @@ $loader-size: 100px;
             height: $modal-size;
             border-radius: 10px;
             background-color: #fff;
-            box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
             display: flex;
             flex-direction: column;
             align-items: center;

@@ -127,6 +127,7 @@
         </Collapse>
     </section>
     <ModalForTrading style="display: none"></ModalForTrading>
+    <ModalForSuccess></ModalForSuccess>
     <Footer></Footer>
 </template>
 
@@ -136,6 +137,7 @@ import Footer from "@/components/footer.vue";
 import ImageSlider from "@/components/support/ImageSlider.vue";
 import PlanCard from "@/components/koalaInfo/PlanCard.vue";
 import ModalForTrading from "@/components/ModalForTrading.vue";
+import ModalForSuccess from "@/components/ModalForSuccess.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
@@ -144,6 +146,7 @@ export default {
         ImageSlider,
         PlanCard,
         ModalForTrading,
+        ModalForSuccess,
     },
     data() {
         return {
@@ -317,18 +320,6 @@ export default {
         }
     }
 }
-// .modal {
-//     width: 100%;
-//     height: 100%;
-//     background-color: #0005;
-//     position: fixed;
-//     top: 0;
-//     left: 0;
-//     z-index: 999;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-// }
 </style>
 <style lang="scss">
 .ivu-collapse-header {
