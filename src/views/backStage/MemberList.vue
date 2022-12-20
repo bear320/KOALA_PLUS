@@ -14,14 +14,20 @@
                     <img src="@/assets/images/icon/black.svg" alt="" />
                 </router-link>
                 <div class="search">
-                    <input type="search" name="" id="" placeholder="搜尋" />
+                    <input
+                        type="search"
+                        @click="search_func"
+                        name="search_mem_name"
+                        id="search_mem_name"
+                        placeholder="輸入姓名搜尋"
+                        ref="search_mem_name"
+                    />
                 </div>
-                <select name="" id="">
-                    <option value="" selected>排列方式</option>
-                    <option value="">會員編號（正序）</option>
-                    <option value="">會員編號（反序）</option>
-                    <option value="">email（反序）</option>
-                    <option value="">email（反序）</option>
+                <select v-model="selectName" @change="search_func">
+                    <option value="" disabled selected>排列方式</option>
+                    <option v-for="list in lists" :value="list.val">
+                        {{ list.item }}
+                    </option>
                 </select>
             </div>
         </div>
@@ -75,6 +81,13 @@ export default {
     data() {
         return {
             memindexs: [],
+            selectName: "",
+            lists: [
+                { val: "1", item: "會員編號（正序）" },
+                { val: "2", item: "會員編號（反序）" },
+                { val: "3", item: "email（正序）" },
+                { val: "4", item: "email（反序）" },
+            ],
         };
     },
     methods: {
@@ -89,6 +102,26 @@ export default {
                     },
                 });
             });
+        },
+        search_func() {
+            const postMemSearch = {
+                search_mem_name: this.$refs.search_mem_name.value,
+                search_orderby: this.selectName,
+            };
+            console.log(postMemSearch);
+            fetch(
+                "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
+                {
+                    method: "POST",
+                    credentials: "include",
+                    body: new URLSearchParams(postMemSearch),
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.memindexs = json;
+                });
         },
     },
     components: {

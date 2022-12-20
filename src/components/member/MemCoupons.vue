@@ -14,11 +14,12 @@
                             <th class="coupon_id">優惠券代碼</th>
                             <th class="coupon_date">
                                 優惠券獲得日期
-                                <div class="iconlayout" @click="iconchange">
-                                    <Icon type="ios-arrow-down" size="20" />
-                                    <Icon type="ios-arrow-up" size="20" />
-                                </div>
-
+                                <Icon
+                                    type="ios-arrow-down"
+                                    size="20"
+                                    class="inverse"
+                                    @click="iconchange"
+                                />
                                 <!-- color="#337a7d" -->
                             </th>
                             <th>
@@ -66,7 +67,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    // console.log(json);
                     if (json.status) {
                         this.couponsList = json.list;
                         this.userid = json.userid;
