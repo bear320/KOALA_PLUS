@@ -239,6 +239,23 @@ export default {
                     ".content_active_forget_password"
                 ).style.display = "none";
             }, 400);
+
+            // ======================================== 註冊會員加進資料庫 ======================================== //
+            // let url="http://localhost/cgd103_g1/public/api//getSignUp.php?memId=" + document.getElementById("memId").value;
+            let url="http://localhost/cgd103_g1/public/api//getSignUp.php"
+            fetch(url)
+            .then(response=>{
+                return response.json(); //已parse完畢, 且傳回promise物件
+            })
+            .then(data=>{
+                if(data.memName){
+                    document.getElementById("showPanel").innerHTML = `姓名: ${data.memName}, 電話:${data.tel}`;
+                }else{
+                    document.getElementById("showPanel").innerHTML = `<h5>查無此會員資料</h5>`;
+                }
+            
+            })
+            .catch(error=>{})
         },
 
         // ======================================== Email 後臺比對 ======================================== //
@@ -252,7 +269,8 @@ export default {
         let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
         xhr.open("get", url, true);
         xhr.send(null);
-}       , 
+        },
+
         // ======================================== forget_password click事件 ======================================== //
         forget_password() {
             document.querySelector(".content_active").className =
