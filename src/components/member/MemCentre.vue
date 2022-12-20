@@ -204,7 +204,12 @@ export default {
                 {
                     // method: "POST",
                     // mode: "cors", //same-origin,no-cors,*cors
-                    credentials: "include", //*omit,same-origin,include
+                    credentials: "include",
+                    //請求選項的方法 獲取請求設置:會在跨源請求中發送 cookie ，
+                    //*credentials方法一：omit 瀏覽器不請求cookie
+                    //*credentials方法一：same-origin 使瀏覽器發送包含在同源(同域)的憑據(cookie)請求
+                    //*credentials方法三：include 瀏覽器會在跨源請求中發送 cookie
+
                     // redirect: "follow", //*follow,manual,error
                     // referrer: "no-referrer", //*client,no-referrer
                     // headers: {
@@ -215,7 +220,7 @@ export default {
             )
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    // console.log(json);
                     if (json.status) {
                         this.memindexs = json.list;
                         return true;

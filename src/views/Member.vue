@@ -78,7 +78,7 @@ export default {
     data() {
         return {
             memsliding: ["會員中心", "訂單資訊", "優惠券", "認養紀錄"],
-            currentTab: 0,
+            currentTab: 1,
         };
     },
     methods: {
