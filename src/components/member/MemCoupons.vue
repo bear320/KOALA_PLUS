@@ -25,7 +25,7 @@
                             </th>
                             <th
                                 class="coupon_get_date"
-                                @click="iconchange('gdate')"
+                                @click="iconchange('gDate')"
                             >
                                 優惠券獲得日期
                                 <Icon
@@ -37,7 +37,7 @@
                             </th>
                             <th
                                 class="coupon_exp_date"
-                                @click="iconchange('edate')"
+                                @click="iconchange('eDate')"
                             >
                                 優惠券到期日<Icon
                                     type="ios-arrow-down"
@@ -79,6 +79,54 @@ export default {
         iconchange(type) {
             this.isReverse = !this.isReverse;
             console.log(type, this.isReverse);
+            //另一個判斷方法：
+            // let iconorderby= (type == "cName")?;;
+            // if (type == "cName") {
+            //     iconorderby = this.isReverse ? 1 : 2;
+            // } else if (type == "gDate") {
+            //     iconorderby = this.isReverse ? 3 : 4;
+            // } else if (type == "eDate") {
+            //     iconorderby = this.isReverse ? 5 : 6;
+            // }
+            let iconorderby = 0;
+            switch (type) {
+                case "cName":
+                    iconorderby = this.isReverse ? 1 : 2;
+                    break;
+                case "gDate":
+                    iconorderby = this.isReverse ? 3 : 4;
+                    break;
+                case "eDate":
+                    iconorderby = this.isReverse ? 5 : 6;
+                    break;
+                default:
+                    iconorderby = 0;
+                    break;
+            }
+            console.log(iconorderby);
+            const postMemSearch = {
+                search_orderby: iconorderby,
+            };
+            console.log(postMemSearch);
+            fetch(
+                "http://localhost/cgd103_g1/public/api/postmemCoupons.php?type=front",
+                {
+                    method: "POST",
+                    credentials: "include",
+                    body: new URLSearchParams(postMemSearch),
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.memindexs = json;
+                    if (json.status) {
+                        this.couponsList = json.list;
+                        // console.log(this.couponsList.length);
+                        return true;
+                    }
+                    alert("獲取數據失敗");
+                });
         },
     },
     created() {
