@@ -41,7 +41,10 @@
                 </div>
                 <div>
                     <p>圖片:</p>
-                    <input type="file" id="upload" />
+                    <label class="btn-lowest imgupload"
+                        ><Icon type="md-image" />上傳圖片
+                        <input type="file" accept="image" style="display: none"
+                    /></label>
                 </div>
             </div>
             <div>
@@ -83,7 +86,6 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.edit = json;
-                    console.log(this.edit);
                 });
         },
     },
@@ -110,7 +112,6 @@ html article {
     label {
         font-size: $h4;
         display: block;
-        margin: 15px 0;
     }
     div {
         margin: 10px;
@@ -128,6 +129,15 @@ html article {
         img {
             margin-right: 10px;
             vertical-align: middle;
+        }
+    }
+    input[type="text"] {
+        width: 40%;
+    }
+    .imgupload {
+        @include btnSize(15px);
+        i {
+            color: $btn-color;
         }
     }
 }
