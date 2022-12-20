@@ -4,37 +4,24 @@
         <div class="main_content">
             <div class="main_content_center">
                 <div class="content_login">
+                    <!-- ======================================== 註冊會員、登入會員、忘記密碼的block ======================================== -->
                     <div class="content_login_sign_up">
                         <div class="content_sign_up_block">
                             <div class="content_opcitiy content_opcitiy_left">
                                 <p>尚未擁有會員？</p>
-                                <button
-                                    class="main_block_btn_sign_up"
-                                    @click="sign_up"
-                                >
-                                    註冊會員
-                                </button>
+                                <button class="main_block_btn_sign_up" @click="sign_up">註冊會員</button>
                             </div>
                         </div>
                         <div class="content_login_block">
                             <div class="content_opcitiy content_opcitiy_right">
                                 <p>已經擁有會員？</p>
-                                <button
-                                    class="main_block_btn_login"
-                                    @click="login"
-                                >
-                                    登入會員</button
-                                ><br />
-                                <button
-                                    class="main_block_btn_login"
-                                    @click="forget_password"
-                                >
-                                    忘記密碼
-                                </button>
+                                <button class="main_block_btn_login" @click="login">登入會員</button><br />
+                                <button class="main_block_btn_login" @click="forget_password">忘記密碼</button>
                             </div>
                         </div>
                     </div>
                     <div class="content_active">
+                        <!-- ======================================== 註冊會員表單 ======================================== -->
                         <div class="content_active_sign_up">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>建立帳號</h2>
@@ -45,10 +32,11 @@
                                 </div>
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input type="email" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
+                                    <input name="mem_account" id="mem_account" type="email" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
+                                    <span id="idMsg">{{ idMsg }}</span>	 
                                 </div>
                                 <div>
-                                    <div class="btn_email_confirm">信箱認證</div>
+                                    <div class="btn_email_confirm" id="btnCheckId" @click="checkId">信箱認證</div>
                                 </div>
                                 <div>
                                     <p class="content_active_sign_up_moveTxt_1">密碼</p>
@@ -69,100 +57,40 @@
                                 </div>
                             </form>
                         </div>
+                        <!-- ======================================== 登入會員表單 ======================================== -->
                         <div class="content_active_login">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input
-                                        type="text"
-                                        placeholder="Account"
-                                        v-model="login_account"
-                                        required
-                                    />
+                                    <input type="text" placeholder="Account" v-model="login_account" required/>
                                 </div>
                                 <div>
-                                    <p class="content_active_login_moveTxt">
-                                        密碼
-                                    </p>
+                                    <p class="content_active_login_moveTxt">密碼</p>
                                     <i class="icon_password"></i>
-                                    <input
-                                        class="content_active_login_move4"
-                                        type="text"
-                                        v-if="pwdType_three"
-                                        v-model="login_password"
-                                        required
-                                    />
-                                    <input
-                                        class="content_active_login_move4"
-                                        type="password"
-                                        placeholder="Password"
-                                        v-model="login_password"
-                                        required
-                                        v-else
-                                    />
-                                    <img
-                                        :src="seen_three ? seenImg : unseenImg"
-                                        @click="changeType_3"
-                                        v-on:mouseover="hoverEye_3"
-                                        v-on:mouseout="outEye_3"
-                                        class="login_icon_eye"
-                                    />
+                                    <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password" required/>
+                                    <input class="content_active_login_move4" type="password" placeholder="Password" v-model="login_password" required v-else/>
+                                    <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye"/>
                                 </div>
-                                <label
-                                    class="errorMsg"
-                                    v-if="errorFlag"
-                                    v-cloak
-                                    >{{ errorMsg }}</label
-                                ><br />
-                                <button
-                                    class="btn_login"
-                                    type="submit"
-                                    @click="login"
-                                    value="Login"
-                                >
-                                    登錄會員</button
-                                ><br />
+                                <label class="errorMsg" v-if="errorFlag" v-cloak>{{ errorMsg }}</label><br />
+                                <button class="btn_login" type="submit" @click="login" value="Login">登錄會員</button><br />
                             </form>
-                            <button class="btn_login" @click="forget_password">
-                                忘記密碼
-                            </button>
-                            <div>
-                                <img
-                                    src="../assets/images/login/login_koala.png"
-                                    alt=""
-                                />
-                            </div>
+                            <button class="btn_login" @click="forget_password">忘記密碼</button>
+                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
+                        <!-- ======================================== 忘記密碼表單 ======================================== -->
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
                             <form>
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input
-                                        id="aaa"
-                                        type="text"
-                                        placeholder="Account"
-                                        v-model="forget_password_account"
-                                        required
-                                    />
+                                    <input id="aaa" type="text" placeholder="Account" v-model="forget_password_account" required/>
                                 </div>
-                                <button
-                                    class="btn_login"
-                                    type="submit"
-                                    @click="sendEmail"
-                                >
-                                    驗證信箱
-                                </button>
+                                <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
-                            <div>
-                                <img
-                                    src="../assets/images/login/login_koala.png"
-                                    alt=""
-                                />
-                            </div>
+                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
                         </div>
                     </div>
                 </div>
@@ -185,6 +113,7 @@ export default {
             login_password: "",
             errorFlag: false,
             errorMsg: "",
+            idMsg: "",
 
             seen_one: "",
             seen_two: "",
@@ -204,27 +133,32 @@ export default {
     },
     mounted() {
         this.login();
-    },
-    created() {
-        // this.getArticleList();
+        // window.addEventListener("load", function(){
+        //     document.getElementById("mem_account").addEventListener("change", checkId) 
+        // }, false);
     },
     methods: {
-        // getArticleList() {
-        //     fetch(
-        //         "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
-        //        /*  { mode: "no-cors" } */
-        //     )
-        //         .then((respons) => respons.json())
-        //         .then((json) => {
-        //             console.log(json);
-        //             this.memindexs = json;
-        //         })
-        //         .catch((error) => {
-        //             // 當初出現錯誤時跑 catch
-        //             console.log(error);
-        //         });
-        // },
+        // ======================================== 關閉彈窗 click事件 ======================================== //
+        login_sign_up() {
+            document.querySelector(".content_active").className =
+                "content_active";
+            document.querySelector(".content_active_sign_up").style.opacity =
+                "0";
+            document.querySelector(".content_active_login").style.opacity = "0";
 
+            setTimeout(function () {
+                document.querySelector(
+                    ".content_active_sign_up"
+                ).style.display = "none";
+                document.querySelector(".content_active_login").style.display =
+                    "none";
+                document.querySelector(
+                    ".content_active_forget_password"
+                ).style.display = "none";
+            }, 500);
+        },
+
+        // ======================================== Login click事件 ======================================== //
         login() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_login";
@@ -250,7 +184,7 @@ export default {
                 ).style.display = "none";
             }, 200);
 
-            // ==============================   登入驗證   ============================== //
+            // ======================================== 登入驗證 ======================================== //
             let thisvue = this;
             if (thisvue.login_account == "" || thisvue.login_password == "") {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
@@ -270,14 +204,18 @@ export default {
                     .then((res) => res.json())
                     .then((json) => {
                         console.log(json);
-                        if (json.code) {
+                        if (this.login_password == json.mem_account) {
                             console.log("成功");
+                        }
+                        else if ( !json.code) {
+                            console.log("失敗")
                         }
                     });
 
             }
         },
 
+        // ======================================== sign_up click事件 ======================================== //
         sign_up() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_sign_up";
@@ -301,40 +239,21 @@ export default {
                     ".content_active_forget_password"
                 ).style.display = "none";
             }, 400);
-
-            // ==============================   帳號是否重複   ============================== //
-            
         },
 
-        async sign_up() {
-            try {
-                // 發送 HTTP 請求
-                const response = await fetch("http://localhost/cgd103_g1/public/api/getConfirmMember.php", {
-                    method: 'POST',
-                    // headers: {
-                    //   'Content-Type': 'application/json'
-                    // },
-                    body: JSON.stringify({
-                        mem_account: this.login_account
-                    })
-                    });
-                // 解析響應數據
-                const data = await response.json();
-                // 判斷帳號是否註冊
-                if (data.exists) {
-                    // 帳號已經註冊，更新組件狀態
-                    this.usernameTaken = true;
-                } else {
-                  this.usernameTaken = false;
-                }
-            } catch (error) {
-                // 處理錯誤
-                console.error(error);
-            }
-        },
-
-
-
+        // ======================================== Email 後臺比對 ======================================== //
+        checkId() {  
+        //產生XMLHttpRequest物件
+        var xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            console.log("=====",xhr.status);
+            document.getElementById("idMsg").innerText = xhr.responseText;
+        }
+        let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
+        xhr.open("get", url, true);
+        xhr.send(null);
+}       , 
+        // ======================================== forget_password click事件 ======================================== //
         forget_password() {
             document.querySelector(".content_active").className =
                 "content_active content_active_active_forget_password";
@@ -360,25 +279,7 @@ export default {
             }, 200);
         },
 
-        login_sign_up() {
-            document.querySelector(".content_active").className =
-                "content_active";
-            document.querySelector(".content_active_sign_up").style.opacity =
-                "0";
-            document.querySelector(".content_active_login").style.opacity = "0";
-
-            setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.display = "none";
-                document.querySelector(".content_active_login").style.display =
-                    "none";
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.display = "none";
-            }, 500);
-        },
-
+        // ======================================== 看得到密碼 click事件 ======================================== //
         changeType_1: function () {
             this.seen_one = !this.seen_one;
             this.pwdType_one = !this.pwdType_one;
@@ -418,6 +319,7 @@ export default {
             this.seen_three = !this.seen_three;
         },
 
+        // ======================================== EmailJs ======================================== //
         sendEmail(e) {
             e.preventDefault();
             const templateParams = {
@@ -468,13 +370,11 @@ export default {
     position: relative;
 }
 
-/* 改整體高度 */
 .content_login {
     position: relative;
     width: 1200px;
 }
 
-/* 還沒按下去的背景 height註解掉就會沒東西 */
 .content_active {
     position: absolute;
     overflow: hidden;
@@ -535,11 +435,9 @@ export default {
     border-radius: 10px;
 }
 
-/* 兩個灰色框寬度 */
 .content_login_sign_up {
     position: absolute;
     width: 100%;
-    /* height: 280px; */
     top: -10em;
     z-index: 1;
 }
@@ -610,7 +508,7 @@ export default {
     margin-top: 10%;
     color: #2e383f;
 }
-/* ---------------------------------- background text ------------------------------------ */
+
 .content_opcitiy {
     position: relative;
     background-color: #96bbbd;
@@ -634,7 +532,6 @@ export default {
     cursor: pointer;
 }
 
-/* LOGIN 裡面的 CONTENT */
 .content_active_login {
     position: absolute;
     top: 0;
@@ -841,7 +738,7 @@ export default {
     width: 50%;
 }
 
-// ==================== 改 input 位置 ==================== //
+// ======================================== 改 input 位置 ======================================== //
 .content_active_sign_up > form > div > .content_active_sign_up_move1 {
     margin-left: 11%;
 }
@@ -870,8 +767,7 @@ export default {
     padding-left: 5%;
 }
 
-// ==================== 眼睛 ==================== //
-
+// ======================================== 眼睛 ======================================== //
 .sign_up_icon_eye {
     width: 20px;
     height: 20px;
@@ -886,7 +782,7 @@ export default {
     margin-top: 3.5%;
 }
 
-// ==================== 手機切版 ==================== //
+// ======================================== 手機切版 ======================================== //
 @media screen and (max-width: 1200px) {
     .content_sign_up_block {
         width: 100%;
