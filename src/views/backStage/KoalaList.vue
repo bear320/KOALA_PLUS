@@ -16,7 +16,7 @@
                     id="search"
                     placeholder="搜尋無尾熊名字"
                     v-model.trim="search"
-                    @change="changeVal"
+                    @input="changeVal"
                 />
             </div>
             <select name="sort" id="sort" v-model="sort" @change="changeVal">
