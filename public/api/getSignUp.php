@@ -116,7 +116,7 @@ header("Content-Type:application/json;charset=utf-8");
 		$products->bindValue(":mem_psw", $_POST["password"]);
 		$products->execute();	
 
-	    $msg = "新增成功";
+	    $msg = "會員註冊成功";
 	} catch (PDOException $e) {
 		$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
 	}	
