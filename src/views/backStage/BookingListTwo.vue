@@ -21,8 +21,8 @@
                 />
             </div>
             <select v-model="selectName" @change="search_func" name="" id="">
-                <option value="" disabled selected>排列方式</option>
-                <option v-for="list in lists" :value="list.val">
+                <option value="" disabled selected>訂單排序</option>
+                <option v-for="list in lists" :value="list.val" :key="list">
                     {{ list.item }}
                 </option>
                 <!-- <option value="">已預約訂單</option>
@@ -32,9 +32,29 @@
     </section>
     <section class="wrapper table">
         <div class="bs-title">
-            <h3 class="bookNum">編號</h3>
+            <h3
+                class="bookNum"
+                @click="numchange('cName')"
+                name="rsv_id_orderby"
+            >
+                編號<Icon
+                    type="ios-arrow-down"
+                    size="20"
+                    :class="{ inverse: idReverse }"
+                />
+            </h3>
             <h3 class="bookName">預約者</h3>
-            <h3 class="bookDate">日期</h3>
+            <h3
+                class="bookDate"
+                @click="datechange('cName')"
+                name="rsv_date_orderby"
+            >
+                日期<Icon
+                    type="ios-arrow-down"
+                    size="20"
+                    :class="{ inverse: dateReverse }"
+                />
+            </h3>
             <h3 class="bookPpl">人數</h3>
             <h3 class="bookConnect">Email / 電話</h3>
             <h3 class="bookStatus">狀態</h3>
@@ -78,6 +98,7 @@
             </p>
         </div>
     </section>
+
     <!-- <div class="pagination">
         <ul>
             <a @click="prePage"><li>&lt;</li></a>
@@ -110,8 +131,11 @@ export default {
             lists: [
                 { val: "rsv_date", item: "日期(正序)" },
                 { val: "rsv_date DESC", item: "日期(反序)" },
-                { val: "rsv_id", item: "預約編號" },
+                { val: "rsv_id", item: "預約編號(正序)" },
+                { val: "rsv_id DESC", item: "預約編號(反序)" },
             ],
+            idReverse: false,
+            dateReverse: false,
         };
     },
     watch: {
@@ -127,6 +151,70 @@ export default {
         // },
     },
     methods: {
+        numchange() {
+            this.idReverse = !this.idReverse;
+            console.log(this.idReverse);
+
+            let postDateSearch = "";
+            this.idReverse
+                ? (postDateSearch = {
+                      search_order_field: "rsv_id ASC",
+                      // search_order_by: "rsv_id",
+                  })
+                : (postDateSearch = {
+                      search_order_field: "rsv_id DESC",
+                      // search_order_by: "rsv_id",
+                  });
+
+            /* const postDateSearch = {
+                search_order_field: "rsv_id DESC",
+                // search_order_by: "rsv_id",
+            }; */
+
+            console.log("QQ");
+            fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?", {
+                method: "POST",
+                credentials: "include",
+                body: new URLSearchParams(postDateSearch),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.booklist = json;
+                });
+            console.log(this.lists[2]);
+        },
+        datechange() {
+            this.dateReverse = !this.dateReverse;
+            console.log(this.dateReverse);
+            let postDateSearch = "";
+            this.dateReverse
+                ? (postDateSearch = {
+                      search_order_field: "rsv_date ASC",
+                      // search_order_by: "rsv_id",
+                  })
+                : (postDateSearch = {
+                      search_order_field: "rsv_date DESC",
+                      // search_order_by: "rsv_id",
+                  });
+
+            /* const postDateSearch = {
+                search_order_field: "rsv_id DESC",
+                // search_order_by: "rsv_id",
+            }; */
+
+            console.log("QQ");
+            fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php", {
+                method: "POST",
+                credentials: "include",
+                body: new URLSearchParams(postDateSearch),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.booklist = json;
+                });
+        },
         getResvDetail() {
             // const productId = this.$route.params.id;
             // const apiURL = new URL(
@@ -443,5 +531,9 @@ a {
     background-color: #2ecc71;
     border-radius: 100%;
     color: #fff;
+}
+
+.inverse {
+    transform: rotate(180deg);
 }
 </style>
