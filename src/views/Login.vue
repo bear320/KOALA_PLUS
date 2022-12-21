@@ -83,12 +83,12 @@
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
-                            <form  @submit="sendEmail">
+                            <form @submit.prevent="forget_password" @submit="sendEmail">
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input id="aaa" type="text" placeholder="Account" name="user_email" v-model="forget_password_account" required/>
+                                    <input id="forget_password_account" type="text" placeholder="Account" name="user_email" v-model="forget_password_account" required/>
                                 </div>
-                                <div id="show_forget_password"></div>
+                                <div name="mem_psw" id="show_forget_password"></div>
                                 <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
@@ -274,49 +274,40 @@ export default {
         // ======================================== 寄 Email  ======================================== //
         sendEmail() {
             // ======================================== 把忘記的密碼撈出來  ======================================== //
+            var xhr = new XMLHttpRequest();
+            xhr.onload=function (){
+                 if( xhr.status == 200 ){
+                  //modify here
+                    showMember(xhr.responseText);
+                 }else{
+                    alert( xhr.status );
+                 }
+            }
+
+            var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+            xhr.open("get", url, true);
+            xhr.send( null );
+
             function showMember(json){
+                var xhr = new XMLHttpRequest();
+
+                var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+                xhr.open("get", url, true);
+                xhr.send(null);
                 let member = JSON.parse(json);
                 let html;
-                
-                if(member.mem_account){ //有會員資料
-                    html = `<table class='memTable'>
-                                <tr><th>帳號</th><td>${member.psw}</td></tr>
-                            </table>`;   
-                }else{//找不到此會員
-                    html = "<center>查無此會員資料</center>";
-                }
+
+                html = `<p>${member.mem_psw}</p>`;
 
                 document.getElementById("show_forget_password").innerHTML = html;
             }
-
-
-
-            
-
-            function getMember(){
-                var xhr = new XMLHttpRequest();
-                xhr.onload=function (){
-                    if( xhr.status == 200 ){
-                        //modify here
-                        showMember(xhr.responseText);  
-                    }else{
-                        alert( xhr.status );
-                    }
-                }
-                
-                var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("mem_account").value;
-                xhr.open("get", url, true);
-                xhr.send( null );
-            }
-
-
-
 
             // ======================================== 忘記密碼的 EmailJs  ======================================== //
             // emailjs
             //     .send("service_Charmy", "template_21xikzb",
             //         {
             //             user_email: this.email,
+            //             mem_psw: this.mem_psw,
             //         },
             //         "X1x5cmen7BlWhZ2yb"
             //     )
@@ -381,6 +372,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+
+.memTable th{
+    background-color:pink;
+  }
+
+  .memTable td{
+    border-bottom:1px dotted deeppink;
+  }
 
 #show_forget_password {
     // display: none;
