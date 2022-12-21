@@ -65,7 +65,10 @@ koala_dob date NOT NULL DEFAULT '2022-12-25' COMMENT '無尾熊生日',
 koala_sex varchar(10) NOT NULL DEFAULT '' COMMENT '無尾熊性別(Female/Male)',
 koala_info varchar(250) NOT NULL DEFAULT '' COMMENT '簡介',
 koala_listed tinyint NOT NULL DEFAULT '0' COMMENT '無尾熊狀態(0:未上架,1:上架)',
-koala_sum int NOT NULL DEFAULT '0' COMMENT '資助認養總金額', 
+koala_sum int NOT NULL DEFAULT '0' COMMENT '資助認養總金額',
+koala_sum_this_month int NOT NULL DEFAULT '0' COMMENT '本月資助認養金額',
+koala_sum_last_month int NOT NULL DEFAULT '0' COMMENT '上月資助認養金額',
+koala_sum_the_month_before_last int NOT NULL DEFAULT '0' COMMENT '上上月資助認養金額',
 koala_img1 varchar(50) NOT NULL DEFAULT '' COMMENT '無尾熊1圖片路徑', 
 koala_img2 varchar(50) DEFAULT '' COMMENT '無尾熊2圖片路徑', 
 koala_img3 varchar(50) DEFAULT '' COMMENT '無尾熊3圖片路徑', 
@@ -77,6 +80,9 @@ KEY dx_koala_sex (`koala_sex`),
 KEY dx_koala_info (`koala_info`),
 KEY dx_koala_listed (`koala_listed`),
 KEY dx_koala_sum (`koala_sum`),
+KEY dx_koala_sum_this_month (`koala_sum_this_month`),
+KEY dx_koala_sum_last_month (`koala_sum_last_month`),
+KEY dx_koala_sum_the_month_before_last (`koala_sum_the_month_before_last`),
 KEY dx_koala_img1 (`koala_img1`),
 KEY dx_koala_img2 (`koala_img2`),
 KEY dx_koala_img3 (`koala_img3`),
@@ -93,10 +99,6 @@ INSERT INTO `tibamefe_cgd103g1`.`koala` ( `koala_name`, `koala_dob`, `koala_sex`
 ('Athena', '2018-08-15', 'Female', '大家好，我是 Athena，2019 年時我在城市中一條繁忙的街道上被發現，因為附近沒有合適的棲息地，因此我被送到了 KOALA+；雖然剛到的時候我有點適應不良，但經過一段時間後，我現在已經完全適應了園區中的生活了！', '1', '0', 'Athena-1.jpg', 'Athena-2.jpg', 'Athena-3.jpg', 'Athena-4.jpg'),
 ('Hermes', '2021-03-31', 'Male', '嗨～我是 Hermes，因為之前居住的環境遭受破壞而來到了 KOALA+，雖然我不是自願來到這裡的，但既來之則安之，我覺得現在的生活也沒有什麼不好，硬要說的話就是有時候遊客太多、太吵了，打擾到我睡覺了，所以我現在都喜歡爬到最高的樹上睡覺，比較不會受到影響！', '1', '0', 'Hermes-1.jpg', 'Hermes-2.jpg', 'Hermes-3.jpg', 'Hermes-4.jpg');
 
-UPDATE koala
-SET koala_sum = (SELECT SUM(sup_price)
-     FROM support
-     WHERE koala.koala_id = support.koala_id);
 
 -- 資助認養
 CREATE TABLE `support`(
@@ -364,3 +366,27 @@ INSERT INTO tibamefe_cgd103g1 . `order_list`(`ord_id`, `prod_id`, `ord_qty`, `pr
 ('09003', '5006', '1', '1400'),
 ('09004', '5007', '2', '800'),
 ('09004', '5008', '1', '600');
+
+-- update 資助認養總金額
+UPDATE koala
+SET koala_sum = (SELECT SUM(sup_price)
+                 FROM support
+                 WHERE koala.koala_id = support.koala_id);
+
+-- update 本月資助認養金額
+UPDATE koala
+SET koala_sum_this_month = (SELECT IFNULL(SUM(sup_price), 0)
+                            FROM support
+                            WHERE MONTH(sup_date) = MONTH(CURRENT_DATE) AND koala.koala_id = support.koala_id);
+
+-- update 上月資助認養金額
+UPDATE koala
+SET koala_sum_last_month = (SELECT IFNULL(SUM(sup_price), 0)
+                            FROM support
+                            WHERE YEAR(sup_date) = YEAR(CURRENT_DATE - INTERVAL 1 MONTH) AND MONTH(sup_date) = MONTH(CURRENT_DATE - INTERVAL 1 MONTH) AND koala.koala_id = support.koala_id);
+
+-- update 上上月資助認養金額
+UPDATE koala
+SET koala_sum_the_month_before_last = (SELECT IFNULL(SUM(sup_price), 0)
+                                       FROM support
+                                       WHERE YEAR(sup_date) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH) AND MONTH(sup_date) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH) AND koala.koala_id = support.koala_id);
