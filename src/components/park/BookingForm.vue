@@ -25,7 +25,7 @@
             <div class="form-group">
                 <label for="rsv_mobile">手機</label>
                 <input
-                    type="mobile"
+                    type="tel"
                     class="form-control"
                     id="rsv_mobile"
                     name="mobile"

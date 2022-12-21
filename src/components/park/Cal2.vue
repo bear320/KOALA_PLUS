@@ -3,7 +3,7 @@
     第一天星期{{ emptyDay }} 現在{{ thisMonth + 1 }}月 -->
     <div class="calender-wrapper" id="calender" ref="calender">
         <h2>{{ thisMonth + 1 }}月</h2>
-
+<weather></weather>
         <table align="center">
             <div class="button-wrapper">
                 <button class="btn-lowest" @click="preMonth()">上個月</button>
@@ -114,6 +114,7 @@
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
 import SearchForm from "@/components/park/SearchForm.vue";
+import Weather from "@/components/park/Weather.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
@@ -154,7 +155,8 @@ export default {
     },
     components: {
         BookingForm,
-        SearchForm
+        SearchForm,
+        Weather
     },
     created() {
         this.getEmptyDay(new Date().getFullYear(), new Date().getMonth());
