@@ -43,7 +43,11 @@
                 <h3 class="black_switch">黑名單</h3>
             </div>
 
-            <div class="content" v-for="item in memindexs" :key="item.mem_id">
+            <div
+                class="content"
+                v-for="(item, index) in memindexs"
+                :key="item.mem_id"
+            >
                 <p class="mem_id">{{ item.mem_id }}</p>
                 <p class="mem_name">
                     {{ item.mem_name }}
@@ -60,6 +64,7 @@
                         :true-value="1"
                         :false-value="0"
                         :before-change="handleBeforeChange"
+                        @on-change="blackSwitchChange(index)"
                         v-model="item.mem_state"
                     >
                         <template #open>
@@ -91,6 +96,26 @@ export default {
         };
     },
     methods: {
+        blackSwitchChange(index) {
+            const black_stateid = this.memindexs[index].mem_id;
+            const black_state = this.memindexs[index].mem_state;
+
+            console.log(this.memindexs[index].mem_state);
+            console.log(this.memindexs[index].mem_id);
+            // fetch(
+            //     "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
+            //     {
+            //         method: "POST",
+            //         credentials: "include",
+            //         body: new URLSearchParams(black_stateid, black_state),
+            //     }
+            // );
+            // .then((res) => res.json())
+            // .then((json) => {
+            //     console.log(json);
+            //     this.memindexs = json;
+            // });
+        },
         handleBeforeChange() {
             return new Promise((resolve) => {
                 this.$Modal.confirm({
