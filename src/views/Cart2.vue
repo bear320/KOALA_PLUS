@@ -7,7 +7,7 @@
             <div class="checkout-box">
                 <div class="order">
                     <h3>訂單詳情</h3>
-                    <div class="card order-detail">
+                    <div class="card-cart order-detail">
                         <div
                             class="order-item"
                             v-for="item in $store.state.cart"
@@ -40,7 +40,7 @@
                 </div>
                 <div class="receiv">
                     <h3>收件資訊</h3>
-                    <div class="card receiv-info">
+                    <div class="card-cart receiv-info">
                         <div class="member-form">
                             <input class="member-equal" type="checkbox" />
                             <label for="">與會員資料相同</label>
@@ -50,27 +50,27 @@
                                 <label for="">收件人姓名：</label>
                                 <input
                                     type="text"
-                                    name=""
-                                    id=""
+                                    name="ord_person"
                                     placeholder="請輸入真實姓名"
+                                    v-model="ordPerson"
                                 />
                             </div>
                             <div class="ship-form">
                                 <label for="">手機號碼：</label>
                                 <input
-                                    type="text"
-                                    name=""
-                                    id=""
+                                    type="tel"
+                                    name="ord_phone"
                                     placeholder="請輸入十位數手機號碼"
+                                    v-model="ordPhone"
                                 />
                             </div>
                             <div class="ship-form">
                                 <label for="">收件地址：</label>
                                 <input
                                     type="text"
-                                    name=""
-                                    id=""
+                                    name="ord_add"
                                     placeholder="請輸入完整收件地址"
+                                    v-model="ordAdd"
                                 />
                             </div>
                             <div class="tappay-wrapper">
@@ -98,12 +98,9 @@
                                 ></div>
                                 <div class="btn-wrapper">
                                     <!-- 這是 TapPay 原生按鈕 -->
-                                    <buttnon
-                                        class="tappay-btn"
-                                        @click="onSubmit"
-                                    >
+                                    <div class="tappay-btn" @click="onSubmit">
                                         前往付款
-                                    </buttnon>
+                                    </div>
                                     <div class="back-step" @click="goBack">
                                         回上一步
                                     </div>
@@ -140,7 +137,9 @@ export default {
 
     data() {
         return {
-            /* carts: this.$store.state.cart, */
+            ordPerson: "品儒北七",
+            ordPhone: "0987168168",
+            ordAdd: "火車站旁邊的某棟四樓",
         };
     },
     computed: {
@@ -151,23 +150,6 @@ export default {
     methods: {
         goBack() {
             window.history.go(-1);
-        },
-        async test() {
-            const res = await fetch(
-                "http://localhost/cgd103_g1/public/api/sample_Credit_CreateOrder.php",
-                {
-                    method: "post",
-                    headers: {
-                        "Content-Type": "application/x-www-form-urlencoded",
-                    },
-                    body: new URLSearchParams({ test: "QQ" }),
-                }
-            );
-
-            /*  const qq = await res.json(); */
-            console.log(res);
-
-            /*  window.location.assign(res.url); */
         },
         updateStatus(field) {
             switch (field) {
@@ -193,9 +175,9 @@ export default {
         },
 
         // 觸發去取得狀態
-        onSubmit() {
+        // 之後記得砍async
+        async onSubmit() {
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
-            console.log("tset");
             if (tappayStatus.canGetPrime === false) {
                 // can not get prime
                 return;
@@ -218,11 +200,27 @@ export default {
 
         async submitPrime(prime) {
             try {
+                const mem_id = this.$store.state.user.mem_id;
+                const coupon_id = this.$store.state.discount.coupon_id
+                    ? this.$store.state.discount.coupon_id
+                    : "null";
+
                 // 要把得到的Prime Token 送給後端,
                 console.log("交易進行中");
                 let payReslut = await fetch(
-                    `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`
+                    `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`,
+                    {
+                        method: "post",
+                        body: new URLSearchParams({
+                            mem_id,
+                            coupon_id,
+                            ord_person: this.ordPerson,
+                            ord_phone: this.ordPhone,
+                            ord_add: this.ordAdd,
+                        }),
+                    }
                 );
+
                 // 不明白為何回傳的是字串
                 let resText = await payReslut.json();
                 // 這邊再把他轉為json物件

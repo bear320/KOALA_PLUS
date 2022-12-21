@@ -3,18 +3,13 @@
         <span
             class="coupon-item"
             v-for="coupon in couponArr"
-            :key="coupon.id"
+            :key="coupon.coupon_id"
             @click="chooseCoupon(coupon)"
         >
             <p class="coupon-title">COUPON</p>
-            <p class="coupon-discount">85折</p>
-            <p class="coupon-deadline">2023-02-20</p>
-            <p class="coupon-code">koala95</p>
-
-            <!-- <div class="coupon-name">{{ coupon.name }}</div>
-                <div class="coupon-code">{{ coupon.code }}</div>
-                <div class="coupon-discount">{{ coupon.discount }}</div>
-                <div class="coupon-deadline">{{ coupon.deadline }}</div> -->
+            <p class="coupon-discount">{{ coupon.coupon_discount * 100 }}折</p>
+            <p class="coupon-deadline">{{ coupon.coupon_exp_date }}</p>
+            <p class="coupon-code">{{ coupon.coupon_code }}</p>
         </span>
         <div class="btn-close" @click="close">
             <Icon class="md-close" type="md-close" color="#333" />
@@ -29,6 +24,7 @@ export default {
             this.$emit("close");
         },
         chooseCoupon(coupon) {
+            this.$store.state.discount = coupon;
             this.$emit("updateCoupon", coupon);
         },
     },

@@ -113,6 +113,14 @@ input[type="text"] {
         border: solid 1px $btn-color;
     }
 }
+//input phone
+input[type="tel"] {
+    @extend %input;
+
+    &:focus {
+        border: solid 1px $btn-color;
+    }
+}
 //input text
 input[type="password"] {
     @extend %input;
