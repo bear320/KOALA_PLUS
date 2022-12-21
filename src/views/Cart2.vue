@@ -45,7 +45,7 @@
                             <input class="member-equal" type="checkbox" />
                             <label for="">與會員資料相同</label>
                         </div>
-                        <form>
+                        <form @submit.prevent>
                             <div class="ship-form">
                                 <label for="">收件人姓名：</label>
                                 <input
@@ -53,6 +53,7 @@
                                     name="ord_person"
                                     placeholder="請輸入真實姓名"
                                     v-model="ordPerson"
+                                    required
                                 />
                             </div>
                             <div class="ship-form">
@@ -62,6 +63,7 @@
                                     name="ord_phone"
                                     placeholder="請輸入十位數手機號碼"
                                     v-model="ordPhone"
+                                    required
                                 />
                             </div>
                             <div class="ship-form">
@@ -71,6 +73,7 @@
                                     name="ord_add"
                                     placeholder="請輸入完整收件地址"
                                     v-model="ordAdd"
+                                    required
                                 />
                             </div>
                             <div class="tappay-wrapper">
@@ -98,27 +101,31 @@
                                 ></div>
                                 <div class="btn-wrapper">
                                     <!-- 這是 TapPay 原生按鈕 -->
-                                    <div class="tappay-btn" @click="onSubmit">
+                                    <button
+                                        type="submit"
+                                        class="tappay-btn"
+                                        @click="onSubmit"
+                                    >
                                         前往付款
-                                    </div>
+                                    </button>
+
                                     <div class="back-step" @click="goBack">
                                         回上一步
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="pay-box">
-                                <div class="btn-paramy" @click="test">
-                                    前往付款
-                                </div>
-                                <div class="back-step" @click="goBack">
-                                    回上一步
-                                </div>
-                            </div> -->
                         </form>
                     </div>
                 </div>
             </div>
+            <h1>{{ isAllFilled }}</h1>
         </div>
+        <ModalForTrading
+            :style="{ display: isTrading ? 'flex' : 'none' }"
+        ></ModalForTrading>
+        <ModalForSuccess
+            :style="{ display: isDone ? 'flex' : 'none' }"
+        ></ModalForSuccess>
     </main>
 
     <Footer></Footer>
@@ -129,22 +136,43 @@ import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import CartItem from "@/components/cart/CartItem.vue";
 import Coupon from "@/components/cart/Coupon.vue";
+import ModalForTrading from "@/components/ModalForTrading.vue";
+import ModalForSuccess from "@/components/ModalForSuccess.vue";
+import { returnStatement } from "@babel/types";
 export default {
     components: {
         Header,
         Footer,
+        ModalForTrading,
+        ModalForSuccess,
     },
 
     data() {
         return {
-            ordPerson: "品儒北七",
-            ordPhone: "0987168168",
-            ordAdd: "火車站旁邊的某棟四樓",
+            ordPerson: "",
+            ordPhone: "",
+            ordAdd: "",
+
+            isTrading: false,
+            isDone: false,
+            CardInfoFilled: false,
         };
     },
     computed: {
         payTotal() {
             return this.$store.getters.payTotal;
+        },
+
+        isAllFilled() {
+            if (
+                this.ordPerson &&
+                this.ordPhone &&
+                this.ordAdd &&
+                this.CardInfoFilled
+            ) {
+                return true;
+            }
+            return false;
         },
     },
     methods: {
@@ -177,6 +205,8 @@ export default {
         // 觸發去取得狀態
         // 之後記得砍async
         async onSubmit() {
+            if (!this.isAllFilled) return;
+            this.isTrading = true;
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
             if (tappayStatus.canGetPrime === false) {
                 // can not get prime
@@ -229,6 +259,11 @@ export default {
 
                 if (payStatus.status === 0) {
                     console.log("付款成功");
+                    this.isTrading = false;
+                    this.isDone = true;
+
+                    this.$store.dispatch("getMemCart");
+                    this.$store.state.discount = {};
                 } else {
                     console.log("付款失敗");
                 }
@@ -247,14 +282,17 @@ export default {
             number: {
                 element: this.$refs.number,
                 placeholder: "**** **** **** ****",
+                required: true,
             },
             expirationDate: {
                 element: this.$refs.expirationDate,
                 placeholder: "MM/YY",
+                required: true,
             },
             ccv: {
                 element: this.$refs.ccv,
                 placeholder: "後三碼",
+                required: true,
             },
         };
 
@@ -309,14 +347,16 @@ export default {
         TPDirect.card.onUpdate((update) => {
             if (update.canGetPrime) {
                 //全部欄位皆為正確 可以呼叫 getPrime
-                this.disabledBtnPay = false;
+                console.log("已填滿");
+                this.CardInfoFilled = true;
             } else {
-                this.disabledBtnPay = false;
+                console.log("尚未填滿");
+                this.CardInfoFilled = false;
             }
 
-            this.updateStatus(update.status.number);
+            /*  this.updateStatus(update.status.number);
             this.updateStatus(update.status.expiry);
-            this.updateStatus(update.status.number);
+            this.updateStatus(update.status.number); */
         });
     },
 };
