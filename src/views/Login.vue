@@ -83,11 +83,12 @@
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
-                            <form>
+                            <form  @submit="sendEmail">
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input id="aaa" type="text" placeholder="Account" v-model="forget_password_account" required/>
+                                    <input id="aaa" type="text" placeholder="Account" name="user_email" v-model="forget_password_account" required/>
                                 </div>
+                                <div id="show_forget_password"></div>
                                 <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
@@ -114,6 +115,10 @@ export default {
             errorFlag: false,
             errorMsg: "",
             idMsg: "",
+            forget_password_account: "",
+
+
+            get_forget_password: "",
 
             seen_one: "",
             seen_two: "",
@@ -127,16 +132,7 @@ export default {
             sign_up_account: "",
             sign_up_password: "",
             sign_up_password_comfirm: "",
-
-            forget_password_account: "",
         };
-    },
-    mounted() {
-        this.login();
-        // ======================================== 註冊會員加進資料庫 ======================================== //
-        // function $id(id){
-	    //     return document.getElementById(id);
-        // };
     },
     methods: {
         // ======================================== 關閉彈窗 click事件 ======================================== //
@@ -275,6 +271,65 @@ export default {
             }, 200);
         },
 
+        // ======================================== 寄 Email  ======================================== //
+        sendEmail() {
+            // ======================================== 把忘記的密碼撈出來  ======================================== //
+            function showMember(json){
+                let member = JSON.parse(json);
+                let html;
+                
+                if(member.mem_account){ //有會員資料
+                    html = `<table class='memTable'>
+                                <tr><th>帳號</th><td>${member.psw}</td></tr>
+                            </table>`;   
+                }else{//找不到此會員
+                    html = "<center>查無此會員資料</center>";
+                }
+
+                document.getElementById("show_forget_password").innerHTML = html;
+            }
+
+
+
+            
+
+            function getMember(){
+                var xhr = new XMLHttpRequest();
+                xhr.onload=function (){
+                    if( xhr.status == 200 ){
+                        //modify here
+                        showMember(xhr.responseText);  
+                    }else{
+                        alert( xhr.status );
+                    }
+                }
+                
+                var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("mem_account").value;
+                xhr.open("get", url, true);
+                xhr.send( null );
+            }
+
+
+
+
+            // ======================================== 忘記密碼的 EmailJs  ======================================== //
+            // emailjs
+            //     .send("service_Charmy", "template_21xikzb",
+            //         {
+            //             user_email: this.email,
+            //         },
+            //         "X1x5cmen7BlWhZ2yb"
+            //     )
+            //     .then(
+            //         (result) => {
+            //             console.log("SUCCESS!", result.text);
+            //         },
+            //         (error) => {
+            //             console.log("FAILED...", error.text);
+            //         }
+            //     );
+        },
+
         // ======================================== 看得到密碼 click事件 ======================================== //
         changeType_1: function () {
             this.seen_one = !this.seen_one;
@@ -315,37 +370,21 @@ export default {
             this.seen_three = !this.seen_three;
         },
 
-        // ======================================== EmailJs ======================================== //
-        sendEmail(e) {
-            e.preventDefault();
-            const templateParams = {
-                // user: e.target.account,
-                userMail: e.target.account,
-            };
 
-            emailjs
-                .send(
-                    "gmail",
-                    "template_21xikzb",
-                    this.templateParams,
-                    "X1x5cmen7BlWhZ2yb"
-                )
-                .then(
-                    () => {
-                        console.log("成功");
-                    },
-                    (error) => {
-                        console.log("失敗", error);
-                    }
-                );
-        },
+    },
+    mounted() {
+        this.login();
 
-
+        // document.getElementById("show_forget_password").innerHTML = html;
     },
 };
 </script>
 
 <style lang="scss" scoped>
+
+#show_forget_password {
+    // display: none;
+}
 .main_content {
     position: absolute;
     top: 0;
