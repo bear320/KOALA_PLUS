@@ -67,7 +67,6 @@
 <script>
 import { BASE_URL } from "@/assets/js/common.js";
 import Header from "@/components/backStage/Header.vue";
-import { throwStatement } from "@babel/types";
 export default {
     components: {
         Header,

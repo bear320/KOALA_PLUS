@@ -1,4 +1,5 @@
 <template>
+    <Loading />
     <Header />
     <article class="nav-space">
         <div
@@ -117,6 +118,7 @@
 <script>
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
+import Loading from "@/components/loading.vue";
 
 const questions = [
     {
@@ -158,6 +160,7 @@ export default {
     components: {
         Header,
         Footer,
+        Loading,
     },
     name: "AboutKoala",
     data() {
