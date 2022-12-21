@@ -87,7 +87,7 @@ export default {
 <style lang="scss" scoped>
 header {
     box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
-    z-index: 999;
+    z-index: 998;
     position: fixed;
     background-color: #fff;
     width: 100%;

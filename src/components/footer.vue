@@ -145,22 +145,4 @@ footer {
         }
     }
 }
-
-// @media screen and (max-width: 1200px) {
-//     .all {
-//         width: 688px;
-//         .list {
-//             display: flex;
-//         }
-//     }
-
-//     .top {
-//         display: flex;
-//         flex-direction: column-reverse;
-//     }
-//     .bt {
-//         margin: 0px;
-//         padding: 30px;
-//     }
-// }
 </style>
