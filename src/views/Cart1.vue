@@ -13,7 +13,7 @@
             </Row>
             <Row :gutter="40" justify="center">
                 <Col :xl="15" :lg="24" :md="24" span="24">
-                    <div class="card cart-title">
+                    <div class="card-cart cart-title">
                         <Row>
                             <Col span="9">品項</Col>
                             <Col span="3">單價</Col>
@@ -34,7 +34,7 @@
                 </Col>
 
                 <Col :xl="9" :lg="24" :md="24" span="24">
-                    <div class="card create-order">
+                    <div class="card-cart create-order">
                         <div class="coupon">
                             <div class="coupon-text">優惠碼</div>
                             <div class="coupon-form">
@@ -43,8 +43,8 @@
                                     type="text"
                                     placeholder="請輸入優惠碼"
                                     v-model="couponCode"
+                                    @input="checkCoupon"
                                 />
-                                <div class="btn-lowest coupon-submit">送出</div>
                             </div>
                             <div class="coupon-check">
                                 <span class="check-link" @click="openCoupon"
@@ -55,7 +55,7 @@
                             <div class="coupon-detail">
                                 <div class="coupon-name">{{ couponName }}</div>
                                 <div class="coupon-pric">
-                                    x{{ couponDiscount }}
+                                    x{{ $store.state.discount.coupon_discount }}
                                 </div>
                             </div>
                             <div class="product-total">
@@ -81,7 +81,6 @@
                                     alt=""
                                 />
                             </div>
-                            <!-- @click="checkOrder" -->
                             <div
                                 to="/cart2"
                                 class="btn-paramy check-order"
@@ -118,52 +117,8 @@ export default {
     },
     data() {
         return {
-            /* cartList: this.$store.state.cart, */
-            couponDiscount: 0,
-            coupon: [
-                {
-                    id: "001",
-                    name: "85折優惠折扣券",
-                    discount: "85折",
-                    value: 0.85,
-                    deadline: 30,
-                    code: "koala85",
-                },
-                {
-                    id: "002",
-                    name: "75折優惠折扣券",
-                    discount: "75折",
-                    value: 0.75,
-                    deadline: 30,
-                    code: "koala90",
-                },
-                {
-                    id: "003",
-                    name: "95折優惠折扣券",
-                    discount: "95折",
-                    value: 0.95,
-                    deadline: 30,
-                    code: "koala95",
-                },
-                /*  {
-                    id: "003",
-                    name: "95折優惠折扣券",
-                    discount: "95折",
-                    value: 0.95,
-                    deadline: 30,
-                    code: "koala95",
-                },
-                {
-                    id: "003",
-                    name: "95折優惠折扣券",
-                    discount: "95折",
-                    value: 0.95,
-                    deadline: 30,
-                    code: "koala95",
-                }, */
-            ],
-            isShowCoupon: true,
-            couponDiscount: this.$store.state.discount,
+            coupon: [],
+            isShowCoupon: false,
             couponCode: "",
             couponName: "",
         };
@@ -183,6 +138,17 @@ export default {
         },
     },
     methods: {
+        checkCoupon() {
+            let haveCoupon = this.coupon.find(
+                (item) => item.coupon_code === this.couponCode
+            );
+
+            if (!haveCoupon) {
+                this.$store.state.discount = {};
+            } else {
+                this.$store.state.discount = haveCoupon;
+            }
+        },
         openCoupon() {
             this.isShowCoupon = true;
         },
@@ -190,18 +156,40 @@ export default {
             this.isShowCoupon = false;
         },
         update(coupon) {
-            this.couponCode = coupon.code;
-            this.couponDiscount = coupon.value;
+            this.couponCode = coupon.coupon_code;
             this.couponName = coupon.name;
+            this.$store.state.coupon = coupon;
             this.isShowCoupon = false;
         },
-        checkOrder() {
-            localStorage.setItem("pay", this.sumTotal - this.discount);
+        async getMemCoupons() {
+            const res = await fetch(
+                `http://localhost/cgd103_g1/public/api/getMemCoupon.php?memId=${this.$store.state.user.mem_id}`
+            );
 
-            this.$router.push({
-                name: "cart2",
+            let temp = await res.json();
+
+            this.coupon = temp.map((item) => {
+                return {
+                    mem_id: item.mem_id,
+                    coupon_id: item.coupon_id,
+                    coupon_code: item.coupon_code,
+                    coupon_get_date: item.coupon_get_date,
+                    coupon_exp_date: item.coupon_exp_date,
+                    coupon_status: item.coupon_status,
+                    coupon_discount: +(`0.` + item.coupon_code.slice(-2)),
+                };
             });
         },
+        checkOrder() {
+            this.$router.push({ name: "cart2" });
+        },
+    },
+    mounted() {
+        this.getMemCoupons();
+        let isChoiceCoupon = Object.keys(this.$store.state.discount).length > 0;
+        this.couponCode = isChoiceCoupon
+            ? this.$store.state.discount.coupon_code
+            : "";
     },
 };
 </script>

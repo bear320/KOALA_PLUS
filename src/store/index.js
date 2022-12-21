@@ -3,7 +3,7 @@ import { createStore } from "vuex";
 export default createStore({
     state: {
         cart: [],
-        discount: 0.85,
+        discount: {},
         // mem_id: 1001
         user: { mem_id: 1001 },
     },
@@ -15,7 +15,10 @@ export default createStore({
             );
         },
         totalDiscount(state, getters) {
-            return getters.productTotal - getters.productTotal * state.discount;
+            return Object.keys(state.discount).length > 0
+                ? getters.productTotal -
+                      getters.productTotal * state.discount.coupon_discount
+                : 0;
         },
         payTotal(_, getters) {
             return getters.productTotal - getters.totalDiscount;
@@ -28,7 +31,6 @@ export default createStore({
         // 更新使用者的購物車狀態
         updateMemCart(state, payload) {
             state.cart = payload;
-            console.log(state.cart);
         },
     },
     actions: {
