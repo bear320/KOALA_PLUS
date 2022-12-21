@@ -30,14 +30,13 @@
                         :true-value="1"
                         :false-value="0"
                         v-model="item.mem_state"
+                        :disabled="disabled"
                     >
-                        <!-- loading
-                        :model-value="false" -->
                         <template #open>
-                            <span>ON</span>
+                            <span>屏蔽</span>
                         </template>
                         <template #close>
-                            <span>OFF</span>
+                            <span>正常</span>
                         </template>
                     </Switch>
                 </p>
@@ -51,6 +50,7 @@ import Header from "@/components/backStage/Header.vue";
 export default {
     data() {
         return {
+            disabled: true,
             memindexs: [
                 // {
                 //     mem_id: "P00001",
@@ -82,13 +82,13 @@ export default {
     methods: {
         handleBeforeChange() {
             return new Promise((resolve) => {
-                this.$Modal.confirm({
-                    title: "切換確認",
-                    content: "您確定要切換開關狀態嗎？",
-                    onOk: () => {
-                        resolve();
-                    },
-                });
+                // this.$Modal.confirm({
+                //     title: "切換確認",
+                //     content: "您確定要切換開關狀態嗎？",
+                //     onOk: () => {
+                //         resolve();
+                //     },
+                // });
             });
         },
     },

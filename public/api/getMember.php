@@ -73,32 +73,27 @@ switch( $type ){
         // $black_state=1;
 
         //【下列為 後台會員 黑名單switch滑塊變更資料庫的相關功能】
-        // try{
 
-        //     $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_state = '{$_POST["$black_state"]}' WHERE mem_id = {$black_stateid} "; //針對某會員 id 修改
 
-        //     $res = $pdo->query( $upSql );
-        //     $resDate["msg"] = 'sucess';
-        // }catch ( Exception $e ) {
-        //         $resDate["msg"] = $e->getMessage();
-        //         echo json_encode( $resDate );
-        //         return true;
-        // }
-        
-        // try { 
+        // $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_state = '{$black_state}' WHERE mem_id = '{$mem_id}' ";
+
+        // try {
         //     $res = $pdo->query( $upSql );
         //     if( $res ){
         //         $resDate["status"] = 1;
-        //         $resDate["msg"] = 'sucess';
+        //         $resDate["msg"] = '黑名單狀態已切換';
         //     }
         //     echo json_encode( $resDate );
         //     return true;
-        // } 
-    
         
+        // } catch (Exception $e) {
+        //     $resDate["msg"] = $e->getMessage();
+        //     echo json_encode( $resDate );
+        //     return true;
+        // }
 
-        //下列為 後台list 抓取所有會員的明細功能
 
+        //【下列為 後台list 抓取所有會員的明細功能】
         $members = $pdo->query($sql);
         $prodRows = $members->fetchAll(PDO::FETCH_ASSOC);
         echo json_encode($prodRows);

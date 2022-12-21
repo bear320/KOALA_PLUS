@@ -68,10 +68,10 @@
                         v-model="item.mem_state"
                     >
                         <template #open>
-                            <span>ON</span>
+                            <span>屏蔽</span>
                         </template>
                         <template #close>
-                            <span>OFF</span>
+                            <span>正常</span>
                         </template>
                     </Switch>
                 </p>
@@ -97,24 +97,26 @@ export default {
     },
     methods: {
         blackSwitchChange(index) {
-            const black_stateid = this.memindexs[index].mem_id;
+            const mem_id = this.memindexs[index].mem_id;
             const black_state = this.memindexs[index].mem_state;
 
             console.log(this.memindexs[index].mem_state);
             console.log(this.memindexs[index].mem_id);
-            // fetch(
-            //     "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
-            //     {
-            //         method: "POST",
-            //         credentials: "include",
-            //         body: new URLSearchParams(black_stateid, black_state),
-            //     }
-            // );
-            // .then((res) => res.json())
-            // .then((json) => {
-            //     console.log(json);
-            //     this.memindexs = json;
-            // });
+            fetch(
+                "http://localhost/cgd103_g1/public/api/postMemberChangeBlacklist.php",
+                {
+                    method: "post",
+                    body: new URLSearchParams({
+                        mem_id,
+                        black_state,
+                    }),
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.resDate = json;
+                });
         },
         handleBeforeChange() {
             return new Promise((resolve) => {
