@@ -127,7 +127,7 @@
         </Collapse>
     </section>
     <ModalForTrading style="display: none"></ModalForTrading>
-    <ModalForSuccess></ModalForSuccess>
+    <ModalForSuccess style="display: none"></ModalForSuccess>
     <Footer></Footer>
 </template>
 

@@ -31,7 +31,7 @@
                         <h4>前往首頁</h4>
                     </router-link>
                     <router-link to="/member" class="/btn-paramy">
-                        <h4>查看訂單</h4>
+                        <h4>會員專區</h4>
                     </router-link>
                 </div>
             </div>
