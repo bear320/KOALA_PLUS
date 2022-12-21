@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin:*");
+header("Content-Type:application/json;charset=utf-8");
+
 // try {
 //     require_once("./headerUse.php");   //header設置
 //     require_once("./connect_cgd103g1.php");   //DB連線設置
@@ -98,16 +101,19 @@
   	
 	try{
 		//header設置
-        require_once("./headerUse.php");
+        // require_once("./headerUse.php");
         //DB連線設置
         require_once("./connect_cgd103g1.php");
 		//sql 指令
-		$sql = "insert into tibamefe_cgd103g1.member values (null, :mem_name, :mem_account, :mem_psw)";
+		
+		// $sql = "insert into tibamefe_cgd103g1.member('mem_name', 'mem_acoount', 'mem_psw') values (:mem_name, :mem_account, :mem_psw)";
+		$sql = "INSERT INTO `tibamefe_cgd103g1`.`member` (`mem_name`, `mem_account`, `mem_psw`) VALUES 
+		(:mem_name, :mem_account, :mem_psw);";
 		//編譯, 執行
 		$products = $pdo->prepare($sql);	
-		$products->bindValue(":mem_name", $_POST["mem_name"]);
-		$products->bindValue(":mem_account", $_POST["mem_account"]);
-		$products->bindValue(":mem_psw", $_POST["mem_psw"]);
+		$products->bindValue(":mem_name", $_POST["userName"]);
+		$products->bindValue(":mem_account", $_POST["account"]);
+		$products->bindValue(":mem_psw", $_POST["password"]);
 		$products->execute();	
 
 	    $msg = "新增成功";

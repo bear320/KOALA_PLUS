@@ -52,6 +52,9 @@
                                     <input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" v-model="sign_up_password_comfirm" required v-else/>
                                     <img :src="seen_two ? seenImg : unseenImg" @click="changeType_2" v-on:mouseover="hoverEye_2" v-on:mouseout="outEye_2" class="sign_up_icon_eye"/>
                                 </div>
+                                <!-- <div>
+                                    <input type="hidden">
+                                </div> -->
                                 <div>
                                     <button class="btn_sign_up"  type="submit"  @click="sign_up">註冊會員</button>
                                 </div>
@@ -223,23 +226,41 @@ export default {
             }, 200);
 
             // ======================================== 註冊會員加進資料庫 ======================================== //
-            let url="http://localhost/cgd103_g1/public/api/getSignUp.php"
+            let url="http://localhost/cgd103_g1/public/api/getSignUp.php";
             // window.addEventListener("DOMContentLoaded", function(){
 	            
-		        let xhr = new XMLHttpRequest();
-		        xhr.onload = function(){
-		        	let result = JSON.parse(xhr.responseText);
-		        	alert(result.msg);
-		        }
-		        xhr.open("post", url, true);
-		        let formData = new FormData();
-		        formData.append("mem_name", document.getElementsByName("mem_name"));
-		        formData.append("mem_account", document.getElementsByName("mem_account"));
-		        formData.append("mem_psw", document.getElementsByName("mem_psw"));
-		        xhr.send(formData);
-                console.log("zzz")
+		        // let xhr = new XMLHttpRequest();
+		        // xhr.onload = function(){
+		        // 	let result = JSON.parse(xhr.responseText);
+		        // 	alert(result.msg);
+		        // }
+		        // xhr.open("post", url, true);
+		        // let formData = new FormData();
+		        // formData.append("mem_name", document.getElementsByName("mem_name"));
+		        // formData.append("mem_account", document.getElementsByName("mem_account"));
+		        // formData.append("mem_psw", document.getElementsByName("mem_psw"));
+		        // xhr.send(formData);
+                // console.log("zzz")
 	            
             // })
+            // const
+            // const apiURL = new URL(`http://localhost/cgd103_g1/public/api/getSignUp.php`);
+            // fetch(apiURL,{method:"POST",body: new URLSearchParams()},
+            // )
+            const signUpContent = {
+                userName: this.sign_up_userName,
+                account: this.sign_up_account,
+                password: this.sign_up_password,
+            };
+
+            fetch(url, {
+                method: "POST",
+                body: new URLSearchParams(signUpContent),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    alert(result.msg);
+                });
         },
 
         // ======================================== Email 後臺比對 ======================================== //
