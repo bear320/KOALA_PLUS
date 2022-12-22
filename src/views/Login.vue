@@ -118,7 +118,6 @@ export default {
             idMsg: "",
             forget_password_account: "",
 
-
             get_forget_password: "",
 
             seen_one: "",
