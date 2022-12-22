@@ -48,7 +48,8 @@
             </Panel>
         </Collapse>
     </div>
-    <!-- 測驗＋背景圖 -->
+
+    <!-- 樹-->
     <div class="bg-text">
         <div class="bg">
             <div class="ab-tree1">
@@ -65,28 +66,15 @@
             </div>
         </div>
     </div>
-
+    <!-- 測驗標題-->
     <div class="test-block">
         <div class="test">
             <h1>Quiz</h1>
+            <!-- 測驗-->
             <form class="card card-ab">
                 <div v-if="questionIndex < questions.length">
                     <h4 class="question">{{ question.question }}</h4>
-                    <!-- <label for="ch">
-                        <div
-                            v-for="c of question.choices"
-                            :key="c"
-                            class="choice btn-lowest"
-                        >
-                            <input
-                                type="radio"
-                                name="choice"
-                                v-model="answer"
-                                :value="c"
-                            />
-                            {{ c }}
-                        </div>
-                    </label> -->
+
                     <label :for="c" v-for="c in question.choices" :key="c">
                         <div class="choice btn-lowest">
                             <input
@@ -103,12 +91,32 @@
                 <div v-else>
                     <div class="btn-paramy btn-ab" @click="restart">重做</div>
                 </div>
-                <div class="btn-paramy btn-ab" @click="submit">送出</div>
+                <div
+                    class="btn-paramy btn-ab"
+                    v-show="questionIndex !== 5"
+                    @click="submit"
+                >
+                    <span v-if="questionIndex < 4">下一題</span>
+                    <span v-else>送出</span>
+                </div>
             </form>
             <div class="discount" v-if="questionIndex === 5 && score === 5">
-                恭喜您獲得優惠卷： Koala87
+                恭喜您獲得優惠卷： {{ coupon_code }}
             </div>
-            <p>得分 : {{ score }} 分</p>
+            <div class="score">
+                <span v-if="questionIndex < 5"></span>
+                <span v-else>得分 : {{ score }} 分</span>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="mask" v-if="showModal" @click="showModal = true"></div>
+        <div class="pop" v-if="showModal">
+            <h3>回答小測驗 登入後贏得優惠券</h3>
+            <p>＊登入後作答 才能獲得優惠卷！</p>
+            <button class="btn btn1 btn-paramy" @click="showModal = false">
+                開始
+            </button>
         </div>
     </div>
 
@@ -119,40 +127,41 @@
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import Loading from "@/components/loading.vue";
+import { handleError } from "@vue/runtime-core";
 
 const questions = [
     {
-        question: "無尾熊的尾巴有什麼作用?",
+        question: "Ｑ1：無尾熊的尾巴有什麼作用?",
         choices: [
-            "1.沒用，好看而已",
-            "2.當坐墊用，讓無尾熊能長時間坐在樹上",
-            "3.美觀漂亮",
+            "A.沒用，好看而已",
+            "B.當坐墊用，讓無尾熊能長時間坐在樹上",
+            "C.美觀漂亮",
         ],
-        rightAnswer: "2.當坐墊用，讓無尾熊能長時間坐在樹上",
+        rightAnswer: "B.當坐墊用，讓無尾熊能長時間坐在樹上",
     },
     {
-        question: "無尾熊的主食為?",
-        choices: ["1.牛肉", "2.咖啡豆", "3.尤加利葉"],
-        rightAnswer: "3.尤加利葉",
+        question: "Ｑ2：無尾熊的主食為?",
+        choices: ["A.牛肉", "B.咖啡豆", "C.尤加利葉"],
+        rightAnswer: "C.尤加利葉",
     },
     {
-        question: "無尾熊一天能睡多久?",
+        question: "Ｑ3：無尾熊一天能睡多久?",
         choices: ["1.18-20小時", "2.2-3小時", "3.無尾熊不睡覺的"],
         rightAnswer: "1.18-20小時",
     },
     {
-        question: "Koala來自於澳洲原始住民，意思是什麼？",
+        question: "Ｑ4：Koala來自於澳洲原始住民，意思是什麼？",
         choices: [
-            "1.Gula是原住民語中「爬樹」的意思",
-            "2.Gula是原住民語中「可愛」的意思",
-            "3.Gula是原住民語中「不喝水」的意思",
+            "A.Gula是原住民語中「爬樹」的意思",
+            "B.Gula是原住民語中「可愛」的意思",
+            "C.Gula是原住民語中「不喝水」的意思",
         ],
-        rightAnswer: "3.Gula是原住民語中「不喝水」的意思",
+        rightAnswer: "C.Gula是原住民語中「不喝水」的意思",
     },
     {
-        question: "無尾熊是熊科動物嗎？",
-        choices: ["1.是", "2.不知道", "3.不是，而是袋類動物"],
-        rightAnswer: "3.不是，而是袋類動物",
+        question: "Ｑ5：無尾熊是熊科動物嗎？",
+        choices: ["A.是", "B.不知道", "C.不是，而是袋類動物"],
+        rightAnswer: "C.不是，而是袋類動物",
     },
 ];
 
@@ -161,6 +170,7 @@ export default {
         Header,
         Footer,
         Loading,
+        handleError,
     },
     name: "AboutKoala",
     data() {
@@ -170,6 +180,8 @@ export default {
             questionIndex: 0,
             question: questions[0],
             answer: "",
+            CouponId: ["4001", "4002", "4003"],
+            showModal: true,
         };
     },
 
@@ -185,6 +197,23 @@ export default {
                 this.questionIndex++;
                 this.question = { ...questions[this.questionIndex] };
             }
+
+            if (this.score === 5) {
+                let ranNum = Math.floor(Math.random(this.CouponId.length) * 3);
+                console.log("隨機號碼", ranNum);
+                console.log("獲得的優惠ID", this.CouponId[ranNum]);
+
+                // 把優惠卷id傳給php
+
+                // ('85折優惠券', 'koala85', '60', '0.85'),
+                /* {
+                    coupon_id:4001
+                    coupon_name:85折優惠券
+                    coupon_code:koala85
+                    coupon_valid:60
+                    coupon_discount:0.85
+                } */
+            }
         },
         restart() {
             this.question = questions[0];
@@ -192,12 +221,35 @@ export default {
             this.questionIndex = 0;
             this.score = 0;
         },
+        getCoupon() {
+            const apiURL = new URL(
+                `http://localhost:8888/cgd103_g1/public/api/getCoupon.php`
+            );
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.CouponId = json;
+                });
+        },
+    },
+    created() {
+        this.getCoupon();
     },
 };
 </script>
 <style lang="scss" scoped>
 .banner {
-    @include bgSetting(center, 90%);
+    @include d() {
+        background-repeat: no-repeat;
+        background-size: center;
+        background-position: 90%;
+    }
+
+    @include m() {
+        background-size: 100%;
+        background-position: top;
+    }
 }
 .content {
     padding: 60px;
@@ -232,9 +284,11 @@ export default {
     margin: 10px;
 }
 .test {
+    margin-bottom: 50px;
     margin-top: -300px;
     @include m() {
         margin: 0px;
+        margin-bottom: 50px;
     }
     p {
         margin: 30px;
@@ -250,25 +304,30 @@ export default {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    @include m() {
-        height: 200px;
-    }
+
     .bg img {
         @include m() {
             width: 100%;
             height: 200px;
         }
     }
-
+    .ab-tree1 img {
+        @include m() {
+            height: 200px;
+        }
+    }
     .ab-tree2 img {
         -moz-transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
         -o-transform: scaleX(-1);
         transform: scaleX(-1);
+        @include m() {
+            height: 200px;
+        }
     }
 }
 .btn-ab {
-    width: 60px;
+    width: 80px;
     margin: auto;
     margin-top: 10px;
 }
@@ -276,8 +335,57 @@ body h1 {
     font-family: "Inkfree";
     font-size: 30vh;
     color: $lightgreen;
+    @include m() {
+        font-size: 50px;
+    }
 }
 .discount {
     margin-top: 20px;
+}
+.mask {
+    background-color: #000;
+    opacity: 0.3;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+.pop {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #fbfef9;
+    border-radius: 5px;
+    position: fixed;
+    top: 100px;
+    left: 300px;
+    width: calc(100% - 600px);
+    height: calc(100% - 400px);
+    z-index: 2;
+    img {
+        width: 50%;
+        margin: auto;
+        -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+        filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
+    }
+    p {
+        margin-top: 50px;
+    }
+    h3 {
+        margin-top: 50px;
+        font-size: 48px;
+    }
+}
+// .btn {
+//     padding: 4px 20px;
+//     bottom: 0;
+//     margin-bottom: 50px;
+// }
+.btn1 {
+    width: 250px;
+    margin: auto;
+    margin-bottom: 20px;
 }
 </style>
