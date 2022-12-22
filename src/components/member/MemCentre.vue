@@ -36,7 +36,7 @@
                     <tr class="tabcontent_txt">
                         <td>電話</td>
                         <input
-                            type="text"
+                            type="tel"
                             id="mem_mob"
                             myfield="mem_mob"
                             v-model="memindexs.mem_mob"

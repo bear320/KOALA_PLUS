@@ -21,6 +21,7 @@
                         id="search_mem_name"
                         placeholder="輸入姓名搜尋"
                         ref="search_mem_name"
+                        v-model="searchMemName"
                     />
                 </div>
                 <select v-model="selectName" @change="search_func">
@@ -78,6 +79,20 @@
             </div>
         </section>
     </article>
+    <section class="pagination">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': currentPage == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <a @click="nextPage"><li>></li></a>
+        </ul>
+    </section>
 </template>
 
 <script>
@@ -93,6 +108,11 @@ export default {
                 { val: "3", item: "email（正序）" },
                 { val: "4", item: "email（反序）" },
             ],
+
+            searchMemName: "",
+
+            totalPage: 0,
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
         };
     },
     methods: {
@@ -131,9 +151,11 @@ export default {
             });
         },
         search_func() {
-            const postMemSearch = {
+            /* const postMemSearch = {
                 search_mem_name: this.$refs.search_mem_name.value,
                 search_orderby: this.selectName,
+                limit: 10,
+                page: this.currentPage,
             };
             console.log(postMemSearch);
             fetch(
@@ -148,29 +170,101 @@ export default {
                 .then((json) => {
                     console.log(json);
                     this.memindexs = json;
+                }); */
+            this.getMemInfo();
+        },
+
+        getMemInfo() {
+            const apiURL = new URL(
+                "http://localhost/cgd103_g1/public/api/getMember.php?"
+            );
+
+            if (!Object.keys(this.$route.query).length) {
+                this.$route.query.search_orderby = this.selectName;
+                this.$route.query.search_mem_name = this.searchMemName;
+                this.$route.query.type = "admin";
+                this.$route.query.limit = 10;
+                this.$route.query.page = 1;
+            }
+
+            this.$route.query.search_orderby = this.selectName;
+            this.$route.query.search_mem_name = this.searchMemName;
+            this.$route.query.type = "admin";
+            this.$route.query.limit = 10;
+            this.$route.query.page = this.currentPage;
+
+            const searchParam = new URLSearchParams(this.$route.query);
+
+            apiURL.search = searchParam;
+
+            fetch(apiURL, {
+                credentials: "include",
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    // console.log(json.prodRows);
+                    this.memindexs = json.prodRows;
+                    console.log(json.count);
+                    this.totalPage = Math.ceil(json.count / 10);
                 });
+        },
+
+        nextPage() {
+            if (this.currentPage === this.totalPage) {
+                return;
+            } else {
+                this.currentPage += 1;
+                this.getMemInfo();
+            }
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                return;
+            } else {
+                this.currentPage--;
+                this.getMemInfo();
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.getMemInfo();
         },
     },
     components: {
         Header,
     },
     created() {
-        fetch(
-            "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
-            {
-                credentials: "include",
-            }
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-                this.memindexs = json;
-            });
+        this.getMemInfo();
     },
 };
 </script>
 
 <style lang="scss" scoped>
+.pagination {
+    padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
+    }
+}
 html article {
     text-align: left;
     .title-n-action {
