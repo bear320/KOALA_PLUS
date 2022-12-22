@@ -41,10 +41,7 @@
                 </div>
                 <div>
                     <p>圖片:</p>
-                    <label class="btn-lowest imgupload"
-                        ><Icon type="md-image" />上傳圖片
-                        <input type="file" accept="image" style="display: none"
-                    /></label>
+                    <input type="file" accept="image" />
                 </div>
             </div>
             <div>
@@ -160,11 +157,23 @@ html article {
     }
     input[type="text"] {
         width: 40%;
+        cursor: text;
     }
-    .imgupload {
-        @include btnSize(15px);
-        i {
-            color: $btn-color;
+    textarea {
+        cursor: text;
+    }
+    input[type="file"]::file-selector-button {
+        border: 1px solid $btn-color;
+        color: $btn-color;
+        margin: 5px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $bg-color;
+        transition: 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $btn-light-color;
         }
     }
 }
