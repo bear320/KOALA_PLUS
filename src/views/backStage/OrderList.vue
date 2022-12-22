@@ -10,7 +10,11 @@
         <section>
             <!-- 會員編號、訂單號碼 -->
 
-            <div class="accordion" v-for="item in orders" :key="item.ord_id">
+            <div
+                class="accordion"
+                v-for="(item, index) in orders"
+                :key="item.ord_id"
+            >
                 <label :for="`tab-${item.ord_id}`">
                     <div class="line1">
                         <p>會員編號：{{ item.mem_id }}</p>
@@ -94,6 +98,7 @@
                                         id="ord_ship"
                                         name="ord_ship"
                                         v-model="item.ord_ship"
+                                        @change="updateStatus(index)"
                                         required
                                     >
                                         <option :value="0">訂單準備中</option>
@@ -160,11 +165,13 @@ export default {
                     this.orderlists = json;
                 });
         },
-        postOrderList() {
+        updateStatus(index) {
+            const orderId = this.orders[index].ord_id;
+            const orderStatus = this.orders[index].ord_ship;
             const apiURL = new URL(`${BASE_URL}/postOrderList.php`);
             const orderList = {
-                ord_id: Number(this.orders.ord_id),
-                ord_ship: this.orders.ord_ship,
+                ord_id: Number(orderId),
+                ord_ship: Number(orderStatus),
             };
             console.log(orderList);
 
