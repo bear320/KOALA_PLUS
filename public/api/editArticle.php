@@ -5,13 +5,14 @@ header("Content-Type:application/json;charset=utf-8");
 try {
     require_once("./connect_cgd103g1.php");
 
-$sql = "update news set news_img = :news_img,
+$sql = "UPDATE tibamefe_cgd103g1.news 
+                    SET news_img = :news_img,
                         news_title = :news_title,
                         news_content = :news_content,
                         news_date = :news_date,
                         news_category = :news_category,
                         news_status = :news_status,
-					where news_id = :news_id;";
+					WHERE news_id = :news_id;";
 
 $updateNews = $pdo->prepare($sql);
 $updateNews->bindValue(":news_id", $_POST["news_id"]);
