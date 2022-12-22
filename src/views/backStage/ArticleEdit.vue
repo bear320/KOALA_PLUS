@@ -90,7 +90,7 @@ export default {
         },
         editArticle() {
             const newsId = this.$route.params.news_id;
-            // console.log(newsId);
+            console.log(newsId);
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
             const articleUpdate = {
                 news_id: Number(this.edit.news_id),
