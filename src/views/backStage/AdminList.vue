@@ -95,6 +95,9 @@ export default {
             });
         },
         getAdminList() {
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getAdminList.php`
+            // );
             const apiURL = new URL(`${BASE_URL}/getAdminList.php`);
             fetch(apiURL)
                 .then((res) => res.json())
@@ -114,7 +117,10 @@ export default {
         switchValidation(index) {
             const empId = this.source[index].emp_id;
             const empValidation = this.source[index].emp_validation;
-            const apiURL = new URL(`${BASE_URL}/getAdminList.php`);
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/postEmpValidation.php`
+            // );
+            const apiURL = new URL(`${BASE_URL}/postEmpValidation.php`);
 
             const postEmpValidation = {
                 emp_id: Number(empId),
