@@ -58,7 +58,6 @@
         <section>
             <h2 class="title">News</h2>
             <div class="wrapper articles">
-                <p>選了啥:{{ selectedCategory }}</p>
                 <select
                     name="category"
                     id="artclesCategory"
@@ -238,6 +237,7 @@ export default {
     methods: {
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

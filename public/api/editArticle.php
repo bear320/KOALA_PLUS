@@ -12,7 +12,7 @@ $sql = "update news set news_img = :news_img,
                         news_category = :news_category,
                         news_status = :news_status,
 						news_id = :news_id,
-					where news_id = :news_id";
+					where news_id = :news_id;";
 
 $updateNews = $pdo->prepare($sql);
 $updateNews->bindValue(":news_img", $_POST["news_img"]);
