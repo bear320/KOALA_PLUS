@@ -38,7 +38,7 @@
                 name="rsv_id_orderby"
             >
                 編號<Icon
-                    type="ios-arrow-down"
+                    type="ios-arrow-up"
                     size="20"
                     :class="{ inverse: idReverse }"
                 />
@@ -50,7 +50,7 @@
                 name="rsv_date_orderby"
             >
                 日期<Icon
-                    type="ios-arrow-down"
+                    type="ios-arrow-up"
                     size="20"
                     :class="{ inverse: dateReverse }"
                 />
@@ -62,7 +62,7 @@
         </div>
         <div
             class="bs-list"
-            v-for="(list, index) in booklist"
+            v-for="(list, index) in filterList"
             :key="list.rsv_id"
             :style="{
                 backgroundColor:
@@ -99,7 +99,7 @@
         </div>
     </section>
 
-    <!-- <div class="pagination">
+    <div class="pagination">
         <ul>
             <a @click="prePage"><li>&lt;</li></a>
             <a
@@ -113,7 +113,7 @@
 
             <a @click="nextPage"><li>></li></a>
         </ul>
-    </div> -->
+    </div>
 </template>
 
 <script>
@@ -158,11 +158,11 @@ export default {
             let postDateSearch = "";
             this.idReverse
                 ? (postDateSearch = {
-                      search_order_field: "rsv_id ASC",
+                      search_order_field: "rsv_id DESC",
                       // search_order_by: "rsv_id",
                   })
                 : (postDateSearch = {
-                      search_order_field: "rsv_id DESC",
+                      search_order_field: "rsv_id ASC",
                       // search_order_by: "rsv_id",
                   });
 
@@ -190,11 +190,12 @@ export default {
             let postDateSearch = "";
             this.dateReverse
                 ? (postDateSearch = {
-                      search_order_field: "rsv_date ASC",
+                      search_order_field: "rsv_date DESC",
                       // search_order_by: "rsv_id",
                   })
                 : (postDateSearch = {
-                      search_order_field: "rsv_date DESC",
+                      search_order_field: "rsv_date ASC",
+
                       // search_order_by: "rsv_id",
                   });
 
@@ -275,13 +276,6 @@ export default {
                 return;
             } else {
                 this.currentPage--;
-                this.$router.push({
-                    path: "/bs-booking-list",
-                    query: {
-                        limit: `10`,
-                        page: this.currentPage,
-                    },
-                });
             }
         },
         nextPage() {
@@ -293,39 +287,33 @@ export default {
                 return;
             } else {
                 this.currentPage++;
-                this.$router.push({
-                    path: "/bs-booking-list",
-                    query: {
-                        limit: `10`,
-                        page: this.currentPage,
-                    },
-                });
             }
         },
         changePage(page) {
             this.currentPage = page;
-            this.$router.push({
-                path: "/bs-booking-list",
-                query: {
-                    limit: `10`,
-                    page: this.currentPage,
-                },
-            });
         },
     },
     created() {
         this.getResvDetail();
-        fetch(
-            "http://localhost/cgd103_g1/public/api/getResvDay2.php?type=admin",
-            {
-                credentials: "include",
-            }
-        )
+        fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php", {
+            credentials: "include",
+        })
             .then((res) => res.json())
             .then((json) => {
                 console.log(json);
                 this.booklist = json;
             });
+    },
+    computed: {
+        totalPage() {
+            return Math.ceil(this.booklist.length / 10);
+        },
+        filterList() {
+            return this.booklist.slice(
+                (this.currentPage - 1) * 10,
+                this.currentPage * 10
+            );
+        },
     },
 };
 </script>
@@ -336,19 +324,28 @@ export default {
     text-align: left;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+
     .title {
         width: 400px;
         display: flex;
+
         column-gap: 20px;
         flex-wrap: wrap;
         h1 {
             display: block;
         }
+
         h2 {
-            padding-left: 500px;
             color: $green;
-            @include borderLeft(30px);
+            &::before {
+                content: "";
+                border-left: solid 5px $green;
+                // position: absolute;
+                padding-right: 10px;
+                margin-left: 3px;
+                height: 100%;
+            }
         }
         img {
             margin-left: 5px;
@@ -357,7 +354,20 @@ export default {
     }
     .action {
         display: flex;
+        align-items: center;
         column-gap: 15px;
+        .search {
+            input {
+                width: 200px;
+                box-sizing: border-box;
+                padding: 4px 10px;
+                line-height: 2;
+                border: 1px solid $green;
+                border-radius: 5px;
+                background-color: transparent;
+                color: $green;
+            }
+        }
     }
 }
 .table {
@@ -369,6 +379,9 @@ export default {
         display: flex;
         justify-items: center;
         align-items: center;
+        h2 {
+            padding-left: 500px;
+        }
         h3 {
             display: block;
             width: calc(100% / 7);
@@ -503,36 +516,29 @@ a {
 
 .pagination {
     padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
+    }
 }
-
-.pagination ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.pagination a {
-    display: inline-block;
-    padding: 10px 18px;
-    color: #222;
-}
-
-/* ONE */
-
-.p1 a {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0;
-    text-align: center;
-}
-
-.p1 a.is-active {
-    background-color: #2ecc71;
-    border-radius: 100%;
-    color: #fff;
-}
-
 .inverse {
     transform: rotate(180deg);
 }

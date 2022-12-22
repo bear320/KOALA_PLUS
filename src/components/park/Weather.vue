@@ -4,7 +4,6 @@
     </div>
 </template>
 <script>
-// import axios from "axios";
 export default {
     data() {
         return {
@@ -12,7 +11,19 @@ export default {
         };
     },
     methods: {
-        getWeatherData() {},
+        getWeatherData() {
+            fetch(
+                "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-005?Authorization=CWB-7DF0CD1C-E933-4927-95D1-99C3EC894A8C&format=JSON&sort=time"
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.weatherData = json;
+                });
+        },
+    },
+    created() {
+        this.getWeatherData();
     },
 };
 </script>
