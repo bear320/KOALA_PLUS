@@ -10,7 +10,9 @@
                 v-if="showMemUnsubscribe === true"
                 @closeMemUnsubscribe="closeMemUnsubscribe_emit"
             ></MemUnsubscribe>
-            <div class="mem_order_table">
+
+            <!-- ============================================ -->
+            <!--  <div class="mem_order_table">
                 <p>訂單編號: {{ order.ord_id }}</p>
                 <table class="table">
                     <thead>
@@ -45,7 +47,39 @@
                 </button>
                 <p>總額: $800</p>
                 <div>訂單狀態:{{ sts_map[ord_sts] }}</div>
-            </div>
+            </div> -->
+            <!-- 測試 accordion 訂單清單展開 -->
+
+            <!-- <div class="section">
+                <div
+                    class="accordion"
+                    v-for="(item, index) in order"
+                    :key="item.pord_id"
+                > -->
+            <!-- <label :for="`tab-${item.ord_id}`"> -->
+            <!-- <div class="line1">
+                        <p>會員編號：{{ item.mem_id }}</p>
+                        <p>訂購日期：{{ item.ord_date }}</p>
+                        <p>訂單編號：{{ item.ord_id }}</p>
+                        <p>
+                            訂單狀態：
+                            <span v-if="item.ord_ship == '0'">訂單處理中</span>
+                            <span v-if="item.ord_ship == '1'">訂單已出貨</span>
+                            <span v-if="item.ord_ship == '2'">訂單已完成</span>
+                            <span v-if="item.ord_ship == '3'">取消訂單</span>
+                        </p>
+                    </div>
+
+                    <div class="box">
+                        <input
+                            type="checkbox"
+                            name="tab"
+                            :id="`tab-${item.ord_id}`"
+                        />
+                    </div>
+                </div>
+            </div> -->
+            {{ order }}
         </div>
     </li>
 </template>
@@ -65,27 +99,27 @@ export default {
             order: [],
             sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
             orderList: [
-                // {
-                //     prod_name: "無尾熊乾髮帽",
-                //     prod_id: "1022",
-                //     prod_category: "玩具/絨毛娃娃",
-                //     ord_qty: 1,
-                //     prod_price: 200,
-                // },
-                // {
-                //     prod_name: "無尾熊乾髮帽2",
-                //     prod_id: "1023",
-                //     prod_category: "玩具/絨毛娃娃",
-                //     ord_qty: 1,
-                //     prod_price: 200,
-                // },
-                // {
-                //     prod_name: "無尾熊乾髮帽3",
-                //     prod_id: "1024",
-                //     prod_category: "玩具/絨毛娃娃",
-                //     ord_qty: 1,
-                //     prod_price: 200,
-                // },
+                {
+                    prod_name: "無尾熊乾髮帽",
+                    prod_id: "1022",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                },
+                {
+                    prod_name: "無尾熊乾髮帽2",
+                    prod_id: "1023",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                },
+                {
+                    prod_name: "無尾熊乾髮帽3",
+                    prod_id: "1024",
+                    prod_category: "玩具/絨毛娃娃",
+                    ord_qty: 1,
+                    prod_price: 200,
+                },
             ],
         };
     },
@@ -109,6 +143,7 @@ export default {
                     console.log(json);
                     if (json.status) {
                         this.order = json.list;
+                        console.log(this.order);
                         this.userid = json.userid;
                         this.username = json.username;
                         return true;
