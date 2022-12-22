@@ -11,7 +11,7 @@ $sql = "UPDATE tibamefe_cgd103g1.news
                         news_content = :news_content,
                         news_date = :news_date,
                         news_category = :news_category,
-                        news_status = :news_status,
+                        news_status = :news_status
 					WHERE news_id = :news_id;";
 
 $updateNews = $pdo->prepare($sql);
