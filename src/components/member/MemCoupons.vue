@@ -125,7 +125,8 @@ export default {
                         // console.log(this.couponsList.length);
                         return true;
                     }
-                    alert("獲取數據失敗");
+                    // alert("獲取數據失敗");
+                    location.href = "/login";
                 });
         },
     },

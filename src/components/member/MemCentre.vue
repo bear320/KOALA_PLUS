@@ -199,6 +199,24 @@ export default {
                 alert("登入失效");
             }
         },
+        signOut() {
+            console.log("123");
+            const postsingOut = this.$refs.postsingOut;
+            fetch(
+                "http://localhost/cgd103_g1/public/api/postMemberLogout.php",
+                {
+                    method: "POST",
+                    credentials: "include",
+                    body: new URLSearchParams(postsingOut),
+                }
+            )
+                .then((res) => res.json())
+                .then((status) => {
+                    console.log(status);
+                    alert(status.msg);
+                    location.href = "/login";
+                });
+        },
     },
     created() {
         let getCookie = document.cookie;
@@ -230,11 +248,13 @@ export default {
                         this.memindexs = json.list;
                         return true;
                     }
-                    alert("獲取數據失敗");
+                    // alert("獲取數據失敗");
                 });
         } else {
             alert("登入失效");
             //跳轉 login url
+
+            location.href = "/login";
         }
     },
     computed() {},
