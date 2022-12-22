@@ -8,7 +8,7 @@
         <div class="sub-title">
             <h2>數據統計 - 資助所有無尾熊</h2>
             <div class="chart-wrapper">
-                <Line v-if="loaded" :data="data" :options="options" />
+                <Line v-if="loaded" :data="dataSupAll" :options="options" />
             </div>
         </div>
         <div class="sub-title">
@@ -51,14 +51,14 @@ export default {
         return {
             loaded: false,
             source: [],
-            data: {
+            dataSupAll: {
                 labels: ["上上月", "上月", "本月"],
                 datasets: [
                     {
                         label: "資助所有無尾熊",
                         data: [null, null, null],
-                        borderColor: "#36A2EB",
-                        backgroundColor: "#9BD0F5",
+                        borderColor: "#33717d",
+                        backgroundColor: "#9abdbf",
                         pointStyle: "circle",
                         pointRadius: 10,
                         pointHoverRadius: 15,
@@ -71,16 +71,10 @@ export default {
                 responsive: true,
                 plugins: {
                     // 圖表標題
-                    title: {
-                        display: true,
-                        text: "Demo Line Chart",
-                    },
-                },
-                legend: {
-                    display: true,
-                    labels: {
-                        color: "rgb(255, 99, 132)",
-                    },
+                    // title: {
+                    //     display: true,
+                    //     text: "Demo Line Chart",
+                    // },
                 },
             },
             chartdata: [],
@@ -120,7 +114,7 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);
-                    this.data.datasets[0].data = [
+                    this.dataSupAll.datasets[0].data = [
                         json[0]["koala_sum_the_month_before_last"],
                         json[0]["koala_sum_last_month"],
                         json[0]["koala_sum_this_month"],
