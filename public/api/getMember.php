@@ -27,10 +27,15 @@ $black_stateid = empty( $_GET["black_stateid"] ) ? ( $_POST["black_stateid"] ?? 
 
 $type = empty( $_GET["type"] ) ? ( $_POST["type"] ?? "" ) : $_GET["type"]; //來源型態(front:前台,admin:後台)
 
-$limit=$_REQUEST['limit'];
-$page = $_REQUEST['page'] - 1;
 
-$offset = $page * $limit;
+$limit = empty( $_GET["limit"] ) ? ( $_POST["limit"] ?? "" ) : $_GET["limit"];
+$page = empty( $_GET["page"] ) ? ( $_POST["page"]  ?? "" ) : $_GET["page"];
+
+if(!empty($limit) && !empty($page)){
+    $offset = ($page - 1) * $limit;
+}
+
+/*  */
 
 if ( $type == "front" && empty($getUser) ) {
     echo json_encode(["status"=>false,"msg"=>"登陸失效"]);
@@ -69,8 +74,15 @@ switch( $type ){
         if(!empty($search_orderby)){
             $orderStr .= "ORDER BY {$orderbyInfo[$search_orderby][0]} {$orderbyInfo[$search_orderby][1]} ";
         }
+
+        $test="";
+        if(!empty($limit) && !empty($page)){
+            $offset = ($page - 1) * $limit;
+            $test .= "LIMIT {$limit} OFFSET {$offset}";
+        }
+
         // var_dump($orderbyInfo[$search_orderby]);die();
-        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr} LIMIT {$limit} OFFSET {$offset} "; // WHERE 1 意味著ALWAYS TRUE它不會對您的查詢產生任何過濾影響
+        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr} {$test}"; // WHERE 1 意味著ALWAYS TRUE它不會對您的查詢產生任何過濾影響
         
         // 查詢總比數
         $countSQL = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr}";
