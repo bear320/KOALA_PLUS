@@ -97,7 +97,7 @@ export default {
                 news_img: this.edit.news_img,
                 news_title: this.edit.news_title,
                 news_content: this.edit.news_content,
-                // news_date: this.edit.news_date,
+                news_date: this.edit.news_date,
                 news_category: this.edit.news_category,
                 news_status: this.edit.news_status,
             };
