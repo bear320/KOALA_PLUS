@@ -88,7 +88,8 @@
                                     <p>帳號/信箱</p>
                                     <input id="forget_password_account" type="text" placeholder="Account" name="user_email" v-model="forget_password_account" required/>
                                 </div>
-                                <div name="mem_psw" id="show_forget_password"></div>
+                                <div name="mem_psw" id="show_forget_password">{{mem_psw}}</div>
+                                <input id="forget_password_none" type="text" name="mem_psw" v-model="mem_psw">
                                 <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
                             </form>
                             <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
@@ -132,6 +133,8 @@ export default {
             sign_up_account: "",
             sign_up_password: "",
             sign_up_password_comfirm: "",
+
+            mem_psw:"",
         };
     },
     methods: {
@@ -274,6 +277,7 @@ export default {
         // ======================================== 寄 Email  ======================================== //
         sendEmail() {
             // ======================================== 把忘記的密碼撈出來  ======================================== //
+            let QQ=this; //這裡的QQ指向的Vue實體
             var xhr = new XMLHttpRequest();
             xhr.onload=function (){
                  if( xhr.status == 200 ){
@@ -296,29 +300,32 @@ export default {
                 xhr.send(null);
                 let member = JSON.parse(json);
                 let html;
+                
+                // 這裡的QQ指的是Vue實體
+                QQ.mem_psw=member.mem_psw;
 
-                html = `<p>${member.mem_psw}</p>`;
+                // html = `<p>${member.mem_psw}</p>`;
 
-                document.getElementById("show_forget_password").innerHTML = html;
+                // document.getElementById("show_forget_password").innerHTML = html;
             }
 
             // ======================================== 忘記密碼的 EmailJs  ======================================== //
-            // emailjs
-            //     .send("service_Charmy", "template_21xikzb",
-            //         {
-            //             user_email: this.email,
-            //             mem_psw: this.mem_psw,
-            //         },
-            //         "X1x5cmen7BlWhZ2yb"
-            //     )
-            //     .then(
-            //         (result) => {
-            //             console.log("SUCCESS!", result.text);
-            //         },
-            //         (error) => {
-            //             console.log("FAILED...", error.text);
-            //         }
-            //     );
+            emailjs
+                .send("service_Charmy", "template_21xikzb",
+                    {
+                        user_email: this.forget_password_account,
+                        mem_psw: this.mem_psw,
+                    },
+                    "X1x5cmen7BlWhZ2yb"
+                )
+                .then(
+                    (result) => {
+                        console.log("SUCCESS!", result.text);
+                    },
+                    (error) => {
+                        console.log("FAILED...", error.text);
+                    }
+                );
         },
 
         // ======================================== 看得到密碼 click事件 ======================================== //
@@ -382,8 +389,13 @@ export default {
   }
 
 #show_forget_password {
-    // display: none;
+    display: none;
 }
+
+#forget_password_none {
+    display: none;
+}
+
 .main_content {
     position: absolute;
     top: 0;
