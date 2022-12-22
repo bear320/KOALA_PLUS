@@ -59,7 +59,7 @@
                 ></textarea>
             </div>
         </form>
-        <button class="btn-paramy" id="btnInsert" @click.prevent="next">
+        <button class="btn-paramy" id="btnInsert" @click.prevent="editArticle">
             <img src="@/assets/images/icon/confirm.svg" alt="" />確認
         </button>
     </article>
@@ -86,6 +86,33 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.edit = json;
+                });
+        },
+        editArticle() {
+            const newsId = this.$route.params.news_id;
+            // console.log(newsId);
+            const apiURL = new URL(`${BASE_URL}/editArticle.php`);
+            const articleUpdate = {
+                news_id: Number(this.edit.news_id),
+                news_img: this.edit.news_img,
+                news_title: this.edit.news_title,
+                news_content: this.edit.news_content,
+                // news_date: this.edit.news_date,
+                news_category: this.edit.news_category,
+                news_status: this.edit.news_status,
+            };
+            console.log(articleUpdate);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(articleUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                    if (confirm("是否關閉此分頁？")) {
+                        window.close();
+                    }
                 });
         },
     },
