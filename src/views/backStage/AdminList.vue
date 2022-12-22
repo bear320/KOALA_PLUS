@@ -32,8 +32,12 @@
             </div>
         </div>
         <!-- 內容 -->
-        <div class="bs-list" v-for="admin in source" :key="admin.emp_id">
-            <div>{{ admin.emp_account }}</div>
+        <div
+            class="bs-list"
+            v-for="(admin, index) in source"
+            :key="admin.emp_id"
+        >
+            <div>{{ admin.emp_id }}</div>
             <div>{{ admin.emp_name }}</div>
             <div>{{ admin.emp_last_login }}</div>
 
@@ -48,8 +52,9 @@
                         true-color="#337a7d"
                         :true-value="1"
                         :false-value="0"
-                        v-model="admin.emp_validation"
                         :before-change="handleBeforeChange"
+                        v-model="admin.emp_validation"
+                        @on-change="switchValidation(index)"
                     >
                         <template #open>
                             <span>ON</span>
@@ -90,6 +95,9 @@ export default {
             });
         },
         getAdminList() {
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/getAdminList.php`
+            // );
             const apiURL = new URL(`${BASE_URL}/getAdminList.php`);
             fetch(apiURL)
                 .then((res) => res.json())
@@ -97,7 +105,7 @@ export default {
                     this.source = json.map((item) => {
                         return {
                             emp_id: +item.emp_id,
-                            emp_account: item.emp_account,
+                            emp_account: +item.emp_account,
                             emp_psw: item.emp_psw,
                             emp_name: item.emp_name,
                             emp_validation: +item.emp_validation,
@@ -106,7 +114,30 @@ export default {
                     });
                 });
         },
+        switchValidation(index) {
+            const empId = this.source[index].emp_id;
+            const empValidation = this.source[index].emp_validation;
+            // const apiURL = new URL(
+            //     `http://localhost:8888/cgd103_g1/public/api/postEmpValidation.php`
+            // );
+            const apiURL = new URL(`${BASE_URL}/postEmpValidation.php`);
+
+            const postEmpValidation = {
+                emp_id: Number(empId),
+                emp_validation: Number(empValidation),
+            };
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(postEmpValidation),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                });
+        },
     },
+
     created() {
         this.getAdminList();
     },

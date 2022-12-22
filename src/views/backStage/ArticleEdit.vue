@@ -41,10 +41,7 @@
                 </div>
                 <div>
                     <p>圖片:</p>
-                    <label class="btn-lowest imgupload"
-                        ><Icon type="md-image" />上傳圖片
-                        <input type="file" accept="image" style="display: none"
-                    /></label>
+                    <input type="file" accept="image" />
                 </div>
             </div>
             <div>
@@ -59,7 +56,7 @@
                 ></textarea>
             </div>
         </form>
-        <button class="btn-paramy" id="btnInsert" @click.prevent="next">
+        <button class="btn-paramy" id="btnInsert" @click.prevent="editArticle">
             <img src="@/assets/images/icon/confirm.svg" alt="" />確認
         </button>
     </article>
@@ -86,6 +83,33 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.edit = json;
+                });
+        },
+        editArticle() {
+            const newsId = this.$route.params.news_id;
+            console.log(newsId);
+            const apiURL = new URL(`${BASE_URL}/editArticle.php`);
+            const articleUpdate = {
+                news_id: Number(this.edit.news_id),
+                news_img: this.edit.news_img,
+                news_title: this.edit.news_title,
+                news_content: this.edit.news_content,
+                news_date: this.edit.news_date,
+                news_category: this.edit.news_category,
+                news_status: this.edit.news_status,
+            };
+            console.log(articleUpdate);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(articleUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                    if (confirm("是否關閉此分頁？")) {
+                        window.close();
+                    }
                 });
         },
     },
@@ -133,11 +157,23 @@ html article {
     }
     input[type="text"] {
         width: 40%;
+        cursor: text;
     }
-    .imgupload {
-        @include btnSize(15px);
-        i {
-            color: $btn-color;
+    textarea {
+        cursor: text;
+    }
+    input[type="file"]::file-selector-button {
+        border: 1px solid $btn-color;
+        color: $btn-color;
+        margin: 5px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $bg-color;
+        transition: 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $btn-light-color;
         }
     }
 }

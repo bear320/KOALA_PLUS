@@ -103,7 +103,7 @@ export default {
             .then((res) => res.json())
             .then((json) => {
                 console.log(json);
-                this.memindexs = json.filter((item) => {
+                this.memindexs = json.prodRows.filter((item) => {
                     return item.mem_state === 1;
                 });
             });

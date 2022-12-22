@@ -36,7 +36,7 @@
                     <tr class="tabcontent_txt">
                         <td>電話</td>
                         <input
-                            type="text"
+                            type="tel"
                             id="mem_mob"
                             myfield="mem_mob"
                             v-model="memindexs.mem_mob"
@@ -57,6 +57,11 @@
                 <button class="btn-paramy" @click="editMemInfo">
                     編輯會員資料
                 </button>
+                <div class="signOutbutton">
+                    <button class="btn-paramy" @click="signOut">
+                        登出會員
+                    </button>
+                </div>
             </div>
             <!-- 會員中心右邊內容 關於帳號密碼-->
             <div class="tabcontent_txt_group">
@@ -288,6 +293,10 @@ export default {
                             padding: 0 20px;
                             height: 30px;
                             line-height: 30px;
+                        }
+                        .signOutbutton {
+                            margin: auto;
+                            padding: 10px;
                         }
                         .tabcontent_group {
                             display: flex;

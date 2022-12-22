@@ -84,7 +84,7 @@ export default {
             filter: drop-shadow(5px 5px 1px rgba(7, 97, 125, 1));
         }
         .bg {
-            width: 100%;
+            width: 110%;
             height: 100vh;
             margin-top: 5%;
             overflow: hidden;

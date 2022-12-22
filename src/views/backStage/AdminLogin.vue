@@ -6,42 +6,17 @@
                 <form @submit.prevent="login">
                     <div>
                         <label>帳號</label>
-                        <input type="text" v-model="userName" required>
+                        <input type="text" v-model="login_account" required>
                     </div>
                     <div>
                         <label>密碼</label>
-                        <input type="password" v-model="password" required>
+                        <input type="password" v-model="login_password" required>
                     </div>
                     <div>
-                        <button class="btn-paramy" type="submit">登錄</button>
+                        <button class="btn-paramy" type="submit" @click="login">登錄</button>
                     </div>
                 </form>
             </div>
-        </div>
-    </section>
-
-    <section class="tidy_list">
-        <div class="tidy_list_block">
-            <router-link to="/bs-index">後台首頁</router-link>
-            <router-link to="/bs-admin-list">權限管理</router-link>
-            <router-link to="/bs-admin-add">新增管理員</router-link>
-            <router-link to="/bs-article-list">公告管理</router-link>
-            <router-link to="/bs-article-edit">新增／編輯公告</router-link>
-            <router-link to="/bs-booking-list">導覽預約管理</router-link>
-            <router-link to="/bs-booking-dayoff">新增休館日期</router-link>
-            <router-link to="/bs-booking-edit">修改預約</router-link>
-            <router-link to="/bs-koala-list">無尾熊管理</router-link>
-            <router-link to="/bs-koala-add">新增無尾熊</router-link>
-            <router-link to="/bs-koala-edit">編輯無尾熊</router-link>
-            <router-link to="/bs-member-list">會員管理</router-link>
-            <router-link to="/bs-member-blacklist">會員黑名單</router-link>
-            <router-link to="/bs-order-list">訂單管理</router-link>
-            <router-link to="/bs-product-list">周邊商品管理</router-link>
-            <router-link to="/bs-product-edit">新增／編輯周邊商品</router-link>
-            <router-link to="/bs-coupon-list">優惠券管理</router-link>
-            <router-link to="/bs-support-list">資助認養管理</router-link>
-            <router-link to="/bs-support-info">資助認養詳情</router-link>
-            <router-link to="/bs-support-statistic">資助認養數據</router-link>
         </div>
     </section>
 
@@ -51,12 +26,42 @@
   export default {
     data () {
       return {
-        userName: "",
-        password: "",
+        login_account: "",
+        login_password: "",
       }
     },
     methods: {
+        login() {
+            let thisvue = this;
+            if (thisvue.login_account == "" || thisvue.login_password == "") {
+                // thisvue.errorMsg = "請輸入帳號和密碼";
+                // thisvue.errorFlag = true;
+            } else {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/getAdminLogin.php",
+                    {
+                        method: "post",
+                        credentials: "include",
+                        body: new URLSearchParams({
+                            mem_account: this.login_account,
+                            mem_psw: this.login_password,
+                        }),
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        if (this.login_password == json.mem_account) {
+                            console.log("成功");
+                        }
+                        else if ( !json.code) {
+                            console.log("失敗")
+                        }
+                        this.$router.push({path: "/bs-index"})
+                    });
 
+            }
+        },
     } 
   }
 </script>

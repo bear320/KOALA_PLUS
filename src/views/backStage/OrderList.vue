@@ -1,16 +1,29 @@
 <template>
     <Header />
     <article class="nav-space wrapper">
-        <h1>訂單管理</h1>
-        <div class="todo">
-            <div class="search">
-                <input type="search" name="" id="" placeholder="搜尋" />
+        <div class="title-n-action">
+            <h1>訂單管理</h1>
+            <div class="todo">
+                <div class="search">
+                    <input
+                        type="search"
+                        name="search"
+                        id="search"
+                        placeholder="搜尋訂單編號"
+                        v-model.trim="search"
+                        @input="changeVal"
+                    />
+                </div>
             </div>
         </div>
         <section>
             <!-- 會員編號、訂單號碼 -->
 
-            <div class="accordion" v-for="item in orders" :key="item.ord_id">
+            <div
+                class="accordion"
+                v-for="(item, index) in orders"
+                :key="item.ord_id"
+            >
                 <label :for="`tab-${item.ord_id}`">
                     <div class="line1">
                         <p>會員編號：{{ item.mem_id }}</p>
@@ -94,6 +107,7 @@
                                         id="ord_ship"
                                         name="ord_ship"
                                         v-model="item.ord_ship"
+                                        @change="updateStatus(index)"
                                         required
                                     >
                                         <option :value="0">訂單準備中</option>
@@ -115,6 +129,20 @@
             </div>
         </section>
     </article>
+    <section class="pagination">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': currentPage == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <a @click="nextPage"><li>></li></a>
+        </ul>
+    </section>
 </template>
 
 <script>
@@ -125,6 +153,9 @@ export default {
         return {
             orders: [],
             orderlists: [],
+            search: "",
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
+            totalPage: 0,
         };
     },
     computed: {
@@ -135,17 +166,34 @@ export default {
             }, {});
         },
     },
+    watch: {
+        $route: function () {
+            if (!Object.keys(this.$route.query).length) {
+                this.currentPage = 1;
+                this.getAllOrders(this.$route.query);
+            }
+            this.getAllOrders(this.$route.query);
+        },
+    },
     methods: {
-        getAllOrders() {
+        getAllOrders(queryParam) {
+            if (!Object.keys(queryParam).length) {
+                queryParam.limit = 10;
+                queryParam.page = 1;
+                queryParam.search = this.search;
+            }
             // const apiURL = new URL(
             //     "http://localhost:8888/cgd103_g1/public/api/getAllOrders.php"
             // );
             const apiURL = new URL(`${BASE_URL}/getAllOrders.php`);
+            const searchParam = new URLSearchParams(queryParam);
+            apiURL.search = searchParam;
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
-                    this.orders = json;
+                    console.log("test", json);
+                    this.orders = json.orders;
+                    this.totalPage = Math.ceil(json.orderCount / 10);
                 });
         },
         getOrderLists() {
@@ -156,15 +204,17 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    // console.log(json);
                     this.orderlists = json;
                 });
         },
-        postOrderList() {
+        updateStatus(index) {
+            const orderId = this.orders[index].ord_id;
+            const orderStatus = this.orders[index].ord_ship;
             const apiURL = new URL(`${BASE_URL}/postOrderList.php`);
             const orderList = {
-                ord_id: Number(this.orders.ord_id),
-                ord_ship: this.orders.ord_ship,
+                ord_id: Number(orderId),
+                ord_ship: Number(orderStatus),
             };
             console.log(orderList);
 
@@ -177,9 +227,60 @@ export default {
                     alert(status.msg);
                 });
         },
+        changeVal() {
+            this.$router.push({
+                path: "/bs-order-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                    search: this.search,
+                },
+            });
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                return;
+            } else {
+                this.currentPage--;
+                this.$router.push({
+                    path: "/bs-order-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                        search: this.search,
+                    },
+                });
+            }
+        },
+        nextPage() {
+            if (this.currentPage === this.totalPage) {
+                return;
+            } else {
+                this.currentPage++;
+                this.$router.push({
+                    path: "/bs-order-list",
+                    query: {
+                        limit: `10`,
+                        page: this.currentPage,
+                        search: this.search,
+                    },
+                });
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
+            this.$router.push({
+                path: "/bs-order-list",
+                query: {
+                    limit: `10`,
+                    page: this.currentPage,
+                    search: this.search,
+                },
+            });
+        },
     },
     created() {
-        this.getAllOrders();
+        this.getAllOrders(this.$route.query);
         this.getOrderLists();
     },
     components: {
@@ -189,8 +290,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-section {
-    margin-bottom: 50px;
+// section {
+//     margin-bottom: 50px;
+// }
+.title-n-action {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .accordion {
     margin-top: 30px;
@@ -379,5 +485,30 @@ html article {
 }
 .bottom {
     padding-bottom: 50px;
+}
+.pagination {
+    padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
+    }
 }
 </style>

@@ -1,9 +1,7 @@
 <template>
     <Header></Header>
     <section class="main_block nav-space">
-        
-        <!-- ==================== 遊戲畫面 ==================== -->
-        <!-- ========== 遊戲背景 ========== -->
+        <!-- ======================================== 遊戲背景 ======================================== -->
         <div class="main_block_LeftTree">
             <div class="main_block_LeftTree_1">
                 <img src="../assets/images/game/LeftTree_1.png" alt="" />
@@ -20,25 +18,13 @@
                 <img src="../assets/images/game/MainTree.png" alt="" />
                 <div>
                     <div v-if="game_exp <= 500" class="main_block_koala_1">
-                        <img
-                            src="../assets/images/game/koala_small.png"
-                            alt=""
-                        />
+                        <img src="../assets/images/game/koala_small.png" alt=""/>
                     </div>
-                    <div
-                        v-else-if="game_exp <= 1000"
-                        class="main_block_koala_2"
-                    >
-                        <img
-                            src="../assets/images/game/koala_middle.png"
-                            alt=""
-                        />
+                    <div v-else-if="game_exp <= 1000" class="main_block_koala_2">
+                        <img src="../assets/images/game/koala_middle.png" alt=""/>
                     </div>
                     <div v-else class="main_block_koala_3">
-                        <img
-                            src="../assets/images/game/koala_large.png"
-                            alt=""
-                        />
+                        <img src="../assets/images/game/koala_large.png" alt=""/>
                     </div>
                 </div>
             </div>
@@ -57,7 +43,7 @@
         <div class="main_block_grass">
             <img src="../assets/images/game/grass.png" alt="" />
         </div>
-        <!-- ========== 遊戲選項列 ========== -->
+        <!-- ======================================== 遊戲選項列 ======================================== -->
         <nav class="game_nav">
             <div class="game_nav_money">
                 <div class="game_nav_money_left">
@@ -69,22 +55,15 @@
                 </div>
             </div>
             <div class="game_nav_button">
-                <div
-                    class="game_nav_shop_button btn-open"
-                    @click="shop_talkwindow"
-                >
+                <div class="game_nav_shop_button btn-open" @click="shop_talkwindow">
                     <img src="../assets/images/game/game_shop.png" alt="" />
                     <p>商店</p>
                 </div>
-                <div
-                    class="game_nav_bag_button btn-open"
-                    @click="bag_talkwindow"
-                >
+                <div class="game_nav_bag_button btn-open" @click="bag_talkwindow">
                     <img src="../assets/images/game/bag.png" alt="" />
                     <p>倉庫</p>
                 </div>
             </div>
-
             <div v-if="expWidth <= 100" class="game_nav_expbar">
                 <div class="experience_bar">
                     <div :style="{ width: expWidth + '%' }" :class="{ expValue: true }"></div>
@@ -92,8 +71,7 @@
             </div>
             <div v-else class="game_nav_expbar">
                 <div class="experience_bar">
-                    <div :style="{ width: 100 + '%' }" :class="{ expValue: true }"
-                    ></div>
+                    <div :style="{ width: 100 + '%' }" :class="{ expValue: true }"></div>
                 </div>
             </div>
             <div>
@@ -111,15 +89,11 @@
                 </div>
             </div>
         </nav>
-        <!-- ==================== 談窗畫面 ==================== -->
-        <!-- ========== 賺遊戲幣的方式 ========== -->
+        <!-- ======================================== 彈出賺遊戲幣的方式 ======================================== -->
         <div id="plus_talkwindow" class="plus_talkwindow">
             <div class="plus_talkwindow_block">
                 <div class="plus_talkwindow_image">
-                    <img
-                        src="../assets/images/game/plus_talkwindow_koala.png"
-                        alt=""
-                    />
+                    <img src="../assets/images/game/plus_talkwindow_koala.png" alt=""/>
                 </div>
                 <div class="btn-close" @click="removeActive">X</div>
                 <div class="plus_talkwindow_content">
@@ -137,7 +111,7 @@
                 </div>
             </div>
         </div>
-        <!-- ========== 虛擬商店 ========== -->
+        <!-- ======================================== 彈出虛擬商店 ======================================== -->
         <div id="shop_talkwindow" class="shop_talkwindow">
             <div class="shop_talkwindow_block">
                 <div class="shop_talkwindow_title">
@@ -148,148 +122,98 @@
                 <div class="shop_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
-                        <p class="shop_talkwindow_commodity_introduce_1">
-                            {{ item_1 }}
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_1">{{ item_1 }}</p>
                         <div>
                             <div v-if="game_money >= 20" class="shop_talkwindow_commodity_button" @click="addnum_1">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_1_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_1_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_1_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_1_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_2.png" alt="" />
-                        <p class="shop_talkwindow_commodity_introduce_1">
-                            {{ item_2 }}
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_1">{{ item_2 }}</p>
                         <div>
                             <div v-if="game_money >= 50" class="shop_talkwindow_commodity_button" @click="addnum_2">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_2_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_2_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_2_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_2_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_3.png" alt="" />
-                        <p class="shop_talkwindow_commodity_introduce_1">
-                            {{ item_3 }}
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_1">{{ item_3 }}</p>
                         <div>
                             <div v-if="game_money >= 125" class="shop_talkwindow_commodity_button" @click="addnum_3">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_3_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_3_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_3_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_3_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_4.png" alt="" />
-                        <p class="shop_talkwindow_commodity_introduce_1">
-                            {{ item_4 }}
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_1">{{ item_4 }}</p>
                         <div>
                             <div v-if="game_money >= 225" class="shop_talkwindow_commodity_button" @click="addnum_4">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_4_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_4_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_4_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_4_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_5.png" alt="" />
-                        <p class="shop_talkwindow_commodity_introduce_1">
-                            {{ item_5 }}
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_1">{{ item_5 }}</p>
                         <div>
                             <div v-if="game_money >= 350" class="shop_talkwindow_commodity_button" @click="addnum_5">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_5_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_5_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_5_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_5_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_6.png" alt="" />
@@ -299,31 +223,23 @@
                         <div>
                             <div v-if="game_money >= 500" class="shop_talkwindow_commodity_button" @click="addnum_6">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_6_sellingprice }}</p>
                                 </div>
                             </div>
                             <div v-else class="shop_talkwindow_commodity_button">
                                 <div>
-                                    <img
-                                        src="../assets/images/game/coin.png"
-                                        alt=""
-                                    />
+                                    <img src="../assets/images/game/coin.png" alt=""/>
                                     <p>{{ item_6_sellingprice }}</p>
                                 </div>
                             </div>
                         </div>
-                        <p class="shop_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_6_exp }} 經驗值
-                        </p>
+                        <p class="shop_talkwindow_commodity_introduce_2">可獲得 {{ item_6_exp }} 經驗值</p>
                     </div>
                 </div>
             </div>
         </div>
-        <!-- ========== 遊戲背包 ========== -->
+        <!-- ======================================== 彈出遊戲背包 ======================================== -->
         <div id="bag_talkwindow" class="bag_talkwindow">
             <div class="bag_talkwindow_block">
                 <div class="bag_talkwindow_title">
@@ -334,129 +250,81 @@
                 <div class="bag_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_1 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_1 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_1 >= 1" @click="minnum_1">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_1_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_1_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_2.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_2 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_2 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_2 >= 1" @click="minnum_2">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_2_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_2_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_3.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_3 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_3 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_3 >= 1" @click="minnum_3">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_3_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_3_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_4.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_4 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_4 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_4 >= 1" @click="minnum_4">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_4_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_4_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_5.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_1 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_1 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_5 >= 1" @click="minnum_5">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_5_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_5_exp }} 經驗值</p>
                     </div>
                     <div>
                         <img src="../assets/images/game/item_6.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">
-                            剩餘數量：{{ remaining_amount_6 }}
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_6 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_6 >= 1" @click="minnum_6">
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                             <div class="bag_talkwindow_commodity_button" v-else>
-                                <div>
-                                    <p>餵食</p>
-                                </div>
+                                <div><p>餵食</p></div>
                             </div>
                         </div>
-                        <p class="bag_talkwindow_commodity_introduce_2">
-                            可獲得 {{ item_6_exp }} 經驗值
-                        </p>
+                        <p class="bag_talkwindow_commodity_introduce_2">可獲得 {{ item_6_exp }} 經驗值</p>
                     </div>
                 </div>
             </div>
@@ -498,6 +366,7 @@ export default {
             remaining_amount_4: 0,
             remaining_amount_5: 0,
             remaining_amount_6: 0,
+            // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
             increment_2: 20 / 20,
             increment_3: 50 / 20,
@@ -508,72 +377,66 @@ export default {
             game_exp: 0,
         };
     },
+    created() {
+        (function(){
+            const supportId = this.$route.params.sup_id;
+            console.log(supportId);
+            const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
+            const supportUpdate = {
+                sup_id: Number(this.source.sup_id),
+                sup_note: this.source.sup_note,
+            };
+            console.log(supportUpdate);
+
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(supportUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                    if (confirm("是否關閉此分頁？")) {
+                        window.close();
+                    }
+                });
+        })(); //IIFE
+    },
     methods: {
-        // ============================== X 關掉彈窗 ============================== //
+        // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
         },
 
-        // ============================== 賺遊戲幣的方式 ============================== //
+        // ======================================== 彈出賺遊戲幣的方式 ======================================== //
         plus_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("plus_talkwindow")
-                .classList.add("plus_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.add("plus_talkwindow_active");
         },
 
-        // ============================== 虛擬商店 ============================== //
+        // ======================================== 彈出虛擬商店 ======================================== //
         shop_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("shop_talkwindow")
-                .classList.add("shop_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.add("shop_talkwindow_active");
         },
 
-        // ============================== 遊戲背包 ============================== //
+        // ======================================== 彈出遊戲背包 ======================================== //
         bag_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("bag_talkwindow")
-                .classList.add("bag_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.add("bag_talkwindow_active");
         },
 
-        // ============================== 經濟實惠的尤加利葉 ============================== //
+        // ======================================== 經濟實惠的尤加利葉 ======================================== //
         addnum_1: function () {
             this.remaining_amount_1++;
             this.game_money -= 20;
@@ -587,7 +450,7 @@ export default {
         //     this.remaining_amount_1 --;
         // },   這個寫法也可以
 
-        // ============================== 物美價廉的尤加利葉 ============================== //
+        // ======================================== 物美價廉的尤加利葉 ======================================== //
         addnum_2: function () {
             this.remaining_amount_2++;
             this.game_money -= 50;
@@ -598,7 +461,7 @@ export default {
             this.game_exp += 20;
         },
 
-        // ============================== 熱銷第一的尤加利葉 ============================== //
+        // ======================================== 熱銷第一的尤加利葉 ======================================== //
         addnum_3: function () {
             this.remaining_amount_3++;
             this.game_money -= 125;
@@ -609,7 +472,7 @@ export default {
             this.game_exp += 50;
         },
 
-        // ============================== 經典不敗的尤加利葉 ============================== //
+        // ======================================== 經典不敗的尤加利葉 ======================================== //
         addnum_4: function () {
             this.remaining_amount_4++;
             this.game_money -= 225;
@@ -620,7 +483,7 @@ export default {
             this.game_exp += 90;
         },
 
-        // ============================== 通過認證的尤加利葉 ============================== //
+        // ======================================== 通過認證的尤加利葉 ======================================== //
         addnum_5: function () {
             this.remaining_amount_5++;
             this.game_money -= 350;
@@ -631,7 +494,7 @@ export default {
             this.game_exp += 140;
         },
 
-        // ============================== 得過冠軍的尤加利葉 ============================== //
+        // ======================================== 得過冠軍的尤加利葉 ======================================== //
         addnum_6: function () {
             this.remaining_amount_6++;
             this.game_money -= 500;
@@ -659,9 +522,7 @@ template {
     background-color: #d3fdff;
 }
 
-/* ============================== 遊戲主區塊 ============================== */
-/* ==================== 遊戲畫面 ==================== */
-/* ========== 遊戲背景 ========== */
+/* ======================================== 遊戲背景 ======================================== */
 .main_block {
     position: relative;
     width: 100%;
@@ -977,7 +838,7 @@ template {
     margin-bottom: 10px;
 }
 
-/* ========== expbar ========== */
+/* ============================== 經驗條 ============================== */
 .experience_bar {
     background-color: grey;
     height: 12px;
@@ -999,8 +860,7 @@ template {
     cursor: pointer;
 }
 
-/* ==================== 談窗畫面 ==================== */
-/* ========== 賺遊戲幣的方式 ========== */
+/* ======================================== 彈出賺遊戲幣的方式 ======================================== */
 .plus_talkwindow {
     position: absolute;
     width: 100%;
@@ -1068,7 +928,7 @@ template {
     font-size: 20px;
 }
 
-/* ========== 虛擬商店 ========== */
+/* ======================================== 彈出虛擬商店 ======================================== */
 .shop_talkwindow {
     position: absolute;
     width: 50%;
@@ -1254,7 +1114,7 @@ template {
     font-size: 12px;
 }
 
-/* ========== 關掉彈窗 ========== */
+/* ======================================== 關掉彈窗 ======================================== */
 .btn-close {
     position: absolute;
     top: 15px;
@@ -1291,7 +1151,7 @@ template {
     }
 }
 
-// ==================== 768 ~ 1200 ==================== //
+// ======================================== 切 768 ~ 1200 ======================================== //
 @media screen and (max-width: 1200px) {
     .main_block {
         position: relative;
@@ -1407,7 +1267,7 @@ template {
         vertical-align: bottom;
     }
 
-    /* ========== 遊戲選項列 ========== */
+    /* ======================================== 遊戲選項列 ======================================== */
     .game_nav {
         position: absolute;
         width: 20%;
@@ -1494,7 +1354,7 @@ template {
         margin-bottom: 10px;
     }
 
-    /* ========== expbar ========== */
+    /* ============================== 經驗條 ============================== */
     .experience_bar {
         background-color: grey;
         height: 12px;
@@ -1516,8 +1376,7 @@ template {
         cursor: pointer;
     }
 
-    /* ==================== 談窗畫面 ==================== */
-    /* ========== 賺遊戲幣的方式 ========== */
+    /* ======================================== 彈出賺遊戲幣的方式 ======================================== */
     .plus_talkwindow {
         position: absolute;
         width: 100%;
@@ -1585,7 +1444,7 @@ template {
         font-size: 16px;
     }
 
-    /* ========== 虛擬商店 ========== */
+    /* ======================================== 彈出虛擬商店 ======================================== */
     .shop_talkwindow {
         position: absolute;
         width: 60%;
@@ -1684,7 +1543,7 @@ template {
         font-size: 12px;
     }
 
-    /* ========== 遊戲背包 ========== */
+    /* ======================================== 彈出遊戲背包 ======================================== */
     .bag_talkwindow {
         position: absolute;
         width: 60%;
@@ -1771,7 +1630,7 @@ template {
         font-size: 12px;
     }
 
-    /* ========== 關掉彈窗 ========== */
+    /* ======================================== 關掉彈窗 ======================================== */
     .btn-close {
         position: absolute;
         top: 15px;
@@ -1809,7 +1668,7 @@ template {
     }
 }
 
-// ==================== 768 以下 ==================== //
+// ======================================== 切 768 以下 ======================================== 切 //
 @media screen and (max-width: 768px) {
     .main_block {
         position: relative;
@@ -1925,7 +1784,7 @@ template {
         vertical-align: bottom;
     }
 
-    /* ========== 遊戲選項列 ========== */
+    /* ======================================== 遊戲選項列 ======================================== */
     .game_nav {
         position: absolute;
         width: 50%;
@@ -2017,7 +1876,7 @@ template {
         margin-bottom: 10px;
     }
 
-    /* ========== expbar ========== */
+    /* ============================== 經驗條 ============================== */
     .experience_bar {
         background-color: grey;
         height: 12px;
@@ -2039,8 +1898,7 @@ template {
         cursor: pointer;
     }
 
-    /* ==================== 談窗畫面 ==================== */
-    /* ========== 賺遊戲幣的方式 ========== */
+    /* ======================================== 彈出賺遊戲幣的方式 ======================================== */
     .plus_talkwindow {
         position: absolute;
         width: 100%;
@@ -2108,7 +1966,7 @@ template {
         font-size: 16px;
     }
 
-    /* ========== 虛擬商店 ========== */
+    /* ======================================== 彈出虛擬商店 ======================================== */
     .shop_talkwindow {
         position: absolute;
         width: 85%;
@@ -2216,7 +2074,7 @@ template {
         font-size: 12px;
     }
 
-    /* ========== 遊戲背包 ========== */
+    /* ======================================== 彈出遊戲背包 ======================================== */
 
     .bag_talkwindow {
         position: absolute;
@@ -2326,7 +2184,7 @@ template {
     }
 
 
-    /* ========== 關掉彈窗 ========== */
+    /* ======================================== 關掉彈窗 ======================================== */
     .btn-close {
         position: absolute;
         top: 15px;
