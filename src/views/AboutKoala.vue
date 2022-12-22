@@ -222,9 +222,7 @@ export default {
             this.score = 0;
         },
         getCoupon() {
-            const apiURL = new URL(
-                `http://localhost:8888/cgd103_g1/public/api/getCoupon.php`
-            );
+            const apiURL = new URL(`${BASE_URL}/getCoupon.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
