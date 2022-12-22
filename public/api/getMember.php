@@ -27,6 +27,11 @@ $black_stateid = empty( $_GET["black_stateid"] ) ? ( $_POST["black_stateid"] ?? 
 
 $type = empty( $_GET["type"] ) ? ( $_POST["type"] ?? "" ) : $_GET["type"]; //來源型態(front:前台,admin:後台)
 
+$limit=$_REQUEST['limit'];
+$page = $_REQUEST['page'] - 1;
+
+$offset = $page * $limit;
+
 if ( $type == "front" && empty($getUser) ) {
     echo json_encode(["status"=>false,"msg"=>"登陸失效"]);
     return true;
@@ -65,8 +70,15 @@ switch( $type ){
             $orderStr .= "ORDER BY {$orderbyInfo[$search_orderby][0]} {$orderbyInfo[$search_orderby][1]} ";
         }
         // var_dump($orderbyInfo[$search_orderby]);die();
-        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr} "; // WHERE 1 意味著ALWAYS TRUE它不會對您的查詢產生任何過濾影響
+        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr} LIMIT {$limit} OFFSET {$offset} "; // WHERE 1 意味著ALWAYS TRUE它不會對您的查詢產生任何過濾影響
+        
+        // 查詢總比數
+        $countSQL = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr}";
+        $countQuery = $pdo->query($countSQL);
+        $count = $countQuery->fetchAll(PDO::FETCH_ASSOC);
 
+
+        // LIMIT {$limit} OFFSET {$offset} ------------------------
         
         // var_dump($black_stateid,$black_state);die();
         // $black_stateid= 1001;
@@ -96,7 +108,7 @@ switch( $type ){
         //【下列為 後台list 抓取所有會員的明細功能】
         $members = $pdo->query($sql);
         $prodRows = $members->fetchAll(PDO::FETCH_ASSOC);
-        echo json_encode($prodRows);
+        echo json_encode(array("prodRows"=>$prodRows,"count"=>count($count)));
         return true;
         break;
     default:
