@@ -1,3 +1,4 @@
+import store from "@/store";
 import { createRouter, createWebHistory } from "vue-router";
 
 // 前後台連結頁面
@@ -82,6 +83,15 @@ const routes = [
         name: "cart1",
         // component: Cart1,
         component: () => import("@/views/Cart1.vue"),
+        beforeEnter: (to, from) => {
+            console.log("qwe");
+            console.log(store.state.user);
+            if (!store.state.user) {
+                alert("尚未登入唷");
+                return { name: "login" };
+            }
+            return true;
+        },
     },
     {
         path: "/cart2",
@@ -97,7 +107,7 @@ const routes = [
     },
     {
         path: "/login",
-        name: "long",
+        name: "login",
         // component: Login,
         component: () => import("@/views/Login.vue"),
     },
@@ -106,6 +116,14 @@ const routes = [
         name: "member",
         // component: Member,
         component: () => import("@/views/Member.vue"),
+        beforeEnter: (to, from) => {
+            console.log("qwe");
+            console.log(store.state.user);
+            if (!store.state.user) {
+                return { name: "login" };
+            }
+            return true;
+        },
     },
     {
         path: "/my-koala",

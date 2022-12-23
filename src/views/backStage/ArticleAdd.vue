@@ -3,28 +3,40 @@
     <article class="bs-nav-space wrapper">
         <h1>公告管理</h1>
         <h2>新增文章</h2>
-        <label for="upload">
+        <label>
             <input
                 type="radio"
-                name="todo"
-                id="upload"
+                name="status"
+                v-model="news_status"
+                value="1"
                 checked
+                required
             />文章立即上傳更新
         </label>
-        <label for="save">
-            <input type="radio" name="todo" id="save" />文章僅先暫存為草稿
+        <label>
+            <input
+                type="radio"
+                name="status"
+                v-model="news_status"
+                value="0"
+            />文章僅先暫存為草稿
         </label>
         <div>
             <p>標題:</p>
-            <input type="text" />
+            <input type="text" v-model="news_title" required />
         </div>
         <div class="display">
             <div>
                 <p>分類:</p>
-                <select name="category" id="articlesCategory">
-                    <option value="news">最新消息</option>
-                    <option value="parkinfo">園區資訊</option>
-                    <option value="moneyinfo">資金運用</option>
+                <select
+                    name="category"
+                    id="artclesCategory"
+                    v-model="news_category"
+                >
+                    <option value="none" selected disabled hidden></option>
+                    <option value="最新消息">最新消息</option>
+                    <option value="園區資訊">園區資訊</option>
+                    <option value="資金運用">資金運用</option>
                 </select>
             </div>
             <div>
@@ -34,9 +46,16 @@
         </div>
         <div>
             <p>內文:</p>
-            <textarea name="" id="" cols="30" rows="10"></textarea>
+            <textarea
+                name=""
+                id=""
+                cols="30"
+                rows="10"
+                v-model="news_content"
+                required
+            ></textarea>
         </div>
-        <button class="btn-paramy">
+        <button class="btn-paramy" @click.prevent="postNewArticle">
             <img src="@/assets/images/icon/confirm.svg" alt="" />確認
         </button>
     </article>
@@ -44,9 +63,47 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
+    },
+    data() {
+        return {
+            news_status: "",
+            news_title: "",
+            news_category: "",
+            news_content: "",
+            news_star: "0",
+            // news_img
+        };
+    },
+    methods: {
+        postNewArticle() {
+            let date = new Date();
+            const apiURL = new URL(`${BASE_URL}/postNewArticle.php`);
+            const articleUpdate = {
+                news_img: this.news_img,
+                news_title: this.news_title,
+                news_content: this.news_content,
+                news_date: date.toISOString().split("T")[0],
+                news_category: this.news_category,
+                news_status: this.news_status,
+                news_star: 0,
+            };
+            console.log(articleUpdate);
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(articleUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    alert(status.msg);
+                    if (confirm("是否關閉此分頁？")) {
+                        window.close();
+                    }
+                });
+        },
     },
 };
 </script>
@@ -86,6 +143,27 @@ html article {
         img {
             margin-right: 10px;
             vertical-align: middle;
+        }
+    }
+    input[type="text"] {
+        width: 40%;
+        cursor: text;
+    }
+    textarea {
+        cursor: text;
+    }
+    input[type="file"]::file-selector-button {
+        border: 1px solid $btn-color;
+        color: $btn-color;
+        margin: 5px;
+        padding: 5px 10px;
+        border-radius: 5px;
+        background-color: $bg-color;
+        transition: 0.5s;
+        cursor: pointer;
+
+        &:hover {
+            background-color: $btn-light-color;
         }
     }
 }

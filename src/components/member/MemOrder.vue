@@ -12,6 +12,91 @@
             ></MemUnsubscribe>
 
             <!-- ============================================ -->
+            <div
+                class="accordion"
+                v-for="(item, index) in order"
+                :key="item.ord_id"
+            >
+                <label :for="`tab-${item.ord_id}`">
+                    <div class="line1">
+                        <p>訂購日期：{{ item.ord_date }}</p>
+                        <p>訂單編號：{{ item.ord_id }}</p>
+                    </div>
+                </label>
+                <div class="box">
+                    <input
+                        type="checkbox"
+                        name="tab"
+                        :id="`tab-${item.ord_id}`"
+                    />
+                    <div class="con">
+                        <div class="con-1">
+                            <p>商品名稱</p>
+                            <p>商品編號</p>
+                            <p>單價</p>
+                            <p>數量</p>
+                            <p>小計</p>
+                        </div>
+
+                        <div
+                            class="con-2"
+                            v-for="orderlist in filterResult[item.ord_id]"
+                            :key="orderlist.prod_id"
+                        >
+                            <p class="product">
+                                {{ orderlist.prod_name }}
+                            </p>
+                            <p class="pnum">
+                                {{ orderlist.prod_id }}
+                            </p>
+                            <p class="price">{{ orderlist.prod_price }} 元</p>
+                            <p class="quantity">
+                                {{ orderlist.ord_qty }}
+                            </p>
+                            <p class="sumtotal">
+                                {{ orderlist.prod_price * orderlist.ord_qty }}
+                                元
+                            </p>
+                        </div>
+                        <div class="con-3">
+                            <div class="left">
+                                <p class="ord_person">
+                                    收件人：{{
+                                        item.ord_person
+                                    }}
+                                    ，收件人電話：{{ item.ord_phone }}
+                                </p>
+                                <p class="add">寄送地址：{{ item.ord_add }}</p>
+                                <p class="btdate">
+                                    訂單成立時間：{{ item.ord_date }}
+                                </p>
+                                <div class="state">
+                                    訂單狀態u, ：{{ item.ord_ship }}
+                                </div>
+                                <button
+                                    v-show="sts_map[item.ord_ship] < 1"
+                                    class="btn-lowest"
+                                    @click="clickMemUnsubscribe"
+                                >
+                                    取消訂單
+                                </button>
+                                <div>訂單狀態:{{ sts_map[item.ord_ship] }}</div>
+                            </div>
+                            <div class="right">
+                                <p>折扣：{{ item.ord_disc }} 元</p>
+                                <p>
+                                    總價：{{ item.ord_sum - item.ord_disc }}
+                                    元
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ============================================ -->
+
+            <!-- ============================================ -->
             <!--  <div class="mem_order_table">
                 <p>訂單編號: {{ order.ord_id }}</p>
                 <table class="table">
@@ -79,7 +164,6 @@
                     </div>
                 </div>
             </div> -->
-            {{ order }}
         </div>
     </li>
 </template>
@@ -94,34 +178,43 @@ export default {
             userid: "",
             username: "",
             showMemUnsubscribe: false,
-            ord_sts: 1,
+            // ord_sts: 1,
             memindexs: [],
             order: [],
             sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
-            orderList: [
-                {
-                    prod_name: "無尾熊乾髮帽",
-                    prod_id: "1022",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
-                {
-                    prod_name: "無尾熊乾髮帽2",
-                    prod_id: "1023",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
-                {
-                    prod_name: "無尾熊乾髮帽3",
-                    prod_id: "1024",
-                    prod_category: "玩具/絨毛娃娃",
-                    ord_qty: 1,
-                    prod_price: 200,
-                },
-            ],
+            orderlists: [],
+            // orderList: [
+            // {
+            //     prod_name: "無尾熊乾髮帽",
+            //     prod_id: "1022",
+            //     prod_category: "玩具/絨毛娃娃",
+            //     ord_qty: 1,
+            //     prod_price: 200,
+            // },
+            // {
+            //     prod_name: "無尾熊乾髮帽2",
+            //     prod_id: "1023",
+            //     prod_category: "玩具/絨毛娃娃",
+            //     ord_qty: 1,
+            //     prod_price: 200,
+            // },
+            // {
+            //     prod_name: "無尾熊乾髮帽3",
+            //     prod_id: "1024",
+            //     prod_category: "玩具/絨毛娃娃",
+            //     ord_qty: 1,
+            //     prod_price: 200,
+            // },
+            // ],
         };
+    },
+    computed: {
+        filterResult() {
+            return this.orderlists.reduce(function (results, org) {
+                (results[org.ord_id] = results[org.ord_id] || []).push(org);
+                return results;
+            }, {});
+        },
     },
     methods: {
         clickMemUnsubscribe() {
@@ -131,29 +224,72 @@ export default {
         closeMemUnsubscribe_emit() {
             this.showMemUnsubscribe = false;
         },
+        // 抓取訂單標題
+        postMemOrders() {
+            // this.postMemOrders(inedx);
+            let getCookie = document.cookie;
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/postmemOrder.php",
+                    {
+                        credentials: "include",
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        if (json.status == 10010) {
+                            location.href = "/login";
+                        }
+                        if (json.status) {
+                            this.order = json.list;
+                            console.log(this.order);
+                            this.userid = json.userid;
+                            this.username = json.username;
+                            return true;
+                        }
+                        alert("獲取數據失敗1");
+                    });
+            } else {
+                // alert("登入失效");
+                //跳轉 login url
+                location.href = "/login";
+            }
+        },
+        // 抓取訂單內容
+        postMemOrderLists() {
+            // this.postMemOrders(inedx);
+            let getCookie = document.cookie;
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/postmemOrderlists.php",
+                    {
+                        credentials: "include",
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        console.log(json);
+                        if (json.status == 10010) {
+                            location.href = "/login";
+                        }
+                        if (json.status) {
+                            console.log("qq", json);
+                            this.orderlists = json.list;
+                            console.log(this.orderlists);
+                            return true;
+                        }
+                        alert("獲取數據失敗1");
+                    });
+            } else {
+                location.href = "/login";
+            }
+        },
     },
     created() {
-        let getCookie = document.cookie;
-        if (getCookie) {
-            fetch("http://localhost/cgd103_g1/public/api/postmemOrder.php", {
-                credentials: "include",
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    console.log(json);
-                    if (json.status) {
-                        this.order = json.list;
-                        console.log(this.order);
-                        this.userid = json.userid;
-                        this.username = json.username;
-                        return true;
-                    }
-                    alert("獲取數據失敗");
-                });
-        } else {
-            // alert("登入失效");
-            //跳轉 login url
-        }
+        // this.postMemOrders(this.$route.query);
+        this.postMemOrders();
+        this.postMemOrderLists();
     },
 };
 </script>
@@ -229,6 +365,93 @@ table {
             @include m() {
                 display: none;
             }
+        }
+    }
+}
+
+// =======================
+.accordion {
+    margin-top: 30px;
+    width: 100%;
+    label {
+        width: 100%;
+        display: block;
+        border: 10px;
+        background-color: $darkgreen;
+        color: #fff;
+        border-radius: 10px;
+        box-shadow: 0px 3px 3px 3px rgb(190, 190, 190);
+        padding: 10px 50px;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -o-user-select: none;
+        user-select: none;
+        text-align: center;
+
+        .line1 {
+            display: flex;
+            p {
+                width: calc(100% / 3);
+            }
+        }
+    }
+}
+
+input[type="checkbox"]:checked + .con {
+    display: block;
+    background-color: #fff;
+    box-shadow: 3px 3px 8px 3px rgb(163, 163, 163);
+    height: fit-content;
+}
+input[type="checkbox"] + .con {
+    display: none;
+}
+input[type="checkbox"] {
+    display: none;
+}
+.con {
+    height: 0px;
+    overflow: hidden;
+    transition: 0.5s;
+    margin-top: 10px;
+    border-radius: 10px;
+
+    .con-1 {
+        height: 30px;
+        display: flex;
+        margin: 10px 50px;
+        text-align: center;
+        border-bottom: 0.5px solid gray;
+
+        p {
+            width: calc(100% / 6);
+            margin-bottom: 10px;
+        }
+    }
+    .con-2 {
+        height: fit-content;
+        display: flex;
+        margin: 10px 50px;
+        text-align: center;
+        align-items: center;
+        border-bottom: 0.5px solid gray;
+        p {
+            width: calc(100% / 6);
+            padding: 10px 0px;
+        }
+    }
+    .con-3 {
+        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        margin: 10px 50px 25px;
+        p,
+        div {
+            margin: 10px;
+        }
+        .right {
+            margin-right: 50px;
         }
     }
 }

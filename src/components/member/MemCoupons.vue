@@ -132,6 +132,7 @@ export default {
     },
     created() {
         let getCookie = document.cookie;
+        console.log(getCookie);
         if (getCookie) {
             fetch("http://localhost/cgd103_g1/public/api/postmemCoupons.php", {
                 credentials: "include",
@@ -146,7 +147,7 @@ export default {
                         // console.log(this.couponsList.length);
                         return true;
                     }
-                    alert("獲取數據失敗");
+                    alert("獲取數據失敗2");
                 });
         } else {
             // alert("登入失效");

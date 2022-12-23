@@ -56,7 +56,7 @@
                 ></textarea>
             </div>
         </form>
-        <button class="btn-paramy" id="btnInsert" @click.prevent="editArticle">
+        <button class="btn-paramy" @click.prevent="editArticle">
             <img src="@/assets/images/icon/confirm.svg" alt="" />確認
         </button>
     </article>

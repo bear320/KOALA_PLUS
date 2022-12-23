@@ -48,7 +48,7 @@
             <div class="game_nav_money">
                 <div class="game_nav_money_left">
                     <img src="../assets/images/game/coin.png" alt="" />
-                    <p>{{ game_money }}</p>
+                    <p id="game_money">{{ game_money }}</p>
                 </div>
                 <div class="game_nav_plus btn-open" @click="plus_talkwindow">
                     <img src="../assets/images/game/pluscircle.png" alt="" />
@@ -255,7 +255,7 @@
                 <div class="bag_talkwindow_commodity">
                     <div>
                         <img src="../assets/images/game/item_1.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_1 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_1">剩餘數量：{{ remaining_amount_1 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_1 >= 1" @click="minnum_1">
                                 <div><p>餵食</p></div>
@@ -268,7 +268,7 @@
                     </div>
                     <div>
                         <img src="../assets/images/game/item_2.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_2 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_2">剩餘數量：{{ remaining_amount_2 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_2 >= 1" @click="minnum_2">
                                 <div><p>餵食</p></div>
@@ -281,7 +281,7 @@
                     </div>
                     <div>
                         <img src="../assets/images/game/item_3.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_3 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_3">剩餘數量：{{ remaining_amount_3 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_3 >= 1" @click="minnum_3">
                                 <div><p>餵食</p></div>
@@ -294,7 +294,7 @@
                     </div>
                     <div>
                         <img src="../assets/images/game/item_4.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_4 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_4">剩餘數量：{{ remaining_amount_4 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_4 >= 1" @click="minnum_4">
                                 <div><p>餵食</p></div>
@@ -307,7 +307,7 @@
                     </div>
                     <div>
                         <img src="../assets/images/game/item_5.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_1 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_5">剩餘數量：{{ remaining_amount_5 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_5 >= 1" @click="minnum_5">
                                 <div><p>餵食</p></div>
@@ -320,7 +320,7 @@
                     </div>
                     <div>
                         <img src="../assets/images/game/item_6.png" alt="" />
-                        <p class="bag_talkwindow_commodity_introduce_1">剩餘數量：{{ remaining_amount_6 }}</p>
+                        <p class="bag_talkwindow_commodity_introduce_1" id="remaining_amount_6">剩餘數量：{{ remaining_amount_6 }}</p>
                         <div>
                             <div class="bag_talkwindow_commodity_button" v-if="remaining_amount_6 >= 1" @click="minnum_6">
                                 <div><p>餵食</p></div>
@@ -346,7 +346,7 @@ export default {
     el: ".game_nav_expbar",
     data() {
         return {
-            game_money: 10000,
+            game_money: "",
             
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
@@ -369,12 +369,12 @@ export default {
             item_5_exp: 140,
             item_6_exp: 210,
 
-            remaining_amount_1: 0,
-            remaining_amount_2: 0,
-            remaining_amount_3: 0,
-            remaining_amount_4: 0,
-            remaining_amount_5: 0,
-            remaining_amount_6: 0,
+            remaining_amount_1: "",
+            remaining_amount_2: "",
+            remaining_amount_3: "",
+            remaining_amount_4: "",
+            remaining_amount_5: "",
+            remaining_amount_6: "",
 
             // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
@@ -412,6 +412,69 @@ export default {
     //             });
     //     })(); //IIFE
     // },
+    mounted() {
+            // ======================================== 把忘記的密碼撈出來  ======================================== //
+            let QQ = this; //這裡的QQ指向的Vue實體
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    // console.log('ㄎㄎ');
+                    showMember(xhr.responseText);
+                } else {
+                    alert(xhr.status);
+                }
+            };
+
+            // console.log(this.$store.state.user.mem_id);
+
+            var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
+            xhr.open("get", url, true);
+            xhr.send(null);
+
+            function showMember(json) {
+                var xhr = new XMLHttpRequest();
+                // console.log(QQ);
+                var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`
+                xhr.open("get", url, true);
+                xhr.send(null);
+                let member = JSON.parse(json);
+
+                let game_moey;
+                // 這裡的QQ指的是Vue實體
+                QQ.game_money = member.mem_point;
+                document.getElementById("game_money").innerHTML = game_moey;
+
+                let remaining_amount_1;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_1 = member.mem_food1;
+                document.getElementById("remaining_amount_1").innerHTML = remaining_amount_1; 
+
+                let remaining_amount_2;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_2 = member.mem_food2;
+                document.getElementById("remaining_amount_2").innerHTML = remaining_amount_2; 
+
+                let remaining_amount_3;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_3 = member.mem_food3;
+                document.getElementById("remaining_amount_3").innerHTML = remaining_amount_3;
+                
+                let remaining_amount_4;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_4 = member.mem_food4;
+                document.getElementById("remaining_amount_4").innerHTML = remaining_amount_4;
+
+                let remaining_amount_5;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_5 = member.mem_food5;
+                document.getElementById("remaining_amount_5").innerHTML = remaining_amount_5; 
+
+                let remaining_amount_6;
+                // 這裡的QQ指的是Vue實體
+                QQ.remaining_amount_6 = member.mem_food6;
+                document.getElementById("remaining_amount_6").innerHTML = remaining_amount_6; 
+            }
+    },
     methods: {
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
@@ -455,19 +518,19 @@ export default {
         minnum_1: function () {
             this.remaining_amount_1--;
 
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 0.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_1; // 增加經驗值
                 
             }
-            else if(this.expWidth + 0.5 > 100) {
+            else if(this.expWidth > 100) {
                 this.expWidth = this.expWidth + this.increment_1 - 100; // 增加經驗值
                 // this.expWidth -= 100
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 10 <= 2000) {
                 this.game_exp += 10;
             }
-            else if(this.game_exp + 10 > 2000) {
+            else if(this.game_exp > 2000) {
                 this.game_exp = this.game_exp + 10 - 2000
                 // this.game_exp += 10;
             }
@@ -482,18 +545,18 @@ export default {
         minnum_2: function () {
             this.remaining_amount_2--;
 
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 1 <= 100) {
                 this.expWidth = this.expWidth + this.increment_2; // 增加經驗值
             }
-            else if(this.expWidth + 1 > 100){
+            else if(this.expWidth > 100){
                 this.expWidth = this.expWidth + this.increment_2 - 100; // 增加經驗值
                 // this.expWidth -= 100;
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 20 <= 2000) {
                 this.game_exp += 20;
             }
-            else if(this.game_exp + 20 > 2000) {
+            else if(this.game_exp > 2000) {
                 this.game_exp = this.game_exp + 20 - 2000;
                 // this.game_exp += 20;
             }
@@ -507,18 +570,18 @@ export default {
         minnum_3: function () {
             this.remaining_amount_3--;
 
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 2.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_3; // 增加經驗值
             }
-            else if(this.expWidth + 2.5 > 100){
+            else if(this.expWidth > 100){
                 this.expWidth = this.expWidth + this.increment_3 - 100; // 增加經驗值
                 // this.expWidth -= 100;
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 50 <= 2000) {
                 this.game_exp += 50;
             }
-            else if(this.game_exp + 50 > 2000) {
+            else if(this.game_exp > 2000) {
                 this.game_exp = this.game_exp + 50 - 2000;
                 // this.game_exp += 50;
             }
@@ -533,18 +596,18 @@ export default {
         minnum_4: function () {
             this.remaining_amount_4--;
 
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 4.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_4; // 增加經驗值
             }
-            else if(this.expWidth + 4.5 > 100){
+            else if(this.expWidth > 100){
                 this.expWidth = this.expWidth + this.increment_4 - 100; // 增加經驗值
                 // this.expWidth -= 100;
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 90 <= 2000) {
                 this.game_exp += 90;
             }
-            else if(this.game_exp + 90 > 2000) {
+            else if(this.game_exp > 2000) {
                 this.game_exp = this.game_exp + 90 - 2000;
                 // this.game_exp += 90;
             }
@@ -558,18 +621,18 @@ export default {
         minnum_5: function () {
             this.remaining_amount_5--;
 
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 7 <= 100) {
                 this.expWidth = this.expWidth + this.increment_5; // 增加經驗值
             }
-            else if(this.expWidth + 7 > 100){
+            else if(this.expWidth > 100){
                 this.expWidth = this.expWidth + this.increment_5 - 100; // 增加經驗值
                 // this.expWidth -= 100;
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 140 <= 2000) {
                 this.game_exp += 140;
             }
-            else if(this.game_exp + 140 > 2000) {
+            else if(this.game_exp > 2000) {
                 this.game_exp = this.game_exp + 140 - 2000
                 // this.game_exp += 140;
             }
@@ -582,22 +645,64 @@ export default {
         },
         minnum_6: function () {
             this.remaining_amount_6--;
-            if(this.expWidth <= 100) {
+            if(this.expWidth + 10.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_6; // 增加經驗值
             }
-            else if(this.expWidth + 10.5 > 100){
+            else if(this.expWidth > 100){
                 this.expWidth = this.expWidth + this.increment_6 - 100; // 增加經驗值
                 // this.expWidth -= 100;
             }
 
-            if(this.game_exp <= 2000) {
+            if(this.game_exp + 210 < 2000) {
                 this.game_exp += 210;
             }
-            else if(this.game_exp + 210 > 2000) {
-                this.game_exp = this.game_exp + 210 - 2000
-                // this.game_exp += 210;
+            else if(this.game_exp + 210 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
         },
+        postData() {
+            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php?memId=${this.$store.state.user.mem_id}`;
+            const gameValueContent = {
+                game_money: this.game_money,
+                remaining_amount_1: this.remaining_amount_1,
+                remaining_amount_2: this.remaining_amount_2,
+                remaining_amount_3: this.remaining_amount_3,
+                remaining_amount_4: this.remaining_amount_4,
+                remaining_amount_5: this.remaining_amount_5,
+                remaining_amount_6: this.remaining_amount_6,
+            };
+
+            fetch(url, {
+                method: "POST",
+                body: new URLSearchParams(gameValueContent),
+            })
+                .then((res) => res.json())
+        }
+    },
+    watch: {
+        remaining_amount_1() {
+            this.postData();
+        },
+        remaining_amount_2() {
+            this.postData();
+        },
+        remaining_amount_3() {
+            this.postData();
+        },
+        remaining_amount_4() {
+            this.postData();
+        },
+        remaining_amount_5() {
+            this.postData();
+        },
+        remaining_amount_6() {
+            this.postData();
+        },
+    },
+    unmounted() {
+        this.postData();
     },
 };
 </script>
