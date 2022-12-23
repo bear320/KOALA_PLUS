@@ -656,11 +656,53 @@ export default {
             if(this.game_exp + 210 < 2000) {
                 this.game_exp += 210;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 210 - 2000
-                // this.game_exp += 210;
+            else if(this.game_exp + 210 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
         },
+        postData() {
+            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php?memId=${this.$store.state.user.mem_id}`;
+            const gameValueContent = {
+                game_money: this.game_money,
+                remaining_amount_1: this.remaining_amount_1,
+                remaining_amount_2: this.remaining_amount_2,
+                remaining_amount_3: this.remaining_amount_3,
+                remaining_amount_4: this.remaining_amount_4,
+                remaining_amount_5: this.remaining_amount_5,
+                remaining_amount_6: this.remaining_amount_6,
+            };
+
+            fetch(url, {
+                method: "POST",
+                body: new URLSearchParams(gameValueContent),
+            })
+                .then((res) => res.json())
+        }
+    },
+    watch: {
+        remaining_amount_1() {
+            this.postData();
+        },
+        remaining_amount_2() {
+            this.postData();
+        },
+        remaining_amount_3() {
+            this.postData();
+        },
+        remaining_amount_4() {
+            this.postData();
+        },
+        remaining_amount_5() {
+            this.postData();
+        },
+        remaining_amount_6() {
+            this.postData();
+        },
+    },
+    unmounted() {
+        this.postData();
     },
 };
 </script>

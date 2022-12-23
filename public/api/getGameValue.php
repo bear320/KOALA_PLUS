@@ -26,12 +26,6 @@ try{
             "mem_food5"=>$memRow["mem_food5"],
             "mem_food6"=>$memRow["mem_food6"],
         ];
-    //   $result = ["mem_food1"=>$memRow["mem_food1"]];
-    //   $result = ["mem_food2"=>$memRow["mem_food2"]];
-    //   $result = ["mem_food3"=>$memRow["mem_food3"]];
-    //   $result = ["mem_food4"=>$memRow["mem_food4"]];
-    //   $result = ["mem_food5"=>$memRow["mem_food5"]];
-    //   $result = ["mem_food6"=>$memRow["mem_food6"]];
 
       echo json_encode($result);//送出json字串
     }
