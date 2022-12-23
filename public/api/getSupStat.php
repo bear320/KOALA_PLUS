@@ -19,6 +19,6 @@ $supStat = $pdo->query($sql2);
 $supStat = $pdo->query($sql3);
 $supStat = $pdo->query($sql4);
 $supStat = $pdo->query($sql5);
-$supStatRows = $supStat->fetchAll(PDO::FETCH_ASSOC);
+$supStatRows = $supStat->fetchAll(PDO::FETCH_NUM);
 echo json_encode($supStatRows, JSON_NUMERIC_CHECK);
 ?>

@@ -57,6 +57,8 @@ export default {
             if (input.files) {
                 while (count--) {
                     var reader = new FileReader();
+                    console.log(input.files[index]);
+                    //
                     this.imageList.push(input.files[index]);
                     reader.onload = (event) => {
                         this.previewList.push(event.target.result);

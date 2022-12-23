@@ -12,13 +12,20 @@ $sql3 =
 $sql4 =
     "UPDATE koala SET koala_sum_the_month_before_last = (SELECT IFNULL(SUM(sup_price), 0) FROM support WHERE YEAR(sup_date) = YEAR(CURRENT_DATE - INTERVAL 2 MONTH) AND MONTH(sup_date) = MONTH(CURRENT_DATE - INTERVAL 2 MONTH) AND koala.koala_id = support.koala_id);";
 $sql5 =
-    "SELECT koala_id, koala_sum_the_month_before_last, koala_sum_last_month, koala_sum_this_month FROM `koala` WHERE koala_id <> 2001;";
+    "SELECT koala_sum_the_month_before_last, koala_sum_last_month, koala_sum_this_month FROM `koala` WHERE koala_id <> 2001 ORDER BY koala_id ASC;";
+$sql6 =
+    "SELECT koala_name FROM `koala` WHERE koala_id <> 2001 ORDER BY koala_id ASC;";
 
 $adoptStat = $pdo->query($sql1);
 $adoptStat = $pdo->query($sql2);
 $adoptStat = $pdo->query($sql3);
 $adoptStat = $pdo->query($sql4);
 $adoptStat = $pdo->query($sql5);
-$adoptStatRows = $adoptStat->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($adoptStatRows, JSON_NUMERIC_CHECK);
+$adoptNameStat = $pdo->query($sql6);
+$adoptStatRows = $adoptStat->fetchAll(PDO::FETCH_NUM);
+$adoptNameStatRows = $adoptNameStat->fetchAll(PDO::FETCH_ASSOC);
+echo json_encode(
+    ["adoptNameStat" => $adoptNameStatRows, "adoptStat" => $adoptStatRows],
+    JSON_NUMERIC_CHECK
+);
 ?>
