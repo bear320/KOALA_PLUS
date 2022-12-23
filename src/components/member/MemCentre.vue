@@ -200,7 +200,20 @@ export default {
             }
         },
         signOut() {
-            console.log("123");
+            this.$Modal.confirm({
+                title: "會員登出提醒",
+                content: "<p>確定要登出嗎?</p>",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info(
+                            "Asynchronously close the dialog box"
+                        );
+                        location.href = "/login";
+                    }, 2000);
+                },
+            });
             const postsingOut = this.$refs.postsingOut;
             fetch(
                 "http://localhost/cgd103_g1/public/api/postMemberLogout.php",
@@ -213,8 +226,7 @@ export default {
                 .then((res) => res.json())
                 .then((status) => {
                     console.log(status);
-                    alert(status.msg);
-                    location.href = "/login";
+                    // alert(status.msg);
                 });
         },
     },
@@ -244,6 +256,10 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     // console.log(json);
+                    if (json.status == 10010) {
+                        alert("帳號已登出");
+                        location.href = "/login";
+                    }
                     if (json.status) {
                         this.memindexs = json.list;
                         return true;
