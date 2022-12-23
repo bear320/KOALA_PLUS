@@ -32,7 +32,7 @@ export default {
     methods: {
         addToCart() {
             this.$store.dispatch("addToCart", {
-                memId: 1001,
+                memId: this.$store.state.user.mem_id,
                 prodId: +this.proId,
                 cartQty: 1,
             });

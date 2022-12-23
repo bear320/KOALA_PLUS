@@ -35,7 +35,12 @@
                             <Icon type="md-cart" />
                         </router-link>
                     </li>
-                    <li>
+                    <li v-if="!$store.state.user">
+                        <router-link to="/login">
+                            <Icon type="md-log-in" />
+                        </router-link>
+                    </li>
+                    <li v-else>
                         <router-link to="/member">
                             <Icon type="md-person" />
                         </router-link>
@@ -64,22 +69,20 @@ export default {
             showKoala: true,
         };
     },
-    methods: {
-        curPath() {
-            this.showKoala = this.$route.path === "/my-koala" ? false : true;
+    computed: {
+        showKoala() {
+            if (this.$route.path === "/my-koala") {
+                return this.curWidth <= 1200 ? true : false;
+            } else return true;
         },
-        koalaShow() {
+    },
+    methods: {
+        changeCurWidth() {
             this.curWidth = window.innerWidth;
-            if (this.curWidth <= 768) {
-                this.showKoala = true;
-            } else {
-                this.showKoala = false;
-            }
         },
     },
     created() {
-        window.addEventListener("resize", this.koalaShow);
-        this.curPath();
+        window.addEventListener("resize", this.changeCurWidth);
     },
 };
 </script>
