@@ -1,6 +1,6 @@
 <?php
 /**
- * 查詢 會員中心的訂單資訊 接口 "群組標題"
+ * 查詢 會員中心的訂單資訊 接口 "群組內文"
  *  接 components / MemOrder.vue
 */
 
@@ -38,5 +38,4 @@ ORDER BY ord_id DESC";
 $support = $pdo->query($sql);
 $supportRows = $support->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode(["status"=>true,"list"=>$supportRows,"userid"=>$userid,"username"=>$getUser["mem_name"]]);
-return true;
 ?>

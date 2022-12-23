@@ -128,6 +128,9 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
+                    if (json.status == 10010) {
+                        location.href = "/login";
+                    }
                     console.log(json);
                     if (json.status) {
                         this.couponsLists = json.list;
