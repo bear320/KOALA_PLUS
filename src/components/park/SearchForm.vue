@@ -9,7 +9,7 @@
                 <label for="mobile">手機</label>
                 <input
                     type="text"
-                    placeholder="搜尋"
+                    placeholder="請輸入您的手機號碼查詢預約資訊"
                     v-model="searchText"
                     @change.lazy="searchProduct"
                 />
@@ -131,16 +131,18 @@ h2 {
     right: 1.5%;
     top: 1.5%;
     border: 0;
-    background-color: #f8f8f8;
     font-size: 28px;
-    font-weight: 600;
-    color: #d0e8ea;
-    border: #f8f8f8 2px solid;
-    border-radius: 50%;
+    font-weight: 500;
+    color: #337a7d;
+    background-color: transparent;
     cursor: pointer;
     z-index: 3;
     text-align: center;
     width: 32px;
+}
+#close:hover {
+    color: #fff;
+    transition: 0.3s;
 }
 
 .form-group {
@@ -202,7 +204,7 @@ h2 {
 }
 
 .btn {
-    margin: 10px;
+    margin: 40px;
     width: 100px;
     height: 40px;
     border-radius: 10px;

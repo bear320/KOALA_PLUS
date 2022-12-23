@@ -161,8 +161,12 @@ export default {
             })
                 .then((res) => res.text())
                 .then((result) => {
+                    result = JSON.parse(result);
                     console.log(result);
+
                     // this.callback();
+                    alert(result);
+                    window.close();
                 });
         },
     },

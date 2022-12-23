@@ -3,7 +3,7 @@
     第一天星期{{ emptyDay }} 現在{{ thisMonth + 1 }}月 -->
     <div class="calender-wrapper" id="calender" ref="calender">
         <h2>{{ thisMonth + 1 }}月</h2>
-<weather></weather>
+<!-- <weather></weather> -->
         <table align="center">
             <div class="button-wrapper">
                 <button class="btn-lowest" @click="preMonth()">上個月</button>
@@ -179,14 +179,11 @@ export default {
     methods: {
         getResvDetail() {
             // const productId = this.$route.params.id;
-            console.log('QQ');
             const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
                     this.notBookDate = json.notBookDate;
-                    console.log(this.notBookDate);
                 })
                
         },
@@ -218,9 +215,6 @@ export default {
             }
             this.allDay = days;
 
-            console.log(firstDate);
-            console.log(days);
-            console.log((firstDate.getDay() + days) % 7);
             this.lastEmptyDay = 7 - [(firstDate.getDay() + days) % 7];
             if (this.lastEmptyDay > 6) {
                 this.lastEmptyDay = 0;
@@ -281,8 +275,6 @@ export default {
 
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
-            console.log(newDD);
-            console.log(newMM);
         },
         closeTable() {
             this.showForm = false;
@@ -290,7 +282,6 @@ export default {
            
         },
         showSearchForm(){
-            console.log("openJohn");
             this.showSearch=true;
 
 
