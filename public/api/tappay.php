@@ -84,7 +84,6 @@ $order_pay = $order_sum - $order_discount;
 
 $insertOrderSQL = "INSERT INTO `orders`(`mem_id`, `coupon_id`, `ord_date`, `ord_sum`, `ord_disc`, `ord_pay`, `ord_person`, `ord_phone`, `ord_add`) VALUES ('$mem_id',$coupon_id,curdate(),'$order_sum','$order_discount','$order_pay','$ord_person','$ord_phone','$ord_add')";
 $insertOrder = $pdo->query($insertOrderSQL);
-}
 
 /* **********建立商品訂單********** */
 
@@ -121,9 +120,7 @@ if($coupon_id==='undefined'){
   $updateMemCouponSQL = "UPDATE `my_coupon` SET `coupon_status`='1' WHERE mem_id={$mem_id} and coupon_id={$coupon_id}";
   $updateMemCouponQuery = $pdo->query($updateMemCouponSQL);
 }
-
-
-
+}
 
 echo json_encode($response) ;
 ?>
