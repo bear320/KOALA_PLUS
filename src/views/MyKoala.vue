@@ -23,7 +23,7 @@
                     <div v-else-if="game_exp <= 1000" class="main_block_koala_2">
                         <img src="../assets/images/game/koala_middle.png" alt=""/>
                     </div>
-                    <div v-else class="main_block_koala_3">
+                    <div v-else-if="game_exp <= 2000" class="main_block_koala_3">
                         <img src="../assets/images/game/koala_large.png" alt=""/>
                     </div>
                 </div>
@@ -64,18 +64,23 @@
                     <p>倉庫</p>
                 </div>
             </div>
-            <div v-if="expWidth <= 100" class="game_nav_expbar">
+            <!-- v-if -->
+            <div  class="game_nav_expbar">
                 <div class="experience_bar">
+                    <!-- v-if="expWidth <= 100" -->
                     <div :style="{ width: expWidth + '%' }" :class="{ expValue: true }"></div>
+                    <!-- <div v-else-if="expWidth > 100" :style="{ width: 100 - expWidth + '%' }" :class="{ expValue: true }"></div> -->
                 </div>
             </div>
-            <div v-else class="game_nav_expbar">
+            <!-- <div v-else class="game_nav_expbar">
                 <div class="experience_bar">
                     <div :style="{ width: 100 + '%' }" :class="{ expValue: true }"></div>
                 </div>
-            </div>
+            </div> -->
             <div>
+                <!-- v-if="game_exp <= 2000" -->
                 <p>已達到經驗值：{{ game_exp }}</p>
+                <!-- <p v-else-if="game_exp > 2000">已達到經驗值：{{ 2000 - game_exp }}</p> -->
             </div>
             <div>
                 <div v-if="500 - game_exp >= 0">
@@ -383,30 +388,30 @@ export default {
             game_exp: 0,
         };
     },
-    created() {
-        (function(){
-            const supportId = this.$route.params.sup_id;
-            console.log(supportId);
-            const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
-            const supportUpdate = {
-                sup_id: Number(this.source.sup_id),
-                sup_note: this.source.sup_note,
-            };
-            console.log(supportUpdate);
+    // created() {
+    //     (function(){
+    //         const supportId = this.$route.params.sup_id;
+    //         console.log(supportId);
+    //         const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
+    //         const supportUpdate = {
+    //             sup_id: Number(this.source.sup_id),
+    //             sup_note: this.source.sup_note,
+    //         };
+    //         console.log(supportUpdate);
 
-            fetch(apiURL, {
-                method: "POST",
-                body: new URLSearchParams(supportUpdate),
-            })
-                .then((res) => res.json())
-                .then((status) => {
-                    alert(status.msg);
-                    if (confirm("是否關閉此分頁？")) {
-                        window.close();
-                    }
-                });
-        })(); //IIFE
-    },
+    //         fetch(apiURL, {
+    //             method: "POST",
+    //             body: new URLSearchParams(supportUpdate),
+    //         })
+    //             .then((res) => res.json())
+    //             .then((status) => {
+    //                 alert(status.msg);
+    //                 if (confirm("是否關閉此分頁？")) {
+    //                     window.close();
+    //                 }
+    //             });
+    //     })(); //IIFE
+    // },
     methods: {
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
@@ -449,12 +454,25 @@ export default {
         },
         minnum_1: function () {
             this.remaining_amount_1--;
-            this.expWidth = this.expWidth + this.increment_1; // 增加經驗值
-            this.game_exp += 10;
+
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_1; // 增加經驗值
+                
+            }
+            else if(this.expWidth + 0.5 > 100) {
+                this.expWidth = this.expWidth + this.increment_1 - 100; // 增加經驗值
+                // this.expWidth -= 100
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 10;
+            }
+            else if(this.game_exp + 10 > 2000) {
+                this.game_exp = this.game_exp + 10 - 2000
+                // this.game_exp += 10;
+            }
+
         },
-        // minnum_1() {
-        //     this.remaining_amount_1 --;
-        // },   這個寫法也可以
 
         // ======================================== 物美價廉的尤加利葉 ======================================== //
         addnum_2: function () {
@@ -463,8 +481,22 @@ export default {
         },
         minnum_2: function () {
             this.remaining_amount_2--;
-            this.expWidth = this.expWidth + this.increment_2; // 增加經驗值
-            this.game_exp += 20;
+
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_2; // 增加經驗值
+            }
+            else if(this.expWidth + 1 > 100){
+                this.expWidth = this.expWidth + this.increment_2 - 100; // 增加經驗值
+                // this.expWidth -= 100;
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 20;
+            }
+            else if(this.game_exp + 20 > 2000) {
+                this.game_exp = this.game_exp + 20 - 2000;
+                // this.game_exp += 20;
+            }
         },
 
         // ======================================== 熱銷第一的尤加利葉 ======================================== //
@@ -474,8 +506,23 @@ export default {
         },
         minnum_3: function () {
             this.remaining_amount_3--;
-            this.expWidth = this.expWidth + this.increment_3; // 增加經驗值
-            this.game_exp += 50;
+
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_3; // 增加經驗值
+            }
+            else if(this.expWidth + 2.5 > 100){
+                this.expWidth = this.expWidth + this.increment_3 - 100; // 增加經驗值
+                // this.expWidth -= 100;
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 50;
+            }
+            else if(this.game_exp + 50 > 2000) {
+                this.game_exp = this.game_exp + 50 - 2000;
+                // this.game_exp += 50;
+            }
+
         },
 
         // ======================================== 經典不敗的尤加利葉 ======================================== //
@@ -485,8 +532,22 @@ export default {
         },
         minnum_4: function () {
             this.remaining_amount_4--;
-            this.expWidth = this.expWidth + this.increment_4; // 增加經驗值
-            this.game_exp += 90;
+
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_4; // 增加經驗值
+            }
+            else if(this.expWidth + 4.5 > 100){
+                this.expWidth = this.expWidth + this.increment_4 - 100; // 增加經驗值
+                // this.expWidth -= 100;
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 90;
+            }
+            else if(this.game_exp + 90 > 2000) {
+                this.game_exp = this.game_exp + 90 - 2000;
+                // this.game_exp += 90;
+            }
         },
 
         // ======================================== 通過認證的尤加利葉 ======================================== //
@@ -496,8 +557,22 @@ export default {
         },
         minnum_5: function () {
             this.remaining_amount_5--;
-            this.expWidth = this.expWidth + this.increment_5; // 增加經驗值
-            this.game_exp += 140;
+
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_5; // 增加經驗值
+            }
+            else if(this.expWidth + 7 > 100){
+                this.expWidth = this.expWidth + this.increment_5 - 100; // 增加經驗值
+                // this.expWidth -= 100;
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 140;
+            }
+            else if(this.game_exp + 140 > 2000) {
+                this.game_exp = this.game_exp + 140 - 2000
+                // this.game_exp += 140;
+            }
         },
 
         // ======================================== 得過冠軍的尤加利葉 ======================================== //
@@ -507,8 +582,21 @@ export default {
         },
         minnum_6: function () {
             this.remaining_amount_6--;
-            this.expWidth = this.expWidth + this.increment_6; // 增加經驗值
-            this.game_exp += 210;
+            if(this.expWidth <= 100) {
+                this.expWidth = this.expWidth + this.increment_6; // 增加經驗值
+            }
+            else if(this.expWidth + 10.5 > 100){
+                this.expWidth = this.expWidth + this.increment_6 - 100; // 增加經驗值
+                // this.expWidth -= 100;
+            }
+
+            if(this.game_exp <= 2000) {
+                this.game_exp += 210;
+            }
+            else if(this.game_exp + 210 > 2000) {
+                this.game_exp = this.game_exp + 210 - 2000
+                // this.game_exp += 210;
+            }
         },
     },
 };
