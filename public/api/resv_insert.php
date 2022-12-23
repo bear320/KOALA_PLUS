@@ -30,7 +30,7 @@ $resDate = [
 		$reservation->bindValue(":rsv_ps", $_POST["rsv_ps"]);
 		$reservation->execute();
 
-		$msg = "預約成功！";
+		$msg = "預約成功！詳細預約資訊已寄至您的信箱";
 	}else{
 
 		$msg = "這天有人預約囉！";

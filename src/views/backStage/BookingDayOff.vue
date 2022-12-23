@@ -104,7 +104,6 @@ export default {
                     result = JSON.parse(result);
                     // this.callback();
                     alert(result);
-                    window.close();
                 });
         },
     },

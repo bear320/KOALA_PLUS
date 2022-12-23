@@ -28,7 +28,7 @@ header("Content-Type:application/json;charset=utf-8");
 
 		//有没有更改圖檔
 
-		$msg = "已修改完成！";
+		$msg = "success";
 	
 	} catch (PDOException $e) {
 		$msg = "error_line: ".$e->getLine().", error_msg: ".$e->getMessage();
@@ -36,7 +36,7 @@ header("Content-Type:application/json;charset=utf-8");
 
 
 //輸出結果
-$result=$msg;
+$result=["msg"=>$msg];
 echo json_encode($result);
 
 ?>    
