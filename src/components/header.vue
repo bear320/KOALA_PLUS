@@ -66,7 +66,6 @@ export default {
             toggle: false,
             i: 0,
             curWidth: window.innerWidth,
-            showKoala: true,
         };
     },
     computed: {

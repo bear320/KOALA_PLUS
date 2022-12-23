@@ -50,7 +50,7 @@
                             />
                             <label for="">與會員資料相同</label>
                         </div>
-                        <form @submit.prevent>
+                        <form ref="form" @submit.prevent>
                             <div class="ship-form">
                                 <label for="">收件人姓名：</label>
                                 <input
@@ -104,19 +104,19 @@
                                     id="card-ccv"
                                     ref="ccv"
                                 ></div>
-                                <div class="btn-wrapper">
-                                    <!-- 這是 TapPay 原生按鈕 -->
-                                    <button
-                                        type="submit"
-                                        class="tappay-btn"
-                                        @click="onSubmit"
-                                    >
-                                        前往付款
-                                    </button>
+                            </div>
+                            <div class="btn-wrapper">
+                                <!-- 這是 TapPay 原生按鈕 -->
+                                <button
+                                    type="submit"
+                                    class="tappay-btn"
+                                    @click="onSubmit"
+                                >
+                                    前往付款
+                                </button>
 
-                                    <div class="back-step" @click="goBack">
-                                        回上一步
-                                    </div>
+                                <div class="back-step" @click="goBack">
+                                    回上一步
                                 </div>
                             </div>
                         </form>
@@ -170,15 +170,7 @@ export default {
         },
 
         isAllFilled() {
-            if (
-                this.ordPerson &&
-                this.ordPhone &&
-                this.ordAdd &&
-                this.CardInfoFilled
-            ) {
-                return true;
-            }
-            return false;
+            return this.$refs["form"].checkValidity() && this.CardInfoFilled;
         },
     },
     methods: {
@@ -189,28 +181,30 @@ export default {
             switch (field) {
                 case 0:
                     //欄位已填好，並且沒有問題
-                    // console.log("field is ok");
+                    console.log("field is ok");
                     break;
                 case 1:
                     //欄位還沒有填寫
-                    // console.log("field is empty");
+                    console.log("field is empty");
                     break;
                 case 2:
                     //欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor
-                    // console.log("field has error");
+                    console.log("field has error");
                     break;
                 case 3:
                     //使用者正在輸入中
-                    // console.log("usertyping");
+                    console.log("usertyping");
                     break;
                 default:
-                // console.log("error!");
+                    console.log("error!");
             }
         },
 
         // 觸發去取得狀態
         // 之後記得砍async
         async onSubmit() {
+            console.log(this.$refs["form"]);
+            console.log(this.isAllFilled);
             if (!this.isAllFilled) return;
             this.isTrading = true;
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
@@ -363,7 +357,7 @@ export default {
                 this.CardInfoFilled = false;
             }
 
-            /*  this.updateStatus(update.status.number);
+            /* this.updateStatus(update.status.number);
             this.updateStatus(update.status.expiry);
             this.updateStatus(update.status.number); */
         });
