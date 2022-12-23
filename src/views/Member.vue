@@ -209,13 +209,13 @@ export default {
         width: 168px;
         height: 252px;
         position: absolute;
-        left: 0px;
+        left: -20px;
         top: 100px;
         z-index: 3;
         overflow: hidden;
         @include d() {
-            width: 168px;
-            height: 252px;
+            width: 112px;
+            height: 168px;
             left: 0px;
             top: 100px;
         }
