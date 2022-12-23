@@ -342,30 +342,35 @@ export default {
     data() {
         return {
             game_money: 10000,
+            
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
             item_3: "熱銷第一的尤加利葉",
             item_4: "經典不敗的尤加利葉",
             item_5: "通過認證的尤加利葉",
             item_6: "得過冠軍的尤加利葉",
+
             item_1_sellingprice: 20,
             item_2_sellingprice: 50,
             item_3_sellingprice: 125,
             item_4_sellingprice: 225,
             item_5_sellingprice: 350,
             item_6_sellingprice: 500,
+
             item_1_exp: 10,
             item_2_exp: 20,
             item_3_exp: 50,
             item_4_exp: 90,
             item_5_exp: 140,
             item_6_exp: 210,
+
             remaining_amount_1: 0,
             remaining_amount_2: 0,
             remaining_amount_3: 0,
             remaining_amount_4: 0,
             remaining_amount_5: 0,
             remaining_amount_6: 0,
+
             // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
             increment_2: 20 / 20,
@@ -373,6 +378,7 @@ export default {
             increment_4: 90 / 20,
             increment_5: 140 / 20,
             increment_6: 210 / 20,
+            
             expWidth: 0,
             game_exp: 0,
         };
