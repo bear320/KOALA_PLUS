@@ -162,6 +162,7 @@ export default {
             this.isShowCoupon = false;
         },
         async getMemCoupons() {
+            if (!this.$store.state.user) return;
             const res = await fetch(
                 `http://localhost/cgd103_g1/public/api/getMemCoupon.php?memId=${this.$store.state.user.mem_id}`
             );

@@ -9,14 +9,29 @@
                         <div class="content_sign_up_block">
                             <div class="content_opcitiy content_opcitiy_left">
                                 <p>尚未擁有會員？</p>
-                                <button class="main_block_btn_sign_up" @click="sign_up">註冊會員</button>
+                                <button
+                                    class="main_block_btn_sign_up"
+                                    @click="sign_up"
+                                >
+                                    註冊會員
+                                </button>
                             </div>
                         </div>
                         <div class="content_login_block">
                             <div class="content_opcitiy content_opcitiy_right">
                                 <p>已經擁有會員？</p>
-                                <button class="main_block_btn_login" @click="login">登入會員</button><br />
-                                <button class="main_block_btn_login" @click="forget_password">忘記密碼</button>
+                                <button
+                                    class="main_block_btn_login"
+                                    @click="login"
+                                >
+                                    登入會員</button
+                                ><br />
+                                <button
+                                    class="main_block_btn_login"
+                                    @click="forget_password"
+                                >
+                                    忘記密碼
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -25,35 +40,107 @@
                         <div class="content_active_sign_up">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>建立帳號</h2>
-                            <form @submit.prevent="sign_up" id="sign_up_form" method="post" enctype="multipart/form-data">
+                            <form
+                                @submit.prevent="sign_up"
+                                id="sign_up_form"
+                                method="post"
+                                enctype="multipart/form-data"
+                            >
                                 <div>
                                     <p>姓名</p>
-                                    <input name="mem_name" class="content_active_sign_up_move1" type="text" placeholder="你的名字" v-model="sign_up_userName" required/>
+                                    <input
+                                        name="mem_name"
+                                        class="content_active_sign_up_move1"
+                                        type="text"
+                                        placeholder="你的名字"
+                                        v-model="sign_up_userName"
+                                        required
+                                    />
                                 </div>
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input name="mem_account" id="mem_account" type="email" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
-                                    <span id="idMsg">{{ idMsg }}</span>	 
+                                    <input
+                                        name="mem_account"
+                                        id="mem_account"
+                                        type="email"
+                                        placeholder="你的信箱或帳號"
+                                        v-model="sign_up_account"
+                                        required
+                                    />
+                                    <span id="idMsg">{{ idMsg }}</span>
                                 </div>
                                 <div>
-                                    <div class="btn_email_confirm" @click="check_account">信箱認證</div>
+                                    <div
+                                        class="btn_email_confirm"
+                                        @click="check_account"
+                                    >
+                                        信箱認證
+                                    </div>
                                 </div>
                                 <div>
-                                    <p class="content_active_sign_up_moveTxt_1">密碼</p>
+                                    <p class="content_active_sign_up_moveTxt_1">
+                                        密碼
+                                    </p>
                                     <i class="icon_password"></i>
-                                    <input name="mem_psw" class="content_active_sign_up_move2" type="text" v-if="pwdType_one" v-model="sign_up_password"/>
-                                    <input name="mem_psw" class="content_active_sign_up_move2" type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
-                                    <img :src="seen_one ? seenImg : unseenImg" @click="changeType_1" v-on:mouseover="hoverEye_1" v-on:mouseout="outEye_1" class="sign_up_icon_eye"/>
+                                    <input
+                                        name="mem_psw"
+                                        class="content_active_sign_up_move2"
+                                        type="text"
+                                        v-if="pwdType_one"
+                                        v-model="sign_up_password"
+                                    />
+                                    <input
+                                        name="mem_psw"
+                                        class="content_active_sign_up_move2"
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        v-model="sign_up_password"
+                                        required
+                                        v-else
+                                    />
+                                    <img
+                                        :src="seen_one ? seenImg : unseenImg"
+                                        @click="changeType_1"
+                                        v-on:mouseover="hoverEye_1"
+                                        v-on:mouseout="outEye_1"
+                                        class="sign_up_icon_eye"
+                                    />
                                 </div>
                                 <div>
-                                    <p class="content_active_sign_up_moveTxt_2">密碼認證</p>
+                                    <p class="content_active_sign_up_moveTxt_2">
+                                        密碼認證
+                                    </p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_sign_up_move3" type="text" v-if="pwdType_two" v-model="sign_up_password_comfirm"/>
-                                    <input class="confirm_password content_active_sign_up_move3" type="password" placeholder="Confirm Password" v-model="sign_up_password_comfirm" required v-else/>
-                                    <img :src="seen_two ? seenImg : unseenImg" @click="changeType_2" v-on:mouseover="hoverEye_2" v-on:mouseout="outEye_2" class="sign_up_icon_eye"/>
+                                    <input
+                                        class="content_active_sign_up_move3"
+                                        type="text"
+                                        v-if="pwdType_two"
+                                        v-model="sign_up_password_comfirm"
+                                    />
+                                    <input
+                                        class="confirm_password content_active_sign_up_move3"
+                                        type="password"
+                                        placeholder="Confirm Password"
+                                        v-model="sign_up_password_comfirm"
+                                        required
+                                        v-else
+                                    />
+                                    <img
+                                        :src="seen_two ? seenImg : unseenImg"
+                                        @click="changeType_2"
+                                        v-on:mouseover="hoverEye_2"
+                                        v-on:mouseout="outEye_2"
+                                        class="sign_up_icon_eye"
+                                    />
                                 </div>
                                 <div>
-                                    <button class="btn_sign_up"  type="submit"  @click="sign_up2">註冊會員</button>
+                                    <button
+                                        class="btn_sign_up"
+                                        type="submit"
+                                        @click="sign_up2"
+                                    >
+                                        註冊會員
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -64,35 +151,108 @@
                             <form @submit.prevent="login">
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input type="text" placeholder="Account" v-model="login_account" required/>
+                                    <input
+                                        type="text"
+                                        placeholder="Account"
+                                        v-model="login_account"
+                                        required
+                                    />
                                 </div>
                                 <div>
-                                    <p class="content_active_login_moveTxt">密碼</p>
+                                    <p class="content_active_login_moveTxt">
+                                        密碼
+                                    </p>
                                     <i class="icon_password"></i>
-                                    <input class="content_active_login_move4" type="text" v-if="pwdType_three" v-model="login_password" required/>
-                                    <input class="content_active_login_move4" type="password" placeholder="Password" v-model="login_password" required v-else/>
-                                    <img :src="seen_three ? seenImg : unseenImg" @click="changeType_3" v-on:mouseover="hoverEye_3" v-on:mouseout="outEye_3" class="login_icon_eye"/>
+                                    <input
+                                        class="content_active_login_move4"
+                                        type="text"
+                                        v-if="pwdType_three"
+                                        v-model="login_password"
+                                        required
+                                    />
+                                    <input
+                                        class="content_active_login_move4"
+                                        type="password"
+                                        placeholder="Password"
+                                        v-model="login_password"
+                                        required
+                                        v-else
+                                    />
+                                    <img
+                                        :src="seen_three ? seenImg : unseenImg"
+                                        @click="changeType_3"
+                                        v-on:mouseover="hoverEye_3"
+                                        v-on:mouseout="outEye_3"
+                                        class="login_icon_eye"
+                                    />
                                 </div>
-                                <label class="errorMsg" v-if="errorFlag" v-cloak>{{ errorMsg }}</label><br />
-                                <button class="btn_login" type="submit" @click="login" value="Login">登錄會員</button><br />
+                                <label
+                                    class="errorMsg"
+                                    v-if="errorFlag"
+                                    v-cloak
+                                    >{{ errorMsg }}</label
+                                ><br />
+                                <button
+                                    class="btn_login"
+                                    type="submit"
+                                    @click="login"
+                                    value="Login"
+                                >
+                                    登錄會員</button
+                                ><br />
                             </form>
-                            <button class="btn_login" @click="forget_password">忘記密碼</button>
-                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
+                            <button class="btn_login" @click="forget_password">
+                                忘記密碼
+                            </button>
+                            <div>
+                                <img
+                                    src="../assets/images/login/login_koala.png"
+                                    alt=""
+                                />
+                            </div>
                         </div>
                         <!-- ======================================== 忘記密碼表單 ======================================== -->
                         <div class="content_active_forget_password">
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
-                            <form @submit.prevent="forget_password" @submit="sendEmail">
+                            <form
+                                @submit.prevent="forget_password"
+                                @submit="sendEmail"
+                            >
                                 <div>
                                     <p>帳號/信箱</p>
-                                    <input id="forget_password_account" type="text" placeholder="Account" name="user_email" v-model="forget_password_account" required/>
+                                    <input
+                                        id="forget_password_account"
+                                        type="text"
+                                        placeholder="Account"
+                                        name="user_email"
+                                        v-model="forget_password_account"
+                                        required
+                                    />
                                 </div>
-                                <div name="mem_psw" id="show_forget_password">{{mem_psw}}</div>
-                                <input id="forget_password_none" type="text" name="mem_psw" v-model="mem_psw">
-                                <button class="btn_login" type="submit" @click="sendEmail">驗證信箱</button>
+                                <div name="mem_psw" id="show_forget_password">
+                                    {{ mem_psw }}
+                                </div>
+                                <input
+                                    id="forget_password_none"
+                                    type="text"
+                                    name="mem_psw"
+                                    v-model="mem_psw"
+                                />
+                                <button
+                                    class="btn_login"
+                                    type="submit"
+                                    @click="sendEmail"
+                                >
+                                    驗證信箱
+                                </button>
                             </form>
-                            <div><img src="../assets/images/login/login_koala.png" alt=""/></div>
+                            <div>
+                                <img
+                                    src="../assets/images/login/login_koala.png"
+                                    alt=""
+                                />
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -111,13 +271,14 @@ export default {
     },
     data() {
         return {
+            /*  login_account: "charmy111@gmail.com",
+            login_password: "charmy111", */
             login_account: "",
             login_password: "",
             errorFlag: false,
             errorMsg: "",
             idMsg: "",
             forget_password_account: "",
-
 
             get_forget_password: "",
 
@@ -134,7 +295,7 @@ export default {
             sign_up_password: "",
             sign_up_password_comfirm: "",
 
-            mem_psw:"",
+            mem_psw: "",
         };
     },
     methods: {
@@ -159,19 +320,29 @@ export default {
         },
 
         // ======================================== Login click事件 ======================================== //
-        login() {
-            document.querySelector(".content_active").className = "content_active content_active_active_login";
-            document.querySelector(".content_active_login").style.display = "block";
-            document.querySelector(".content_active_sign_up").style.opacity = "0";
-            document.querySelector(".content_active_forget_password").style.opacity = "0";
+        async login() {
+            document.querySelector(".content_active").className =
+                "content_active content_active_active_login";
+            document.querySelector(".content_active_login").style.display =
+                "block";
+            document.querySelector(".content_active_sign_up").style.opacity =
+                "0";
+            document.querySelector(
+                ".content_active_forget_password"
+            ).style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".content_active_login").style.opacity = "1";
+                document.querySelector(".content_active_login").style.opacity =
+                    "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(".content_active_sign_up").style.display = "none";
-                document.querySelector(".content_active_forget_password").style.display = "none";
+                document.querySelector(
+                    ".content_active_sign_up"
+                ).style.display = "none";
+                document.querySelector(
+                    ".content_active_forget_password"
+                ).style.display = "none";
             }, 200);
 
             // ======================================== 登入驗證 ======================================== //
@@ -180,7 +351,7 @@ export default {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
                 // thisvue.errorFlag = true;
             } else {
-                fetch(
+                /* fetch(
                     "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
                     {
                         method: "post",
@@ -194,115 +365,145 @@ export default {
                     .then((res) => res.json())
                     .then((json) => {
                         console.log(json);
+                        this.$store.state.user = { mem_id: 1001 };
                         if (this.login_password == json.mem_account) {
                             console.log("成功");
+                        } else if (!json.code) {
+                            console.log("失敗");
                         }
-                        else if ( !json.code) {
-                            console.log("失敗")
-                        }
-                        this.$router.push({path: "/home"})
-                    });
+                        this.$router.push({ path: "/home" });
+                    }); */
+                await this.$store.dispatch("memLogin", {
+                    mem_account: this.login_account,
+                    mem_psw: this.login_password,
+                });
 
+                if (this.$store.state.user) {
+                    this.$router.push({ path: "/home" });
+                }
             }
         },
 
         // ======================================== sign_up click事件 ======================================== //
         sign_up() {
-            document.querySelector(".content_active").className = "content_active content_active_active_sign_up";
-            document.querySelector(".content_active_sign_up").style.display = "block";
+            document.querySelector(".content_active").className =
+                "content_active content_active_active_sign_up";
+            document.querySelector(".content_active_sign_up").style.display =
+                "block";
             document.querySelector(".content_active_login").style.opacity = "0";
-            document.querySelector( ".content_active_forget_password").style.opacity = "0";
+            document.querySelector(
+                ".content_active_forget_password"
+            ).style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".content_active_sign_up").style.opacity = "1";
+                document.querySelector(
+                    ".content_active_sign_up"
+                ).style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(".content_active_login").style.display = "none";
-                document.querySelector(".content_active_forget_password").style.display = "none";
+                document.querySelector(".content_active_login").style.display =
+                    "none";
+                document.querySelector(
+                    ".content_active_forget_password"
+                ).style.display = "none";
             }, 200);
         },
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up2() {
-            let url="http://localhost/cgd103_g1/public/api/getSignUp.php";
+            let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
             const signUpContent = {
                 userName: this.sign_up_userName,
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
-            
-            fetch(url,
-            {
+
+            fetch(url, {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
-            .then((res) => res.json())
-            .then((result) => {
-                alert(result.msg);
-                location.reload();
-            });
+                .then((res) => res.json())
+                .then((result) => {
+                    alert(result.msg);
+                    location.reload();
+                });
         },
 
         // ======================================== Email 後臺比對 ======================================== //
-        check_account() {  
-        //產生XMLHttpRequest物件
-        var xhr = new XMLHttpRequest();
-        xhr.onload = function(){
-            // console.log("=====",xhr.status);
-            document.getElementById("idMsg").innerText = xhr.responseText;
-        }
-        let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
-        xhr.open("get", url, true);
-        xhr.send(null);
+        check_account() {
+            //產生XMLHttpRequest物件
+            var xhr = new XMLHttpRequest();
+            xhr.onload = function () {
+                // console.log("=====",xhr.status);
+                document.getElementById("idMsg").innerText = xhr.responseText;
+            };
+            let url =
+                "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
+                document.getElementById("mem_account").value;
+            xhr.open("get", url, true);
+            xhr.send(null);
         },
 
         // ======================================== forget_password click事件 ======================================== //
         forget_password() {
-            document.querySelector(".content_active").className = "content_active content_active_active_forget_password";
-            document.querySelector(".content_active_forget_password").style.display = "block";
+            document.querySelector(".content_active").className =
+                "content_active content_active_active_forget_password";
+            document.querySelector(
+                ".content_active_forget_password"
+            ).style.display = "block";
             document.querySelector(".content_active_login").style.opacity = "0";
-            document.querySelector(".content_active_sign_up").style.opacity = "0";
+            document.querySelector(".content_active_sign_up").style.opacity =
+                "0";
 
             setTimeout(function () {
-                document.querySelector(".content_active_forget_password").style.opacity = "1";
+                document.querySelector(
+                    ".content_active_forget_password"
+                ).style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(".content_active_sign_up").style.display = "none";
-                document.querySelector(".content_active_login").style.display = "none";
+                document.querySelector(
+                    ".content_active_sign_up"
+                ).style.display = "none";
+                document.querySelector(".content_active_login").style.display =
+                    "none";
             }, 200);
         },
 
         // ======================================== 寄 Email  ======================================== //
         sendEmail() {
             // ======================================== 把忘記的密碼撈出來  ======================================== //
-            let QQ=this; //這裡的QQ指向的Vue實體
+            let QQ = this; //這裡的QQ指向的Vue實體
             var xhr = new XMLHttpRequest();
-            xhr.onload=function (){
-                 if( xhr.status == 200 ){
-                  //modify here
+            xhr.onload = function () {
+                if (xhr.status == 200) {
+                    //modify here
                     showMember(xhr.responseText);
-                 }else{
-                    alert( xhr.status );
-                 }
-            }
+                } else {
+                    alert(xhr.status);
+                }
+            };
 
-            var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+            var url =
+                "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+                document.getElementById("forget_password_account").value;
             xhr.open("get", url, true);
-            xhr.send( null );
+            xhr.send(null);
 
-            function showMember(json){
+            function showMember(json) {
                 var xhr = new XMLHttpRequest();
 
-                var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+                var url =
+                    "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+                    document.getElementById("forget_password_account").value;
                 xhr.open("get", url, true);
                 xhr.send(null);
                 let member = JSON.parse(json);
                 let html;
-                
+
                 // 這裡的QQ指的是Vue實體
-                QQ.mem_psw=member.mem_psw;
+                QQ.mem_psw = member.mem_psw;
 
                 // html = `<p>${member.mem_psw}</p>`;
 
@@ -311,7 +512,9 @@ export default {
 
             // ======================================== 忘記密碼的 EmailJs  ======================================== //
             emailjs
-                .send("service_Charmy", "template_21xikzb",
+                .send(
+                    "service_Charmy",
+                    "template_21xikzb",
                     {
                         user_email: this.forget_password_account,
                         mem_psw: this.mem_psw,
@@ -367,8 +570,6 @@ export default {
         outEye_3: function () {
             this.seen_three = !this.seen_three;
         },
-
-
     },
     mounted() {
         this.login();
@@ -379,14 +580,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.memTable th {
+    background-color: pink;
+}
 
-.memTable th{
-    background-color:pink;
-  }
-
-  .memTable td{
-    border-bottom:1px dotted deeppink;
-  }
+.memTable td {
+    border-bottom: 1px dotted deeppink;
+}
 
 #show_forget_password {
     display: none;

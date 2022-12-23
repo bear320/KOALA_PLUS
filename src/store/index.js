@@ -5,7 +5,7 @@ export default createStore({
         cart: [],
         discount: {},
         // mem_id: 1001
-        user: { mem_id: 1001 },
+        user: null,
     },
     getters: {
         productTotal(state) {
@@ -32,8 +32,62 @@ export default createStore({
         updateMemCart(state, payload) {
             state.cart = payload;
         },
+
+        // 更新使用者
+        updateMemInfo(state, payload) {
+            state.user = {
+                mem_id: payload.mem_id,
+                mem_mob: payload.mem_mob,
+                mem_add: payload.mem_add,
+            };
+        },
     },
     actions: {
+        /* 會員 */
+        async memLogin(context, payload) {
+            try {
+                const res = await fetch(
+                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
+                    {
+                        method: "post",
+                        credentials: "include",
+                        body: new URLSearchParams(payload),
+                    }
+                );
+
+                const result = await res.json();
+                console.log(result.code == 1);
+                if (result.code == 1) {
+                    context.commit("updateMemInfo", result.memInfo);
+                } else {
+                    throw new Error("帳號或密碼錯誤");
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
+        async getMem(context) {
+            try {
+                const res = await fetch(
+                    "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
+                    {
+                        credentials: "include",
+                    }
+                );
+
+                const result = await res.json();
+                console.log(result);
+                if (result.status) {
+                    context.commit("updateMemInfo", result.list);
+                } else {
+                    throw new Error(result.msg);
+                }
+            } catch (error) {
+                console.log(error);
+            }
+        },
+
         // 取得使用者的購物車資訊
         async getMemCart(context) {
             const res = await fetch(

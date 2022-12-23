@@ -42,7 +42,12 @@
                     <h3>收件資訊</h3>
                     <div class="card-cart receiv-info">
                         <div class="member-form">
-                            <input class="member-equal" type="checkbox" />
+                            <input
+                                class="member-equal"
+                                type="checkbox"
+                                v-model="isEqualMemInfo"
+                                @change="autoInsertMemInfo"
+                            />
                             <label for="">與會員資料相同</label>
                         </div>
                         <form @submit.prevent>
@@ -118,7 +123,6 @@
                     </div>
                 </div>
             </div>
-            <h1>{{ isAllFilled }}</h1>
         </div>
         <ModalForTrading
             :style="{ display: isTrading ? 'flex' : 'none' }"
@@ -156,6 +160,8 @@ export default {
             isTrading: false,
             isDone: false,
             CardInfoFilled: false,
+
+            isEqualMemInfo: false,
         };
     },
     computed: {
@@ -270,6 +276,9 @@ export default {
             } catch (err) {
                 console.log(err);
             }
+        },
+        autoInsertMemInfo() {
+            console.log(this.isEqualMemInfo);
         },
     },
     mounted() {
