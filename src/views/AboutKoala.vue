@@ -124,6 +124,7 @@
 </template>
 
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 import Header from "@/components/header.vue";
 import Footer from "@/components/footer.vue";
 import Loading from "@/components/loading.vue";
