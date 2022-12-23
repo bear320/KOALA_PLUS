@@ -83,21 +83,12 @@ export default {
     },
 
     methods: {
-        handleBeforeChange() {
-            return new Promise((resolve) => {
-                this.$Modal.confirm({
-                    title: "確定切換權限嗎？",
-                    content: "您確定切換權限嗎？",
-                    onOk: () => {
-                        resolve();
-                    },
-                });
-            });
-        },
+        
         getAdminList() {
             // const apiURL = new URL(
             //     `http://localhost:8888/cgd103_g1/public/api/getAdminList.php`
             // );
+            
             const apiURL = new URL(`${BASE_URL}/getAdminList.php`);
             fetch(apiURL)
                 .then((res) => res.json())
@@ -114,29 +105,41 @@ export default {
                     });
                 });
         },
-        switchValidation(index) {
-            const empId = this.source[index].emp_id;
-            const empValidation = this.source[index].emp_validation;
-            // const apiURL = new URL(
-            //     `http://localhost:8888/cgd103_g1/public/api/postEmpValidation.php`
-            // );
-            const apiURL = new URL(`${BASE_URL}/postEmpValidation.php`);
+        // switchValidation(index) {
+        //     const empId = this.source[index].emp_id;
+        //     const empValidation = this.source[index].emp_validation;
+        //     const apiURL = new URL(
+        //         `http://localhost:8888/cgd103_g1/public/api/postEmpValidation.php`
+        //     );
+        //     // const apiURL = new URL(`${BASE_URL}/postEmpValidation.php`);
 
-            const postEmpValidation = {
-                emp_id: Number(empId),
-                emp_validation: Number(empValidation),
-            };
+        //     const postEmpValidation = {
+        //         emp_id: Number(empId),
+        //         emp_validation: Number(empValidation),
+        //     };
 
-            fetch(apiURL, {
-                method: "POST",
-                body: new URLSearchParams(postEmpValidation),
-            })
-                .then((res) => res.json())
-                .then((status) => {
-                    alert(status.msg);
+        //     fetch(apiURL, {
+        //         method: "POST",
+        //         body: new URLSearchParams(postEmpValidation),
+        //     })
+        //         .then((res) => res.json())
+        //         .then((status) => {
+        //             alert(status.msg);
+        //         });
+        // },
+        handleBeforeChange() {
+            return new Promise((resolve) => {
+                this.$Modal.confirm({
+                    title: "確定切換權限嗎？",
+                    content: "您確定切換權限嗎？",
+                    onOk: () => {
+                        resolve();
+                    },
                 });
+            });
         },
     },
+    
 
     created() {
         this.getAdminList();
