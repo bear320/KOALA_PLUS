@@ -11,7 +11,8 @@ $sql = "UPDATE tibamefe_cgd103g1.news
                         news_content = :news_content,
                         news_date = :news_date,
                         news_category = :news_category,
-                        news_status = :news_status
+                        news_status = :news_status,
+                        news_star = :news_star
 					WHERE news_id = :news_id;";
 
 $updateNews = $pdo->prepare($sql);
@@ -22,6 +23,7 @@ $updateNews->bindValue(":news_content", $_POST["news_content"]);
 $updateNews->bindValue(":news_date", $_POST["news_date"]);
 $updateNews->bindValue(":news_category", $_POST["news_category"]);
 $updateNews->bindValue(":news_status", $_POST["news_status"]);
+$updateNews->bindValue(":news_star", $_POST["news_star"]);
 $updateNews->execute();
 $msg = "資料已更新";
 } catch (PDOException $e) {

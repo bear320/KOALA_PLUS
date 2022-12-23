@@ -5,10 +5,9 @@ header("Content-Type:application/json;charset=utf-8");
 try {
     require_once("./connect_cgd103g1.php");
 
-$sql = "INSERT INTO tibamefe_cgd103g1.reservation VALUES( null, :news_id, :news_img, :news_title, :news_content, :news_date, :news_category, :news_status, :news_star )";
+$sql = "INSERT INTO tibamefe_cgd103g1.news VALUES( null, :news_img, :news_title, :news_content, :news_date, :news_category, :news_status, :news_star )";
 
 $newArticle = $pdo->prepare($sql);
-$newArticle->bindValue(":news_id", $_POST["news_id"]);
 $newArticle->bindValue(":news_img", $_POST["news_img"]);
 $newArticle->bindValue(":news_title", $_POST["news_title"]);
 $newArticle->bindValue(":news_content", $_POST["news_content"]);
