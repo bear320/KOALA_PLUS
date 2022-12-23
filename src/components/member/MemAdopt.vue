@@ -135,9 +135,10 @@ export default {
                         this.username = json.username;
                         return true;
                     }
-                    alert("獲取數據失敗");
+                    // alert("獲取數據失敗");
                 });
         } else {
+            location.href = "/login";
             // alert("登入失效");
             //跳轉 login url
         }
