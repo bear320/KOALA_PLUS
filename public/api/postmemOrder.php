@@ -25,7 +25,7 @@ $resDate = [
 $userid = $getUser["mem_id"];
 
 $sql = "SELECT m.mem_id, m.mem_id 'mem_id',m.mem_name,
-o.ord_id, o.ord_date ,o.ord_ship, o.ord_disc, o.ord_sum,
+o.ord_id, o.ord_date ,o.ord_ship, o.ord_disc, o.ord_sum,o.ord_add,o.ord_phone,o.ord_person,
 ol.prod_id ,ol.ord_qty, ol.prod_price , 
 p.prod_id 'prod_id' , p.prod_name, p.prod_category 'prod_category'
 FROM tibamefe_cgd103g1.orders o
