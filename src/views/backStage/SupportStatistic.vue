@@ -59,6 +59,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 import { Line } from "vue-chartjs";
 import {
     Chart as ChartJS,
@@ -154,9 +155,8 @@ export default {
         this.loaded = false;
 
         try {
-            await fetch(
-                `http://localhost:8888/cgd103_g1/public/api/getSupStat.php`
-            )
+            // `http://localhost:8888/cgd103_g1/public/api/getSupStat.php`
+            await fetch(`${BASE_URL}/getSupStat.php`)
                 .then((res) => res.json())
                 .then((json) => {
                     /* this.dataSupAll.datasets[0].data = [
@@ -197,9 +197,8 @@ export default {
             //     ],
             // },
 
-            await fetch(
-                `http://localhost:8888/cgd103_g1/public/api/getAdoptStat.php`
-            )
+            // `http://localhost:8888/cgd103_g1/public/api/getAdoptStat.php`
+            await fetch(`${BASE_URL}/getAdoptStat.php`)
                 .then((res) => res.json())
                 .then((json) => {
                     this.source = json;
