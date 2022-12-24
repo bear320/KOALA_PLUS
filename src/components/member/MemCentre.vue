@@ -122,6 +122,48 @@ export default {
         };
     },
     methods: {
+        getmemCentre() {
+            let getCookie = document.cookie;
+            const apiURL = new URL(`${BASE_URL}/getMember.php?type=front`);
+            if (getCookie) {
+                // const createdurl = "http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1002";
+                // "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
+                fetch("apiURL", {
+                    // method: "POST",
+                    // mode: "cors", //same-origin,no-cors,*cors
+                    credentials: "include",
+                    //請求選項的方法 獲取請求設置:會在跨源請求中發送 cookie ，
+                    //*credentials方法一：omit 瀏覽器不請求cookie
+                    //*credentials方法一：same-origin 使瀏覽器發送包含在同源(同域)的憑據(cookie)請求
+                    //*credentials方法三：include 瀏覽器會在跨源請求中發送 cookie
+
+                    // redirect: "follow", //*follow,manual,error
+                    // referrer: "no-referrer", //*client,no-referrer
+                    // headers: {
+                    //     "Access-Control-Allow-Origin": "http://localhost:8080",
+                    //     "Content-Type": "application/json",
+                    // },
+                })
+                    .then((res) => res.json())
+                    .then((json) => {
+                        // console.log(json);
+                        // if (json.status == 10010) {
+                        //     alert("帳號已登出");
+                        //     location.href = "/login";
+                        // }
+                        if (json.status) {
+                            this.memindexs = json.list;
+                            return true;
+                        }
+                        // alert("獲取數據失敗");
+                    });
+            } else {
+                alert("登入失效");
+                //跳轉 login url
+
+                location.href = "/login";
+            }
+        },
         editMemInfo() {
             const postMemMainData = {
                 mem_name: this.$refs.mem_name.value,
@@ -129,18 +171,16 @@ export default {
                 mem_mob: this.$refs.mem_mob.value,
                 mem_add: this.$refs.mem_add.value,
             };
-            console.log(postMemMainData);
+            // console.log(postMemMainData);
 
             let getCookie = document.cookie;
+            const apiURL = new URL(`${BASE_URL}/editMember.php?type=1`);
             if (getCookie) {
-                fetch(
-                    "http://localhost/cgd103_g1/public/api/editMember.php?type=1",
-                    {
-                        method: "POST",
-                        credentials: "include",
-                        body: new URLSearchParams(postMemMainData),
-                    }
-                )
+                fetch(apiURL, {
+                    method: "POST",
+                    credentials: "include",
+                    body: new URLSearchParams(postMemMainData),
+                })
                     .then((res) => res.json())
                     .then((status) => {
                         alert(status.msg);
@@ -196,7 +236,7 @@ export default {
                     // alert("密碼不可為空白");
                 }
             } else {
-                alert("登入失效");
+                // alert("登入失效");
             }
         },
         signOut() {
@@ -210,7 +250,7 @@ export default {
                         this.$Message.info(
                             "Asynchronously close the dialog box"
                         );
-                        location.href = "/login";
+                        // location.href = "/login";
                     }, 2000);
                 },
             });
@@ -231,47 +271,7 @@ export default {
         },
     },
     created() {
-        let getCookie = document.cookie;
-        if (getCookie) {
-            // const createdurl = "http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1002";
-            fetch(
-                "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
-                {
-                    // method: "POST",
-                    // mode: "cors", //same-origin,no-cors,*cors
-                    credentials: "include",
-                    //請求選項的方法 獲取請求設置:會在跨源請求中發送 cookie ，
-                    //*credentials方法一：omit 瀏覽器不請求cookie
-                    //*credentials方法一：same-origin 使瀏覽器發送包含在同源(同域)的憑據(cookie)請求
-                    //*credentials方法三：include 瀏覽器會在跨源請求中發送 cookie
-
-                    // redirect: "follow", //*follow,manual,error
-                    // referrer: "no-referrer", //*client,no-referrer
-                    // headers: {
-                    //     "Access-Control-Allow-Origin": "http://localhost:8080",
-                    //     "Content-Type": "application/json",
-                    // },
-                }
-            )
-                .then((res) => res.json())
-                .then((json) => {
-                    // console.log(json);
-                    if (json.status == 10010) {
-                        alert("帳號已登出");
-                        location.href = "/login";
-                    }
-                    if (json.status) {
-                        this.memindexs = json.list;
-                        return true;
-                    }
-                    // alert("獲取數據失敗");
-                });
-        } else {
-            alert("登入失效");
-            //跳轉 login url
-
-            location.href = "/login";
-        }
+        this.getmemCentre();
     },
     computed() {},
 };

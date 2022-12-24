@@ -270,9 +270,9 @@ export default {
                     .then((res) => res.json())
                     .then((json) => {
                         console.log(json);
-                        if (json.status == 10010) {
-                            location.href = "/login";
-                        }
+                        // if (json.status == 10010) {
+                        //     location.href = "/login";
+                        // }
                         if (json.status) {
                             console.log("qq", json);
                             this.orderlists = json.list;
@@ -282,7 +282,7 @@ export default {
                         alert("獲取數據失敗1");
                     });
             } else {
-                location.href = "/login";
+                // location.href = "/login";
             }
         },
     },

@@ -126,33 +126,39 @@ export default {
                         return true;
                     }
                     // alert("獲取數據失敗");
-                    location.href = "/login";
+                    // location.href = "/login";
                 });
+        },
+        postmemCoupons() {
+            let getCookie = document.cookie;
+            console.log(getCookie);
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/postmemCoupons.php",
+                    {
+                        credentials: "include",
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        // console.log(json);
+                        if (json.status) {
+                            this.couponsList = json.list;
+                            this.userid = json.userid;
+                            this.username = json.username;
+                            // console.log(this.couponsList.length);
+                            return true;
+                        }
+                        alert("獲取數據失敗2");
+                    });
+            } else {
+                // alert("登入失效");
+                //跳轉 login url
+            }
         },
     },
     created() {
-        let getCookie = document.cookie;
-        console.log(getCookie);
-        if (getCookie) {
-            fetch("http://localhost/cgd103_g1/public/api/postmemCoupons.php", {
-                credentials: "include",
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    // console.log(json);
-                    if (json.status) {
-                        this.couponsList = json.list;
-                        this.userid = json.userid;
-                        this.username = json.username;
-                        // console.log(this.couponsList.length);
-                        return true;
-                    }
-                    alert("獲取數據失敗2");
-                });
-        } else {
-            // alert("登入失效");
-            //跳轉 login url
-        }
+        this.postmemCoupons();
     },
 };
 </script>

@@ -118,33 +118,39 @@ export default {
                 this.toImage();
             });
         },
+        postmemAdopt() {
+            let getCookie = document.cookie;
+            if (getCookie) {
+                fetch(
+                    "http://localhost/cgd103_g1/public/api/postmemAdopt.php",
+                    {
+                        credentials: "include",
+                    }
+                )
+                    .then((res) => res.json())
+                    .then((json) => {
+                        // if (json.status == 10010) {
+                        //     location.href = "/login";
+                        // }
+                        console.log(json);
+                        if (json.status) {
+                            this.couponsLists = json.list;
+                            this.userid = json.userid;
+                            this.username = json.username;
+                            return true;
+                        }
+                        // alert("獲取數據失敗");
+                    });
+            } else {
+                // location.href = "/login";
+                // alert("登入失效");
+                //跳轉 login url
+            }
+        },
     },
 
     created() {
-        let getCookie = document.cookie;
-        if (getCookie) {
-            fetch("http://localhost/cgd103_g1/public/api/postmemAdopt.php", {
-                credentials: "include",
-            })
-                .then((res) => res.json())
-                .then((json) => {
-                    if (json.status == 10010) {
-                        location.href = "/login";
-                    }
-                    console.log(json);
-                    if (json.status) {
-                        this.couponsLists = json.list;
-                        this.userid = json.userid;
-                        this.username = json.username;
-                        return true;
-                    }
-                    // alert("獲取數據失敗");
-                });
-        } else {
-            location.href = "/login";
-            // alert("登入失效");
-            //跳轉 login url
-        }
+        this.postmemAdopt();
     },
 };
 </script>
