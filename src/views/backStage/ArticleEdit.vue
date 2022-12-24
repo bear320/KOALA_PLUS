@@ -101,6 +101,7 @@ export default {
                 news_date: this.edit.news_date,
                 news_category: this.edit.news_category,
                 news_status: this.edit.news_status,
+                news_star: this.edit.news_star,
             };
             console.log(articleUpdate);
 
@@ -110,11 +111,21 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
-                    if (confirm("是否關閉此分頁？")) {
-                        window.close();
-                    }
+                    // alert(status.msg);
+                    this.confirmModal();
                 });
+        },
+        confirmModal() {
+            this.$Modal.confirm({
+                title: "文章已修改",
+                content: "<p>文章已修改，是否關閉此分頁？</p>",
+                okText: "是",
+                cancelText: "否",
+                onOk: () => {
+                    this.$Modal.remove();
+                    window.close();
+                },
+            });
         },
     },
     created() {
