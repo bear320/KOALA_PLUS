@@ -129,6 +129,7 @@
     </div>
 </template>
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 import emailjs from "emailjs-com";
 export default {
     components: {
@@ -205,7 +206,9 @@ export default {
                 rsv_ps: "",
             };
 
-            fetch("http://localhost/cgd103_g1/public/api/resv_insert.php", {
+            // fetch("http://localhost/cgd103_g1/public/api/resv_insert.php"
+            const apiURL = new URL(`${BASE_URL}/resv_insert.php`);
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(payload),
             })

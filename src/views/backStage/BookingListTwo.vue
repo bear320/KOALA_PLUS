@@ -118,6 +118,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -172,9 +173,11 @@ export default {
             }; */
 
             console.log("QQ");
-            fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?", {
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?",
+            fetch(apiURL, {
                 method: "POST",
-                credentials: "include",
+                // credentials: "include",
                 body: new URLSearchParams(postDateSearch),
             })
                 .then((res) => res.json())
@@ -204,10 +207,12 @@ export default {
                 // search_order_by: "rsv_id",
             }; */
 
-            console.log("QQ");
-            fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php", {
+            // console.log("QQ");
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php",
+            fetch(apiURL, {
                 method: "POST",
-                credentials: "include",
+                // credentials: "include",
                 body: new URLSearchParams(postDateSearch),
             })
                 .then((res) => res.json())
@@ -229,10 +234,12 @@ export default {
             //     });
         },
         deleteList(index) {
-            console.log(this.booklist[index].rsv_id);
-            const apiURL = new URL(
-                `http://localhost/cgd103_g1/public/api/deleteRsv.php`
-            );
+            // console.log(this.booklist[index].rsv_id);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/deleteRsv.php`
+            // );
+            const apiURL = new URL(`${BASE_URL}/deleteRsv.php`);
+
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams({
@@ -258,9 +265,12 @@ export default {
             console.log(postDateSearch);
             console.log(1111, this.selectName);
             console.log("QQ");
-            fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?", {
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?",
+            fetch(apiURL, {
                 method: "POST",
-                credentials: "include",
+                // credentials: "include",
                 body: new URLSearchParams(postDateSearch),
             })
                 .then((res) => res.json())
@@ -295,16 +305,18 @@ export default {
     },
     created() {
         this.getResvDetail();
-        fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php", {
-            credentials: "include",
-        })
+        const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+
+        // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php"
+        // )
+        fetch(apiURL)
             .then((res) => res.json())
             .then((json) => {
                 console.log(json);
                 this.booklist = json;
             });
     },
-    computed: {
+    /* computed: {
         totalPage() {
             return Math.ceil(this.booklist.length / 10);
         },
@@ -314,7 +326,7 @@ export default {
                 this.currentPage * 10
             );
         },
-    },
+    }, */
 };
 </script>
 

@@ -2,9 +2,9 @@
 header('Access-Control-Allow-Origin:*');
 header("Content-Type:application/json;charset=utf-8");
 //header設置
-require_once("./headerUse.php");
+// require_once("./headerUse.php");
 //驗證登入
-require_once("./verifyFrontLogin.php");
+// require_once("./verifyFrontLogin.php");
 //DB連線設置
 require_once("./connect_cgd103g1.php");
 $sql = "select * from tibamefe_cgd103g1.reservation";

@@ -119,6 +119,7 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 
 export default {
     components: {
@@ -133,9 +134,13 @@ export default {
     },
     created() {
         console.log(this.$route.params.id);
-        fetch(
-            `http://localhost/cgd103_g1/public/api/getResvPage.php?bookId=${this.$route.params.id}`
-        )
+        const apiURL = new URL(
+            `${BASE_URL}/getResvPage.php?bookId=${this.$route.params.id}`
+        );
+        // fetch(
+        //     `http://localhost/cgd103_g1/public/api/getResvPage.php?bookId=${this.$route.params.id}`
+        // )
+        fetch(apiURL)
             .then((res) => res.json())
             .then((json) => {
                 this.temp = json[0];
@@ -155,7 +160,10 @@ export default {
                 rsv_ps: this.temp.rsv_ps,
             };
             // console.log(payload);
-            fetch("http://localhost/cgd103_g1/public/api/resvPage_insert.php", {
+
+            // fetch("http://localhost/cgd103_g1/public/api/resvPage_insert.php",
+            const apiURL = new URL(`${BASE_URL}/resvPage_insert.php`);
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(payload),
             })

@@ -26,7 +26,7 @@ import { createRouter, createWebHistory } from "vue-router";
 // import AdminAdd from "../views/backStage/AdminAdd.vue";
 // import ArticleList from "../views/backStage/ArticleList.vue";
 // import ArticleEdit from "../views/backStage/ArticleEdit.vue";
-// import BookingList from "../views/backStage/BookingList.vue";
+// import BookingList from "../views/backStage/BookingListTwo.vue";
 // import BookingDayOff from "../views/backStage/BookingDayOff.vue";
 // import BookingEdit from "../views/backStage/BookingEdit.vue";
 // import KoalaList from "../views/backStage/KoalaList.vue";
@@ -188,7 +188,7 @@ const routes = [
     {
         path: "/bs-booking-list-two",
         name: "bookingListTwo",
-        // component: BookingList,
+        // component: BookingListTwo,
         component: () => import("@/views/backStage/BookingListTwo.vue"),
     },
     // {

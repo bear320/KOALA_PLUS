@@ -66,6 +66,7 @@
     </div>
 </template>
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     props: ["msg"],
     data() {
@@ -107,7 +108,8 @@ export default {
                 rsv_status: this.temp.rsv_status,
                 rsv_ps: this.temp.rsv_ps,
             };
-            fetch("http://localhost/cgd103_g1/public/api/getResvInfo.php", {
+            const apiURL = new URL(`${BASE_URL}/getResvInfo.php`);
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams({
                     rsv_mobile: this.searchText,
