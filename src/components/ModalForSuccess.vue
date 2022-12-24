@@ -59,9 +59,10 @@ $success-size: 80px;
     display: flex;
     justify-content: center;
     align-items: center;
-    box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
 
     .successModal {
+        box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
+
         .modal-wrapper {
             width: $modal-size;
             height: $modal-size;
