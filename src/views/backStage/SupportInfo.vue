@@ -151,11 +151,24 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
-                    if (confirm("是否關閉此分頁？")) {
-                        window.close();
-                    }
+                    // alert(status.msg);
+                    // if (confirm("是否關閉此分頁？")) {
+                    //     window.close();
+                    // }
+                    this.confirmModal();
                 });
+        },
+        confirmModal() {
+            this.$Modal.confirm({
+                title: "訂單備註已修改",
+                content: "<p>訂單備註已修改，是否關閉此分頁？</p>",
+                okText: "是",
+                cancelText: "否",
+                onOk: () => {
+                    this.$Modal.remove();
+                    window.close();
+                },
+            });
         },
     },
     created() {
@@ -271,6 +284,26 @@ export default {
     }
     .line + .line {
         margin-top: 30px;
+    }
+}
+</style>
+<style lang="scss">
+.ivu-modal-confirm-head {
+    .ivu-icon {
+        color: $green;
+    }
+}
+.ivu-btn-text {
+    &:hover {
+        color: $green;
+    }
+}
+.ivu-btn-primary {
+    background-color: $green;
+    border-color: $green;
+    &:hover {
+        background-color: $green;
+        border-color: $green;
     }
 }
 </style>
