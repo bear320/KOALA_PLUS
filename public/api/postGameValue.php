@@ -16,23 +16,24 @@ try{
     mem_food3 = :remaining_amount_3,
     mem_food4 = :remaining_amount_4,
     mem_food5 = :remaining_amount_5,
-    mem_food6 = :remaining_amount_6,
-    WHERE mem_id = :mem_id;";
+    mem_food6 = :remaining_amount_6
+    WHERE mem_id = :mem_id";
     
     
     
     
 	//編譯, 執行
 	$updateGameValue = $pdo->prepare($sql);	
-	$updateGameValue->bindValue(":mem_point", $_POST["game_money"]);
-	$updateGameValue->bindValue(":mem_food1", $_POST["remaining_amount_1"]);
-	$updateGameValue->bindValue(":mem_food2", $_POST["remaining_amount_2"]);
-    $updateGameValue->bindValue(":mem_food3", $_POST["remaining_amount_3"]);
-    $updateGameValue->bindValue(":mem_food4", $_POST["remaining_amount_4"]);
-    $updateGameValue->bindValue(":mem_food5", $_POST["remaining_amount_5"]);
-    $updateGameValue->bindValue(":mem_food6", $_POST["remaining_amount_6"]);
+	$updateGameValue->bindValue(":mem_id", $_POST["memId"]);
+	$updateGameValue->bindValue(":game_money", $_POST["game_money"]);
+	$updateGameValue->bindValue(":remaining_amount_1", $_POST["remaining_amount_1"]);
+	$updateGameValue->bindValue(":remaining_amount_2", $_POST["remaining_amount_2"]);
+    $updateGameValue->bindValue(":remaining_amount_3", $_POST["remaining_amount_3"]);
+    $updateGameValue->bindValue(":remaining_amount_4", $_POST["remaining_amount_4"]);
+    $updateGameValue->bindValue(":remaining_amount_5", $_POST["remaining_amount_5"]);
+    $updateGameValue->bindValue(":remaining_amount_6", $_POST["remaining_amount_6"]);
 	$updateGameValue->execute();
-
+    $msg="Updated";
 }
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
