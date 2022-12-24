@@ -115,7 +115,7 @@
                                     <h3>{{ article.news_title }}</h3>
                                 </template>
                                 <template #article-tag>
-                                    <p>{{ article.news_category }}</p>
+                                    <p>#{{ article.news_category }}</p>
                                 </template>
                                 <template #article-date>
                                     <p>{{ article.news_date }}</p>
@@ -141,7 +141,7 @@
                                 </p>
                                 <div class="date">
                                     <p class="article-tag">
-                                        {{ article.news_category }}
+                                        #{{ article.news_category }}
                                     </p>
                                     <p class="article-date">
                                         {{ article.news_date }}
@@ -767,7 +767,7 @@ body {
                     color: $lightgreen;
                     width: 50%;
                     @include m {
-                        width: 70%;
+                        width: 40%;
                     }
                 }
                 .article-content {

@@ -34,9 +34,9 @@
                         id="artclesCategory"
                         v-model="edit.news_category"
                     >
-                        <option value="最新消息">#最新消息</option>
-                        <option value="園區資訊">#園區資訊</option>
-                        <option value="資金運用">#資金運用</option>
+                        <option value="最新消息">最新消息</option>
+                        <option value="園區資訊">園區資訊</option>
+                        <option value="資金運用">資金運用</option>
                     </select>
                 </div>
                 <div>
@@ -79,6 +79,9 @@ export default {
             const apiURL = new URL(
                 `${BASE_URL}/getArticlePage.php?newsId=${this.$route.params.news_id}`
             );
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/getArticlePage.php?newsId=${this.$route.params.news_id}`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -86,9 +89,10 @@ export default {
                 });
         },
         editArticle() {
-            const newsId = this.$route.params.news_id;
-            console.log(newsId);
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/editArticle.php`
+            // );
             const articleUpdate = {
                 news_id: Number(this.edit.news_id),
                 news_img: this.edit.news_img,

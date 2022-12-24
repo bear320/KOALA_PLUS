@@ -100,6 +100,11 @@ button {
             display: flex;
             color: $lightgreen;
             margin-bottom: 20px;
+            width: 35%;
+            justify-content: space-between;
+            @include m {
+                width: 50%;
+            }
         }
         .content {
             @include m {
