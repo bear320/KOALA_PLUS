@@ -154,6 +154,7 @@
                                 v-model.number="article.news_star"
                             />
                         </label>
+
                         <div class="article">
                             <p>{{ article.news_title }}</p>
                             <p class="article-content">
@@ -174,9 +175,7 @@
                             <router-link
                                 :to="`/bs-article-edit/${article.news_id}`"
                                 target="_blank"
-                                ><img
-                                    src="@/assets/images/icon/edit.svg"
-                                    alt=""
+                                ><img src="@/assets/images/icon/edit.svg"
                             /></router-link>
                             <span style="cursor: pointer" @click="modal = true">
                                 <img
