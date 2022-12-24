@@ -175,9 +175,10 @@ export default {
         },
 
         getMemInfo() {
-            const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getMember.php?"
-            );
+            const apiURL = new URL(`${BASE_URL}/getMember.php`);
+            // const apiURL = new URL(
+            //     "http://localhost/cgd103_g1/public/api/getMember.php?"
+            // );
 
             if (!Object.keys(this.$route.query).length) {
                 this.$route.query.search_orderby = this.selectName;

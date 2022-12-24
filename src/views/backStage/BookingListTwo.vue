@@ -172,7 +172,7 @@ export default {
                 // search_order_by: "rsv_id",
             }; */
 
-            console.log("QQ");
+            // console.log("QQ");
             const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
             // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?",
             fetch(apiURL, {
