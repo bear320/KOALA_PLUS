@@ -80,6 +80,8 @@
 
 <script>
 import html2canvas from "html2canvas";
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     data() {
         return {
@@ -120,13 +122,17 @@ export default {
         },
         postmemAdopt() {
             let getCookie = document.cookie;
+            const apiURL = new URL(`${BASE_URL}/postmemAdopt.php`);
             if (getCookie) {
-                fetch(
+                /* fetch(
                     "http://localhost/cgd103_g1/public/api/postmemAdopt.php",
                     {
                         credentials: "include",
                     }
-                )
+                ) */
+                fetch(apiURL, {
+                    credentials: "include",
+                })
                     .then((res) => res.json())
                     .then((json) => {
                         // if (json.status == 10010) {

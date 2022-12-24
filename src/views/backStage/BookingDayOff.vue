@@ -9,7 +9,11 @@
             <h2>新增休館日期</h2>
         </div>
     </section>
-    <form class="wrapper function-wrapper" enctype="multipart/form-data">
+    <form
+        @submit.prevent="next"
+        class="wrapper function-wrapper"
+        enctype="multipart/form-data"
+    >
         <div class="line">
             <div class="cell">
                 <label for="rsv_date">休館日期：</label>
@@ -89,8 +93,8 @@ export default {
                 rsv_date: this.orderDate,
                 rsv_ppl: 0,
                 rsv_name: "koala+",
-                rsv_mobile: null,
-                rsv_email: null,
+                rsv_mobile: "",
+                rsv_email: "",
                 rsv_status: "休館",
                 rsv_ps: "",
             };

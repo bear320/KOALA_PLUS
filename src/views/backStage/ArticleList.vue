@@ -86,11 +86,21 @@
                                 target="_blank"
                                 ><img src="@/assets/images/icon/edit.svg"
                             /></router-link>
-                            <span @click="deleteArticle(index)">
+                            <span style="cursor: pointer" @click="modal = true">
                                 <img
                                     src="@/assets/images/icon/delete.svg"
                                     alt=""
                             /></span>
+                            <Modal
+                                v-model="modal"
+                                title="刪除文章?"
+                                ok-text="確認"
+                                cancel-text="取消"
+                                @on-ok="deleteArticle(index)"
+                                @on-cancel="cancel"
+                            >
+                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                            </Modal>
                         </div>
                     </div>
                 </section>
@@ -144,6 +154,7 @@
                                 v-model.number="article.news_star"
                             />
                         </label>
+
                         <div class="article">
                             <p>{{ article.news_title }}</p>
                             <p class="article-content">
@@ -164,15 +175,23 @@
                             <router-link
                                 :to="`/bs-article-edit/${article.news_id}`"
                                 target="_blank"
-                                ><img
-                                    src="@/assets/images/icon/edit.svg"
-                                    alt=""
+                                ><img src="@/assets/images/icon/edit.svg"
                             /></router-link>
-                            <span @click="deleteArticle(index)">
+                            <span style="cursor: pointer" @click="modal = true">
                                 <img
                                     src="@/assets/images/icon/delete.svg"
                                     alt=""
                             /></span>
+                            <Modal
+                                v-model="modal"
+                                title="刪除文章?"
+                                ok-text="確認"
+                                cancel-text="取消"
+                                @on-ok="deleteArticle(index)"
+                                @on-cancel="cancel"
+                            >
+                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                            </Modal>
                         </div>
                     </div>
                 </section>
@@ -193,14 +212,15 @@ export default {
             articles: [],
             uploaded: [],
             draft: [],
+            modal: false,
         };
     },
     methods: {
         getArticleList() {
-            // const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
-            const apiURL = new URL(
-                `http://localhost/cgd103_g1/public/api/getArticleList.php`
-            );
+            const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/getArticleList.php`
+            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -215,10 +235,10 @@ export default {
                 });
         },
         marked(index) {
-            // const apiURL = new URL(`${BASE_URL}/editArticle.php`);
-            const apiURL = new URL(
-                `http://localhost/cgd103_g1/public/api/editArticle.php`
-            );
+            const apiURL = new URL(`${BASE_URL}/editArticle.php`);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/editArticle.php`
+            // );
             const news_id = this.articles[index].news_id;
             const news_star = this.articles[index].news_star;
 
@@ -235,27 +255,42 @@ export default {
                     this.resDate = json;
                 });
         },
+        confirmModal() {
+            console.log(this.articles[index].news_id);
+            this.$Modal.confirm({
+                title: "確定要刪除文章?",
+                content: "<p>文章刪除後將無法回復動作，確定要刪除嗎?</p>",
+                okText: "確定",
+                cancelText: "取消",
+                onOk: () => {
+                    this.deleteArticle(index);
+                    this.$Modal.remove();
+                },
+            });
+        },
         deleteArticle(index) {
             console.log(this.articles[index].news_id);
-            // const apiURL = new URL(`${BASE_URL}/deleteArticle.php`);
-            const apiURL = new URL(
-                `http://localhost/cgd103_g1/public/api/deleteArticle.php`
-            );
-            if (confirm("確定要刪除文章?")) {
-                fetch(apiURL, {
-                    method: "POST",
-                    body: new URLSearchParams({
-                        news_id: this.articles[index].news_id,
-                    }),
-                })
-                    .then((res) => res.json())
-                    .then((result) => {
-                        console.log(result);
+            const apiURL = new URL(`${BASE_URL}/deleteArticle.php`);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/deleteArticle.php`
+            // );
 
-                        // alert(result);
-                        location.reload();
-                    });
-            }
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams({
+                    news_id: this.articles[index].news_id,
+                }),
+            })
+                .then((res) => res.json())
+                .then((result) => {
+                    console.log(result);
+                    // alert(result);
+                    location.reload();
+                    this.$Message.info("已刪除文章");
+                });
+        },
+        cancel() {
+            this.$Message.info("已取消");
         },
     },
     created() {
@@ -265,9 +300,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.ivu-tabs-tab-active {
-    color: $green !important;
-}
 html article {
     text-align: left;
 

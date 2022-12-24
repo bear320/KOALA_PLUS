@@ -10,16 +10,18 @@
                 <img src="@/assets/images/icon/FilePlus.svg" alt="" />
             </router-link>
             <div class="search">
-                <input type="search" name="" id="" placeholder="搜尋" />
+                <input
+                    type="search"
+                    name="search"
+                    id="search"
+                    placeholder="搜尋商品編號"
+                    v-model.trim="search"
+                    @input="changeVal"
+                />
             </div>
-            <select name="" id="">
-                <option value="" selected>排列方式</option>
-                <option value="">名字（正序）</option>
-                <option value="">名字（反序）</option>
-                <option value="">編號（反序）</option>
-                <option value="">編號（反序）</option>
-                <option value="">價格（大到小）</option>
-                <option value="">價格（小到大）</option>
+            <select name="sort" id="sort" v-model="sort" @change="changeVal">
+                <option value="0">排列：編號（小到大）</option>
+                <option value="1">排列：編號（大到小）</option>
             </select>
         </div>
     </section>
@@ -33,23 +35,29 @@
             <h3 class="kListed">上 / 下架</h3>
             <h3 class="kEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="koala in koalas" :key="koala.id">
-            <p>{{ koala.id }}</p>
-            <p>{{ koala.name }}</p>
-            <img class="proImg" src="https://fakeimg.pl/300x200/200" />
-            <p>{{ koala.sex }}</p>
-            <p>$300</p>
+        <div class="bs-list" v-for="prod in prods" :key="prod.prod_id">
+            <p>{{ prod.prod_id }}</p>
+            <p>{{ prod.prod_name }}</p>
+            <img
+                class="proImg"
+                :src="require(`@/assets/images/shop/${prod.prod_img1}`)"
+            />
+            <p>{{ prod.prod_category }}</p>
+            <p>{{ prod.prod_price }}</p>
             <p>
                 <Switch
                     size="large"
                     true-color="#337a7d"
-                    v-model="koala.listed"
+                    v-model.number="prod.prod_listed"
+                    :true-value="1"
+                    :false-value="0"
+                    @on-change="switchListed(index)"
                 >
                     <template #open>
-                        <span>ON</span>
+                        <span>上架</span>
                     </template>
                     <template #close>
-                        <span>OFF</span>
+                        <span>下架</span>
                     </template>
                 </Switch>
             </p>
@@ -59,6 +67,20 @@
                 </router-link>
             </p>
         </div>
+    </section>
+    <section class="pagination">
+        <ul>
+            <a @click="prePage"><li>&lt;</li></a>
+            <a
+                v-for="i in totalPage"
+                :class="{ 'is-active': page == i }"
+                :key="i"
+                href="#"
+                @click="changePage(i)"
+                ><li>{{ i }}</li></a
+            >
+            <a @click="nextPage"><li>></li></a>
+        </ul>
     </section>
 </template>
 
@@ -70,56 +92,105 @@ export default {
     },
     data() {
         return {
-            koalas: [
-                {
-                    name: "無尾熊室內拖鞋",
-                    id: "K001",
-                    dob: "2020-03-22",
-                    sex: "生活小物",
-                    listed: true,
-                },
-                {
-                    name: "無尾熊娃娃",
-                    id: "K002",
-                    dob: "2019-05-20",
-                    sex: "玩具/絨毛娃娃",
-                    listed: true,
-                },
-                {
-                    name: "無尾熊室內拖鞋",
-                    id: "K003",
-                    dob: "2019-10-15",
-                    sex: "生活小物",
-                    listed: true,
-                },
-                {
-                    name: "無尾熊衣服",
-                    id: "K004",
-                    dob: "2018-04-08",
-                    sex: "服飾",
-                    listed: true,
-                },
-                {
-                    name: "無尾熊室內拖鞋",
-                    id: "K005",
-                    dob: "2017-07-10",
-                    sex: "生活小物",
-                    listed: true,
-                },
-                {
-                    name: "無尾熊衣服",
-                    id: "K006",
-                    dob: "2015-01-16",
-                    sex: "服飾",
-                    listed: false,
-                },
-            ],
+            sort: 0,
+            prods: [],
+            search: "",
+            totalPage: 0,
+            page: 1,
         };
+    },
+    methods: {
+        prePage() {
+            if (this.page == 1) {
+                return;
+            } else {
+                this.page--;
+                this.getProductList({
+                    search: this.search,
+                    sort: this.sort,
+                    page: this.page,
+                });
+            }
+        },
+        nextPage() {
+            if (this.page === this.totalPage) {
+                return;
+            } else {
+                this.page++;
+                this.getProductList({
+                    search: this.search,
+                    sort: this.sort,
+                    page: this.page,
+                });
+            }
+        },
+        changePage(i) {
+            this.page = i;
+            this.getProductList({
+                search: this.search,
+                sort: this.sort,
+                page: this.page,
+            });
+        },
+        changeVal() {
+            this.getProductList({
+                search: this.search,
+                sort: this.sort,
+                page: this.page,
+            });
+        },
+        getProductList(payload) {
+            const apiURL = new URL(
+                "http://localhost/cgd103_g1/public/api/getProductsList.php"
+            );
+
+            const quertParam = new URLSearchParams(payload);
+            console.log(payload);
+            apiURL.search = quertParam;
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.prods = json.prod;
+                    this.totalPage = Math.ceil(json.prodCount / 10);
+                });
+        },
+    },
+    created() {
+        this.getProductList({
+            search: this.search,
+            sort: this.sort,
+            page: this.page,
+        });
     },
 };
 </script>
 
 <style lang="scss" scoped>
+.pagination {
+    padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
+    }
+}
 .title-n-action {
     margin-bottom: 20px;
     text-align: left;

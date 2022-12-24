@@ -58,23 +58,15 @@
         <section>
             <h2 class="title">News</h2>
             <div class="wrapper articles">
-                <select
-                    name="category"
-                    id="artclesCategory"
-                    v-model="selectedCategory"
-                >
-                    <option value="undefined" selected>所有文章</option>
-                    <option
-                        :value="article.news_category"
-                        v-for="article in articles"
-                        :key="article"
-                    >
-                        {{ article.news_category }}
-                    </option>
+                <select name="category" id="artclesCategory">
+                    <option value="none" selected>所有文章</option>
+                    <option value="最新消息">最新消息</option>
+                    <option value="園區資訊">園區資訊</option>
+                    <option value="資金運用">資金運用</option>
                 </select>
                 <div
                     class="oneArticle"
-                    v-for="(article, idx) in articles"
+                    v-for="(article, idx) in uploaded"
                     :key="article"
                 >
                     <div
@@ -231,6 +223,7 @@ export default {
                 },
             ],
             articles: [],
+            uploaded: [],
             selectedCategory: undefined,
         };
     },
@@ -242,7 +235,9 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.articles = json;
-                    console.log(this.articles);
+                    this.uploaded = this.articles.filter((article) => {
+                        return article.news_status == "1";
+                    });
                 });
         },
         openLightbox(idx) {

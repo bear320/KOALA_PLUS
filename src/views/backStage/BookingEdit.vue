@@ -9,6 +9,31 @@
             <h2>修改預約</h2>
         </div>
     </section>
+    <template>
+        <Button @click="modal1 = true">Custom header and footer</Button>
+        <Modal v-model="modal1" width="360">
+            <template #header>
+                <p style="color: #33717d; text-align: center">
+                    <Icon type="md-checkmark-circle" style="color: #33717d" />
+                    <span style="margin-left: 3px">修改成功</span>
+                </p>
+            </template>
+            <div style="text-align: center">
+                <p>此筆園區導覽預約訂單已經修改成功！</p>
+            </div>
+            <template #footer>
+                <Button
+                    type="sucessed"
+                    size="middle"
+                    width:150px
+                    long
+                    :loading="modal_loading"
+                    @click="del"
+                    >確定</Button
+                >
+            </template>
+        </Modal>
+    </template>
     <form
         class="wrapper function-wrapper"
         action=""
@@ -130,6 +155,7 @@ export default {
     data() {
         return {
             temp: {},
+            modal1: false,
         };
     },
     created() {
@@ -172,9 +198,17 @@ export default {
                     result = JSON.parse(result);
                     console.log(result);
                     // this.callback();
-                    alert(result);
-                    window.close();
+                    // alert(result);
+                    this.modal1 = true;
                 });
+        },
+        del() {
+            setTimeout(() => {
+                this.modal_loading = false;
+                this.modal1 = false;
+                this.$Message.success("Successfully delete");
+                window.close();
+            }, 450);
         },
     },
 };

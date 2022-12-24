@@ -112,6 +112,8 @@
     </li>
 </template>
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     data() {
         return {
@@ -128,7 +130,7 @@ export default {
             if (getCookie) {
                 // const createdurl = "http://localhost/cgd103_g1/public/api/getMember.php?mem_id=1002";
                 // "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
-                fetch("apiURL", {
+                fetch(apiURL, {
                     // method: "POST",
                     // mode: "cors", //same-origin,no-cors,*cors
                     credentials: "include",
@@ -210,14 +212,19 @@ export default {
 
             let getCookie = document.cookie;
             if (getCookie) {
-                fetch(
+                /*  fetch(
                     "http://localhost/cgd103_g1/public/api/editMember.php?type=2",
                     {
                         method: "POST",
                         credentials: "include",
                         body: new URLSearchParams(postMemMainData),
                     }
-                )
+                ) */
+                fetch(`${BASE_URL}/editMember.php?type=2`, {
+                    method: "POST",
+                    credentials: "include",
+                    body: new URLSearchParams(postMemMainData),
+                })
                     .then((res) => res.json())
                     .then((status) => {
                         console.log(status);
@@ -255,14 +262,11 @@ export default {
                 },
             });
             const postsingOut = this.$refs.postsingOut;
-            fetch(
-                "http://localhost/cgd103_g1/public/api/postMemberLogout.php",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    body: new URLSearchParams(postsingOut),
-                }
-            )
+            fetch(`${BASE_URL}/postMemberLogout.php`, {
+                method: "POST",
+                credentials: "include",
+                body: new URLSearchParams(postsingOut),
+            })
                 .then((res) => res.json())
                 .then((status) => {
                     console.log(status);

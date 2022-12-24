@@ -142,7 +142,8 @@ import CartItem from "@/components/cart/CartItem.vue";
 import Coupon from "@/components/cart/Coupon.vue";
 import ModalForTrading from "@/components/ModalForTrading.vue";
 import ModalForSuccess from "@/components/ModalForSuccess.vue";
-import { returnStatement } from "@babel/types";
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     components: {
         Header,
@@ -237,8 +238,21 @@ export default {
 
                 // 要把得到的Prime Token 送給後端,
                 console.log("交易進行中");
-                let payReslut = await fetch(
+                /* let payReslut = await fetch(
                     `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`,
+                    {
+                        method: "post",
+                        body: new URLSearchParams({
+                            mem_id,
+                            coupon_id,
+                            ord_person: this.ordPerson,
+                            ord_phone: this.ordPhone,
+                            ord_add: this.ordAdd,
+                        }),
+                    }
+                ); */
+                let payReslut = await fetch(
+                    `${BASE_URL}/tappay.php?prime=${prime}`,
                     {
                         method: "post",
                         body: new URLSearchParams({

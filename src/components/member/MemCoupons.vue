@@ -66,6 +66,8 @@
     </li>
 </template>
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     data() {
         return {
@@ -108,14 +110,20 @@ export default {
                 search_orderby: iconorderby,
             };
             console.log(postMemSearch);
-            fetch(
+
+            /* fetch(
                 "http://localhost/cgd103_g1/public/api/postmemCoupons.php?type=front",
                 {
                     method: "POST",
                     credentials: "include",
                     body: new URLSearchParams(postMemSearch),
                 }
-            )
+            ) */
+            fetch(`${BASE_URL}/postmemCoupons.php?type=front`, {
+                method: "POST",
+                credentials: "include",
+                body: new URLSearchParams(postMemSearch),
+            })
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);
@@ -133,12 +141,15 @@ export default {
             let getCookie = document.cookie;
             console.log(getCookie);
             if (getCookie) {
-                fetch(
+                /* fetch(
                     "http://localhost/cgd103_g1/public/api/postmemCoupons.php",
                     {
                         credentials: "include",
                     }
-                )
+                ) */
+                fetch(`${BASE_URL}/postmemCoupons.php`, {
+                    credentials: "include",
+                })
                     .then((res) => res.json())
                     .then((json) => {
                         // console.log(json);
