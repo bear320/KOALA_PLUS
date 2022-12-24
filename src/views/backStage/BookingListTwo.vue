@@ -126,7 +126,7 @@ export default {
     data() {
         return {
             booklist: [],
-            totalPage: 0,
+            // totalPage: ,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
             selectName: "",
             lists: [
@@ -316,7 +316,7 @@ export default {
                 this.booklist = json;
             });
     },
-    /* computed: {
+    computed: {
         totalPage() {
             return Math.ceil(this.booklist.length / 10);
         },
@@ -326,7 +326,7 @@ export default {
                 this.currentPage * 10
             );
         },
-    }, */
+    },
 };
 </script>
 

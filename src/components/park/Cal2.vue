@@ -270,7 +270,7 @@ export default {
         },
 
         chooseDate(yy, mm, dd) {
-            if (this.notBookDate[`${yy}-${mm}-${dd}`]) return;
+            
             let newMM = mm.toString();
             if (newMM.length < 2) {
                 newMM = "0" + newMM;
@@ -279,6 +279,7 @@ export default {
             if (newDD.length < 2) {
                 newDD = "0" + newDD;
             }
+            if (this.notBookDate[`${yy}-${newMM}-${newDD}`]) return;
 
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
