@@ -43,9 +43,9 @@ export default {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
                 // thisvue.errorFlag = true;
             } else {
-                const apiURL = new URL(`${BASE_URL}/getAdminLogin.php`);
-                // "http://localhost/cgd103_g1/public/api/getAdminLogin.php"
-                fetch(apiURL,
+                // const apiURL = new URL(`${BASE_URL}/getAdminLogin.php`);
+                "http://localhost/cgd103_g1/public/api/getAdminLogin.php"
+                fetch(url,
                     {
                         method: "post",
                         credentials: "include",

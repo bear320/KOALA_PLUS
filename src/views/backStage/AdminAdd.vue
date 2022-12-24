@@ -91,14 +91,14 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up() {
-            const apiURL = new URL(`${BASE_URL}/getAdminAdd.php`);
-            // let url="http://localhost/cgd103_g1/public/api/getAdminAdd.php";
+            // const apiURL = new URL(`${BASE_URL}/getAdminAdd.php`);
+            let url="http://localhost/cgd103_g1/public/api/getAdminAdd.php";
             const signUpContent = {
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
             
-            fetch(apiURL,
+            fetch(url,
             {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
