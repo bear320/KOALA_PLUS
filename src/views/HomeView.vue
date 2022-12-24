@@ -99,7 +99,7 @@
                 <div class="newscards">
                     <div
                         class="card article"
-                        v-for="(article, idx) in articles"
+                        v-for="(article, idx) in uploaded"
                         :key="article"
                     >
                         <teleport to="body">
@@ -182,6 +182,7 @@ export default {
             offsets: [],
             touchStartY: 0,
             articles: [],
+            uploaded: [],
         };
     },
     mounted() {
@@ -195,7 +196,12 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.articles = json;
-                    console.log(this.articles);
+                    this.uploaded = this.articles
+                        .filter((article) => {
+                            return article.news_status == "1";
+                        })
+                        .sort((a, b) => b.news_date - a.news_date)
+                        .slice(0, 3); //取得最新三筆
                 });
         },
 
