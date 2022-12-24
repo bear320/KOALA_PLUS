@@ -153,8 +153,12 @@
             </div>
         </div>
     </section>
-    <ModalForTrading style="display: none"></ModalForTrading>
-    <ModalForSuccess style="display: none"></ModalForSuccess>
+    <ModalForTrading
+        :style="{ display: isTrading ? 'flex' : 'none' }"
+    ></ModalForTrading>
+    <ModalForSuccess
+        :style="{ display: isDone ? 'flex' : 'none' }"
+    ></ModalForSuccess>
     <Footer></Footer>
 </template>
 
@@ -180,15 +184,6 @@ export default {
             source: [],
             plans: [
                 {
-                    pName: "認養單隻無尾熊",
-                    pPrice: 1000,
-                    pPoint: 1000,
-                    pGift1: "物美價廉的尤加利葉",
-                    pGift2: "熱銷第一的尤加利葉",
-                    pDesc: "領養單隻無尾熊，可自行選擇欲幫助之無尾熊，捐贈之款項將會專款專用，用於該隻無尾熊醫療、照護等相關費用。",
-                    pBtn: "立即認養",
-                },
-                {
                     pName: "資助所有無尾熊",
                     pPrice: 300,
                     pPoint: 300,
@@ -196,6 +191,15 @@ export default {
                     pGift2: "物美價廉的尤加利葉",
                     pDesc: "資助園區內所有無尾熊，捐贈之款項將會用於維護園區設備、採購醫療用品、種植尤加利樹及支持無尾熊相關之研究計畫等。",
                     pBtn: "立即資助",
+                },
+                {
+                    pName: "認養單隻無尾熊",
+                    pPrice: 1000,
+                    pPoint: 1000,
+                    pGift1: "物美價廉的尤加利葉",
+                    pGift2: "熱銷第一的尤加利葉",
+                    pDesc: "領養單隻無尾熊，可自行選擇欲幫助之無尾熊，捐贈之款項將會專款專用，用於該隻無尾熊醫療、照護等相關費用。",
+                    pBtn: "立即認養",
                 },
             ],
             supType: 0,
@@ -247,6 +251,8 @@ export default {
 
         // 觸發取得狀態
         async onSubmit() {
+            this.$refs["closeBtn"].style.display = "none";
+            this.isTrading = true;
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
             if (tappayStatus.canGetPrime === false) {
                 // can not get prime
@@ -294,6 +300,8 @@ export default {
 
                 if (payStatus.status === 0) {
                     console.log("付款成功");
+                    this.isTrading = false;
+                    this.isDone = true;
                 } else {
                     console.log("付款失敗");
                 }

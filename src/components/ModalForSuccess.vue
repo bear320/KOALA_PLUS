@@ -1,7 +1,8 @@
 <template>
-    <section class="modal">
+    <section class="modal" ref="modalSuccess">
         <div class="successModal">
             <div class="modal-wrapper">
+                <div class="close" @click="closeModal">×</div>
                 <div class="successAnimation">
                     <svg
                         class="checkmark success"
@@ -40,7 +41,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+    methods: {
+        closeModal() {
+            this.$refs["modalSuccess"].style.display = "none";
+        },
+    },
+};
 </script>
 
 <style lang="scss" scoped>
@@ -73,6 +80,19 @@ $success-size: 80px;
             align-items: center;
             justify-content: center;
             row-gap: 20px;
+            position: relative;
+
+            .close {
+                font-size: 20px;
+                color: $font_color;
+                position: absolute;
+                top: 5px;
+                right: 10px;
+
+                &:hover {
+                    cursor: pointer;
+                }
+            }
 
             .successAnimation {
                 .checkmark_circle_success {
@@ -163,12 +183,6 @@ $success-size: 80px;
                         border-radius: 10px;
                         border: 1px solid $green;
                     }
-                    // &:nth-child(2) {
-                    //     h4 {
-                    //         color: #fff;
-                    //         background-color: $green;
-                    //     }
-                    // }
                 }
             }
         }
