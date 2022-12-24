@@ -95,7 +95,7 @@
                         </button>
                         <div class="tag">
                             <p class="article-tag">
-                                {{ article.news_category }}
+                                #{{ article.news_category }}
                             </p>
                             <p class="article-date">{{ article.news_date }}</p>
                         </div>
