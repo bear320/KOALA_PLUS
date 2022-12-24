@@ -281,7 +281,7 @@ export default {
                 // 要把得到的Prime Token 送給後端,
                 console.log("交易進行中");
                 let payReslut = await fetch(
-                    `http://localhost:8888/cgd103_g1/public/api/tappaySupport.php?prime=${prime}`,
+                    `${BASE_URL}/tappaySupport.php?prime=${prime}`,
                     {
                         method: "post",
                         body: new URLSearchParams({
