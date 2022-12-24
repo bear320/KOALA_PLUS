@@ -234,10 +234,28 @@ export default {
             //     });
         },
         deleteList(index) {
+            this.$Modal.confirm({
+                title: "刪除訂單",
+                content: "<p>確定要刪除這筆園區導覽預約訂單？</p>",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info("這筆預約訂單已刪除");
+                    }, 2000);
+                    this.deleteFetch(index);
+                },
+                onCancel: () => {
+                    this.$Message.info("已取消");
+                },
+            });
+
             // console.log(this.booklist[index].rsv_id);
             // const apiURL = new URL(
             //     `http://localhost/cgd103_g1/public/api/deleteRsv.php`
             // );
+        },
+        deleteFetch(index) {
             const apiURL = new URL(`${BASE_URL}/deleteRsv.php`);
 
             fetch(apiURL, {
@@ -252,9 +270,25 @@ export default {
                     // console.log(this.booklist);
 
                     // this.callback();
-                    alert(result);
+                    // alert(result);
                     location.reload();
+                    console.log(result);
                 });
+        },
+        async() {
+            this.$Modal.confirm({
+                title: "Title",
+                content: "<p>The dialog box will be closed after 2 seconds</p>",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info(
+                            "Asynchronously close the dialog box"
+                        );
+                    }, 2000);
+                },
+            });
         },
         search_func() {
             const postDateSearch = {
@@ -331,6 +365,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.ivu-icon {
+    width: 100%;
+}
+.ivu-modal-confirm {
+    .ivu-modal-confirm-head {
+        .ivu-modal-confirm-head-icon {
+            .ivu-icon {
+                color: #07617d;
+            }
+        }
+    }
+    .ivu-btn-text {
+        &:hover {
+            color: #07617d;
+        }
+    }
+    .ivu-btn-primary {
+        background-color: $green;
+        border-color: $green;
+        &:hover {
+            background-color: $green;
+            border-color: $green;
+        }
+    }
+}
 .title-n-action {
     margin-bottom: 20px;
     text-align: left;

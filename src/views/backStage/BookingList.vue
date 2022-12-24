@@ -144,11 +144,26 @@ export default {
                 .then((result) => {
                     console.log(result);
                     // console.log(this.booklist);
-
                     // this.callback();
-                    alert(result);
-                    location.reload();
+                    // alert(result);
+                    this.async();
+                    // location.reload();
                 });
+        },
+        async() {
+            this.$Modal.confirm({
+                title: "Title",
+                content: "<p>The dialog box will be closed after 2 seconds</p>",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info(
+                            "Asynchronously close the dialog box"
+                        );
+                    }, 2000);
+                },
+            });
         },
         prePage() {
             if (this.currentPage == 1) {
