@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     data() {
         return {
@@ -42,8 +43,9 @@ export default {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
                 // thisvue.errorFlag = true;
             } else {
-                fetch(
-                    "http://localhost/cgd103_g1/public/api/getAdminLogin.php",
+                const apiURL = new URL(`${BASE_URL}/getAdminLogin.php`);
+                // "http://localhost/cgd103_g1/public/api/getAdminLogin.php"
+                fetch(apiURL,
                     {
                         method: "post",
                         credentials: "include",

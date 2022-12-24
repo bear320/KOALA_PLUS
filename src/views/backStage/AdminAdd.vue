@@ -27,6 +27,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -90,13 +91,14 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up() {
-            let url="http://localhost/cgd103_g1/public/api/getAdminAdd.php";
+            const apiURL = new URL(`${BASE_URL}/getAdminAdd.php`);
+            // let url="http://localhost/cgd103_g1/public/api/getAdminAdd.php";
             const signUpContent = {
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
             
-            fetch(url,
+            fetch(apiURL,
             {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),

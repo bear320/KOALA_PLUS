@@ -339,6 +339,7 @@
 
 <script>
 import Header from "@/components/header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -426,16 +427,18 @@ export default {
             };
 
             // console.log(this.$store.state.user.mem_id);
-
-            var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
-            xhr.open("get", url, true);
+            
+            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user.mem_id}`);
+            // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
 
             function showMember(json) {
                 var xhr = new XMLHttpRequest();
                 // console.log(QQ);
-                var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`
-                xhr.open("get", url, true);
+                const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`);
+                // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`
+                xhr.open("get", apiURL, true);
                 xhr.send(null);
                 let member = JSON.parse(json);
 
@@ -663,7 +666,8 @@ export default {
             }
         },
         postData() {
-            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
+            const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
+            // let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
             const gameValueContent = {
                 memId: this.$store.state.user.mem_id,
                 game_money: this.game_money,
@@ -675,7 +679,7 @@ export default {
                 remaining_amount_6: this.remaining_amount_6,
             };
 
-            fetch(url, {
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(gameValueContent),
             })

@@ -264,6 +264,7 @@
 <script>
 import Header from "@/components/header.vue";
 import emailjs from "emailjs-com";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
@@ -412,14 +413,15 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up2() {
-            let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
+            // let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
+            const apiURL = new URL(`${BASE_URL}/getSignUp.php`)
             const signUpContent = {
                 userName: this.sign_up_userName,
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
 
-            fetch(url, {
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
@@ -438,10 +440,9 @@ export default {
                 // console.log("=====",xhr.status);
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
-            let url =
-                "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
-                document.getElementById("mem_account").value;
-            xhr.open("get", url, true);
+            const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
+            //  url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
         },
 
@@ -485,19 +486,17 @@ export default {
                 }
             };
 
-            var url =
-                "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-                document.getElementById("forget_password_account").value;
-            xhr.open("get", url, true);
+            const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
+            // var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
 
             function showMember(json) {
                 var xhr = new XMLHttpRequest();
 
-                var url =
-                    "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-                    document.getElementById("forget_password_account").value;
-                xhr.open("get", url, true);
+                const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
+                // var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+                xhr.open("get", apiURL, true);
                 xhr.send(null);
                 let member = JSON.parse(json);
                 let html;
