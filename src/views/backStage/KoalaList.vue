@@ -222,8 +222,15 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
+                    // alert(status.msg);
+                    this.open(true);
                 });
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "✔　無尾熊上／下架狀態已切換",
+                desc: nodesc ? "" : "無尾熊上／下架狀態已切換",
+            });
         },
     },
     created() {
