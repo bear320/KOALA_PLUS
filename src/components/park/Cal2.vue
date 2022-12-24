@@ -3,7 +3,7 @@
     第一天星期{{ emptyDay }} 現在{{ thisMonth + 1 }}月 -->
     <div class="calender-wrapper" id="calender" ref="calender">
         <h2>{{ thisMonth + 1 }}月</h2>
-<weather></weather>
+
         <table align="center">
             <div class="button-wrapper">
                 <button class="btn-lowest" @click="preMonth()">上個月</button>
@@ -85,7 +85,7 @@
             v-if="showForm"
             @closeForm="closeTable"
         ></booking-form>
-        <button @click="showSearchForm" class="showSearchForm btn-secondary">查詢預約</button>
+        <button  @click="showSearchForm" class="showSearchForm btn-secondary">查詢預約</button>
         <search-form v-if="showSearch" @closeList="closeTable"></search-form>
         
         <div class="notice">
@@ -179,14 +179,14 @@ export default {
     methods: {
         getResvDetail() {
             // const productId = this.$route.params.id;
-            console.log('QQ');
+            // console.log('QQ');
             const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    // console.log(json);
                     this.notBookDate = json.notBookDate;
-                    console.log(this.notBookDate);
+                    // console.log(this.notBookDate);
                 })
                
         },
@@ -218,9 +218,9 @@ export default {
             }
             this.allDay = days;
 
-            console.log(firstDate);
+/*             console.log(firstDate);
             console.log(days);
-            console.log((firstDate.getDay() + days) % 7);
+            console.log((firstDate.getDay() + days) % 7); */
             this.lastEmptyDay = 7 - [(firstDate.getDay() + days) % 7];
             if (this.lastEmptyDay > 6) {
                 this.lastEmptyDay = 0;
@@ -281,8 +281,8 @@ export default {
 
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
             this.showForm = true;
-            console.log(newDD);
-            console.log(newMM);
+     /*        console.log(newDD);
+            console.log(newMM); */
         },
         closeTable() {
             this.showForm = false;
@@ -290,7 +290,7 @@ export default {
            
         },
         showSearchForm(){
-            console.log("openJohn");
+            // console.log("openJohn");
             this.showSearch=true;
 
 
@@ -384,8 +384,11 @@ li {
 }
 .showSearchForm {
     margin-top: 30px;
+    height: 40px;
     padding: 0 10px;
+    text-align: center;
 }
+
 
 @media screen and (max-width: 1200px) {
     table {

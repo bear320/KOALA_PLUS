@@ -1,21 +1,38 @@
 <template lang="">
     <div class="book-form" v-if="showForm">
-        <form id="search-form" action="post" data-form-storage="true">
+        <form
+            id="search-form"
+            action="submit"
+            method="post"
+            data-form-storage="true"
+            @submit.prevent="next"
+            ref="form"
+            enctype="multipart/form-data"
+        >
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
             <button id="close" @click="closeList">X</button>
 
             <div class="form-group">
-                <label for="mobile">手機</label>
+                <label for="mobile">手機號碼</label>
                 <input
-                    type="text"
-                    placeholder="搜尋"
+                    type="tel"
+                    name="mobile"
+                    id="mobile"
+                    placeholder="請輸入您的手機號碼查詢"
                     v-model="searchText"
-                    @change.lazy="searchProduct"
+                    required
+                    minlength="10"
+                    maxlength="10"
+                    pattern="^09\d{8}$"
                 />
             </div>
 
-            <button type="submit" class="btn btn-primary" @click.prevent="next">
+            <button
+                type="submit"
+                class="btn btn-primary"
+                @submit.prevent="next"
+            >
                 確認查詢
             </button>
 
@@ -40,7 +57,7 @@
             </div>
 
             <div class="orderList" v-show="noOrder">
-                <div class="order-info">查詢不到您的預約唷！</div>
+                <div class="order-info">查詢不到這筆預約唷！</div>
                 <button @click="closeList" class="btn-primary ok-btn">
                     確認
                 </button>
@@ -60,16 +77,25 @@ export default {
             noOrder: false,
         };
     },
-    computed: {},
+    computed: {
+        isAllFilled() {
+            return this.searchText;
+        },
+    },
     created() {},
     methods: {
         closeIt() {
             this.showForm = false;
-            console.log(this.msg);
-            console.log(this.orderDate);
+            // console.log(this.msg);
+            // console.log(this.orderDate);
         },
         next() {
             console.log(this.searchText);
+            if (!this.$refs.form.checkValidity()) {
+                // alert("手機號碼不正確");
+                return;
+            }
+
             // const productId = this.$route.params.id;
             const payload = {
                 rsv_id: this.temp.rsv_id,
@@ -108,7 +134,7 @@ export default {
     },
 };
 </script>
-<style scoped>
+<style lang="scss" scoped>
 .book-form {
     width: 700px;
     height: 400px;
@@ -131,16 +157,18 @@ h2 {
     right: 1.5%;
     top: 1.5%;
     border: 0;
-    background-color: #f8f8f8;
     font-size: 28px;
-    font-weight: 600;
-    color: #d0e8ea;
-    border: #f8f8f8 2px solid;
-    border-radius: 50%;
+    font-weight: 500;
+    color: #337a7d;
+    background-color: transparent;
     cursor: pointer;
     z-index: 3;
     text-align: center;
     width: 32px;
+}
+#close:hover {
+    color: #07617d;
+    shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
 }
 
 .form-group {
@@ -202,13 +230,15 @@ h2 {
 }
 
 .btn {
-    margin: 10px;
-    width: 100px;
-    height: 40px;
-    border-radius: 10px;
-    background-color: #337a7d;
-    color: white;
-    cursor: pointer;
+    @extend %btn;
+    background-color: $btn-light-color;
+    margin: 50px;
+    padding: 5px 10px;
+
+    &:hover {
+        background-color: $btn-color;
+        color: white;
+    }
 }
 
 @media screen and (max-width: 768px) {

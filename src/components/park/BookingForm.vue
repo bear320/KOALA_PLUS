@@ -4,9 +4,10 @@
             ref="form"
             id="bookingForm"
             data-form-storage="true"
+            action="submit"
             enctype="multipart/form-data"
             method="post"
-            @submit="sendEmail"
+            @submit.prevent="sendEmail"
         >
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
@@ -18,8 +19,9 @@
                     class="form-control"
                     id="rsv_name"
                     name="user_name"
-                    placeholder="booking name"
+                    placeholder="預約人姓名"
                     v-model.trim="name"
+                    required="required"
                 />
             </div>
             <div class="form-group">
@@ -29,8 +31,11 @@
                     class="form-control"
                     id="rsv_mobile"
                     name="mobile"
-                    placeholder="mobile"
+                    placeholder="請輸入10位手機號碼，如0912345678"
                     v-model="mobile"
+                    required="required"
+                    maxlength="10"
+                    pattern="09\d{8}"
                 />
             </div>
             <div class="form-group">
@@ -42,6 +47,8 @@
                     name="user_email"
                     placeholder="name@example.com"
                     v-model="email"
+                    required="required"
+                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$"
                 />
             </div>
             <div class="form-group">
@@ -51,31 +58,13 @@
                     id="rsv_ppl"
                     name="people"
                     v-model="people"
+                    required
                 >
                     <option disabled value="">選擇人數</option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                    <option value="6">6</option>
-                    <option value="7">7</option>
-                    <option value="8">8</option>
-                    <option value="9">9</option>
-                    <option value="10">10</option>
-                    <option value="11">11</option>
-                    <option value="12">12</option>
-                    <option value="13">13</option>
-                    <option value="14">14</option>
-                    <option value="15">15</option>
-                    <option value="16">16</option>
-                    <option value="17">17</option>
-                    <option value="18">18</option>
-                    <option value="19">19</option>
-                    <option value="20">20</option>
+                    <option v-for="i in 20" :key="i" :value="i">{{ i }}</option>
                 </select>
             </div>
-            <div class="rsv_date">
+            <div class="form-group rsv_date">
                 <label for="start">預約日期:</label>
                 <input
                     type="date"
@@ -84,24 +73,35 @@
                     name="time"
                     v-model="orderDate"
                     min="2022-01-01"
-                    max="2023-12-31"
+                    max="2024-12-31"
                 />
-                <label for="">您選擇的預約日期： {{ orderDate }}</label>
+                <label for="chooseDay"
+                    >您選擇的預約日期： {{ orderDate }}</label
+                >
+                <div
+                    v-for="(item, index) in tempWx"
+                    v-show="`${orderDate + ' ' + '18:00:00'}` == item.time"
+                >
+                    當日最低溫度：{{ item.test }} °C 當日氣候：{{
+                        item.elValue
+                    }}
+                </div>
+                <!-- {{ tempWx[0] }} -->
             </div>
-
+            <!-- @click="next" -->
             <button
                 type="submit"
                 value="Send"
                 class="btn btn-primary"
-                @click.prevent="next"
+                @click="next"
             >
                 確認預約
             </button>
 
             <div class="orderList" v-show="isOrder">
                 <div class="order-info">
-                    <!-- 預約編號：No.{{ orderDate }} -->
-                    <!-- <br /> -->
+                    "您的預約明細已寄至信箱！"
+                    <br />
                     預約日期：{{ orderDate }}
                     <br />
                     姓名：{{ name }}
@@ -144,6 +144,7 @@ export default {
             orderDate: this.msg,
             isShow: false,
             isOrder: false,
+            tempWx: {},
         };
     },
     computed: {
@@ -152,6 +153,12 @@ export default {
         //             display: this.isShow ? "" : "none",
         //         };
         //     },
+        isAllFilled() {
+            return this.email && this.name && this.mobile;
+        },
+    },
+    created() {
+        this.getWeatherData();
     },
     methods: {
         sendEmail() {
@@ -186,7 +193,7 @@ export default {
             console.log(this.orderDate);
         },
         next() {
-            console.log("next");
+            if (!this.$refs.form.checkValidity()) return;
             this.isOrder = true;
             const payload = {
                 rsv_date: this.orderDate,
@@ -204,9 +211,8 @@ export default {
             })
                 .then((res) => res.text())
                 .then((result) => {
-                    console.log("QQ", result);
                     result = JSON.parse(result);
-                    alert(result);
+                    // alert(result);
                     this.callback();
                 });
             emailjs
@@ -230,6 +236,35 @@ export default {
                         console.log("FAILED...", error.text);
                     }
                 );
+        },
+        getWeatherData() {
+            fetch(
+                "https://opendata.cwb.gov.tw/api/v1/rest/datastore/F-D0047-007?Authorization=CWB-7DF0CD1C-E933-4927-95D1-99C3EC894A8C&format=JSON&locationName=%E4%B8%AD%E5%A3%A2%E5%8D%80&elementName=MinT,Wx&sort=time"
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    // console.log(json.records.locations);
+                    let [QQ] = json.records.locations;
+                    // console.log(QQ.location);
+                    let [ZZ] = QQ.location;
+                    // console.log(ZZ.weatherElement);
+                    let test = ZZ.weatherElement;
+                    let wx = ZZ.weatherElement;
+                    let tempWx = wx[0].time.map((item, index) => {
+                        return {
+                            time: item.startTime,
+                            elValue: item.elementValue[0].value,
+                            test: wx[1].time[index].elementValue[0].value,
+                            // .slice(0, 10),
+                        };
+                    });
+                    console.log("tt", tempWx);
+                    this.tempWx = tempWx;
+
+                    console.log("TIME", tempWx[0].time);
+
+                    // this.weather = this.tempWx;
+                });
         },
     },
 };
