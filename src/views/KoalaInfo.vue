@@ -55,6 +55,8 @@
                     :pDesc="plan.pDesc"
                     :pBtn="plan.pBtn"
                     :index="index"
+                    :supKoalaId="this.source.koala_id"
+                    @show-pay-box="showPayBox"
                 ></PlanCard>
             </div>
         </div>
@@ -126,6 +128,31 @@
             </Panel>
         </Collapse>
     </section>
+    <section
+        class="pay-box"
+        ref="closeBtn"
+        style="display: none"
+        @submit.prevent
+    >
+        <div class="tappay-wrapper">
+            <div class="close" @click="closePayBox">×</div>
+            <h4 class="payLabel">信用卡卡號：</h4>
+            <div class="tpfield" id="card-number" ref="number"></div>
+            <h4 for="card-number" class="payLabel">卡片到期日：</h4>
+            <div
+                class="tpfield"
+                id="card-expiration-date"
+                ref="expirationDate"
+            ></div>
+            <h4 for="card-number" class="payLabel">卡片安全碼(CCV)：</h4>
+            <div class="tpfield" id="card-ccv" ref="ccv"></div>
+            <div class="btn-wrapper">
+                <button type="submit" class="tappay-btn" @click="onSubmit">
+                    現在付款
+                </button>
+            </div>
+        </div>
+    </section>
     <ModalForTrading style="display: none"></ModalForTrading>
     <ModalForSuccess style="display: none"></ModalForSuccess>
     <Footer></Footer>
@@ -171,6 +198,10 @@ export default {
                     pBtn: "立即資助",
                 },
             ],
+            supType: 0,
+            koalaId: 0,
+            isTrading: false,
+            isDone: false,
         };
     },
     methods: {
@@ -191,9 +222,186 @@ export default {
                     // alert(error);
                 });
         },
+        updateStatus(field) {
+            switch (field) {
+                case 0:
+                    //欄位已填好，並且沒有問題
+                    console.log("field is ok");
+                    break;
+                case 1:
+                    //欄位還沒有填寫
+                    console.log("field is empty");
+                    break;
+                case 2:
+                    //欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor
+                    console.log("field has error");
+                    break;
+                case 3:
+                    //使用者正在輸入中
+                    console.log("usertyping");
+                    break;
+                default:
+                    console.log("error!");
+            }
+        },
+
+        // 觸發取得狀態
+        async onSubmit() {
+            const tappayStatus = TPDirect.card.getTappayFieldsStatus();
+            if (tappayStatus.canGetPrime === false) {
+                // can not get prime
+                this.open(false);
+                return;
+            }
+
+            // Get prime
+            TPDirect.card.getPrime((result) => {
+                if (result.status !== 0) {
+                    // get prime error
+                    console.log(result.msg);
+                    return;
+                }
+
+                let prime = result.card.prime;
+                console.log(prime);
+                this.submitPrime(prime);
+            });
+        },
+
+        async submitPrime(prime) {
+            try {
+                const mem_id = this.$store.state.user.mem_id;
+
+                // 要把得到的Prime Token 送給後端,
+                console.log("交易進行中");
+                let payReslut = await fetch(
+                    `http://localhost:8888/cgd103_g1/public/api/tappaySupport.php?prime=${prime}`,
+                    {
+                        method: "post",
+                        body: new URLSearchParams({
+                            mem_id,
+                            type: this.supType,
+                            koala_id: this.koalaId,
+                        }),
+                    }
+                );
+
+                // 不明白為何回傳的是字串
+                let resText = await payReslut.json();
+                // 這邊再把他轉為json物件
+                let payStatus = JSON.parse(resText);
+                console.log(payStatus);
+
+                if (payStatus.status === 0) {
+                    console.log("付款成功");
+                } else {
+                    console.log("付款失敗");
+                }
+            } catch (err) {
+                console.log(err);
+            }
+        },
+        showPayBox({ type, id }) {
+            this.$refs["closeBtn"].style.display = "flex";
+            this.supType = type;
+            this.koalaId = id;
+            console.log(type, id);
+        },
+        closePayBox() {
+            this.$refs["closeBtn"].style.display = "none";
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "付款資訊填寫有誤／不完整",
+                desc: nodesc ? "" : "請確認付款資訊欄位是否正確且完整填寫！",
+            });
+        },
     },
     created() {
         this.getKoalaInfo();
+    },
+    mounted() {
+        TPDirect.setupSDK(
+            126868,
+            "app_DW5s6l3IyRtBeiHXgHJ1zWvEIl3gC6Dzb38wl1f4mPHSTMvvha462aLYzU1X",
+            "sandbox"
+        );
+        const fields = {
+            number: {
+                element: this.$refs.number,
+                placeholder: "**** **** **** ****",
+                required: true,
+            },
+            expirationDate: {
+                element: this.$refs.expirationDate,
+                placeholder: "MM/YY",
+                required: true,
+            },
+            ccv: {
+                element: this.$refs.ccv,
+                placeholder: "後三碼",
+                required: true,
+            },
+        };
+
+        TPDirect.card.setup({
+            fields: fields,
+            styles: {
+                // Style all elements
+                input: {
+                    color: "gray",
+                    "font-size": "18px",
+                    "line-height": "1.5",
+                },
+                // Styling ccv field
+                "input.cvc": {
+                    "font-size": "18px",
+                    height: "10px",
+                },
+                // Styling expiration-date field
+                "input.expiration-date": {
+                    "font-size": "18px",
+                },
+                // Styling card-number field
+                "input.card-number": {
+                    "font-size": "18px",
+                },
+                // Styling placeholder
+                "::placeholder": {
+                    color: "#c4cdd4",
+                },
+                // style focus state
+                ":focus": {
+                    color: "#33717d",
+                },
+                // style valid state
+                ".valid": {
+                    color: "#33717d",
+                },
+                // style invalid state
+                ".invalid": {
+                    color: "IndianRed",
+                },
+                // Media queries
+                // Note that these apply to the iframe, not the root window.
+                "@media screen and (max-width: 400px)": {
+                    input: {
+                        color: "#33717d",
+                    },
+                },
+            },
+        });
+
+        TPDirect.card.onUpdate((update) => {
+            if (update.canGetPrime) {
+                //全部欄位皆為正確 可以呼叫 getPrime
+                console.log("已填滿");
+                this.CardInfoFilled = true;
+            } else {
+                console.log("尚未填滿");
+                this.CardInfoFilled = false;
+            }
+        });
     },
 };
 </script>
@@ -317,6 +525,84 @@ export default {
         }
         @include m() {
             width: 100%;
+        }
+    }
+}
+
+.pay-box {
+    width: 100%;
+    height: 100%;
+    background-color: #0005;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .tappay-wrapper {
+        box-sizing: border-box;
+        padding: 30px;
+        border-radius: 10px;
+        background-color: #fff;
+        box-shadow: 0 0 10px 0 rgba(255, 255, 255, 0.2);
+        position: relative;
+
+        .close {
+            font-size: 20px;
+            color: $font_color;
+            position: absolute;
+            top: 5px;
+            right: 10px;
+
+            &:hover {
+                cursor: pointer;
+            }
+        }
+
+        .payLabel {
+            text-align: left;
+        }
+
+        .tpfield {
+            height: 40px;
+            width: 100%;
+            margin: 5px 0 30px;
+            padding: 5px;
+            border-radius: 10px;
+            border: 1px solid $btn-light-color;
+            background-color: #fff;
+
+            iframe {
+                font: font-R 18px;
+            }
+        }
+
+        .btn-wrapper {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            .tappay-btn {
+                padding: 5px 20px;
+                border-radius: 10px;
+                border: solid 0.5px $btn-color;
+                font-size: 1.2rem;
+                color: $bg-color;
+                background-color: $btn-color;
+                box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+                cursor: pointer;
+                user-select: none;
+
+                &:hover {
+                    font-weight: 700;
+                }
+
+                &:active {
+                    box-shadow: 0px 2px 2px 2px rgba(149, 149, 149, 0.2),
+                        inset 0px 2px 2px 2px rgba(149, 149, 149, 0.2);
+                }
+            }
         }
     }
 }

@@ -17,7 +17,7 @@
                 <li>{{ pGift2 }} * 1</li>
             </ul>
             <h4>{{ pDesc }}</h4>
-            <button class="btn-secondary" @click="showIndex(index)">
+            <button class="btn-secondary" @click="clickToPay(index)">
                 {{ pBtn }}
             </button>
         </div>
@@ -35,13 +35,51 @@ export default {
         "pDesc",
         "pBtn",
         "index",
+        "supKoalaId",
     ],
     data() {
-        return {};
+        return {
+            type: 0,
+            koala_id: 0,
+        };
     },
     methods: {
-        showIndex(i) {
-            alert(i);
+        clickToPay(i) {
+            if (this.$store.state.user == null) {
+                this.open(false);
+                return;
+            } else {
+                switch (i) {
+                    case 0:
+                        this.type = 0;
+                        this.koala_id = 2001;
+                        this.$emit("show-pay-box", {
+                            type: this.type,
+                            id: this.koala_id,
+                        });
+                        break;
+
+                    case 1:
+                        this.type = 1;
+                        this.koala_id = +this.supKoalaId;
+                        this.$emit("show-pay-box", {
+                            type: this.type,
+                            id: this.koala_id,
+                        });
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "請登入會員",
+                desc: nodesc
+                    ? ""
+                    : `需先登入會員方可進行資助／認養，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`,
+            });
         },
     },
 };
