@@ -114,7 +114,7 @@
 <script>
 import BookingForm from "@/components/park/BookingForm.vue";
 import SearchForm from "@/components/park/SearchForm.vue";
-import Weather from "@/components/park/Weather.vue";
+
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
     name: "Calendar3",
@@ -156,7 +156,7 @@ export default {
     components: {
         BookingForm,
         SearchForm,
-        Weather
+
     },
     created() {
         this.getEmptyDay(new Date().getFullYear(), new Date().getMonth());
@@ -180,7 +180,8 @@ export default {
         getResvDetail() {
             // const productId = this.$route.params.id;
             // console.log('QQ');
-            const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
+            // const apiURL = new URL("http://localhost/cgd103_g1/public/api/getResvDay.php");
+            const apiURL = new URL(`${BASE_URL}/getResvDay.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

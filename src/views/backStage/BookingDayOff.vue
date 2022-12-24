@@ -67,6 +67,7 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 
 export default {
     components: {
@@ -93,8 +94,9 @@ export default {
                 rsv_status: "休館",
                 rsv_ps: "",
             };
-
-            fetch("http://localhost/cgd103_g1/public/api/resv_insert.php", {
+            const apiURL = new URL(`${BASE_URL}/resv_insert.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/resv_insert.php",
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(payload),
             })
