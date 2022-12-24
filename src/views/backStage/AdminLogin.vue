@@ -6,29 +6,34 @@
                 <form @submit.prevent="login">
                     <div>
                         <label>帳號</label>
-                        <input type="text" v-model="login_account" required>
+                        <input type="text" v-model="login_account" required />
                     </div>
                     <div>
                         <label>密碼</label>
-                        <input type="password" v-model="login_password" required>
+                        <input
+                            type="password"
+                            v-model="login_password"
+                            required
+                        />
                     </div>
                     <div>
-                        <button class="btn-paramy" type="submit" @click="login">登錄</button>
+                        <button class="btn-paramy" type="submit" @click="login">
+                            登錄
+                        </button>
                     </div>
                 </form>
             </div>
         </div>
     </section>
-
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        login_account: "",
-        login_password: "",
-      }
+export default {
+    data() {
+        return {
+            login_account: "",
+            login_password: "",
+        };
     },
     methods: {
         login() {
@@ -53,26 +58,23 @@
                         console.log(json);
                         if (this.login_password == json.mem_account) {
                             console.log("成功");
+                        } else if (!json.code) {
+                            console.log("失敗");
                         }
-                        else if ( !json.code) {
-                            console.log("失敗")
-                        }
-                        this.$router.push({path: "/bs-index"})
+                        this.$router.push({ path: "/bs-index" });
                     });
-
             }
         },
-    } 
-  }
+    },
+};
 </script>
 
 <style lang="scss" scoped>
-
 a {
     display: block;
 }
 
-.tidy_list{
+.tidy_list {
     position: relative;
 }
 
@@ -91,12 +93,10 @@ a {
 
 .login_block {
     position: absolute;
-    top:50%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
-
 
 .login {
     position: relative;
@@ -106,7 +106,7 @@ a {
 
 .login_block {
     position: absolute;
-    top:40%;
+    top: 40%;
     left: 50%;
     transform: translate(-50%, -40%);
 }
@@ -128,89 +128,7 @@ a {
 .login_block > form > div > button {
     padding: 3% 5%;
 }
-
 </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <!-- <template>
     <div class="login">
@@ -242,7 +160,7 @@ a {
             <router-link to="/bs-admin-add">新增管理員</router-link>
             <router-link to="/bs-article-list">公告管理</router-link>
             <router-link to="/bs-article-edit">新增／編輯公告</router-link>
-            <router-link to="/bs-booking-list">導覽預約管理</router-link>
+            <router-link to="/bs-booking-list-two">導覽預約管理</router-link>
             <router-link to="/bs-booking-dayoff">新增休館日期</router-link>
             <router-link to="/bs-booking-edit">修改預約</router-link>
             <router-link to="/bs-koala-list">無尾熊管理</router-link>
@@ -313,75 +231,6 @@ a {
 
 </style> -->
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <!-- <template>
     <h1>後台登入頁</h1>
     <section class="tidy_list">
@@ -391,7 +240,7 @@ a {
         <router-link to="/bs-admin-add">新增管理員</router-link>
         <router-link to="/bs-article-list">公告管理</router-link>
         <router-link to="/bs-article-edit">新增／編輯公告</router-link>
-        <router-link to="/bs-booking-list">導覽預約管理</router-link>
+        <router-link to="/bs-booking-list-two">導覽預約管理</router-link>
         <router-link to="/bs-booking-dayoff">新增休館日期</router-link>
         <router-link to="/bs-booking-edit">修改預約</router-link>
         <router-link to="/bs-koala-list">無尾熊管理</router-link>

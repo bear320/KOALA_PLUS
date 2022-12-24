@@ -186,17 +186,17 @@ const routes = [
         component: () => import("@/views/backStage/ArticleAdd.vue"),
     },
     {
-        path: "/bs-booking-list",
-        name: "bookingList",
-        // component: BookingList,
-        component: () => import("@/views/backStage/BookingList.vue"),
-    },
-    {
         path: "/bs-booking-list-two",
         name: "bookingListTwo",
         // component: BookingList,
         component: () => import("@/views/backStage/BookingListTwo.vue"),
     },
+    // {
+    //     path: "/bs-booking-list-two",
+    //     name: "bookingListTwo",
+    //     // component: BookingList,
+    //     component: () => import("@/views/backStage/BookingListTwo.vue"),
+    // },
     {
         path: "/bs-booking-dayoff",
         name: "bookingDayOff",

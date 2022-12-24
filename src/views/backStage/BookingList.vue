@@ -157,7 +157,7 @@ export default {
             } else {
                 this.currentPage--;
                 this.$router.push({
-                    path: "/bs-booking-list",
+                    path: "/bs-booking-list-two",
                     query: {
                         limit: `10`,
                         page: this.currentPage,
@@ -175,7 +175,7 @@ export default {
             } else {
                 this.currentPage++;
                 this.$router.push({
-                    path: "/bs-booking-list",
+                    path: "/bs-booking-list-two",
                     query: {
                         limit: `10`,
                         page: this.currentPage,
@@ -186,7 +186,7 @@ export default {
         changePage(page) {
             this.currentPage = page;
             this.$router.push({
-                path: "/bs-booking-list",
+                path: "/bs-booking-list-two",
                 query: {
                     limit: `10`,
                     page: this.currentPage,

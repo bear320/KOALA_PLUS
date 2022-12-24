@@ -47,7 +47,7 @@
             </div>
             <div>
                 <div class="card">
-                    <a href="/bs-booking-list">
+                    <a href="/bs-booking-list-two">
                         <img
                             src="@/assets/images/backstageindex/bookingIcon.png"
                             alt=""

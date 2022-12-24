@@ -27,7 +27,7 @@
             </Submenu>
             <Submenu name="3" v-color="'#fff'">
                 <template #title>
-                    <router-link to="/bs-booking-list">
+                    <router-link to="/bs-booking-list-two">
                         園區導覽管理
                     </router-link>
                 </template>
