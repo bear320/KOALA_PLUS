@@ -663,8 +663,9 @@ export default {
             }
         },
         postData() {
-            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php?memId=${this.$store.state.user.mem_id}`;
+            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
             const gameValueContent = {
+                memId: this.$store.state.user.mem_id,
                 game_money: this.game_money,
                 remaining_amount_1: this.remaining_amount_1,
                 remaining_amount_2: this.remaining_amount_2,
@@ -679,6 +680,7 @@ export default {
                 body: new URLSearchParams(gameValueContent),
             })
                 .then((res) => res.json())
+                .then((json) => console.log(json))
         }
     },
     watch: {
