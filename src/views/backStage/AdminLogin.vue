@@ -44,7 +44,7 @@ export default {
                 // thisvue.errorFlag = true;
             } else {
                 // const apiURL = new URL(`${BASE_URL}/getAdminLogin.php`);
-                "http://localhost/cgd103_g1/public/api/getAdminLogin.php"
+                let url = "http://localhost/cgd103_g1/public/api/getAdminLogin.php"
                 fetch(url,
                     {
                         method: "post",
