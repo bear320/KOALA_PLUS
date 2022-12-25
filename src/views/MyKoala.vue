@@ -337,8 +337,7 @@
         <!-- ======================================== 彈出折價券 ======================================== -->
         <div id="discount_coupon_talkwindow" class="discount_coupon_talkwindow">
             <div class="discount_coupon_talkwindow_block">
-                <div><p>恭喜你獲得折價券</p></div>
-                <div @click="get_discount_coupon"><p>領取</p></div>
+                <div class="discount_coupon_talkwindow_block_button" @click="get_discount_coupon"><p>領取</p></div>
             </div>
         </div>
     </section>
@@ -549,6 +548,9 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+                let instant = new Date();
+                let now = instant .getFullYear()+ "-" + (instant .getMonth()+1) + "-" + instant .getDate();
+                console.log(now)
                 this.game_exp = 0;
             }
 
@@ -579,6 +581,9 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+                let instant = new Date();
+                let now = instant .getFullYear()+ "-" + (instant .getMonth()+1) + "-" + instant .getDate();
+                console.log(now)
                 this.game_exp = 0;
             }
         },
@@ -608,6 +613,9 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+                let instant = new Date();
+                let now = instant .getFullYear()+ "-" + (instant .getMonth()+1) + "-" + instant .getDate();
+                console.log(now)
                 this.game_exp = 0;
             }
 
@@ -638,6 +646,9 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+                let instant = new Date();
+                let now = instant .getFullYear()+ "-" + (instant .getMonth()+1) + "-" + instant .getDate();
+                console.log(now)
                 this.game_exp = 0;
             }
         },
@@ -667,6 +678,9 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+                let instant = new Date();
+                let now = instant .getFullYear()+ "-" + (instant .getMonth()+1) + "-" + instant .getDate();
+                console.log(now)
                 this.game_exp = 0;
             }
         },
@@ -695,6 +709,41 @@ export default {
                 this.game_exp = 2000;
                 document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
+                let instant = new Date();
+                let year = instant.getFullYear();
+                let month = (instant.getMonth()+1);
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = (instant.getMonth()+2)
+                if(nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future = instant.getFullYear()+ "-" + nextMonth + "-" + instant.getDate();
+                
+                console.log(now);
+                console.log(future);
+
+
+
+                // const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+
+                fetch(url, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                .then((res) => res.json())
+                .then((json) => console.log(json))
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -1387,18 +1436,38 @@ template {
 }
 
 .discount_coupon_talkwindow_block {
-    width: 70%;
+    width: 47%;
+    height: 65%;
     position: absolute;
-    top: 0;
+    top: 5%;
     right: 0;
     bottom: 50%;
-    left: 22%;
+    left: 34%;
     font-size: 30px;
     text-align: center;
     color: white;
     background-color: #ccc;
-    background-image: url(../assets/images/game/talk_window_background.png);
+    background-image: url(../assets/images/game/thankyou.png);
+    background-size: 100% 100%;
     border-radius: 10px;
+}
+
+.discount_coupon_talkwindow_block_button {
+    position: absolute;
+    top: 70%;
+    left: 15%;
+    width: 15%;
+    display: flex;
+    // margin: 45% 15%;
+    padding: 10px;
+    justify-content: space-around;
+    border-radius: 10px;
+    background-color: #579194;
+    cursor: pointer;
+}
+
+.discount_coupon_talkwindow_block_button > p {
+    font-size: 24px;
 }
 
 /* ======================================== 關掉彈窗 ======================================== */
@@ -1944,18 +2013,38 @@ template {
     }
 
     .discount_coupon_talkwindow_block {
-        width: 70%;
+        width: 65%;
+        height: 65%;
         position: absolute;
-        top: 0;
+        top: 5%;
         right: 0;
         bottom: 50%;
-        left: 19.5%;
+        left: 23.5%;
         font-size: 30px;
         text-align: center;
         color: white;
         background-color: #ccc;
-        background-image: url(../assets/images/game/talk_window_background.png);
+        background-image: url(../assets/images/game/thankyou.png);
+        background-size: 100% 100%;
         border-radius: 10px;
+    }
+
+    .discount_coupon_talkwindow_block_button {
+        position: absolute;
+        top: 70%;
+        left: 15%;
+        width: 15%;
+        display: flex;
+        // margin: 45% 15%;
+        padding: 10px;
+        justify-content: space-around;
+        border-radius: 10px;
+        background-color: #579194;
+        cursor: pointer;
+    }
+
+    .discount_coupon_talkwindow_block_button > p {
+        font-size: 24px;
     }
 
     /* ======================================== 關掉彈窗 ======================================== */
@@ -2453,7 +2542,9 @@ template {
 
     .bag_talkwindow_title > p {
         margin-left: 3%;
-        line-height: 41.78px;
+        line-height: 64px;
+        font-size: 18px;
+        color: #579194;
     }
 
     .bag_talkwindow_commodity {
@@ -2491,7 +2582,7 @@ template {
     }
 
     .bag_talkwindow_commodity_button {
-        width: 20%;
+        width: 100%;
         display: flex;
         margin: 0;
         padding: 5px;
@@ -2516,7 +2607,7 @@ template {
 
     .bag_talkwindow_commodity_button > div > p {
         margin: 0;
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .bag_talkwindow_commodity_introduce_2 {
@@ -2531,25 +2622,45 @@ template {
         top: 10%;
         right: 0%;
         bottom: 0;
-        left: -16%;
+        left: -5%;
         overflow: hidden;
         margin-right: 20%;
         transform: scale(0);
     }
 
     .discount_coupon_talkwindow_block {
-        width: 70%;
+        width: 100%;
+        height: 65%;
         position: absolute;
-        top: 0;
+        top: 5%;
         right: 0;
         bottom: 50%;
-        left: 30%;
+        left: 10%;
         font-size: 30px;
         text-align: center;
         color: white;
         background-color: #ccc;
-        background-image: url(../assets/images/game/talk_window_background.png);
+        background-image: url(../assets/images/game/thankyou.png);
+        background-size: 100% 100%;
         border-radius: 10px;
+    }
+
+    .discount_coupon_talkwindow_block_button {
+        position: absolute;
+        top: 70%;
+        left: 15%;
+        width: 15%;
+        display: flex;
+        // margin: 45% 15%;
+        padding: 10px;
+        justify-content: space-around;
+        border-radius: 10px;
+        background-color: #579194;
+        cursor: pointer;
+    }
+
+    .discount_coupon_talkwindow_block_button > p {
+        font-size: 24px;
     }
 
     /* ======================================== 關掉彈窗 ======================================== */
