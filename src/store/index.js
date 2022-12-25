@@ -47,19 +47,19 @@ export default createStore({
         /* 會員 */
         async memLogin(context, payload) {
             try {
-                /* const res = await fetch(
+                const res = await fetch(
                     "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
                     {
                         method: "post",
                         credentials: "include",
                         body: new URLSearchParams(payload),
                     }
-                ); */
-                const res = await fetch(`${BASE_URL}/getConfirmMember.php`, {
+                );
+                /* const res = await fetch(`${BASE_URL}/getConfirmMember.php`, {
                     method: "post",
                     credentials: "include",
                     body: new URLSearchParams(payload),
-                });
+                }); */
 
                 const result = await res.json();
                 console.log(result.code == 1);
@@ -75,18 +75,18 @@ export default createStore({
 
         async getMem(context) {
             try {
-                /*  const res = await fetch(
+                const res = await fetch(
                     "http://localhost/cgd103_g1/public/api/getMember.php?type=front",
                     {
                         credentials: "include",
                     }
-                ); */
-                const res = await fetch(
+                );
+                /*      const res = await fetch(
                     `${BASE_URL}/getMember.php?type=front`,
                     {
                         credentials: "include",
                     }
-                );
+                ); */
 
                 const result = await res.json();
                 console.log(result);
@@ -102,44 +102,44 @@ export default createStore({
 
         // 取得使用者的購物車資訊
         async getMemCart(context) {
-            /*   const res = await fetch(
-                `http://localhost/cgd103_g1/public/api/getMemberCart.php?memId=${context.state.user.mem_id}`
-            ); */
             const res = await fetch(
-                `${BASE_URL}/getMemberCart.php?memId=${context.state.user.mem_id}`
+                `http://localhost/cgd103_g1/public/api/getMemberCart.php?memId=${context.state.user.mem_id}`
             );
+            /*   const res = await fetch(
+                `${BASE_URL}/getMemberCart.php?memId=${context.state.user.mem_id}`
+            ); */
             const cartList = await res.json();
             context.commit("updateMemCart", cartList);
         },
         // 加入購物車
         async addToCart(context, payload) {
-            /*  const res = await fetch(
+            const res = await fetch(
                 "http://localhost/cgd103_g1/public/api/postAddCart.php",
                 {
                     method: "POST",
                     body: new URLSearchParams(payload),
                 }
-            ); */
-            const res = await fetch(`${BASE_URL}/postAddCart.php`, {
+            );
+            /*    const res = await fetch(`${BASE_URL}/postAddCart.php`, {
                 method: "POST",
                 body: new URLSearchParams(payload),
-            });
+            }); */
             context.dispatch("getMemCart");
         },
 
         // 刪除購物車項目
         async deleteCartItem(context, payload) {
-            /*  const res = await fetch(
+            const res = await fetch(
                 "http://localhost/cgd103_g1/public/api/postMemberCartItem.php",
                 {
                     method: "POST",
                     body: new URLSearchParams(payload),
                 }
-            ); */
-            const res = await fetch(`${BASE_URL}/postMemberCartItem.php`, {
+            );
+            /*    const res = await fetch(`${BASE_URL}/postMemberCartItem.php`, {
                 method: "POST",
                 body: new URLSearchParams(payload),
-            });
+            }); */
             context.dispatch("getMemCart");
         },
     },
