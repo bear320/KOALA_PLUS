@@ -14,45 +14,90 @@
         <div class="sub-title">
             <h2>數據統計 - 認養單隻無尾熊</h2>
             <Tabs class="tab-wrapper">
-                <TabPane class="tab" label="Zeus" name="Zeus">
-                    <Line v-if="loaded" :data="dataSupAll" :options="options" />
+                <TabPane class="tab" label="總覽" name="All">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['All']"
+                        :options="options"
+                    />
                 </TabPane>
-                <TabPane class="tab" label="Hera" name="Hera"></TabPane>
-                <TabPane class="tab" label="Poseidon" name="Poseidon"></TabPane>
-                <TabPane class="tab" label="Ares" name="Ares"></TabPane>
-                <TabPane
-                    class="tab"
-                    label="Aphrodite"
-                    name="Aphrodite"
-                ></TabPane>
-                <TabPane class="tab" label="Apollo" name="Apollo"></TabPane>
-                <TabPane class="tab" label="Athena" name="Athena"></TabPane>
-                <TabPane class="tab" label="Hermes" name="Hermes"></TabPane>
+                <TabPane class="tab" label="Zeus" name="Zeus">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Zeus']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Hera" name="Hera">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Hera']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Poseidon" name="Poseidon">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Poseidon']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Ares" name="Ares">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Ares']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Aphrodite" name="Aphrodite">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Aphrodite']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Apollo" name="Apollo">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Apollo']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Athena" name="Athena">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Athena']"
+                        :options="options"
+                    />
+                </TabPane>
+                <TabPane class="tab" label="Hermes" name="Hermes">
+                    <Line
+                        v-if="loaded"
+                        :data="dataAdopt[0]['Hermes']"
+                        :options="options"
+                    />
+                </TabPane>
             </Tabs>
             <br />
             <!-- 分隔線 -->
-            <select
-                name="adoptStat"
-                id="adoptStat"
-                v-model="koalaSelect"
-                @change="optSelected(index)"
-            >
+            <!-- <select name="adoptStat" id="adoptStat" v-model="koalaSelect">
                 <option
                     :value="koalaOpt.koala_name"
-                    v-for="(koalaOpt, index) in koalaName"
+                    v-for="(koalaOpt, index) in source.adoptNameStat"
                     :key="index"
                 >
                     {{ koalaOpt.koala_name }}
                 </option>
             </select>
-            <div v-for="(koalaChart, index) in koalaName" :key="index">
-                <div
-                    v-show="koalaSelect === koalaChart.koala_name"
-                    class="chart-wrapper"
-                >
-                    <h1>{{ koalaChart.koala_name }}</h1>
-                </div>
-            </div>
+            <div
+                v-for="(koalaChart, index) in source.adoptNameStat"
+                v-show="koalaSelect === koalaChart.koala_name"
+                :key="index"
+                class="chart-wrapper"
+            >
+                <h3>{{ koalaChart.koala_name }}</h3>
+                <Line v-if="loaded" :data="temp" :options="options" />
+            </div> -->
         </div>
     </section>
 </template>
@@ -70,6 +115,7 @@ import {
     Title,
     Tooltip,
     Legend,
+    Filler,
 } from "chart.js";
 
 ChartJS.register(
@@ -79,24 +125,25 @@ ChartJS.register(
     LineElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 );
 
 export default {
     components: {
         Header,
         Line,
+        Filler,
     },
     data() {
         return {
             loaded: false,
-            source: [],
             dataSupAll: {
                 labels: ["上上月", "上月", "本月"],
                 datasets: [
                     {
                         label: "資助所有無尾熊",
-                        data: [null, null, null],
+                        data: [],
                         borderColor: "#33717d",
                         backgroundColor: "#9abdbf",
                         pointStyle: "circle",
@@ -107,50 +154,340 @@ export default {
                     },
                 ],
             },
-            dataAdoptKoala: {
-                labels: ["上上月", "上月", "本月"],
-                datasets: [],
-            },
+
+            dataAdopt: [
+                {
+                    All: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#f94144",
+                                backgroundColor: "#f94144",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#f8961e",
+                                backgroundColor: "#f8961e",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#f9c74f",
+                                backgroundColor: "#f9c74f",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#90be6d",
+                                backgroundColor: "#90be6d",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#43aa8b",
+                                backgroundColor: "#43aa8b",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#4d908e",
+                                backgroundColor: "#4d908e",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#577590",
+                                backgroundColor: "#577590",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#277da1",
+                                backgroundColor: "#277da1",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                            },
+                        ],
+                    },
+                    Zeus: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Hera: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Poseidon: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Ares: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Aphrodite: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Apollo: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Athena: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                    Hermes: {
+                        labels: ["上上月", "上月", "本月"],
+                        datasets: [
+                            {
+                                label: "",
+                                data: [],
+                                borderColor: "#33717d",
+                                backgroundColor: "#9abdbf75",
+                                pointStyle: "circle",
+                                pointRadius: 10,
+                                pointHoverRadius: 15,
+                                tension: 0.4,
+                                cubicInterpolationMode: "monotone",
+                                fill: true,
+                            },
+                        ],
+                    },
+                },
+            ],
             options: {
                 responsive: true,
-                plugins: {
-                    // 圖表標題
-                    // title: {
-                    //     display: true,
-                    //     text: "Demo Line Chart",
-                    // },
-                },
             },
-            source: [],
-            koalaName: [],
-            koalaSelect: "Zeus",
-            isSelected: 0,
+            // temp: {
+            //     labels: ["上上月", "上月", "本月"],
+            //     datasets: [
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //         {
+            //             label: "",
+            //             data: [],
+            //             borderColor: "#33717d",
+            //             backgroundColor: "#9abdbf",
+            //             pointStyle: "circle",
+            //             pointRadius: 10,
+            //             pointHoverRadius: 15,
+            //             cubicInterpolationMode: "monotone",
+            //             tension: 0.4,
+            //         },
+            //     ],
+            // },
+            // source: [],
+            // koalaSelect: "Zeus",
         };
     },
-    // methods: {
-    //     getSupStat() {
-    //         const apiURL = new URL(
-    //             `http://localhost:8888/cgd103_g1/public/api/getSupStat.php`
-    //         );
-    //         fetch(apiURL)
-    //             .then((res) => res.json())
-    //             .then((json) => {
-    //                 this.source = json;
-    //                 // 資助所有無尾熊資料陣列
-    //                 this.data.datasets[0].data = [
-    //                     json[0]["koala_sum_the_month_before_last"],
-    //                     json[0]["koala_sum_last_month"],
-    //                     json[0]["koala_sum_this_month"],
-    //                 ];
-    //             })
-    //             .catch((error) => {
-    //                 // alert(error);
-    //             });
-    //     },
-    // },
-    // created() {
-    //     this.getSupStat();
-    // },
     async mounted() {
         this.loaded = false;
 
@@ -177,46 +514,117 @@ export default {
                             tension: 0.4,
                         };
                     });
-                    // console.log(this.dataSupAll, this.dataSupAll["datasets"]);
                 });
-
-            //     dataSupAll: {
-            //     labels: ["上上月", "上月", "本月"],
-            //     datasets: [
-            //         {
-            //             label: "資助所有無尾熊",
-            //             data: [null, null, null],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //     ],
-            // },
 
             // `http://localhost:8888/cgd103_g1/public/api/getAdoptStat.php`
             await fetch(`${BASE_URL}/getAdoptStat.php`)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.source = json;
-                    this.koalaName = json.adoptNameStat;
-                    console.log(this.source);
-                    console.log(this.source["adoptNameStat"][0]);
+                    // this.source = json;
+                    // 總覽
+                    // this.temp["datasets"][0]["label"] =
+                    //     json.adoptNameStat[0].koala_name;
+                    // this.temp["datasets"][0]["data"] = json.adoptStat[0];
+                    // this.temp["datasets"][1]["label"] =
+                    //     json.adoptNameStat[1].koala_name;
+                    // this.temp["datasets"][1]["data"] = json.adoptStat[1];
+                    // this.temp["datasets"][2]["label"] =
+                    //     json.adoptNameStat[2].koala_name;
+                    // this.temp["datasets"][2]["data"] = json.adoptStat[2];
+                    // this.temp["datasets"][3]["label"] =
+                    //     json.adoptNameStat[3].koala_name;
+                    // this.temp["datasets"][3]["data"] = json.adoptStat[3];
+                    // this.temp["datasets"][4]["label"] =
+                    //     json.adoptNameStat[4].koala_name;
+                    // this.temp["datasets"][4]["data"] = json.adoptStat[4];
+                    // this.temp["datasets"][5]["label"] =
+                    //     json.adoptNameStat[5].koala_name;
+                    // this.temp["datasets"][5]["data"] = json.adoptStat[5];
+                    // this.temp["datasets"][6]["label"] =
+                    //     json.adoptNameStat[6].koala_name;
+                    // this.temp["datasets"][6]["data"] = json.adoptStat[6];
+                    // this.temp["datasets"][7]["label"] =
+                    //     json.adoptNameStat[7].koala_name;
+                    // this.temp["datasets"][7]["data"] = json.adoptStat[7];
+                    // All
+                    this.dataAdopt[0].All["datasets"][0]["label"] =
+                        json.adoptNameStat[0].koala_name;
+                    this.dataAdopt[0].All["datasets"][0]["data"] =
+                        json.adoptStat[0];
+                    this.dataAdopt[0].All["datasets"][1]["label"] =
+                        json.adoptNameStat[1].koala_name;
+                    this.dataAdopt[0].All["datasets"][1]["data"] =
+                        json.adoptStat[1];
+                    this.dataAdopt[0].All["datasets"][2]["label"] =
+                        json.adoptNameStat[2].koala_name;
+                    this.dataAdopt[0].All["datasets"][2]["data"] =
+                        json.adoptStat[2];
+                    this.dataAdopt[0].All["datasets"][3]["label"] =
+                        json.adoptNameStat[3].koala_name;
+                    this.dataAdopt[0].All["datasets"][3]["data"] =
+                        json.adoptStat[3];
+                    this.dataAdopt[0].All["datasets"][4]["label"] =
+                        json.adoptNameStat[4].koala_name;
+                    this.dataAdopt[0].All["datasets"][4]["data"] =
+                        json.adoptStat[4];
+                    this.dataAdopt[0].All["datasets"][5]["label"] =
+                        json.adoptNameStat[5].koala_name;
+                    this.dataAdopt[0].All["datasets"][5]["data"] =
+                        json.adoptStat[5];
+                    this.dataAdopt[0].All["datasets"][6]["label"] =
+                        json.adoptNameStat[6].koala_name;
+                    this.dataAdopt[0].All["datasets"][6]["data"] =
+                        json.adoptStat[6];
+                    this.dataAdopt[0].All["datasets"][7]["label"] =
+                        json.adoptNameStat[7].koala_name;
+                    this.dataAdopt[0].All["datasets"][7]["data"] =
+                        json.adoptStat[7];
+                    // Zeus
+                    this.dataAdopt[0].Zeus["datasets"][0]["label"] =
+                        json.adoptNameStat[0].koala_name;
+                    this.dataAdopt[0].Zeus["datasets"][0]["data"] =
+                        json.adoptStat[0];
+                    // Hera
+                    this.dataAdopt[0].Hera["datasets"][0]["label"] =
+                        json.adoptNameStat[1].koala_name;
+                    this.dataAdopt[0].Hera["datasets"][0]["data"] =
+                        json.adoptStat[1];
+                    // Poseidon
+                    this.dataAdopt[0].Poseidon["datasets"][0]["label"] =
+                        json.adoptNameStat[2].koala_name;
+                    this.dataAdopt[0].Poseidon["datasets"][0]["data"] =
+                        json.adoptStat[2];
+                    // Ares
+                    this.dataAdopt[0].Ares["datasets"][0]["label"] =
+                        json.adoptNameStat[3].koala_name;
+                    this.dataAdopt[0].Ares["datasets"][0]["data"] =
+                        json.adoptStat[3];
+                    // Aphrodite
+                    this.dataAdopt[0].Aphrodite["datasets"][0]["label"] =
+                        json.adoptNameStat[4].koala_name;
+                    this.dataAdopt[0].Aphrodite["datasets"][0]["data"] =
+                        json.adoptStat[4];
+                    // Apollo
+                    this.dataAdopt[0].Apollo["datasets"][0]["label"] =
+                        json.adoptNameStat[5].koala_name;
+                    this.dataAdopt[0].Apollo["datasets"][0]["data"] =
+                        json.adoptStat[5];
+                    // Athena
+                    this.dataAdopt[0].Athena["datasets"][0]["label"] =
+                        json.adoptNameStat[6].koala_name;
+                    this.dataAdopt[0].Athena["datasets"][0]["data"] =
+                        json.adoptStat[6];
+                    // Hermes
+                    this.dataAdopt[0].Hermes["datasets"][0]["label"] =
+                        json.adoptNameStat[7].koala_name;
+                    this.dataAdopt[0].Hermes["datasets"][0]["data"] =
+                        json.adoptStat[7];
                 });
 
             this.loaded = true;
         } catch (e) {
             console.error(e);
         }
-    },
-    methods: {
-        optSelected(i) {
-            console.log("QQ", i);
-            this.isSelected = i;
-        },
     },
 };
 </script>
@@ -282,7 +690,13 @@ export default {
     .ivu-tabs-ink-bar {
         display: none;
     }
-    .ivu-tabs-tab:hover,
+    .ivu-tabs-tab {
+        color: $btn-color;
+        &:hover {
+            color: $btn-color;
+            font-weight: 700;
+        }
+    }
     .ivu-tabs-tab.ivu-tabs-tab-active.ivu-tabs-tab-focused {
         color: $btn-color;
         font-weight: 700;
