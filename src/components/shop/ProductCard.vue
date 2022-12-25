@@ -26,7 +26,7 @@ export default {
     props: ["proImg", "proName", "proPrice", "proId", "col"],
     data() {
         return {
-            img: require(`@/assets/images/shop/${this.proImg}`),
+            img: `/images/shop/${this.proImg}`,
         };
     },
     methods: {

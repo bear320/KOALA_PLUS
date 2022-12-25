@@ -11,20 +11,20 @@
     </section>
     <form
         class="wrapper function-wrapper"
-        action=""
         enctype="multipart/form-data"
+        ref="prod-form"
     >
         <div class="line">
             <div class="cell">
-                <label for="prod-name">商品名稱：</label>
-                <input type="text" name="prod-name" id="prod-name" required />
+                <label for="prod_name">商品名稱：</label>
+                <input type="text" name="prod_name" id="prod_name" required />
             </div>
             <div class="cell">
                 <label for="prod-category">商品分類</label>
                 <select
                     type="text"
-                    name="prod-category"
-                    id="prod-category"
+                    name="prod_category"
+                    id="prod_category"
                     required
                 >
                     <option value="daily">生活小物</option>
@@ -33,17 +33,17 @@
                 </select>
             </div>
             <div class="cell">
-                <label for="prod-price">單價：</label>
-                <input type="text" name="prod-price" id="prod-price" required />
+                <label for="prod_price">單價：</label>
+                <input type="text" name="prod_price" id="prod_price" required />
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <label for="prod-listed">上 / 下架：</label>
+                <label for="prod_listed">上 / 下架：</label>
                 <select
                     type="text"
-                    name="prod-listed"
-                    id="prod-listed"
+                    name="prod_listed"
+                    id="prod_listed"
                     required
                 >
                     <option value="1">上架</option>
@@ -53,10 +53,10 @@
         </div>
         <div class="line">
             <div class="cell">
-                <label for="prod-desc">描述：</label>
+                <label for="prod_info">描述：</label>
                 <textarea
-                    name="prod-desc"
-                    id="prod-desc"
+                    name="prod_info"
+                    id="prod_info"
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
@@ -70,12 +70,12 @@
                     新增圖片：
                     <span>* 請至少上傳一張圖片，數量上限為四張</span>
                 </h4>
-                <ImageUpload></ImageUpload>
+                <ImageUpload ref="imageUpload"></ImageUpload>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" @click.prevent="send">
                     <img src="@/assets/images/icon/confirm.svg" alt="" />確認
                 </button>
             </div>
@@ -86,6 +86,7 @@
 <script>
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
+import { returnStatement } from "@babel/types";
 
 export default {
     components: {
@@ -93,9 +94,33 @@ export default {
         ImageUpload,
     },
     data() {
-        return {
-            temp: [],
-        };
+        return {};
+    },
+    methods: {
+        send() {
+            if (!this.$refs["prod-form"].checkValidity()) return;
+            const formData = new FormData(this.$refs["prod-form"]);
+            console.log(formData.getAll("image[]"));
+            fetch(
+                "http://localhost/cgd103_g1/public/api/postInsertProduct.php",
+                {
+                    method: "post",
+                    body: formData,
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => {
+                    if (json.status === 0) {
+                        console.log("新增成功");
+                        // 新增成功後，表單欄位
+                        this.$refs["prod-form"].reset();
+                        // 呼叫ImageUpload裡的Clear重置狀態
+                        this.$refs.imageUpload.Clear();
+                    } else {
+                        console.log("新增失敗");
+                    }
+                });
+        },
     },
 };
 </script>
@@ -171,6 +196,20 @@ export default {
             width: 100%;
             textarea {
                 resize: none;
+            }
+        }
+    }
+    .line:nth-child(4) {
+        .cell {
+            width: 100%;
+            h4 {
+                margin-bottom: 10px;
+                span {
+                    color: lighten($font-color, 30%);
+                    font-size: 1rem;
+                    margin-left: 10px;
+                    text-decoration: underline;
+                }
             }
         }
     }

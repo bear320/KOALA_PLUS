@@ -1,25 +1,33 @@
 <template>
     <div class="upload-wrapper">
         <input
+            v-for="(item, index) in 4"
+            :key="item"
             type="file"
             accept="image/*"
-            multiple="multiple"
-            id="uploadImages"
+            :id="`uploadImages${index}`"
             style="display: none"
-            @change="showImages"
+            name="image[]"
+            ref="imgInput"
+            @change="showImages(index)"
         />
+
         <template v-if="previewList.length">
-            <div v-for="item in previewList" :key="item.id" class="upImage">
+            <div
+                v-for="(item, index) in previewList"
+                :key="item.id"
+                class="upImage"
+            >
                 <div class="bgBlock">
                     <Icon
                         type="ios-trash-outline"
-                        @click="deleteImage(item)"
+                        @click="deleteImage(item, index)"
                     ></Icon>
                 </div>
                 <img :src="item" />
             </div>
         </template>
-        <label for="uploadImages" v-show="uploadShow">
+        <label :for="`uploadImages${emptyIndex}`" v-show="!imgAllFilled">
             <img
                 src="@/assets/images/addImage.svg"
                 alt="上傳圖片"
@@ -35,50 +43,54 @@ export default {
         return {
             imageList: [],
             previewList: [],
-            uploadShow: true,
+            showLabel: [false, false, false, false],
         };
     },
-    methods: {
-        showImages(e) {
-            // 限制上傳圖片數量
-            let uploadImages = document.getElementById("uploadImages");
-            if (
-                uploadImages.files.length > 4 ||
-                this.imageList.length + uploadImages.files.length > 4
-            ) {
-                alert("超過上傳數量限制！");
-                return;
-            }
+    computed: {
+        // 檢查圖片位址為空的位址
+        emptyIndex() {
+            return this.showLabel.findIndex((item) => item === false);
+        },
+        // 當圖片上傳至四張時就不會顯示上傳的Label
+        imgAllFilled() {
+            return this.showLabel.every((item) => item === true);
+        },
+    },
 
+    methods: {
+        Clear() {
+            this.$refs.imgInput.forEach((element) => {
+                element.value = "";
+            });
+            this.imageList = [];
+            this.previewList = [];
+        },
+        showImages(i) {
             // 預覽上傳圖片
-            let input = e.target;
-            let count = input.files.length;
+            let input = this.$refs.imgInput[i];
             let index = 0;
             if (input.files) {
-                while (count--) {
-                    var reader = new FileReader();
-                    console.log(input.files[index]);
-                    //
-                    this.imageList.push(input.files[index]);
-                    reader.onload = (event) => {
-                        this.previewList.push(event.target.result);
-                    };
-                    reader.readAsDataURL(input.files[index]);
-                    index++;
-                }
+                var reader = new FileReader();
+                // 檢查imageList是否有重複檔名的圖片
+                let isRepeat = this.imageList.some(
+                    (item) => item.name === input.files[index].name
+                );
+                // 有的話直接返回
+                if (isRepeat) return;
+                this.imageList.push(input.files[index]);
+                reader.onload = (event) => {
+                    this.previewList.push(event.target.result);
+                };
+                reader.readAsDataURL(input.files[index]);
             }
+            this.showLabel[i] = true;
         },
-        deleteImage(file) {
+        deleteImage(file, i) {
+            console.log(this.imageList);
+            this.showLabel[i] = false;
+            this.$refs.imgInput[i].value = "";
             this.previewList.splice(this.previewList.indexOf(file), 1);
             this.imageList.splice(this.previewList.indexOf(file), 1);
-            this.countImages();
-        },
-        countImages() {
-            if (this.imageList.length > 4 || this.imageList.length == 4) {
-                this.uploadShow = false;
-            } else {
-                this.uploadShow = true;
-            }
         },
     },
     created() {

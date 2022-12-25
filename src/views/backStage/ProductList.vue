@@ -38,10 +38,7 @@
         <div class="bs-list" v-for="prod in prods" :key="prod.prod_id">
             <p>{{ prod.prod_id }}</p>
             <p>{{ prod.prod_name }}</p>
-            <img
-                class="proImg"
-                :src="require(`@/assets/images/shop/${prod.prod_img1}`)"
-            />
+            <img class="proImg" :src="`/images/shop/${prod.prod_img1}`" />
             <p>{{ prod.prod_category }}</p>
             <p>{{ prod.prod_price }}</p>
             <p>
