@@ -334,21 +334,13 @@
                 </div>
             </div>
         </div>
-        <!-- ======================================== 彈出遊戲禮券 ======================================== -->
-        <!-- <div id="discount_coupon_talkwindow" class="discount_coupon_talkwindow">
-            <div class="discount_coupon_talkwindow_block" v-if="game_exp < 2000" style="display: none">
-                <div class="discount_coupon_talkwindow_content">
-                    <div><p>恭喜你獲得折價券</p></div>
-                    <div><p>領取</p></div>
-                </div>
+        <!-- ======================================== 彈出折價券 ======================================== -->
+        <div id="discount_coupon_talkwindow" class="discount_coupon_talkwindow">
+            <div class="discount_coupon_talkwindow_block">
+                <div><p>恭喜你獲得折價券</p></div>
+                <div @click="get_discount_coupon"><p>領取</p></div>
             </div>
-            <div class="discount_coupon_talkwindow_block" v-else-if="game_exp >= 2000" style="display: block">
-                <div class="discount_coupon_talkwindow_content">
-                    <div><p>恭喜你獲得折價券</p></div>
-                    <div><p>領取</p></div>
-                </div>
-            </div>
-        </div> -->
+        </div>
     </section>
 </template>
 
@@ -493,6 +485,9 @@ export default {
                 document.getElementById("remaining_amount_6").innerHTML = remaining_amount_6; 
             }
     },
+    computed: {
+
+    },
     methods: {
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
@@ -552,6 +547,7 @@ export default {
             }
             else if(this.game_exp + 10 >= 2000) {
                 this.game_exp = 2000;
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
@@ -581,6 +577,7 @@ export default {
             }
             else if(this.game_exp + 20 >= 2000) {
                 this.game_exp = 2000;
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
@@ -609,6 +606,7 @@ export default {
             }
             else if(this.game_exp + 50 >= 2000) {
                 this.game_exp = 2000;
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
@@ -638,6 +636,7 @@ export default {
             }
             else if(this.game_exp + 90 >= 2000) {
                 this.game_exp = 2000;
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
@@ -666,6 +665,7 @@ export default {
             }
             else if(this.game_exp +140 >= 2000) {
                 this.game_exp = 2000;
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
@@ -693,10 +693,15 @@ export default {
             }
             else if(this.game_exp + 210 >= 2000) {
                 this.game_exp = 2000;
-
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
+        },
+
+        // ======================================== 領取折價券 ======================================== //
+        get_discount_coupon: function(){
+            document.getElementById("discount_coupon_talkwindow").classList.remove("discount_coupon_talkwindow_active");
         },
 
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
@@ -1396,17 +1401,6 @@ template {
     border-radius: 10px;
 }
 
-.discount_coupon_talkwindow_content {
-    position: relative;
-    width: 70%;
-    margin: -1% auto;
-    justify-content: center;
-    display: flex;
-    flex-wrap: wrap;
-    padding-top: 5%;
-    margin-left: 25%;
-}
-
 /* ======================================== 關掉彈窗 ======================================== */
 .btn-close {
     position: absolute;
@@ -1419,7 +1413,7 @@ template {
 .shop_talkwindow_active,
 .bag_talkwindow_active,
 .plus_talkwindow_active,
-.discount_coupon_talkwindow_content {
+.discount_coupon_talkwindow_active {
     animation: popup 0.5s;
     transform: scale(1);
 }
@@ -1936,6 +1930,34 @@ template {
         font-size: 12px;
     }
 
+    /* ======================================== 彈出折價券 ======================================== */
+    .discount_coupon_talkwindow {
+        position: absolute;
+        width: 100%;
+        top: 10%;
+        right: 0%;
+        bottom: 0;
+        left: -16%;
+        overflow: hidden;
+        margin-right: 20%;
+        transform: scale(0);
+    }
+
+    .discount_coupon_talkwindow_block {
+        width: 70%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 50%;
+        left: 19.5%;
+        font-size: 30px;
+        text-align: center;
+        color: white;
+        background-color: #ccc;
+        background-image: url(../assets/images/game/talk_window_background.png);
+        border-radius: 10px;
+    }
+
     /* ======================================== 關掉彈窗 ======================================== */
     .btn-close {
         position: absolute;
@@ -1947,7 +1969,8 @@ template {
 
     .shop_talkwindow_active,
     .bag_talkwindow_active,
-    .plus_talkwindow_active {
+    .plus_talkwindow_active,
+    .discount_coupon_talkwindow_active {
         animation: popup 0.5s;
         transform: scale(1);
     }
@@ -2501,6 +2524,33 @@ template {
         font-size: 12px;
     }
 
+    /* ======================================== 彈出折價券 ======================================== */
+    .discount_coupon_talkwindow {
+        position: absolute;
+        width: 100%;
+        top: 10%;
+        right: 0%;
+        bottom: 0;
+        left: -16%;
+        overflow: hidden;
+        margin-right: 20%;
+        transform: scale(0);
+    }
+
+    .discount_coupon_talkwindow_block {
+        width: 70%;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 50%;
+        left: 30%;
+        font-size: 30px;
+        text-align: center;
+        color: white;
+        background-color: #ccc;
+        background-image: url(../assets/images/game/talk_window_background.png);
+        border-radius: 10px;
+    }
 
     /* ======================================== 關掉彈窗 ======================================== */
     .btn-close {
@@ -2513,7 +2563,8 @@ template {
 
     .shop_talkwindow_active,
     .bag_talkwindow_active,
-    .plus_talkwindow_active {
+    .plus_talkwindow_active,
+    .discount_coupon_talkwindow_active {
         animation: popup 0.5s;
         transform: scale(1);
     }
