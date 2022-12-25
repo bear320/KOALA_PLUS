@@ -16,6 +16,9 @@ $mem_id = empty( $_GET["mem_id"] ) ? ( $_POST["mem_id"] ?? "" ) : $_GET["mem_id"
 $userid = !isset($getUser["mem_id"])?$mem_id:$getUser["mem_id"];
 $type = empty( $_GET["type"] ) ? ( $_POST["type"] ?? "" ) : $_GET["type"]; //請求類型(1:編輯會員資料,2:重設會員密碼)
 
+$useraccount = !isset($getUser["mem_account"])?$mem_id:$getUser["mem_account"];
+$mem_account = empty( $_GET["mem_idmem_account"] ) ? ( $_POST["mem_account"] ?? "" ) : $_GET["mem_account"];
+
 $resDate = [
     "status" => 0,  //狀態(0:失敗,1:成功)
     "msg" => "",
@@ -34,6 +37,11 @@ switch ( $type ) {
 
         if ( empty( $setSql ) ) {
             $resDate["msg"] = "沒有數據需要更新";
+            echo json_encode( $resDate );
+            return true;
+        }
+        if ($useraccount != $mem_account){
+            $resDate["msg"] = "此信箱已有人使用";
             echo json_encode( $resDate );
             return true;
         }
