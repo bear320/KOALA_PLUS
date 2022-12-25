@@ -9,13 +9,13 @@ try{
 	//sql 指令
 	
 	// $sql = "insert into tibamefe_cgd103g1.member('mem_name', 'mem_acoount', 'mem_psw') values (:mem_name, :mem_account, :mem_psw)";
-	$sql = "INSERT INTO `tibamefe_cgd103g1`.`my_coupon` (`mem_id `, `coupon_id`, `coupon_get_date`, `coupon_exp_date`, `coupon_status `) VALUES (:mem_id, 5004 :coupon_get_date, :coupon_exp_date, 0);";
+	$sql = "INSERT INTO `tibamefe_cgd103g1`.`my_coupon` (`mem_id`, `coupon_id`, `coupon_get_date`, `coupon_exp_date`, `coupon_status`) VALUES (:mem_id, 5004, :coupon_get_date, :coupon_exp_date, 0);";
+	
 	//編譯, 執行
-	$products = $pdo->prepare($sql);	
-	$products->bindValue(":mem_id", $_POST["memId"]);
-    $products->bindValue(":coupon_get_date", $_POST["coupon_get_date"]);
-    $products->bindValue(":coupon_exp_date", $_POST["coupon_exp_date"]);
-	$products->execute();
+	$gameCoupon = $pdo->prepare($sql);
+    $gameCoupon->bindValue(":coupon_get_date", $_POST["coupon_get_date"]);
+    $gameCoupon->bindValue(":coupon_exp_date", $_POST["coupon_exp_date"]);
+	$gameCoupon->execute();
 
     $msg = "領取成功";
 }
