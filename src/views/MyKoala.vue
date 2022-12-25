@@ -66,31 +66,31 @@
             </div>
             <!-- v-if -->
             <div  class="game_nav_expbar">
-                <div class="experience_bar">
-                    <!-- v-if="expWidth <= 100" -->
-                    <div :style="{ width: expWidth + '%' }" :class="{ expValue: true }"></div>
-                    <!-- <div v-else-if="expWidth > 100" :style="{ width: 100 - expWidth + '%' }" :class="{ expValue: true }"></div> -->
+                <div v-if="game_exp <= 500" class="experience_bar">
+                    <div :style="{ width: expWidth + '%' }" :class="{ expValue1: true }"></div>
                 </div>
-            </div>
-            <!-- <div v-else class="game_nav_expbar">
-                <div class="experience_bar">
-                    <div :style="{ width: 100 + '%' }" :class="{ expValue: true }"></div>
+                <div v-else-if="game_exp <= 1000" class="experience_bar">
+                    <div :style="{ width: expWidth + '%' }" :class="{ expValue2: true }"></div>
                 </div>
-            </div> -->
-            <div>
-                <!-- v-if="game_exp <= 2000" -->
-                <p>已達到經驗值：{{ game_exp }}</p>
-                <!-- <p v-else-if="game_exp > 2000">已達到經驗值：{{ 2000 - game_exp }}</p> -->
+                <div v-else-if="game_exp <= 2000" class="experience_bar">
+                    <div :style="{ width: expWidth + '%' }" :class="{ expValue3: true }"></div>
+                </div>
             </div>
             <div>
                 <div v-if="500 - game_exp >= 0">
+                    <p>無尾熊目前階段：1</p>
+                    <p>已達成經驗值：{{ game_exp }}</p>
                     <p>距離下一段經驗值：{{ 500 - game_exp }}</p>
                 </div>
                 <div v-else-if="1000 - game_exp >= 0">
+                    <p>無尾熊目前階段：2</p>
+                    <p>已達成經驗值：{{ game_exp }}</p>
                     <p>距離下一段經驗值：{{ 1000 - game_exp }}</p>
                 </div>
                 <div v-else-if="2000 - game_exp >= 0">
-                    <p>距離下一段經驗值：{{ 2000 - game_exp }}</p>
+                    <p>無尾熊目前階段：3</p>
+                    <p>已達成經驗值：{{ game_exp }}</p>
+                    <p>距離終點只剩經驗值：{{ 2000 - game_exp }}</p>
                 </div>
             </div>
         </nav>
@@ -334,6 +334,21 @@
                 </div>
             </div>
         </div>
+        <!-- ======================================== 彈出遊戲禮券 ======================================== -->
+        <!-- <div id="discount_coupon_talkwindow" class="discount_coupon_talkwindow">
+            <div class="discount_coupon_talkwindow_block" v-if="game_exp < 2000" style="display: none">
+                <div class="discount_coupon_talkwindow_content">
+                    <div><p>恭喜你獲得折價券</p></div>
+                    <div><p>領取</p></div>
+                </div>
+            </div>
+            <div class="discount_coupon_talkwindow_block" v-else-if="game_exp >= 2000" style="display: block">
+                <div class="discount_coupon_talkwindow_content">
+                    <div><p>恭喜你獲得折價券</p></div>
+                    <div><p>領取</p></div>
+                </div>
+            </div>
+        </div> -->
     </section>
 </template>
 
@@ -521,21 +536,24 @@ export default {
         minnum_1: function () {
             this.remaining_amount_1--;
 
-            if(this.expWidth + 0.5 <= 100) {
+            if(this.expWidth + 0.5 < 100) {
                 this.expWidth = this.expWidth + this.increment_1; // 增加經驗值
                 
             }
-            else if(this.expWidth > 100) {
-                this.expWidth = this.expWidth + this.increment_1 - 100; // 增加經驗值
-                // this.expWidth -= 100
+            else if(this.expWidth + 0.5 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 0.5 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 10 <= 2000) {
                 this.game_exp += 10;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 10 - 2000
-                // this.game_exp += 10;
+            else if(this.game_exp + 10 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
 
         },
@@ -551,17 +569,20 @@ export default {
             if(this.expWidth + 1 <= 100) {
                 this.expWidth = this.expWidth + this.increment_2; // 增加經驗值
             }
-            else if(this.expWidth > 100){
-                this.expWidth = this.expWidth + this.increment_2 - 100; // 增加經驗值
-                // this.expWidth -= 100;
+            else if(this.expWidth + 1 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 1 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 20 <= 2000) {
                 this.game_exp += 20;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 20 - 2000;
-                // this.game_exp += 20;
+            else if(this.game_exp + 20 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
         },
 
@@ -576,17 +597,20 @@ export default {
             if(this.expWidth + 2.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_3; // 增加經驗值
             }
-            else if(this.expWidth > 100){
-                this.expWidth = this.expWidth + this.increment_3 - 100; // 增加經驗值
-                // this.expWidth -= 100;
+            else if(this.expWidth + 2.5 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 2.5 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 50 <= 2000) {
                 this.game_exp += 50;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 50 - 2000;
-                // this.game_exp += 50;
+            else if(this.game_exp + 50 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
 
         },
@@ -602,17 +626,20 @@ export default {
             if(this.expWidth + 4.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_4; // 增加經驗值
             }
-            else if(this.expWidth > 100){
-                this.expWidth = this.expWidth + this.increment_4 - 100; // 增加經驗值
-                // this.expWidth -= 100;
+            else if(this.expWidth + 4.5 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 4.5 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 90 <= 2000) {
                 this.game_exp += 90;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 90 - 2000;
-                // this.game_exp += 90;
+            else if(this.game_exp + 90 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
         },
 
@@ -627,17 +654,20 @@ export default {
             if(this.expWidth + 7 <= 100) {
                 this.expWidth = this.expWidth + this.increment_5; // 增加經驗值
             }
-            else if(this.expWidth > 100){
-                this.expWidth = this.expWidth + this.increment_5 - 100; // 增加經驗值
-                // this.expWidth -= 100;
+            else if(this.expWidth + 7 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 7 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 140 <= 2000) {
                 this.game_exp += 140;
             }
-            else if(this.game_exp > 2000) {
-                this.game_exp = this.game_exp + 140 - 2000
-                // this.game_exp += 140;
+            else if(this.game_exp +140 >= 2000) {
+                this.game_exp = 2000;
+                // 彈窗禮券   post 進去
+                this.game_exp = 0;
             }
         },
 
@@ -651,9 +681,11 @@ export default {
             if(this.expWidth + 10.5 <= 100) {
                 this.expWidth = this.expWidth + this.increment_6; // 增加經驗值
             }
-            else if(this.expWidth > 100){
-                this.expWidth = this.expWidth + this.increment_6 - 100; // 增加經驗值
-                // this.expWidth -= 100;
+            else if(this.expWidth + 10.5 == 100) {
+                this.expWidth = 100;
+            }
+            else if(this.expWidth + 10.5 > 100) {
+                this.expWidth = 0;
             }
 
             if(this.game_exp + 210 < 2000) {
@@ -661,54 +693,59 @@ export default {
             }
             else if(this.game_exp + 210 >= 2000) {
                 this.game_exp = 2000;
+
                 // 彈窗禮券   post 進去
                 this.game_exp = 0;
             }
         },
-        postData() {
-            // const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
-            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
-            const gameValueContent = {
-                memId: this.$store.state.user.mem_id,
-                game_money: this.game_money,
-                remaining_amount_1: this.remaining_amount_1,
-                remaining_amount_2: this.remaining_amount_2,
-                remaining_amount_3: this.remaining_amount_3,
-                remaining_amount_4: this.remaining_amount_4,
-                remaining_amount_5: this.remaining_amount_5,
-                remaining_amount_6: this.remaining_amount_6,
-            };
 
-            fetch(url, {
-                method: "POST",
-                body: new URLSearchParams(gameValueContent),
-            })
-                .then((res) => res.json())
-                .then((json) => console.log(json))
-        }
+        // ======================================== 消費及使用時同步更新後台資料 ======================================== //
+        // postData() {
+        //     // const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
+        //     let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
+        //     const gameValueContent = {
+        //         memId: this.$store.state.user.mem_id,
+        //         game_money: this.game_money,
+        //         remaining_amount_1: this.remaining_amount_1,
+        //         remaining_amount_2: this.remaining_amount_2,
+        //         remaining_amount_3: this.remaining_amount_3,
+        //         remaining_amount_4: this.remaining_amount_4,
+        //         remaining_amount_5: this.remaining_amount_5,
+        //         remaining_amount_6: this.remaining_amount_6,
+        //     };
+
+        //     fetch(url, {
+        //         method: "POST",
+        //         body: new URLSearchParams(gameValueContent),
+        //     })
+        //         .then((res) => res.json())
+        //         .then((json) => console.log(json))
+        // },
     },
     watch: {
-        remaining_amount_1() {
-            this.postData();
-        },
-        remaining_amount_2() {
-            this.postData();
-        },
-        remaining_amount_3() {
-            this.postData();
-        },
-        remaining_amount_4() {
-            this.postData();
-        },
-        remaining_amount_5() {
-            this.postData();
-        },
-        remaining_amount_6() {
-            this.postData();
-        },
+        // ======================================== 消費及使用時同步更新後台資料 ======================================== //
+        // remaining_amount_1() {
+        //     this.postData();
+        // },
+        // remaining_amount_2() {
+        //     this.postData();
+        // },
+        // remaining_amount_3() {
+        //     this.postData();
+        // },
+        // remaining_amount_4() {
+        //     this.postData();
+        // },
+        // remaining_amount_5() {
+        //     this.postData();
+        // },
+        // remaining_amount_6() {
+        //     this.postData();
+        // },
     },
     unmounted() {
-        this.postData();
+        // ======================================== 消費及使用時同步更新後台資料 ======================================== //
+        // this.postData();
     },
 };
 </script>
@@ -956,7 +993,7 @@ template {
     vertical-align: bottom;
 }
 
-/* ========== 遊戲選項列 ========== */
+/* ======================================== 遊戲選項列 ======================================== */
 .game_nav {
     position: absolute;
     width: 15%;
@@ -1051,8 +1088,20 @@ template {
     margin-top: 15%;
 }
 
-.expValue {
+.expValue1 {
     background-color: teal;
+    height: 12px;
+    max-width: 100%;
+}
+
+.expValue2 {
+    background-color: orange;
+    height: 12px;
+    max-width: 100%;
+}
+
+.expValue3 {
+    background-color: red;
     height: 12px;
     max-width: 100%;
 }
@@ -1232,7 +1281,7 @@ template {
     font-size: 12px;
 }
 
-/* ========== 遊戲背包 ========== */
+/* ======================================== 遊戲背包 ======================================== */
 .bag_talkwindow {
     position: absolute;
     width: 50%;
@@ -1319,6 +1368,45 @@ template {
     font-size: 12px;
 }
 
+/* ======================================== 彈出折價券 ======================================== */
+.discount_coupon_talkwindow {
+    position: absolute;
+    width: 100%;
+    top: 10%;
+    right: 0%;
+    bottom: 0;
+    left: -16%;
+    overflow: hidden;
+    margin-right: 20%;
+    transform: scale(0);
+}
+
+.discount_coupon_talkwindow_block {
+    width: 70%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 50%;
+    left: 22%;
+    font-size: 30px;
+    text-align: center;
+    color: white;
+    background-color: #ccc;
+    background-image: url(../assets/images/game/talk_window_background.png);
+    border-radius: 10px;
+}
+
+.discount_coupon_talkwindow_content {
+    position: relative;
+    width: 70%;
+    margin: -1% auto;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 5%;
+    margin-left: 25%;
+}
+
 /* ======================================== 關掉彈窗 ======================================== */
 .btn-close {
     position: absolute;
@@ -1330,7 +1418,8 @@ template {
 
 .shop_talkwindow_active,
 .bag_talkwindow_active,
-.plus_talkwindow_active {
+.plus_talkwindow_active,
+.discount_coupon_talkwindow_content {
     animation: popup 0.5s;
     transform: scale(1);
 }
@@ -1567,8 +1656,20 @@ template {
         margin-top: 15%;
     }
 
-    .expValue {
+    .expValue1 {
         background-color: teal;
+        height: 12px;
+        max-width: 100%;
+    }
+
+    .expValue2 {
+        background-color: orange;
+        height: 12px;
+        max-width: 100%;
+    }
+
+    .expValue3 {
+        background-color: red;
         height: 12px;
         max-width: 100%;
     }
@@ -2089,8 +2190,20 @@ template {
         margin-top: 15%;
     }
 
-    .expValue {
+    .expValue1 {
         background-color: teal;
+        height: 12px;
+        max-width: 100%;
+    }
+
+    .expValue2 {
+        background-color: orange;
+        height: 12px;
+        max-width: 100%;
+    }
+
+    .expValue3 {
+        background-color: red;
         height: 12px;
         max-width: 100%;
     }
