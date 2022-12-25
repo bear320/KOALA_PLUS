@@ -441,7 +441,7 @@ export default {
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
             // const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
-             url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
+            let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
             xhr.open("get", url, true);
             xhr.send(null);
         },
