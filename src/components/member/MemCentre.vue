@@ -85,6 +85,7 @@
                             v-if="pwdType_one"
                             v-model="passwordcheck"
                             @keyup.enter="memPageDown"
+                            autocomplete="off"
                         />
                         <input
                             type="password"
@@ -95,6 +96,7 @@
                             @keyup.enter="memPageDown"
                             required
                             v-else
+                            autocomplete="off"
                         />
                         <img
                             :src="seen_one ? seenImg : unseenImg"
@@ -114,6 +116,7 @@
                             ref="mem_password1"
                             v-if="pwdType_two"
                             v-model="newpassword"
+                            autocomplete="off"
                         />
                         <input
                             type="password"
@@ -124,6 +127,7 @@
                             @keyup.enter="memPageDown"
                             required
                             v-else
+                            autocomplete="off"
                         />
                         <img
                             :src="seen_two ? seenImg : unseenImg"
@@ -143,6 +147,7 @@
                             ref="mem_passwordconfirm"
                             v-if="pwdType_three"
                             v-model="newpasswordconfirm"
+                            autocomplete="off"
                         />
                         <input
                             type="password"
@@ -153,6 +158,7 @@
                             @keyup.enter="memPageDown"
                             required
                             v-else
+                            autocomplete="off"
                         />
                         <img
                             :src="seen_three ? seenImg : unseenImg"
