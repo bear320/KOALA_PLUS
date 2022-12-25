@@ -41,7 +41,7 @@
             </div>
             <div>
                 <p>圖片:</p>
-                <input type="file" id="upload" />
+                <input type="file" />
             </div>
         </div>
         <div>
@@ -98,11 +98,21 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
-                    if (confirm("是否關閉此分頁？")) {
-                        window.close();
-                    }
+                    // alert(status.msg);
+                    this.confirmModal();
                 });
+        },
+        confirmModal() {
+            this.$Modal.confirm({
+                title: "已新增文章",
+                content: "<p>已新增文章，是否關閉此分頁？</p>",
+                okText: "是",
+                cancelText: "否",
+                onOk: () => {
+                    this.$Modal.remove();
+                    window.close();
+                },
+            });
         },
     },
 };

@@ -58,15 +58,81 @@
         <section>
             <h2 class="title">News</h2>
             <div class="wrapper articles">
-                <select name="category" id="artclesCategory">
-                    <option value="none" selected>所有文章</option>
-                    <option value="最新消息">最新消息</option>
-                    <option value="園區資訊">園區資訊</option>
-                    <option value="資金運用">資金運用</option>
+                <select
+                    name="category"
+                    v-model="selectCategory"
+                    id="selectCategory"
+                    @change="choose()"
+                >
+                    <option
+                        v-for="option in options"
+                        :key="option.value"
+                        :value="option.value"
+                        :selected="option.selected"
+                    >
+                        {{ option.value }}
+                    </option>
                 </select>
+                <div v-show="selectCategory == '所有文章'">
+                    <div
+                        class="oneArticle"
+                        v-for="(article, idx) in uploaded"
+                        :key="article"
+                    >
+                        <div
+                            class="article-img"
+                            :style="{
+                                backgroundImage:
+                                    'url(' +
+                                    require(`@/assets/images/about/${article.news_img}`) +
+                                    ')',
+                            }"
+                        ></div>
+                        <div class="article">
+                            <button
+                                @click="openLightbox(idx)"
+                                class="article-title"
+                            >
+                                {{ article.news_title }}
+                            </button>
+                            <div class="tag">
+                                <p class="article-tag">
+                                    #{{ article.news_category }}
+                                </p>
+                                <p class="article-date">
+                                    {{ article.news_date }}
+                                </p>
+                            </div>
+                            <div class="article-content">
+                                {{ article.news_content }}
+                            </div>
+                        </div>
+                        <lightbox ref="lightbox">
+                            <template #img>
+                                <img
+                                    :src="
+                                        require(`@/assets/images/about/${article.news_img}`)
+                                    "
+                                />
+                            </template>
+                            <template #article-title>
+                                <h3>{{ article.news_title }}</h3>
+                            </template>
+                            <template #article-tag>
+                                <p>{{ article.news_category }}</p>
+                            </template>
+                            <template #article-date>
+                                <p>{{ article.news_date }}</p>
+                            </template>
+                            <template #article-content>
+                                <p>{{ article.news_content }}</p>
+                            </template>
+                        </lightbox>
+                    </div>
+                </div>
                 <div
                     class="oneArticle"
-                    v-for="(article, idx) in uploaded"
+                    v-for="(article, idx) in newarticles"
                     :key="article"
                 >
                     <div
@@ -89,7 +155,9 @@
                             <p class="article-tag">
                                 #{{ article.news_category }}
                             </p>
-                            <p class="article-date">{{ article.news_date }}</p>
+                            <p class="article-date">
+                                {{ article.news_date }}
+                            </p>
                         </div>
                         <div class="article-content">
                             {{ article.news_content }}
@@ -222,12 +290,36 @@ export default {
                     url: require("../assets/images/about/8.jpg"),
                 },
             ],
+            options: [
+                { value: "所有文章", selected: true },
+                { value: "最新消息" },
+                { value: "園區資訊" },
+                { value: "資金運用" },
+            ],
             articles: [],
             uploaded: [],
-            selectedCategory: undefined,
+            selectCategory: "所有文章",
+            newarticles: [],
         };
     },
     methods: {
+        choose() {
+            let tag = document.getElementById("selectCategory").value;
+            console.log(tag);
+            const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.articles = json;
+                    this.newarticles = this.articles.filter((article) => {
+                        return (
+                            article.news_status == "1" &&
+                            article.news_category == tag
+                        );
+                    });
+                });
+        },
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
             // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
@@ -238,6 +330,7 @@ export default {
                     this.uploaded = this.articles.filter((article) => {
                         return article.news_status == "1";
                     });
+                    console.log(uploaded);
                 });
         },
         openLightbox(idx) {
@@ -246,12 +339,6 @@ export default {
     },
     created() {
         this.getArticleList();
-    },
-    watch: {
-        selectedCategory: function (value) {
-            let oneArticle = document.querySelector("oneArticle");
-            let category = document.getElementById("artclesCategory").value;
-        },
     },
 };
 </script>
