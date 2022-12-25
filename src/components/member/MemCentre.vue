@@ -64,7 +64,7 @@
                 </div>
             </div>
             <!-- 會員中心右邊內容 關於帳號密碼-->
-            <div class="tabcontent_txt_group">
+            <form class="tabcontent_txt_group">
                 <div class="subtitle">
                     <Icon type="ios-create" size="20" color="#337a7d" />
                     <span>重設會員密碼</span>
@@ -76,38 +76,95 @@
                 <table class="tabcontent_group">
                     <tr class="tabcontent_txt">
                         <td>原密碼</td>
+                        <i class="icon_password"></i>
                         <input
                             type="text"
                             id="mem_psw"
                             myfield="mem_psw"
                             ref="mem_psw"
+                            v-if="pwdType_one"
                             v-model="passwordcheck"
                             @keyup.enter="memPageDown"
+                        />
+                        <input
+                            type="password"
+                            id="mem_psw"
+                            myfield="mem_psw"
+                            ref="mem_psw"
+                            v-model="passwordcheck"
+                            @keyup.enter="memPageDown"
+                            required
+                            v-else
+                        />
+                        <img
+                            :src="seen_one ? seenImg : unseenImg"
+                            @click="changeType_1"
+                            v-on:mouseover="hoverEye_1"
+                            v-on:mouseout="outEye_1"
+                            class="login_icon_eye"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>密碼</td>
+                        <i class="icon_password"></i>
                         <input
                             type="text"
                             id="mem_password1"
                             myfield="mem_password1"
                             ref="mem_password1"
+                            v-if="pwdType_two"
                             v-model="newpassword"
+                        />
+                        <input
+                            type="password"
+                            id="mem_password1"
+                            myfield="mem_password1"
+                            ref="mem_password1"
+                            v-model="newpassword"
+                            @keyup.enter="memPageDown"
+                            required
+                            v-else
+                        />
+                        <img
+                            :src="seen_two ? seenImg : unseenImg"
+                            @click="changeType_2"
+                            v-on:mouseover="hoverEye_2"
+                            v-on:mouseout="outEye_2"
+                            class="login_icon_eye"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>重新輸入</td>
+                        <i class="icon_password"></i>
                         <input
                             type="text"
                             id="mem_password_again"
                             myfield="mem_password1"
                             ref="mem_passwordconfirm"
+                            v-if="pwdType_three"
                             v-model="newpasswordconfirm"
+                        />
+                        <input
+                            type="password"
+                            id="mem_password_again"
+                            myfield="mem_password1"
+                            ref="mem_passwordconfirm"
+                            v-model="newpasswordconfirm"
+                            @keyup.enter="memPageDown"
+                            required
+                            v-else
+                        />
+                        <img
+                            :src="seen_three ? seenImg : unseenImg"
+                            @click="changeType_3"
+                            v-on:mouseover="hoverEye_3"
+                            v-on:mouseout="outEye_3"
+                            class="login_icon_eye"
                         />
                     </tr>
                 </table>
                 <button class="btn-paramy" @click="editMempsw">修改密碼</button>
-            </div>
+            </form>
         </div>
     </li>
 </template>
@@ -121,6 +178,14 @@ export default {
             passwordcheck: "",
             newpassword: "",
             newpasswordconfirm: "",
+            unseenImg: require("@/assets/images/login/eye_close.png"),
+            seenImg: require("@/assets/images/login/eye_open.png"),
+            seen_one: "",
+            pwdType_one: false,
+            seen_two: "",
+            pwdType_two: false,
+            seen_three: "",
+            pwdType_three: false,
         };
     },
     methods: {
@@ -273,6 +338,45 @@ export default {
                     // alert(status.msg);
                 });
         },
+        // 密碼是否顯示的控制
+        changeType_1: function () {
+            this.seen_one = !this.seen_one;
+            this.pwdType_one = !this.pwdType_one;
+        },
+
+        hoverEye_1: function () {
+            this.seen_one = !this.seen_one;
+        },
+
+        outEye_1: function () {
+            this.seen_one = !this.seen_one;
+        },
+        // 首次輸入新密碼
+        changeType_2: function () {
+            this.seen_two = !this.seen_two;
+            this.pwdType_two = !this.pwdType_two;
+        },
+
+        hoverEye_2: function () {
+            this.seen_two = !this.seen_two;
+        },
+
+        outEye_2: function () {
+            this.seen_two = !this.seen_two;
+        },
+        // 再次輸入新密碼
+        changeType_3: function () {
+            this.seen_three = !this.seen_three;
+            this.pwdType_three = !this.pwdType_three;
+        },
+
+        hoverEye_3: function () {
+            this.seen_three = !this.seen_three;
+        },
+
+        outEye_3: function () {
+            this.seen_three = !this.seen_three;
+        },
     },
     created() {
         this.getmemCentre();
@@ -358,6 +462,11 @@ export default {
                             @include m() {
                                 max-width: 280px;
                             }
+                        }
+                        .login_icon_eye {
+                            width: 20px;
+                            height: 20px;
+                            align-self: center;
                         }
                     }
                 }
