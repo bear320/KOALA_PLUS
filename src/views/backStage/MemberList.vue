@@ -97,6 +97,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     data() {
         return {
@@ -122,16 +123,14 @@ export default {
 
             console.log(this.memindexs[index].mem_state);
             console.log(this.memindexs[index].mem_id);
-            fetch(
-                "http://localhost/cgd103_g1/public/api/postMemberChangeBlacklist.php",
-                {
-                    method: "post",
-                    body: new URLSearchParams({
-                        mem_id,
-                        black_state,
-                    }),
-                }
-            )
+            const apiURL = new URL(`${BASE_URL}/postMemberChangeBlacklist.php`);
+            fetch(apiURL, {
+                method: "post",
+                body: new URLSearchParams({
+                    mem_id,
+                    black_state,
+                }),
+            })
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);

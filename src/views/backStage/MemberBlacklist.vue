@@ -47,6 +47,7 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     data() {
         return {
@@ -80,6 +81,19 @@ export default {
         };
     },
     methods: {
+        postmemberBlacklist() {
+            const apiURL = new URL(`${BASE_URL}/getMember.php?type=admin`);
+            console.log(apiURL);
+            fetch(apiURL, { credentials: "include" })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+
+                    this.memindexs = json.prodRows.filter((item) => {
+                        return item.mem_state === 1;
+                    });
+                });
+        },
         handleBeforeChange() {
             return new Promise((resolve) => {
                 // this.$Modal.confirm({
@@ -96,17 +110,7 @@ export default {
         Header,
     },
     created() {
-        fetch(
-            "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
-            { credentials: "include" }
-        )
-            .then((res) => res.json())
-            .then((json) => {
-                console.log(json);
-                this.memindexs = json.prodRows.filter((item) => {
-                    return item.mem_state === 1;
-                });
-            });
+        this.postmemberBlacklist();
     },
 };
 </script>
