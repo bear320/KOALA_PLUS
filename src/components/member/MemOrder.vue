@@ -71,16 +71,16 @@
                                     訂單成立時間：{{ item.ord_date }}
                                 </p>
                                 <div class="state">
-                                    訂單狀態u, ：{{ item.ord_ship }}
+                                    訂單狀態u, ：{{ item.ord_ship
+                                    }}{{ sts_map[item.ord_ship] }}
                                 </div>
                                 <button
-                                    v-show="sts_map[item.ord_ship] < 1"
+                                    v-show="item.ord_ship < 1"
                                     class="btn-lowest"
                                     @click="clickMemUnsubscribe"
                                 >
                                     取消訂單
                                 </button>
-                                <div>訂單狀態:{{ sts_map[item.ord_ship] }}</div>
                             </div>
                             <div class="right">
                                 <p>折扣：{{ item.ord_disc }} 元</p>
@@ -184,29 +184,7 @@ export default {
             order: [],
             sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
             orderlists: [],
-            // orderList: [
-            // {
-            //     prod_name: "無尾熊乾髮帽",
-            //     prod_id: "1022",
-            //     prod_category: "玩具/絨毛娃娃",
-            //     ord_qty: 1,
-            //     prod_price: 200,
-            // },
-            // {
-            //     prod_name: "無尾熊乾髮帽2",
-            //     prod_id: "1023",
-            //     prod_category: "玩具/絨毛娃娃",
-            //     ord_qty: 1,
-            //     prod_price: 200,
-            // },
-            // {
-            //     prod_name: "無尾熊乾髮帽3",
-            //     prod_id: "1024",
-            //     prod_category: "玩具/絨毛娃娃",
-            //     ord_qty: 1,
-            //     prod_price: 200,
-            // },
-            // ],
+            // orderList: []
         };
     },
     computed: {
@@ -221,6 +199,7 @@ export default {
         clickMemUnsubscribe() {
             // console.log(this.showMemUnsubscribe);
             this.showMemUnsubscribe = true;
+            item.ord_ship == 3;
         },
         closeMemUnsubscribe_emit() {
             this.showMemUnsubscribe = false;
@@ -258,7 +237,7 @@ export default {
                             this.username = json.username;
                             return true;
                         }
-                        alert("獲取數據失敗1");
+                        // alert("獲取數據失敗1");
                     });
             } else {
                 // alert("登入失效");
@@ -292,7 +271,7 @@ export default {
                             console.log(this.orderlists);
                             return true;
                         }
-                        alert("獲取數據失敗1");
+                        // alert("獲取數據失敗1");
                     });
             } else {
                 // location.href = "/login";
@@ -328,7 +307,6 @@ export default {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-                border-bottom: 1px solid #337a7d;
 
                 .mem_order_table {
                     width: 80%;
@@ -339,7 +317,7 @@ export default {
                     button {
                         padding: 0 10px;
                         line-height: 30px;
-                        height: 30px;
+                        // height: 30px;
                         @include m() {
                             padding: 0 5px;
                             font-size: 16px;
@@ -393,7 +371,7 @@ table {
         background-color: $darkgreen;
         color: #fff;
         border-radius: 10px;
-        box-shadow: 0px 3px 3px 3px rgb(190, 190, 190);
+        box-shadow: 0px 2px 3px 1px rgb(190, 190, 190);
         padding: 10px 50px;
         cursor: pointer;
         -webkit-user-select: none;
@@ -414,7 +392,7 @@ table {
 input[type="checkbox"]:checked + .con {
     display: block;
     background-color: #fff;
-    box-shadow: 3px 3px 8px 3px rgb(163, 163, 163);
+    box-shadow: 0px 2px 3px 1px rgb(190, 190, 190);
     height: fit-content;
 }
 input[type="checkbox"] + .con {
@@ -455,7 +433,7 @@ input[type="checkbox"] {
         }
     }
     .con-3 {
-        height: 150px;
+        // height: 150px;
         display: flex;
         justify-content: space-between;
         margin: 10px 50px 25px;
@@ -465,6 +443,15 @@ input[type="checkbox"] {
         }
         .right {
             margin-right: 50px;
+        }
+        button {
+            padding: 0 10px;
+            line-height: 30px;
+            // height: 30px;
+            @include m() {
+                padding: 0 5px;
+                font-size: 16px;
+            }
         }
     }
 }

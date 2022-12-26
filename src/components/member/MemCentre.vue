@@ -259,9 +259,9 @@ export default {
                         alert(status.msg);
                     });
                 if (this.passwordcheck != "") {
-                    alert("有輸入內容");
+                    // alert("有輸入內容");
                     if (this.newpassword == this.newpasswordconfirm) {
-                        alert("相同");
+                        // alert("相同");
                     } else {
                         alert("密碼不相同");
                     }
