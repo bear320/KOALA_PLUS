@@ -6,6 +6,10 @@
             <img src="@/assets/images/backstageindex/supportIcon.png" alt="" />
         </div>
         <div class="action">
+            <router-link to="bs-support-statistic" target="_blank">
+                <!-- <img src="@/assets/images/icon/stats.svg" alt="" /> -->
+                <img src="@/assets/images/icon/statistic.svg" alt="" />
+            </router-link>
             <div class="search">
                 <input
                     type="search"
@@ -217,6 +221,7 @@ export default {
         column-gap: 15px;
         img {
             vertical-align: top;
+            height: 40px;
         }
     }
 }
