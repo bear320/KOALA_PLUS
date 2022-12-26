@@ -42,7 +42,10 @@
                                     size="20"
                                     color="#337a7d"
                                     @click="
-                                        showcouponsList(mem_name, item.sup_date)
+                                        showcouponsList(
+                                            couponsLists.mem_name,
+                                            couponsLists.sup_date
+                                        )
                                     "
                                 />
                             </td>
@@ -224,16 +227,6 @@ table {
             left: 39%;
         }
     }
-    // .certificate_koala {
-    //     position: relative;
-    //     width: fit-content;
-    //     padding: 10px;
-    //     top: 50%;
-    //     left: 67%;
-    //     transform: translate(-65%, -50%);
-    //     color: #ffffff;
-    //     font-weight: 700;
-    // }
 
     .certificate_date {
         position: relative;
