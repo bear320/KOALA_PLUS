@@ -14,7 +14,7 @@ session_id($getSessionId);
 session_start();
 $getUser = $_SESSION??[];
 if ( empty( $getUser ) ) {
-    echo json_encode(["status"=>10010,"msg"=>"該帳號目前已登出"]);
+    echo json_encode(["status"=>10010,"msg"=>"該帳號目前已登出",'session_id'=>session_id()]);
     die();
 }
 ?>
