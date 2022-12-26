@@ -14,7 +14,7 @@ foreach($images["tmp_name"] as $i => $tmp_name){
             $fileExt = pathinfo($images["name"][$i],PATHINFO_EXTENSION);
             $fileName[$i] = uniqid() . ".". $fileExt;
 
-            $to = "../images/shop/".$fileName;
+            $to = "../images/shop/".$fileName[$i];
             if(copy( $from, $to)){
                 $msg[] = "圖像 ".$images["name"][$i]." 上傳成功";
             }else{
