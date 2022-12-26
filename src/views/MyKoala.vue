@@ -109,17 +109,17 @@
             <div>
                 <div v-if="500 - game_exp >= 0">
                     <p>無尾熊目前階段：1</p>
-                    <p>已達成經驗值：{{ game_exp }}</p>
+                    <p id="game_exp">已達成經驗值：{{ game_exp }}</p>
                     <p>距離下一段經驗值：{{ 500 - game_exp }}</p>
                 </div>
                 <div v-else-if="1000 - game_exp >= 0">
                     <p>無尾熊目前階段：2</p>
-                    <p>已達成經驗值：{{ game_exp }}</p>
+                    <p id="game_exp">已達成經驗值：{{ game_exp }}</p>
                     <p>距離下一段經驗值：{{ 1000 - game_exp }}</p>
                 </div>
                 <div v-else-if="2000 - game_exp >= 0">
                     <p>無尾熊目前階段：3</p>
-                    <p>已達成經驗值：{{ game_exp }}</p>
+                    <p id="game_exp">已達成經驗值：{{ game_exp }}</p>
                     <p>距離終點只剩經驗值：{{ 2000 - game_exp }}</p>
                 </div>
             </div>
@@ -557,7 +557,7 @@ export default {
     el: ".game_nav_expbar",
     data() {
         return {
-            game_money: "",
+            game_money: 0, // nan
 
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
@@ -692,6 +692,12 @@ export default {
             QQ.remaining_amount_6 = member.mem_food6;
             document.getElementById("remaining_amount_6").innerHTML =
                 remaining_amount_6;
+
+            let game_exp;
+            // 這裡的QQ指的是Vue實體
+            QQ.game_exp = member.mem_exp;
+            document.getElementById("game_exp").innerHTML =
+                game_exp;
         }
     },
     computed: {},
@@ -1182,8 +1188,8 @@ export default {
 
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
         postData() {
-            // const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
-            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
+            const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
+            // let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
             const gameValueContent = {
                 memId: this.$store.state.user.mem_id,
                 game_money: this.game_money,
@@ -1193,9 +1199,10 @@ export default {
                 remaining_amount_4: this.remaining_amount_4,
                 remaining_amount_5: this.remaining_amount_5,
                 remaining_amount_6: this.remaining_amount_6,
+                game_exp: this.game_exp,
             };
 
-            fetch(url, {
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(gameValueContent),
             })
