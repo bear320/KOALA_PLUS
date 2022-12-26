@@ -244,10 +244,10 @@ export default {
         },
         insertCoupon() {
             console.log(this.CouponId);
-            console.log(this.CouponCode);
+            console.log(typeof this.CouponCode);
             const payload = {
                 memid: 1006,
-                CouponId: this.CouponId,
+                CouponId: parseInt(this.CouponId),
                 CouponCode: this.CouponCode,
             };
             const apiURL = new URL(`${BASE_URL}/insertCoupon.php`);
