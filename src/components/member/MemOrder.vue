@@ -9,8 +9,9 @@
             <MemUnsubscribe
                 v-if="showMemUnsubscribe === true"
                 @closeMemUnsubscribe="closeMemUnsubscribe_emit"
+                @reRenderOrders="cancelOrder"
             ></MemUnsubscribe>
-
+            <p>合計 {{ order.length }} 筆訂單紀錄</p>
             <!-- ============================================ -->
             <div
                 class="accordion"
@@ -71,13 +72,13 @@
                                     訂單成立時間：{{ item.ord_date }}
                                 </p>
                                 <div class="state">
-                                    訂單狀態u, ：{{ item.ord_ship
+                                    訂單狀態：{{ item.ord_ship
                                     }}{{ sts_map[item.ord_ship] }}
                                 </div>
                                 <button
                                     v-show="item.ord_ship < 1"
                                     class="btn-lowest"
-                                    @click="clickMemUnsubscribe"
+                                    @click="clickMemUnsubscribe(index)"
                                 >
                                     取消訂單
                                 </button>
@@ -184,6 +185,7 @@ export default {
             order: [],
             sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
             orderlists: [],
+            tmpOrder: "",
             // orderList: []
         };
     },
@@ -196,17 +198,41 @@ export default {
         },
     },
     methods: {
-        clickMemUnsubscribe() {
+        cancelOrder() {
+            console.log("即將取消的訂單為");
+            console.log(this.tmpOrder);
+            fetch(
+                "http://localhost/cgd103_g1/public/api/postUpdateOrderState.php",
+                {
+                    method: "post",
+                    credentials: "include",
+                    body: new URLSearchParams({
+                        ord_ship: 3,
+                        ord_id: this.tmpOrder,
+                        mem_id: this.$store.state.user.mem_id,
+                    }),
+                }
+            )
+                .then((res) => res.json())
+                .then((json) => this.postMemOrders());
+        },
+        clickMemUnsubscribe(index) {
             // console.log(this.showMemUnsubscribe);
+            this.tmpOrder = this.order[index].ord_id;
+            // console.log(this.order[index].ord_id);
             this.showMemUnsubscribe = true;
-            item.ord_ship == 3;
+            const ord_ship = {
+                search_orderby: iconorderby,
+            };
         },
         closeMemUnsubscribe_emit() {
             this.showMemUnsubscribe = false;
         },
+
         // 抓取訂單標題
         postMemOrders() {
             // this.postMemOrders(inedx);
+
             let getCookie = document.cookie;
             if (getCookie) {
                 fetch(`${BASE_URL}/postmemOrder.php`, {
@@ -214,13 +240,13 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((json) => {
-                        console.log(json);
+                        // console.log(json);
                         if (json.status == 10010) {
                             location.href = "/login";
                         }
                         if (json.status) {
                             this.order = json.list;
-                            console.log(this.order);
+                            // console.log(this.order);
                             this.userid = json.userid;
                             this.username = json.username;
                             return true;
@@ -243,14 +269,14 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((json) => {
-                        console.log(json);
+                        // console.log(json);
                         // if (json.status == 10010) {
                         //     location.href = "/login";
                         // }
                         if (json.status) {
                             console.log("qq", json);
                             this.orderlists = json.list;
-                            console.log(this.orderlists);
+                            // console.log(this.orderlists);
                             return true;
                         }
                         // alert("獲取數據失敗1");
@@ -350,7 +376,7 @@ table {
         width: 100%;
         display: block;
         border: 10px;
-        background-color: $darkgreen;
+        background-color: #2e382e;
         color: #fff;
         border-radius: 10px;
         box-shadow: 0px 2px 3px 1px rgb(190, 190, 190);
