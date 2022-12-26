@@ -49,35 +49,13 @@
 import Header from "@/components/backStage/Header.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
+    components: {
+        Header,
+    },
     data() {
         return {
             disabled: true,
-            memindexs: [
-                // {
-                //     mem_id: "P00001",
-                //     mem_name: "曾韋翰",
-                //     mem_mob: "0988777688",
-                //     mem_account: "charmy111@gmail.com",
-                //     mem_add: "桃園市復興路46號8樓",
-                //     black_switch: false,
-                // },
-                // {
-                //     mem_id: "P00002",
-                //     mem_name: "韋禮安",
-                //     mem_mob: "0988777688",
-                //     mem_account: "charmy222@gmail.com",
-                //     mem_add: "桃園市復興路46號9樓",
-                //     black_switch: true,
-                // },
-                // {
-                //     mem_id: "P00003",
-                //     mem_name: "王以太",
-                //     mem_mob: "0988777688",
-                //     mem_account: "charmy333@gmail.com",
-                //     mem_add: "桃園市復興路46號10樓",
-                //     black_switch: false,
-                // },
-            ],
+            memindexs: [],
         };
     },
     methods: {
@@ -106,9 +84,7 @@ export default {
             });
         },
     },
-    components: {
-        Header,
-    },
+
     created() {
         this.postmemberBlacklist();
     },
