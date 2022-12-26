@@ -413,15 +413,15 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up2() {
-            let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
-            // const apiURL = new URL(`${BASE_URL}/getSignUp.php`)
+            // let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
+            const apiURL = new URL(`${BASE_URL}/getSignUp.php`);
             const signUpContent = {
                 userName: this.sign_up_userName,
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
 
-            fetch(url, {
+            fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
@@ -441,7 +441,9 @@ export default {
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
             // const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
-            let url = "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" + document.getElementById("mem_account").value;
+            let url =
+                "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
+                document.getElementById("mem_account").value;
             xhr.open("get", url, true);
             xhr.send(null);
         },
@@ -487,7 +489,9 @@ export default {
             };
 
             // const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
-            var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+            var url =
+                "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+                document.getElementById("forget_password_account").value;
             xhr.open("get", url, true);
             xhr.send(null);
 
@@ -495,7 +499,9 @@ export default {
                 var xhr = new XMLHttpRequest();
 
                 // const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
-                var url = "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" + document.getElementById("forget_password_account").value;
+                var url =
+                    "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+                    document.getElementById("forget_password_account").value;
                 xhr.open("get", url, true);
                 xhr.send(null);
                 let member = JSON.parse(json);

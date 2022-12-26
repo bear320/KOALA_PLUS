@@ -214,9 +214,6 @@ export default {
             const apiURL = new URL(
                 `${BASE_URL}/getKoalaInfo.php?koalaName=${koalaName}`
             );
-            // const apiURL = new URL(
-            //     `http://localhost:8888/cgd103_g1/public/api/getKoalaInfo.php?koalaName=${koalaName}`
-            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

@@ -4,20 +4,53 @@
         <div class="content_active">
             <div class="content_active_sign_up">
                 <h1>新增後台管理員</h1>
-                <form @submit.prevent="sign_up" id="sign_up_form" method="post" enctype="multipart/form-data">
+                <form
+                    @submit.prevent="sign_up"
+                    id="sign_up_form"
+                    method="post"
+                    enctype="multipart/form-data"
+                >
                     <div>
                         <p>帳號</p>
-                        <input id="emp_account" type="text" placeholder="你的信箱或帳號" v-model="sign_up_account" required/>
+                        <input
+                            id="emp_account"
+                            type="text"
+                            placeholder="你的信箱或帳號"
+                            v-model="sign_up_account"
+                            required
+                        />
                     </div>
                     <div>
                         <p class="content_active_sign_up_moveTxt_1">密碼</p>
                         <i class="icon_password"></i>
-                        <input type="text" v-if="pwdType_one" v-model="sign_up_password"/>
-                        <input type="password" placeholder="Confirm Password" v-model="sign_up_password" required v-else/>
-                        <img :src="seen_one ? seenImg : unseenImg" @click="changeType_1" v-on:mouseover="hoverEye_1" v-on:mouseout="outEye_1" class="sign_up_icon_eye"/>
+                        <input
+                            type="text"
+                            v-if="pwdType_one"
+                            v-model="sign_up_password"
+                        />
+                        <input
+                            type="password"
+                            placeholder="Confirm Password"
+                            v-model="sign_up_password"
+                            required
+                            v-else
+                        />
+                        <img
+                            :src="seen_one ? seenImg : unseenImg"
+                            @click="changeType_1"
+                            v-on:mouseover="hoverEye_1"
+                            v-on:mouseout="outEye_1"
+                            class="sign_up_icon_eye"
+                        />
                     </div>
                     <div>
-                        <button class="btn_sign_up"  type="submit"  @click="sign_up">註冊會員</button>
+                        <button
+                            class="btn_sign_up"
+                            type="submit"
+                            @click="sign_up"
+                        >
+                            註冊會員
+                        </button>
                     </div>
                 </form>
             </div>
@@ -32,7 +65,7 @@ export default {
     components: {
         Header,
     },
-    data () {
+    data() {
         return {
             login_account: "",
             login_password: "",
@@ -46,7 +79,7 @@ export default {
             pwdType_one: false,
             pwdType_two: false,
             pwdType_three: false,
-        }
+        };
     },
     methods: {
         // ======================================== 看得到密碼 click事件 ======================================== //
@@ -92,33 +125,31 @@ export default {
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up() {
             // const apiURL = new URL(`${BASE_URL}/getAdminAdd.php`);
-            let url="http://localhost/cgd103_g1/public/api/getAdminAdd.php";
+            let url = `${BASE_URL}/getAdminAdd.php`;
             const signUpContent = {
                 account: this.sign_up_account,
                 password: this.sign_up_password,
             };
-            
-            fetch(url,
-            {
+
+            fetch(url, {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
-            .then((res) => res.json())
-            .then((result) => {
-                alert(result.msg);
-                location.reload();
-            });
+                .then((res) => res.json())
+                .then((result) => {
+                    alert(result.msg);
+                    location.reload();
+                });
         },
-    } 
+    },
 };
 </script>
 
 <style lang="scss" scoped>
-
 .content_active {
     position: relative;
     // width: 100%;
-    height: 100VH;
+    height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -190,5 +221,4 @@ export default {
     margin-left: 1.5%;
     margin-top: 3.5%;
 }
-
 </style>

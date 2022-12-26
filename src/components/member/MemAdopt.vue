@@ -124,12 +124,6 @@ export default {
             let getCookie = document.cookie;
             const apiURL = new URL(`${BASE_URL}/postmemAdopt.php`);
             if (getCookie) {
-                /* fetch(
-                    "http://localhost/cgd103_g1/public/api/postmemAdopt.php",
-                    {
-                        credentials: "include",
-                    }
-                ) */
                 fetch(apiURL, {
                     credentials: "include",
                 })

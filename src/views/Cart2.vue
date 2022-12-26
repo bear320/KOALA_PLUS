@@ -238,19 +238,6 @@ export default {
 
                 // 要把得到的Prime Token 送給後端,
                 console.log("交易進行中");
-                /* let payReslut = await fetch(
-                    `http://localhost/cgd103_g1/public/api/tappay.php?prime=${prime}`,
-                    {
-                        method: "post",
-                        body: new URLSearchParams({
-                            mem_id,
-                            coupon_id,
-                            ord_person: this.ordPerson,
-                            ord_phone: this.ordPhone,
-                            ord_add: this.ordAdd,
-                        }),
-                    }
-                ); */
                 let payReslut = await fetch(
                     `${BASE_URL}/tappay.php?prime=${prime}`,
                     {

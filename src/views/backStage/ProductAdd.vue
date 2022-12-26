@@ -87,6 +87,7 @@
 import Header from "@/components/backStage/Header.vue";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
 import { returnStatement } from "@babel/types";
+import { BASE_URL } from "@/assets/js/common.js";
 
 export default {
     components: {
@@ -101,13 +102,10 @@ export default {
             if (!this.$refs["prod-form"].checkValidity()) return;
             const formData = new FormData(this.$refs["prod-form"]);
             console.log(formData.getAll("image[]"));
-            fetch(
-                "http://localhost/cgd103_g1/public/api/postInsertProduct.php",
-                {
-                    method: "post",
-                    body: formData,
-                }
-            )
+            fetch(`${BASE_URL}/postInsertProduct.php`, {
+                method: "post",
+                body: formData,
+            })
                 .then((res) => res.json())
                 .then((json) => {
                     if (json.status === 0) {

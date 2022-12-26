@@ -164,9 +164,6 @@ export default {
         },
         async getMemCoupons() {
             if (!this.$store.state.user) return;
-            /*   const res = await fetch(
-                `http://localhost/cgd103_g1/public/api/getMemCoupon.php?memId=${this.$store.state.user.mem_id}`
-            ); */
             const res = await fetch(
                 `${BASE_URL}/getMemCoupon.php?memId=${this.$store.state.user.mem_id}`
             );

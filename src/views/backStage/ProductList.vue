@@ -83,6 +83,8 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     components: {
         Header,
@@ -137,9 +139,7 @@ export default {
             });
         },
         getProductList(payload) {
-            const apiURL = new URL(
-                "http://localhost/cgd103_g1/public/api/getProductsList.php"
-            );
+            const apiURL = new URL(`${BASE_URL}/getProductsList.php`);
 
             const quertParam = new URLSearchParams(payload);
             console.log(payload);

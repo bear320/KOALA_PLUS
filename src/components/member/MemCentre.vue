@@ -283,14 +283,6 @@ export default {
 
             let getCookie = document.cookie;
             if (getCookie) {
-                /*  fetch(
-                    "http://localhost/cgd103_g1/public/api/editMember.php?type=2",
-                    {
-                        method: "POST",
-                        credentials: "include",
-                        body: new URLSearchParams(postMemMainData),
-                    }
-                ) */
                 fetch(`${BASE_URL}/editMember.php?type=2`, {
                     method: "POST",
                     credentials: "include",

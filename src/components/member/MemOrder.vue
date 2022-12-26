@@ -230,21 +230,9 @@ export default {
             // this.postMemOrders(inedx);
             let getCookie = document.cookie;
             if (getCookie) {
-                /* fetch(
-                    "http://localhost/cgd103_g1/public/api/postmemOrder.php",
-                    {
-                        credentials: "include",
-                    }
-                ); */
                 fetch(`${BASE_URL}/postmemOrder.php`, {
                     credentials: "include",
                 })
-                    /* fetch(
-                    "http://localhost/cgd103_g1/public/api/postmemOrder.php",
-                    {
-                        credentials: "include",
-                    }
-                ) */
                     .then((res) => res.json())
                     .then((json) => {
                         console.log(json);
@@ -271,12 +259,6 @@ export default {
             // this.postMemOrders(inedx);
             let getCookie = document.cookie;
             if (getCookie) {
-                /* fetch(
-                    "http://localhost/cgd103_g1/public/api/postmemOrderlists.php",
-                    {
-                        credentials: "include",
-                    }
-                ) */
                 fetch(`${BASE_URL}/postmemOrderlists.php`, {
                     credentials: "include",
                 })

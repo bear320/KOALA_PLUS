@@ -110,15 +110,6 @@ export default {
                 search_orderby: iconorderby,
             };
             console.log(postMemSearch);
-
-            /* fetch(
-                "http://localhost/cgd103_g1/public/api/postmemCoupons.php?type=front",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    body: new URLSearchParams(postMemSearch),
-                }
-            ) */
             fetch(`${BASE_URL}/postmemCoupons.php?type=front`, {
                 method: "POST",
                 credentials: "include",
@@ -141,12 +132,6 @@ export default {
             let getCookie = document.cookie;
             console.log(getCookie);
             if (getCookie) {
-                /* fetch(
-                    "http://localhost/cgd103_g1/public/api/postmemCoupons.php",
-                    {
-                        credentials: "include",
-                    }
-                ) */
                 fetch(`${BASE_URL}/postmemCoupons.php`, {
                     credentials: "include",
                 })

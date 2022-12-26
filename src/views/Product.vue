@@ -115,7 +115,8 @@ import Header from "@/components/header.vue";
 import ImageSlider from "@/components/shop/ImageSlider.vue";
 import ProductCard from "@/components/shop/ProductCard.vue";
 import Footer from "@/components/footer.vue";
-import { returnStatement } from "@babel/types";
+import { BASE_URL } from "@/assets/js/common.js";
+
 export default {
     components: {
         Header,
@@ -169,7 +170,7 @@ export default {
         getProductDetail() {
             const productId = this.$route.params.id;
             const apiURL = new URL(
-                `http://localhost/cgd103_g1/public/api/getProductDetail.php?proId=${productId}`
+                `${BASE_URL}/getProductDetail.php?proId=${productId}`
             );
             fetch(apiURL)
                 .then((res) => res.json())

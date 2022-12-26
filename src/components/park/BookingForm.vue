@@ -205,8 +205,6 @@ export default {
                 rsv_status: "已預約",
                 rsv_ps: "",
             };
-
-            // fetch("http://localhost/cgd103_g1/public/api/resv_insert.php"
             const apiURL = new URL(`${BASE_URL}/resv_insert.php`);
             fetch(apiURL, {
                 method: "POST",
