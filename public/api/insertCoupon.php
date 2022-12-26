@@ -9,7 +9,7 @@ try{
 	$coupon = $pdo->prepare($sql);	
 	$coupon->bindValue(":mem_id", $_POST["mem_id"]);
 	$coupon->bindValue(":coupon_id", $_POST["coupon_id"]);
-	$coupon->bindValue(":coupon_code", $_POST[":coupon_code"]);
+	$coupon->bindValue(":coupon_code", $_POST["coupon_code"]);
 	$coupon->execute();
 
     $msg="新增成功";
