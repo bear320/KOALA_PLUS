@@ -15,12 +15,12 @@
                         </a>
                         <div>
                             <a href="">
-                                <p>未處理</p>
-                                <p>17</p>
+                                <p>月訂單</p>
+                                <p class="counts">{{ monthlyOrders }}</p>
                             </a>
                             <a href="">
-                                <p>處理中</p>
-                                <p>08</p>
+                                <p>未出貨</p>
+                                <p class="counts">{{ orderCount }}</p>
                             </a>
                         </div>
                     </div>
@@ -94,9 +94,31 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
+    },
+    data() {
+        return {
+            orderCount: [],
+            monthlyOrders: [],
+        };
+    },
+    methods: {
+        getOrderCount() {
+            const apiURL = new URL(`${BASE_URL}/getOrderCount.php`);
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    // console.log(json);
+                    this.orderCount = json[0]["all"];
+                    this.monthlyOrders = json[1]["m"];
+                });
+        },
+    },
+    created() {
+        this.getOrderCount();
     },
 };
 </script>
@@ -126,6 +148,10 @@ article {
                 width: 100%;
                 margin: 0 10px;
                 text-align: left;
+
+                .counts {
+                    text-align: center;
+                }
             }
             .card:first-child {
                 background-color: rgba(252, 245, 234, 0.6);
