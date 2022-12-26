@@ -6,7 +6,7 @@
         </div>
         <div class="mem_main">
             <div class="mem_coupons_table">
-                <p>合計 4 筆認養紀錄</p>
+                <p>合計 {{ couponsLists.length }} 筆認養紀錄</p>
                 <table class="table">
                     <thead>
                         <tr>
@@ -134,7 +134,7 @@ export default {
                 useCORS: true, // 解决文件跨域问题
             }).then((canvas) => {
                 const url = canvas.toDataURL("image/png"); // 生成的图片
-                // 可以上传后端或者直接显示
+                // 可以上傳后端或者直接显示
                 this.imgUrl = url;
             });
         },

@@ -116,14 +116,6 @@ const routes = [
         name: "member",
         // component: Member,
         component: () => import("@/views/Member.vue"),
-        beforeEnter: (to, from) => {
-            console.log("qwe");
-            console.log(store.state.user);
-            if (!store.state.user) {
-                return { name: "login" };
-            }
-            return true;
-        },
     },
     {
         path: "/my-koala",
