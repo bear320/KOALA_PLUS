@@ -76,7 +76,8 @@
                 </div>
                 <!-- </div> -->
             </div>
-            <img :src="imgUrl" class="return_img" />
+            <!-- <img :src="imgUrl" class="return_img" /> -->
+            <a ref="downloadBtn" :href="imgUrl" download="test.png"></a>
         </div>
     </li>
 </template>
@@ -139,6 +140,9 @@ export default {
                 const url = canvas.toDataURL("image/png"); // 生成的图片
                 // 可以上傳后端或者直接显示
                 this.imgUrl = url;
+                this.$nextTick(function () {
+                    this.$refs.downloadBtn.click();
+                });
             });
         },
         showcouponsList(name, date) {
