@@ -72,9 +72,10 @@
                                     :true-value="1"
                                     :false-value="0"
                                     @change="marked(index)"
-                                    v-model.number="article.news_star"
+                                    v-model="article.news_star"
                                 />
                             </label>
+                            <p>{{ article.news_star }}</p>
                             <div class="article">
                                 <p>{{ article.news_title }}</p>
                                 <p class="article-content">
@@ -151,12 +152,13 @@
                                 />
                             </svg>
                             <input
+                                id="star"
                                 type="checkbox"
                                 style="display: none"
                                 :true-value="1"
                                 :false-value="0"
                                 @change="marked(index)"
-                                v-model.number="article.news_star"
+                                v-model="article.news_star"
                             />
                         </label>
 
@@ -245,12 +247,13 @@
                                     />
                                 </svg>
                                 <input
+                                    id="star"
                                     type="checkbox"
                                     style="display: none"
                                     :true-value="1"
                                     :false-value="0"
                                     @change="marked(index)"
-                                    v-model.number="article.news_star"
+                                    v-model="article.news_star"
                                 />
                             </label>
                             <div class="article">
@@ -305,7 +308,7 @@
                     >
                         <label
                             :class="
-                                article.news_star == 1 ? 'starmark' : 'star'
+                                article.news_star == true ? 'starmark' : 'star'
                             "
                         >
                             <svg
@@ -329,12 +332,13 @@
                                 />
                             </svg>
                             <input
+                                id="star"
                                 type="checkbox"
                                 style="display: none"
                                 :true-value="1"
                                 :false-value="0"
                                 @change="marked(index)"
-                                v-model.number="article.news_star"
+                                v-model="article.news_star"
                             />
                         </label>
                         <div class="article">
@@ -448,25 +452,39 @@ export default {
                     console.log(this.articles);
                 });
         },
-        marked(index) {
+        marked(index, test) {
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
             // const apiURL = new URL(
             //     `http://localhost/cgd103_g1/public/api/editArticle.php`
             // );
-            const news_id = this.articles[index].news_id;
+            /* const news_id = this.articles[index].news_id;
             const news_star = this.articles[index].news_star;
 
-            console.log(this.articles[index].news_id);
+            console.log(news_id);
+            console.log(news_star); */
+
+            if (this.articles[index].news_star === 0) {
+                this.articles[index].news_star = 1;
+            } else {
+                this.articles[index].news_star = 0;
+            }
+
             console.log(this.articles[index].news_star);
+            console.log(this.articles[index].news_id);
 
             fetch(apiURL, {
                 method: "POST",
-                body: new URLSearchParams({ news_id, news_star }),
+                // body: new URLSearchParams({ news_id, news_star }),
+                body: new URLSearchParams({
+                    type: "star",
+                    news_star: this.articles[index].news_star,
+                    news_id: this.articles[index].news_id,
+                }),
             })
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);
-                    this.resDate = json;
+                    // this.resDate = json;
                 });
         },
         confirmModal() {
