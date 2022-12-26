@@ -66,6 +66,7 @@ export default {
             this.maintitle = "很難過您取消了訂單！";
             this.subtitle = "您已經取消訂購無尾熊的周邊";
             this.showbutton = false;
+            this.$emit("reRenderOrders");
         },
         goBackMemOrder() {
             this.$emit("closeMemUnsubscribe");
@@ -75,7 +76,8 @@ export default {
 </script>
 <style lang="scss" scoped>
 .mem_MemUnsubscribe {
-    background-color: #d0e8ea;
+    background-color: rgba(255, 255, 255, 0.9);
+    border: #d0e8ea 2px solid;
     width: 280px;
     position: absolute;
     z-index: 10;

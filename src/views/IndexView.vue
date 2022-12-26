@@ -101,7 +101,7 @@ export default {
             background-color: #fbfafa;
             // background-color: rgba(254, 250, 224, 0.7);
             box-shadow: 0px 0px 30px 0px rgb(252 241 173);
-            opacity: 0.61;
+            opacity: 0.6;
             width: 300px;
             height: 300px;
             border-radius: 50%;
@@ -125,6 +125,12 @@ export default {
         position: relative;
         bottom: -29px;
         font-weight: 600;
+        // color: #fff;
+        p {
+            text-shadow: -1.3px 0 #fff, 0 1.3px #fff, 1.3px 0 #fff,
+                0 -1.3px #fff;
+            user-select: none;
+        }
     }
 }
 </style>

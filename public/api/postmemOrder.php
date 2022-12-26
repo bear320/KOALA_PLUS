@@ -17,6 +17,8 @@ if ( empty($getUser) ) {
     return true;
 }
 
+$ord_ship = empty( $_GET["ord_ship"] ) ? ( $_POST["ord_ship"] ?? "" ) : $_GET["ord_ship"];
+
 $resDate = [
     "status" => 0,  //狀態(0:失敗,1:成功)
     "msg" => "",
@@ -24,16 +26,18 @@ $resDate = [
 
 $userid = $getUser["mem_id"];
 
+
+// $upSql = "UPDATE tibamefe_cgd103g1.orders SET ord_ship = '{$_POST["ord_ship"]}' WHERE mem_id = {$userid} ";
+
+// $update = $pdo->query($upSql);
+
 $sql = "SELECT m.mem_id, m.mem_id 'mem_id',m.mem_name,
-o.ord_id, o.ord_date ,o.ord_ship, o.ord_disc, o.ord_sum,o.ord_add,o.ord_phone,o.ord_person,
-ol.prod_id ,ol.ord_qty, ol.prod_price , 
-p.prod_id 'prod_id' , p.prod_name, p.prod_category 'prod_category'
+o.ord_id, o.ord_date ,o.ord_ship, o.ord_disc, o.ord_sum,o.ord_add,o.ord_phone,o.ord_person
 FROM tibamefe_cgd103g1.orders o
 JOIN tibamefe_cgd103g1.member m ON m.mem_id = o.mem_id
-JOIN tibamefe_cgd103g1.order_list ol ON o.ord_id =ol.ord_id
-JOIN tibamefe_cgd103g1.product p ON p.prod_id = ol.prod_id
 WHERE m.mem_id = $userid
 ORDER BY ord_id DESC";
+
 
 $support = $pdo->query($sql);
 $supportRows = $support->fetchAll(PDO::FETCH_ASSOC);

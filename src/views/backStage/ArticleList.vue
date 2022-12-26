@@ -6,11 +6,20 @@
             <router-link to="bs-article-add" target="_blank"
                 ><img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></router-link>
-            <select name="category" id="artclesCategory">
-                <option value="none" selected>所有文章</option>
-                <option value="最新消息">最新消息</option>
-                <option value="園區資訊">園區資訊</option>
-                <option value="資金運用">資金運用</option>
+            <select
+                name="category"
+                v-model="selectCategory"
+                id="selectCategory"
+                @change="choose()"
+            >
+                <option
+                    v-for="option in options"
+                    :key="option.value"
+                    :value="option.value"
+                    :selected="option.selected"
+                >
+                    {{ option.value }}
+                </option>
             </select>
         </div>
         <Tabs>
@@ -18,15 +27,102 @@
                 <section>
                     <div class="bstitle">
                         <h3 class="star"></h3>
-                        <h3 class="article">文章</h3>
+                        <h3 class="article">公告</h3>
                         <h3 class="pic">圖片</h3>
                         <h3 class="date">日期</h3>
                         <h3 class="tag">分類</h3>
                         <h3 class="operator">操作</h3>
                     </div>
+                    <div v-show="selectCategory == '所有公告'">
+                        <div
+                            class="content"
+                            v-for="(article, index) in uploaded"
+                            :key="index"
+                        >
+                            <label
+                                :class="
+                                    article.news_star == 1 ? 'starmark' : 'star'
+                                "
+                            >
+                                <svg
+                                    version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px"
+                                    y="0px"
+                                    viewBox="0 0 47.94 47.94"
+                                    style="
+                                        enable-background: new 0 0 47.94 47.94;
+                                    "
+                                    xml:space="preserve"
+                                >
+                                    <path
+                                        style="fill: currentColor,stoke: currentColor;"
+                                        d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                            c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                            c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                            c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                            c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                            C22.602,0.567,25.338,0.567,26.285,2.486z"
+                                    />
+                                </svg>
+                                <input
+                                    type="checkbox"
+                                    style="display: none"
+                                    :true-value="1"
+                                    :false-value="0"
+                                    @change="marked(index)"
+                                    v-model.number="article.news_star"
+                                />
+                            </label>
+                            <div class="article">
+                                <p>{{ article.news_title }}</p>
+                                <p class="article-content">
+                                    {{ article.news_content }}
+                                </p>
+                            </div>
+                            <div class="pic">
+                                <img
+                                    :src="
+                                        require(`@/assets/images/about/${article.news_img}`)
+                                    "
+                                    alt=""
+                                />
+                            </div>
+                            <p class="date">{{ article.news_date }}</p>
+                            <p class="tag">{{ article.news_category }}</p>
+                            <div class="operator">
+                                <router-link
+                                    :to="`/bs-article-edit/${article.news_id}`"
+                                    target="_blank"
+                                    ><img src="@/assets/images/icon/edit.svg"
+                                /></router-link>
+                                <span
+                                    style="cursor: pointer"
+                                    @click="modal = true"
+                                >
+                                    <img
+                                        src="@/assets/images/icon/delete.svg"
+                                        alt=""
+                                /></span>
+                                <Modal
+                                    v-model="modal"
+                                    title="刪除公告?"
+                                    ok-text="確認"
+                                    cancel-text="取消"
+                                    @on-ok="deleteArticle(index)"
+                                    @on-cancel="cancel"
+                                >
+                                    <p>
+                                        公告刪除後將無法回復動作，確定要刪除嗎?
+                                    </p>
+                                </Modal>
+                            </div>
+                        </div>
+                    </div>
                     <div
                         class="content"
-                        v-for="(article, index) in uploaded"
+                        v-for="(article, index) in newarticles"
                         :key="index"
                     >
                         <label
@@ -93,13 +189,13 @@
                             /></span>
                             <Modal
                                 v-model="modal"
-                                title="刪除文章?"
+                                title="刪除公告?"
                                 ok-text="確認"
                                 cancel-text="取消"
                                 @on-ok="deleteArticle(index)"
                                 @on-cancel="cancel"
                             >
-                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                                <p>公告刪除後將無法回復動作，確定要刪除嗎?</p>
                             </Modal>
                         </div>
                     </div>
@@ -109,15 +205,102 @@
                 <section>
                     <div class="bstitle">
                         <h3 class="star"></h3>
-                        <h3 class="article">文章</h3>
+                        <h3 class="article">公告</h3>
                         <h3 class="pic">圖片</h3>
                         <h3 class="date">日期</h3>
                         <h3 class="tag">分類</h3>
                         <h3 class="operator">操作</h3>
                     </div>
+                    <div v-show="selectCategory == '所有公告'">
+                        <div
+                            class="content"
+                            v-for="(article, index) in draft"
+                            :key="index"
+                        >
+                            <label
+                                :class="
+                                    article.news_star == 1 ? 'starmark' : 'star'
+                                "
+                            >
+                                <svg
+                                    version="1.1"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                    x="0px"
+                                    y="0px"
+                                    viewBox="0 0 47.94 47.94"
+                                    style="
+                                        enable-background: new 0 0 47.94 47.94;
+                                    "
+                                    xml:space="preserve"
+                                >
+                                    <path
+                                        style="fill: currentColor,stoke: currentColor;"
+                                        d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
+                            c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                            c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                            c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                            c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                            C22.602,0.567,25.338,0.567,26.285,2.486z"
+                                    />
+                                </svg>
+                                <input
+                                    type="checkbox"
+                                    style="display: none"
+                                    :true-value="1"
+                                    :false-value="0"
+                                    @change="marked(index)"
+                                    v-model.number="article.news_star"
+                                />
+                            </label>
+                            <div class="article">
+                                <p>{{ article.news_title }}</p>
+                                <p class="article-content">
+                                    {{ article.news_content }}
+                                </p>
+                            </div>
+                            <div class="pic">
+                                <img
+                                    :src="
+                                        require(`@/assets/images/about/${article.news_img}`)
+                                    "
+                                    alt=""
+                                />
+                            </div>
+                            <p class="date">{{ article.news_date }}</p>
+                            <p class="tag">{{ article.news_category }}</p>
+                            <div class="operator">
+                                <router-link
+                                    :to="`/bs-article-edit/${article.news_id}`"
+                                    target="_blank"
+                                    ><img src="@/assets/images/icon/edit.svg"
+                                /></router-link>
+                                <span
+                                    style="cursor: pointer"
+                                    @click="modal = true"
+                                >
+                                    <img
+                                        src="@/assets/images/icon/delete.svg"
+                                        alt=""
+                                /></span>
+                                <Modal
+                                    v-model="modal"
+                                    title="刪除公告?"
+                                    ok-text="確認"
+                                    cancel-text="取消"
+                                    @on-ok="deleteArticle(index)"
+                                    @on-cancel="cancel"
+                                >
+                                    <p>
+                                        公告刪除後將無法回復動作，確定要刪除嗎?
+                                    </p>
+                                </Modal>
+                            </div>
+                        </div>
+                    </div>
                     <div
                         class="content"
-                        v-for="(article, index) in draft"
+                        v-for="(article, index) in draftnews"
                         :key="index"
                     >
                         <label
@@ -138,11 +321,11 @@
                                 <path
                                     style="fill: currentColor,stoke: currentColor;"
                                     d="M26.285,2.486l5.407,10.956c0.376,0.762,1.103,1.29,1.944,1.412l12.091,1.757
-	c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
-	c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
-	c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
-	c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
-	C22.602,0.567,25.338,0.567,26.285,2.486z"
+                            c2.118,0.308,2.963,2.91,1.431,4.403l-8.749,8.528c-0.608,0.593-0.886,1.448-0.742,2.285l2.065,12.042
+                            c0.362,2.109-1.852,3.717-3.746,2.722l-10.814-5.685c-0.752-0.395-1.651-0.395-2.403,0l-10.814,5.685
+                            c-1.894,0.996-4.108-0.613-3.746-2.722l2.065-12.042c0.144-0.837-0.134-1.692-0.742-2.285l-8.749-8.528
+                            c-1.532-1.494-0.687-4.096,1.431-4.403l12.091-1.757c0.841-0.122,1.568-0.65,1.944-1.412l5.407-10.956
+                            C22.602,0.567,25.338,0.567,26.285,2.486z"
                                 />
                             </svg>
                             <input
@@ -154,7 +337,6 @@
                                 v-model.number="article.news_star"
                             />
                         </label>
-
                         <div class="article">
                             <p>{{ article.news_title }}</p>
                             <p class="article-content">
@@ -184,13 +366,13 @@
                             /></span>
                             <Modal
                                 v-model="modal"
-                                title="刪除文章?"
+                                title="刪除公告?"
                                 ok-text="確認"
                                 cancel-text="取消"
                                 @on-ok="deleteArticle(index)"
                                 @on-cancel="cancel"
                             >
-                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                                <p>公告刪除後將無法回復動作，確定要刪除嗎?</p>
                             </Modal>
                         </div>
                     </div>
@@ -213,9 +395,41 @@ export default {
             uploaded: [],
             draft: [],
             modal: false,
+            options: [
+                { value: "所有公告", selected: true },
+                { value: "最新消息" },
+                { value: "園區資訊" },
+                { value: "資金運用" },
+            ],
+            selectCategory: "所有公告",
+            newarticles: [],
+            newsdraft: [],
         };
     },
     methods: {
+        choose() {
+            let tag = document.getElementById("selectCategory").value;
+            console.log(tag);
+            const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.articles = json;
+                    this.newarticles = this.articles.filter((article) => {
+                        return (
+                            article.news_status == "1" &&
+                            article.news_category == tag
+                        );
+                    });
+                    this.newsdraft = this.articles.filter((article) => {
+                        return (
+                            article.news_status == "0" &&
+                            article.news_category == tag
+                        );
+                    });
+                });
+        },
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
             // const apiURL = new URL(
@@ -258,8 +472,8 @@ export default {
         confirmModal() {
             console.log(this.articles[index].news_id);
             this.$Modal.confirm({
-                title: "確定要刪除文章?",
-                content: "<p>文章刪除後將無法回復動作，確定要刪除嗎?</p>",
+                title: "確定要刪除公告?",
+                content: "<p>公告刪除後將無法回復動作，確定要刪除嗎?</p>",
                 okText: "確定",
                 cancelText: "取消",
                 onOk: () => {
@@ -286,7 +500,7 @@ export default {
                     console.log(result);
                     // alert(result);
                     location.reload();
-                    this.$Message.info("已刪除文章");
+                    this.$Message.info("已刪除公告");
                 });
         },
         cancel() {

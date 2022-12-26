@@ -64,7 +64,7 @@
                         />
                         <h2>公告管理</h2>
                     </a>
-                    <a href="/bs-article-edit" class="detail">新增公告文章</a>
+                    <a href="/bs-article-add" class="detail">新增公告文章</a>
                 </div>
                 <div class="card">
                     <a href="/bs-product-list">
@@ -106,7 +106,7 @@ article {
     height: 100vh;
 
     .cards {
-        height: 80%;
+        height: 90%;
     }
     .cards > div {
         box-sizing: border-box;
