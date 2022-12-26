@@ -784,14 +784,47 @@ export default {
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
                 let instant = new Date();
-                let now =
+                let year = instant.getFullYear();
+                let month = instant.getMonth() + 1;
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = instant.getMonth() + 2;
+                if (nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future =
                     instant.getFullYear() +
                     "-" +
-                    (instant.getMonth() + 1) +
+                    nextMonth +
                     "-" +
                     instant.getDate();
+
                 console.log(now);
+                console.log(future);
+
+                const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                    .then((res) => res.json())
+                    .then((json) => console.log(json));
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -820,14 +853,47 @@ export default {
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
                 let instant = new Date();
-                let now =
+                let year = instant.getFullYear();
+                let month = instant.getMonth() + 1;
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = instant.getMonth() + 2;
+                if (nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future =
                     instant.getFullYear() +
                     "-" +
-                    (instant.getMonth() + 1) +
+                    nextMonth +
                     "-" +
                     instant.getDate();
+
                 console.log(now);
+                console.log(future);
+
+                const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                    .then((res) => res.json())
+                    .then((json) => console.log(json));
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -856,14 +922,47 @@ export default {
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
                 let instant = new Date();
-                let now =
+                let year = instant.getFullYear();
+                let month = instant.getMonth() + 1;
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = instant.getMonth() + 2;
+                if (nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future =
                     instant.getFullYear() +
                     "-" +
-                    (instant.getMonth() + 1) +
+                    nextMonth +
                     "-" +
                     instant.getDate();
+
                 console.log(now);
+                console.log(future);
+
+                const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                    .then((res) => res.json())
+                    .then((json) => console.log(json));
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -892,14 +991,47 @@ export default {
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
                 let instant = new Date();
-                let now =
+                let year = instant.getFullYear();
+                let month = instant.getMonth() + 1;
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = instant.getMonth() + 2;
+                if (nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future =
                     instant.getFullYear() +
                     "-" +
-                    (instant.getMonth() + 1) +
+                    nextMonth +
                     "-" +
                     instant.getDate();
+
                 console.log(now);
+                console.log(future);
+
+                const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                    .then((res) => res.json())
+                    .then((json) => console.log(json));
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -928,14 +1060,47 @@ export default {
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
+
                 let instant = new Date();
-                let now =
+                let year = instant.getFullYear();
+                let month = instant.getMonth() + 1;
+                let day = instant.getDate();
+                let now = year + "-" + month + "-" + day;
+                let nextMonth = instant.getMonth() + 2;
+                if (nextMonth == 13) {
+                    nextMonth = 1;
+                }
+                let future =
                     instant.getFullYear() +
                     "-" +
-                    (instant.getMonth() + 1) +
+                    nextMonth +
                     "-" +
                     instant.getDate();
+
                 console.log(now);
+                console.log(future);
+
+                const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
+                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
+                const gameDiscountCoupon = {
+                    memId: this.$store.state.user.mem_id,
+                    coupon_get_date: now,
+                    coupon_exp_date: future,
+                };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(gameDiscountCoupon),
+                })
+                    .then((res) => res.json())
+                    .then((json) => console.log(json));
+                // .then((result) => {
+                //     alert(result.msg);
+                // });
+
                 this.game_exp = 0;
             }
         },
@@ -1016,52 +1181,52 @@ export default {
         },
 
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
-        // postData() {
-        //     // const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
-        //     let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
-        //     const gameValueContent = {
-        //         memId: this.$store.state.user.mem_id,
-        //         game_money: this.game_money,
-        //         remaining_amount_1: this.remaining_amount_1,
-        //         remaining_amount_2: this.remaining_amount_2,
-        //         remaining_amount_3: this.remaining_amount_3,
-        //         remaining_amount_4: this.remaining_amount_4,
-        //         remaining_amount_5: this.remaining_amount_5,
-        //         remaining_amount_6: this.remaining_amount_6,
-        //     };
+        postData() {
+            // const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
+            let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
+            const gameValueContent = {
+                memId: this.$store.state.user.mem_id,
+                game_money: this.game_money,
+                remaining_amount_1: this.remaining_amount_1,
+                remaining_amount_2: this.remaining_amount_2,
+                remaining_amount_3: this.remaining_amount_3,
+                remaining_amount_4: this.remaining_amount_4,
+                remaining_amount_5: this.remaining_amount_5,
+                remaining_amount_6: this.remaining_amount_6,
+            };
 
-        //     fetch(url, {
-        //         method: "POST",
-        //         body: new URLSearchParams(gameValueContent),
-        //     })
-        //         .then((res) => res.json())
-        //         .then((json) => console.log(json))
-        // },
+            fetch(url, {
+                method: "POST",
+                body: new URLSearchParams(gameValueContent),
+            })
+                .then((res) => res.json())
+                .then((json) => console.log(json))
+        },
     },
     watch: {
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
-        // remaining_amount_1() {
-        //     this.postData();
-        // },
-        // remaining_amount_2() {
-        //     this.postData();
-        // },
-        // remaining_amount_3() {
-        //     this.postData();
-        // },
-        // remaining_amount_4() {
-        //     this.postData();
-        // },
-        // remaining_amount_5() {
-        //     this.postData();
-        // },
-        // remaining_amount_6() {
-        //     this.postData();
-        // },
+        remaining_amount_1() {
+            this.postData();
+        },
+        remaining_amount_2() {
+            this.postData();
+        },
+        remaining_amount_3() {
+            this.postData();
+        },
+        remaining_amount_4() {
+            this.postData();
+        },
+        remaining_amount_5() {
+            this.postData();
+        },
+        remaining_amount_6() {
+            this.postData();
+        },
     },
     unmounted() {
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
-        // this.postData();
+        this.postData();
     },
 };
 </script>
