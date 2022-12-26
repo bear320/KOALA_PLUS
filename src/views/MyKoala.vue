@@ -990,6 +990,9 @@ export default {
                     coupon_get_date: now,
                     coupon_exp_date: future,
                 };
+                console.log(gameDiscountCoupon.memId);
+                console.log(gameDiscountCoupon.coupon_get_date);
+                console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
