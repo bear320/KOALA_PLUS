@@ -101,7 +101,11 @@
                 </div>
             </form>
             <div class="discount" v-if="questionIndex === 5 && score === 5">
-                恭喜您獲得優惠卷： {{ coupon_code }}
+                恭喜您獲得優惠卷： {{ coupon_code }} {{ coupon_name }}
+                <!-- {{  CouponId === "4001" == "01" }} -->
+                <p v-if="CouponId === '4001'">95折價券</p>
+                <p v-else-if="CouponId === '4002'">9折價券</p>
+                <p v-else-if="CouponId === '4003'">85折價券</p>
             </div>
             <div class="score">
                 <span v-if="questionIndex < 5"></span>
@@ -147,8 +151,8 @@ const questions = [
     },
     {
         question: "Ｑ3：無尾熊一天能睡多久?",
-        choices: ["1.18-20小時", "2.2-3小時", "3.無尾熊不睡覺的"],
-        rightAnswer: "1.18-20小時",
+        choices: ["A.18-20小時", "2.2-3小時", "3.無尾熊不睡覺的"],
+        rightAnswer: "A.18-20小時",
     },
     {
         question: "Ｑ4：Koala來自於澳洲原始住民，意思是什麼？",
@@ -176,13 +180,16 @@ export default {
     name: "AboutKoala",
     data() {
         return {
+            payload: {},
             questions,
             score: 0,
             questionIndex: 0,
             question: questions[0],
             answer: "",
-            CouponId: ["4001", "4002", "4003"],
+            // CouponId: ["4001", "4002", "4003"],
+            CouponId: [],
             showModal: true,
+            CouponCode: "",
         };
     },
 
@@ -193,17 +200,31 @@ export default {
             if (options.indexOf(answer) === -1) return;
             if (answer === question.rightAnswer) {
                 this.score++;
+                console.log(this.score);
             }
             if (questionIndex < questions.length) {
                 this.questionIndex++;
                 this.question = { ...questions[this.questionIndex] };
             }
 
-            if (this.score === 5) {
+            if (this.score > 4) {
                 let ranNum = Math.floor(Math.random(this.CouponId.length) * 3);
                 console.log("隨機號碼", ranNum);
                 console.log("獲得的優惠ID", this.CouponId[ranNum]);
+                this.CouponId = this.CouponId[ranNum];
+                if (this.CouponId === "4001") {
+                    this.CouponCode = "koala95";
+                } else if (this.CouponId === "4002") {
+                    this.CouponCode = "koala90";
+                } else if (this.CouponId === "4003") {
+                    this.CouponCode = "koala85";
+                }
+                this.payload.memid = 1006;
+                this.payload.CouponCode = this.CouponCode;
+                this.payload.CouponId = this.CouponId[ranNum];
+                console.log("COCO", this.CouponCode);
 
+                this.insertCoupon();
                 // 把優惠卷id傳給php
 
                 // ('85折優惠券', 'koala85', '60', '0.85'),
@@ -229,6 +250,22 @@ export default {
                 .then((json) => {
                     console.log(json);
                     this.CouponId = json;
+                });
+        },
+        insertCoupon() {
+            // const payload = {
+            //     memid: 1006,
+            //     CouponId: this.CouponId[ranNum],
+            //     CouponCode: this.CouponCode,
+            // };
+            const apiURL = new URL(`${BASE_URL}/insertCoupon.php`);
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(this.payload),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
                 });
         },
     },
@@ -269,7 +306,6 @@ export default {
         }
     }
 }
-
 .card-ab {
     margin: auto;
     padding: 50px;
@@ -298,7 +334,6 @@ export default {
     text-align: start;
     padding-left: 10px;
 }
-
 .bg {
     width: 100%;
     display: flex;

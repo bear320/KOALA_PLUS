@@ -274,7 +274,7 @@ export default {
                         //     location.href = "/login";
                         // }
                         if (json.status) {
-                            console.log("qq", json);
+                            // console.log("qq", json);
                             this.orderlists = json.list;
                             // console.log(this.orderlists);
                             return true;

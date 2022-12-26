@@ -16,6 +16,9 @@ export default {
                 this.isloaded = true;
             }
         };
+        setTimeout(() => {
+            this.isloaded = false
+        },500)
     },
 };
 </script>
