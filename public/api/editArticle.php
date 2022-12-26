@@ -42,6 +42,8 @@ if($type==="star"){
     } */
 }
 
+
+
 $result = ["msg" => $msg];
 echo json_encode($result);
 
