@@ -90,6 +90,7 @@ export default {
             // } else if (type == "eDate") {
             //     iconorderby = this.isReverse ? 5 : 6;
             // }
+
             let iconorderby = 0;
             switch (type) {
                 case "cName":
@@ -121,9 +122,10 @@ export default {
                     this.memindexs = json;
                     if (json.status) {
                         this.couponsList = json.list;
-                        // console.log(this.couponsList.length);
+                        console.log(this.couponsList.length);
                         return true;
                     }
+                    console.log(this.couponsList);
                     // alert("獲取數據失敗");
                     // location.href = "/login";
                 });
