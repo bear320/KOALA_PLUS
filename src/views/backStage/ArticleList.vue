@@ -27,13 +27,13 @@
                 <section>
                     <div class="bstitle">
                         <h3 class="star"></h3>
-                        <h3 class="article">文章</h3>
+                        <h3 class="article">公告</h3>
                         <h3 class="pic">圖片</h3>
                         <h3 class="date">日期</h3>
                         <h3 class="tag">分類</h3>
                         <h3 class="operator">操作</h3>
                     </div>
-                    <div v-show="selectCategory == '所有文章'">
+                    <div v-show="selectCategory == '所有公告'">
                         <div
                             class="content"
                             v-for="(article, index) in uploaded"
@@ -107,14 +107,14 @@
                                 /></span>
                                 <Modal
                                     v-model="modal"
-                                    title="刪除文章?"
+                                    title="刪除公告?"
                                     ok-text="確認"
                                     cancel-text="取消"
                                     @on-ok="deleteArticle(index)"
                                     @on-cancel="cancel"
                                 >
                                     <p>
-                                        文章刪除後將無法回復動作，確定要刪除嗎?
+                                        公告刪除後將無法回復動作，確定要刪除嗎?
                                     </p>
                                 </Modal>
                             </div>
@@ -189,13 +189,13 @@
                             /></span>
                             <Modal
                                 v-model="modal"
-                                title="刪除文章?"
+                                title="刪除公告?"
                                 ok-text="確認"
                                 cancel-text="取消"
                                 @on-ok="deleteArticle(index)"
                                 @on-cancel="cancel"
                             >
-                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                                <p>公告刪除後將無法回復動作，確定要刪除嗎?</p>
                             </Modal>
                         </div>
                     </div>
@@ -205,13 +205,13 @@
                 <section>
                     <div class="bstitle">
                         <h3 class="star"></h3>
-                        <h3 class="article">文章</h3>
+                        <h3 class="article">公告</h3>
                         <h3 class="pic">圖片</h3>
                         <h3 class="date">日期</h3>
                         <h3 class="tag">分類</h3>
                         <h3 class="operator">操作</h3>
                     </div>
-                    <div v-show="selectCategory == '所有文章'">
+                    <div v-show="selectCategory == '所有公告'">
                         <div
                             class="content"
                             v-for="(article, index) in draft"
@@ -285,14 +285,14 @@
                                 /></span>
                                 <Modal
                                     v-model="modal"
-                                    title="刪除文章?"
+                                    title="刪除公告?"
                                     ok-text="確認"
                                     cancel-text="取消"
                                     @on-ok="deleteArticle(index)"
                                     @on-cancel="cancel"
                                 >
                                     <p>
-                                        文章刪除後將無法回復動作，確定要刪除嗎?
+                                        公告刪除後將無法回復動作，確定要刪除嗎?
                                     </p>
                                 </Modal>
                             </div>
@@ -366,13 +366,13 @@
                             /></span>
                             <Modal
                                 v-model="modal"
-                                title="刪除文章?"
+                                title="刪除公告?"
                                 ok-text="確認"
                                 cancel-text="取消"
                                 @on-ok="deleteArticle(index)"
                                 @on-cancel="cancel"
                             >
-                                <p>文章刪除後將無法回復動作，確定要刪除嗎?</p>
+                                <p>公告刪除後將無法回復動作，確定要刪除嗎?</p>
                             </Modal>
                         </div>
                     </div>
@@ -396,12 +396,12 @@ export default {
             draft: [],
             modal: false,
             options: [
-                { value: "所有文章", selected: true },
+                { value: "所有公告", selected: true },
                 { value: "最新消息" },
                 { value: "園區資訊" },
                 { value: "資金運用" },
             ],
-            selectCategory: "所有文章",
+            selectCategory: "所有公告",
             newarticles: [],
             newsdraft: [],
         };
@@ -472,8 +472,8 @@ export default {
         confirmModal() {
             console.log(this.articles[index].news_id);
             this.$Modal.confirm({
-                title: "確定要刪除文章?",
-                content: "<p>文章刪除後將無法回復動作，確定要刪除嗎?</p>",
+                title: "確定要刪除公告?",
+                content: "<p>公告刪除後將無法回復動作，確定要刪除嗎?</p>",
                 okText: "確定",
                 cancelText: "取消",
                 onOk: () => {
@@ -500,7 +500,7 @@ export default {
                     console.log(result);
                     // alert(result);
                     location.reload();
-                    this.$Message.info("已刪除文章");
+                    this.$Message.info("已刪除公告");
                 });
         },
         cancel() {

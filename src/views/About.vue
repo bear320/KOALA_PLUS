@@ -73,7 +73,7 @@
                         {{ option.value }}
                     </option>
                 </select>
-                <div v-show="selectCategory == '所有文章'">
+                <div v-show="selectCategory == '所有公告'">
                     <div
                         class="oneArticle"
                         v-for="(article, idx) in uploaded"
@@ -291,14 +291,14 @@ export default {
                 },
             ],
             options: [
-                { value: "所有文章", selected: true },
+                { value: "所有公告", selected: true },
                 { value: "最新消息" },
                 { value: "園區資訊" },
                 { value: "資金運用" },
             ],
             articles: [],
             uploaded: [],
-            selectCategory: "所有文章",
+            selectCategory: "所有公告",
             newarticles: [],
         };
     },
