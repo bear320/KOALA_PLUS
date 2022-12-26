@@ -1,5 +1,5 @@
 <template>
-    <Loading />
+    <!-- <Loading /> -->
     <Header />
     <article class="nav-space">
         <div
@@ -186,8 +186,7 @@ export default {
             questionIndex: 0,
             question: questions[0],
             answer: "",
-            // CouponId: ["4001", "4002", "4003"],
-            CouponId: [],
+            CouponId: ["4001", "4002", "4003"],
             showModal: true,
             CouponCode: "",
         };
@@ -200,7 +199,7 @@ export default {
             if (options.indexOf(answer) === -1) return;
             if (answer === question.rightAnswer) {
                 this.score++;
-                console.log(this.score);
+                // console.log(this.score);
             }
             if (questionIndex < questions.length) {
                 this.questionIndex++;
@@ -209,8 +208,8 @@ export default {
 
             if (this.score > 4) {
                 let ranNum = Math.floor(Math.random(this.CouponId.length) * 3);
-                console.log("隨機號碼", ranNum);
-                console.log("獲得的優惠ID", this.CouponId[ranNum]);
+                // console.log("隨機號碼", ranNum);
+                // console.log("獲得的優惠ID", this.CouponId[ranNum]);
                 this.CouponId = this.CouponId[ranNum];
                 if (this.CouponId === "4001") {
                     this.CouponCode = "koala95";
@@ -219,10 +218,10 @@ export default {
                 } else if (this.CouponId === "4003") {
                     this.CouponCode = "koala85";
                 }
-                this.payload.memid = 1006;
+                /* this.payload.memid = 1006;
                 this.payload.CouponCode = this.CouponCode;
-                this.payload.CouponId = this.CouponId[ranNum];
-                console.log("COCO", this.CouponCode);
+                this.payload.CouponId = this.CouponId[ranNum]; */
+                // console.log("COCO", this.CouponCode);
 
                 this.insertCoupon();
                 // 把優惠卷id傳給php
@@ -243,34 +242,24 @@ export default {
             this.questionIndex = 0;
             this.score = 0;
         },
-        getCoupon() {
-            const apiURL = new URL(`${BASE_URL}/getCoupon.php`);
-            fetch(apiURL)
-                .then((res) => res.json())
-                .then((json) => {
-                    console.log(json);
-                    this.CouponId = json;
-                });
-        },
         insertCoupon() {
-            // const payload = {
-            //     memid: 1006,
-            //     CouponId: this.CouponId[ranNum],
-            //     CouponCode: this.CouponCode,
-            // };
+            console.log(this.CouponId);
+            console.log(typeof this.CouponCode);
+            const payload = {
+                memid: 1006,
+                CouponId: parseInt(this.CouponId),
+                CouponCode: this.CouponCode,
+            };
             const apiURL = new URL(`${BASE_URL}/insertCoupon.php`);
             fetch(apiURL, {
                 method: "POST",
-                body: new URLSearchParams(this.payload),
+                body: new URLSearchParams(payload),
             })
                 .then((res) => res.json())
                 .then((json) => {
                     console.log(json);
                 });
         },
-    },
-    created() {
-        this.getCoupon();
     },
 };
 </script>
