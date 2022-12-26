@@ -1,4 +1,3 @@
-
 <?php 
 header("Access-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
@@ -9,5 +8,4 @@ $sql = "select * from tibamefe_cgd103g1.coupon;";
 $coupon = $pdo->query($sql);
 $couponRows = $coupon->fetchAll(PDO::FETCH_ASSOC);
 echo json_encode($couponRows);     
-
 ?>
