@@ -461,7 +461,11 @@ export default {
 
             fetch(apiURL, {
                 method: "POST",
-                body: new URLSearchParams({ news_id, news_star }),
+                body: new URLSearchParams({
+                    type: "star",
+                    news_id: this.articles[index].news_id,
+                    news_star: this.articles[index].news_star,
+                }),
             })
                 .then((res) => res.json())
                 .then((json) => {
