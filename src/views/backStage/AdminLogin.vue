@@ -13,7 +13,7 @@
                         <input
                             type="password"
                             v-model="login_password"
-                            required
+                            required;
                         />
                     </div>
                     <div>
