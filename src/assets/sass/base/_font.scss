@@ -1,19 +1,46 @@
 @import "color";
 
-// <link href="https://fonts.googleapis.com/css?family=Noto+Sans+TC" rel="stylesheet"/>
-
-// $fontFamily: "Noto Sans TC", sans-serif; //思源黑體
-
 $font_weight: "EL", "R";
 @each $weight in $font_weight {
-    @font-face {
+    /*  @font-face {
         font-family: "font-#{$weight}";
-        src: url("@/assets/font/GenSenRounded-#{$weight}.ttc");
+        src: url("https://github.com/ButTaiwan/gensen-font/blob/master/ttc/GenSenRounded-#{$weight}.ttc");
+    } */
+
+    @font-face {
+        font-family: "font-EL";
+        src: url(https://cdn.jsdelivr.net/gh/max32002/swei-gothic@2.129/WebFont/CJK%20TC/SweiGothicCJKtc-Thin.woff2)
+                format("woff2"),
+            url(https://cdn.jsdelivr.net/gh/max32002/swei-gothic@2.129/WebFont/CJK%20TC/SweiGothicCJKtc-Thin.woff)
+                format("woff");
+    }
+    @font-face {
+        font-family: "font-R";
+        src: url(https://cdn.jsdelivr.net/gh/max32002/swei-gothic@2.129/WebFont/CJK%20TC/SweiGothicCJKtc-Regular.woff2)
+                format("woff2"),
+            url(https://cdn.jsdelivr.net/gh/max32002/swei-gothic@2.129/WebFont/CJK%20TC/SweiGothicCJKtc-Regular.woff)
+                format("woff");
     }
 }
-@font-face {
+
+/* @font-face {
     font-family: "Inkfree";
     src: url("@/assets/font/Inkfree.ttf");
+} */
+
+@font-face {
+    font-family: "Inkfree";
+    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot");
+    src: url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.eot?#iefix")
+            format("embedded-opentype"),
+        url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff2")
+            format("woff2"),
+        url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.woff")
+            format("woff"),
+        url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.ttf")
+            format("truetype"),
+        url("//db.onlinewebfonts.com/t/0801c08e5412f54e4b4e9ad146d83a12.svg#Ink Free")
+            format("svg");
 }
 
 $h1: 45px;

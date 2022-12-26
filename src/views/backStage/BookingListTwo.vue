@@ -237,6 +237,7 @@ export default {
             this.$Modal.confirm({
                 title: "刪除訂單",
                 content: "<p>確定要刪除這筆園區導覽預約訂單？</p>",
+                okText: "確定",
                 loading: true,
                 onOk: () => {
                     setTimeout(() => {

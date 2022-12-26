@@ -98,6 +98,7 @@ export default {
                 rsv_status: "休館",
                 rsv_ps: "",
             };
+
             const apiURL = new URL(`${BASE_URL}/resv_insert.php`);
             // fetch("http://localhost/cgd103_g1/public/api/resv_insert.php",
             fetch(apiURL, {
@@ -109,7 +110,7 @@ export default {
                     console.log(result);
                     result = JSON.parse(result);
                     // this.callback();
-                    alert(result);
+
                     window.close();
                 });
         },
