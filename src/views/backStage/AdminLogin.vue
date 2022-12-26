@@ -44,7 +44,7 @@ export default {
                 // thisvue.errorFlag = true;
             } else {
                 const apiURL = new URL(`${BASE_URL}/getAdminLogin.php`);
-                fetch(url, {
+                fetch(apiURL, {
                     method: "post",
                     credentials: "include",
                     body: new URLSearchParams({
