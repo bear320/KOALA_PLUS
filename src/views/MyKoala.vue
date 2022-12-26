@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+    <Header />
     <section class="main_block nav-space">
         <!-- ======================================== 遊戲背景 ======================================== -->
         <div class="main_block_LeftTree">
@@ -698,9 +698,10 @@ export default {
             QQ.game_exp = member.mem_exp;
             document.getElementById("game_exp").innerHTML =
                 game_exp;
+
+            QQ.expWidth = member.mem_exp/20;
         }
     },
-    computed: {},
     methods: {
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {

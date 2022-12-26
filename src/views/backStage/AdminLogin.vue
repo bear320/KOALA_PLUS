@@ -2,7 +2,7 @@
     <section>
         <div class="login">
             <div class="login_block">
-                <h1>後臺管理者登錄頁面</h1>
+                <h1>管理登錄頁面</h1>
                 <form @submit.prevent="login">
                     <div>
                         <label>帳號</label>

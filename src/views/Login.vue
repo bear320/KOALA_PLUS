@@ -1,5 +1,5 @@
 <template>
-    <Header></Header>
+    <Header />
     <section class="main_block nav_space wrapper">
         <div class="main_content">
             <div class="main_content_center">
@@ -204,12 +204,12 @@
                             <button class="btn_login" @click="forget_password">
                                 忘記密碼
                             </button>
-                            <div>
+                            <!-- <div>
                                 <img
                                     src="../assets/images/login/login_koala.png"
                                     alt=""
                                 />
-                            </div>
+                            </div> -->
                         </div>
                         <!-- ======================================== 忘記密碼表單 ======================================== -->
                         <div class="content_active_forget_password">
@@ -247,12 +247,12 @@
                                     驗證信箱
                                 </button>
                             </form>
-                            <div>
+                            <!-- <div>
                                 <img
                                     src="../assets/images/login/login_koala.png"
                                     alt=""
                                 />
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>

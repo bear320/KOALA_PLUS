@@ -3,7 +3,7 @@
     <section>
         <div class="content_active">
             <div class="content_active_sign_up">
-                <h1>新增後台管理員</h1>
+                <h1>新增管理員</h1>
                 <form
                     @submit.prevent="sign_up"
                     id="sign_up_form"
@@ -49,7 +49,7 @@
                             type="submit"
                             @click="sign_up"
                         >
-                            註冊會員
+                            加入管理員
                         </button>
                     </div>
                 </form>
