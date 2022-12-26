@@ -270,7 +270,7 @@ export default {
         },
 
         chooseDate(yy, mm, dd) {
-            
+  
             let newMM = mm.toString();
             if (newMM.length < 2) {
                 newMM = "0" + newMM;
@@ -280,8 +280,13 @@ export default {
                 newDD = "0" + newDD;
             }
             if (this.notBookDate[`${yy}-${newMM}-${newDD}`]) return;
-
+          
             this.rsvDate = `${yy}-${newMM}-${newDD}`;
+            // console.log("AAA", this.rsvDate);
+            // console.log("BBB", new Date() );
+            var todayDate = new Date().toISOString().slice(0, 10);
+            // console.log("CCCC",todayDate);
+            if (this.rsvDate < todayDate) return;
             this.showForm = true;
      /*        console.log(newDD);
             console.log(newMM); */
