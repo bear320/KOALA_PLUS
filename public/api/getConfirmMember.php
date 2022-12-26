@@ -33,7 +33,7 @@ if($login_account != "" && $login_psw != "") {
             session_start();
             // session_unset();
             $_SESSION = $resArray;
-            $result_array = ["code"=>"1", "msg"=>"登陸成功",'memInfo'=>$_SESSION];//, "token"=>$token
+            $result_array = ["code"=>"1", "msg"=>"登陸成功",'memInfo'=>$_SESSION,'session_id'=>session_id()];//, "token"=>$token
             echo json_encode($result_array);
         }
         else {

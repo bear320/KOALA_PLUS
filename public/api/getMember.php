@@ -49,7 +49,7 @@ switch( $type ){
         $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE mem_id = {$userid}";
         $members = $pdo->query($sql);
         $prodRows = $members->fetch(PDO::FETCH_ASSOC);
-        echo json_encode(["status"=>true,"list"=>$prodRows]);
+        echo json_encode(["status"=>true,"list"=>$prodRows,'session_id'=>session_id()]);
         return true;
         break;
     case "admin":
