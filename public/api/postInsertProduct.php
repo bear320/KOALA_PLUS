@@ -12,7 +12,7 @@ foreach($images["tmp_name"] as $i => $tmp_name){
 
             $from = $tmp_name;
             $fileExt = pathinfo($images["name"][$i],PATHINFO_EXTENSION);
-            $fileName = uniqid() . ".". $fileExt;
+            $fileName[$i] = uniqid() . ".". $fileExt;
 
             $to = "../images/shop/".$fileName;
             if(copy( $from, $to)){
@@ -44,10 +44,10 @@ try {
 	$prod_info = $_POST['prod_info'];
 	$prod_listed = $_POST['prod_listed'];
 	$prod_category = $_POST['prod_category'];
-	$prod_img1 = $images["name"][0]!==''?$images["name"][0]:null;
-	$prod_img2 = $images["name"][1]!==''?$images["name"][1]:null;
-	$prod_img3 = $images["name"][2]!==''?$images["name"][2]:null;
-	$prod_img4 = $images["name"][3]!==''?$images["name"][3]:null;
+	$prod_img1 = $fileName[0]!==''?$fileName[0]:null;
+	$prod_img2 = $fileName[1]!==''?$fileName[1]:null;
+	$prod_img3 = $fileName[2]!==''?$fileName[2]:null;
+	$prod_img4 = $fileName[3]!==''?$fileName[3]:null;
 
 
 	require_once("./connect_cgd103g1.php");
