@@ -36,15 +36,7 @@ export default {
         "pBtn",
         "index",
         "supKoalaId",
-    ],
-    data() {
-        return {
-            type: 0,
-            koala_id: 0,
-        };
-    },
-    methods: {
-        clickToPay(i) {
+    ],        clickToPay(i) {
             if (this.$store.state.user == null) {
                 this.open(false);
                 return;
@@ -81,6 +73,14 @@ export default {
                     : `需先登入會員方可進行資助／認養，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`,
             });
         },
+    data() {
+        return {
+            type: 0,
+            koala_id: 0,
+        };
+    },
+    methods: {
+
     },
 };
 </script>

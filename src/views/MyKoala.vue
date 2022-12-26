@@ -638,24 +638,24 @@ export default {
 
         // console.log(this.$store.state.user.mem_id);
 
-        // const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user.mem_id}`);
-        var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
-        xhr.open("get", url, true);
+        const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user.mem_id}`);
+        // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
+        xhr.open("get", apiURL, true);
         xhr.send(null);
 
         function showMember(json) {
             var xhr = new XMLHttpRequest();
             // console.log(QQ);
-            // const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`);
-            var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`;
-            xhr.open("get", url, true);
+            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`);
+            // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
             let member = JSON.parse(json);
 
-            let game_moey;
+            let game_money;
             // 這裡的QQ指的是Vue實體
             QQ.game_money = member.mem_point;
-            document.getElementById("game_money").innerHTML = game_moey;
+            document.getElementById("game_money").innerHTML = game_money;
 
             let remaining_amount_1;
             // 這裡的QQ指的是Vue實體
