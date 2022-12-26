@@ -10,6 +10,8 @@
         </div>
     </section>
     <form
+        ref="form"
+        action="submit"
         @submit.prevent="next"
         class="wrapper function-wrapper"
         enctype="multipart/form-data"
@@ -57,7 +59,12 @@
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy" id="btnInsert" @click.prevent="next">
+                <button
+                    type="submit"
+                    class="btn-paramy"
+                    id="btnInsert"
+                    @submit.prevent="next"
+                >
                     <img
                         src="@/assets/images/icon/confirm.svg"
                         alt=""
@@ -88,7 +95,27 @@ export default {
     },
     methods: {
         next() {
-            console.log("next");
+            this.$Modal.confirm({
+                title: "新增休館日",
+                content: "<p>確定要新增這天休館日？</p>",
+                okText: "確定",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info("已新增這筆休館日");
+                        this.insertDayoff();
+                    }, 650);
+                },
+                onCancel: () => {
+                    this.$Message.info("已取消");
+                    // window.close();
+                },
+            });
+        },
+
+        // console.log("next");
+        insertDayoff() {
             const payload = {
                 rsv_date: this.orderDate,
                 rsv_ppl: 0,
@@ -96,7 +123,7 @@ export default {
                 rsv_mobile: "",
                 rsv_email: "",
                 rsv_status: "休館",
-                rsv_ps: "",
+                rsv_ps: this.ps,
             };
 
             const apiURL = new URL(`${BASE_URL}/resv_insert.php`);

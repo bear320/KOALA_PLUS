@@ -81,8 +81,13 @@
                 <div
                     v-for="(item, index) in tempWx"
                     v-show="`${orderDate + ' ' + '18:00:00'}` == item.time"
+                    @mouseover="formHover = true"
+                    @mouseleave="formHover = false"
+                    :style="{
+                        color: formHover ? '' : '#FFFEE2',
+                    }"
                 >
-                    當日最低溫度：{{ item.test }} °C 當日氣候：{{
+                    當日最低溫度：{{ item.test }} °C &#8195 當日氣候：{{
                         item.elValue
                     }}
                 </div>
@@ -138,6 +143,7 @@ export default {
     props: ["msg", "callback"],
     data() {
         return {
+            itemColor: "",
             email: "",
             name: "",
             mobile: "",
@@ -146,6 +152,7 @@ export default {
             isShow: false,
             isOrder: false,
             tempWx: {},
+            formHover: false,
         };
     },
     computed: {
@@ -273,7 +280,7 @@ export default {
 <style scoped>
 .book-form {
     width: 700px;
-    height: 660px;
+    height: 700px;
     border: 1px solid #96bbbd;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;

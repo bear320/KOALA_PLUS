@@ -457,7 +457,12 @@ export default {
         h3 {
             display: block;
             width: calc(100% / 7);
+            .ivu-icon {
+                width: 30px;
+            }
         }
+
+        // }
     }
 
     .bs-list {
