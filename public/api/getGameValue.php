@@ -25,6 +25,7 @@ try{
             "mem_food4"=>$memRow["mem_food4"],
             "mem_food5"=>$memRow["mem_food5"],
             "mem_food6"=>$memRow["mem_food6"],
+            "mem_exp"=>$memRow["mem_exp"],
         ];
 
       echo json_encode($result);//送出json字串

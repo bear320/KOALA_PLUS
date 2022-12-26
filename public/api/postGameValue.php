@@ -16,8 +16,10 @@ try{
     mem_food3 = :remaining_amount_3,
     mem_food4 = :remaining_amount_4,
     mem_food5 = :remaining_amount_5,
-    mem_food6 = :remaining_amount_6
+    mem_food6 = :remaining_amount_6,
+    mem_exp = :game_exp
     WHERE mem_id = :mem_id";
+
     
     
     
@@ -32,6 +34,7 @@ try{
     $updateGameValue->bindValue(":remaining_amount_4", $_POST["remaining_amount_4"]);
     $updateGameValue->bindValue(":remaining_amount_5", $_POST["remaining_amount_5"]);
     $updateGameValue->bindValue(":remaining_amount_6", $_POST["remaining_amount_6"]);
+    $updateGameValue->bindValue(":game_exp", $_POST["game_exp"]);
 	$updateGameValue->execute();
     $msg="Updated";
 }
