@@ -20,13 +20,13 @@
                             item["name"]
                         }}</router-link>
                     </li>
-                    <li v-show="showKoala">
-                        <router-link to="/my-koala" class="playgame">
+                    <li v-show="showKoala" @click="clickToPlay">
+                        <div class="playgame">
                             <img
                                 src="../assets/images/header/playgame.svg"
                                 alt=""
                             />
-                        </router-link>
+                        </div>
                     </li>
                 </ul>
                 <ul class="icon">
@@ -78,6 +78,22 @@ export default {
     methods: {
         changeCurWidth() {
             this.curWidth = window.innerWidth;
+        },
+        clickToPlay() {
+            if (this.$store.state.user == null) {
+                this.open(false);
+                return;
+            } else {
+                this.$router.push({ path: "/my-koala" });
+                }
+            },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "請登入會員",
+                desc: nodesc
+                    ? ""
+                    : `需先登入會員才可進行遊玩，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`,
+            });
         },
     },
     created() {
