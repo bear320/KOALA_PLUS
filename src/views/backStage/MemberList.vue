@@ -99,24 +99,27 @@
 import Header from "@/components/backStage/Header.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
+    components: {
+        Header,
+    },
     data() {
         return {
             memindexs: [],
             selectName: "",
+            // 後台會員排序明細陣列
             lists: [
                 { val: "1", item: "會員編號（正序）" },
                 { val: "2", item: "會員編號（反序）" },
                 { val: "3", item: "email（正序）" },
                 { val: "4", item: "email（反序）" },
             ],
-
             searchMemName: "",
-
             totalPage: 0,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
         };
     },
     methods: {
+        // switch滑塊設定
         blackSwitchChange(index) {
             const mem_id = this.memindexs[index].mem_id;
             const black_state = this.memindexs[index].mem_state;
@@ -137,6 +140,7 @@ export default {
                     this.resDate = json;
                 });
         },
+        // switch滑塊設定 跳出提醒是否真的要切換?
         handleBeforeChange() {
             return new Promise((resolve) => {
                 this.$Modal.confirm({
@@ -149,30 +153,10 @@ export default {
                 });
             });
         },
+        // 後臺會員 搜尋功能
         search_func() {
-            /* const postMemSearch = {
-                search_mem_name: this.$refs.search_mem_name.value,
-                search_orderby: this.selectName,
-                limit: 10,
-                page: this.currentPage,
-            };
-            console.log(postMemSearch);
-            fetch(
-                "http://localhost/cgd103_g1/public/api/getMember.php?type=admin",
-                {
-                    method: "POST",
-                    credentials: "include",
-                    body: new URLSearchParams(postMemSearch),
-                }
-            )
-                .then((res) => res.json())
-                .then((json) => {
-                    console.log(json);
-                    this.memindexs = json;
-                }); */
             this.getMemInfo();
         },
-
         getMemInfo() {
             const apiURL = new URL(`${BASE_URL}/getMember.php`);
             // const apiURL = new URL(
@@ -208,7 +192,7 @@ export default {
                     this.totalPage = Math.ceil(json.count / 10);
                 });
         },
-
+        // 頁尾 分頁以及頁碼的切換nextPage、prePage、changePage
         nextPage() {
             if (this.currentPage === this.totalPage) {
                 return;
@@ -230,9 +214,7 @@ export default {
             this.getMemInfo();
         },
     },
-    components: {
-        Header,
-    },
+    // 取得會員明細清單
     created() {
         this.getMemInfo();
     },
