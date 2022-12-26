@@ -97,29 +97,6 @@ export default {
     },
     mounted() {},
     methods: {
-        toImage() {
-            // 這是轉出來的
-            this.imgUrl = "";
-            html2canvas(this.$refs.html2canvas, {
-                width: 600,
-                height: 485,
-                backgroundColor: null,
-                useCORS: true, // 解决文件跨域问题
-            }).then((canvas) => {
-                const url = canvas.toDataURL("image/png"); // 生成的图片
-                // 可以上传后端或者直接显示
-                this.imgUrl = url;
-            });
-        },
-        showcouponsList(name, date) {
-            // console.log(name, date);
-            this.tempName = name;
-            this.tempDate = date;
-            /*  this.certificate_Index = index; */
-            this.$nextTick(function () {
-                this.toImage();
-            });
-        },
         postmemAdopt() {
             let getCookie = document.cookie;
             const apiURL = new URL(`${BASE_URL}/postmemAdopt.php`);
@@ -146,6 +123,29 @@ export default {
                 // alert("登入失效");
                 //跳轉 login url
             }
+        },
+        toImage() {
+            // 這是轉出來的
+            this.imgUrl = "";
+            html2canvas(this.$refs.html2canvas, {
+                width: 600,
+                height: 485,
+                backgroundColor: null,
+                useCORS: true, // 解决文件跨域问题
+            }).then((canvas) => {
+                const url = canvas.toDataURL("image/png"); // 生成的图片
+                // 可以上传后端或者直接显示
+                this.imgUrl = url;
+            });
+        },
+        showcouponsList(name, date) {
+            // console.log(name, date);
+            this.tempName = name;
+            this.tempDate = date;
+            /*  this.certificate_Index = index; */
+            this.$nextTick(function () {
+                this.toImage();
+            });
         },
     },
 
@@ -243,6 +243,8 @@ table {
     }
 }
 .return_img {
+    width: 550px;
+    height: 444px;
     @include d() {
         width: 550px;
         height: 444px;

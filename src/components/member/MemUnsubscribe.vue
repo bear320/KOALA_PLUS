@@ -2,7 +2,10 @@
     <div class="mem_MemUnsubscribe">
         <div class="inner-container">
             <div class="img MemUnsubscribe_1">
-                <img src="@/assets/images/member/MemUnsubscribe_1.png" alt="" />
+                <img
+                    src="@/assets/images/member/MemUnsubscribe_1.png"
+                    alt="會員下載領養證明"
+                />
             </div>
 
             <div class="Unsubscribe_main">
@@ -112,7 +115,7 @@ export default {
                 flex-wrap: wrap;
                 align-items: center;
                 line-height: 30px;
-                height: 30px;
+                // height: 30px;
                 button {
                     margin: 5px;
                     padding: 0 10px;
