@@ -20,7 +20,13 @@
                     @change="search_func"
                 />
             </div>
-            <select v-model="selectName" @change="search_func" name="" id="">
+            <select
+                v-model="selectName"
+                @change="search_func"
+                name="search_rsv_status"
+                id="search_rsv_status"
+                ref="search_rsv_status"
+            >
                 <option value="" disabled selected>訂單排序</option>
                 <option v-for="list in lists" :value="list.val" :key="list">
                     {{ list.item }}
@@ -130,6 +136,9 @@ export default {
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
             selectName: "",
             lists: [
+                { val: "", item: "不分類" },
+                { val: "已預約", item: "已預約" },
+                { val: "休館", item: "休館" },
                 { val: "rsv_date", item: "日期(正序)" },
                 { val: "rsv_date DESC", item: "日期(反序)" },
                 { val: "rsv_id", item: "預約編號(正序)" },
@@ -294,7 +303,7 @@ export default {
         search_func() {
             const postDateSearch = {
                 search_rsv_date: this.$refs.search_rsv_date.value,
-                search_order_field: this.selectName,
+                search_rsv_status: this.$refs.search_rsv_status.value,
                 search_order_by: "",
             };
             console.log(postDateSearch);
