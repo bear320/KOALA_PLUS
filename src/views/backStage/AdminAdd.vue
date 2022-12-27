@@ -166,16 +166,18 @@ export default {
 
 .content_active_sign_up > form > div > input {
     text-align: left;
-    padding: 10px 5px;
-    margin-left: 5%;
-    margin-top: 0%;
-    width: 230px;
+    padding: 5px ;
+    margin: 3%;
+    // margin-top: 0%;
+    width: 0px;
+    flex-grow: 8;
     color: #757575;
+    border-radius:5px ;
 }
 
-#emp_account {
-    margin-right: 5%;
-}
+// #emp_account {
+//     margin-right: 5%;
+// }
 
 .content_active_sign_up > h2 {
     font-size: 24px;
@@ -186,13 +188,17 @@ export default {
 
 .content_active_sign_up > form > div > p {
     display: inline-block;
-    padding-top: 1.5%;
+    width: 0;
+    // padding-top: 1.5%;
+    flex-grow: 2;
 }
 
 .content_active_sign_up > form > div {
     display: flex;
     justify-content: center;
     margin-top: 7%;
+    align-items: center;
+    position: relative;
 }
 
 .btn_sign_up {
@@ -209,16 +215,27 @@ export default {
 
 // ======================================== 眼睛 ======================================== //
 .sign_up_icon_eye {
-    width: 20px;
-    height: 20px;
-    margin-left: 1.5%;
-    margin-top: 1.5%;
+    width: 18px;
+    height: 18px;
+    // margin-left: 1.5%;
+    // margin-top: 1.5%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: -10%;
+
+    position:absolute;
 }
 
 .login_icon_eye {
-    width: 20px;
-    height: 20px;
-    margin-left: 1.5%;
-    margin-top: 3.5%;
+    width: 18px;
+    height: 18px;
+    // margin-left: 1.5%;
+    // margin-top: 3.5%;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    right: -8%;
+    position:absolute;
 }
 </style>
