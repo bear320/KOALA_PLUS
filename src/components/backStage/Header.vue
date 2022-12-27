@@ -22,7 +22,7 @@
                     <router-link to="/bs-article-list">公告管理</router-link>
                 </template>
                 <MenuItem name="2-1">
-                    <router-link to="/bs-article-edit">新增公告</router-link>
+                    <router-link to="/bs-article-add">新增公告</router-link>
                 </MenuItem>
             </Submenu>
             <Submenu name="3" v-color="'#fff'">
