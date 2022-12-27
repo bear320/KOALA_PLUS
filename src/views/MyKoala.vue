@@ -597,6 +597,8 @@ export default {
 
             expWidth: 0,
             game_exp: 0,
+
+            tmp_memID:0
         };
     },
     // created() {
@@ -623,7 +625,10 @@ export default {
     //             });
     //     })(); //IIFE
     // },
-    mounted() {
+    async mounted() {
+        
+        await this.getMem()
+
         // ======================================== 把忘記的密碼撈出來  ======================================== //
         let QQ = this; //這裡的QQ指向的Vue實體
         var xhr = new XMLHttpRequest();
@@ -638,7 +643,7 @@ export default {
 
         // console.log(this.$store.state.user.mem_id);
 
-        const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user.mem_id}`);
+        const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.tmp_memID}`);
         // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
         xhr.open("get", apiURL, true);
         xhr.send(null);
@@ -646,7 +651,7 @@ export default {
         function showMember(json) {
             var xhr = new XMLHttpRequest();
             // console.log(QQ);
-            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`);
+            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.tmp_memID}`);
             // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`;
             xhr.open("get", apiURL, true);
             xhr.send(null);
@@ -703,6 +708,23 @@ export default {
         }
     },
     methods: {
+
+        //  ============================測試============================ //
+        async getMem(){
+            const res = await fetch(
+                    `${BASE_URL}/getMember.php?type=front`,
+                    {
+                        credentials: "include",
+                    }
+                );
+
+                const result = await res.json();
+                this.tmp_memID=result.list.mem_id;
+            
+        },
+
+
+        
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
             document
