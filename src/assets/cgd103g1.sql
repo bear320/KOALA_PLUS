@@ -185,6 +185,10 @@ INSERT INTO `tibamefe_cgd103g1`.`my_coupon` ( `mem_id`,`coupon_id`, `coupon_code
 ('1003', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1004', '4004', 'koala60', '2022-12-25', '2023-02-25', '0');
 
+()
+curdate(),
+
+
 
 -- 給佳政參考的php指令
 -- $coupRow["valid"]
@@ -277,22 +281,22 @@ INSERT INTO `tibamefe_cgd103g1`.`reservation` ( `rsv_date`, `rsv_ppl`,  `rsv_nam
 
 -- 公告
 CREATE TABLE `news`(
-`news_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '公告編號',
-`news_img` varchar(50) DEFAULT '' COMMENT '公告圖片', 
-`news_title` varchar(100) NOT NULL DEFAULT '' COMMENT '公告標題',
-`news_content` varchar(500) NOT NULL DEFAULT '' COMMENT '公告內容',
-`news_date` date NOT NULL DEFAULT '2022-12-01' COMMENT '公告發佈日期',
-`news_category` varchar(50) NOT NULL DEFAULT '' COMMENT '公告分類(最新消息、資金運用、園區資訊)',
-`news_status` tinyint NOT NULL DEFAULT '0' COMMENT '公告狀態(0:草稿,1:已上架)',
-`news_star` tinyint NOT NULL DEFAULT '0' COMMENT '公告星星(0:普通,1:主要)',
+news_id int unsigned NOT NULL AUTO_INCREMENT COMMENT '公告編號',
+news_img varchar(50) DEFAULT '' COMMENT '公告圖片', 
+news_title varchar(100) NOT NULL DEFAULT '' COMMENT '公告標題',
+news_content varchar(500) NOT NULL DEFAULT '' COMMENT '公告內容',
+news_date date NOT NULL DEFAULT '2022-12-01' COMMENT '公告發佈日期',
+news_category varchar(50) NOT NULL DEFAULT '' COMMENT '公告分類(最新消息、資金運用、園區資訊)',
+news_status tinyint NOT NULL DEFAULT '0' COMMENT '公告狀態(0:草稿,1:已上架)',
+news_star tinyint NOT NULL DEFAULT '0' COMMENT '公告星星(0:普通,1:主要)',
 PRIMARY KEY (`news_id`), 
-KEY `dx_news_img` (`news_img`), 
-KEY `dx_news_title` (`news_title`), 
-KEY `dx_news_content` (`news_content`), 
-KEY `dx_news_date` (`news_date`), 
-KEY `dx_news_category` (`news_category`), 
-KEY `dx_news_status` (`news_status`), 
-KEY `dx_news_star` (`news_star`)
+KEY dx_news_img (`news_img`), 
+KEY dx_news_title (`news_title`), 
+KEY dx_news_content (`news_content`), 
+KEY dx_news_date (`news_date`), 
+KEY dx_news_category (`news_category`), 
+KEY dx_news_status (`news_status`), 
+KEY dx_news_star (`news_star`)
 )ENGINE=InnoDB AUTO_INCREMENT=07001 DEFAULT CHARSET=utf8mb4 COMMENT='公告';
 INSERT INTO `tibamefe_cgd103g1`.`news` (`news_img`, `news_title`, `news_content`, `news_date`, `news_category`, `news_status`, `news_star`) VALUES
 ('5.jpg', '無尾熊救援行動', '無尾熊救援隊是一群專門處理無尾熊救援的志願者。他們擁有專業的知識和技能，可以在無尾熊陷入危險的情況下進行救援行動。有一天，無尾熊救援隊的成員收到了一個緊急的救援呼叫。有一隻無尾熊被困在樹上，無法自行下樹。無尾熊救援隊立即出發，帶著各種救援器材前往救援現場。當他們到達樹下時，發現那隻無尾熊已經被困在樹上很久了，體力已經大減。但是，無尾熊救援隊的成員們很有耐心，他們給了那隻無尾熊食物和水，並且給了他安慰。當無尾熊救援隊成員們用各種工具將無尾熊從樹上救下來時，那隻無尾熊真的很感激。他們帶著那隻無尾熊回到了救援中心，並給了他充足的休息和治療。', '2022-11-19', '最新消息', '1', '0'),

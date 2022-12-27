@@ -11,7 +11,8 @@
         >
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
-            <button id="close" @click="closeIt">X</button>
+            <Icon type="md-close-circle" id="close" @click="closeIt"/>
+            <!-- <button id="close" @click="closeIt">X</button> -->
             <div class="form-group">
                 <label for="rsv_name">姓名</label>
                 <input
@@ -79,12 +80,13 @@
                     >您選擇的預約日期： {{ orderDate }}</label
                 >
                 <div
+                    class="weather"
                     v-for="(item, index) in tempWx"
                     v-show="`${orderDate + ' ' + '18:00:00'}` == item.time"
                     @mouseover="formHover = true"
                     @mouseleave="formHover = false"
                     :style="{
-                        color: formHover ? '' : '#FFFEE2',
+                        color: formHover ? '' : '#FAB666',
                     }"
                 >
                     當日最低溫度：{{ item.test }} °C &#8195 當日氣候：{{
@@ -277,7 +279,10 @@ export default {
     },
 };
 </script>
-<style scoped>
+
+
+<style lang="scss" scoped>
+
 .book-form {
     width: 700px;
     height: 700px;
@@ -290,6 +295,8 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     display: fixed;
+
+
 }
 h2 {
     margin-top: 40px;
@@ -301,16 +308,23 @@ h2 {
     top: 1.5%;
     border: 0;
     background-color: transparent;
-    font-size: 20px;
+    font-size: 30px;
     font-weight: 500;
-    color: #f8f8f8;
-    border: #f8f8f8 2px solid;
+    color: #337a7d;
+    /* border: #f8f8f8 2px solid; */
     border-radius: 50%;
     cursor: pointer;
     z-index: 3;
     text-align: center;
-    width: 32px;
+    width: inherit;
+
+    &:hover{
+        color: #FFFEE2;
+    }
+  
 }
+
+
 
 .form-group {
     text-align: left;
@@ -381,7 +395,7 @@ h2 {
     }
     .book-form {
         width: 90%;
-        height: 78%;
+        height: 50%;
     }
     .form-group {
         text-align: left;
@@ -434,6 +448,15 @@ h2 {
         background-color: #337a7d;
         color: white;
         cursor: pointer;
+    }
+    @media screen and (max-width: 768px){
+        .book-form{
+            height:68%;
+        }
+
+    }
+    .weather {
+        font-size: 13px;
     }
 }
 </style>
