@@ -148,7 +148,7 @@ export default {
                     content: "您確定要切換開關狀態嗎？",
                     onOk: () => {
                         resolve();
-                        // console.log(this.$Modal);
+                        console.log(this.$Modal);
                     },
                 });
             });
@@ -186,7 +186,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    // console.log(json.prodRows);
+                    console.log(json.prodRows);
                     this.memindexs = json.prodRows;
                     console.log(json.count);
                     this.totalPage = Math.ceil(json.count / 10);
@@ -228,7 +228,6 @@ export default {
         display: inline-block;
         padding: 10px 18px;
         color: $darkgreen;
-        //
         width: 40px;
         height: 40px;
         line-height: 40px;
@@ -286,18 +285,19 @@ html article {
         }
         .bstitle,
         .content {
-            height: 56px;
             display: flex;
             justify-content: space-around;
             align-items: center;
             line-height: 1.5;
             width: 100%;
-            margin: 10px 0;
-            padding: 10px 0;
             border-bottom: solid 1px rgb(190, 214, 213);
             p {
                 width: calc(100% / 6);
             }
+        }
+        .content {
+            height: 56px;
+            padding: 10px 0;
         }
     }
 }

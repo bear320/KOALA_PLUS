@@ -1,10 +1,13 @@
 <template>
     <Header />
     <article class="bs-nav-space wrapper">
-        <h1>會員管理</h1>
+        <div class="title">
+            <h1>會員管理</h1>
+            <img src="@/assets/images/backstageindex/memberIcon.png" alt="" />
+            <h2>黑名單</h2>
+        </div>
 
         <section>
-            <h2>黑名單</h2>
             <div class="bstitle">
                 <h3 class="mem_id">會員編號</h3>
                 <h3 class="mem_name">姓氏</h3>
@@ -72,17 +75,6 @@ export default {
                     });
                 });
         },
-        handleBeforeChange() {
-            return new Promise((resolve) => {
-                // this.$Modal.confirm({
-                //     title: "切換確認",
-                //     content: "您確定要切換開關狀態嗎？",
-                //     onOk: () => {
-                //         resolve();
-                //     },
-                // });
-            });
-        },
     },
 
     created() {
@@ -94,19 +86,38 @@ export default {
 <style lang="scss" scoped>
 html article {
     text-align: left;
+    .title {
+        width: 400px;
+        display: flex;
+        column-gap: 20px;
+        flex-wrap: wrap;
+        h1 {
+            display: block;
+        }
+        img {
+            margin-left: 5px;
+            height: 67.5px;
+        }
 
-    h1 {
-        display: inline-block;
-        width: 25%;
-        background-image: url(@/assets/images/backstageindex/memberIcon.png);
-        @include bgSetting(contain, right);
+        h2 {
+            // text-align: left;
+
+            // @include borderLeft(30px);
+            color: #07617d;
+            position: relative;
+            padding-left: 30px;
+            margin: 10px 0;
+            transform: translate(-30px, 0);
+        }
+        h2::before {
+            content: "";
+            border-left: solid 5px #07617d;
+            position: absolute;
+            left: 0;
+            height: 100%;
+        }
     }
 
-    h2 {
-        text-align: left;
-        color: $green;
-        @include borderLeft(30px);
-    }
     section {
         text-align: center;
         h3 {
@@ -121,12 +132,14 @@ html article {
             align-items: center;
             line-height: 1.5;
             width: 100%;
-            margin: 0 50px;
-            padding: 10px 0;
             border-bottom: solid 1px rgb(190, 214, 213);
             p {
                 width: calc(100% / 6);
             }
+        }
+        .content {
+            height: 56px;
+            padding: 10px 0;
         }
     }
 }
