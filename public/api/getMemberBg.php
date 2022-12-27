@@ -1,7 +1,7 @@
 <?php 
 /**
- * 查詢會員接口
- * 接 components / MemCentre.vue
+ * 查詢"後台"會員接口    
+ * 接 MemberBlacklist.vue
 */
 
 //header設置
@@ -19,6 +19,7 @@ require_once("./headerUse.php");
 // session_start();
 // $getUser = $_SESSION??[];
 //DB連線設置
+
 require_once("./connect_cgd103g1.php");
 
 $resDate = [
@@ -27,19 +28,18 @@ $resDate = [
 ];
 
 //參數處理
-// $mem_id = empty( $_GET["mem_id"] ) ? ( $_POST["mem_id"] ?? "" ) : $_GET["mem_id"];
-// $search_mem_name = empty( $_GET["search_mem_name"] ) ? ( $_POST["search_mem_name"] ?? "" ) : $_GET["search_mem_name"];
-// $search_orderby = empty( $_GET["search_orderby"] ) ? ( $_POST["search_orderby"] ?? "" ) : $_GET["search_orderby"];
+$mem_id = empty( $_GET["mem_id"] ) ? ( $_POST["mem_id"] ?? "" ) : $_GET["mem_id"];
+$search_mem_name = empty( $_GET["search_mem_name"] ) ? ( $_POST["search_mem_name"] ?? "" ) : $_GET["search_mem_name"];
+$search_orderby = empty( $_GET["search_orderby"] ) ? ( $_POST["search_orderby"] ?? "" ) : $_GET["search_orderby"];
 
-// $black_state = empty( $_GET["black_state"] ) ? ( $_POST["black_state"] ?? "" ) : $_GET["black_state"];
-// $black_stateid = empty( $_GET["black_stateid"] ) ? ( $_POST["black_stateid"] ?? "" ) : $_GET["black_stateid"];
+$black_state = empty( $_GET["black_state"] ) ? ( $_POST["black_state"] ?? "" ) : $_GET["black_state"];
+$black_stateid = empty( $_GET["black_stateid"] ) ? ( $_POST["black_stateid"] ?? "" ) : $_GET["black_stateid"];
 //如果是空，true等於(「?」後面，「:」前面)，false等於(「:」後面，「;」前面)
 
 $type = empty( $_GET["type"] ) ? ( $_POST["type"] ?? "" ) : $_GET["type"]; //來源型態(front:前台,admin:後台)
 
 
-// $limit = empty( $_GET["limit"] ) ? ( $_POST["limit"] ?? "" ) : $_GET["limit"];
-
+$limit = empty( $_GET["limit"] ) ? ( $_POST["limit"] ?? "" ) : $_GET["limit"];
 $page = empty( $_GET["page"] ) ? ( $_POST["page"]  ?? "" ) : $_GET["page"];
 
 if(!empty($limit) && !empty($page)){
