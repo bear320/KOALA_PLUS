@@ -635,7 +635,7 @@ export default {
                 // console.log('ㄎㄎ');
                 showMember(xhr.responseText);
             } else {
-                alert(xhr.status);
+                // alert(xhr.status);
             }
         };
 
@@ -698,9 +698,9 @@ export default {
 
             let game_exp;
             // 這裡的QQ指的是Vue實體
-            console.log("test",member.mem_exp);
-            console.log(typeof member.mem_exp);
-            console.log(typeof +member.mem_exp);
+            // console.log("test",member.mem_exp);
+            // console.log(typeof member.mem_exp);
+            // console.log(typeof +member.mem_exp);
             QQ.game_exp =+ member.mem_exp;
            /*  document.getElementById("game_exp").innerHTML =
                 game_exp; */
@@ -829,16 +829,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -898,16 +898,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -967,16 +967,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -1036,16 +1036,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -1105,16 +1105,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -1173,16 +1173,16 @@ export default {
                     // coupon_get_date: now,
                     // coupon_exp_date: future,
                 };
-                console.log(gameDiscountCoupon.memId);
-                console.log(gameDiscountCoupon.coupon_get_date);
-                console.log(gameDiscountCoupon.coupon_exp_date);
+                // console.log(gameDiscountCoupon.memId);
+                // console.log(gameDiscountCoupon.coupon_get_date);
+                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
                     .then((res) => res.json())
-                    .then((json) => console.log(json));
+                    // .then((json) => console.log(json));
                 // .then((result) => {
                 //     alert(result.msg);
                 // });
@@ -1219,7 +1219,7 @@ export default {
                 body: new URLSearchParams(gameValueContent),
             })
                 .then((res) => res.json())
-                .then((json) => console.log(json))
+                // .then((json) => console.log(json))
         },
     },
     watch: {
