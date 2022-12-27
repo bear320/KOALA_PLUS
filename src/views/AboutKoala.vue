@@ -1,5 +1,5 @@
 <template>
-    <!-- <Loading /> -->
+    <Loading />
     <Header />
     <article class="nav-space">
         <div
