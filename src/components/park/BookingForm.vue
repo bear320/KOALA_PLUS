@@ -83,16 +83,21 @@
                     class="weather"
                     v-for="(item, index) in tempWx"
                     v-show="`${orderDate + ' ' + '18:00:00'}` == item.time"
-                    @mouseover="formHover = true"
+                   
+                >   
+                <div v-if="item.test >15" style="color: #07617D;">當日最低溫度：{{item.test }} °C ⛅&#8195 當日氣候：{{item.elValue}}</div>
+
+                <div v-if="10<item.test <15" style="color: #8692FF;">當日最低溫度：{{item.test }} °C🍃 &#8195 當日氣候：{{item.elValue}}</div>
+
+                <div v-if="item.test <10" style="color: #FF7B7B;">當日最低溫度：{{ item.test }} °C⛄ &#8195 當日氣候：{{item.elValue}}</div>
+                </div> 
+
+                
+                <!--  @mouseover="formHover = true"
                     @mouseleave="formHover = false"
                     :style="{
                         color: formHover ? '' : '#FAB666',
-                    }"
-                >
-                    當日最低溫度：{{ item.test }} °C &#8195 當日氣候：{{
-                        item.elValue
-                    }}
-                </div>
+                    }" -->
                 <!-- {{ tempWx[0] }} -->
             </div>
             <!-- @click="next" -->

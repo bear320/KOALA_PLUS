@@ -185,17 +185,12 @@ INSERT INTO `tibamefe_cgd103g1`.`my_coupon` ( `mem_id`,`coupon_id`, `coupon_code
 ('1003', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1004', '4004', 'koala60', '2022-12-25', '2023-02-25', '0');
 
-()
-curdate(),
-
-
 
 -- 給佳政參考的php指令
 -- $coupRow["valid"]
 -- $days = 30;
 -- $sql = "SELECT ADDDATE(current_date(), INTERVAL {$coupRow["valid"]} DAY)"
 -- SELECT ADDDATE(current_date(), INTERVAL 30 DAY)
-
 
 -- 周邊商品
 CREATE TABLE `product`(
