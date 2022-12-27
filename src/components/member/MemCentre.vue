@@ -88,6 +88,7 @@
                             v-model="passwordcheck"
                             @keyup.enter="memPageDown"
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <input
                             type="password"
@@ -99,6 +100,7 @@
                             required
                             v-else
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <img
                             :src="seen_one ? seenImg : unseenImg"
@@ -119,6 +121,7 @@
                             v-if="pwdType_two"
                             v-model="newpassword"
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <input
                             type="password"
@@ -130,6 +133,7 @@
                             required
                             v-else
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <img
                             :src="seen_two ? seenImg : unseenImg"
@@ -150,6 +154,7 @@
                             v-if="pwdType_three"
                             v-model="newpasswordconfirm"
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <input
                             type="password"
@@ -161,6 +166,7 @@
                             required
                             v-else
                             autocomplete="off"
+                            @keyup="reg_pswType"
                         />
                         <img
                             :src="seen_three ? seenImg : unseenImg"
@@ -402,6 +408,12 @@ export default {
                 desc: nodesc ? "" : "請確認email格式是否正確且完整填寫！",
             });
         },
+        psw_open(nodesc) {
+            this.$Notice.open({
+                title: "提醒密碼格式錯誤",
+                desc: nodesc ? "" : "請確認密碼格式是否正確且完整填寫！",
+            });
+        },
         // =============
         // ================正則
 
@@ -412,7 +424,6 @@ export default {
             // console.log(res);
             if (res) {
             } else {
-                // alert("手機格式錯誤");
                 this.mod_open(false);
             }
         },
@@ -423,10 +434,28 @@ export default {
             console.log(res);
             if (res) {
             } else {
-                // alert("手機格式錯誤");
                 this.email_open(false);
             }
         },
+        reg_pswType() {
+            let mem_oldpsw_val = this.$refs.mem_psw.value;
+            let mem_newpsw_val = this.$refs.mem_password1.value;
+            // const validate = /^(?=.*d){6,8}$/;
+            let res1 = validate.test(mem_oldpsw_val);
+            let res2 = validate.test(mem_newpsw_val);
+            console.log(res1);
+            console.log(res2);
+
+            if (res1) {
+            } else {
+                this.psw_open(false);
+            }
+            if (res2) {
+            } else {
+                this.psw_open(false);
+            }
+        },
+        // /(?=^.{8,}{7,8}$)/
     },
     created() {
         this.getmemCentre();
