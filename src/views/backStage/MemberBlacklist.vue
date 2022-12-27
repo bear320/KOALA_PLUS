@@ -71,8 +71,9 @@ export default {
                     console.log(json);
 
                     this.memindexs = json.prodRows.filter((item) => {
-                        return item.mem_state === 1;
+                        return item.mem_state === "1";
                     });
+                    console.log("prodRows.item.mem_state");
                 });
         },
     },

@@ -90,31 +90,7 @@ switch( $type ){
         $count = $countQuery->fetchAll(PDO::FETCH_ASSOC);
 
 
-        // LIMIT {$limit} OFFSET {$offset} ------------------------
-        
-        // var_dump($black_stateid,$black_state);die();
-        // $black_stateid= 1001;
-        // $black_state=1;
-
-        //【下列為 後台會員 黑名單switch滑塊變更資料庫的相關功能】
-
-
-        // $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_state = '{$black_state}' WHERE mem_id = '{$mem_id}' ";
-
-        // try {
-        //     $res = $pdo->query( $upSql );
-        //     if( $res ){
-        //         $resDate["status"] = 1;
-        //         $resDate["msg"] = '黑名單狀態已切換';
-        //     }
-        //     echo json_encode( $resDate );
-        //     return true;
-        
-        // } catch (Exception $e) {
-        //     $resDate["msg"] = $e->getMessage();
-        //     echo json_encode( $resDate );
-        //     return true;
-        // }
+    
 
 
         //【下列為 後台list 抓取所有會員的明細功能】

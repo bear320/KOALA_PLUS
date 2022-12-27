@@ -66,7 +66,7 @@
                         :false-value="0"
                         :before-change="handleBeforeChange"
                         @on-change="blackSwitchChange(index)"
-                        v-model="item.mem_state"
+                        v-model.number="item.mem_state"
                     >
                         <template #open>
                             <span>屏蔽</span>
@@ -186,8 +186,30 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json.prodRows);
-                    this.memindexs = json.prodRows;
+                    console.log("test", json.prodRows);
+                    // this.memindexs = json.prodRows;
+                    this.memindexs = json.prodRows.map((item) => {
+                        return {
+                            mem_id: +item.mem_id,
+                            mem_name: item.mem_name,
+                            mem_account: item.mem_account,
+                            mem_psw: item.mem_psw,
+                            mem_mob: item.mem_mob,
+                            mem_add: item.mem_add,
+                            ord_sum: +item.ord_sum,
+                            support_sum: +item.support_sum,
+                            mem_exp: +item.mem_exp,
+                            mem_point: +item.mem_point,
+                            mem_food1: +item.mem_food1,
+                            mem_food2: +item.mem_food2,
+                            mem_food3: +item.mem_food3,
+                            mem_food4: +item.mem_food4,
+                            mem_food5: +item.mem_food5,
+                            mem_food6: +item.mem_food6,
+                            mem_validation: +item.mem_validation,
+                            mem_state: +item.mem_state,
+                        };
+                    });
                     console.log(json.count);
                     this.totalPage = Math.ceil(json.count / 10);
                 });
