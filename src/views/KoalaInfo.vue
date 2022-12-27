@@ -248,14 +248,16 @@ export default {
 
         // 觸發取得狀態
         async onSubmit() {
-            this.$refs["closeBtn"].style.display = "none";
-            this.isTrading = true;
+            // this.$refs["closeBtn"].style.display = "none";
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
             if (tappayStatus.canGetPrime === false) {
                 // can not get prime
                 this.open(false);
+                // this.$refs["closeBtn"].style.display = "none";
                 return;
             }
+            this.$refs["closeBtn"].style.display = "none";
+            this.isTrading = true;
 
             // Get prime
             TPDirect.card.getPrime((result) => {
@@ -399,10 +401,10 @@ export default {
         TPDirect.card.onUpdate((update) => {
             if (update.canGetPrime) {
                 //全部欄位皆為正確 可以呼叫 getPrime
-                // console.log("已填滿");
+                // console.log("付款資訊完整且正確");
                 this.CardInfoFilled = true;
             } else {
-                // console.log("尚未填滿");
+                // console.log("付款資訊不完整或有誤");
                 this.CardInfoFilled = false;
             }
         });

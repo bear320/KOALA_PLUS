@@ -409,9 +409,7 @@ export default {
     methods: {
         choose() {
             let tag = document.getElementById("selectCategory").value;
-            console.log(tag);
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
-            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -432,9 +430,6 @@ export default {
         },
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
-            // const apiURL = new URL(
-            //     `http://localhost/cgd103_g1/public/api/getArticleList.php`
-            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -445,19 +440,13 @@ export default {
                     this.draft = this.articles.filter((article) => {
                         return article.news_status == "0";
                     });
-                    console.log(this.articles);
                 });
         },
         marked(index) {
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
-            // const apiURL = new URL(
-            //     `http://localhost/cgd103_g1/public/api/editArticle.php`
-            // );
+
             const news_id = this.articles[index].news_id;
             const news_star = this.articles[index].news_star;
-
-            console.log(this.articles[index].news_id);
-            console.log(this.articles[index].news_star);
 
             fetch(apiURL, {
                 method: "POST",
@@ -469,12 +458,10 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
                     this.resDate = json;
                 });
         },
         confirmModal() {
-            console.log(this.articles[index].news_id);
             this.$Modal.confirm({
                 title: "確定要刪除公告?",
                 content: "<p>公告刪除後將無法回復動作，確定要刪除嗎?</p>",
@@ -487,12 +474,7 @@ export default {
             });
         },
         deleteArticle(index) {
-            console.log(this.articles[index].news_id);
             const apiURL = new URL(`${BASE_URL}/deleteArticle.php`);
-            // const apiURL = new URL(
-            //     `http://localhost/cgd103_g1/public/api/deleteArticle.php`
-            // );
-
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams({
@@ -501,8 +483,6 @@ export default {
             })
                 .then((res) => res.json())
                 .then((result) => {
-                    console.log(result);
-                    // alert(result);
                     location.reload();
                     this.$Message.info("已刪除公告");
                 });
