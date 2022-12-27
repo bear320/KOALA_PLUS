@@ -58,7 +58,7 @@
                     編輯會員資料
                 </button>
                 <div class="signOutbutton">
-                    <button class="btn-paramy" @click="signOut">
+                    <button class="btn-secondary" @click="signOut">
                         登出會員
                     </button>
                 </div>
@@ -438,7 +438,7 @@ export default {
                         }
                         .signOutbutton {
                             margin: auto;
-                            padding: 10px;
+                            padding: 20px 0;
                         }
                         .tabcontent_group {
                             display: flex;

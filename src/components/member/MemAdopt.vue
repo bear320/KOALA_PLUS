@@ -77,7 +77,11 @@
                 <!-- </div> -->
             </div>
             <!-- <img :src="imgUrl" class="return_img" /> -->
-            <a ref="downloadBtn" :href="imgUrl" download="test.png"></a>
+            <a
+                ref="downloadBtn"
+                :href="imgUrl"
+                download="koala_adoption_certificate.png"
+            ></a>
         </div>
     </li>
 </template>
@@ -205,38 +209,63 @@ table {
     }
 }
 // 這是SHOW出來的圖片
-
-.adopt_certificate {
-    width: 600px;
-    height: 425px;
-    position: relative;
-    background-color: pink;
-    background-image: url("@/assets/images/member/Certificate02.svg");
-    background-size: contain;
-    // .certificatebg {
-    //     width: 100%;
-    //     height: 100%;
-    // }
-    @include d() {
-        width: 300px;
-        height: 283px;
-    }
-    .certificate_name {
+.html2canvas {
+    display: flex;
+    justify-content: center;
+    .adopt_certificate {
+        width: 600px;
+        height: 425px;
         position: relative;
-        top: 65%;
-        left: 39%;
-        transform: translate(-65%, -50%);
+        background-color: pink;
+        background-image: url("@/assets/images/member/Certificate02.svg");
+        background-size: contain;
+        // .certificatebg {
+        //     width: 100%;
+        //     height: 100%;
+        // }
         @include d() {
+            // width: 300px;
+            // height: 283px;
+            width: 100%;
+            aspect-ratio: 3 / 5;
+        }
+        @include m() {
+            // width: 300px;
+            // height: 283px;
+            width: 100%;
+            height: 200px;
+            aspect-ratio: 2 / 6;
+        }
+
+        .certificate_name {
+            position: relative;
             top: 65%;
             left: 39%;
+            transform: translate(-65%, -50%);
+            @include d() {
+                top: 63%;
+                left: 40%;
+            }
+            @include m() {
+                top: 65%;
+                left: 40%;
+            }
         }
-    }
 
-    .certificate_date {
-        position: relative;
-        top: 75%;
-        left: 42%;
-        transform: translate(-65%, -50%);
+        .certificate_date {
+            position: relative;
+            top: 75%;
+            left: 42%;
+            transform: translate(-65%, -50%);
+            @include d() {
+                top: 75%;
+                left: 43%;
+            }
+            @include m() {
+                top: 72%;
+                left: 43%;
+            }
+        }
     }
 }
 .return_img {

@@ -31,14 +31,6 @@
                     </li>
                 </ul>
 
-                <img
-                    class="memleftimg"
-                    width="343"
-                    height="514"
-                    src="@/assets/images/drawing2.png"
-                    alt="會員頁面的無尾熊左圖"
-                />
-
                 <div class="wrapper">
                     <ul
                         class="tabs_content"
@@ -51,6 +43,11 @@
                         <MemAdopt></MemAdopt>
                     </ul>
                 </div>
+                <img
+                    class="memleftimg"
+                    src="@/assets/images/drawing4.png"
+                    alt="會員頁面的無尾熊左圖"
+                />
             </div>
         </section>
     </div>
@@ -179,8 +176,31 @@ export default {
             }
         }
     }
+    .memleftimg {
+        width: 155px;
+        height: 218px;
+        position: absolute;
+        // left: 1150px;
+        left: 70%;
+        top: -100px;
+        z-index: 10;
+
+        @include d() {
+            width: 103px;
+            height: 145px;
+            left: 75%;
+            top: -67px;
+        }
+        @include m() {
+            width: 51px;
+            height: 73px;
+            left: 60%;
+            top: 45px;
+        }
+    }
 
     .wrapper {
+        position: relative;
         margin: 30px auto;
         width: 1000px;
         overflow: hidden;
@@ -202,28 +222,6 @@ export default {
                 border-radius: 10px;
                 transition: 0.9s 0.9s cubic-bezier(0.18, 1.14, 0.5, 1.18);
             }
-        }
-    }
-
-    .memleftimg {
-        width: 168px;
-        height: 252px;
-        position: absolute;
-        left: -20px;
-        top: 100px;
-        z-index: 3;
-        overflow: hidden;
-        @include d() {
-            width: 112px;
-            height: 168px;
-            left: 0px;
-            top: 100px;
-        }
-        @include m() {
-            width: 84px;
-            height: 126px;
-            left: 0px;
-            top: 300px;
         }
     }
 }
