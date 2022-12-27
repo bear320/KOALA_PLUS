@@ -136,10 +136,10 @@ export default {
                 body: new URLSearchParams(signUpContent),
             })
                 .then((res) => res.json())
-                .then((result) => {
-                    alert(result.msg);
-                    location.reload();
-                });
+                // .then((result) => {
+                //     alert(result.msg);
+                //     location.reload();
+                // });
         },
     },
 };

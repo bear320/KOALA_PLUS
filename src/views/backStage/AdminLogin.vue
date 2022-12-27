@@ -54,12 +54,12 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((json) => {
-                        console.log(json);
-                        if (this.login_password == json.mem_account) {
-                            console.log("成功");
-                        } else if (!json.code) {
-                            console.log("失敗");
-                        }
+                        // console.log(json);
+                        // if (this.login_password == json.mem_account) {
+                        //     console.log("成功");
+                        // } else if (!json.code) {
+                        //     console.log("失敗");
+                        // }
                         this.$router.push({ path: "/bs-index" });
                     });
             }

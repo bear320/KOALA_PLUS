@@ -426,10 +426,13 @@ export default {
                 body: new URLSearchParams(signUpContent),
             })
                 .then((res) => res.json())
-                .then((result) => {
-                    alert(result.msg);
-                    location.reload();
-                });
+                .then(()=>{
+                    alert("註冊成功")
+                })
+                // .then((result) => {
+                //     alert(result.msg);
+                //     location.reload();
+                // });
         },
 
         // ======================================== Email 後臺比對 ======================================== //
@@ -440,11 +443,11 @@ export default {
                 // console.log("=====",xhr.status);
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
-            // const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
-            let url =
-                "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
-                document.getElementById("mem_account").value;
-            xhr.open("get", url, true);
+            const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
+            // let url =
+            //     "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
+            //     document.getElementById("mem_account").value;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
         },
 
@@ -483,9 +486,10 @@ export default {
                 if (xhr.status == 200) {
                     //modify here
                     showMember(xhr.responseText);
-                } else {
-                    alert(xhr.status);
                 }
+                // else {
+                //     alert(xhr.status);
+                // }
             };
 
             // const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
@@ -528,10 +532,12 @@ export default {
                 )
                 .then(
                     (result) => {
-                        console.log("SUCCESS!", result.text);
+                        // console.log("SUCCESS!", result.text);
+                        alert("註冊成功");
                     },
                     (error) => {
-                        console.log("FAILED...", error.text);
+                        // console.log("FAILED...", error.text);
+                        alert("註冊失敗")
                     }
                 );
         },
