@@ -156,7 +156,7 @@ iframe {
 }
 
 .leaf-icon-left {
-    width: 500px;
+    width: 400px;
     position: absolute;
     transform: rotate(60deg);
     left: -30px;
