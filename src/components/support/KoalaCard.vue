@@ -3,7 +3,7 @@
         <div class="img">
             <!-- <img src="../../assets/images/support/koala1.jpg" /> -->
             <!-- <img :src="require(`@/assets/images/support/${kCover}`)" /> -->
-            <img :src="`/images/koalas/${kCover}`" />
+            <img :src="`./images/koalas/${kCover}`" />
         </div>
         <div class="wave end"></div>
         <div class="wave middle"></div>
