@@ -63,7 +63,7 @@ export default {
     },
     methods: {
         postmemberBlacklist() {
-            const apiURL = new URL(`${BASE_URL}/getMember.php?type=admin`);
+            const apiURL = new URL(`${BASE_URL}/getMemberBg.php?type=admin`);
             console.log(apiURL);
             fetch(apiURL, { credentials: "include" })
                 .then((res) => res.json())

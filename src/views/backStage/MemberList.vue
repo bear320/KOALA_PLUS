@@ -158,7 +158,7 @@ export default {
             this.getMemInfo();
         },
         getMemInfo() {
-            const apiURL = new URL(`${BASE_URL}/getMember.php`);
+            const apiURL = new URL(`${BASE_URL}/getMemberBg.php`);
             // const apiURL = new URL(
             //     "http://localhost/cgd103_g1/public/api/getMember.php?"
             // );
@@ -270,6 +270,8 @@ html article {
             column-gap: 15px;
             img {
                 vertical-align: top;
+                width: 45px;
+                height: 40px;
             }
         }
     }
