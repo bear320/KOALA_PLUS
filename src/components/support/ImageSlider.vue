@@ -4,7 +4,7 @@
             <div ref="mainImage" class="main-image">
                 <img
                     v-for="(imgPath, index) in imgs"
-                    :src="`/images/koalas/${imgPath}`"
+                    :src="`../images/koalas/${imgPath}`"
                     :key="index"
                 />
             </div>
@@ -22,7 +22,7 @@
         <div class="sub-images">
             <img
                 v-for="(imgPath, index) in imgs"
-                :src="require(`@/assets/images/support/${imgPath}`)"
+                :src="`../images/koalas/${imgPath}`"
                 :key="index"
                 @click="changeImage(index)"
             />
