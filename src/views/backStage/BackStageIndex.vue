@@ -5,87 +5,114 @@
             <div>
                 <div class="top2">
                     <div class="card">
-                        <a href="/bs-support-list">
+                        <router-link to="/bs-support-list">
                             <h2>資助認養管理</h2>
-                        </a>
+                        </router-link>
+                        <router-link to="/bs-support-statistic">
+                            <Circle
+                                :size="120"
+                                :trail-width="6"
+                                :stroke-width="5"
+                                :percent="supSum / 100"
+                                stroke-linecap="square"
+                                stroke-color="#FD646F"
+                            >
+                                <div class="demo-Circle-custom">
+                                    <p class="sum">{{ supSum }}</p>
+                                    <p class="mini">半年累計金額</p>
+                                </div>
+                            </Circle>
+                        </router-link>
                     </div>
                     <div class="card">
-                        <a href="/bs-order-list">
+                        <router-link to="/bs-order-list">
                             <h2>訂單管理</h2>
-                        </a>
+                        </router-link>
                         <div>
-                            <a href="">
-                                <p>月訂單</p>
-                                <p class="counts">{{ monthlyOrders }}</p>
-                            </a>
-                            <a href="">
-                                <p>未出貨</p>
-                                <p class="counts">{{ orderCount }}</p>
-                            </a>
+                            <div>
+                                <p class="mini">月訂單</p>
+                                <p class="counts">
+                                    {{ monthlyOrders["m"] }}
+                                </p>
+                            </div>
+                            <div>
+                                <p class="mini">未出貨</p>
+                                <p class="counts">{{ orderCount["all"] }}</p>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="card">
-                    <a href="/bs-admin-list">
+                    <router-link to="/bs-admin-list">
                         <img
                             src="@/assets/images/backstageindex/adminIcon.png"
                         />
                         <h2>權限管理</h2>
-                    </a>
-                    <a href="/bs-admin-add" class="detail">新增管理員帳戶</a>
+                    </router-link>
+                    <router-link to="/bs-admin-add" class="detail"
+                        >新增管理員帳戶</router-link
+                    >
                 </div>
                 <div class="card">
-                    <a href="/bs-koala-list">
+                    <router-link to="/bs-koala-list">
                         <img
                             src="@/assets/images/backstageindex/koalaIcon.png"
-                            alt=""
                         />
                         <h2>無尾熊管理</h2>
-                    </a>
-                    <a href="/bs-koala-add" class="detail">新增無尾熊資訊</a>
+                    </router-link>
+                    <router-link to="/bs-koala-add" class="detail"
+                        >新增無尾熊資訊</router-link
+                    >
                 </div>
             </div>
             <div>
                 <div class="card">
-                    <a href="/bs-booking-list-two">
+                    <router-link to="/bs-booking-list-two">
                         <img
                             src="@/assets/images/backstageindex/bookingIcon.png"
-                            alt=""
                         />
                         <h2>園區導覽管理</h2>
-                    </a>
-                    <a href="/bs-booking-dayoff" class="detail">新增休館管理</a>
+                    </router-link>
+                    <router-link to="/bs-booking-dayoff" class="detail"
+                        >新增休館管理</router-link
+                    >
                 </div>
                 <div class="card">
-                    <a href="/bs-article-list">
+                    <router-link to="/bs-article-list">
                         <img
                             src="@/assets/images/backstageindex/articleIcon.png"
-                            alt=""
                         />
                         <h2>公告管理</h2>
-                    </a>
-                    <a href="/bs-article-add" class="detail">新增公告文章</a>
+                    </router-link>
+                    <router-link to="/bs-article-add" class="detail"
+                        >新增公告文章</router-link
+                    >
                 </div>
                 <div class="card">
-                    <a href="/bs-product-list">
+                    <router-link to="/bs-product-list">
                         <img
                             src="@/assets/images/backstageindex/productIcon.png"
-                            alt=""
                         />
                         <h2>商品管理</h2>
-                    </a>
-                    <a href="" class="detail">優惠券管理</a>
-                    <a href="/bs-product-edit" class="detail2">新增商品資訊</a>
+                    </router-link>
+                    <router-link to="/bs-coupon-list" class="detail"
+                        >優惠券管理</router-link
+                    >
+                    <router-link to="/bs-product-edit" class="detail2"
+                        >新增商品資訊</router-link
+                    >
                 </div>
                 <div class="card">
-                    <a href="/bs-member-list">
+                    <router-link to="/bs-member-list">
                         <img
                             src="@/assets/images/backstageindex/memberIcon.png"
                             alt=""
                         />
                         <h2>會員管理</h2>
-                    </a>
-                    <a href="/bs-member-blacklist" class="detail">黑名單管理</a>
+                    </router-link>
+                    <router-link to="/bs-member-blacklist" class="detail"
+                        >黑名單管理</router-link
+                    >
                 </div>
             </div>
         </div>
@@ -103,20 +130,30 @@ export default {
         return {
             orderCount: [],
             monthlyOrders: [],
+            supSum: [],
         };
     },
     methods: {
+        getSupSum() {
+            const apiURL = new URL(`${BASE_URL}/getSupportSum.php`);
+            fetch(apiURL)
+                .then((res) => res.json())
+                .then((json) => {
+                    this.supSum = parseInt(json[0]["sum"]);
+                });
+        },
         getOrderCount() {
             const apiURL = new URL(`${BASE_URL}/getOrderCount.php`);
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    this.orderCount = json[0]["all"];
-                    this.monthlyOrders = json[1]["m"];
+                    this.orderCount = json[0];
+                    this.monthlyOrders = json[1];
                 });
         },
     },
     created() {
+        this.getSupSum();
         this.getOrderCount();
     },
 };
@@ -151,13 +188,26 @@ article {
                 .counts {
                     text-align: center;
                 }
+                .mini {
+                    font-size: 10px;
+                    color: $green;
+                    font-weight: 700;
+                }
             }
             .card:first-child {
                 background-color: rgba(252, 245, 234, 0.6);
                 height: calc(65% - 20px);
+                display: flex;
 
-                a h2 {
-                    padding-left: 20px;
+                a:first-child {
+                    width: 70%;
+                }
+                .sum {
+                    color: #fd646f;
+                    font-size: $h2;
+                }
+                .mini {
+                    margin-top: 10px;
                 }
             }
             .card:last-child {
@@ -170,11 +220,17 @@ article {
                 div {
                     display: flex;
 
-                    a p:last-child {
+                    div {
+                        flex-direction: column;
+                        margin: 10px 20px;
+                    }
+
+                    div p:last-child {
                         font-size: $h2;
+                        font-weight: 700;
                         color: #f89c26;
                     }
-                    a:first-child p:last-child {
+                    div:first-child p:last-child {
                         color: #ef651c;
                     }
                 }
