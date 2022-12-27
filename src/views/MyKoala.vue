@@ -580,12 +580,12 @@ export default {
             item_5_exp: 140,
             item_6_exp: 210,
 
-            remaining_amount_1: "",
-            remaining_amount_2: "",
-            remaining_amount_3: "",
-            remaining_amount_4: "",
-            remaining_amount_5: "",
-            remaining_amount_6: "",
+            remaining_amount_1: 0,
+            remaining_amount_2: 0,
+            remaining_amount_3: 0,
+            remaining_amount_4: 0,
+            remaining_amount_5: 0,
+            remaining_amount_6: 0,
 
             // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
@@ -792,31 +792,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
@@ -861,31 +861,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
@@ -930,31 +930,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
@@ -999,31 +999,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
@@ -1068,31 +1068,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
@@ -1136,31 +1136,31 @@ export default {
                     .classList.add("discount_coupon_talkwindow_active");
                 // 彈窗禮券   post 進去
 
-                let instant = new Date();
-                let year = instant.getFullYear();
-                let month = instant.getMonth() + 1;
-                let day = instant.getDate();
-                let now = year + "-" + month + "-" + day;
-                let nextMonth = instant.getMonth() + 2;
-                if (nextMonth == 13) {
-                    nextMonth = 1;
-                }
-                let future =
-                    instant.getFullYear() +
-                    "-" +
-                    nextMonth +
-                    "-" +
-                    instant.getDate();
+                // let instant = new Date();
+                // let year = instant.getFullYear();
+                // let month = instant.getMonth() + 1;
+                // let day = instant.getDate();
+                // let now = year + "-" + month + "-" + day;
+                // let nextMonth = instant.getMonth() + 2;
+                // if (nextMonth == 13) {
+                //     nextMonth = 1;
+                // }
+                // let future =
+                //     instant.getFullYear() +
+                //     "-" +
+                //     nextMonth +
+                //     "-" +
+                //     instant.getDate();
 
-                console.log(now);
-                console.log(future);
+                // console.log(now);
+                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
                 // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    coupon_get_date: now,
-                    coupon_exp_date: future,
+                    // coupon_get_date: now,
+                    // coupon_exp_date: future,
                 };
                 console.log(gameDiscountCoupon.memId);
                 console.log(gameDiscountCoupon.coupon_get_date);
