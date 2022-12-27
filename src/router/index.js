@@ -82,13 +82,13 @@ const routes = [
         name: "koala-info",
         // component: KoalaInfo,
         component: () => import("@/views/KoalaInfo.vue"),
+        meta: { title: "無尾熊詳情" },
     },
     {
         path: "/cart1",
         name: "cart1",
         // component: Cart1,
         component: () => import("@/views/Cart1.vue"),
-
         meta: { title: "購物車" },
     },
     {
@@ -96,6 +96,7 @@ const routes = [
         name: "cart2",
         // component: Cart2,
         component: () => import("@/views/Cart2.vue"),
+        meta: { title: "結帳" },
     },
     {
         path: "/koala-park",
@@ -109,7 +110,7 @@ const routes = [
         name: "login",
         // component: Login,
         component: () => import("@/views/Login.vue"),
-        meta: { title: "登入/註冊" },
+        meta: { title: "登入／註冊" },
     },
     {
         path: "/member",
@@ -130,6 +131,7 @@ const routes = [
         name: "product",
         // component: Product,
         component: () => import("@/views/Product.vue"),
+        meta: { title: "商品詳情" },
     },
     {
         path: "/shop",
@@ -178,12 +180,14 @@ const routes = [
         name: "articleEdit",
         // component: ArticleEdit,
         component: () => import("@/views/backStage/ArticleEdit.vue"),
+        meta: { title: "編輯公告" },
     },
     {
         path: "/bs-article-add",
         name: "articleAdd",
         // component: ArticleAdd,
         component: () => import("@/views/backStage/ArticleAdd.vue"),
+        meta: { title: "新增公告" },
     },
     {
         path: "/bs-booking-list-two",
