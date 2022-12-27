@@ -116,7 +116,7 @@
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" @click.prevent="postKoalaUpdate">
                     <img
                         src="@/assets/images/icon/confirm.svg"
                         alt="【圖示】確認"
@@ -157,6 +157,40 @@ export default {
                 .then((json) => {
                     this.source = json.koalaInfo;
                 });
+        },
+        postKoalaUpdate() {
+            // 改
+            const apiURL = new URL(`${BASE_URL}/postKoalaUpdate.php`);
+            const koalaUpdate = {
+                koala_id: Number(this.source.koala_id),
+                koala_name: this.source.koala_name,
+                koala_sex: this.source.koala_sex,
+                koala_dob: this.source.koala_dob,
+                koala_listed: Number(this.source.koala_listed),
+                koala_info: this.source.koala_info,
+            };
+            console.log(koalaUpdate);
+            fetch(apiURL, {
+                method: "POST",
+                body: new URLSearchParams(koalaUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    // alert(status.msg);
+                    this.confirmModal();
+                });
+        },
+        confirmModal() {
+            this.$Modal.confirm({
+                title: "訂單備註已修改",
+                content: "<p>訂單備註已修改，是否關閉此分頁？</p>",
+                okText: "是",
+                cancelText: "否",
+                onOk: () => {
+                    this.$Modal.remove();
+                    window.close();
+                },
+            });
         },
     },
     created() {
