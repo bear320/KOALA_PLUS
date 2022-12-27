@@ -88,6 +88,7 @@
                 <ImageEdit
                     ref="imageUpload"
                     :imgs="imgsPath"
+                    :prod_id="this.$route.params.id"
                     @update="updateImgs"
                 ></ImageEdit>
             </div>
@@ -122,7 +123,7 @@ export default {
         send() {
             // if (!this.$refs["prod-form"].checkValidity()) return;
             const formData = new FormData(this.$refs["prod-form"]);
-            console.log(formData.getAll("image[]"));
+            formData.append("prod_id", this.$route.params.id);
             fetch(`${BASE_URL}/postUpdateProduct.php`, {
                 method: "post",
                 body: formData,

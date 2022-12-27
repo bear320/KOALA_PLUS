@@ -6,6 +6,7 @@ const MY_DIR = "shop";
 
 $type = $_POST["type"];
 $index= $_POST["index"];
+$prod_id = $_POST["prod_id"];
 
 $prod_column = "prod_img" . "$index";
 
@@ -92,7 +93,7 @@ if ($type == "insert") {
     }
     if( $_FILES["image"]["error"] === 0){
         try{
-            $reSortSQL = "UPDATE `product` SET `$prod_column`='$fileName' WHERE `prod_id`='5003';";
+            $reSortSQL = "UPDATE `product` SET `$prod_column`='$fileName' WHERE `prod_id`='$prod_id';";
             $reSort =  $pdo->query($reSortSQL);
         }
         catch (PDOException $e) {
@@ -104,11 +105,11 @@ if ($type == "insert") {
 
 
 else if($type=='del'){
-    $delImgSQL = "UPDATE `product` SET `$prod_column`='null' WHERE `prod_id`='5003';";
+    $delImgSQL = "UPDATE `product` SET `$prod_column`='null' WHERE `prod_id`='$prod_id';";
     $delImg =  $pdo->query($delImgSQL);
  
 
-    $sql = "select * from tibamefe_cgd103g1.product where prod_id='5003 '";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_id='$prod_id'";
     $products = $pdo->query($sql);
     $prodRows = $products->fetch(PDO::FETCH_ASSOC);
 
@@ -125,10 +126,10 @@ else if($type=='del'){
     $prod_img4=isset($result[3])?$result[3]:null;
 
     $reSortSQL = "UPDATE `product` SET `prod_img1`='$prod_img1',`prod_img2`='$prod_img2',`prod_img3`='$prod_img3',`prod_img4`='$prod_img4'
-    WHERE `prod_id`='5003';";
+    WHERE `prod_id`='$prod_id';";
     $reSort =  $pdo->query($reSortSQL);
 
-    $sql = "select * from tibamefe_cgd103g1.product where prod_id='5003 '";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_id='$prod_id'";
     $newRows = $pdo->query($sql);
     $prodRows2 = $newRows->fetch(PDO::FETCH_ASSOC);
 

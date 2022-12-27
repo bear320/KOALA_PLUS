@@ -34,7 +34,7 @@
 <script>
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
-    props: ["imgs"],
+    props: ["imgs", "prod_id"],
     data() {
         return {
             imageList: [],
@@ -85,10 +85,11 @@ export default {
                 reader.readAsDataURL(input.files[index]);
             }
             this.showLabel[i] = true;
-
+            console.log(this.prod_id);
             const fd = new FormData(this.$refs["prod-form"]);
             fd.append("type", "insert");
             fd.append("index", `${this.emptyIndex + 1}`);
+            fd.append("prod_id", this.prod_id);
             console.log(fd.getAll("image"));
             fetch(`${BASE_URL}/postUpdateProdImg.php`, {
                 method: "post",
@@ -109,6 +110,7 @@ export default {
                 body: new URLSearchParams({
                     type: "del",
                     index: i + 1,
+                    prod_id: this.prod_id,
                 }),
             })
                 .then((res) => res.json())

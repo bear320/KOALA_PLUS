@@ -72,7 +72,7 @@
                     <router-link to="/bs-product-list">商品管理</router-link>
                 </template>
                 <MenuItem name="7-1">
-                    <router-link to="/bs-product-edit">新增商品</router-link>
+                    <router-link to="/bs-product-add">新增商品</router-link>
                 </MenuItem>
                 <MenuItem name="7-2">
                     <router-link to="/bs-coupon-list">優惠券管理</router-link>
