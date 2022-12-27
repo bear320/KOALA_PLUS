@@ -3,12 +3,17 @@
     <section class="bs-nav-space wrapper title-n-action">
         <div class="title">
             <h1>資助認養管理</h1>
-            <img src="@/assets/images/backstageindex/supportIcon.png" alt="" />
+            <img
+                src="@/assets/images/backstageindex/supportIcon.png"
+                alt="【圖示】資助認養"
+            />
         </div>
         <div class="action">
             <router-link to="bs-support-statistic" target="_blank">
-                <!-- <img src="@/assets/images/icon/stats.svg" alt="" /> -->
-                <img src="@/assets/images/icon/statistic.svg" alt="" />
+                <img
+                    src="@/assets/images/icon/statistic.svg"
+                    alt="【圖示】數據統計"
+                />
             </router-link>
             <div class="search">
                 <input
@@ -51,7 +56,10 @@
                     :to="`/bs-support-info/${order.sup_id}`"
                     target="_blank"
                 >
-                    <img src="@/assets/images/icon/edit.svg" alt="" />
+                    <img
+                        src="@/assets/images/icon/edit.svg"
+                        alt="【圖示】編輯"
+                    />
                 </router-link>
             </p>
         </div>
@@ -108,11 +116,6 @@ export default {
             const apiURL = new URL(`${BASE_URL}/getSupportList.php`);
             const searchParam = new URLSearchParams(queryParam);
             apiURL.search = searchParam;
-            // ?page=${this.currentPage}&sort=${this.sort}&search=3002
-            // console.log(queryParam);
-            // const apiURL = new URL(
-            //     `http://localhost:8888/cgd103_g1/public/api/getSupportList.php?limit=10&page=${this.currentPage}`
-            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {

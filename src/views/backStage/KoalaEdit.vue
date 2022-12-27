@@ -3,7 +3,10 @@
     <section class="bs-nav-space wrapper title-wrapper">
         <div class="title">
             <h1>無尾熊管理</h1>
-            <img src="@/assets/images/backstageindex/koalaIcon.png" alt="" />
+            <img
+                src="@/assets/images/backstageindex/koalaIcon.png"
+                alt="【圖示】無尾熊"
+            />
         </div>
         <div class="sub-title">
             <h2>編輯無尾熊</h2>
@@ -114,7 +117,10 @@
         <div class="line">
             <div class="cell">
                 <button class="btn-paramy">
-                    <img src="@/assets/images/icon/confirm.svg" alt="" />確認
+                    <img
+                        src="@/assets/images/icon/confirm.svg"
+                        alt="【圖示】確認"
+                    />確認
                 </button>
             </div>
         </div>

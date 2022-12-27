@@ -3,7 +3,10 @@
     <section class="bs-nav-space wrapper title-wrapper">
         <div class="title">
             <h1>資助認養管理</h1>
-            <img src="@/assets/images/backstageindex/supportIcon.png" alt="" />
+            <img
+                src="@/assets/images/backstageindex/supportIcon.png"
+                alt="【圖示】資助認養"
+            />
         </div>
         <div class="sub-title">
             <h2>資助認養詳情</h2>
@@ -99,7 +102,10 @@
         <div class="line">
             <div class="cell">
                 <button class="btn-paramy" @click.prevent="postSupportUpdate">
-                    <img src="@/assets/images/icon/confirm.svg" alt="" />確認
+                    <img
+                        src="@/assets/images/icon/confirm.svg"
+                        alt="【圖示】確認"
+                    />確認
                 </button>
             </div>
         </div>
@@ -126,9 +132,6 @@ export default {
             const apiURL = new URL(
                 `${BASE_URL}/getSupportInfo.php?supportId=${supportId}`
             );
-            // const apiURL = new URL(
-            //     `http://localhost:8888/cgd103_g1/public/api/getSupportInfo.php?supportId=${supportId}`
-            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -136,14 +139,11 @@ export default {
                 });
         },
         postSupportUpdate() {
-            const supportId = this.$route.params.sup_id;
-            console.log(supportId);
             const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
             const supportUpdate = {
                 sup_id: Number(this.source.sup_id),
                 sup_note: this.source.sup_note,
             };
-            console.log(supportUpdate);
 
             fetch(apiURL, {
                 method: "POST",
@@ -152,9 +152,6 @@ export default {
                 .then((res) => res.json())
                 .then((status) => {
                     // alert(status.msg);
-                    // if (confirm("是否關閉此分頁？")) {
-                    //     window.close();
-                    // }
                     this.confirmModal();
                 });
         },

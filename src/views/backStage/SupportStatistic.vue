@@ -3,7 +3,10 @@
     <section class="bs-nav-space wrapper title-wrapper">
         <div class="title">
             <h1>資助認養管理</h1>
-            <img src="@/assets/images/backstageindex/supportIcon.png" alt="" />
+            <img
+                src="@/assets/images/backstageindex/supportIcon.png"
+                alt="【圖示】資助認養"
+            />
         </div>
         <div class="sub-title">
             <h2>數據統計 - 資助所有無尾熊</h2>
@@ -78,26 +81,6 @@
                     />
                 </TabPane>
             </Tabs>
-            <br />
-            <!-- 分隔線 -->
-            <!-- <select name="adoptStat" id="adoptStat" v-model="koalaSelect">
-                <option
-                    :value="koalaOpt.koala_name"
-                    v-for="(koalaOpt, index) in source.adoptNameStat"
-                    :key="index"
-                >
-                    {{ koalaOpt.koala_name }}
-                </option>
-            </select>
-            <div
-                v-for="(koalaChart, index) in source.adoptNameStat"
-                v-show="koalaSelect === koalaChart.koala_name"
-                :key="index"
-                class="chart-wrapper"
-            >
-                <h3>{{ koalaChart.koala_name }}</h3>
-                <Line v-if="loaded" :data="temp" :options="options" />
-            </div> -->
         </div>
     </section>
 </template>
@@ -391,108 +374,12 @@ export default {
             options: {
                 responsive: true,
             },
-            // temp: {
-            //     labels: ["上上月", "上月", "本月"],
-            //     datasets: [
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //         {
-            //             label: "",
-            //             data: [],
-            //             borderColor: "#33717d",
-            //             backgroundColor: "#9abdbf",
-            //             pointStyle: "circle",
-            //             pointRadius: 10,
-            //             pointHoverRadius: 15,
-            //             cubicInterpolationMode: "monotone",
-            //             tension: 0.4,
-            //         },
-            //     ],
-            // },
-            // source: [],
-            // koalaSelect: "Zeus",
         };
     },
     async mounted() {
         this.loaded = false;
 
         try {
-            // `http://localhost:8888/cgd103_g1/public/api/getSupStat.php`
             await fetch(`${BASE_URL}/getSupStat.php`)
                 .then((res) => res.json())
                 .then((json) => {
@@ -516,36 +403,9 @@ export default {
                     });
                 });
 
-            // `http://localhost:8888/cgd103_g1/public/api/getAdoptStat.php`
             await fetch(`${BASE_URL}/getAdoptStat.php`)
                 .then((res) => res.json())
                 .then((json) => {
-                    // this.source = json;
-                    // 總覽
-                    // this.temp["datasets"][0]["label"] =
-                    //     json.adoptNameStat[0].koala_name;
-                    // this.temp["datasets"][0]["data"] = json.adoptStat[0];
-                    // this.temp["datasets"][1]["label"] =
-                    //     json.adoptNameStat[1].koala_name;
-                    // this.temp["datasets"][1]["data"] = json.adoptStat[1];
-                    // this.temp["datasets"][2]["label"] =
-                    //     json.adoptNameStat[2].koala_name;
-                    // this.temp["datasets"][2]["data"] = json.adoptStat[2];
-                    // this.temp["datasets"][3]["label"] =
-                    //     json.adoptNameStat[3].koala_name;
-                    // this.temp["datasets"][3]["data"] = json.adoptStat[3];
-                    // this.temp["datasets"][4]["label"] =
-                    //     json.adoptNameStat[4].koala_name;
-                    // this.temp["datasets"][4]["data"] = json.adoptStat[4];
-                    // this.temp["datasets"][5]["label"] =
-                    //     json.adoptNameStat[5].koala_name;
-                    // this.temp["datasets"][5]["data"] = json.adoptStat[5];
-                    // this.temp["datasets"][6]["label"] =
-                    //     json.adoptNameStat[6].koala_name;
-                    // this.temp["datasets"][6]["data"] = json.adoptStat[6];
-                    // this.temp["datasets"][7]["label"] =
-                    //     json.adoptNameStat[7].koala_name;
-                    // this.temp["datasets"][7]["data"] = json.adoptStat[7];
                     // All
                     this.dataAdopt[0].All["datasets"][0]["label"] =
                         json.adoptNameStat[0].koala_name;
@@ -623,7 +483,7 @@ export default {
 
             this.loaded = true;
         } catch (e) {
-            console.error(e);
+            // console.error(e);
         }
     },
 };

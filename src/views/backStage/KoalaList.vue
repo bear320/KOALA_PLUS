@@ -3,11 +3,17 @@
     <section class="bs-nav-space wrapper title-n-action">
         <div class="title">
             <h1>無尾熊管理</h1>
-            <img src="@/assets/images/backstageindex/koalaIcon.png" alt="" />
+            <img
+                src="@/assets/images/backstageindex/koalaIcon.png"
+                alt="【圖示】無尾熊"
+            />
         </div>
         <div class="action">
             <router-link to="bs-koala-add" target="_blank">
-                <img src="@/assets/images/icon/FilePlus.svg" alt="" />
+                <img
+                    src="@/assets/images/icon/FilePlus.svg"
+                    alt="【圖示】新增"
+                />
             </router-link>
             <div class="search">
                 <input
@@ -70,7 +76,10 @@
                     :to="`/bs-koala-edit/${koala.koala_name}`"
                     target="_blank"
                 >
-                    <img src="@/assets/images/icon/edit.svg" alt="" />
+                    <img
+                        src="@/assets/images/icon/edit.svg"
+                        alt="【圖示】編輯"
+                    />
                 </router-link>
             </p>
         </div>
@@ -205,8 +214,6 @@ export default {
             });
         },
         switchListed(index) {
-            // console.log(this.source[index].koala_id);
-            // console.log(this.source[index].koala_listed);
             const koalaId = this.source[index].koala_id;
             const koalaListed = this.source[index].koala_listed;
             const apiURL = new URL(`${BASE_URL}/postKoalaListed.php`);
@@ -214,7 +221,6 @@ export default {
                 koala_id: Number(koalaId),
                 koala_listed: Number(koalaListed),
             };
-            console.log(postKoalaListed);
 
             fetch(apiURL, {
                 method: "POST",
