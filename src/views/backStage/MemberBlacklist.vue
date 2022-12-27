@@ -32,7 +32,7 @@
                         true-color="#337a7d"
                         :true-value="1"
                         :false-value="0"
-                        v-model="item.mem_state"
+                        v-model.number="item.mem_state"
                         :disabled="disabled"
                     >
                         <template #open>
@@ -68,12 +68,16 @@ export default {
             fetch(apiURL, { credentials: "include" })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
-
+                    // console.log(json);
                     this.memindexs = json.prodRows.filter((item) => {
-                        return item.mem_state === "1";
+                        item.mem_state = parseInt(item.mem_state);
+                        item.mem_mob = "收機啦" + item.mem_mob;
+                        // if (item.mem_state == 1) return true;
+                        if (item.mem_state != 0) return true;
+                        // return item.mem_state == "1";
                     });
-                    console.log("prodRows.item.mem_state");
+
+                    // console.log(this.memindexs);
                 });
         },
     },
