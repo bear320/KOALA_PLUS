@@ -99,6 +99,7 @@ $size-s: 295px;
                 width: 100%;
                 aspect-ratio: 1 / 1;
                 flex-shrink: 0;
+                background-color: #fff;
             }
         }
         .buttons {
@@ -163,6 +164,7 @@ $size-s: 295px;
             border-radius: $b-radius;
             outline: 1px solid lighten($darkgreen, 50%);
             cursor: pointer;
+            background-color: #fff;
         }
     }
 }
