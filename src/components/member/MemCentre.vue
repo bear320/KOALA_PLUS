@@ -31,6 +31,7 @@
                             myfield="mem_account"
                             v-model="memindexs.mem_account"
                             ref="mem_account"
+                            @keyup="reg_emailType"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -41,6 +42,7 @@
                             myfield="mem_mob"
                             v-model="memindexs.mem_mob"
                             ref="mem_mob"
+                            @keyup="reg_phoneType2"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -257,6 +259,12 @@ export default {
                     .then((res) => res.json())
                     .then((status) => {
                         alert(status.msg);
+                        status.$Notice.open({
+                            title: "Notification title",
+                            desc: nodesc
+                                ? ""
+                                : "Here is the notification description. Here is the notification description. ",
+                        });
                     });
                 if (this.passwordcheck != "") {
                     // alert("有輸入內容");
@@ -264,6 +272,12 @@ export default {
                         // alert("相同");
                     } else {
                         alert("密碼不相同");
+                        this.$Notice.open({
+                            title: "Notification title",
+                            desc: nodesc
+                                ? ""
+                                : "Here is the notification description. Here is the notification description. ",
+                        });
                     }
                 } else {
                     // alert("密碼不可為空白");
@@ -374,6 +388,44 @@ export default {
 
         outEye_3: function () {
             this.seen_three = !this.seen_three;
+        },
+        // =============
+        mod_open(nodesc) {
+            this.$Notice.open({
+                title: "提醒電話號碼格式錯誤",
+                desc: nodesc ? "" : "請確認電話號碼格式是否正確且完整填寫！",
+            });
+        },
+        email_open(nodesc) {
+            this.$Notice.open({
+                title: "提醒email格式錯誤",
+                desc: nodesc ? "" : "請確認email格式是否正確且完整填寫！",
+            });
+        },
+        // =============
+        // ================正則
+
+        reg_phoneType2() {
+            let mem_mod_val = this.$refs.mem_mob.value;
+            const validate = /^09[0-9]{8}$/;
+            let res = validate.test(mem_mod_val);
+            // console.log(res);
+            if (res) {
+            } else {
+                // alert("手機格式錯誤");
+                this.mod_open(false);
+            }
+        },
+        reg_emailType() {
+            let mem_account_val = this.$refs.mem_account.value;
+            const validate = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            let res = validate.test(mem_account_val);
+            console.log(res);
+            if (res) {
+            } else {
+                // alert("手機格式錯誤");
+                this.email_open(false);
+            }
         },
     },
     created() {
