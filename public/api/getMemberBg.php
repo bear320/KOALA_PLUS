@@ -1,25 +1,14 @@
 <?php 
 /**
- * 查詢"後台"會員接口    
- * 接 MemberBlacklist.vue
+ * 查詢會員接口
+ * 接 components / MemCentre.vue
 */
 
 //header設置
 require_once("./headerUse.php");
 //驗證登入
-
-// $headerCookies = explode('; ', getallheaders()['Cookie']);
-// $cookies = array();
-// foreach($headerCookies as $itm) {
-//     list($key, $val) = explode('=', $itm, 2);
-//     $cookies[$key] = $val;
-// }
-// $getSessionId = $cookies["PHPSESSID"]??"";
-// session_id($getSessionId);
-// session_start();
-// $getUser = $_SESSION??[];
+// require_once("./verifyFrontLogin.php");
 //DB連線設置
-
 require_once("./connect_cgd103g1.php");
 
 $resDate = [
@@ -46,13 +35,6 @@ if(!empty($limit) && !empty($page)){
     $offset = ($page - 1) * $limit;
 }
 
-$sql = "select * from tibamefe_cgd103g1.member order by mem_id DESC";
-
-$news = $pdo->query($sql);
-$newsRows = $news->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($newsRows);
-
-
 /*  */
 
 if ( $type == "front" && empty($getUser) ) {
@@ -62,23 +44,23 @@ if ( $type == "front" && empty($getUser) ) {
 
 switch( $type ){
     case "front":
-        // $userid = $getUser["mem_id"];
-        // //如果id不是空值 執行以下
-        // $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE mem_id = {$userid}";
-        // $members = $pdo->query($sql);
-        // $prodRows = $members->fetch(PDO::FETCH_ASSOC);
-        // echo json_encode(["status"=>true,"list"=>$prodRows,'session_id'=>session_id()]);
-        // return true;
-        // break;
+        $userid = $getUser["mem_id"];
+        //如果id不是空值 執行以下
+        $sql = "SELECT * FROM tibamefe_cgd103g1.member WHERE mem_id = {$userid}";
+        $members = $pdo->query($sql);
+        $prodRows = $members->fetch(PDO::FETCH_ASSOC);
+        echo json_encode(["status"=>true,"list"=>$prodRows,'session_id'=>session_id()]);
+        return true;
+        break;
     case "admin":
-        // 【下列為 後台會員 搜尋功能】
+        //【下列為 後台會員 搜尋功能】
         $whereStr = "";
         if (!empty($search_mem_name)){
             $whereStr .= "AND mem_name LIKE '%{$search_mem_name}%' ";  
             // $whereStr = $whereStr."xxxx"
         }
 
-        // 【下列為 後台會員 排序相關功能：】
+        //【下列為 後台會員 排序相關功能：】
         $orderbyInfo = [
             1=> ["mem_id","ASC"], //會員編號（正序）
             2=> ["mem_id","DESC"], //會員編號（反序）
@@ -106,6 +88,34 @@ switch( $type ){
         $countSQL = "SELECT * FROM tibamefe_cgd103g1.member WHERE 1 {$whereStr} {$orderStr}";
         $countQuery = $pdo->query($countSQL);
         $count = $countQuery->fetchAll(PDO::FETCH_ASSOC);
+
+
+        // LIMIT {$limit} OFFSET {$offset} ------------------------
+        
+        // var_dump($black_stateid,$black_state);die();
+        // $black_stateid= 1001;
+        // $black_state=1;
+
+        //【下列為 後台會員 黑名單switch滑塊變更資料庫的相關功能】
+
+
+        // $upSql = "UPDATE tibamefe_cgd103g1.member SET mem_state = '{$black_state}' WHERE mem_id = '{$mem_id}' ";
+
+        // try {
+        //     $res = $pdo->query( $upSql );
+        //     if( $res ){
+        //         $resDate["status"] = 1;
+        //         $resDate["msg"] = '黑名單狀態已切換';
+        //     }
+        //     echo json_encode( $resDate );
+        //     return true;
+        
+        // } catch (Exception $e) {
+        //     $resDate["msg"] = $e->getMessage();
+        //     echo json_encode( $resDate );
+        //     return true;
+        // }
+
 
         //【下列為 後台list 抓取所有會員的明細功能】
         $members = $pdo->query($sql);
