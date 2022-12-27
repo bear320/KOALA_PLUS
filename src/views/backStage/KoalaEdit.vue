@@ -159,7 +159,6 @@ export default {
                 });
         },
         postKoalaUpdate() {
-            // 改
             const apiURL = new URL(`${BASE_URL}/postKoalaUpdate.php`);
             const koalaUpdate = {
                 koala_id: Number(this.source.koala_id),
@@ -169,7 +168,6 @@ export default {
                 koala_listed: Number(this.source.koala_listed),
                 koala_info: this.source.koala_info,
             };
-            console.log(koalaUpdate);
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(koalaUpdate),
