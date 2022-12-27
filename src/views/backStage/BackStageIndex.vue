@@ -111,7 +111,6 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    // console.log(json);
                     this.orderCount = json[0]["all"];
                     this.monthlyOrders = json[1]["m"];
                 });

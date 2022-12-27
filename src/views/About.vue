@@ -41,7 +41,7 @@
             <div class="slider">
                 <div class="slide-track">
                     <div class="slide" v-for="cc in imgs" :key="cc">
-                        <img :src="cc.url" />
+                        <img :src="cc.url" alt="KOALA+救援行動" />
                     </div>
                 </div>
             </div>
@@ -113,6 +113,7 @@
                                     :src="
                                         require(`@/assets/images/about/${article.news_img}`)
                                     "
+                                    alt="公告圖片"
                                 />
                             </template>
                             <template #article-title>
@@ -169,6 +170,7 @@
                                 :src="
                                     require(`@/assets/images/about/${article.news_img}`)
                                 "
+                                alt="公告圖片"
                             />
                         </template>
                         <template #article-title>
@@ -305,9 +307,7 @@ export default {
     methods: {
         choose() {
             let tag = document.getElementById("selectCategory").value;
-            console.log(tag);
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
-            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -322,7 +322,6 @@ export default {
         },
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
-            // fetch("http://localhost/cgd103_g1/public/api/getArticleList.php")
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
@@ -330,7 +329,6 @@ export default {
                     this.uploaded = this.articles.filter((article) => {
                         return article.news_status == "1";
                     });
-                    console.log(uploaded);
                 });
         },
         openLightbox(idx) {
