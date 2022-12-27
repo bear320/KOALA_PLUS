@@ -71,7 +71,6 @@ export default {
                     // console.log(json);
                     this.memindexs = json.prodRows.filter((item) => {
                         item.mem_state = parseInt(item.mem_state);
-                        item.mem_mob = "收機啦" + item.mem_mob;
                         // if (item.mem_state == 1) return true;
                         if (item.mem_state != 0) return true;
                         // return item.mem_state == "1";
