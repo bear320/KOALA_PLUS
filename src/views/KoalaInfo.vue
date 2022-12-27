@@ -268,7 +268,7 @@ export default {
                 }
 
                 let prime = result.card.prime;
-                console.log(prime);
+                // console.log(prime);
                 this.submitPrime(prime);
             });
         },
@@ -278,7 +278,7 @@ export default {
                 const mem_id = this.$store.state.user.mem_id;
 
                 // 要把得到的Prime Token 送給後端,
-                console.log("交易進行中");
+                // console.log("交易進行中");
                 let payReslut = await fetch(
                     `${BASE_URL}/tappaySupport.php?prime=${prime}`,
                     {
@@ -295,14 +295,14 @@ export default {
                 let resText = await payReslut.json();
                 // 這邊再把他轉為json物件
                 let payStatus = JSON.parse(resText);
-                console.log(payStatus);
+                // console.log(payStatus);
 
                 if (payStatus.status === 0) {
-                    console.log("付款成功");
+                    // console.log("付款成功");
                     this.isTrading = false;
                     this.isDone = true;
                 } else {
-                    console.log("付款失敗");
+                    // console.log("付款失敗");
                 }
             } catch (err) {
                 // console.log(err);
@@ -401,10 +401,10 @@ export default {
         TPDirect.card.onUpdate((update) => {
             if (update.canGetPrime) {
                 //全部欄位皆為正確 可以呼叫 getPrime
-                console.log("付款資訊完整且正確");
+                // console.log("付款資訊完整且正確");
                 this.CardInfoFilled = true;
             } else {
-                console.log("付款資訊不完整或有誤");
+                // console.log("付款資訊不完整或有誤");
                 this.CardInfoFilled = false;
             }
         });
