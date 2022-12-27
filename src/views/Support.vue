@@ -34,7 +34,7 @@
                 </h4>
             </div>
             <div class="img">
-                <img src="../assets/images/drawing6.png" alt="" />
+                <img src="../assets/images/drawing6.png" alt="【裝飾】無尾熊" />
             </div>
         </div>
     </section>
@@ -64,7 +64,7 @@
         </div>
     </section>
     <section class="wrapper bg-img">
-        <img src="../assets/images/drawing7.png" alt="" />
+        <img src="../assets/images/drawing7.png" alt="【裝飾】尤加利葉" />
     </section>
     <Footer></Footer>
 </template>

@@ -9,7 +9,10 @@
                 <h4>方案內容：</h4>
                 <li>領養 / 資助證明 * 1</li>
                 <li>
-                    <img src="../../assets/images/support/coin.svg" alt="" />
+                    <img
+                        src="../../assets/images/support/coin.svg"
+                        alt="會員點數"
+                    />
                     {{ pPoint }}
                     點
                 </li>
@@ -36,7 +39,15 @@ export default {
         "pBtn",
         "index",
         "supKoalaId",
-    ],        clickToPay(i) {
+    ],
+    data() {
+        return {
+            type: 0,
+            koala_id: 0,
+        };
+    },
+    methods: {
+        clickToPay(i) {
             if (this.$store.state.user == null) {
                 this.open(false);
                 return;
@@ -50,7 +61,6 @@ export default {
                             id: this.koala_id,
                         });
                         break;
-
                     case 1:
                         this.type = 1;
                         this.koala_id = +this.supKoalaId;
@@ -59,7 +69,6 @@ export default {
                             id: this.koala_id,
                         });
                         break;
-
                     default:
                         break;
                 }
@@ -73,14 +82,6 @@ export default {
                     : `需先登入會員方可進行資助／認養，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`,
             });
         },
-    data() {
-        return {
-            type: 0,
-            koala_id: 0,
-        };
-    },
-    methods: {
-
     },
 };
 </script>

@@ -227,22 +227,22 @@ export default {
             switch (field) {
                 case 0:
                     //欄位已填好，並且沒有問題
-                    console.log("field is ok");
+                    // console.log("field is ok");
                     break;
                 case 1:
                     //欄位還沒有填寫
-                    console.log("field is empty");
+                    // console.log("field is empty");
                     break;
                 case 2:
                     //欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor
-                    console.log("field has error");
+                    // console.log("field has error");
                     break;
                 case 3:
                     //使用者正在輸入中
-                    console.log("usertyping");
+                    // console.log("usertyping");
                     break;
                 default:
-                    console.log("error!");
+                // console.log("error!");
             }
         },
 
@@ -261,12 +261,12 @@ export default {
             TPDirect.card.getPrime((result) => {
                 if (result.status !== 0) {
                     // get prime error
-                    console.log(result.msg);
+                    // console.log(result.msg);
                     return;
                 }
 
                 let prime = result.card.prime;
-                console.log(prime);
+                // console.log(prime);
                 this.submitPrime(prime);
             });
         },
@@ -276,7 +276,7 @@ export default {
                 const mem_id = this.$store.state.user.mem_id;
 
                 // 要把得到的Prime Token 送給後端,
-                console.log("交易進行中");
+                // console.log("交易進行中");
                 let payReslut = await fetch(
                     `${BASE_URL}/tappaySupport.php?prime=${prime}`,
                     {
@@ -293,24 +293,23 @@ export default {
                 let resText = await payReslut.json();
                 // 這邊再把他轉為json物件
                 let payStatus = JSON.parse(resText);
-                console.log(payStatus);
+                // console.log(payStatus);
 
                 if (payStatus.status === 0) {
-                    console.log("付款成功");
+                    // console.log("付款成功");
                     this.isTrading = false;
                     this.isDone = true;
                 } else {
-                    console.log("付款失敗");
+                    // console.log("付款失敗");
                 }
             } catch (err) {
-                console.log(err);
+                // console.log(err);
             }
         },
         showPayBox({ type, id }) {
             this.$refs["closeBtn"].style.display = "flex";
             this.supType = type;
             this.koalaId = id;
-            console.log(type, id);
         },
         closePayBox() {
             this.$refs["closeBtn"].style.display = "none";
@@ -400,10 +399,10 @@ export default {
         TPDirect.card.onUpdate((update) => {
             if (update.canGetPrime) {
                 //全部欄位皆為正確 可以呼叫 getPrime
-                console.log("已填滿");
+                // console.log("已填滿");
                 this.CardInfoFilled = true;
             } else {
-                console.log("尚未填滿");
+                // console.log("尚未填滿");
                 this.CardInfoFilled = false;
             }
         });
