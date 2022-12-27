@@ -99,22 +99,21 @@
                     <span v-if="questionIndex < 4">下一題</span>
                     <span v-else>送出</span>
                 </div>
+                <div class="discount" v-if="questionIndex === 5 && score === 5">
+                    恭喜您獲得優惠卷： {{ coupon_code }} {{ coupon_name }}
+                    <!-- {{  CouponId === "4001" == "01" }} -->
+                    <p v-if="CouponId === '4001'">95折價券</p>
+                    <p v-else-if="CouponId === '4002'">9折價券</p>
+                    <p v-else-if="CouponId === '4003'">85折價券</p>
+                </div>
+                <div class="score">
+                    <span v-if="questionIndex < 5"></span>
+                    <span v-else>得分 : {{ score }} 分</span>
+                </div>
             </form>
-            <div class="discount" v-if="questionIndex === 5 && score === 5">
-                恭喜您獲得優惠卷： {{ coupon_code }} {{ coupon_name }}
-                <!-- {{  CouponId === "4001" == "01" }} -->
-                <p v-if="CouponId === '4001'">95折價券</p>
-                <p v-else-if="CouponId === '4002'">9折價券</p>
-                <p v-else-if="CouponId === '4003'">85折價券</p>
-            </div>
-            <div class="score">
-                <span v-if="questionIndex < 5"></span>
-                <span v-else>得分 : {{ score }} 分</span>
-            </div>
         </div>
     </div>
     <div>
-        <div class="mask" v-if="showModal" @click="showModal = true"></div>
         <div class="pop" v-if="showModal">
             <h3>回答小測驗 登入後贏得優惠券</h3>
             <p>＊登入後作答 才能獲得優惠卷！</p>
@@ -365,47 +364,33 @@ body h1 {
 .discount {
     margin-top: 20px;
 }
-.mask {
-    background-color: #000;
-    opacity: 0.3;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 1;
-}
+
 .pop {
-    display: flex;
-    flex-direction: column;
     justify-content: center;
     background-color: #fbfef9;
     border-radius: 5px;
-    position: fixed;
-    top: 100px;
-    left: 300px;
-    width: calc(100% - 600px);
-    height: calc(100% - 400px);
-    z-index: 2;
-    img {
-        width: 50%;
-        margin: auto;
-        -webkit-filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
-        filter: drop-shadow(12px 12px 7px rgba(0, 0, 0, 0.7));
-    }
-    p {
-        margin-top: 50px;
-    }
-    h3 {
-        margin-top: 50px;
-        font-size: 48px;
+    position: absolute;
+    top: 1850px;
+    box-shadow: 2px 2px 10px;
+    left: 400px;
+    width: calc(100% - 800px);
+    height: 300px;
+    z-index: 1;
+    @include m() {
+        top: 1000px;
+        left: 20px;
+        width: calc(100% - 40px);
+        height: 200px;
     }
 }
-// .btn {
-//     padding: 4px 20px;
-//     bottom: 0;
-//     margin-bottom: 50px;
-// }
+p {
+    margin-top: 50px;
+}
+h3 {
+    margin-top: 50px;
+    font-size: 48px;
+}
+
 .btn1 {
     width: 250px;
     margin: auto;
