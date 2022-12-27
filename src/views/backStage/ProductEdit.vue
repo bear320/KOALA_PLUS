@@ -11,20 +11,27 @@
     </section>
     <form
         class="wrapper function-wrapper"
-        action=""
         enctype="multipart/form-data"
+        ref="prod-form"
     >
         <div class="line">
             <div class="cell">
-                <label for="prod-name">商品名稱：</label>
-                <input type="text" name="prod-name" id="prod-name" required />
+                <label for="prod_name">商品名稱：</label>
+                <input
+                    type="text"
+                    name="prod_name"
+                    id="prod_name"
+                    v-model="product.prod_name"
+                    required
+                />
             </div>
             <div class="cell">
                 <label for="prod-category">商品分類</label>
                 <select
                     type="text"
-                    name="prod-category"
-                    id="prod-category"
+                    name="prod_category"
+                    id="prod_category"
+                    v-model="product.prod_category"
                     required
                 >
                     <option value="daily">生活小物</option>
@@ -33,33 +40,41 @@
                 </select>
             </div>
             <div class="cell">
-                <label for="prod-price">單價：</label>
-                <input type="text" name="prod-price" id="prod-price" required />
+                <label for="prod_price">單價：</label>
+                <input
+                    type="text"
+                    name="prod_price"
+                    id="prod_price"
+                    v-model="product.prod_price"
+                    required
+                />
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <label for="prod-listed">上 / 下架：</label>
+                <label for="prod_listed">上 / 下架：</label>
                 <select
                     type="text"
-                    name="prod-listed"
-                    id="prod-listed"
+                    name="prod_listed"
+                    id="prod_listed"
+                    v-model.number="product.prod_listed"
                     required
                 >
-                    <option value="1">上架</option>
-                    <option value="0">下架</option>
+                    <option :value="1">上架</option>
+                    <option :value="0">下架</option>
                 </select>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <label for="prod-desc">描述：</label>
+                <label for="prod_info">描述：</label>
                 <textarea
-                    name="prod-desc"
-                    id="prod-desc"
+                    name="prod_info"
+                    id="prod_info"
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
+                    v-model="product.prod_info"
                     required
                 ></textarea>
             </div>
@@ -70,12 +85,16 @@
                     新增圖片：
                     <span>* 請至少上傳一張圖片，數量上限為四張</span>
                 </h4>
-                <ImageUpload></ImageUpload>
+                <ImageEdit
+                    ref="imageUpload"
+                    :imgs="imgsPath"
+                    @update="updateImgs"
+                ></ImageEdit>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" @click.prevent="send">
                     <img src="@/assets/images/icon/confirm.svg" alt="" />確認
                 </button>
             </div>
@@ -85,17 +104,61 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
-import ImageUpload from "@/components/backStage/ImageUpload.vue";
+import ImageEdit from "@/components/backStage/ImageEdit.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 
 export default {
     components: {
         Header,
-        ImageUpload,
+        ImageEdit,
     },
     data() {
         return {
-            temp: [],
+            product: {},
+            imgsPath: [],
         };
+    },
+    methods: {
+        send() {
+            // if (!this.$refs["prod-form"].checkValidity()) return;
+            const formData = new FormData(this.$refs["prod-form"]);
+            console.log(formData.getAll("image[]"));
+            fetch(`${BASE_URL}/postUpdateProduct.php`, {
+                method: "post",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                });
+        },
+        updateImgs(payload) {
+            console.log(payload);
+            this.imgsPath = payload.map((img, index) => {
+                return {
+                    pathID: index,
+                    path: `../images/shop/${img}`,
+                };
+            });
+        },
+    },
+    async created() {
+        const res = await fetch(
+            `${BASE_URL}/getProductDetail.php?proId=${this.$route.params.id}`
+        );
+
+        const result = await res.json();
+        this.product = result.prod_detail;
+        this.imgsPath = this.product.images
+            .filter((item) => {
+                return item !== "";
+            })
+            .map((img, index) => {
+                return {
+                    pathID: index,
+                    path: `../images/shop/${img}`,
+                };
+            });
     },
 };
 </script>
@@ -171,6 +234,20 @@ export default {
             width: 100%;
             textarea {
                 resize: none;
+            }
+        }
+    }
+    .line:nth-child(4) {
+        .cell {
+            width: 100%;
+            h4 {
+                margin-bottom: 10px;
+                span {
+                    color: lighten($font-color, 30%);
+                    font-size: 1rem;
+                    margin-left: 10px;
+                    text-decoration: underline;
+                }
             }
         }
     }

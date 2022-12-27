@@ -1,25 +1,27 @@
 <template>
     <div class="upload-wrapper">
-        <input
-            type="file"
-            accept="image/*"
-            multiple="multiple"
-            id="uploadImages"
-            style="display: none"
-            @change="showImages"
-        />
-        <template v-if="previewList.length">
-            <div v-for="item in previewList" :key="item.id" class="upImage">
-                <div class="bgBlock">
-                    <Icon
-                        type="ios-trash-outline"
-                        @click="deleteImage(item)"
-                    ></Icon>
-                </div>
-                <img :src="item" />
+        <form enctype="multipart/form-data" ref="prod-form">
+            <input
+                type="file"
+                accept="image/*"
+                id="uploadImages"
+                style="display: none"
+                name="image"
+                ref="imgInput"
+                @change="showImages(index)"
+            />
+        </form>
+
+        <div v-for="(item, index) in imgs" :key="item.pathID" class="upImage">
+            <div class="bgBlock">
+                <Icon
+                    type="ios-trash-outline"
+                    @click="deleteImage(item, index)"
+                ></Icon>
             </div>
-        </template>
-        <label for="uploadImages" v-show="uploadShow">
+            <img :src="item.path" />
+        </div>
+        <label for="uploadImages" v-show="!imgAllFilled">
             <img
                 src="@/assets/images/addImage.svg"
                 alt="上傳圖片"
@@ -30,53 +32,94 @@
 </template>
 
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
+    props: ["imgs"],
     data() {
         return {
             imageList: [],
-            previewList: [],
-            uploadShow: true,
+            previewList: this.imgs,
+            showLabel: [],
+            editItem: [],
         };
     },
-    methods: {
-        showImages(e) {
-            // 限制上傳圖片數量
-            let uploadImages = document.getElementById("uploadImages");
-            if (
-                uploadImages.files.length > 4 ||
-                this.imageList.length + uploadImages.files.length > 4
-            ) {
-                alert("超過上傳數量限制！");
-                return;
-            }
 
+    computed: {
+        // 檢查圖片位址為空的位址
+        emptyIndex() {
+            return this.imgs.length;
+        },
+        // 當圖片上傳至四張時就不會顯示上傳的Label
+        imgAllFilled() {
+            return this.imgs.length >= 4;
+        },
+    },
+
+    methods: {
+        Clear() {
+            this.$refs.imgInput.forEach((element) => {
+                element.value = "";
+            });
+            this.imageList = [];
+        },
+        showImages(i) {
             // 預覽上傳圖片
-            let input = e.target;
-            let count = input.files.length;
+            let input = this.$refs.imgInput;
             let index = 0;
             if (input.files) {
-                while (count--) {
-                    var reader = new FileReader();
-                    this.imageList.push(input.files[index]);
-                    reader.onload = (event) => {
-                        this.previewList.push(event.target.result);
-                    };
-                    reader.readAsDataURL(input.files[index]);
-                    index++;
-                }
+                var reader = new FileReader();
+                // 檢查imageList是否有重複檔名的圖片
+                let isRepeat = this.imageList.some(
+                    (item) => item.name === input.files[index].name
+                );
+                // 有的話直接返回
+                if (isRepeat) return;
+                this.imageList.push(input.files[index]);
+                reader.onload = (event) => {
+                    this.imgs.push({
+                        pathID: this.editItem[0],
+                        path: event.target.result,
+                    });
+                    this.editItem.shift();
+                };
+                reader.readAsDataURL(input.files[index]);
             }
+            this.showLabel[i] = true;
+
+            const fd = new FormData(this.$refs["prod-form"]);
+            fd.append("type", "insert");
+            fd.append("index", `${this.emptyIndex + 1}`);
+            console.log(fd.getAll("image"));
+            fetch(`${BASE_URL}/postUpdateProdImg.php`, {
+                method: "post",
+                body: fd,
+            })
+                .then((res) => res.json())
+                .then((json) => console.log(json));
         },
-        deleteImage(file) {
-            this.previewList.splice(this.previewList.indexOf(file), 1);
-            this.imageList.splice(this.previewList.indexOf(file), 1);
-            this.countImages();
-        },
-        countImages() {
-            if (this.imageList.length > 4 || this.imageList.length == 4) {
-                this.uploadShow = false;
-            } else {
-                this.uploadShow = true;
-            }
+
+        deleteImage(file, i) {
+            this.showLabel[i] = false;
+
+            this.$refs.imgInput.value = "";
+            this.imageList.splice(this.imageList.indexOf(file), 1);
+            this.imgs.splice(this.imgs.indexOf(file), 1);
+            fetch(`${BASE_URL}/postUpdateProdImg.php`, {
+                method: "post",
+                body: new URLSearchParams({
+                    type: "del",
+                    index: i + 1,
+                }),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    this.$emit(
+                        "update",
+                        json.filter((item) => {
+                            return item !== "";
+                        })
+                    );
+                });
         },
     },
     created() {

@@ -273,7 +273,7 @@ const routes = [
         meta: { title: "新增商品" },
     },
     {
-        path: "/bs-product-edit",
+        path: "/bs-product-edit/:id",
         name: "productEdit",
         // component: ProductEdit,
         component: () => import("@/views/backStage/ProductEdit.vue"),

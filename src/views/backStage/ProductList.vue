@@ -59,7 +59,10 @@
                 </Switch>
             </p>
             <p>
-                <router-link :to="`/bs-product-edit`" target="_blank">
+                <router-link
+                    :to="`/bs-product-edit/${prod.prod_id}`"
+                    target="_blank"
+                >
                     <img src="@/assets/images/icon/edit.svg" alt="" />
                 </router-link>
             </p>
