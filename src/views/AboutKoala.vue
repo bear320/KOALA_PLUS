@@ -71,7 +71,18 @@
         <div class="test">
             <h1>Quiz</h1>
             <!-- 測驗-->
+
             <form class="card card-ab">
+                <div class="pop" v-if="showModal">
+                    <h3>回答小測驗 登入後贏得優惠券</h3>
+                    <p>＊登入後作答 才能獲得優惠卷！</p>
+                    <button
+                        class="btn btn1 btn-paramy"
+                        @click="showModal = false"
+                    >
+                        開始
+                    </button>
+                </div>
                 <div v-if="questionIndex < questions.length">
                     <h4 class="question">{{ question.question }}</h4>
 
@@ -113,15 +124,7 @@
             </form>
         </div>
     </div>
-    <div>
-        <div class="pop" v-if="showModal">
-            <h3>回答小測驗 登入後贏得優惠券</h3>
-            <p>＊登入後作答 才能獲得優惠卷！</p>
-            <button class="btn btn1 btn-paramy" @click="showModal = false">
-                開始
-            </button>
-        </div>
-    </div>
+    <div></div>
 
     <Footer />
 </template>
@@ -298,6 +301,7 @@ export default {
     margin: auto;
     padding: 50px;
     width: 500px;
+    position: relative;
     @include m() {
         width: 80%;
         margin: auto;
@@ -309,6 +313,7 @@ export default {
 .test {
     margin-bottom: 50px;
     margin-top: -300px;
+
     @include m() {
         margin: 0px;
         margin-bottom: 50px;
@@ -366,22 +371,16 @@ body h1 {
 }
 
 .pop {
+    position: absolute;
     justify-content: center;
     background-color: #fbfef9;
     border-radius: 5px;
-    position: absolute;
-    top: 1850px;
+    width: 100%;
+    height: 100%;
     box-shadow: 2px 2px 10px;
-    left: 400px;
-    width: calc(100% - 800px);
-    height: 300px;
     z-index: 1;
-    @include m() {
-        top: 1000px;
-        left: 20px;
-        width: calc(100% - 40px);
-        height: 200px;
-    }
+    top: -3px;
+    right: 3px;
 }
 p {
     margin-top: 50px;
@@ -395,5 +394,8 @@ h3 {
     width: 250px;
     margin: auto;
     margin-bottom: 20px;
+    @include m() {
+        width: 100px;
+    }
 }
 </style>
