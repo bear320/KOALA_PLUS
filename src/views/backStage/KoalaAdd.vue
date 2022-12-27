@@ -14,23 +14,23 @@
     </section>
     <form
         class="wrapper function-wrapper"
-        action=""
         enctype="multipart/form-data"
+        ref="koala-form"
     >
         <div class="line">
             <div class="cell">
-                <label for="koala-name">名字：</label>
+                <label for="koala_name">名字：</label>
                 <input
                     type="text"
-                    name="koala-name"
-                    id="koala-name"
+                    name="koala_name"
+                    id="koala_name"
                     placeholder="請輸入名字"
                     required
                 />
             </div>
             <div class="cell">
-                <label for="koala-sex">性別：</label>
-                <select type="text" name="koala-sex" id="koala-sex" required>
+                <label for="koala_sex">性別：</label>
+                <select type="text" name="koala_sex" id="koala_sex" required>
                     <option value="Male">公</option>
                     <option value="Female">母</option>
                 </select>
@@ -38,15 +38,15 @@
         </div>
         <div class="line">
             <div class="cell">
-                <label for="koala-dob">出生日期：</label>
-                <input type="date" name="koala-dob" id="koala-dob" required />
+                <label for="koala_dob">出生日期：</label>
+                <input type="date" name="koala_dob" id="koala_dob" required />
             </div>
             <div class="cell">
-                <label for="koala-listed">上 / 下架：</label>
+                <label for="koala_listed">上 / 下架：</label>
                 <select
                     type="text"
-                    name="koala-listed"
-                    id="koala-listed"
+                    name="koala_listed"
+                    id="koala_listed"
                     required
                 >
                     <option value="1">上架</option>
@@ -56,10 +56,10 @@
         </div>
         <div class="line">
             <div class="cell">
-                <label for="koala-desc">描述：</label>
+                <label for="koala_info">描述：</label>
                 <textarea
-                    name="koala-desc"
-                    id="koala-desc"
+                    name="koala_info"
+                    id="koala_info"
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
@@ -73,12 +73,12 @@
                     新增圖片：
                     <span>* 請至少上傳一張圖片，數量上限為四張</span>
                 </h4>
-                <ImageUpload></ImageUpload>
+                <ImageUpload ref="imageUpload"></ImageUpload>
             </div>
         </div>
         <div class="line">
             <div class="cell">
-                <button class="btn-paramy">
+                <button class="btn-paramy" @click.prevent="postNewKoala">
                     <img
                         src="@/assets/images/icon/confirm.svg"
                         alt="【圖示】確認"
@@ -91,12 +91,65 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
+import { BASE_URL } from "@/assets/js/common.js";
 import ImageUpload from "@/components/backStage/ImageUpload.vue";
 
 export default {
     components: {
         Header,
         ImageUpload,
+    },
+    data() {
+        return {};
+    },
+    methods: {
+        postNewKoala() {
+            if (!this.$refs["koala-form"].checkValidity()) {
+                this.open(false);
+                return;
+            }
+            const formData = new FormData(this.$refs["koala-form"]);
+            console.log(formData.getAll("image[]"));
+            const apiURL = new URL(`${BASE_URL}/postNewKoala.php`);
+            fetch(apiURL, {
+                method: "POST",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    if (json.status === 0) {
+                        console.log("新增成功");
+                        // 新增成功後，表單欄位
+                        this.$refs["koala-form"].reset();
+                        // 呼叫 ImageUpload 裡的 Clear 重置狀態
+                        this.$refs.imageUpload.Clear();
+                        this.confirmModal();
+                    } else {
+                        console.log("新增失敗");
+                    }
+                    // alert(status.msg);
+                });
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "無尾熊資訊填寫不完整",
+                desc: nodesc
+                    ? ""
+                    : "無尾熊資訊填寫不完整，請確認各欄位是否皆已填寫！",
+            });
+        },
+        confirmModal() {
+            this.$Modal.confirm({
+                title: "訂單備註已修改",
+                content: "<p>訂單備註已修改，是否關閉此分頁？</p>",
+                okText: "是",
+                cancelText: "否",
+                onOk: () => {
+                    this.$Modal.remove();
+                    window.close();
+                },
+            });
+        },
     },
 };
 </script>
