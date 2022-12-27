@@ -16,13 +16,16 @@
             <div class="container">
                 <div id="scene">
                     <div class="layer" data-depth="0.5" data-friction-x="1">
-                        <img src="@/assets/images/index/star.png" />
+                        <img
+                            src="@/assets/images/index/star.png"
+                            alt="火災中的無尾熊視差滾動互動圖"
+                        />
                     </div>
                     <div class="layer" data-depth="1.5">
                         <img src="@/assets/images/index/fireline.png" />
                     </div>
                     <div class="layer" data-depth="0.1">
-                        <img src="@/assets/images/index/treeblur.png" alt="" />
+                        <img src="@/assets/images/index/treeblur.png" />
                     </div>
                     <div class="layer">
                         <img src="@/assets/images/index/star.png" />
@@ -34,7 +37,7 @@
                         <img src="@/assets/images/index/cryingkoala.png" />
                     </div>
                     <div class="layer" data-depth="0.3">
-                        <img src="@/assets/images/index/tree.png" alt="" />
+                        <img src="@/assets/images/index/tree.png" />
                     </div>
                     <div class="layer" data-depth="2">
                         <img src="@/assets/images/index/fireline.png" />
@@ -109,6 +112,7 @@
                                         :src="
                                             require(`@/assets/images/about/${article.news_img}`)
                                         "
+                                        alt="公告圖片"
                                     />
                                 </template>
                                 <template #article-title>
@@ -236,7 +240,6 @@ export default {
             }, this.inMoveDelay);
         },
         handleMouseWheel: function (e) {
-            console.log(e);
             if (e.wheelDelta < 120 && !this.inMove) {
                 this.moveUp();
             } else if (e.wheelDelta > 120 && !this.inMove) {

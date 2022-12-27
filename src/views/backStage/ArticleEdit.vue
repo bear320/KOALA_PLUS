@@ -103,8 +103,6 @@ export default {
                 news_status: this.edit.news_status,
                 news_star: this.edit.news_star,
             };
-            console.log(articleUpdate);
-
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(articleUpdate),
