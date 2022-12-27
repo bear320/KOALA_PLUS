@@ -557,7 +557,7 @@ export default {
     el: ".game_nav_expbar",
     data() {
         return {
-            game_money: 0, // nan
+            game_money: "", // nan
 
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
@@ -580,12 +580,12 @@ export default {
             item_5_exp: 140,
             item_6_exp: 210,
 
-            remaining_amount_1: 0,
-            remaining_amount_2: 0,
-            remaining_amount_3: 0,
-            remaining_amount_4: 0,
-            remaining_amount_5: 0,
-            remaining_amount_6: 0,
+            remaining_amount_1: "",
+            remaining_amount_2: "",
+            remaining_amount_3: "",
+            remaining_amount_4: "",
+            remaining_amount_5: "",
+            remaining_amount_6: "",
 
             // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
@@ -625,9 +625,7 @@ export default {
     //             });
     //     })(); //IIFE
     // },
-    async mounted() {
-        
-        await this.getMem()
+    mounted() {
 
         // ======================================== 把忘記的密碼撈出來  ======================================== //
         let QQ = this; //這裡的QQ指向的Vue實體
@@ -643,7 +641,7 @@ export default {
 
         // console.log(this.$store.state.user.mem_id);
 
-        const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.tmp_memID}`);
+        const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user?.mem_id}`);
         // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
         xhr.open("get", apiURL, true);
         xhr.send(null);
@@ -651,7 +649,7 @@ export default {
         function showMember(json) {
             var xhr = new XMLHttpRequest();
             // console.log(QQ);
-            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.tmp_memID}`);
+            const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user?.mem_id}`);
             // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`;
             xhr.open("get", apiURL, true);
             xhr.send(null);
@@ -700,28 +698,19 @@ export default {
 
             let game_exp;
             // 這裡的QQ指的是Vue實體
-            QQ.game_exp = member.mem_exp;
-            document.getElementById("game_exp").innerHTML =
-                game_exp;
+            console.log("test",member.mem_exp);
+            console.log(typeof member.mem_exp);
+            console.log(typeof +member.mem_exp);
+            QQ.game_exp =+ member.mem_exp;
+           /*  document.getElementById("game_exp").innerHTML =
+                game_exp; */
 
             QQ.expWidth = member.mem_exp/20;
         }
     },
     methods: {
 
-        //  ============================測試============================ //
-        async getMem(){
-            const res = await fetch(
-                    `${BASE_URL}/getMember.php?type=front`,
-                    {
-                        credentials: "include",
-                    }
-                );
-
-                const result = await res.json();
-                this.tmp_memID=result.list.mem_id;
-            
-        },
+    
 
 
         
@@ -1214,7 +1203,7 @@ export default {
             const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
             // let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
             const gameValueContent = {
-                memId: this.$store.state.user.mem_id,
+                memId: this.$store.state.user?.mem_id,
                 game_money: this.game_money,
                 remaining_amount_1: this.remaining_amount_1,
                 remaining_amount_2: this.remaining_amount_2,

@@ -37,9 +37,9 @@ export default createStore({
         // 更新使用者
         updateMemInfo(state, payload) {
             state.user = {
-                mem_id: payload.mem_id,
-                mem_mob: payload.mem_mob,
-                mem_add: payload.mem_add,
+                mem_id: payload?.mem_id,
+                mem_mob: payload?.mem_mob,
+                mem_add: payload?.mem_add,
             };
         },
     },
@@ -90,7 +90,7 @@ export default createStore({
         // 取得使用者的購物車資訊
         async getMemCart(context) {
             const res = await fetch(
-                `${BASE_URL}/getMemberCart.php?memId=${context.state.user.mem_id}`
+                `${BASE_URL}/getMemberCart.php?memId=${context.state.user?.mem_id}`
             );
             const cartList = await res.json();
             context.commit("updateMemCart", cartList);
