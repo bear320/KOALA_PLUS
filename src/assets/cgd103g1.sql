@@ -185,6 +185,10 @@ INSERT INTO `tibamefe_cgd103g1`.`my_coupon` ( `mem_id`,`coupon_id`, `coupon_code
 ('1003', '4003', 'koala95', '2022-12-20', '2023-02-20', '0'),
 ('1004', '4004', 'koala60', '2022-12-25', '2023-02-25', '0');
 
+()
+curdate(),
+
+
 
 -- 給佳政參考的php指令
 -- $coupRow["valid"]
@@ -277,27 +281,31 @@ INSERT INTO `tibamefe_cgd103g1`.`reservation` ( `rsv_date`, `rsv_ppl`,  `rsv_nam
 
 -- 公告
 CREATE TABLE `news`(
-`news_id` int unsigned NOT NULL AUTO_INCREMENT COMMENT '公告編號',
-`news_img` varchar(50) DEFAULT '' COMMENT '公告圖片', 
-`news_title` varchar(100) NOT NULL DEFAULT '' COMMENT '公告標題',
-`news_content` varchar(500) NOT NULL DEFAULT '' COMMENT '公告內容',
-`news_date` date NOT NULL DEFAULT '2022-12-01' COMMENT '公告發佈日期',
-`news_category` varchar(50) NOT NULL DEFAULT '' COMMENT '公告分類(最新消息、資金運用、園區資訊)',
-`news_status` tinyint NOT NULL DEFAULT '0' COMMENT '公告狀態(0:草稿,1:已上架)',
-`news_star` tinyint NOT NULL DEFAULT '0' COMMENT '公告星星(0:普通,1:主要)',
+news_id int unsigned NOT NULL AUTO_INCREMENT COMMENT '公告編號',
+news_img varchar(50) DEFAULT '' COMMENT '公告圖片', 
+news_title varchar(100) NOT NULL DEFAULT '' COMMENT '公告標題',
+news_content varchar(500) NOT NULL DEFAULT '' COMMENT '公告內容',
+news_date date NOT NULL DEFAULT '2022-12-01' COMMENT '公告發佈日期',
+news_category varchar(50) NOT NULL DEFAULT '' COMMENT '公告分類(最新消息、資金運用、園區資訊)',
+news_status tinyint NOT NULL DEFAULT '0' COMMENT '公告狀態(0:草稿,1:已上架)',
+news_star tinyint NOT NULL DEFAULT '0' COMMENT '公告星星(0:普通,1:主要)',
 PRIMARY KEY (`news_id`), 
-KEY `dx_news_img` (`news_img`), 
-KEY `dx_news_title` (`news_title`), 
-KEY `dx_news_content` (`news_content`), 
-KEY `dx_news_date` (`news_date`), 
-KEY `dx_news_category` (`news_category`), 
-KEY `dx_news_status` (`news_status`), 
-KEY `dx_news_star` (`news_star`)
+KEY dx_news_img (`news_img`), 
+KEY dx_news_title (`news_title`), 
+KEY dx_news_content (`news_content`), 
+KEY dx_news_date (`news_date`), 
+KEY dx_news_category (`news_category`), 
+KEY dx_news_status (`news_status`), 
+KEY dx_news_star (`news_star`)
 )ENGINE=InnoDB AUTO_INCREMENT=07001 DEFAULT CHARSET=utf8mb4 COMMENT='公告';
 INSERT INTO `tibamefe_cgd103g1`.`news` (`news_img`, `news_title`, `news_content`, `news_date`, `news_category`, `news_status`, `news_star`) VALUES
-('3.jpg', '一隻無尾熊寶寶出生了', '每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。為了迎接三隻無尾熊寶寶誕生，園區特別精心打造了育嬰房，為讓無尾熊媽媽可以安心照護baby，園區特別將無尾熊一館打造成無尾熊育嬰房兼坐月子中心。此外，考量育嬰需求，動物保母也會特別多採集一些尤加利樹嫩葉為無尾熊媽媽「加菜」，使母體具備足夠營養，讓無尾熊baby長得頭好壯壯。除精心打造育嬰房讓無尾熊寶寶安心成長外，由於這是動物園首次有三隻無尾熊baby接連出生，為讓大眾分享新生命誕生的喜悅，園區也特別舉辦「無尾熊新生兒命名票選活動」，讓喜歡無尾熊的民眾可以透過票選方式選出心中最喜歡的名字，最後票選結果將於一月底公布，屆時三隻無尾熊寶寶就會以民眾選出的新名字跟大家歡喜亮相。', '2022-11-29', '最新消息', '1', '1'),
-('8.jpg', '園區公休通知', '因應園區大清潔及設施維修工程，KOALA+園區將於112/02/15~112/02/20公休6日，造成不便盡請見諒。', '2022-12-03', '園區資訊', '1', '0'),
-('6.jpg', '關於日前收到的大筆捐款', '日前，KOALA+收到一筆大筆的捐款，十分感謝。這筆捐款將為全園區的無尾熊進行健康檢查，以及森林環境勘查及保育，當地居民也全力支持與配合這項活動，非常感謝各位捐款人，您的支持是我們提供無尾熊保育的最大動力。', '2022-12-11', '資金運用', '1', '0');
+('5.jpg', '無尾熊救援行動', '無尾熊救援隊是一群專門處理無尾熊救援的志願者。他們擁有專業的知識和技能，可以在無尾熊陷入危險的情況下進行救援行動。有一天，無尾熊救援隊的成員收到了一個緊急的救援呼叫。有一隻無尾熊被困在樹上，無法自行下樹。無尾熊救援隊立即出發，帶著各種救援器材前往救援現場。當他們到達樹下時，發現那隻無尾熊已經被困在樹上很久了，體力已經大減。但是，無尾熊救援隊的成員們很有耐心，他們給了那隻無尾熊食物和水，並且給了他安慰。當無尾熊救援隊成員們用各種工具將無尾熊從樹上救下來時，那隻無尾熊真的很感激。他們帶著那隻無尾熊回到了救援中心，並給了他充足的休息和治療。', '2022-11-19', '最新消息', '1', '0'),
+('8.jpg', '園區公休通知', '因應園區大清潔及設施維修工程，KOALA+園區將於111/12/15~111/12/20休館6日，造成不便盡請見諒。', '2022-11-26', '園區資訊', '1', '0'),
+('3.jpg', '一隻無尾熊寶寶出生了', '每年的9到11月是無尾熊開始繁殖的交配季節，當無尾熊長到2歲時就開始邁入性成熟年齡、可以進行傳宗接代的重責大任。無尾熊平均一胎以孕育一隻baby為主，偶爾會有雙胞胎出現，平均壽命為10至12歲。為了迎接三隻無尾熊寶寶誕生，園區特別精心打造了育嬰房，為讓無尾熊媽媽可以安心照護baby，園區特別將無尾熊一館打造成無尾熊育嬰房兼坐月子中心。此外，考量育嬰需求，動物保母也會特別多採集一些尤加利樹嫩葉為無尾熊媽媽「加菜」，使母體具備足夠營養，讓無尾熊baby長得頭好壯壯。', '2022-11-29', '最新消息', '1', '0'),
+('6.jpg', '關於日前收到的大筆捐款', '日前，KOALA+收到一筆大筆的捐款，十分感謝。這筆捐款將為全園區的無尾熊進行健康檢查，以及森林環境勘查及保育，當地居民也全力支持與配合這項活動，非常感謝各位捐款人，您的支持是我們提供無尾熊保育的最大動力。', '2022-12-02', '資金運用', '1', '0'),
+('1.jpg', '馬路與無尾熊', '無尾熊和馬路一直是熟悉的好朋友。無尾熊喜歡在馬路上散步，而馬路則喜歡讓無尾熊在上面走來走去。無尾熊是個外向的生物，喜歡與周圍的動物打交道。而馬路則是個安靜的生物，喜歡讓大家都安安靜靜地走過。有時候，無尾熊會在馬路上玩耍，讓馬路有些不知所措。但是，馬路總是很耐心地等待著無尾熊，直到無尾熊再次回到它身邊。無尾熊和馬路之間的友誼非常特別，他們總是能夠找到彼此的共鳴。', '2022-12-03', '最新消息', '0', '0'),
+('4.jpg', '這是一個草稿', '這是一個草稿，用來測試無尾熊和草稿的關係，我想他們會處的很好。', '2022-12-05', '園區資訊', '0', '0'),
+('7.jpg', '新增無尾熊注意路牌', '與澳洲政府協力將無尾熊常出沒區域放上告示路牌，希望能減少無尾熊車禍發生，也請用路人多加注意。', '2022-12-08', '最新消息', '1', '0');
 
 -- 管理者
 CREATE TABLE `employee`(

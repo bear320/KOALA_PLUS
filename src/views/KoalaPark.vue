@@ -3,7 +3,7 @@
 
     <div class="video-container">
         <iframe
-            src="https://www.youtube.com/embed/L2fRuAoxepc?controls=0&amp;start=178&autoplay=1&mute=1&playsinline=1&loop=1&playlist=L2fRuAoxepc"
+            src="https://www.youtube.com/embed/WLb3wjQ21Dc?controls=0&amp;start=113&autoplay=1&mute=1&playsinline=1&loop=1&playlist=WLb3wjQ21Dc"
         ></iframe>
     </div>
 
@@ -188,7 +188,8 @@ iframe {
 
 @media (min-aspect-ratio: 16/9) {
     .video-container iframe {
-        height: 56.25vw;
+        // height: 56.25vw;
+        height: 70vw;
     }
 }
 @media (max-aspect-ratio: 16/9) {
@@ -213,6 +214,9 @@ iframe {
         left: -30px;
         top: 1300px;
     }
+    .sub-banner {
+        height: 30vh;
+    }
 }
 
 @media screen and (max-width: 1024px) {
@@ -231,9 +235,15 @@ iframe {
         left: -40px;
         top: 1350px;
     }
+    .sub-banner {
+        height: 25vh;
+    }
 }
 
 @media screen and (max-width: 768px) {
+    .video-container {
+        height: 90vh;
+    }
     .koala-icon {
         width: 200px;
         left: -70px;
@@ -248,6 +258,9 @@ iframe {
         width: 250px;
         left: -40px;
         top: 1350px;
+    }
+    .sub-banner {
+        height: 20vh;
     }
 }
 </style>
