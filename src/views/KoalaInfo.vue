@@ -29,7 +29,11 @@
                     </h2>
                 </div>
                 <div class="paragraph">
-                    <h3>性別： {{ source.koala_sex }}</h3>
+                    <h3>
+                        類別：
+                        <span v-if="parseInt(source.koala_age) >= 3">成年</span>
+                        <span v-if="parseInt(source.koala_age) < 3">幼年</span>
+                    </h3>
                     <h3>生日： {{ source.koala_dob }}</h3>
                     <h3>年齡： {{ source.koala_age }}</h3>
                 </div>
