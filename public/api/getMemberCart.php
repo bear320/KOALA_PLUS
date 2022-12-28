@@ -11,5 +11,5 @@ $sql = "SELECT c1.mem_id,c1.prod_id,c1.cart_qty,c2.prod_name,c2.prod_price,c2.pr
 
 $memCart = $pdo->query($sql);
 $memCartRows = $memCart->fetchAll(PDO::FETCH_ASSOC);
-echo json_encode($memCartRows);            
+echo json_encode($memCartRows,JSON_NUMERIC_CHECK);            
 ?>
