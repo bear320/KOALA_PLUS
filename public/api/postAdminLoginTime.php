@@ -2,12 +2,10 @@
 header("Access-Control-Allow-Origin:*");
 header("Content-Type:application/json;charset=utf-8");
 try{
-	//header設置
-    // require_once("./headerUse.php");
-    //DB連線設置
-    require_once("./connect_cgd103g1.php");
+    // require_once("./headerUse.php");   //header設置
+    require_once("./connect_cgd103g1.php");   //DB連線設置
+
 	//sql 指令
-    
     $sql = "UPDATE tibamefe_cgd103g1.employee
     SET emp_last_login = CURDATE()
     WHERE emp_id = :emp_id";
@@ -21,6 +19,7 @@ try{
 catch (PDOException $e) {
 	$msg = "錯誤行號 : ".$e->getLine().", 錯誤訊息 : ".$e->getMessage();
 }
+
 //輸出結果
 $result = ["msg"=>$msg];
 echo json_encode($_POST);

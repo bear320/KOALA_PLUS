@@ -268,9 +268,7 @@ export default {
             errorMsg: "",
             idMsg: "",
             forget_password_account: "",
-
             get_forget_password: "",
-
             seen_one: "",
             seen_two: "",
             seen_three: "",
@@ -283,7 +281,6 @@ export default {
             sign_up_account: "",
             sign_up_password: "",
             sign_up_password_comfirm: "",
-
             mem_psw: "",
         };
     },
@@ -348,6 +345,8 @@ export default {
                 if (this.$store.state.user) {
                     this.$router.push({ path: "/home" });
                 }
+                
+                this.open_3();
             }
         },
 
@@ -392,7 +391,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then(()=>{
-                    alert("註冊成功")
+                    this.open_1();
                 })
                 .then(() => {
                     this.$router.push({ path: "/login" });
@@ -413,27 +412,18 @@ export default {
 
         // ======================================== forget_password click事件 ======================================== //
         forget_password() {
-            document.querySelector(".content_active").className =
-                "content_active content_active_active_forget_password";
-            document.querySelector(
-                ".content_active_forget_password"
-            ).style.display = "block";
+            document.querySelector(".content_active").className = "content_active content_active_active_forget_password";
+            document.querySelector(".content_active_forget_password").style.display = "block";
             document.querySelector(".content_active_login").style.opacity = "0";
-            document.querySelector(".content_active_sign_up").style.opacity =
-                "0";
+            document.querySelector(".content_active_sign_up").style.opacity =  "0";
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.opacity = "1";
+                document.querySelector(".content_active_forget_password").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.display = "none";
-                document.querySelector(".content_active_login").style.display =
-                    "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_login").style.display = "none";
             }, 200);
         },
 
@@ -452,10 +442,7 @@ export default {
                 )
                 .then(
                     (result) => {
-                        alert("密碼寄送成功 請查收");
-                    },
-                    (error) => {
-                        alert("寄送失敗 請注意信箱是否錯誤")
+                        this.open_2();
                     }
                 );
         },
@@ -526,6 +513,32 @@ export default {
 
         outEye_3: function () {
             this.seen_three = !this.seen_three;
+        },
+
+        // ======================================== 彈窗 ======================================== //
+        open_1(open_1) {
+            this.$Notice.open({
+                title: "恭喜註冊成功",
+                desc: open_1
+                    ? ""
+                    : `請登入會員以便獲得更好的使用體驗 <a href="/login">登入</a>`,
+            });
+        },
+        open_2(open_2) {
+            this.$Notice.open({
+                title: "已將密碼寄到您的電子信箱",
+                desc: open_2
+                    ? ""
+                    : `密碼已經寄到您的電子信箱囉，<a href="/login">登入</a>，若沒收到請確認輸入是否有誤`,
+            });
+        },
+        open_3(open_3) {
+            this.$Notice.open({
+                title: "登入成功",
+                desc: open_3
+                    ? ""
+                    : `恭喜您成功登入囉`,
+            });
         },
     },
     mounted() {
