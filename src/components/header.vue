@@ -136,8 +136,15 @@ export default {
         },
         open(nodesc, title, desc) {
             this.$Notice.open({
+<<<<<<< HEAD
                 title: `${title}`,
                 desc: nodesc ? "" : `${desc}`,
+=======
+                title: "請登入會員",
+                desc: nodesc
+                    ? ""
+                    : `需先登入會員才可進行遊玩，尚未註冊會員者也至 <a href="/login">登入頁面</a> 立即註冊！`,
+>>>>>>> charmy01
             });
         },
     },
