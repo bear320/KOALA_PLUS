@@ -1,7 +1,7 @@
 <?php 
 header('Access-Control-Allow-Origin:*');
 header("Content-Type:application/json;charset=utf-8");
-const MY_DIR = "shop";
+const MY_DIR = "../images/shop";
 $images = $_FILES["image"];
 foreach($images["tmp_name"] as $i => $tmp_name){
     switch($images["error"][$i]){

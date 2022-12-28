@@ -35,7 +35,7 @@
             <h3 class="kListed">上 / 下架</h3>
             <h3 class="kEdit">編輯</h3>
         </div>
-        <div class="bs-list" v-for="prod in prods" :key="prod.prod_id">
+        <div class="bs-list" v-for="(prod, index) in prods" :key="prod.prod_id">
             <p>{{ prod.prod_id }}</p>
             <p>{{ prod.prod_name }}</p>
             <img class="proImg" :src="`/images/shop/${prod.prod_img1}`" />
@@ -156,10 +156,32 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(this.totalPage);
                     this.prods = json.prod;
                     this.totalPage = Math.ceil(json.prodCount / 10);
                 });
+        },
+        switchListed(index) {
+            const apiURL = new URL(`${BASE_URL}/postProductListed.php`);
+            const prodData = new FormData();
+            prodData.append("prod_id", this.prods[index].prod_id);
+            prodData.append("prod_listed", this.prods[index].prod_listed);
+            fetch(apiURL, {
+                method: "post",
+                body: prodData,
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    if (!this.prods[index].prod_listed) {
+                        this.open(true, this.prods[index].prod_id, "下架");
+                    } else {
+                        this.open(true, this.prods[index].prod_id, "上架");
+                    }
+                });
+        },
+        open(nodesc, prod_id, prod_listed) {
+            this.$Notice.open({
+                title: `✔　商品 ${prod_id}已${prod_listed}`,
+            });
         },
     },
     created() {
