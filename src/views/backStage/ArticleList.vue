@@ -82,10 +82,14 @@
                                 </p>
                             </div>
                             <div class="pic">
-                                <img
+                                <!-- <img
                                     :src="
                                         require(`@/assets/images/about/${article.news_img}`)
                                     "
+                                    alt=""
+                                /> -->
+                                <img
+                                    :src="`/images/article/${article.news_img}`"
                                     alt=""
                                 />
                             </div>
@@ -167,10 +171,14 @@
                             </p>
                         </div>
                         <div class="pic">
-                            <img
+                            <!-- <img
                                 :src="
                                     require(`@/assets/images/about/${article.news_img}`)
                                 "
+                                alt=""
+                            /> -->
+                            <img
+                                :src="`/images/article/${article.news_img}`"
                                 alt=""
                             />
                         </div>
@@ -260,10 +268,14 @@
                                 </p>
                             </div>
                             <div class="pic">
-                                <img
+                                <!-- <img
                                     :src="
                                         require(`@/assets/images/about/${article.news_img}`)
                                     "
+                                    alt=""
+                                /> -->
+                                <img
+                                    :src="`/images/article/${article.news_img}`"
                                     alt=""
                                 />
                             </div>
@@ -344,10 +356,14 @@
                             </p>
                         </div>
                         <div class="pic">
-                            <img
+                            <!-- <img
                                 :src="
                                     require(`@/assets/images/about/${article.news_img}`)
                                 "
+                                alt=""
+                            /> -->
+                            <img
+                                :src="`/images/article/${article.news_img}`"
                                 alt=""
                             />
                         </div>
