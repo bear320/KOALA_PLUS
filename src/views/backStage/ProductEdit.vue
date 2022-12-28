@@ -121,7 +121,6 @@ export default {
     },
     methods: {
         send() {
-            // if (!this.$refs["prod-form"].checkValidity()) return;
             const formData = new FormData(this.$refs["prod-form"]);
             formData.append("prod_id", this.$route.params.id);
             fetch(`${BASE_URL}/postUpdateProduct.php`, {
@@ -130,7 +129,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    this.open(true);
                 });
         },
         updateImgs(payload) {
@@ -140,6 +139,11 @@ export default {
                     pathID: index,
                     path: `../images/shop/${img}`,
                 };
+            });
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: `✔ 已更新商品 `,
             });
         },
     },

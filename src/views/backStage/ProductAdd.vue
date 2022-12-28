@@ -117,7 +117,13 @@ export default {
                     // } else {
                     // console.log("新增失敗");
                     // }
+                    this.open(true);
                 });
+        },
+        open(nodesc) {
+            this.$Notice.open({
+                title: "✔　已新增商品",
+            });
         },
     },
 };

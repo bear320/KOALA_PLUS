@@ -97,6 +97,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => console.log(json));
+            this.open(true, "新增");
         },
 
         deleteImage(file, i) {
@@ -122,6 +123,13 @@ export default {
                         })
                     );
                 });
+            this.open(true, "刪除");
+        },
+
+        open(nodesc, type) {
+            this.$Notice.open({
+                title: `✔ 商品圖片${type}成功 `,
+            });
         },
     },
     created() {
