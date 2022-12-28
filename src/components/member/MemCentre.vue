@@ -32,6 +32,10 @@
                             v-model="memindexs.mem_account"
                             ref="mem_account"
                             @keyup.enter="reg_emailType"
+                            @keyup="CheckInput_email"
+                            :class="{
+                                InputError: checkInputEmail,
+                            }"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -43,7 +47,15 @@
                             v-model="memindexs.mem_mob"
                             ref="mem_mob"
                             @keyup.enter="reg_phoneType2"
+                            @keyup="CheckInput_mob"
+                            :class="{
+                                InputError: checkInputMod,
+                            }"
                         />
+                        <!-- v-bind:class="{
+                                active: checkInputMod,
+                                error: false,
+                            }" -->
                     </tr>
                     <tr class="tabcontent_txt">
                         <td>地址</td>
@@ -196,6 +208,8 @@ export default {
             pwdType_two: false,
             seen_three: "",
             pwdType_three: false,
+            checkInputMod: false,
+            checkInputEmail: false,
         };
     },
     methods: {
@@ -265,7 +279,8 @@ export default {
                             this.mod_change();
                             // 已修改完成會員資料
                         } else {
-                            this.mod_error();
+                            // this.mod_error();
+                            this.$Message.info(status.msg);
                         }
                     });
                 if (this.passwordcheck != "") {
@@ -428,12 +443,12 @@ export default {
                 desc: nodesc ? "" : "已修改完成會員資料",
             });
         },
-        mod_error(nodesc) {
-            this.$Notice.open({
-                title: "錯誤提醒",
-                desc: nodesc ? "" : "請檢查電話號碼長度是否過長？",
-            });
-        },
+        // mod_error(nodesc) {
+        //     this.$Notice.open({
+        //         title: "錯誤提醒",
+        //         desc: nodesc ? "" : "請檢查電話號碼長度是否過長？",
+        //     });
+        // },
         psw_thesame(nodesc) {
             this.$Notice.open({
                 title: "提醒",
@@ -447,25 +462,57 @@ export default {
             });
         },
         // ================正則
-
+        // 控制input 電話號碼時，按下anter，會出現提醒，如果格式正確，不會跳出提醒
         reg_phoneType2() {
             let mem_mod_val = this.$refs.mem_mob.value;
             const validate = /^09[0-9]{8}$/;
             let res = validate.test(mem_mod_val);
             // console.log(res);
             if (res) {
+                // this.checkInputMod = false;
             } else {
                 this.mod_open(false);
+                // this.checkInputMod = true;
             }
         },
+
+        // 控制input 電話號碼時，keyon事件，input的背景會出現紅色的提醒，如果格式正確，不會出現紅色
+        CheckInput_mob() {
+            let mem_mod_val = this.$refs.mem_mob.value;
+            const validate = /^09[0-9]{8}$/;
+            let res = validate.test(mem_mod_val);
+            // console.log(res);
+            if (res) {
+                this.checkInputMod = false;
+            } else {
+                // this.mod_open(false);
+                this.checkInputMod = true;
+            }
+        },
+        // 控制input email時，按下anter，會出現提醒，如果格式正確，不會跳出提醒
         reg_emailType() {
             let mem_account_val = this.$refs.mem_account.value;
             const validate = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
             let res = validate.test(mem_account_val);
             console.log(res);
             if (res) {
+                this.checkInputEmail = false;
             } else {
                 this.email_open(false);
+                this.checkInputEmail = true;
+            }
+        },
+        // 控制input email時，keyon事件，input的背景會出現紅色的提醒，如果格式正確，不會出現紅色
+        CheckInput_email() {
+            let mem_account_val = this.$refs.mem_account.value;
+            const validate = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
+            let res = validate.test(mem_account_val);
+            console.log(res);
+            if (res) {
+                this.checkInputEmail = false;
+            } else {
+                // this.email_open(false);
+                this.checkInputEmail = true;
             }
         },
         reg_pswType() {
@@ -496,6 +543,19 @@ export default {
 <style lang="scss" scoped>
 // .member 會員的會員中心
 
+.InputError {
+    &:focus {
+        border-color: red;
+        box-shadow: 1px 2px 1px red;
+    }
+}
+// 用來測試↓
+input {
+    &:focus {
+        border-color: #ff6;
+        box-shadow: 1px 2px 1px #996;
+    }
+}
 .tabs {
     .wrapper {
         .tabs_content {

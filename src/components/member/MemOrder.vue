@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_order content">
         <div class="mem_basic">
-            <p>姓名：{{ userid }}</p>
-            <p>會員ID：{{ username }}</p>
+            <p>會員ID：{{ userid }}</p>
+            <p>姓名：{{ username }}</p>
         </div>
         <!-- 訂單資訊下方內容 -->
         <div class="mem_main">
