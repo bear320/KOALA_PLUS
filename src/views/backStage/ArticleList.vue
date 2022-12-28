@@ -248,7 +248,6 @@ export default {
     data() {
         return {
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
-            // totalPage: 0,
             articles: [],
             uploaded: [],
             draft: [],
@@ -361,19 +360,13 @@ export default {
         },
         prePage() {
             if (this.currentPage == 1) {
-                // console.log(this.currentPage);
-                // console.log(this.totalPage);
                 return;
             } else {
                 this.currentPage--;
             }
         },
         nextPage() {
-            console.log("QQ");
-
             if (this.currentPage === this.totalPage) {
-                // console.log(this.currentPage);
-                // console.log(this.totalPage);
                 return;
             } else {
                 this.currentPage++;
