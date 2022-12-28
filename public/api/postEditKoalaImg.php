@@ -63,7 +63,7 @@ if ($type == "insert") {
     $delImgSQL = "UPDATE `koala` SET `$koala_column`='null' WHERE `koala_name`='$koala_name';";
     $delImg = $pdo->query($delImgSQL);
 
-    $sql = "select * from tibamefe_cgd103g1.product where koala_name='$koala_name'";
+    $sql = "select * from tibamefe_cgd103g1.koala where koala_name='$koala_name'";
     $koalas = $pdo->query($sql);
     $koalaRows = $koalas->fetch(PDO::FETCH_ASSOC);
 
@@ -100,4 +100,4 @@ if ($type == "insert") {
         $koalaRows2["koala_img4"],
     ]);
 }
-?>     ?>
+?>     ?> ?>
