@@ -214,8 +214,6 @@ table {
     justify-content: center;
 }
 .html2canvas {
-    /* display: flex;
-    justify-content: center; */
     padding: 10px 0;
     .adopt_certificate {
         width: 600px;
