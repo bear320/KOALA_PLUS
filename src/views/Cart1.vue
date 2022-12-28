@@ -21,7 +21,6 @@
                             <Col span="4" :xl="6" :lg="6">小計</Col>
                         </Row>
                     </div>
-
                     <CartItem
                         v-for="cartItem in $store.state.cart"
                         :key="cartItem.prod_id"
@@ -82,9 +81,18 @@
                                 />
                             </div>
                             <div
+                                v-if="!cartItemLength"
+                                to="/shop"
+                                class="btn-paramy check-order"
+                                @click="checkOrder(`shop`)"
+                            >
+                                前往購物
+                            </div>
+                            <div
+                                v-else
                                 to="/cart2"
                                 class="btn-paramy check-order"
-                                @click="checkOrder"
+                                @click="checkOrder(`cart2`)"
                             >
                                 確認訂單
                             </div>
@@ -137,6 +145,9 @@ export default {
         getCoin() {
             return this.$store.getters.getCoin;
         },
+        cartItemLength() {
+            return this.$store.state.cart.length;
+        },
     },
     methods: {
         checkCoupon() {
@@ -182,8 +193,8 @@ export default {
                 };
             });
         },
-        checkOrder() {
-            this.$router.push({ name: "cart2" });
+        checkOrder(to) {
+            this.$router.push({ name: to });
         },
     },
     mounted() {
@@ -233,6 +244,7 @@ main {
                 background-color: $green;
             }
         }
+
         .cart-title {
             padding: 20px 0;
             font-size: $h4;

@@ -14,27 +14,27 @@ $offset = $page * $limit;
 $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product";
 
 if(isset($_GET["lte"]) && isset($_GET["gte"])){
-    $sql = "select * from tibamefe_cgd103g1.product where prod_price between {$lte} and {$gte} order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price between {$gte} and {$lte} order by {$order} limit {$limit} offset {$offset}";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_price between {$lte} and {$gte} and prod_listed order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price between {$lte} and {$gte} and prod_listed";
 }
 else if(isset($_GET["gte"])){
-    $sql = "select * from tibamefe_cgd103g1.product where prod_price >= {$gte} order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price >= {$gte} order by {$order} limit {$limit} offset {$offset}";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_price >= {$gte} and prod_listed = 1 order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price >= {$gte} and prod_listed = 1 order by {$order} ";
 }
 else if(isset($_GET["lte"])){
-    $sql = "select * from tibamefe_cgd103g1.product where prod_price <= {$lte} order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price <= {$lte} order by {$order} limit {$limit} offset {$offset}";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_price <= {$lte} and prod_listed = 1 order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_price <= {$lte} and prod_listed = 1 order by {$order} ";
 }
 else if(isset($_GET["search"])){
-    $sql = "select * from tibamefe_cgd103g1.product where prod_name like '%{$search}%' order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_name like '%{$search}%'";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_name like '%{$search}%' and prod_listed = 1 order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_name like '%{$search}%' and prod_listed = 1";
     
 }else if(isset($_GET["category"])){
-    $sql = "select * from tibamefe_cgd103g1.product where prod_category='{$category}' order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_category='{$category}'";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_category='{$category}' and prod_listed = 1 order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_category='{$category}' and prod_listed = 1";
 }else{
-    $sql = "select * from tibamefe_cgd103g1.product order by {$order} limit {$limit} offset {$offset}";
-    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product";
+    $sql = "select * from tibamefe_cgd103g1.product where prod_listed = 1 order by {$order} limit {$limit} offset {$offset}";
+    $sql2 = "select count(*) as 'prod_total' from tibamefe_cgd103g1.product where prod_listed = 1";
 }
 
 $products = $pdo->query($sql);

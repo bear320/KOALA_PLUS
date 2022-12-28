@@ -102,6 +102,7 @@
                     :proName="item.prod_name"
                     :proPrice="item.prod_price"
                     :proId="item.prod_id"
+                    :path="`../images/shop/`"
                     :col="'col-xl-3 col-lg-3 col-md-6 col-6'"
                 ></product-card>
             </div>
@@ -177,10 +178,9 @@ export default {
                 .then((json) => {
                     this.source = json.prod_detail;
                     this.images = json.prod_detail.images.filter((item) => {
-                        return item !== null;
+                        return item !== "";
                     });
                     this.relProducts = json.relProd;
-                    console.log(this.relProducts);
                 });
         },
         changeQuantity(operator) {
@@ -190,11 +190,30 @@ export default {
                 this.quantity += 1;
             }
         },
-        addToCart() {
-            this.$store.dispatch("addToCart", {
-                memId: 1001,
-                prodId: +this.$route.params.id,
-                cartQty: this.quantity,
+        async addToCart() {
+            let prodIndex = this.$store.state.cart.findIndex(
+                (item) => item.prod_id === +this.$route.params.id
+            );
+            if (prodIndex < 0) {
+                await this.$store.dispatch("addToCart", {
+                    memId: this.$store.state.user.mem_id,
+                    prodId: this.$route.params.id,
+                    cartQty: this.quantity,
+                });
+                this.open(true, "已新增商品至購物車");
+            } else {
+                await this.$store.dispatch("addToCart", {
+                    memId: this.$store.state.user.mem_id,
+                    prodId: this.$route.params.id,
+                    cartQty: (this.$store.state.cart[prodIndex].cart_qty +=
+                        this.quantity),
+                });
+                this.open(true, "已更新商品數量");
+            }
+        },
+        open(nodesc, title) {
+            this.$Notice.open({
+                title: `✔　${title}`,
             });
         },
     },

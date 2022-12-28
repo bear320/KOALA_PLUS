@@ -81,6 +81,7 @@
                             :proName="item.prod_name"
                             :proPrice="item.prod_price"
                             :proId="item.prod_id"
+                            :path="`./images/shop/`"
                             :col="'col-xl-4 col-lg-4 col-md-6 col-6'"
                         ></product-card>
                     </div>
@@ -95,7 +96,12 @@
                                 type="ios-arrow-back"
                                 @click="previousPage('previous')"
                             />
-                            <input class="page" type="text" v-model="curPage" />
+                            <input
+                                class="page"
+                                type="text"
+                                v-model="curPage"
+                                @change="changePage"
+                            />
                             of {{ pageTotal }} pages
                             <Icon
                                 class="bgc"
@@ -157,7 +163,6 @@ export default {
     methods: {
         priceRange() {
             if (this.upperLimit && this.lowerLimit) {
-                console.log("GG");
                 this.$router.push({
                     path: "/shop",
                     query: {
@@ -228,6 +233,10 @@ export default {
             this.curPage = 1;
             this.lowerLimit = "";
             this.upperLimit = "";
+            window.scrollTo({
+                top: 500,
+                behavior: "instant",
+            });
         },
         getProduct(queryParam) {
             if (!Object.keys(queryParam).length) {
@@ -244,12 +253,6 @@ export default {
                 .then((json) => {
                     this.source = json.prods;
                     this.pageTotal = Math.ceil(json.prodCount / 9);
-                    if (!this.source.length) {
-                        throw new Error("查無相關結果");
-                    }
-                })
-                .catch((error) => {
-                    /* alert(error); */
                 });
         },
 
@@ -257,52 +260,40 @@ export default {
             if (this.curPage <= 1) return;
             this.curPage -= 1;
             this.changePage();
-            window.scrollTo({
-                top: 500,
-                behavior: "instant",
-            });
         },
         nextPage() {
             if (this.curPage >= this.pageTotal) return;
             this.curPage += 1;
             this.changePage();
-            window.scrollTo({
-                top: 500,
-                behavior: "instant",
-            });
         },
         toFirstPage() {
             if (this.curPage <= 1) return;
             this.curPage = 1;
             this.changePage();
-            window.scrollTo({
-                top: 500,
-                behavior: "instant",
-            });
         },
         toLastPage() {
             if (this.curPage >= this.pageTotal) return;
             this.curPage = this.pageTotal;
             this.changePage();
+        },
+        changePage() {
+            if (this.curPage > this.pageTotal) {
+                this.curPage = this.pageTotal;
+            }
+
+            if (this.curPage < 1) {
+                this.curPage = 1;
+            }
+            const queryParam = { ...this.$route.query };
+            queryParam.page = this.curPage;
+            this.$router.push({
+                path: "/shop",
+                query: queryParam,
+            });
             window.scrollTo({
                 top: 500,
                 behavior: "instant",
             });
-        },
-        changePage() {
-            const queryParam = { ...this.$route.query };
-            queryParam.page = this.curPage;
-            if (!this.$route.query.category) {
-                this.$router.push({
-                    path: "/shop",
-                    query: queryParam,
-                });
-            } else {
-                this.$router.push({
-                    path: "/shop",
-                    query: queryParam,
-                });
-            }
         },
     },
     created() {

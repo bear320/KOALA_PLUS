@@ -103,8 +103,7 @@
                                     ref="ccv"
                                 ></div>
                             </div>
-                            <div class="btn-wrapper">
-                                <!-- 這是 TapPay 原生按鈕 -->
+                            <div class="btn-wrapper" v-if="!isDone">
                                 <button
                                     type="submit"
                                     class="tappay-btn"
@@ -180,30 +179,23 @@ export default {
             switch (field) {
                 case 0:
                     //欄位已填好，並且沒有問題
-                    console.log("field is ok");
                     break;
                 case 1:
                     //欄位還沒有填寫
-                    console.log("field is empty");
                     break;
                 case 2:
                     //欄位有錯誤，此時在 CardView 裡面會用顯示 errorColor
-                    console.log("field has error");
                     break;
                 case 3:
                     //使用者正在輸入中
-                    console.log("usertyping");
                     break;
                 default:
-                    console.log("error!");
             }
         },
 
         // 觸發去取得狀態
         // 之後記得砍async
         async onSubmit() {
-            console.log(this.$refs["form"]);
-            console.log(this.isAllFilled);
             if (!this.isAllFilled) return;
             this.isTrading = true;
             const tappayStatus = TPDirect.card.getTappayFieldsStatus();
@@ -211,18 +203,14 @@ export default {
                 // can not get prime
                 return;
             }
-            console.log("有執行這行唷");
-
             // Get prime
             TPDirect.card.getPrime((result) => {
                 if (result.status !== 0) {
                     // get prime error
-                    console.log(result.msg);
                     return;
                 }
 
                 let prime = result.card.prime;
-                console.log(prime);
                 this.submitPrime(prime);
             });
         },
@@ -235,7 +223,6 @@ export default {
                     : "null";
 
                 // 要把得到的Prime Token 送給後端,
-                console.log("交易進行中");
                 let payReslut = await fetch(
                     `${BASE_URL}/tappay.php?prime=${prime}`,
                     {
@@ -254,24 +241,41 @@ export default {
                 let resText = await payReslut.json();
                 // 這邊再把他轉為json物件
                 let payStatus = JSON.parse(resText);
-                console.log(payStatus);
 
                 if (payStatus.status === 0) {
-                    console.log("付款成功");
+                    /*     console.log("付款成功"); */
                     this.isTrading = false;
                     this.isDone = true;
-
+                    this.open(true, this.$store.getters.getCoin);
                     this.$store.dispatch("getMemCart");
                     this.$store.state.discount = {};
                 } else {
-                    console.log("付款失敗");
+                    /*  console.log("付款失敗"); */
                 }
             } catch (err) {
-                console.log(err);
+                /*     console.log(err); */
             }
         },
         autoInsertMemInfo() {
-            console.log(this.isEqualMemInfo);
+            if (this.isEqualMemInfo) {
+                this.ordPerson = this.$store.state.user.mem_name;
+                this.ordPhone = this.$store.state.user.mem_mob;
+                this.ordAdd = this.$store.state.user.mem_add;
+            } else {
+                this.$refs.form.reset();
+            }
+        },
+        open(nodesc, coin) {
+            this.$Notice.open({
+                title: `感謝您的購買`,
+                desc: nodesc
+                    ? `<h3>您總共獲得 <img  width=25px
+                                    hegitht=25px
+                                    src="./images/shop/coin.png"
+                                    alt=""
+                                /> x${coin}</h3>`
+                    : ``,
+            });
         },
     },
     mounted() {
@@ -349,10 +353,8 @@ export default {
         TPDirect.card.onUpdate((update) => {
             if (update.canGetPrime) {
                 //全部欄位皆為正確 可以呼叫 getPrime
-                console.log("已填滿");
                 this.CardInfoFilled = true;
             } else {
-                console.log("尚未填滿");
                 this.CardInfoFilled = false;
             }
 

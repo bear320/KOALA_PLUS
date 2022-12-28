@@ -23,10 +23,10 @@
 </template>
 <script>
 export default {
-    props: ["proImg", "proName", "proPrice", "proId", "col"],
+    props: ["proImg", "proName", "proPrice", "proId", "col", "path"],
     data() {
         return {
-            img: `./images/shop/${this.proImg}`,
+            img: `${this.path}${this.proImg}`,
         };
     },
     methods: {
@@ -57,10 +57,12 @@ export default {
             });
         },
         scrollToProduct() {
-            window.scrollTo({
-                top: 0,
-                behavior: "instant",
-            });
+            setTimeout(() => {
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                });
+            }, 100);
         },
     },
 };

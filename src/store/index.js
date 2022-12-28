@@ -40,6 +40,7 @@ export default createStore({
                 mem_id: payload?.mem_id,
                 mem_mob: payload?.mem_mob,
                 mem_add: payload?.mem_add,
+                mem_name: payload?.mem_name,
             };
         },
 
@@ -62,14 +63,13 @@ export default createStore({
 
                 const result = await res.json();
                 if (result.code == 1) {
-                    console.log(result);
                     context.commit("updateMemInfo", result.memInfo);
                     context.dispatch("getMemCart");
                 } else {
                     throw new Error("帳號或密碼錯誤");
                 }
             } catch (error) {
-                console.log(error);
+                /*  console.log(error); */
             }
         },
 
