@@ -186,7 +186,6 @@ export default {
                 });
         },
         updateImgs(payload) {
-            console.log(payload);
             this.imgsPath = payload.map((img, index) => {
                 return {
                     pathID: index,
