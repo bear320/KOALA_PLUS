@@ -31,7 +31,7 @@
                             myfield="mem_account"
                             v-model="memindexs.mem_account"
                             ref="mem_account"
-                            @keyup="reg_emailType"
+                            @keyup.enter="reg_emailType"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -42,7 +42,7 @@
                             myfield="mem_mob"
                             v-model="memindexs.mem_mob"
                             ref="mem_mob"
-                            @keyup="reg_phoneType2"
+                            @keyup.enter="reg_phoneType2"
                         />
                     </tr>
                     <tr class="tabcontent_txt">
@@ -71,7 +71,7 @@
                     <Icon type="ios-create" size="20" color="#337a7d" />
                     <span>重設會員密碼</span>
                     <p>
-                        為了您的帳戶安全，密碼的長度必須至少為八個字符，並且包含字母和數字字符的任意組合。
+                        為了您的帳戶安全，密碼的長度必須為六到九個字符，並且包含字母和數字字符的任意組合。
                         密碼區分大小寫。 新密碼不能與舊密碼相同。
                     </p>
                 </div>
@@ -86,9 +86,8 @@
                             ref="mem_psw"
                             v-if="pwdType_one"
                             v-model="passwordcheck"
-                            @keyup.enter="memPageDown"
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <input
                             type="password"
@@ -96,11 +95,10 @@
                             myfield="mem_psw"
                             ref="mem_psw"
                             v-model="passwordcheck"
-                            @keyup.enter="memPageDown"
                             required
                             v-else
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <img
                             :src="seen_one ? seenImg : unseenImg"
@@ -121,7 +119,7 @@
                             v-if="pwdType_two"
                             v-model="newpassword"
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <input
                             type="password"
@@ -129,11 +127,10 @@
                             myfield="mem_password1"
                             ref="mem_password1"
                             v-model="newpassword"
-                            @keyup.enter="memPageDown"
                             required
                             v-else
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <img
                             :src="seen_two ? seenImg : unseenImg"
@@ -154,7 +151,7 @@
                             v-if="pwdType_three"
                             v-model="newpasswordconfirm"
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <input
                             type="password"
@@ -162,11 +159,10 @@
                             myfield="mem_password1"
                             ref="mem_passwordconfirm"
                             v-model="newpasswordconfirm"
-                            @keyup.enter="memPageDown"
                             required
                             v-else
                             autocomplete="off"
-                            @keyup="reg_pswType"
+                            @keyup.enter="reg_pswType"
                         />
                         <img
                             :src="seen_three ? seenImg : unseenImg"
@@ -263,29 +259,30 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((status) => {
-                        alert(status.msg);
-                        status.$Notice.open({
-                            title: "Notification title",
-                            desc: nodesc
-                                ? ""
-                                : "Here is the notification description. Here is the notification description. ",
-                        });
+                        console.log(status);
+                        console.log(status.msg);
+                        if (status.status == "1") {
+                            this.mod_change();
+                            // 已修改完成會員資料
+                        } else {
+                            this.mod_error();
+                        }
                     });
                 if (this.passwordcheck != "") {
                     // alert("有輸入內容");
                     if (this.newpassword == this.newpasswordconfirm) {
                         // alert("相同");
                     } else {
-                        alert("密碼不相同");
-                        this.$Notice.open({
-                            title: "Notification title",
-                            desc: nodesc
-                                ? ""
-                                : "Here is the notification description. Here is the notification description. ",
-                        });
+                        // alert("密碼不相同");
+                        // this.psw_thesame();
+                        // 新密碼輸入不相同
                     }
                 } else {
                     // alert("密碼不可為空白");
+                    // this.$Notice.open({
+                    //     title: "提醒",
+                    //     desc: nodesc ? "" : "密碼不可為空白",
+                    // });
                 }
             } else {
                 alert("登入失效");
@@ -309,23 +306,28 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((status) => {
-                        console.log(status);
-                        alert(status.msg);
+                        // alert(status.msg);
+                        this.$Message.info(status.msg);
+                        // 傳回PHP的msg
                     });
                 if (this.passwordcheck != "") {
-                    alert("有輸入內容");
+                    // alert("有輸入內容");
                     console.log(this.newpassword);
                     console.log(this.newpasswordconfirm);
                     if (this.newpassword == this.newpasswordconfirm) {
-                        alert("相同");
+                        // alert("相同");
                     } else {
-                        alert("密碼不相同");
+                        // alert("密碼不相同");
+                        this.psw_thesame();
+                        // this.$Message.info("新密碼輸入不相同");
                     }
                 } else {
                     // alert("密碼不可為空白");
+                    this.psw_null();
                 }
             } else {
                 // alert("登入失效");
+                this.$Message.info("登入失效");
             }
         },
         signOut() {
@@ -336,22 +338,26 @@ export default {
                 onOk: () => {
                     setTimeout(() => {
                         this.$Modal.remove();
-                        this.$Message.info("您已登出會員");
+
                         // location.href = "/login";
+                        const postsingOut = this.$refs.postsingOut;
+                        fetch(`${BASE_URL}/postMemberLogout.php`, {
+                            method: "POST",
+                            credentials: "include",
+                            body: new URLSearchParams(postsingOut),
+                        })
+                            .then((res) => res.json())
+                            .then((status) => {
+                                console.log(status);
+                                // alert(status.msg);
+                                this.$Message.info("您已登出會員");
+                            });
                     }, 2000);
                 },
+                onCancel: () => {
+                    // this.$Message.info("Clicked cancel");
+                },
             });
-            const postsingOut = this.$refs.postsingOut;
-            fetch(`${BASE_URL}/postMemberLogout.php`, {
-                method: "POST",
-                credentials: "include",
-                body: new URLSearchParams(postsingOut),
-            })
-                .then((res) => res.json())
-                .then((status) => {
-                    console.log(status);
-                    // alert(status.msg);
-                });
         },
         // 密碼是否顯示的控制
         changeType_1: function () {
@@ -412,6 +418,30 @@ export default {
             });
         },
         // =============
+        mod_change(nodesc) {
+            this.$Notice.open({
+                title: "提醒",
+                desc: nodesc ? "" : "已修改完成會員資料",
+            });
+        },
+        mod_error(nodesc) {
+            this.$Notice.open({
+                title: "錯誤提醒",
+                desc: nodesc ? "" : "請檢查電話號碼長度是否過長？",
+            });
+        },
+        psw_thesame(nodesc) {
+            this.$Notice.open({
+                title: "提醒",
+                desc: nodesc ? "" : "新密碼輸入不相同",
+            });
+        },
+        psw_null(nodesc) {
+            this.$Notice.open({
+                title: "提醒",
+                desc: nodesc ? "" : "密碼不可為空白",
+            });
+        },
         // ================正則
 
         reg_phoneType2() {
@@ -437,7 +467,7 @@ export default {
         reg_pswType() {
             let mem_oldpsw_val = this.$refs.mem_psw.value;
             let mem_newpsw_val = this.$refs.mem_password1.value;
-            // const validate = /^(?=.*d){6,8}$/;
+            const validate = /^(?=.*d)(?=.*[a-zA-Z]).{6,9}$/;
             let res1 = validate.test(mem_oldpsw_val);
             let res2 = validate.test(mem_newpsw_val);
             console.log(res1);
@@ -452,7 +482,6 @@ export default {
                 this.psw_open(false);
             }
         },
-        // /(?=^.{8,}{7,8}$)/
     },
     created() {
         this.getmemCentre();
