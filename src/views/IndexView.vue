@@ -114,6 +114,8 @@ export default {
                 top: 50%;
                 left: 50%;
                 transform: translate(-50%, -50%);
+                padding: 40%;
+                writing-mode: vertical-lr;
             }
         }
         .link:hover {

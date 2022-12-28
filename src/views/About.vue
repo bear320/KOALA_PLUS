@@ -73,67 +73,11 @@
                         {{ option.value }}
                     </option>
                 </select>
-                <div v-show="selectCategory == '所有公告'">
-                    <div
-                        class="oneArticle"
-                        v-for="(article, idx) in uploaded"
-                        :key="article"
-                    >
-                        <div
-                            class="article-img"
-                            :style="{
-                                backgroundImage:
-                                    'url(' +
-                                    require(`@/assets/images/about/${article.news_img}`) +
-                                    ')',
-                            }"
-                        ></div>
-                        <div class="article">
-                            <button
-                                @click="openLightbox(idx)"
-                                class="article-title"
-                            >
-                                {{ article.news_title }}
-                            </button>
-                            <div class="tag">
-                                <p class="article-tag">
-                                    #{{ article.news_category }}
-                                </p>
-                                <p class="article-date">
-                                    {{ article.news_date }}
-                                </p>
-                            </div>
-                            <div class="article-content">
-                                {{ article.news_content }}
-                            </div>
-                        </div>
-                        <lightbox ref="lightbox">
-                            <template #img>
-                                <img
-                                    :src="
-                                        require(`@/assets/images/about/${article.news_img}`)
-                                    "
-                                    alt="公告圖片"
-                                />
-                            </template>
-                            <template #article-title>
-                                <h3>{{ article.news_title }}</h3>
-                            </template>
-                            <template #article-tag>
-                                <p>{{ article.news_category }}</p>
-                            </template>
-                            <template #article-date>
-                                <p>{{ article.news_date }}</p>
-                            </template>
-                            <template #article-content>
-                                <p>{{ article.news_content }}</p>
-                            </template>
-                        </lightbox>
-                    </div>
-                </div>
                 <div
                     class="oneArticle"
-                    v-for="(article, idx) in newarticles"
+                    v-for="(article, idx) in selectCategory == '所有公告'
+                        ? uploaded
+                        : newarticles"
                     :key="article"
                 >
                     <div
