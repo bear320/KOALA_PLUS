@@ -38,7 +38,7 @@
                 <h3 class="mem_id">會員編號</h3>
                 <h3 class="mem_name">姓名</h3>
                 <h3 class="mem_mob">手機</h3>
-                <h3 class="mem_validation">email驗證</h3>
+                <h3 class="mem_validation">Email驗證</h3>
                 <h3 class="mem_account">Email / 帳號</h3>
 
                 <h3 class="black_switch">黑名單</h3>
@@ -69,7 +69,7 @@
                         v-model.number="item.mem_state"
                     >
                         <template #open>
-                            <span>屏蔽</span>
+                            <span>封鎖</span>
                         </template>
                         <template #close>
                             <span>正常</span>
@@ -110,8 +110,8 @@ export default {
             lists: [
                 { val: "1", item: "會員編號（正序）" },
                 { val: "2", item: "會員編號（反序）" },
-                { val: "3", item: "email（正序）" },
-                { val: "4", item: "email（反序）" },
+                { val: "3", item: "Email（正序）" },
+                { val: "4", item: "Email（反序）" },
             ],
             searchMemName: "",
             totalPage: 0,
@@ -146,6 +146,7 @@ export default {
                 this.$Modal.confirm({
                     title: "黑名單確認",
                     content: "您確定要切換開關狀態嗎？",
+
                     onOk: () => {
                         resolve();
                         console.log(this.$Modal);
