@@ -1,33 +1,27 @@
 <template>
     <div class="upload-wrapper">
-        <input
-            v-for="(item, index) in 4"
-            :key="item"
-            type="file"
-            accept="image/*"
-            :id="`uploadImages${index}`"
-            style="display: none"
-            name="image[]"
-            ref="imgInput"
-            @change="showImages(index)"
-        />
+        <form enctype="multipart/form-data" ref="koala_form">
+            <input
+                type="file"
+                accept="image/*"
+                id="uploadImages"
+                style="display: none"
+                name="image"
+                ref="imgInput"
+                @change="showImages(index)"
+            />
+        </form>
 
-        <template v-if="previewList.length">
-            <div
-                v-for="(item, index) in previewList"
-                :key="item.id"
-                class="upImage"
-            >
-                <div class="bgBlock">
-                    <Icon
-                        type="ios-trash-outline"
-                        @click="deleteImage(item, index)"
-                    ></Icon>
-                </div>
-                <img :src="item" />
+        <div v-for="(item, index) in imgs" :key="item.pathID" class="upImage">
+            <div class="bgBlock">
+                <Icon
+                    type="ios-trash-outline"
+                    @click="deleteImage(item, index)"
+                ></Icon>
             </div>
-        </template>
-        <label :for="`uploadImages${emptyIndex}`" v-show="!imgAllFilled">
+            <img :src="item.path" />
+        </div>
+        <label for="uploadImages" v-show="!imgAllFilled">
             <img
                 src="@/assets/images/addImage.svg"
                 alt="上傳圖片"
@@ -38,22 +32,26 @@
 </template>
 
 <script>
+import { BASE_URL } from "@/assets/js/common.js";
 export default {
+    props: ["imgs", "koala_name"],
     data() {
         return {
             imageList: [],
-            previewList: [],
-            showLabel: [false, false, false, false],
+            previewList: this.imgs,
+            showLabel: [],
+            editItem: [],
         };
     },
+
     computed: {
         // 檢查圖片位址為空的位址
         emptyIndex() {
-            return this.showLabel.findIndex((item) => item === false);
+            return this.imgs.length;
         },
         // 當圖片上傳至四張時就不會顯示上傳的Label
         imgAllFilled() {
-            return this.showLabel.every((item) => item === true);
+            return this.imgs.length >= 4;
         },
     },
 
@@ -63,12 +61,10 @@ export default {
                 element.value = "";
             });
             this.imageList = [];
-            this.previewList = [];
-            this.showLabel = [false, false, false, false];
         },
         showImages(i) {
             // 預覽上傳圖片
-            let input = this.$refs.imgInput[i];
+            let input = this.$refs.imgInput;
             let index = 0;
             if (input.files) {
                 var reader = new FileReader();
@@ -80,18 +76,52 @@ export default {
                 if (isRepeat) return;
                 this.imageList.push(input.files[index]);
                 reader.onload = (event) => {
-                    this.previewList.push(event.target.result);
+                    this.imgs.push({
+                        pathID: this.editItem[0],
+                        path: event.target.result,
+                    });
+                    this.editItem.shift();
                 };
                 reader.readAsDataURL(input.files[index]);
             }
             this.showLabel[i] = true;
+            // console.log(this.koala_name);
+            const formData = new FormData(this.$refs["koala_form"]);
+            formData.append("type", "insert");
+            formData.append("index", `${this.emptyIndex + 1}`);
+            formData.append("koala_name", this.koala_name);
+            // console.log(formData.getAll("image"));
+            fetch(`${BASE_URL}/postEditKoalaImg.php`, {
+                method: "post",
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((json) => console.log(json));
         },
+
         deleteImage(file, i) {
-            console.log(this.imageList);
             this.showLabel[i] = false;
-            this.$refs.imgInput[i].value = "";
-            this.previewList.splice(this.previewList.indexOf(file), 1);
-            this.imageList.splice(this.previewList.indexOf(file), 1);
+
+            this.$refs.imgInput.value = "";
+            this.imageList.splice(this.imageList.indexOf(file), 1);
+            this.imgs.splice(this.imgs.indexOf(file), 1);
+            fetch(`${BASE_URL}/postEditKoalaImg.php`, {
+                method: "post",
+                body: new URLSearchParams({
+                    type: "del",
+                    index: i + 1,
+                    koala_name: this.koala_name,
+                }),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    this.$emit(
+                        "update",
+                        json.filter((item) => {
+                            return item !== "";
+                        })
+                    );
+                });
         },
     },
     created() {

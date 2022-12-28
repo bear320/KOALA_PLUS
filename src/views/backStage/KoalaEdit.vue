@@ -14,38 +14,38 @@
     </section>
     <form
         class="wrapper function-wrapper"
-        action=""
         enctype="multipart/form-data"
+        ref="koala_form"
     >
         <div class="line">
             <div class="cell">
-                <label for="koala-id">編號：</label>
+                <label for="koala_id">編號：</label>
                 <input
                     type="text"
-                    name="koala-id"
-                    id="koala-id"
+                    name="koala_id"
+                    id="koala_id"
                     v-model="source.koala_id"
                     disabled
                     required
                 />
             </div>
             <div class="cell">
-                <label for="koala-name">名字：</label>
+                <label for="koala_name">名字：</label>
                 <input
                     type="text"
-                    name="koala-name"
-                    id="koala-name"
+                    name="koala_name"
+                    id="koala_name"
                     placeholder="請輸入名字"
                     required
                     v-model="source.koala_name"
                 />
             </div>
             <div class="cell">
-                <label for="koala-sex">性別：</label>
+                <label for="koala_sex">性別：</label>
                 <select
                     type="text"
-                    name="koala-sex"
-                    id="koala-sex"
+                    name="koala_sex"
+                    id="koala_sex"
                     v-model="source.koala_sex"
                     required
                 >
@@ -56,32 +56,32 @@
         </div>
         <div class="line">
             <div class="cell">
-                <label for="koala-dob">出生日期：</label>
+                <label for="koala_dob">出生日期：</label>
                 <input
                     type="date"
-                    name="koala-dob"
-                    id="koala-dob"
+                    name="koala_dob"
+                    id="koala_dob"
                     v-model="source.koala_dob"
                     required
                 />
             </div>
             <div class="cell">
-                <label for="koala-dob">年齡：</label>
+                <label for="koala_age">年齡：</label>
                 <input
                     type="text"
-                    name="koala-dob"
-                    id="koala-dob"
+                    name="koala_age"
+                    id="koala_age"
                     v-model="source.koala_age"
                     disabled
                     required
                 />
             </div>
             <div class="cell">
-                <label for="koala-listed">上 / 下架：</label>
+                <label for="koala_listed">上 / 下架：</label>
                 <select
                     type="text"
-                    name="koala-listed"
-                    id="koala-listed"
+                    name="koala_listed"
+                    id="koala_listed"
                     v-model="source.koala_listed"
                     required
                 >
@@ -92,10 +92,10 @@
         </div>
         <div class="line">
             <div class="cell">
-                <label for="koala-desc">描述：</label>
+                <label for="koala_info">描述：</label>
                 <textarea
-                    name="koala-desc"
-                    id="koala-desc"
+                    name="koala_info"
+                    id="koala_info"
                     cols="30"
                     rows="10"
                     placeholder="請輸入描述內容"
@@ -110,8 +110,12 @@
                     新增圖片：
                     <span>* 請至少上傳一張圖片，數量上限為四張</span>
                 </h4>
-                <!-- <ImageUpload></ImageUpload> -->
-                <ImageEdit></ImageEdit>
+                <KoalaImageEdit
+                    ref="imageUpload"
+                    :imgs="imgsPath"
+                    :koala_name="this.$route.params.koala_name"
+                    @update="updateImgs"
+                ></KoalaImageEdit>
             </div>
         </div>
         <div class="line">
@@ -129,35 +133,38 @@
 
 <script>
 import Header from "@/components/backStage/Header.vue";
-import ImageUpload from "@/components/backStage/ImageUpload.vue";
-import ImageEdit from "@/components/backStage/ImageEdit.vue";
+import KoalaImageEdit from "@/components/backStage/KoalaImageEdit.vue";
 import { BASE_URL } from "@/assets/js/common.js";
 export default {
     components: {
         Header,
-        // ImageUpload,
-        ImageEdit,
+        KoalaImageEdit,
     },
     data() {
         return {
-            source: [],
+            // source: [],
+            source: {},
+            imgsPath: [],
         };
     },
     methods: {
-        getKoalaEditInfo() {
-            const koalaName = this.$route.params.koala_name;
-            const apiURL = new URL(
-                `${BASE_URL}/getKoalaEditInfo.php?koalaName=${koalaName}`
-            );
-            // const apiURL = new URL(
-            //     `http://localhost:8888/cgd103_g1/public/api/getKoalaEditInfo.php?koalaName=${koalaName}`
-            // );
-            fetch(apiURL)
-                .then((res) => res.json())
-                .then((json) => {
-                    this.source = json.koalaInfo;
-                });
-        },
+        // getKoalaEditInfo() {
+        //     const koalaName = this.$route.params.koala_name;
+        //     // const apiURL = new URL(
+        //     //     `${BASE_URL}/getKoalaEditInfo.php?koalaName=${koalaName}`
+        //     // );
+        //     const apiURL = new URL(
+        //         `${BASE_URL}/getKoalaInfo.php?koalaName=${koalaName}`
+        //     );
+        //     // const apiURL = new URL(
+        //     //     `http://localhost:8888/cgd103_g1/public/api/getKoalaEditInfo.php?koalaName=${koalaName}`
+        //     // );
+        //     fetch(apiURL)
+        //         .then((res) => res.json())
+        //         .then((json) => {
+        //             this.source = json.koalaInfo;
+        //         });
+        // },
         postKoalaUpdate() {
             const apiURL = new URL(`${BASE_URL}/postKoalaUpdate.php`);
             const koalaUpdate = {
@@ -178,10 +185,19 @@ export default {
                     this.confirmModal();
                 });
         },
+        updateImgs(payload) {
+            console.log(payload);
+            this.imgsPath = payload.map((img, index) => {
+                return {
+                    pathID: index,
+                    path: `../images/koalas/${img}`,
+                };
+            });
+        },
         confirmModal() {
             this.$Modal.confirm({
-                title: "訂單備註已修改",
-                content: "<p>訂單備註已修改，是否關閉此分頁？</p>",
+                title: "無尾熊資訊已修改",
+                content: "<p>無尾熊資訊已修改，是否關閉此分頁？</p>",
                 okText: "是",
                 cancelText: "否",
                 onOk: () => {
@@ -191,8 +207,24 @@ export default {
             });
         },
     },
-    created() {
-        this.getKoalaEditInfo();
+    async created() {
+        // this.getKoalaEditInfo();
+        const res = await fetch(
+            `${BASE_URL}/getKoalaInfo.php?koalaName=${this.$route.params.koala_name}`
+        );
+
+        const result = await res.json();
+        this.source = result.koalaInfo;
+        this.imgsPath = this.source.koala_images
+            .filter((item) => {
+                return item !== "";
+            })
+            .map((img, index) => {
+                return {
+                    pathID: index,
+                    path: `../images/koalas/${img}`,
+                };
+            });
     },
 };
 </script>

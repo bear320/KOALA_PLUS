@@ -108,15 +108,15 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    if (json.status === 0) {
-                        console.log("新增成功");
-                        // 新增成功後，表單欄位
-                        this.$refs["prod-form"].reset();
-                        // 呼叫ImageUpload裡的Clear重置狀態
-                        this.$refs.imageUpload.Clear();
-                    } else {
-                        console.log("新增失敗");
-                    }
+                    // if (json.status === 0) {
+                    console.log("新增成功");
+                    // 新增成功後，表單欄位
+                    this.$refs["prod-form"].reset();
+                    // 呼叫ImageUpload裡的Clear重置狀態
+                    this.$refs.imageUpload.Clear();
+                    // } else {
+                    // console.log("新增失敗");
+                    // }
                 });
         },
     },
