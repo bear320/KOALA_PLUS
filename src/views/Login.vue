@@ -58,18 +58,19 @@
                                     />
                                 </div>
                                 <div>
-                                    <p>帳號/信箱</p>
+                                    <p>信箱</p>
                                     <input
                                         name="mem_account"
                                         id="mem_account"
-                                        type="email"
-                                        placeholder="你的信箱或帳號"
+                                        type="text"
+                                        placeholder="你的信箱"
                                         v-model="sign_up_account"
                                         required
                                     />
-                                    <span id="idMsg">{{ idMsg }}</span>
+                                    <!-- <span id="idMsg">{{ idMsg }}</span> -->
                                 </div>
-                                <div>
+                                <div id="idMsg_block">
+                                    <span id="idMsg">{{ idMsg }}</span>
                                     <div
                                         class="btn_email_confirm"
                                         @click="check_account"
@@ -93,7 +94,7 @@
                                         name="mem_psw"
                                         class="content_active_sign_up_move2"
                                         type="password"
-                                        placeholder="Confirm Password"
+                                        placeholder="你的密碼"
                                         v-model="sign_up_password"
                                         required
                                         v-else
@@ -120,7 +121,7 @@
                                     <input
                                         class="confirm_password content_active_sign_up_move3"
                                         type="password"
-                                        placeholder="Confirm Password"
+                                        placeholder="再次輸入你的密碼"
                                         v-model="sign_up_password_comfirm"
                                         required
                                         v-else
@@ -150,10 +151,10 @@
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
                                 <div>
-                                    <p>帳號/信箱</p>
+                                    <p>信箱</p>
                                     <input
                                         type="text"
-                                        placeholder="Account"
+                                        placeholder="你的信箱"
                                         v-model="login_account"
                                         required
                                     />
@@ -173,7 +174,7 @@
                                     <input
                                         class="content_active_login_move4"
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="你的密碼"
                                         v-model="login_password"
                                         required
                                         v-else
@@ -216,15 +217,16 @@
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>忘記密碼</h2>
                             <form
+                                ref="form"
                                 @submit.prevent="forget_password"
                                 @submit="sendEmail"
                             >
                                 <div>
-                                    <p>帳號/信箱</p>
+                                    <p>信箱</p>
                                     <input
                                         id="forget_password_account"
                                         type="text"
-                                        placeholder="Account"
+                                        placeholder="你的信箱"
                                         name="user_email"
                                         v-model="forget_password_account"
                                         required
@@ -236,13 +238,14 @@
                                 <input
                                     id="forget_password_none"
                                     type="text"
-                                    name="mem_psw"
+                                    name="forgot_psw"
                                     v-model="mem_psw"
                                 />
                                 <button
                                     class="btn_login"
                                     type="submit"
-                                    @click="sendEmail"
+                                    value="Send"
+                                    @click="forget_password"
                                 >
                                     驗證信箱
                                 </button>
@@ -429,10 +432,11 @@ export default {
                 .then(()=>{
                     alert("註冊成功")
                 })
-                // .then((result) => {
-                //     alert(result.msg);
-                //     location.reload();
-                // });
+                .then(() => {
+                    // alert(result.msg);
+                    // location.reload();
+                    this.$router.push({ path: "/login" });
+                });
         },
 
         // ======================================== Email 後臺比對 ======================================== //
@@ -443,7 +447,11 @@ export default {
                 // console.log("=====",xhr.status);
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
-            const apiURL = new URL(`${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`);
+            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`;
+            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `${document.getElementById("mem_account").value}`;
+            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `aaaaa${document.getElementById("mem_account").value}aaaaa`;
+            const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + document.getElementById("mem_account").value;
+            
             // let url =
             //     "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
             //     document.getElementById("mem_account").value;
@@ -478,6 +486,33 @@ export default {
         },
 
         // ======================================== 寄 Email  ======================================== //
+        sendinggg(){
+            console.log("我是後面執行的");
+            emailjs
+                .send(
+                    "service_Charmy",
+                    "template_21xikzb",
+                    {
+                        user_email: this.forget_password_account,
+                        forgot_psw: this.mem_psw,
+
+                    },
+                    "X1x5cmen7BlWhZ2yb"
+                )
+                .then(
+                    (result) => {
+                        // console.log("SUCCESS!", result.text);
+                        console.log(this);
+                        console.log('TEST',this.mem_psw);
+                        alert("密碼寄送成功 請查收");
+                    },
+                    (error) => {
+                        // console.log("FAILED...", error.text);
+                        alert("寄送失敗 請注意信箱是否錯誤")
+                    }
+                );
+        },
+
         sendEmail() {
             // ======================================== 把忘記的密碼撈出來  ======================================== //
             let QQ = this; //這裡的QQ指向的Vue實體
@@ -492,54 +527,41 @@ export default {
                 // }
             };
 
-            // const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
-            var url =
-                "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-                document.getElementById("forget_password_account").value;
-            xhr.open("get", url, true);
+            const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + document.getElementById("forget_password_account").value);
+            // var url =
+            //     "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+            //     document.getElementById("forget_password_account").value;
+            xhr.open("get", apiURL, true);
             xhr.send(null);
-
-            function showMember(json) {
+            console.log("1");
+            async function showMember(json) {
+                console.log("2");
                 var xhr = new XMLHttpRequest();
-
-                // const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + `document.getElementById("forget_password_account").value`);
-                var url =
-                    "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-                    document.getElementById("forget_password_account").value;
-                xhr.open("get", url, true);
+                
+                const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + document.getElementById("forget_password_account").value);
+                // var url =
+                //     "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
+                //     document.getElementById("forget_password_account").value;
+                xhr.open("get", apiURL, true);
                 xhr.send(null);
-                let member = JSON.parse(json);
+                console.log("3");
+                let member =await JSON.parse(json);
                 // let html;
-
+                
                 // 這裡的QQ指的是Vue實體
+                console.log("4");
                 QQ.mem_psw = member.mem_psw;
-
+                // console.log("QQQQ",QQ.mem_psw);
+                
                 // html = `<p>${member.mem_psw}</p>`;
-
+                
                 // document.getElementById("show_forget_password").innerHTML = html;
+                console.log("我是前面執行的");
+                QQ.sendinggg();
+                console.log("6");
             }
-
             // ======================================== 忘記密碼的 EmailJs  ======================================== //
-            emailjs
-                .send(
-                    "service_Charmy",
-                    "template_21xikzb",
-                    {
-                        user_email: this.forget_password_account,
-                        mem_psw: this.mem_psw,
-                    },
-                    "X1x5cmen7BlWhZ2yb"
-                )
-                .then(
-                    (result) => {
-                        // console.log("SUCCESS!", result.text);
-                        alert("註冊成功");
-                    },
-                    (error) => {
-                        // console.log("FAILED...", error.text);
-                        alert("註冊失敗")
-                    }
-                );
+            
         },
 
         // ======================================== 看得到密碼 click事件 ======================================== //
@@ -591,13 +613,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.memTable th {
-    background-color: pink;
-}
+// .memTable th {
+//     background-color: pink;
+// }
 
-.memTable td {
-    border-bottom: 1px dotted deeppink;
-}
+// .memTable td {
+//     border-bottom: 1px dotted deeppink;
+// }
 
 #show_forget_password {
     display: none;
@@ -605,6 +627,16 @@ export default {
 
 #forget_password_none {
     display: none;
+}
+
+#idMsg_block {
+    position: relative;
+}
+
+#idMsg {
+    position: absolute;
+    bottom: 45%;
+    left: 35%;
 }
 
 .main_content {
@@ -905,8 +937,8 @@ export default {
     border-radius: 10px;
     box-shadow: 1px 5px 20px -5px rgba(0, 0, 0, 0.4);
     color: #eee;
-    margin-top: -5%;
-    margin-left: 37.5%;
+    margin-top: -3%;
+    margin-left: 45.5%;
     cursor: pointer;
 }
 
@@ -997,19 +1029,19 @@ export default {
 
 // ======================================== 改 input 位置 ======================================== //
 .content_active_sign_up > form > div > .content_active_sign_up_move1 {
-    margin-left: 11%;
+    margin-left: 5%;
 }
 
 .content_active_sign_up > form > div > .content_active_sign_up_move2 {
-    margin-left: 10.5%;
+    margin-left: 5%;
 }
 
 .content_active_sign_up > form > div > .content_active_sign_up_move3 {
-    margin-left: 6%;
+    margin-left: 5%;
 }
 
 .content_active_login > form > div > .content_active_login_move4 {
-    margin-left: 11%;
+    margin-left: 5%;
 }
 
 .content_active_sign_up_moveTxt_1 {
@@ -1017,7 +1049,7 @@ export default {
 }
 
 .content_active_sign_up_moveTxt_2 {
-    padding-left: 5%;
+    // padding-left: 5%;
 }
 
 .content_active_login_moveTxt {
