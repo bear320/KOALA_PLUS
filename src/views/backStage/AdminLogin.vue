@@ -63,6 +63,19 @@ export default {
                         this.$router.push({ path: "/bs-index" });
                     });
             }
+
+
+            
+            const apiURL = new URL(`${BASE_URL}/postAdminLoginTime.php`);
+                const last_login = {
+                    memId: this.$store.state.user.mem_id,
+                };
+
+                fetch(apiURL, {
+                    method: "POST",
+                    body: new URLSearchParams(last_login),
+                })
+                    .then((res) => res.json())
         },
     },
 };
