@@ -52,6 +52,20 @@
 </template>
 
 <script>
+const Animations = {
+    fadeOut(element) {
+        element.classList.add("fadeOut");
+        setTimeout(function () {
+            element.style.display = "none";
+        }, 500);
+    },
+    fadeIn(element) {
+        element.style.display = "block";
+        setTimeout(function () {
+            element.classList.remove("fadeOut");
+        }, 10);
+    },
+};
 export default {
     porps: {},
     data() {
@@ -67,6 +81,19 @@ export default {
             i: 0,
             curWidth: window.innerWidth,
         };
+    },
+    mounted() {
+        let before = window.scrollY;
+        window.addEventListener("scroll", function () {
+            let after = window.scrollY;
+            if (after - before > 300) {
+                Animations.fadeOut(document.querySelector("#navbar"));
+                before = after;
+            } else if (before - after > 100) {
+                Animations.fadeIn(document.querySelector("#navbar"));
+                before = after;
+            }
+        });
     },
     computed: {
         showKoala() {
@@ -85,8 +112,8 @@ export default {
                 return;
             } else {
                 this.$router.push({ path: "/my-koala" });
-                }
-            },
+            }
+        },
         open(nodesc) {
             this.$Notice.open({
                 title: "請登入會員",
@@ -103,6 +130,14 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+#navbar {
+    transition: opacity 0.5s;
+    opacity: 1;
+}
+
+#navbar.fadeOut {
+    opacity: 0;
+}
 header {
     box-shadow: 0px 4px 4px 0px rgba(130, 130, 130, 0.25);
     z-index: 998;
