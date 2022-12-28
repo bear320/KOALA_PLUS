@@ -2,61 +2,13 @@
 header('Access-Control-Allow-Origin:*');
 header("Content-Type:application/json;charset=utf-8");
 require_once("./connect_cgd103g1.php");
-const MY_DIR = "shop";
+const MY_DIR = "../images/shop";
 
 $type = $_POST["type"];
 $index= $_POST["index"];
 $prod_id = $_POST["prod_id"];
 
 $prod_column = "prod_img" . "$index";
-
-/* $images = $_FILES["image"];
-foreach($images["tmp_name"] as $i => $tmp_name){
-    switch($images["error"][$i]){
-        case UPLOAD_ERR_OK:
-            if( file_exists(MY_DIR) == false){
-                mkdir(MY_DIR); //make directory
-            }
-
-            $from = $tmp_name;
-            $fileExt = pathinfo($images["name"][$i],PATHINFO_EXTENSION);
-            $fileName[$i] = uniqid() . ".". $fileExt;
-
-            $to = "../images/shop/".$fileName[$i];
-            if(copy( $from, $to)){
-                $msg[] = "圖像 ".$images["name"][$i]." 上傳成功";
-            }else{
-                $msg[] = "圖像 ".$images["name"][$i]." 上傳失敗";
-            }
-            break;
-        case UPLOAD_ERR_INI_SIZE:
-            $msg[] = "圖像 ".$images["name"][$i]." 上傳檔案太大,不能超過 ". ini_get("upload_max_filesize") ;    
-            break;
-        case UPLOAD_ERR_FORM_SIZE:
-            $msg[] = "圖像 ".$images["name"][$i]." 上傳檔案太大,不能超過 ".$_POST["MAX_FILE_SIZE"];            
-            break;
-        case UPLOAD_ERR_PARTIAL:
-            $msg[] = "圖像 ".$images["name"][$i]." 上傳檔案不完整";
-            break;
-        case UPLOAD_ERR_NO_FILE:
-            $msg[] = "圖像 ".$images["name"][$i]." 没有上傳檔案";
-            break;
-        default:
-            $msg[] = "圖像 ".$images["name"][$i]." 上傳檔案失敗，錯誤代碼: ".$images["error"][$i]."請通知系統開發人員";
-    }
-} */
-/* try {
-	$sql = "UPDATE `product` SET `prod_name`='$prod_name',`prod_price`='$prod_price',prod_info='$prod_info',prod_listed='$prod_listed',prod_category='$prod_category',
-    `prod_img1`='$prod_img1',`prod_img2`='$prod_img2',`prod_img3`='$prod_img3',`prod_img4`='$prod_img4'
-    WHERE `prod_id`='5001';";
-
-	$updateProd =  $pdo->query($sql);
-	$msg = array("status" => 0);
-} catch (PDOException $e) {
-	$msg = "error_line: ".$e->getLine().", error_msg: ".$e->getMessage();
-}	
- */
-
 
 if ($type == "insert") {
     switch ($_FILES["image"]["error"]) {
