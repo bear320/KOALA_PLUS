@@ -62,6 +62,7 @@ export default createStore({
 
                 const result = await res.json();
                 if (result.code == 1) {
+                    console.log(result);
                     context.commit("updateMemInfo", result.memInfo);
                     context.dispatch("getMemCart");
                 } else {
@@ -73,14 +74,19 @@ export default createStore({
         },
 
         async getMem(context) {
-            const res = await fetch(`${BASE_URL}/getMember.php?type=front`, {
-                credentials: "include",
-            });
+            if (!window.location.pathname.includes("/bs")) {
+                const res = await fetch(
+                    `${BASE_URL}/getMember.php?type=front`,
+                    {
+                        credentials: "include",
+                    }
+                );
 
-            const result = await res.json();
-            if (result.status == 10010) return;
-            context.commit("updateMemInfo", result.list);
-            context.dispatch("getMemCart");
+                const result = await res.json();
+                if (result.status == 10010) return;
+                context.commit("updateMemInfo", result.list);
+                context.dispatch("getMemCart");
+            }
         },
 
         // 取得使用者的購物車資訊
