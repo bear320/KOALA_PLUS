@@ -1,4 +1,3 @@
-
 <?php 
 //header設置
 require_once("./headerUse.php");
@@ -19,7 +18,7 @@ if($login_account != "" && $login_psw != "") {
             $nowTime = time();
             session_start();
             $_SESSION = $resArray;
-            $result_array = ["code"=>"1", "msg"=>"登陸成功"];//, "token"=>$token
+            $result_array = ["code"=>"1", "msg"=>"登陸成功","adminInfo"=>$_SESSION];//, "token"=>$token
             echo json_encode($result_array);
         }
         else {
@@ -37,5 +36,5 @@ else {
 
 // $admin = $pdo->query($sql);
 // $adminRows = $admin->fetchAll(PDO::FETCH_ASSOC);
-// echo json_encode($adminRows);            
+// echo json_encode($_POST);            
 ?>

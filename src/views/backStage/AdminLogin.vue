@@ -34,10 +34,11 @@ export default {
         return {
             login_account: "",
             login_password: "",
+            emp_id:0,
         };
     },
     methods: {
-        login() {
+         login() {
             let thisvue = this;
             if (thisvue.login_account == "" || thisvue.login_password == "") {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
@@ -48,35 +49,33 @@ export default {
                     method: "post",
                     credentials: "include",
                     body: new URLSearchParams({
-                        mem_account: this.login_account,
-                        mem_psw: this.login_password,
+                        emp_account: this.login_account,
+                        emp_psw: this.login_password,
                     }),
                 })
                     .then((res) => res.json())
                     .then((json) => {
-                        // console.log(json);
-                        // if (this.login_password == json.mem_account) {
-                        //     console.log("成功");
-                        // } else if (!json.code) {
-                        //     console.log("失敗");
-                        // }
+                        this.emp_id=json.adminInfo.emp_id;
                         this.$router.push({ path: "/bs-index" });
+                    })
+                    .then(()=>{
+                        this.updatedLastItme();
                     });
-            }
-
-
+                }
+            },
             
-            const apiURL = new URL(`${BASE_URL}/postAdminLoginTime.php`);
+            updatedLastItme(){
+                const apiURL = new URL(`${BASE_URL}/postAdminLoginTime.php`);
                 const last_login = {
-                    memId: this.$store.state.user.mem_id,
+                    emp_id: this.emp_id,
                 };
-
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(last_login),
                 })
                     .then((res) => res.json())
-        },
+                    .then((json) => console.log(json))
+        }
     },
 };
 </script>
