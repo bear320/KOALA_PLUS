@@ -1,5 +1,4 @@
 <template>
-    <!-- <Loading /> -->
     <Header />
     <article class="nav-space">
         <div
@@ -176,7 +175,6 @@ export default {
     components: {
         Header,
         Footer,
-        Loading,
         handleError,
     },
     name: "AboutKoala",
@@ -201,7 +199,6 @@ export default {
             if (options.indexOf(answer) === -1) return;
             if (answer === question.rightAnswer) {
                 this.score++;
-                // console.log(this.score);
             }
             if (questionIndex < questions.length) {
                 this.questionIndex++;
@@ -210,8 +207,7 @@ export default {
 
             if (this.score > 4) {
                 let ranNum = Math.floor(Math.random(this.CouponId.length) * 3);
-                // console.log("隨機號碼", ranNum);
-                // console.log("獲得的優惠ID", this.CouponId[ranNum]);
+
                 this.CouponId = this.CouponId[ranNum];
                 if (this.CouponId === "4001") {
                     this.CouponCode = "koala95";
@@ -223,7 +219,6 @@ export default {
                 /* this.payload.memid = 1006;
                 this.payload.CouponCode = this.CouponCode;
                 this.payload.CouponId = this.CouponId[ranNum]; */
-                // console.log("COCO", this.CouponCode);
 
                 this.insertCoupon();
                 // 把優惠卷id傳給php
@@ -245,8 +240,8 @@ export default {
             this.score = 0;
         },
         insertCoupon() {
-            console.log(this.CouponId);
-            console.log(typeof this.CouponCode);
+            // console.log(this.CouponId);
+            // console.log(typeof this.CouponCode);
             const payload = {
                 memid: 1006,
                 CouponId: parseInt(this.CouponId),
