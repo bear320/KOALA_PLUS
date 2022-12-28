@@ -54,8 +54,6 @@ export default createStore({
                 });
 
                 const result = await res.json();
-                console.log(result.code == 1);
-                console.log("TEST", result);
                 if (result.code == 1) {
                     context.commit("updateMemInfo", result.memInfo);
                 } else {
@@ -76,9 +74,9 @@ export default createStore({
                 );
 
                 const result = await res.json();
-                console.log(result);
                 if (result.status) {
                     context.commit("updateMemInfo", result.list);
+                    context.dispatch("getMemCart");
                 } else {
                     throw new Error(result.msg);
                 }

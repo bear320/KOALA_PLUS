@@ -6,7 +6,7 @@
                     <Col :xl="12" :lg="24" :md="24" span="24">
                         <img
                             class="product-img"
-                            :src="require(`@/assets/images/shop/${itemImage}`)"
+                            :src="`./images/shop/${itemImage}`"
                         />
                     </Col>
                     <Col :xl="12" :lg="24" :md="24" span="24">
