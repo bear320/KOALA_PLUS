@@ -351,6 +351,10 @@ export default {
                                 console.log(status);
                                 // alert(status.msg);
                                 this.$Message.info("您已登出會員");
+                                // 重置Vuex使用者狀態
+                                this.$store.commit("logoutMember");
+                                // 將使用者導回首頁
+                                this.$router.push({ path: "/home" });
                             });
                     }, 2000);
                 },
