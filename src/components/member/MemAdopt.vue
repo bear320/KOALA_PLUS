@@ -55,7 +55,7 @@
             </div>
         </div>
 
-        <div>
+        <div class="html-group">
             <div class="html2canvas" ref="html2canvas">
                 <!-- 轉出來的證書 -->
                 <!-- <div class="certificate_img"> -->
@@ -209,9 +209,14 @@ table {
     }
 }
 // 這是SHOW出來的圖片
-.html2canvas {
+.html-group {
     display: flex;
     justify-content: center;
+}
+.html2canvas {
+    /* display: flex;
+    justify-content: center; */
+    padding: 10px 0;
     .adopt_certificate {
         width: 600px;
         height: 425px;
