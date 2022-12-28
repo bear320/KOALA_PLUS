@@ -62,18 +62,17 @@
                         <div class="con-3">
                             <div class="left">
                                 <p class="ord_person">
-                                    收件人：{{
-                                        item.ord_person
-                                    }}
-                                    ，收件人電話：{{ item.ord_phone }}
+                                    收件人：{{ item.ord_person }}
+                                </p>
+                                <p class="ord_phone">
+                                    收件人電話：{{ item.ord_phone }}
                                 </p>
                                 <p class="add">寄送地址：{{ item.ord_add }}</p>
                                 <p class="btdate">
                                     訂單成立時間：{{ item.ord_date }}
                                 </p>
                                 <div class="state">
-                                    訂單狀態：{{ item.ord_ship
-                                    }}{{ sts_map[item.ord_ship] }}
+                                    訂單狀態：{{ sts_map[item.ord_ship] }}
                                 </div>
                                 <button
                                     v-show="item.ord_ship < 1"
@@ -241,9 +240,9 @@ export default {
                     .then((res) => res.json())
                     .then((json) => {
                         // console.log(json);
-                        if (json.status == 10010) {
-                            location.href = "/login";
-                        }
+                        // if (json.status == 10010) {
+                        //     location.href = "/login";
+                        // }
                         if (json.status) {
                             this.order = json.list;
                             // console.log(this.order);
@@ -256,7 +255,7 @@ export default {
             } else {
                 // alert("登入失效");
                 //跳轉 login url
-                location.href = "/login";
+                // location.href = "/login";
             }
         },
         // 抓取訂單內容
@@ -448,6 +447,14 @@ input[type="checkbox"] {
         p,
         div {
             margin: 10px;
+        }
+        .left {
+            p {
+                text-align: left;
+            }
+            .state {
+                font-weight: 600;
+            }
         }
         .right {
             margin-right: 50px;
