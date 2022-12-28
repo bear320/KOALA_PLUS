@@ -3,61 +3,68 @@
     <article class="bs-nav-space wrapper">
         <h1>公告管理</h1>
         <h2>新增文章</h2>
-        <label>
-            <input
-                type="radio"
-                name="status"
-                v-model="news_status"
-                value="1"
-                checked
-                required
-            />文章立即上傳更新
-        </label>
-        <label>
-            <input
-                type="radio"
-                name="status"
-                v-model="news_status"
-                value="0"
-            />文章僅先暫存為草稿
-        </label>
-        <div>
-            <p>標題:</p>
-            <input type="text" v-model="news_title" required />
-        </div>
-        <div class="display">
+        <form enctype="multipart/form-data" ref="article-form">
+            <label>
+                <input
+                    type="radio"
+                    name="news_status"
+                    v-model="news_status"
+                    value="1"
+                    checked
+                    required
+                />文章立即上傳更新
+            </label>
+            <label>
+                <input
+                    type="radio"
+                    name="news_status"
+                    v-model.number="news_status"
+                    value="0"
+                />文章僅先暫存為草稿
+            </label>
             <div>
-                <p>分類:</p>
-                <select
-                    name="category"
-                    id="artclesCategory"
-                    v-model="news_category"
-                >
-                    <option value="none" selected disabled hidden></option>
-                    <option value="最新消息">最新消息</option>
-                    <option value="園區資訊">園區資訊</option>
-                    <option value="資金運用">資金運用</option>
-                </select>
+                <p>標題:</p>
+                <input
+                    type="news_title"
+                    name="news_title"
+                    v-model="news_title"
+                    required
+                />
+            </div>
+            <div class="display">
+                <div>
+                    <p>分類:</p>
+                    <select
+                        name="news_category"
+                        id="artclesCategory"
+                        v-model="news_category"
+                    >
+                        <option value="none" selected disabled hidden></option>
+                        <option value="最新消息">最新消息</option>
+                        <option value="園區資訊">園區資訊</option>
+                        <option value="資金運用">資金運用</option>
+                    </select>
+                </div>
+                <div>
+                    <p>圖片:</p>
+                    <input type="file" name="news_img" />
+                </div>
             </div>
             <div>
-                <p>圖片:</p>
-                <input type="file" />
+                <p>內文:</p>
+                <textarea
+                    name="news_content"
+                    id=""
+                    cols="30"
+                    rows="10"
+                    v-model="news_content"
+                    required
+                ></textarea>
             </div>
-        </div>
-        <div>
-            <p>內文:</p>
-            <textarea
-                name=""
-                id=""
-                cols="30"
-                rows="10"
-                v-model="news_content"
-                required
-            ></textarea>
-        </div>
-        <button class="btn-paramy" @click.prevent="postNewArticle">
-            <img src="@/assets/images/icon/confirm.svg" alt="" />確認
-        </button>
+            <button class="btn-paramy" @click.prevent="postNewArticle">
+                <img src="@/assets/images/icon/confirm.svg" alt="" />確認
+            </button>
+        </form>
     </article>
 </template>
 
@@ -75,11 +82,11 @@ export default {
             news_category: "",
             news_content: "",
             news_star: "0",
-            // news_img
         };
     },
     methods: {
-        postNewArticle() {
+        // 舊版
+        /* postNewArticle() {
             let date = new Date();
             const apiURL = new URL(`${BASE_URL}/postNewArticle.php`);
             const articleUpdate = {
@@ -91,6 +98,7 @@ export default {
                 news_status: this.news_status,
                 news_star: 0,
             };
+
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(articleUpdate),
@@ -98,6 +106,40 @@ export default {
                 .then((res) => res.json())
                 .then((status) => {
                     // alert(status.msg);
+                    this.confirmModal();
+                });
+        }, */
+        postNewArticle() {
+            let date = new Date();
+            const apiURL = new URL(`${BASE_URL}/postNewArticle.php`);
+
+            // 取得form表單元素相當於document.querySelector(".form")
+            console.log(this.$refs["article-form"]);
+            // 產生formData物件，內容包含表單裡Input的value
+            const formData = new FormData(this.$refs["article-form"]);
+
+            // formData物件新增鍵值對，相當於
+            /* {
+                // 表單內容
+                // news_status: "...";
+                // news_title: "...";
+                // news_category: "...";
+                // news_content: "...";
+                // news_img: "...";
+                // append新增的內容
+                // news_date:"..."
+                // news_star: "...";
+            } */
+            formData.append("news_date", date.toISOString().split("T")[0]);
+            formData.append("news_star", this.news_star);
+
+            fetch(apiURL, {
+                method: "POST",
+                // 用formData物件裡的資料作為請求體傳給php
+                body: formData,
+            })
+                .then((res) => res.json())
+                .then((status) => {
                     this.confirmModal();
                 });
         },

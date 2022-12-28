@@ -108,10 +108,14 @@
                         <teleport to="body">
                             <lightbox ref="lightbox">
                                 <template #img>
-                                    <img
+                                    <!--  <img
                                         :src="
                                             require(`@/assets/images/about/${article.news_img}`)
                                         "
+                                        alt="公告圖片"
+                                    /> -->
+                                    <img
+                                        :src="`/images/article/${article.news_img}`"
                                         alt="公告圖片"
                                     />
                                 </template>
@@ -130,7 +134,7 @@
                             </lightbox>
                         </teleport>
                         <div @click="openLightbox(idx)">
-                            <div
+                            <!--  <div
                                 class="article-img"
                                 :style="{
                                     backgroundImage:
@@ -138,6 +142,10 @@
                                         require(`@/assets/images/about/${article.news_img}`) +
                                         ')',
                                 }"
+                            ></div> -->
+                            <div
+                                class="article-img"
+                                :style="getStyle(article.news_img)"
                             ></div>
                             <div class="font">
                                 <p class="article-title">
@@ -194,6 +202,12 @@ export default {
         this.calculateSectionOffsets();
     },
     methods: {
+        getStyle(article) {
+            return {
+                backgroundImage: `url(/images/article/${article})`,
+            };
+        },
+
         getArticleList() {
             const apiURL = new URL(`${BASE_URL}/getArticleList.php`);
             fetch(apiURL)

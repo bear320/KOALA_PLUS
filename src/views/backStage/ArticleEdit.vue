@@ -3,11 +3,16 @@
     <article class="bs-nav-space wrapper">
         <h1>公告管理</h1>
         <h2>編輯文章</h2>
-        <form action="" enctype="multipart/form-data" method="post">
+        <form
+            action=""
+            enctype="multipart/form-data"
+            method="post"
+            ref="article-form"
+        >
             <label>
                 <input
                     type="radio"
-                    name="status"
+                    name="news_status"
                     v-model="edit.news_status"
                     value="1"
                     checked
@@ -17,20 +22,25 @@
             <label>
                 <input
                     type="radio"
-                    name="status"
+                    name="news_status"
                     v-model="edit.news_status"
                     value="0"
                 />文章僅先暫存為草稿
             </label>
             <div>
                 <p>標題:</p>
-                <input type="text" v-model="edit.news_title" required />
+                <input
+                    type="text"
+                    name="news_title"
+                    v-model="edit.news_title"
+                    required
+                />
             </div>
             <div class="display">
                 <div>
                     <p>分類:</p>
                     <select
-                        name="category"
+                        name="news_category"
                         id="artclesCategory"
                         v-model="edit.news_category"
                     >
@@ -41,13 +51,13 @@
                 </div>
                 <div>
                     <p>圖片:</p>
-                    <input type="file" accept="image" />
+                    <input type="file" accept="image" name="news_img" />
                 </div>
             </div>
             <div>
                 <p>內文:</p>
                 <textarea
-                    name=""
+                    name="news_content"
                     id=""
                     cols="30"
                     rows="10"
@@ -79,16 +89,14 @@ export default {
             const apiURL = new URL(
                 `${BASE_URL}/getArticlePage.php?newsId=${this.$route.params.news_id}`
             );
-            // const apiURL = new URL(
-            //     `http://localhost/cgd103_g1/public/api/getArticlePage.php?newsId=${this.$route.params.news_id}`
-            // );
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
                     this.edit = json;
                 });
         },
-        editArticle() {
+        // 舊版本
+        /* editArticle() {
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
             // const apiURL = new URL(
             //     `http://localhost/cgd103_g1/public/api/editArticle.php`
@@ -106,6 +114,23 @@ export default {
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(articleUpdate),
+            })
+                .then((res) => res.json())
+                .then((status) => {
+                    // alert(status.msg);
+                    this.confirmModal();
+                });
+        }, */
+        editArticle() {
+            const apiURL = new URL(`${BASE_URL}/editArticle.php`);
+            console.log(this.$refs["article-form"]);
+            const formData = new FormData(this.$refs["article-form"]);
+            formData.append("type", "edit");
+            formData.append("news_id", this.edit.news_id);
+            formData.append("news_date", this.edit.news_date);
+            fetch(apiURL, {
+                method: "POST",
+                body: formData,
             })
                 .then((res) => res.json())
                 .then((status) => {
