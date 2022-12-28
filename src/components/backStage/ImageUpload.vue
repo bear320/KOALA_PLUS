@@ -64,6 +64,7 @@ export default {
             });
             this.imageList = [];
             this.previewList = [];
+            this.showLabel = [false, false, false, false];
         },
         showImages(i) {
             // 預覽上傳圖片
