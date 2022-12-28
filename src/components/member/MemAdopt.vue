@@ -213,6 +213,7 @@ table {
 }
 .html2canvas {
     padding: 10px 0;
+
     .adopt_certificate {
         width: 600px;
         height: 425px;
@@ -225,17 +226,17 @@ table {
         //     height: 100%;
         // }
         @include d() {
-            // width: 300px;
-            // height: 283px;
-            width: 100%;
-            aspect-ratio: 3 / 5;
+            width: 427px;
+            height: 303px;
+            // width: 100%;
+            // aspect-ratio: 3 / 5;
         }
         @include m() {
-            // width: 300px;
-            // height: 283px;
-            width: 100%;
-            height: 200px;
-            aspect-ratio: 2 / 6;
+            width: 280px;
+            height: 195px;
+            // width: 100%;
+            // height: 200px;
+            // aspect-ratio: 2 / 6;
         }
 
         .certificate_name {
