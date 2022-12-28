@@ -16,7 +16,7 @@
                     id="search"
                     placeholder="搜尋商品編號"
                     v-model.trim="search"
-                    @input="changeVal"
+                    @input="searchProdId"
                 />
             </div>
             <select name="sort" id="sort" v-model="sort" @change="changeVal">
@@ -134,6 +134,13 @@ export default {
                 page: this.page,
             });
         },
+        searchProdId() {
+            this.getProductList({
+                search: this.search,
+                sort: this.sort,
+                page: 1,
+            });
+        },
         changeVal() {
             this.getProductList({
                 search: this.search,
@@ -145,11 +152,11 @@ export default {
             const apiURL = new URL(`${BASE_URL}/getProductsList.php`);
 
             const quertParam = new URLSearchParams(payload);
-            console.log(payload);
             apiURL.search = quertParam;
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
+                    console.log(this.totalPage);
                     this.prods = json.prod;
                     this.totalPage = Math.ceil(json.prodCount / 10);
                 });

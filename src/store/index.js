@@ -63,6 +63,7 @@ export default createStore({
                 const result = await res.json();
                 if (result.code == 1) {
                     context.commit("updateMemInfo", result.memInfo);
+                    context.dispatch("getMemCart");
                 } else {
                     throw new Error("帳號或密碼錯誤");
                 }

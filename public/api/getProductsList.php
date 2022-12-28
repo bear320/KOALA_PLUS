@@ -18,7 +18,7 @@ switch ($sort) {
             WHERE prod_id LIKE '%{$search}%'
             ORDER BY prod_id ASC LIMIT {$limit} OFFSET {$offset};";
            $sql2 =
-           "SELECT count(*) AS 'prod_count' FROM tibamefe_cgd103g1.product";
+           "SELECT count(*) AS 'prod_count' FROM tibamefe_cgd103g1.product WHERE prod_id LIKE '%{$search}%'";
         } else {
             $sql1 = "SELECT * FROM tibamefe_cgd103g1.product
             ORDER BY prod_id ASC LIMIT {$limit} OFFSET {$offset};";
@@ -33,7 +33,8 @@ switch ($sort) {
             $sql1 = "SELECT * FROM tibamefe_cgd103g1.product
             WHERE prod_id LIKE '%{$search}%'
             ORDER BY prod_id DESC LIMIT {$limit} OFFSET {$offset};";
-            $sql2 = "SELECT count(*) AS 'prod_count' FROM tibamefe_cgd103g1.product WHERE prod_id LIKE '%{$search}%' LIMIT {$limit} OFFSET {$offset};";
+           $sql2 =
+           "SELECT count(*) AS 'prod_count' FROM tibamefe_cgd103g1.product  WHERE prod_id LIKE '%{$search}%'";
         } else {
             $sql1 = "SELECT * FROM tibamefe_cgd103g1.product
             ORDER BY prod_id DESC LIMIT {$limit} OFFSET {$offset};";
