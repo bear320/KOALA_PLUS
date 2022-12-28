@@ -163,7 +163,7 @@
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_1 }}
                         </p>
-                        <div>
+                        <div class="active">
                             <div
                                 v-if="game_money >= 20"
                                 class="shop_talkwindow_commodity_button"
@@ -194,7 +194,7 @@
                             可獲得 {{ item_1_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_2.png" alt="" />
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_2 }}
@@ -230,7 +230,7 @@
                             可獲得 {{ item_2_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_3.png" alt="" />
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_3 }}
@@ -266,7 +266,7 @@
                             可獲得 {{ item_3_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_4.png" alt="" />
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_4 }}
@@ -302,7 +302,7 @@
                             可獲得 {{ item_4_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_5.png" alt="" />
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_5 }}
@@ -338,7 +338,7 @@
                             可獲得 {{ item_5_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_6.png" alt="" />
                         <p class="shop_talkwindow_commodity_introduce_1">
                             {{ item_6 }}
@@ -386,7 +386,7 @@
                 </div>
                 <div class="btn-close" @click="removeActive">X</div>
                 <div class="bag_talkwindow_commodity">
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_1.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -410,7 +410,7 @@
                             可獲得 {{ item_1_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_2.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -434,7 +434,7 @@
                             可獲得 {{ item_2_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_3.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -458,7 +458,7 @@
                             可獲得 {{ item_3_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_4.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -482,7 +482,7 @@
                             可獲得 {{ item_4_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_5.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -506,7 +506,7 @@
                             可獲得 {{ item_5_exp }} 經驗值
                         </p>
                     </div>
-                    <div>
+                    <div class="active">
                         <img src="../assets/images/game/item_6.png" alt="" />
                         <p
                             class="bag_talkwindow_commodity_introduce_1"
@@ -911,6 +911,7 @@ export default {
         // ======================================== 領取折價券 ======================================== //
         get_discount_coupon: function () {
             document.getElementById("discount_coupon_talkwindow").classList.remove("discount_coupon_talkwindow_active");
+            this.open();
         },
 
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
@@ -933,6 +934,16 @@ export default {
                 body: new URLSearchParams(gameValueContent),
             })
             .then((res) => res.json())
+        },
+
+        // ======================================== 右上角彈窗 ======================================== //
+        open(open) {
+            this.$Notice.open({
+                title: "成功領取優惠券",
+                desc: open
+                    ? ""
+                    : `恭喜您獲得六折優惠券乙張`,
+            });
         },
     },
     watch: {
@@ -1546,6 +1557,11 @@ img {
     background-color: #579194;
     cursor: pointer;
 }
+
+.active :active {
+    scale: (1.02);
+}
+
 
 .bag_talkwindow_commodity_button > p {
     font-size: 14px;
