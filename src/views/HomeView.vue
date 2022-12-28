@@ -109,14 +109,9 @@
                         <teleport to="body">
                             <lightbox ref="lightbox">
                                 <template #img>
-                                    <!--  <img
-                                        :src="
-                                            require(`@/assets/images/about/${article.news_img}`)
-                                        "
-                                        alt="公告圖片"
                                     /> -->
                                     <img
-                                        :src="`/images/article/${article.news_img}`"
+                                        :src="`./images/article/${article.news_img}`"
                                         alt="公告圖片"
                                     />
                                 </template>
@@ -135,15 +130,6 @@
                             </lightbox>
                         </teleport>
                         <div @click="openLightbox(idx)">
-                            <!--  <div
-                                class="article-img"
-                                :style="{
-                                    backgroundImage:
-                                        'url(' +
-                                        require(`@/assets/images/about/${article.news_img}`) +
-                                        ')',
-                                }"
-                            ></div> -->
                             <div
                                 class="article-img"
                                 :style="getStyle(article.news_img)"
@@ -205,7 +191,7 @@ export default {
     methods: {
         getStyle(article) {
             return {
-                backgroundImage: `url(/images/article/${article})`,
+                backgroundImage: `url('./images/article/${article}')`,
             };
         },
 

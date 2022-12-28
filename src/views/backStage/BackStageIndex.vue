@@ -24,10 +24,8 @@
                             </Circle>
                         </router-link>
                     </div>
-                    <div class="card">
-                        <router-link to="/bs-order-list">
-                            <h2>訂單管理</h2>
-                        </router-link>
+                    <router-link to="/bs-order-list" class="card">
+                        <h2>訂單管理</h2>
                         <div>
                             <div>
                                 <p class="mini">月訂單</p>
@@ -40,7 +38,7 @@
                                 <p class="counts">{{ orderCount["all"] }}</p>
                             </div>
                         </div>
-                    </div>
+                    </router-link>
                 </div>
                 <div class="card">
                     <router-link to="/bs-admin-list">
@@ -98,7 +96,7 @@
                     <router-link to="/bs-coupon-list" class="detail"
                         >優惠券管理</router-link
                     >
-                    <router-link to="/bs-product-edit" class="detail2"
+                    <router-link to="/bs-product-add" class="detail2"
                         >新增商品資訊</router-link
                     >
                 </div>
@@ -201,6 +199,8 @@ article {
 
                 a:first-child {
                     width: 70%;
+                    height: 100%;
+                    padding: 50px 20px;
                 }
                 .sum {
                     color: #fd646f;
@@ -216,6 +216,10 @@ article {
                 justify-content: space-between;
                 width: 100%;
                 height: 35%;
+
+                h2 {
+                    padding: 20px;
+                }
 
                 div {
                     display: flex;
