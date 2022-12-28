@@ -18,7 +18,7 @@
                             >
                                 優惠券代碼
                                 <Icon
-                                    type="ios-arrow-down"
+                                    type="md-arrow-round-down"
                                     size="20"
                                     :class="{ inverse: isReverse }"
                                 />
@@ -29,7 +29,7 @@
                             >
                                 優惠券獲得日期
                                 <Icon
-                                    type="ios-arrow-down"
+                                    type="md-arrow-round-down"
                                     size="20"
                                     :class="{ inverse: isReverse }"
                                 />
@@ -40,7 +40,7 @@
                                 @click="iconchange('eDate')"
                             >
                                 優惠券到期日<Icon
-                                    type="ios-arrow-down"
+                                    type="md-arrow-round-down"
                                     size="20"
                                     :class="{ inverse: isReverse }"
                                 />
@@ -185,6 +185,12 @@ table {
         height: 30px;
         th {
             padding: 10px;
+            .ivu-icon {
+                color: #579194;
+                &:hover {
+                    color: #2e382e;
+                }
+            }
         }
         .coupon_code,
         .coupon_get_date {
