@@ -204,7 +204,9 @@ header {
                     position: fixed;
                     top: 80%;
                     user-select: none;
-                    @include size(180px, auto);
+                    cursor: pointer;
+                    left: 85%;
+                    @include size(150px, auto);
 
                     img {
                         width: 100%;
@@ -269,7 +271,7 @@ header {
                             top: auto;
                             left: auto;
                             width: 15vw;
-                            margin: auto;
+                            margin: 0 15%;
 
                             img {
                                 width: initial;
