@@ -302,8 +302,6 @@ export default {
                 })
                     .then((res) => res.json())
                     .then((status) => {
-                        console.log(status);
-                        console.log(status.msg);
                         if (status.status == "1") {
                             this.mod_change();
                             // 已修改完成會員資料
@@ -356,8 +354,6 @@ export default {
                     });
                 if (this.passwordcheck != "") {
                     // alert("有輸入內容");
-                    console.log(this.newpassword);
-                    console.log(this.newpasswordconfirm);
                     if (this.newpassword == this.newpasswordconfirm) {
                         // alert("相同");
                     } else {
@@ -392,8 +388,6 @@ export default {
                         })
                             .then((res) => res.json())
                             .then((status) => {
-                                console.log(status);
-                                // alert(status.msg);
                                 this.$Message.info("您已登出會員");
                                 // 重置Vuex使用者狀態
                                 this.$store.commit("logoutMember");
@@ -523,7 +517,6 @@ export default {
             let mem_account_val = this.$refs.mem_account.value;
             const validate = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
             let res = validate.test(mem_account_val);
-            console.log(res);
             if (res) {
                 this.checkInputEmail = false;
             } else {
@@ -536,7 +529,6 @@ export default {
             let mem_account_val = this.$refs.mem_account.value;
             const validate = /^([a-z0-9_\.-]+)@([\da-z\.-]+)\.([a-z\.]{2,6})$/;
             let res = validate.test(mem_account_val);
-            console.log(res);
             if (res) {
                 this.checkInputEmail = false;
             } else {
@@ -551,9 +543,6 @@ export default {
             const validate = /^(?=.*d)(?=.*[a-zA-Z]).{6,9}$/;
             let res1 = validate.test(mem_oldpsw_val);
             let res2 = validate.test(mem_newpsw_val);
-            console.log(res1);
-            console.log(res2);
-
             if (res1) {
             } else {
                 // this.psw_open(false);
@@ -569,8 +558,6 @@ export default {
             // const validate = /^(?=.*d)(?=.*[a-zA-Z]).{6,9}$/;
             const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
             let res1 = validate.test(mem_oldpsw_val);
-            console.log("TEST1", res1);
-
             if (res1) {
                 this.checkInputPsw1 = false;
             } else {
@@ -581,8 +568,6 @@ export default {
             let mem_newpsw_val = this.$refs.mem_password1.value;
             const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
             let res2 = validate.test(mem_newpsw_val);
-            console.log("TEST2", res2);
-
             if (res2) {
                 this.checkInputPsw2 = false;
             } else {
@@ -593,8 +578,6 @@ export default {
             let mem_passwordconfirm = this.$refs.mem_passwordconfirm.value;
             const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
             let res3 = validate.test(mem_passwordconfirm);
-            console.log("TEST3", res3);
-
             if (res3) {
                 this.checkInputPsw3 = false;
             } else {

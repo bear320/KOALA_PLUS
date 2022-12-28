@@ -117,7 +117,6 @@ export default {
                         // if (json.status == 10010) {
                         //     location.href = "/login";
                         // }
-                        console.log(json);
                         if (json.status) {
                             this.couponsLists = json.list;
                             this.userid = json.userid;
@@ -150,7 +149,6 @@ export default {
             });
         },
         showcouponsList(name, date) {
-            // console.log(name, date);
             this.tempName = name;
             this.tempDate = date;
             /*  this.certificate_Index = index; */
