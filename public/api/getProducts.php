@@ -42,5 +42,5 @@ $prodCount = $pdo->query($sql2);
 $prodRows = $products->fetchAll(PDO::FETCH_ASSOC);
 $prodRows2 = $prodCount->fetchColumn();
 /* echo json_encode($prodRows);    */         
-echo json_encode(array("prodCount" => (int)$prodRows2,"prods"=>$prodRows));            
+echo json_encode(array("prodCount" => (int)$prodRows2,"prods"=>$prodRows),JSON_NUMERIC_CHECK);            
 ?>

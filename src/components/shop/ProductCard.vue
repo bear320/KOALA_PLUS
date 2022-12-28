@@ -30,11 +30,30 @@ export default {
         };
     },
     methods: {
-        addToCart() {
-            this.$store.dispatch("addToCart", {
-                memId: this.$store.state.user.mem_id,
-                prodId: +this.proId,
-                cartQty: 1,
+        async addToCart() {
+            let prodIndex = this.$store.state.cart.findIndex(
+                (item) => item.prod_id === this.proId
+            );
+
+            if (prodIndex < 0) {
+                await this.$store.dispatch("addToCart", {
+                    memId: this.$store.state.user.mem_id,
+                    prodId: this.proId,
+                    cartQty: 1,
+                });
+                this.open(true, "已新增商品至購物車");
+            } else {
+                await this.$store.dispatch("addToCart", {
+                    memId: this.$store.state.user.mem_id,
+                    prodId: this.proId,
+                    cartQty: (this.$store.state.cart[prodIndex].cart_qty += 1),
+                });
+                this.open(true, "已更新商品數量");
+            }
+        },
+        open(nodesc, title) {
+            this.$Notice.open({
+                title: `✔　${title}`,
             });
         },
         scrollToProduct() {
