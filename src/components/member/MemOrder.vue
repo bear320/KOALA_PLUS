@@ -182,7 +182,7 @@ export default {
             // ord_sts: 1,
             memindexs: [],
             order: [],
-            sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "取消訂單"],
+            sts_map: ["訂單準備中", "訂單已出貨", "訂單已完成", "訂單已取消"],
             orderlists: [],
             tmpOrder: "",
             // orderList: []
