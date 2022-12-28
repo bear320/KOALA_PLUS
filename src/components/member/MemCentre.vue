@@ -650,17 +650,22 @@ input {
                                 width: 260px;
                                 text-align: justify;
                                 margin: 5px auto;
-                                min-height: 130px;
+                                min-height: 118px;
+                                @include m() {
+                                    min-height: 80px;
+                                    padding: 5px 5px;
+                                }
                             }
                         }
                         button {
                             padding: 0 20px;
                             height: 30px;
                             line-height: 30px;
+                            margin: 10px 0;
                         }
                         .signOutbutton {
                             margin: auto;
-                            padding: 20px 0;
+                            // padding: 20px 0;
                         }
                         .tabcontent_group {
                             display: flex;
