@@ -120,7 +120,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
+                    // alert(status.msg);
                 });
         },
         handleBeforeChange() {
