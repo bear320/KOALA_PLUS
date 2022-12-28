@@ -96,7 +96,9 @@ export default {
                 body: formData,
             })
                 .then((res) => res.json())
-                .then((json) => console.log(json));
+                .then((json) => {
+                    // console.log(json);
+                });
         },
 
         deleteImage(file, i) {
