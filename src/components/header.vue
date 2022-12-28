@@ -131,7 +131,7 @@ export default {
 
 <style lang="scss" scoped>
 #navbar {
-    transition: opacity 0.5s;
+    transition: opacity 1s ease;
     opacity: 1;
 }
 
