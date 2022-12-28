@@ -54,6 +54,7 @@ export default {
         margin-bottom: 25px;
         &:hover img {
             filter: brightness(0.8);
+            box-shadow: 0px 0px 10px rgb(0 0 0 / 25%);
         }
         &:hover .btn-cart {
             opacity: 1;
@@ -61,11 +62,14 @@ export default {
         .product-img {
             display: block;
             text-decoration: none;
+            border: solid 0.5px transparent;
+            border-radius: 10px;
 
             img {
                 width: 100%;
                 vertical-align: top;
                 transition: all 0.3s ease;
+                border-radius: 10px;
             }
         }
         .btn-cart {

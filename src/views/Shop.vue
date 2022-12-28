@@ -317,6 +317,7 @@ export default {
     margin-bottom: 100px;
     @include m() {
         margin-bottom: 15px;
+        @include bgSetting(contain, center 50px);
     }
 }
 
