@@ -123,9 +123,6 @@ export default {
         blackSwitchChange(index) {
             const mem_id = this.memindexs[index].mem_id;
             const black_state = this.memindexs[index].mem_state;
-
-            console.log(this.memindexs[index].mem_state);
-            console.log(this.memindexs[index].mem_id);
             const apiURL = new URL(`${BASE_URL}/postMemberChangeBlacklist.php`);
             fetch(apiURL, {
                 method: "post",
@@ -136,7 +133,6 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
                     this.resDate = json;
                 });
         },
@@ -150,7 +146,6 @@ export default {
                     cancelText: "取消",
                     onOk: () => {
                         resolve();
-                        console.log(this.$Modal);
                     },
                 });
             });
@@ -188,7 +183,6 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log("test", json.prodRows);
                     // this.memindexs = json.prodRows;
                     this.memindexs = json.prodRows.map((item) => {
                         return {
@@ -212,7 +206,6 @@ export default {
                             mem_state: +item.mem_state,
                         };
                     });
-                    console.log(json.count);
                     this.totalPage = Math.ceil(json.count / 10);
                 });
         },

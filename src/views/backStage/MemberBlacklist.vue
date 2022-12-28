@@ -64,19 +64,15 @@ export default {
     methods: {
         postmemberBlacklist() {
             const apiURL = new URL(`${BASE_URL}/getMemberBg.php?type=admin`);
-            console.log(apiURL);
             fetch(apiURL, { credentials: "include" })
                 .then((res) => res.json())
                 .then((json) => {
-                    // console.log(json);
                     this.memindexs = json.prodRows.filter((item) => {
                         item.mem_state = parseInt(item.mem_state);
                         // if (item.mem_state == 1) return true;
                         if (item.mem_state != 0) return true;
                         // return item.mem_state == "1";
                     });
-
-                    // console.log(this.memindexs);
                 });
         },
     },
