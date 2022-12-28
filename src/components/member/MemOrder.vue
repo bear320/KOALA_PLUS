@@ -200,18 +200,16 @@ export default {
         cancelOrder() {
             console.log("即將取消的訂單為");
             console.log(this.tmpOrder);
-            fetch(
-                "http://localhost/cgd103_g1/public/api/postUpdateOrderState.php",
-                {
-                    method: "post",
-                    credentials: "include",
-                    body: new URLSearchParams({
-                        ord_ship: 3,
-                        ord_id: this.tmpOrder,
-                        mem_id: this.$store.state.user.mem_id,
-                    }),
-                }
-            )
+
+            fetch(`${BASE_URL}/postUpdateOrderState.php`, {
+                method: "post",
+                credentials: "include",
+                body: new URLSearchParams({
+                    ord_ship: 3,
+                    ord_id: this.tmpOrder,
+                    mem_id: this.$store.state.user.mem_id,
+                }),
+            })
                 .then((res) => res.json())
                 .then((json) => this.postMemOrders());
         },
