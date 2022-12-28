@@ -42,6 +42,13 @@ export default createStore({
                 mem_add: payload?.mem_add,
             };
         },
+
+        // 登出使用者
+        logoutMember(state) {
+            state.user = null;
+            state.cart = [];
+            state.discount = {};
+        },
     },
     actions: {
         /* 會員 */
@@ -65,24 +72,14 @@ export default createStore({
         },
 
         async getMem(context) {
-            try {
-                const res = await fetch(
-                    `${BASE_URL}/getMember.php?type=front`,
-                    {
-                        credentials: "include",
-                    }
-                );
+            const res = await fetch(`${BASE_URL}/getMember.php?type=front`, {
+                credentials: "include",
+            });
 
-                const result = await res.json();
-                if (result.status) {
-                    context.commit("updateMemInfo", result.list);
-                    context.dispatch("getMemCart");
-                } else {
-                    throw new Error(result.msg);
-                }
-            } catch (error) {
-                console.log(error);
-            }
+            const result = await res.json();
+            if (result.status == 10010) return;
+            context.commit("updateMemInfo", result.list);
+            context.dispatch("getMemCart");
         },
 
         // 取得使用者的購物車資訊
