@@ -36,7 +36,7 @@
                         :disabled="disabled"
                     >
                         <template #open>
-                            <span>屏蔽</span>
+                            <span>封鎖</span>
                         </template>
                         <template #close>
                             <span>正常</span>
