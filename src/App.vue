@@ -18,13 +18,5 @@ export default {
     created() {
         this.$store.dispatch("getMem");
     },
-    watch: {
-        // 監測登入狀態，若有會員登入則執行程式
-        "$store.state.user"(newValue) {
-            // console.log(newValue);
-            // 更新購物車的資訊
-            this.$store.dispatch("getMemCart");
-        },
-    },
 };
 </script>

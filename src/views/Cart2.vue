@@ -16,9 +16,7 @@
                             <div class="item-box">
                                 <div class="item-img">
                                     <img
-                                        :src="
-                                            require(`@/assets/images/shop/${item.prod_img1}`)
-                                        "
+                                        :src="`./images/shop/${item.prod_img1}`"
                                     />
                                 </div>
                                 <div class="item-name">
