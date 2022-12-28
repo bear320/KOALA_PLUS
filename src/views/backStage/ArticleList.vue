@@ -113,6 +113,21 @@
                         </div>
                     </div>
                 </section>
+                <div class="pagination">
+                    <ul>
+                        <a @click="prePage"><li>&lt;</li></a>
+                        <a
+                            v-for="i in totalPage"
+                            :class="{ 'is-active': currentPage == i }"
+                            :key="i"
+                            href="#"
+                            @click="changePage(i)"
+                            ><li>{{ i }}</li></a
+                        >
+
+                        <a @click="nextPage"><li>></li></a>
+                    </ul>
+                </div>
             </TabPane>
             <TabPane label="草稿">
                 <section>
@@ -203,6 +218,21 @@
                         </div>
                     </div>
                 </section>
+                <div class="pagination">
+                    <ul>
+                        <a @click="prePage"><li>&lt;</li></a>
+                        <a
+                            v-for="i in totalPage"
+                            :class="{ 'is-active': currentPage == i }"
+                            :key="i"
+                            href="#"
+                            @click="changePage(i)"
+                            ><li>{{ i }}</li></a
+                        >
+
+                        <a @click="nextPage"><li>></li></a>
+                    </ul>
+                </div>
             </TabPane>
         </Tabs>
     </article>
@@ -217,6 +247,8 @@ export default {
     },
     data() {
         return {
+            currentPage: this.$route.query.page ? this.$route.query.page : 1,
+            // totalPage: 0,
             articles: [],
             uploaded: [],
             draft: [],
@@ -231,6 +263,17 @@ export default {
             newarticles: [],
             newsdraft: [],
         };
+    },
+    computed: {
+        totalPage() {
+            return Math.ceil(this.articles.length / 10);
+        },
+        filterList() {
+            return this.articles.slice(
+                (this.currentPage - 1) * 10,
+                this.currentPage * 10
+            );
+        },
     },
     methods: {
         choose() {
@@ -315,6 +358,29 @@ export default {
         },
         cancel() {
             this.$Message.info("已取消");
+        },
+        prePage() {
+            if (this.currentPage == 1) {
+                // console.log(this.currentPage);
+                // console.log(this.totalPage);
+                return;
+            } else {
+                this.currentPage--;
+            }
+        },
+        nextPage() {
+            console.log("QQ");
+
+            if (this.currentPage === this.totalPage) {
+                // console.log(this.currentPage);
+                // console.log(this.totalPage);
+                return;
+            } else {
+                this.currentPage++;
+            }
+        },
+        changePage(page) {
+            this.currentPage = page;
         },
     },
     created() {
@@ -419,6 +485,32 @@ html article {
             padding: 10px 0;
             margin-bottom: 10px;
             border-bottom: solid 1px $lightgreen;
+        }
+    }
+    .pagination {
+        padding: 30px 0;
+        text-align: center;
+        a {
+            display: inline-block;
+            padding: 10px 18px;
+            color: $darkgreen;
+            //
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            padding: 0;
+            text-align: center;
+            &:hover {
+                color: $darkgreen;
+            }
+            &:focus {
+                color: #fff;
+            }
+        }
+        a.is-active {
+            background-color: $darkgreen;
+            border-radius: 100%;
+            color: #fff;
         }
     }
 }
