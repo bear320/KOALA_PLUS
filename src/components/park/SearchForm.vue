@@ -46,7 +46,7 @@
                     <br />
                     人數：{{ temp.rsv_ppl }}
                     <br />
-                    Email：{{ temp.email }}
+                    Email：{{ temp.rsv_email }}
                     <br />
                     電話：{{ temp.rsv_mobile }}
                 </div>
@@ -91,7 +91,7 @@ export default {
             // console.log(this.orderDate);
         },
         next() {
-            console.log(this.searchText);
+            // console.log(this.searchText);
             if (!this.$refs.form.checkValidity()) {
                 // alert("手機號碼不正確");
                 return;

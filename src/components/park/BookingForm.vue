@@ -205,8 +205,8 @@ export default {
         // },
         closeIt() {
             this.$emit("closeForm");
-            console.log(this.msg);
-            console.log(this.orderDate);
+           /*  console.log(this.msg);
+            console.log(this.orderDate); */
         },
         next() {
             if (!this.$refs.form.checkValidity()) return;
@@ -275,11 +275,11 @@ export default {
                             // .slice(0, 10),
                         };
                     });
-                    console.log("tt", tempWx);
+                    // console.log("tt", tempWx);
                     this.tempWx = tempWx;
 
-                    console.log("TIME", tempWx[0].time);
-                    console.log("TEST", tempWx[0].elValueStr);
+                    // console.log("TIME", tempWx[0].time);
+                    // console.log("TEST", tempWx[0].elValueStr);
 
                     // this.weather = this.tempWx;
                 });
@@ -391,9 +391,18 @@ h2 {
     padding: 5px 10px;
 }
 .weatherForecast {
-    width: 50px;
+    width: 60px;
     vertical-align: top;
 }
+.weather {
+        font-size: 20px;
+        height: inherit;
+        line-height: inherit;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        
+    }
 @media screen and (max-width: 768px) {
     h2 {
         margin-top: 30px;
@@ -444,7 +453,19 @@ h2 {
         border-radius: 10px;
         box-shadow: 0px 15px 10px -15px #111;
     }
-
+    .weatherForecast {
+    width: 40px;
+    vertical-align: top;
+}
+.weather {
+        font-size: 16px;
+        height: inherit;
+        line-height: inherit;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        
+    }
     .btn {
         margin: 10px;
         width: 100px;
@@ -454,13 +475,12 @@ h2 {
         color: white;
         cursor: pointer;
     }
-    @media screen and (max-width: 768px) {
-        .book-form {
-            height: 66%;
+    .book-form {
+            height: 70%;
         }
+    @media screen and (max-width: 768px) {
+       
     }
-    .weather {
-        font-size: 16px;
-    }
+    
 }
 </style>
