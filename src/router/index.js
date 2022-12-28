@@ -26,7 +26,7 @@ import AdminList from "../views/backStage/AdminList.vue";
 import AdminAdd from "../views/backStage/AdminAdd.vue";
 import ArticleList from "../views/backStage/ArticleList.vue";
 import ArticleEdit from "../views/backStage/ArticleEdit.vue";
-import BookingList from "../views/backStage/BookingListTwo.vue";
+import BookingList from "../views/backStage/BookingList.vue";
 import BookingDayOff from "../views/backStage/BookingDayOff.vue";
 import BookingEdit from "../views/backStage/BookingEdit.vue";
 import KoalaList from "../views/backStage/KoalaList.vue";
@@ -190,10 +190,10 @@ const routes = [
         meta: { title: "新增公告" },
     },
     {
-        path: "/bs-booking-list-two",
-        name: "bookingListTwo",
-        // component: BookingListTwo,
-        component: () => import("@/views/backStage/BookingListTwo.vue"),
+        path: "/bs-booking-list",
+        name: "bookingList",
+        // component: BookingList,
+        component: () => import("@/views/backStage/BookingList.vue"),
         meta: { title: "園區導覽管理" },
     },
     // {

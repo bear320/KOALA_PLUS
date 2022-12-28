@@ -7,25 +7,60 @@
             <h2>預約總覽</h2>
         </div>
         <div class="action">
-            <!-- 改連結 -->
             <router-link to="/bs-booking-dayoff" target="_blank">
                 <img src="@/assets/images/icon/FilePlus.svg" alt=""
             /></router-link>
             <div class="search">
-                <input type="search" name="" id="" placeholder="搜尋" />
+                <input
+                    type="date"
+                    name="search_rsv_date"
+                    id="search_rsv_date"
+                    placeholder="搜尋"
+                    ref="search_rsv_date"
+                    @change="search_func"
+                />
             </div>
-            <select name="" id="">
-                <option value="" selected>排列方式</option>
-                <option value="">已預約訂單</option>
-                <option value="">休館日訂單</option>
+            <select
+                v-model="selectName"
+                @change="search_func"
+                name="search_rsv_status"
+                id="search_rsv_status"
+                ref="search_rsv_status"
+            >
+                <option value="" disabled selected>訂單排序</option>
+                <option v-for="list in lists" :value="list.val" :key="list">
+                    {{ list.item }}
+                </option>
+                <!-- <option value="">已預約訂單</option>
+                <option value="">休館日訂單</option> -->
             </select>
         </div>
     </section>
     <section class="wrapper table">
         <div class="bs-title">
-            <h3 class="bookNum">編號</h3>
+            <h3
+                class="bookNum"
+                @click="numchange('cName')"
+                name="rsv_id_orderby"
+            >
+                編號<Icon
+                    type="ios-arrow-up"
+                    size="20"
+                    :class="{ inverse: idReverse }"
+                />
+            </h3>
             <h3 class="bookName">預約者</h3>
-            <h3 class="bookDate">日期</h3>
+            <h3
+                class="bookDate"
+                @click="datechange('cName')"
+                name="rsv_date_orderby"
+            >
+                日期<Icon
+                    type="ios-arrow-up"
+                    size="20"
+                    :class="{ inverse: dateReverse }"
+                />
+            </h3>
             <h3 class="bookPpl">人數</h3>
             <h3 class="bookConnect">Email / 電話</h3>
             <h3 class="bookStatus">狀態</h3>
@@ -33,7 +68,7 @@
         </div>
         <div
             class="bs-list"
-            v-for="(list, index) in booklist"
+            v-for="(list, index) in filterList"
             :key="list.rsv_id"
             :style="{
                 backgroundColor:
@@ -69,6 +104,7 @@
             </p>
         </div>
     </section>
+
     <div class="pagination">
         <ul>
             <a @click="prePage"><li>&lt;</li></a>
@@ -80,11 +116,7 @@
                 @click="changePage(i)"
                 ><li>{{ i }}</li></a
             >
-            <!--   <a href="#"><li>2</li></a>
-            <a href="#"><li>3</li></a>
-            <a href="#"><li>4</li></a>
-            <a href="#"><li>5</li></a>
-            <a href="#"><li>6</li></a> -->
+
             <a @click="nextPage"><li>></li></a>
         </ul>
     </div>
@@ -100,38 +132,142 @@ export default {
     data() {
         return {
             booklist: [],
-            totalPage: 0,
+            // totalPage: ,
             currentPage: this.$route.query.page ? this.$route.query.page : 1,
+            selectName: "",
+            lists: [
+                { val: "", item: "不分類" },
+                { val: "已預約", item: "已預約" },
+                { val: "休館", item: "休館" },
+                /*    { val: "rsv_date", item: "日期(正序)" },
+                { val: "rsv_date DESC", item: "日期(反序)" },
+                { val: "rsv_id", item: "預約編號(正序)" },
+                { val: "rsv_id DESC", item: "預約編號(反序)" }, */
+            ],
+            idReverse: false,
+            dateReverse: false,
         };
     },
     watch: {
-        $route: function () {
-            console.log(this.$route.query);
-            console.log(this.currentPage);
-            if (!Object.keys(this.$route.query).length) {
-                console.log("空物件");
-                this.currentPage = 1;
-                this.getResvDetail();
-            }
-            this.getResvDetail();
-        },
+        // $route: function () {
+        //     console.log(this.$route.query);
+        //     console.log(this.currentPage);
+        //     if (!Object.keys(this.$route.query).length) {
+        //         console.log("空物件");
+        //         this.currentPage = 1;
+        //         this.getResvDetail();
+        //     }
+        //     this.getResvDetail();
+        // },
     },
     methods: {
-        getResvDetail() {
-            // const productId = this.$route.params.id;
-            const apiURL = new URL(
-                `${BASE_URL}/getReservation.php?limit=9&page=${this.currentPage}`
-            );
-            fetch(apiURL)
+        numchange() {
+            this.idReverse = !this.idReverse;
+            // console.log(this.idReverse);
+
+            let postDateSearch = "";
+            this.idReverse
+                ? (postDateSearch = {
+                      search_order_field: "rsv_id DESC",
+                      // search_order_by: "rsv_id",
+                  })
+                : (postDateSearch = {
+                      search_order_field: "rsv_id ASC",
+                      // search_order_by: "rsv_id",
+                  });
+
+            /* const postDateSearch = {
+                search_order_field: "rsv_id DESC",
+                // search_order_by: "rsv_id",
+            }; */
+
+            // console.log("QQ");
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?",
+            fetch(apiURL, {
+                method: "POST",
+                // credentials: "include",
+                body: new URLSearchParams(postDateSearch),
+            })
                 .then((res) => res.json())
                 .then((json) => {
-                    this.booklist = json.bookList;
-                    this.totalPage = Math.ceil(json.rsvCount / 10);
+                    console.log(json);
+                    this.booklist = json;
+                });
+            // console.log(this.lists[2]);
+        },
+        datechange() {
+            this.dateReverse = !this.dateReverse;
+            console.log(this.dateReverse);
+            let postDateSearch = "";
+            this.dateReverse
+                ? (postDateSearch = {
+                      search_order_field: "rsv_date DESC",
+                      // search_order_by: "rsv_id",
+                  })
+                : (postDateSearch = {
+                      search_order_field: "rsv_date ASC",
+
+                      // search_order_by: "rsv_id",
+                  });
+
+            /* const postDateSearch = {
+                search_order_field: "rsv_id DESC",
+                // search_order_by: "rsv_id",
+            }; */
+
+            // console.log("QQ");
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php",
+            fetch(apiURL, {
+                method: "POST",
+                // credentials: "include",
+                body: new URLSearchParams(postDateSearch),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.booklist = json;
                 });
         },
+        getResvDetail() {
+            // const productId = this.$route.params.id;
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/getReservation.php?limit=9&page=${this.currentPage}`
+            // );
+            // fetch(apiURL)
+            //     .then((res) => res.json())
+            //     .then((json) => {
+            //         this.booklist = json.bookList;
+            //         this.totalPage = Math.ceil(json.rsvCount / 10);
+            //     });
+        },
         deleteList(index) {
-            console.log(this.booklist[index].rsv_id);
+            this.$Modal.confirm({
+                title: "刪除訂單",
+                content: "<p>確定要刪除這筆園區導覽預約訂單？</p>",
+                okText: "確定",
+                loading: true,
+                onOk: () => {
+                    setTimeout(() => {
+                        this.$Modal.remove();
+                        this.$Message.info("這筆預約訂單已刪除");
+                    }, 2000);
+                    this.deleteFetch(index);
+                },
+                onCancel: () => {
+                    this.$Message.info("已取消");
+                },
+            });
+
+            // console.log(this.booklist[index].rsv_id);
+            // const apiURL = new URL(
+            //     `http://localhost/cgd103_g1/public/api/deleteRsv.php`
+            // );
+        },
+        deleteFetch(index) {
             const apiURL = new URL(`${BASE_URL}/deleteRsv.php`);
+
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams({
@@ -142,10 +278,11 @@ export default {
                 .then((result) => {
                     console.log(result);
                     // console.log(this.booklist);
+
                     // this.callback();
                     // alert(result);
-                    this.async();
-                    // location.reload();
+                    location.reload();
+                    console.log(result);
                 });
         },
         async() {
@@ -163,6 +300,30 @@ export default {
                 },
             });
         },
+        search_func() {
+            const postDateSearch = {
+                search_rsv_date: this.$refs.search_rsv_date.value,
+                search_rsv_status: this.$refs.search_rsv_status.value,
+                search_order_by: "",
+                // search_order_by: "this.lists.val",
+            };
+            // console.log("aaa", postDateSearch.search_order_by);
+            // console.log(1111, this.lists);
+            // console.log("QQ");
+            const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+
+            // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php?",
+            fetch(apiURL, {
+                method: "POST",
+                // credentials: "include",
+                body: new URLSearchParams(postDateSearch),
+            })
+                .then((res) => res.json())
+                .then((json) => {
+                    console.log(json);
+                    this.booklist = json;
+                });
+        },
         prePage() {
             if (this.currentPage == 1) {
                 // console.log(this.currentPage);
@@ -170,17 +331,10 @@ export default {
                 return;
             } else {
                 this.currentPage--;
-                this.$router.push({
-                    path: "/bs-booking-list-two",
-                    query: {
-                        limit: `10`,
-                        page: this.currentPage,
-                    },
-                });
             }
         },
         nextPage() {
-            console.log("QQ");
+            // console.log("QQ");
 
             if (this.currentPage === this.totalPage) {
                 // console.log(this.currentPage);
@@ -188,51 +342,92 @@ export default {
                 return;
             } else {
                 this.currentPage++;
-                this.$router.push({
-                    path: "/bs-booking-list-two",
-                    query: {
-                        limit: `10`,
-                        page: this.currentPage,
-                    },
-                });
             }
         },
         changePage(page) {
             this.currentPage = page;
-            this.$router.push({
-                path: "/bs-booking-list-two",
-                query: {
-                    limit: `10`,
-                    page: this.currentPage,
-                },
-            });
         },
     },
     created() {
         this.getResvDetail();
+        const apiURL = new URL(`${BASE_URL}/getResvDay2.php`);
+
+        // fetch("http://localhost/cgd103_g1/public/api/getResvDay2.php"
+        // )
+        fetch(apiURL)
+            .then((res) => res.json())
+            .then((json) => {
+                console.log(json);
+                this.booklist = json;
+            });
+    },
+    computed: {
+        totalPage() {
+            return Math.ceil(this.booklist.length / 10);
+        },
+        filterList() {
+            return this.booklist.slice(
+                (this.currentPage - 1) * 10,
+                this.currentPage * 10
+            );
+        },
     },
 };
 </script>
 
 <style lang="scss" scoped>
+.ivu-icon {
+    width: 100%;
+}
+.ivu-modal-confirm {
+    .ivu-modal-confirm-head {
+        .ivu-modal-confirm-head-icon {
+            .ivu-icon {
+                color: #07617d;
+            }
+        }
+    }
+    .ivu-btn-text {
+        &:hover {
+            color: #07617d;
+        }
+    }
+    .ivu-btn-primary {
+        background-color: $green;
+        border-color: $green;
+        &:hover {
+            background-color: $green;
+            border-color: $green;
+        }
+    }
+}
 .title-n-action {
     margin-bottom: 20px;
     text-align: left;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+
     .title {
         width: 400px;
         display: flex;
+
         column-gap: 20px;
         flex-wrap: wrap;
         h1 {
             display: block;
         }
+
         h2 {
-            padding-left: 500px;
             color: $green;
-            @include borderLeft(30px);
+            &::before {
+                content: "";
+                border-left: solid 5px $green;
+                // position: absolute;
+                padding-right: 10px;
+                margin-left: 3px;
+                height: 100%;
+            }
         }
         img {
             margin-left: 5px;
@@ -241,7 +436,20 @@ export default {
     }
     .action {
         display: flex;
+        align-items: center;
         column-gap: 15px;
+        .search {
+            input {
+                width: 200px;
+                box-sizing: border-box;
+                padding: 4px 10px;
+                line-height: 2;
+                border: 1px solid $green;
+                border-radius: 5px;
+                background-color: transparent;
+                color: $green;
+            }
+        }
     }
 }
 .table {
@@ -253,10 +461,18 @@ export default {
         display: flex;
         justify-items: center;
         align-items: center;
+        h2 {
+            padding-left: 500px;
+        }
         h3 {
             display: block;
             width: calc(100% / 7);
+            .ivu-icon {
+                width: 30px;
+            }
         }
+
+        // }
     }
 
     .bs-list {
@@ -387,33 +603,30 @@ a {
 
 .pagination {
     padding: 30px 0;
+    a {
+        display: inline-block;
+        padding: 10px 18px;
+        color: $darkgreen;
+        //
+        width: 40px;
+        height: 40px;
+        line-height: 40px;
+        padding: 0;
+        text-align: center;
+        &:hover {
+            color: $darkgreen;
+        }
+        &:focus {
+            color: #fff;
+        }
+    }
+    a.is-active {
+        background-color: $darkgreen;
+        border-radius: 100%;
+        color: #fff;
+    }
 }
-
-.pagination ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-}
-
-.pagination a {
-    display: inline-block;
-    padding: 10px 18px;
-    color: #222;
-}
-
-/* ONE */
-
-.p1 a {
-    width: 40px;
-    height: 40px;
-    line-height: 40px;
-    padding: 0;
-    text-align: center;
-}
-
-.p1 a.is-active {
-    background-color: #2ecc71;
-    border-radius: 100%;
-    color: #fff;
+.inverse {
+    transform: rotate(180deg);
 }
 </style>
