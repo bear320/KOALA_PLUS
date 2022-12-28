@@ -11,7 +11,7 @@
         >
             <h2>預約資訊</h2>
             <!-- <button id="close" @click.self="toggleModal">X</button> -->
-            <Icon type="md-close-circle" id="close" @click="closeIt"/>
+            <Icon type="md-close-circle" id="close" @click="closeIt" />
             <!-- <button id="close" @click="closeIt">X</button> -->
             <div class="form-group">
                 <label for="rsv_name">姓名</label>
@@ -83,21 +83,22 @@
                     class="weather"
                     v-for="(item, index) in tempWx"
                     v-show="`${orderDate + ' ' + '18:00:00'}` == item.time"
-                   
-                >   
-                <div v-if="item.test >15" style="color: #07617D;">當日最低溫度：{{item.test }} °C ⛅&#8195 當日氣候：{{item.elValue}}</div>
-
-                <div v-if="10<item.test <15" style="color: #8692FF;">當日最低溫度：{{item.test }} °C🍃 &#8195 當日氣候：{{item.elValue}}</div>
-
-                <div v-if="item.test <10" style="color: #FF7B7B;">當日最低溫度：{{ item.test }} °C⛄ &#8195 當日氣候：{{item.elValue}}</div>
-                </div> 
-
-                
-                <!--  @mouseover="formHover = true"
+                    @mouseover="formHover = true"
                     @mouseleave="formHover = false"
                     :style="{
                         color: formHover ? '' : '#FAB666',
-                    }" -->
+                    }"
+                >
+                    <!-- 當日最低溫度：{{ item.test }} °C &#8195 當日氣候：{{
+                        item.elValue
+                    }} -->
+                    當日最低溫度：{{ item.test }} °C &#8195 當日氣候：
+                    <img
+                        class="weatherForecast"
+                        :src="`https://www.cwb.gov.tw/V8/assets/img/weather_icons/weathers/svg_icon/night/${item.test}.svg`"
+                        alt="氣象預報圖片"
+                    />&#8195{{item.elValueStr}}
+                </div>
                 <!-- {{ tempWx[0] }} -->
             </div>
             <!-- @click="next" -->
@@ -268,7 +269,8 @@ export default {
                     let tempWx = wx[0].time.map((item, index) => {
                         return {
                             time: item.startTime,
-                            elValue: item.elementValue[0].value,
+                            elValue: item.elementValue[1].value,
+                            elValueStr: item.elementValue[0].value,
                             test: wx[1].time[index].elementValue[0].value,
                             // .slice(0, 10),
                         };
@@ -277,6 +279,7 @@ export default {
                     this.tempWx = tempWx;
 
                     console.log("TIME", tempWx[0].time);
+                    console.log("TEST", tempWx[0].elValueStr);
 
                     // this.weather = this.tempWx;
                 });
@@ -285,12 +288,10 @@ export default {
 };
 </script>
 
-
 <style lang="scss" scoped>
-
 .book-form {
     width: 700px;
-    height: 700px;
+    height: 710px;
     border: 1px solid #96bbbd;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
@@ -300,8 +301,6 @@ export default {
     left: 50%;
     transform: translateX(-50%);
     display: fixed;
-
-
 }
 h2 {
     margin-top: 40px;
@@ -323,13 +322,10 @@ h2 {
     text-align: center;
     width: inherit;
 
-    &:hover{
-        color: #FFFEE2;
+    &:hover {
+        color: #fffee2;
     }
-  
 }
-
-
 
 .form-group {
     text-align: left;
@@ -394,13 +390,17 @@ h2 {
     transform: translate(-50%, -50%);
     padding: 5px 10px;
 }
+.weatherForecast {
+    width: 50px;
+    vertical-align: top;
+}
 @media screen and (max-width: 768px) {
     h2 {
         margin-top: 30px;
     }
     .book-form {
         width: 90%;
-        height: 50%;
+        height: 53%;
     }
     .form-group {
         text-align: left;
@@ -454,14 +454,13 @@ h2 {
         color: white;
         cursor: pointer;
     }
-    @media screen and (max-width: 768px){
-        .book-form{
-            height:68%;
+    @media screen and (max-width: 768px) {
+        .book-form {
+            height: 66%;
         }
-
     }
     .weather {
-        font-size: 13px;
+        font-size: 16px;
     }
 }
 </style>
