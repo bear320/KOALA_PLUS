@@ -80,7 +80,7 @@ export default {
     methods: {
         iconchange(type) {
             this.isReverse = !this.isReverse;
-            console.log(type, this.isReverse);
+            // console.log(type, this.isReverse);
             //另一個判斷方法：
             // let iconorderby= (type == "cName")?;;
             // if (type == "cName") {
@@ -106,11 +106,11 @@ export default {
                     iconorderby = 0;
                     break;
             }
-            console.log(iconorderby);
+            // console.log(iconorderby);
             const postMemSearch = {
                 search_orderby: iconorderby,
             };
-            console.log(postMemSearch);
+            // console.log(postMemSearch);
             fetch(`${BASE_URL}/postmemCoupons.php?type=front`, {
                 method: "POST",
                 credentials: "include",
@@ -118,21 +118,21 @@ export default {
             })
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log(json);
+                    // console.log(json);
                     this.memindexs = json;
                     if (json.status) {
                         this.couponsList = json.list;
-                        console.log(this.couponsList.length);
+                        // console.log(this.couponsList.length);
                         return true;
                     }
-                    console.log(this.couponsList);
+                    // console.log(this.couponsList);
                     // alert("獲取數據失敗");
                     // location.href = "/login";
                 });
         },
         postmemCoupons() {
             let getCookie = document.cookie;
-            console.log(getCookie);
+            // console.log(getCookie);
             if (getCookie) {
                 fetch(`${BASE_URL}/postmemCoupons.php`, {
                     credentials: "include",
