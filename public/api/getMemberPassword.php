@@ -11,7 +11,6 @@ try{
     $member->bindValue(":user_email", $_GET["mem_account"]);
     $member->execute();
   
-    //如果找得資料，取回資料，送出json
     if($member->rowCount() == 0){ //無此會員資料
       echo "{}";
     }else{

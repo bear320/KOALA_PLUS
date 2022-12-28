@@ -10,8 +10,7 @@ try{
     $member = $pdo->prepare($sql);
     $member->bindValue(":memId", $_GET["memId"]);
     $member->execute();
-  
-    //如果找得資料，取回資料，送出json
+
     if($member->rowCount() == 0){ //無此會員資料
         echo "{}";
     }else{
@@ -28,7 +27,7 @@ try{
             "mem_exp"=>$memRow["mem_exp"],
         ];
 
-      echo json_encode($result);//送出json字串
+      echo json_encode($result);
     }
   }catch(PDOException $e){
     $result = ["errMsg"=>$e->getMessage()];
