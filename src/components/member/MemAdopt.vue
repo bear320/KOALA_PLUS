@@ -1,8 +1,8 @@
 <template lang="">
     <li class="mem_adopt content">
         <div class="mem_basic">
-            <p>姓名：{{ userid }}</p>
-            <p>會員ID：{{ username }}</p>
+            <p>會員ID：{{ userid }}</p>
+            <p>姓名：{{ username }}</p>
         </div>
         <div class="mem_main">
             <div class="mem_coupons_table">
