@@ -91,7 +91,7 @@ switch ( $type ) {
             $res = $pdo->query( $upSql );
             if( $res ){
                 $resDate["status"] = 1;
-                $resDate["msg"] = 'sucess';
+                $resDate["msg"] = '成功修改密碼';
             }
             echo json_encode( $resDate );
             return true;
