@@ -11,7 +11,7 @@
                 @closeMemUnsubscribe="closeMemUnsubscribe_emit"
                 @reRenderOrders="cancelOrder"
             ></MemUnsubscribe>
-            <p>合計 {{ order.length }} 筆訂單紀錄</p>
+            <p class="orderTotal">合計 {{ order.length }} 筆訂單紀錄</p>
             <!-- ============================================ -->
             <div
                 class="accordion"
@@ -314,20 +314,33 @@ export default {
                 width: 100%;
                 display: flex;
                 flex-wrap: wrap;
-
-                .mem_order_table {
-                    width: 80%;
+                .orderTotal {
+                    margin: 0 auto;
                 }
-                .mem_state {
-                    // background-color: burlywood;
-                    width: 20%;
-                    button {
-                        padding: 0 10px;
-                        line-height: 30px;
-                        // height: 30px;
-                        @include m() {
-                            padding: 0 5px;
-                            font-size: 16px;
+                .accordion {
+                    margin-top: 30px;
+                    width: 100%;
+                    label {
+                        width: 100%;
+                        display: block;
+                        border: 10px;
+                        background-color: #2e382e;
+                        color: #fff;
+                        border-radius: 10px;
+                        box-shadow: 0px 2px 3px 1px rgb(190, 190, 190);
+                        padding: 10px 50px;
+                        cursor: pointer;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -o-user-select: none;
+                        user-select: none;
+                        text-align: center;
+
+                        .line1 {
+                            display: flex;
+                            p {
+                                width: calc(100% / 3);
+                            }
                         }
                     }
                 }
@@ -335,66 +348,8 @@ export default {
         }
     }
 }
-table {
-    border-spacing: 0;
-    width: 100%;
-    tr {
-        text-align: center;
-        padding: 10px 0;
-        line-height: 30px;
-        height: 30px;
-        th {
-            // padding: 10px;
-            @include d() {
-                padding: 5px;
-            }
-        }
-        .prod_id {
-            @include d() {
-                display: none;
-            }
-        }
-        .prod_category {
-            @include m() {
-                display: none;
-            }
-        }
-        .prod_price {
-            @include m() {
-                display: none;
-            }
-        }
-    }
-}
 
 // =======================
-.accordion {
-    margin-top: 30px;
-    width: 100%;
-    label {
-        width: 100%;
-        display: block;
-        border: 10px;
-        background-color: #2e382e;
-        color: #fff;
-        border-radius: 10px;
-        box-shadow: 0px 2px 3px 1px rgb(190, 190, 190);
-        padding: 10px 50px;
-        cursor: pointer;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -o-user-select: none;
-        user-select: none;
-        text-align: center;
-
-        .line1 {
-            display: flex;
-            p {
-                width: calc(100% / 3);
-            }
-        }
-    }
-}
 
 input[type="checkbox"]:checked + .con {
     display: block;
