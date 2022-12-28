@@ -67,7 +67,6 @@
                                         v-model="sign_up_account"
                                         required
                                     />
-                                    <!-- <span id="idMsg">{{ idMsg }}</span> -->
                                 </div>
                                 <div id="idMsg_block">
                                     <span id="idMsg">{{ idMsg }}</span>
@@ -205,12 +204,6 @@
                             <button class="btn_login" @click="forget_password">
                                 忘記密碼
                             </button>
-                            <!-- <div>
-                                <img
-                                    src="../assets/images/login/login_koala.png"
-                                    alt=""
-                                />
-                            </div> -->
                         </div>
                         <!-- ======================================== 忘記密碼表單 ======================================== -->
                         <div class="content_active_forget_password">
@@ -250,12 +243,6 @@
                                     驗證信箱
                                 </button>
                             </form>
-                            <!-- <div>
-                                <img
-                                    src="../assets/images/login/login_koala.png"
-                                    alt=""
-                                />
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -275,8 +262,6 @@ export default {
     },
     data() {
         return {
-            /*  login_account: "charmy111@gmail.com",
-            login_password: "charmy111", */
             login_account: "",
             login_password: "",
             errorFlag: false,
@@ -355,28 +340,6 @@ export default {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
                 // thisvue.errorFlag = true;
             } else {
-                /* fetch(
-                    "http://localhost/cgd103_g1/public/api/getConfirmMember.php",
-                    {
-                        method: "post",
-                        credentials: "include",
-                        body: new URLSearchParams({
-                            mem_account: this.login_account,
-                            mem_psw: this.login_password,
-                        }),
-                    }
-                )
-                    .then((res) => res.json())
-                    .then((json) => {
-                        console.log(json);
-                        this.$store.state.user = { mem_id: 1001 };
-                        if (this.login_password == json.mem_account) {
-                            console.log("成功");
-                        } else if (!json.code) {
-                            console.log("失敗");
-                        }
-                        this.$router.push({ path: "/home" });
-                    }); */
                 await this.$store.dispatch("memLogin", {
                     mem_account: this.login_account,
                     mem_psw: this.login_password,
@@ -416,7 +379,6 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up2() {
-            // let url = "http://localhost/cgd103_g1/public/api/getSignUp.php";
             const apiURL = new URL(`${BASE_URL}/getSignUp.php`);
             const signUpContent = {
                 userName: this.sign_up_userName,
@@ -433,28 +395,18 @@ export default {
                     alert("註冊成功")
                 })
                 .then(() => {
-                    // alert(result.msg);
-                    // location.reload();
                     this.$router.push({ path: "/login" });
                 });
         },
 
         // ======================================== Email 後臺比對 ======================================== //
         check_account() {
-            //產生XMLHttpRequest物件
             var xhr = new XMLHttpRequest();
             xhr.onload = function () {
-                // console.log("=====",xhr.status);
                 document.getElementById("idMsg").innerText = xhr.responseText;
             };
-            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `document.getElementById("mem_account").value`;
-            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `${document.getElementById("mem_account").value}`;
-            // const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + `aaaaa${document.getElementById("mem_account").value}aaaaa`;
             const apiURL = `${BASE_URL}/getConfirmEmail.php?mem_account=` + document.getElementById("mem_account").value;
             
-            // let url =
-            //     "http://localhost/cgd103_g1/public/api/getConfirmEmail.php?mem_account=" +
-            //     document.getElementById("mem_account").value;
             xhr.open("get", apiURL, true);
             xhr.send(null);
         },
@@ -487,7 +439,6 @@ export default {
 
         // ======================================== 寄 Email  ======================================== //
         sendinggg(){
-            console.log("我是後面執行的");
             emailjs
                 .send(
                     "service_Charmy",
@@ -501,13 +452,9 @@ export default {
                 )
                 .then(
                     (result) => {
-                        // console.log("SUCCESS!", result.text);
-                        console.log(this);
-                        console.log('TEST',this.mem_psw);
                         alert("密碼寄送成功 請查收");
                     },
                     (error) => {
-                        // console.log("FAILED...", error.text);
                         alert("寄送失敗 請注意信箱是否錯誤")
                     }
                 );
@@ -515,50 +462,27 @@ export default {
 
         sendEmail() {
             // ======================================== 把忘記的密碼撈出來  ======================================== //
-            let QQ = this; //這裡的QQ指向的Vue實體
+            let QQ = this;
             var xhr = new XMLHttpRequest();
             xhr.onload = function () {
                 if (xhr.status == 200) {
-                    //modify here
                     showMember(xhr.responseText);
                 }
-                // else {
-                //     alert(xhr.status);
-                // }
             };
 
             const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + document.getElementById("forget_password_account").value);
-            // var url =
-            //     "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-            //     document.getElementById("forget_password_account").value;
             xhr.open("get", apiURL, true);
             xhr.send(null);
-            console.log("1");
             async function showMember(json) {
-                console.log("2");
                 var xhr = new XMLHttpRequest();
                 
                 const apiURL = new URL(`${BASE_URL}/getMemberPassword.php?mem_account=` + document.getElementById("forget_password_account").value);
-                // var url =
-                //     "http://localhost/cgd103_g1/public/api/getMemberPassword.php?mem_account=" +
-                //     document.getElementById("forget_password_account").value;
                 xhr.open("get", apiURL, true);
                 xhr.send(null);
-                console.log("3");
                 let member =await JSON.parse(json);
-                // let html;
-                
-                // 這裡的QQ指的是Vue實體
-                console.log("4");
                 QQ.mem_psw = member.mem_psw;
-                // console.log("QQQQ",QQ.mem_psw);
-                
-                // html = `<p>${member.mem_psw}</p>`;
-                
-                // document.getElementById("show_forget_password").innerHTML = html;
-                console.log("我是前面執行的");
+
                 QQ.sendinggg();
-                console.log("6");
             }
             // ======================================== 忘記密碼的 EmailJs  ======================================== //
             
@@ -606,21 +530,11 @@ export default {
     },
     mounted() {
         this.login();
-
-        // document.getElementById("show_forget_password").innerHTML = html;
     },
 };
 </script>
 
 <style lang="scss" scoped>
-// .memTable th {
-//     background-color: pink;
-// }
-
-// .memTable td {
-//     border-bottom: 1px dotted deeppink;
-// }
-
 #show_forget_password {
     display: none;
 }
@@ -686,10 +600,6 @@ export default {
     height: 85vh;
     top: -40vh;
     left: 600px;
-    // -webkit-transition: all 0.5s;
-    // -moz-transition: all 0.5s;
-    // -ms-transition: all 0.5s;
-    // -o-transition: all 0.5s;
     transition: all 0.5s;
     z-index: 2;
     border-radius: 10px;
@@ -701,10 +611,6 @@ export default {
     height: 85vh;
     top: -40vh;
     left: 0%;
-    // -webkit-transition: all 0.5s;
-    // -moz-transition: all 0.5s;
-    // -ms-transition: all 0.5s;
-    // -o-transition: all 0.5s;
     transition: all 0.5s;
     border-radius: 10px;
     z-index: 2;
@@ -716,10 +622,6 @@ export default {
     height: 85vh;
     top: -40vh;
     left: 600px;
-    // -webkit-transition: all 0.5s;
-    // -moz-transition: all 0.5s;
-    // -ms-transition: all 0.5s;
-    // -o-transition: all 0.5s;
     transition: all 0.5s;
     border-radius: 10px;
 }
@@ -805,7 +707,6 @@ export default {
     height: 350px;
     border-radius: 3px;
     margin: auto;
-    /* margin-top: 60px; */
     padding: 15px 0px;
 }
 
@@ -1046,10 +947,6 @@ export default {
 
 .content_active_sign_up_moveTxt_1 {
     padding-left: 4.5%;
-}
-
-.content_active_sign_up_moveTxt_2 {
-    // padding-left: 5%;
 }
 
 .content_active_login_moveTxt {

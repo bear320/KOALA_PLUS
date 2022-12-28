@@ -124,7 +124,6 @@ export default {
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
         sign_up() {
-            // const apiURL = new URL(`${BASE_URL}/getAdminAdd.php`);
             let url = `${BASE_URL}/getAdminAdd.php`;
             const signUpContent = {
                 account: this.sign_up_account,
@@ -135,11 +134,7 @@ export default {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
-                .then((res) => res.json())
-                // .then((result) => {
-                //     alert(result.msg);
-                //     location.reload();
-                // });
+            .then((res) => res.json())
         },
     },
 };
@@ -155,29 +150,15 @@ export default {
     align-items: center;
 }
 
-.content_active_sign_up {
-    // position: absolute;
-    // top: 50%;
-    // left: 50%
-    // width: fit-content;
-    // margin: auto;
-    // transform: translate(-50%,-50%);
-}
-
 .content_active_sign_up > form > div > input {
     text-align: left;
     padding: 5px ;
     margin: 3%;
-    // margin-top: 0%;
     width: 0px;
     flex-grow: 8;
     color: #757575;
     border-radius:5px ;
 }
-
-// #emp_account {
-//     margin-right: 5%;
-// }
 
 .content_active_sign_up > h2 {
     font-size: 24px;
@@ -189,7 +170,6 @@ export default {
 .content_active_sign_up > form > div > p {
     display: inline-block;
     width: 0;
-    // padding-top: 1.5%;
     flex-grow: 2;
 }
 
@@ -217,8 +197,6 @@ export default {
 .sign_up_icon_eye {
     width: 18px;
     height: 18px;
-    // margin-left: 1.5%;
-    // margin-top: 1.5%;
     top: 0;
     bottom: 0;
     margin: auto;
@@ -230,8 +208,6 @@ export default {
 .login_icon_eye {
     width: 18px;
     height: 18px;
-    // margin-left: 1.5%;
-    // margin-top: 3.5%;
     top: 0;
     bottom: 0;
     margin: auto;

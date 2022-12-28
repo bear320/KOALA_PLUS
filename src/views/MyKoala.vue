@@ -558,35 +558,30 @@ export default {
     data() {
         return {
             game_money: "", // nan
-
             item_1: "經濟實惠的尤加利葉",
             item_2: "物美價廉的尤加利葉",
             item_3: "熱銷第一的尤加利葉",
             item_4: "經典不敗的尤加利葉",
             item_5: "通過認證的尤加利葉",
             item_6: "得過冠軍的尤加利葉",
-
             item_1_sellingprice: 20,
             item_2_sellingprice: 50,
             item_3_sellingprice: 125,
             item_4_sellingprice: 225,
             item_5_sellingprice: 350,
             item_6_sellingprice: 500,
-
             item_1_exp: 10,
             item_2_exp: 20,
             item_3_exp: 50,
             item_4_exp: 90,
             item_5_exp: 140,
             item_6_exp: 210,
-
             remaining_amount_1: "",
             remaining_amount_2: "",
             remaining_amount_3: "",
             remaining_amount_4: "",
             remaining_amount_5: "",
             remaining_amount_6: "",
-
             // ======================================== 經驗值滿 2000，因算 100%，2000/100=20  ========================================
             increment_1: 10 / 20,
             increment_2: 20 / 20,
@@ -594,188 +589,100 @@ export default {
             increment_4: 90 / 20,
             increment_5: 140 / 20,
             increment_6: 210 / 20,
-
             expWidth: 0,
             game_exp: 0,
-
             tmp_memID:0
         };
     },
-    // created() {
-    //     (function(){
-    //         const supportId = this.$route.params.sup_id;
-    //         console.log(supportId);
-    //         const apiURL = new URL(`${BASE_URL}/postSupportUpdate.php`);
-    //         const supportUpdate = {
-    //             sup_id: Number(this.source.sup_id),
-    //             sup_note: this.source.sup_note,
-    //         };
-    //         console.log(supportUpdate);
-
-    //         fetch(apiURL, {
-    //             method: "POST",
-    //             body: new URLSearchParams(supportUpdate),
-    //         })
-    //             .then((res) => res.json())
-    //             .then((status) => {
-    //                 alert(status.msg);
-    //                 if (confirm("是否關閉此分頁？")) {
-    //                     window.close();
-    //                 }
-    //             });
-    //     })(); //IIFE
-    // },
     mounted() {
-
         // ======================================== 把忘記的密碼撈出來  ======================================== //
         let QQ = this; //這裡的QQ指向的Vue實體
         var xhr = new XMLHttpRequest();
         xhr.onload = function () {
             if (xhr.status == 200) {
-                // console.log('ㄎㄎ');
                 showMember(xhr.responseText);
             } else {
-                // alert(xhr.status);
             }
         };
 
-        // console.log(this.$store.state.user.mem_id);
-
         const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${this.$store.state.user?.mem_id}`);
-        // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${this.$store.state.user.mem_id}`;
         xhr.open("get", apiURL, true);
         xhr.send(null);
 
         function showMember(json) {
             var xhr = new XMLHttpRequest();
-            // console.log(QQ);
             const apiURL = new URL(`${BASE_URL}/getGameValue.php?memId=${QQ.$store.state.user?.mem_id}`);
-            // var url = `http://localhost/cgd103_g1/public/api/getGameValue.php?memId=${QQ.$store.state.user.mem_id}`;
             xhr.open("get", apiURL, true);
             xhr.send(null);
             let member = JSON.parse(json);
 
             let game_money;
-            // 這裡的QQ指的是Vue實體
             QQ.game_money = member.mem_point;
             document.getElementById("game_money").innerHTML = game_money;
 
             let remaining_amount_1;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_1 = member.mem_food1;
-            document.getElementById("remaining_amount_1").innerHTML =
-                remaining_amount_1;
+            document.getElementById("remaining_amount_1").innerHTML = remaining_amount_1;
 
             let remaining_amount_2;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_2 = member.mem_food2;
-            document.getElementById("remaining_amount_2").innerHTML =
-                remaining_amount_2;
+            document.getElementById("remaining_amount_2").innerHTML = remaining_amount_2;
 
             let remaining_amount_3;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_3 = member.mem_food3;
-            document.getElementById("remaining_amount_3").innerHTML =
-                remaining_amount_3;
+            document.getElementById("remaining_amount_3").innerHTML = remaining_amount_3;
 
             let remaining_amount_4;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_4 = member.mem_food4;
-            document.getElementById("remaining_amount_4").innerHTML =
-                remaining_amount_4;
+            document.getElementById("remaining_amount_4").innerHTML = remaining_amount_4;
 
             let remaining_amount_5;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_5 = member.mem_food5;
-            document.getElementById("remaining_amount_5").innerHTML =
-                remaining_amount_5;
+            document.getElementById("remaining_amount_5").innerHTML = remaining_amount_5;
 
             let remaining_amount_6;
-            // 這裡的QQ指的是Vue實體
             QQ.remaining_amount_6 = member.mem_food6;
-            document.getElementById("remaining_amount_6").innerHTML =
-                remaining_amount_6;
+            document.getElementById("remaining_amount_6").innerHTML = remaining_amount_6;
 
             let game_exp;
-            // 這裡的QQ指的是Vue實體
-            // console.log("test",member.mem_exp);
-            // console.log(typeof member.mem_exp);
-            // console.log(typeof +member.mem_exp);
             QQ.game_exp =+ member.mem_exp;
-           /*  document.getElementById("game_exp").innerHTML =
-                game_exp; */
 
             QQ.expWidth = member.mem_exp/20;
         }
     },
     methods: {
-
-    
-
-
-        
         // ======================================== X 關掉彈窗 ======================================== //
         removeActive: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
         },
 
         // ======================================== 彈出賺遊戲幣的方式 ======================================== //
         plus_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("plus_talkwindow")
-                .classList.add("plus_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.add("plus_talkwindow_active");
         },
 
         // ======================================== 彈出虛擬商店 ======================================== //
         shop_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("shop_talkwindow")
-                .classList.add("shop_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.add("shop_talkwindow_active");
         },
 
         // ======================================== 彈出遊戲背包 ======================================== //
         bag_talkwindow: function () {
-            document
-                .getElementById("shop_talkwindow")
-                .classList.remove("shop_talkwindow_active");
-            document
-                .getElementById("bag_talkwindow")
-                .classList.remove("bag_talkwindow_active");
-            document
-                .getElementById("plus_talkwindow")
-                .classList.remove("plus_talkwindow_active");
+            document.getElementById("shop_talkwindow").classList.remove("shop_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.remove("bag_talkwindow_active");
+            document.getElementById("plus_talkwindow").classList.remove("plus_talkwindow_active");
 
-            document
-                .getElementById("bag_talkwindow")
-                .classList.add("bag_talkwindow_active");
+            document.getElementById("bag_talkwindow").classList.add("bag_talkwindow_active");
         },
 
         // ======================================== 經濟實惠的尤加利葉 ======================================== //
@@ -787,7 +694,7 @@ export default {
             this.remaining_amount_1--;
 
             if (this.expWidth + 0.5 < 100) {
-                this.expWidth = this.expWidth + this.increment_1; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_1;
             } else if (this.expWidth + 0.5 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 0.5 > 100) {
@@ -798,50 +705,18 @@ export default {
                 this.game_exp += 10;
             } else if (this.game_exp + 10 >= 2000) {
                 this.game_exp = 2000;
-                document
-                    .getElementById("discount_coupon_talkwindow")
-                    .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -856,7 +731,7 @@ export default {
             this.remaining_amount_2--;
 
             if (this.expWidth + 1 <= 100) {
-                this.expWidth = this.expWidth + this.increment_2; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_2;
             } else if (this.expWidth + 1 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 1 > 100) {
@@ -867,50 +742,18 @@ export default {
                 this.game_exp += 20;
             } else if (this.game_exp + 20 >= 2000) {
                 this.game_exp = 2000;
-                document
-                    .getElementById("discount_coupon_talkwindow")
-                    .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -925,7 +768,7 @@ export default {
             this.remaining_amount_3--;
 
             if (this.expWidth + 2.5 <= 100) {
-                this.expWidth = this.expWidth + this.increment_3; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_3;
             } else if (this.expWidth + 2.5 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 2.5 > 100) {
@@ -936,50 +779,18 @@ export default {
                 this.game_exp += 50;
             } else if (this.game_exp + 50 >= 2000) {
                 this.game_exp = 2000;
-                document
-                    .getElementById("discount_coupon_talkwindow")
-                    .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -994,7 +805,7 @@ export default {
             this.remaining_amount_4--;
 
             if (this.expWidth + 4.5 <= 100) {
-                this.expWidth = this.expWidth + this.increment_4; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_4;
             } else if (this.expWidth + 4.5 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 4.5 > 100) {
@@ -1008,47 +819,17 @@ export default {
                 document
                     .getElementById("discount_coupon_talkwindow")
                     .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -1063,7 +844,7 @@ export default {
             this.remaining_amount_5--;
 
             if (this.expWidth + 7 <= 100) {
-                this.expWidth = this.expWidth + this.increment_5; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_5;
             } else if (this.expWidth + 7 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 7 > 100) {
@@ -1074,50 +855,18 @@ export default {
                 this.game_exp += 140;
             } else if (this.game_exp + 140 >= 2000) {
                 this.game_exp = 2000;
-                document
-                    .getElementById("discount_coupon_talkwindow")
-                    .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -1131,7 +880,7 @@ export default {
         minnum_6: function () {
             this.remaining_amount_6--;
             if (this.expWidth + 10.5 <= 100) {
-                this.expWidth = this.expWidth + this.increment_6; // 增加經驗值
+                this.expWidth = this.expWidth + this.increment_6;
             } else if (this.expWidth + 10.5 == 100) {
                 this.expWidth = 100;
             } else if (this.expWidth + 10.5 > 100) {
@@ -1142,50 +891,18 @@ export default {
                 this.game_exp += 210;
             } else if (this.game_exp + 210 >= 2000) {
                 this.game_exp = 2000;
-                document
-                    .getElementById("discount_coupon_talkwindow")
-                    .classList.add("discount_coupon_talkwindow_active");
-                // 彈窗禮券   post 進去
-
-                // let instant = new Date();
-                // let year = instant.getFullYear();
-                // let month = instant.getMonth() + 1;
-                // let day = instant.getDate();
-                // let now = year + "-" + month + "-" + day;
-                // let nextMonth = instant.getMonth() + 2;
-                // if (nextMonth == 13) {
-                //     nextMonth = 1;
-                // }
-                // let future =
-                //     instant.getFullYear() +
-                //     "-" +
-                //     nextMonth +
-                //     "-" +
-                //     instant.getDate();
-
-                // console.log(now);
-                // console.log(future);
+                document.getElementById("discount_coupon_talkwindow").classList.add("discount_coupon_talkwindow_active");
 
                 const apiURL = new URL(`${BASE_URL}/postGameCoupon.php`);
-                // let url = `http://localhost/cgd103_g1/public/api/postGameCoupon.php`;
                 const gameDiscountCoupon = {
                     memId: this.$store.state.user.mem_id,
-                    // coupon_get_date: now,
-                    // coupon_exp_date: future,
                 };
-                // console.log(gameDiscountCoupon.memId);
-                // console.log(gameDiscountCoupon.coupon_get_date);
-                // console.log(gameDiscountCoupon.coupon_exp_date);
 
                 fetch(apiURL, {
                     method: "POST",
                     body: new URLSearchParams(gameDiscountCoupon),
                 })
-                    .then((res) => res.json())
-                    // .then((json) => console.log(json));
-                // .then((result) => {
-                //     alert(result.msg);
-                // });
+                .then((res) => res.json())
 
                 this.game_exp = 0;
             }
@@ -1193,15 +910,12 @@ export default {
 
         // ======================================== 領取折價券 ======================================== //
         get_discount_coupon: function () {
-            document
-                .getElementById("discount_coupon_talkwindow")
-                .classList.remove("discount_coupon_talkwindow_active");
+            document.getElementById("discount_coupon_talkwindow").classList.remove("discount_coupon_talkwindow_active");
         },
 
         // ======================================== 消費及使用時同步更新後台資料 ======================================== //
         postData() {
             const apiURL = new URL(`${BASE_URL}/postGameValue.php`);
-            // let url = `http://localhost/cgd103_g1/public/api/postGameValue.php`;
             const gameValueContent = {
                 memId: this.$store.state.user?.mem_id,
                 game_money: this.game_money,
@@ -1218,8 +932,7 @@ export default {
                 method: "POST",
                 body: new URLSearchParams(gameValueContent),
             })
-                .then((res) => res.json())
-                // .then((json) => console.log(json))
+            .then((res) => res.json())
         },
     },
     watch: {
@@ -1251,17 +964,18 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+template {
+    background-color: #d3fdff;
+}
+
 a {
     text-decoration: none;
     color: #000;
 }
+
 img {
     width: 100%;
     display: inline;
-}
-
-template {
-    background-color: #d3fdff;
 }
 
 /* ======================================== 遊戲背景 ======================================== */
@@ -1286,29 +1000,6 @@ template {
 
 .main_block_LeftTree > img {
     vertical-align: bottom;
-}
-
-.main_block_LeftTree_1 {
-    // position: absolute;
-    // left: 10%;
-    // bottom: 0;
-}
-
-.main_block_LeftTree_2 {
-    // position: absolute;
-    // left: 20%;
-    // bottom: 0;
-}
-
-.main_block_LeftTree_3 {
-    // position: absolute;
-    // left: 30%;
-    // bottom: 0;
-}
-
-.main_block_MainTree {
-    // position: relative;
-    // width: 100%;
 }
 
 .main_block_MainTree_0 {
@@ -1466,19 +1157,16 @@ template {
 }
 
 .main_block_RightTree_1 {
-    // position: absolute;
     right: 10%;
     bottom: 0;
 }
 
 .main_block_RightTree_2 {
-    // position: absolute;
     right: 20%;
     bottom: 0;
 }
 
 .main_block_RightTree_3 {
-    // position: absolute;
     right: 30%;
     bottom: 0;
 }
@@ -1491,7 +1179,6 @@ template {
 
 .main_block_grass > img {
     width: 100%;
-    // position: absolute;
     bottom: 0;
     left: 0;
     vertical-align: bottom;
@@ -1516,7 +1203,6 @@ template {
 .game_nav_money_left {
     width: 140px;
     display: flex;
-    // border: 1px solid #96bbbd;
     border-radius: 10px;
 }
 
@@ -1656,8 +1342,6 @@ template {
     padding-top: 5%;
     margin-left: 25%;
 }
-
-/* .plus_talkwindow_image {} */
 
 .plus_talkwindow_image > img {
     width: 320px;
@@ -1908,7 +1592,6 @@ template {
     left: 15%;
     width: 15%;
     display: flex;
-    // margin: 45% 15%;
     padding: 10px;
     justify-content: space-around;
     border-radius: 10px;
@@ -1978,31 +1661,8 @@ template {
         align-items: flex-end;
     }
 
-    .main_block_LeftTree_1 {
-        // position: absolute;
-        // left: 10%;
-        // bottom: 0;
-    }
-
-    .main_block_LeftTree_2 {
-        // position: absolute;
-        // left: 20%;
-        // bottom: 0;
-    }
-
-    .main_block_LeftTree_3 {
-        // position: absolute;
-        // left: 30%;
-        // bottom: 0;
-    }
-
     .main_block_LeftTree > img {
         vertical-align: bottom;
-    }
-
-    .main_block_MainTree {
-        // position: relative;
-        // width: 100%;
     }
 
     .main_block_MainTree_0 {
@@ -2043,19 +1703,16 @@ template {
     }
 
     .main_block_RightTree_1 {
-        // position: absolute;
         right: 10%;
         bottom: 0;
     }
 
     .main_block_RightTree_2 {
-        // position: absolute;
         right: 20%;
         bottom: 0;
     }
 
     .main_block_RightTree_3 {
-        // position: absolute;
         right: 30%;
         bottom: 0;
     }
@@ -2068,7 +1725,6 @@ template {
 
     .main_block_grass > img {
         width: 100%;
-        // position: absolute;
         bottom: 0;
         left: 0;
         vertical-align: bottom;
@@ -2093,7 +1749,6 @@ template {
     .game_nav_money_left {
         width: 140px;
         display: flex;
-        // border: 1px solid #96bbbd;
         border-radius: 10px;
     }
 
@@ -2233,8 +1888,6 @@ template {
         padding-top: 5%;
         margin-left: 25%;
     }
-
-    /* .plus_talkwindow_image {} */
 
     .plus_talkwindow_image > img {
         width: 240px;
@@ -2485,7 +2138,6 @@ template {
         left: 15%;
         width: 15%;
         display: flex;
-        // margin: 45% 15%;
         padding: 10px;
         justify-content: space-around;
         border-radius: 10px;
@@ -2556,31 +2208,8 @@ template {
         align-items: flex-end;
     }
 
-    .main_block_LeftTree_1 {
-        // position: absolute;
-        // left: 10%;
-        // bottom: 0;
-    }
-
-    .main_block_LeftTree_2 {
-        // position: absolute;
-        // left: 20%;
-        // bottom: 0;
-    }
-
-    .main_block_LeftTree_3 {
-        // position: absolute;
-        // left: 30%;
-        // bottom: 0;
-    }
-
     .main_block_LeftTree > img {
         vertical-align: bottom;
-    }
-
-    .main_block_MainTree {
-        // position: relative;
-        // width: 100%;
     }
 
     .main_block_MainTree_0 {
@@ -2621,19 +2250,16 @@ template {
     }
 
     .main_block_RightTree_1 {
-        // position: absolute;
         right: 10%;
         bottom: 0;
     }
 
     .main_block_RightTree_2 {
-        // position: absolute;
         right: 20%;
         bottom: 0;
     }
 
     .main_block_RightTree_3 {
-        // position: absolute;
         right: 30%;
         bottom: 0;
     }
@@ -2646,7 +2272,6 @@ template {
 
     .main_block_grass > img {
         width: 100%;
-        // position: absolute;
         bottom: 0;
         left: 0;
         vertical-align: bottom;
@@ -2672,7 +2297,6 @@ template {
     .game_nav_money_left {
         width: 140px;
         display: flex;
-        // border: 1px solid #96bbbd;
         border-radius: 10px;
     }
 
@@ -2816,8 +2440,6 @@ template {
         padding-top: 5%;
         margin-left: 25%;
     }
-
-    /* .plus_talkwindow_image {} */
 
     .plus_talkwindow_image > img {
         width: 240px;
@@ -3101,7 +2723,6 @@ template {
         left: 15%;
         width: 15%;
         display: flex;
-        // margin: 45% 15%;
         padding: 10px;
         justify-content: space-around;
         border-radius: 10px;
