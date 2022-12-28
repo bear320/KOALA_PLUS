@@ -228,15 +228,10 @@ table {
         @include d() {
             width: 427px;
             height: 303px;
-            // width: 100%;
-            // aspect-ratio: 3 / 5;
         }
         @include m() {
             width: 280px;
             height: 195px;
-            // width: 100%;
-            // height: 200px;
-            // aspect-ratio: 2 / 6;
         }
 
         .certificate_name {
