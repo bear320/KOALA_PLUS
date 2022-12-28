@@ -241,8 +241,7 @@ export default {
             } else {
                 alert("登入失效");
                 //跳轉 login url
-
-                location.href = "/login";
+                // location.href = "/login";
             }
         },
         editMemInfo() {
@@ -337,9 +336,7 @@ export default {
                 onOk: () => {
                     setTimeout(() => {
                         this.$Modal.remove();
-                        this.$Message.info(
-                            "Asynchronously close the dialog box"
-                        );
+                        this.$Message.info("您已登出會員");
                         // location.href = "/login";
                     }, 2000);
                 },

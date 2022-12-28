@@ -241,9 +241,9 @@ export default {
                     .then((res) => res.json())
                     .then((json) => {
                         // console.log(json);
-                        if (json.status == 10010) {
-                            location.href = "/login";
-                        }
+                        // if (json.status == 10010) {
+                        //     location.href = "/login";
+                        // }
                         if (json.status) {
                             this.order = json.list;
                             // console.log(this.order);
@@ -256,7 +256,7 @@ export default {
             } else {
                 // alert("登入失效");
                 //跳轉 login url
-                location.href = "/login";
+                // location.href = "/login";
             }
         },
         // 抓取訂單內容
