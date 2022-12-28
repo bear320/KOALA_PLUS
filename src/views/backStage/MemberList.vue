@@ -146,7 +146,6 @@ export default {
                 this.$Modal.confirm({
                     title: "黑名單確認",
                     content: "您確定要切換開關狀態嗎？",
-
                     onOk: () => {
                         resolve();
                         console.log(this.$Modal);

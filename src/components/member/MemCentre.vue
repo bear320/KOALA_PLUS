@@ -100,6 +100,10 @@
                             v-model="passwordcheck"
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw1"
+                            :class="{
+                                InputError: checkInputPsw1,
+                            }"
                         />
                         <input
                             type="password"
@@ -111,6 +115,10 @@
                             v-else
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw1"
+                            :class="{
+                                InputError: checkInputPsw1,
+                            }"
                         />
                         <img
                             :src="seen_one ? seenImg : unseenImg"
@@ -132,6 +140,10 @@
                             v-model="newpassword"
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw2"
+                            :class="{
+                                InputError: checkInputPsw2,
+                            }"
                         />
                         <input
                             type="password"
@@ -143,6 +155,10 @@
                             v-else
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw2"
+                            :class="{
+                                InputError: checkInputPsw2,
+                            }"
                         />
                         <img
                             :src="seen_two ? seenImg : unseenImg"
@@ -164,6 +180,10 @@
                             v-model="newpasswordconfirm"
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw3"
+                            :class="{
+                                InputError: checkInputPsw3,
+                            }"
                         />
                         <input
                             type="password"
@@ -175,6 +195,10 @@
                             v-else
                             autocomplete="off"
                             @keyup.enter="reg_pswType"
+                            @keyup="CheckInput_psw3"
+                            :class="{
+                                InputError: checkInputPsw3,
+                            }"
                         />
                         <img
                             :src="seen_three ? seenImg : unseenImg"
@@ -185,7 +209,9 @@
                         />
                     </tr>
                 </table>
-                <button class="btn-paramy" @click="editMempsw">修改密碼</button>
+                <button class="btn-paramy" @click.prevent="editMempsw">
+                    修改密碼
+                </button>
             </form>
         </div>
     </li>
@@ -210,6 +236,9 @@ export default {
             pwdType_three: false,
             checkInputMod: false,
             checkInputEmail: false,
+            checkInputPsw1: false,
+            checkInputPsw2: false,
+            checkInputPsw3: false,
         };
     },
     methods: {
@@ -283,22 +312,22 @@ export default {
                             this.$Message.info(status.msg);
                         }
                     });
-                if (this.passwordcheck != "") {
-                    // alert("有輸入內容");
-                    if (this.newpassword == this.newpasswordconfirm) {
-                        // alert("相同");
-                    } else {
-                        // alert("密碼不相同");
-                        // this.psw_thesame();
-                        // 新密碼輸入不相同
-                    }
-                } else {
-                    // alert("密碼不可為空白");
-                    // this.$Notice.open({
-                    //     title: "提醒",
-                    //     desc: nodesc ? "" : "密碼不可為空白",
-                    // });
-                }
+                // if (this.passwordcheck != "") {
+                // alert("有輸入內容");
+                // if (this.newpassword == this.newpasswordconfirm) {
+                // alert("相同");
+                // } else {
+                // alert("密碼不相同");
+                // this.psw_thesame();
+                // 新密碼輸入不相同
+                // }
+                // } else {
+                // alert("密碼不可為空白");
+                // this.$Notice.open({
+                //     title: "提醒",
+                //     desc: nodesc ? "" : "密碼不可為空白",
+                // });
+                // }
             } else {
                 alert("登入失效");
             }
@@ -518,6 +547,7 @@ export default {
         reg_pswType() {
             let mem_oldpsw_val = this.$refs.mem_psw.value;
             let mem_newpsw_val = this.$refs.mem_password1.value;
+
             const validate = /^(?=.*d)(?=.*[a-zA-Z]).{6,9}$/;
             let res1 = validate.test(mem_oldpsw_val);
             let res2 = validate.test(mem_newpsw_val);
@@ -526,11 +556,49 @@ export default {
 
             if (res1) {
             } else {
-                this.psw_open(false);
+                // this.psw_open(false);
             }
             if (res2) {
             } else {
-                this.psw_open(false);
+                // this.psw_open(false);
+            }
+        },
+        CheckInput_psw1() {
+            let mem_oldpsw_val = this.$refs.mem_psw.value;
+
+            // const validate = /^(?=.*d)(?=.*[a-zA-Z]).{6,9}$/;
+            const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
+            let res1 = validate.test(mem_oldpsw_val);
+            console.log("TEST1", res1);
+
+            if (res1) {
+                this.checkInputPsw1 = false;
+            } else {
+                this.checkInputPsw1 = true;
+            }
+        },
+        CheckInput_psw2() {
+            let mem_newpsw_val = this.$refs.mem_password1.value;
+            const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
+            let res2 = validate.test(mem_newpsw_val);
+            console.log("TEST2", res2);
+
+            if (res2) {
+                this.checkInputPsw2 = false;
+            } else {
+                this.checkInputPsw2 = true;
+            }
+        },
+        CheckInput_psw3() {
+            let mem_passwordconfirm = this.$refs.mem_passwordconfirm.value;
+            const validate = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,9}$/;
+            let res3 = validate.test(mem_passwordconfirm);
+            console.log("TEST3", res3);
+
+            if (res3) {
+                this.checkInputPsw3 = false;
+            } else {
+                this.checkInputPsw3 = true;
             }
         },
     },
