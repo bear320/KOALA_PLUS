@@ -19,5 +19,6 @@ catch (PDOException $e) {
 }
 //輸出結果
 $result = ["msg"=>$msg];
+// echo json_encode($sql);
 echo json_encode($result);
 ?>
