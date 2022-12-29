@@ -158,7 +158,8 @@ $size-s: 295px;
     .sub-images {
         width: 100%;
         display: flex;
-        justify-content: space-between;
+        justify-content: flex-start;
+        column-gap: calc(10% / 3);
         img {
             width: 22.5%;
             aspect-ratio: 1 / 1;
