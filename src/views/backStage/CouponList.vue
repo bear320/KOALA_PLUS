@@ -44,9 +44,27 @@ export default {
             couponlist: [
                 {
                     name: "95折優惠券",
-                    date: "30天",
-                    id: "#happyqq",
+                    date: "60天",
+                    id: "#koala95",
                     discount: "95折",
+                },
+                {
+                    name: "9折優惠券",
+                    date: "60天",
+                    id: "#koala90",
+                    discount: "9折",
+                },
+                {
+                    name: "85折優惠券",
+                    date: "60天",
+                    id: "#koala85",
+                    discount: "85折",
+                },
+                {
+                    name: "6折優惠券",
+                    date: "360天",
+                    id: "#koala60",
+                    discount: "6折",
                 },
             ],
         };
