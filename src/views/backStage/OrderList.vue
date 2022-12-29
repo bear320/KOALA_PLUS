@@ -107,6 +107,7 @@
                                         id="ord_ship"
                                         name="ord_ship"
                                         v-model="item.ord_ship"
+                                        :before-change="handleBeforeChange"
                                         @change="updateStatus(index)"
                                         required
                                     >
@@ -224,7 +225,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
-                    alert(status.msg);
+                    // alert(status.msg);
                 });
         },
         changeVal() {
@@ -276,6 +277,17 @@ export default {
                     page: this.currentPage,
                     search: this.search,
                 },
+            });
+        },
+        handleBeforeChange() {
+            return new Promise((resolve) => {
+                this.$Modal.confirm({
+                    title: "確定更新訂單狀態嗎？",
+                    content: "您確定更新訂單狀態嗎？？",
+                    onOk: () => {
+                        resolve();
+                    },
+                });
             });
         },
     },
