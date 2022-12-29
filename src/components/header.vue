@@ -1,5 +1,4 @@
 <template>
-    import { log } from 'util';
     <header id="navbar">
         <nav class="wrapper">
             <div>
