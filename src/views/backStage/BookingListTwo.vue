@@ -179,8 +179,8 @@ export default {
             let postDateSearch = "";
             this.idReverse
                 ? (postDateSearch = {
-                      search_order_field: "rsv_id DESC",
-                      // search_order_by: "rsv_id",
+                      //   search_order_field: "rsv_id DESC",
+                      search_order_by: "rsv_id DESC",
                   })
                 : (postDateSearch = {
                       search_order_field: "rsv_id ASC",
@@ -213,13 +213,13 @@ export default {
             let postDateSearch = "";
             this.dateReverse
                 ? (postDateSearch = {
-                      search_order_field: "rsv_date DESC",
-                      // search_order_by: "rsv_id",
+                      //   search_order_field: "rsv_date DESC",
+                      search_order_by: "rsv_id DESC",
                   })
                 : (postDateSearch = {
-                      search_order_field: "rsv_date ASC",
+                      //   search_order_field: "rsv_date ASC",
 
-                      // search_order_by: "rsv_id",
+                      search_order_by: "rsv_id ASC",
                   });
 
             /* const postDateSearch = {

@@ -18,7 +18,7 @@ $search_order_field = $_POST["search_order_field"] ?? "";
 $whereStr = "";
 $orderStr = "";
 
-/* if(isset($_POST['search_rsv_date']) && !empty($_POST['search_rsv_date'])){
+if(isset($_POST['search_rsv_date']) && !empty($_POST['search_rsv_date'])){
     $whereStr .= "WHERE rsv_date='{$_POST['search_rsv_date']}'";
 }
 if(isset($_POST['search_rsv_status']) && !empty($_POST['search_rsv_status'])){
@@ -31,8 +31,8 @@ if(isset($_POST['search_rsv_status']) && !empty($_POST['search_rsv_status'])){
 if(isset($_POST['search_order_by']) && !empty($_POST['search_order_by'])){
     $orderStr .= "ORDER BY {$_POST['search_order_by']}";
 }
-$sql = "SELECT * FROM tibamefe_cgd103g1.reservation {$whereStr} {$orderStr} "; */
-if(isset($search_rsv_date) && !empty($search_rsv_date)){
+$sql = "SELECT * FROM tibamefe_cgd103g1.reservation {$whereStr} {$orderStr} ";
+/* if(isset($search_rsv_date) && !empty($search_rsv_date)){
     $whereStr .= "WHERE rsv_date='$search_rsv_date'";
 }
 if(isset($search_status) && !empty($search_status)){
@@ -44,7 +44,7 @@ if(isset($search_status) && !empty($search_status)){
 }
 if(isset($search_order_by) && !empty($search_order_by)){
     $orderStr .= "ORDER BY '$search_order_by'";
-}
+} */
 $sql = "SELECT * FROM tibamefe_cgd103g1.reservation {$whereStr} {$orderStr}";
 
 
