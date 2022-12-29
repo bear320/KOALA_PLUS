@@ -82,7 +82,7 @@
             <!-- <p>
                 <router-link
                     :to="`/bs-support-info/${list.number}`"
-                    target="_blank" 
+                    target="_blank"
                 >
                     {{ list.number }}
                 </router-link>
@@ -147,6 +147,17 @@ export default {
             idReverse: false,
             dateReverse: false,
         };
+    },
+    computed: {
+        totalPage() {
+            return Math.ceil(this.booklist.length / 10);
+        },
+        filterList() {
+            return this.booklist.slice(
+                (this.currentPage - 1) * 10,
+                this.currentPage * 10
+            );
+        },
     },
     watch: {
         // $route: function () {
@@ -360,17 +371,6 @@ export default {
                 console.log(json);
                 this.booklist = json;
             });
-    },
-    computed: {
-        totalPage() {
-            return Math.ceil(this.booklist.length / 10);
-        },
-        filterList() {
-            return this.booklist.slice(
-                (this.currentPage - 1) * 10,
-                this.currentPage * 10
-            );
-        },
     },
 };
 </script>

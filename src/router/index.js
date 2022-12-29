@@ -192,8 +192,8 @@ const routes = [
     {
         path: "/bs-booking-list",
         name: "bookingList",
-        // component: BookingList,
-        component: () => import("@/views/backStage/BookingList.vue"),
+        // component: BookingListTwo,
+        component: () => import("@/views/backStage/BookingListTwo.vue"),
         meta: { title: "園區導覽管理" },
     },
     // {
