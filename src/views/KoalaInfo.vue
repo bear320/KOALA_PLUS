@@ -12,7 +12,7 @@
     <section class="wrapper">
         <div class="koala-info">
             <div class="img">
-                <ImageSlider :imgs="this.source.koala_images"></ImageSlider>
+                <ImageSlider :imgs="images"></ImageSlider>
             </div>
             <div class="text">
                 <div class="paragraph">
@@ -186,6 +186,7 @@ export default {
     data() {
         return {
             source: [],
+            images: [],
             plans: [
                 {
                     pName: "資助所有無尾熊",
@@ -222,9 +223,9 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.source = json.koalaInfo;
-                })
-                .catch((error) => {
-                    // alert(error);
+                    this.images = json.koalaInfo.koala_images.filter((item) => {
+                        return item != null;
+                    });
                 });
         },
         updateStatus(field) {
