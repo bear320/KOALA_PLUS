@@ -224,7 +224,7 @@ export default {
                 .then((json) => {
                     this.source = json.koalaInfo;
                     this.images = json.koalaInfo.koala_images.filter((item) => {
-                        return item != null;
+                        return item != "";
                     });
                 });
         },

@@ -140,8 +140,8 @@ export default {
         },
         confirmModal() {
             this.$Modal.confirm({
-                title: "訂單備註已修改",
-                content: "<p>訂單備註已修改，是否關閉此分頁？</p>",
+                title: "無尾熊新增成功",
+                content: "<p>無尾熊新增成功，是否關閉此分頁？</p>",
                 okText: "是",
                 cancelText: "否",
                 onOk: () => {
