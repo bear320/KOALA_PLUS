@@ -30,10 +30,10 @@
                     </li>
                 </ul>
                 <ul class="icon">
-                    <li @click="clickToCart">
-                        <a>
+                    <li>
+                        <router-link to="/cart1">
                             <Icon type="md-cart" />
-                        </a>
+                        </router-link>
                     </li>
                     <li v-if="!$store.state.user">
                         <router-link to="/login">
@@ -106,45 +106,20 @@ export default {
         changeCurWidth() {
             this.curWidth = window.innerWidth;
         },
-        clickToCart() {
-            if (this.$store.state.user == null) {
-                this.open(
-                    false,
-                    `請登入會員`,
-                    `需先登入會員才可進入購物車頁，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`
-                );
-                return;
-            } else {
-                if (this.$store.state.cart.length > 0) {
-                    this.$router.push({ path: "/cart1" });
-                } else {
-                    this.open(false, `目前購物車是空的唷!`, "");
-                }
-            }
-        },
         clickToPlay() {
             if (this.$store.state.user == null) {
-                this.open(
-                    false,
-                    `請登入會員`,
-                    `需先登入會員才可進行遊玩，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`
-                );
+                this.open(false);
                 return;
             } else {
                 this.$router.push({ path: "/my-koala" });
             }
         },
-        open(nodesc, title, desc) {
+        open(nodesc) {
             this.$Notice.open({
-<<<<<<< HEAD
-                title: `${title}`,
-                desc: nodesc ? "" : `${desc}`,
-=======
                 title: "請登入會員",
                 desc: nodesc
                     ? ""
                     : `需先登入會員才可進行遊玩，尚未註冊會員者也至 <a href="/login">登入頁面</a> 立即註冊！`,
->>>>>>> charmy01
             });
         },
     },
