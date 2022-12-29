@@ -45,6 +45,7 @@
                                 id="sign_up_form"
                                 method="post"
                                 enctype="multipart/form-data"
+                                @submit="sendEmail"
                             >
                                 <div>
                                     <p>姓名</p>
@@ -195,7 +196,7 @@
                                 <button
                                     class="btn_login"
                                     type="submit"
-                                    @click="login"
+                                    @click="login_2"
                                     value="Login"
                                 >
                                     登錄會員</button
@@ -307,31 +308,23 @@ export default {
 
         // ======================================== Login click事件 ======================================== //
         async login() {
-            document.querySelector(".content_active").className =
-                "content_active content_active_active_login";
-            document.querySelector(".content_active_login").style.display =
-                "block";
-            document.querySelector(".content_active_sign_up").style.opacity =
-                "0";
-            document.querySelector(
-                ".content_active_forget_password"
-            ).style.opacity = "0";
+            document.querySelector(".content_active").className = "content_active content_active_active_login";
+            document.querySelector(".content_active_login").style.display = "block";
+            document.querySelector(".content_active_sign_up").style.opacity = "0";
+            document.querySelector(".content_active_forget_password").style.opacity = "0";
 
             setTimeout(function () {
-                document.querySelector(".content_active_login").style.opacity =
-                    "1";
+                document.querySelector(".content_active_login").style.opacity = "1";
             }, 400);
 
             setTimeout(function () {
-                document.querySelector(
-                    ".content_active_sign_up"
-                ).style.display = "none";
-                document.querySelector(
-                    ".content_active_forget_password"
-                ).style.display = "none";
+                document.querySelector(".content_active_sign_up").style.display = "none";
+                document.querySelector(".content_active_forget_password").style.display = "none";
             }, 200);
+        },
 
-            // ======================================== 登入驗證 ======================================== //
+        // ======================================== 登入驗證 ======================================== //
+        async login_2() {
             let thisvue = this;
             if (thisvue.login_account == "" || thisvue.login_password == "") {
                 // thisvue.errorMsg = "請輸入帳號和密碼";
@@ -389,13 +382,24 @@ export default {
                 method: "POST",
                 body: new URLSearchParams(signUpContent),
             })
-                .then((res) => res.json())
-                .then(()=>{
-                    this.open_1();
-                })
-                .then(() => {
-                    this.$router.push({ path: "/login" });
-                });
+            .then((res) => res.json())
+            .then(()=>{
+                this.open_1();
+            })
+            .then(() => {
+                this.$router.push({ path: "/login" });
+            });
+
+
+            emailjs
+                .send(
+                    "service_Charmy",
+                    "template_isxapxd",
+                    {
+                        user_email: this.sign_up_account,
+                    },
+                    "X1x5cmen7BlWhZ2yb"
+                )
         },
 
         // ======================================== Email 後臺比對 ======================================== //
@@ -521,7 +525,8 @@ export default {
                 title: "恭喜註冊成功",
                 desc: open_1
                     ? ""
-                    : `請登入會員以便獲得更好的使用體驗 <a href="/login">登入</a>`,
+                    : `請登入會員以便獲得更好的使用體驗唷`,
+                    // : `請登入會員以便獲得更好的使用體驗 <a href="/login">登入</a>`,
             });
         },
         open_2(open_2) {
@@ -529,7 +534,8 @@ export default {
                 title: "已將密碼寄到您的電子信箱",
                 desc: open_2
                     ? ""
-                    : `密碼已經寄到您的電子信箱囉，<a href="/login">登入</a>，若沒收到請確認輸入是否有誤`,
+                    : `密碼已經寄到您的電子信箱囉，若沒收到請確認輸入是否有誤`,
+                    // : `密碼已經寄到您的電子信箱囉，<a href="/login">登入</a>，若沒收到請確認輸入是否有誤`,
             });
         },
         open_3(open_3) {
