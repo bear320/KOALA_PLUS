@@ -106,11 +106,6 @@ export default {
         changeCurWidth() {
             this.curWidth = window.innerWidth;
         },
-<<<<<<< HEAD
-        clickToPlay() {
-            if (this.$store.state.user == null) {
-                this.open(false);
-=======
         clickToCart() {
             if (this.$store.state.user == null) {
                 this.open(false, `請登入會員`, ``);
@@ -130,7 +125,6 @@ export default {
                     `請登入會員`,
                     `需先登入會員才可進行遊玩，尚未註冊會員者至登入頁面立即註冊！`
                 );
->>>>>>> my
                 return;
             } else {
                 this.$router.push({ path: "/my-koala" });
