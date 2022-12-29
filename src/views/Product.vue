@@ -180,7 +180,7 @@ export default {
                         return item !== null;
                     });
                     this.relProducts = json.relProd;
-                    console.log(this.relProducts);
+                    // console.log(this.relProducts);
                 });
         },
         changeQuantity(operator) {
