@@ -1,4 +1,5 @@
 <template>
+    import { log } from 'util';
     <header id="navbar">
         <nav class="wrapper">
             <div>
@@ -30,10 +31,10 @@
                     </li>
                 </ul>
                 <ul class="icon">
-                    <li>
-                        <router-link to="/cart1">
+                    <li @click="clickToCart">
+                        <a>
                             <Icon type="md-cart" />
-                        </router-link>
+                        </a>
                     </li>
                     <li v-if="!$store.state.user">
                         <router-link to="/login">
@@ -130,7 +131,7 @@ export default {
                 this.$router.push({ path: "/my-koala" });
             }
         },
-        open(nodesc) {
+        open(nodesc, title, desc) {
             this.$Notice.open({
                 title: `${title}`,
                 desc: nodesc ? "" : `${desc}`,
