@@ -464,7 +464,6 @@ h2 {
         text-align: center;
         display: flex;
         align-items: center;
-        
     }
     .btn {
         margin: 10px;
@@ -478,9 +477,37 @@ h2 {
     .book-form {
             height: 70%;
         }
-    @media screen and (max-width: 768px) {
-       
-    }
+   
     
 }
+ @media screen and (max-width: 500px) {
+    .weather {
+        font-size: 16px;
+        height: inherit;
+        line-height: inherit;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+   
+
+    }
+    }
+
+    @media screen and (max-width: 400px) {
+    .weather {
+        font-size: 14px;
+        height: inherit;
+        line-height: inherit;
+        text-align: center;
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    }
+ 
+
+    
 </style>
