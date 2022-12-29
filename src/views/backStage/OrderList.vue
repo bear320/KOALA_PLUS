@@ -107,7 +107,7 @@
                                         id="ord_ship"
                                         name="ord_ship"
                                         v-model="item.ord_ship"
-                                        :before-change="handleBeforeChange"
+                                        @on-change="change"
                                         @change="updateStatus(index)"
                                         required
                                     >
@@ -192,7 +192,7 @@ export default {
             fetch(apiURL)
                 .then((res) => res.json())
                 .then((json) => {
-                    console.log("test", json);
+                    // console.log("test", json);
                     this.orders = json.orders;
                     this.totalPage = Math.ceil(json.orderCount / 10);
                 });
@@ -217,7 +217,7 @@ export default {
                 ord_id: Number(orderId),
                 ord_ship: Number(orderStatus),
             };
-            console.log(orderList);
+            // console.log(orderList);
 
             fetch(apiURL, {
                 method: "POST",
@@ -279,16 +279,8 @@ export default {
                 },
             });
         },
-        handleBeforeChange() {
-            return new Promise((resolve) => {
-                this.$Modal.confirm({
-                    title: "確定更新訂單狀態嗎？",
-                    content: "您確定更新訂單狀態嗎？？",
-                    onOk: () => {
-                        resolve();
-                    },
-                });
-            });
+        change(status) {
+            this.$Message.info("开关状态：" + status);
         },
     },
     created() {
