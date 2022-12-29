@@ -271,7 +271,7 @@ header {
                             top: auto;
                             left: auto;
                             width: 15vw;
-                            margin: 0 15%;
+                            margin: 0 30%;
 
                             img {
                                 width: initial;
@@ -289,6 +289,9 @@ header {
 @media (max-width: 768px) {
     header nav .hamburger {
         margin: auto 15px;
+    }
+    .playgame {
+        margin: 0 15%;
     }
 }
 </style>
