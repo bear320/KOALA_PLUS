@@ -108,11 +108,7 @@ export default {
         },
         clickToCart() {
             if (this.$store.state.user == null) {
-                this.open(
-                    false,
-                    `請登入會員`,
-                    `需先登入會員才可進入購物車頁，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`
-                );
+                this.open(false, `請登入會員`, ``);
                 return;
             } else {
                 if (this.$store.state.cart.length > 0) {
@@ -127,7 +123,7 @@ export default {
                 this.open(
                     false,
                     `請登入會員`,
-                    `需先登入會員才可進行遊玩，尚未註冊會員者也至<a href="/login">登入頁面</a>立即註冊！`
+                    `需先登入會員才可進行遊玩，尚未註冊會員者至登入頁面立即註冊！`
                 );
                 return;
             } else {
@@ -136,10 +132,8 @@ export default {
         },
         open(nodesc, title, desc) {
             this.$Notice.open({
-                title: "請登入會員",
-                desc: nodesc
-                    ? ""
-                    : `需先登入會員才可進行遊玩，尚未註冊會員者也至 <a href="/login">登入頁面</a> 立即註冊！`,
+                title: `${title}`,
+                desc: nodesc ? "" : `${desc}`,
             });
         },
     },
