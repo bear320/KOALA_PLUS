@@ -243,11 +243,14 @@ export default {
             // console.log(this.CouponId);
             // console.log(typeof this.CouponCode);
             const payload = {
-                memid: 1006,
+                memid: this.$store.state.user.mem_id,
                 CouponId: parseInt(this.CouponId),
                 CouponCode: this.CouponCode,
             };
-            const apiURL = new URL(`${BASE_URL}/insertCoupon.php`);
+            // const apiURL = new URL(`${BASE_URL}/insertCoupon.php`);
+            const apiURL = new URL(
+                `http://localhost/cgd103_g1/public/api/insertCoupon.php`
+            );
             fetch(apiURL, {
                 method: "POST",
                 body: new URLSearchParams(payload),
