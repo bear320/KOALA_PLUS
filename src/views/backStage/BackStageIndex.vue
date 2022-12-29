@@ -65,7 +65,7 @@
             </div>
             <div>
                 <div class="card">
-                    <router-link to="/bs-booking-list-two">
+                    <router-link to="/bs-booking-list">
                         <img
                             src="@/assets/images/backstageindex/bookingIcon.png"
                         />
