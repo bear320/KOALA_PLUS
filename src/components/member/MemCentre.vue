@@ -341,21 +341,22 @@ export default {
 
             let getCookie = document.cookie;
             if (getCookie) {
-                fetch(`${BASE_URL}/editMember.php?type=2`, {
-                    method: "POST",
-                    credentials: "include",
-                    body: new URLSearchParams(postMemMainData),
-                })
-                    .then((res) => res.json())
-                    .then((status) => {
-                        // alert(status.msg);
-                        this.$Message.info(status.msg);
-                        // 傳回PHP的msg
-                    });
                 if (this.passwordcheck != "") {
                     // alert("有輸入內容");
                     if (this.newpassword == this.newpasswordconfirm) {
+                        console.log("test");
                         // alert("相同");
+                        fetch(`${BASE_URL}/editMember.php?type=2`, {
+                            method: "POST",
+                            credentials: "include",
+                            body: new URLSearchParams(postMemMainData),
+                        })
+                            .then((res) => res.json())
+                            .then((status) => {
+                                // alert(status.msg);
+                                this.$Message.info(status.msg);
+                                // 傳回PHP的msg
+                            });
                     } else {
                         // alert("密碼不相同");
                         this.psw_thesame();
@@ -375,6 +376,8 @@ export default {
                 title: "會員登出提醒",
                 content: "<p>確定要登出嗎?</p>",
                 loading: true,
+                okText: "確認",
+                cancelText: "取消",
                 onOk: () => {
                     setTimeout(() => {
                         this.$Modal.remove();
