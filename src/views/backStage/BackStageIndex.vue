@@ -7,19 +7,20 @@
                     <div class="card">
                         <router-link to="/bs-support-list">
                             <h2>資助認養管理</h2>
+                            <p>半年目標資助金額: 50000元</p>
                         </router-link>
                         <router-link to="/bs-support-statistic">
                             <Circle
                                 :size="120"
                                 :trail-width="6"
                                 :stroke-width="5"
-                                :percent="supSum / 100"
+                                :percent="supSum / 500"
                                 stroke-linecap="square"
                                 stroke-color="#FD646F"
                             >
                                 <div class="demo-Circle-custom">
                                     <p class="sum">{{ supSum }}</p>
-                                    <p class="mini">半年累計金額</p>
+                                    <p class="mini">近半年累計</p>
                                 </div>
                             </Circle>
                         </router-link>

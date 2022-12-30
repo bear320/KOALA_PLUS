@@ -25,7 +25,7 @@
             <div>
                 <p>標題:</p>
                 <input
-                    type="news_title"
+                    type="text"
                     name="news_title"
                     v-model="news_title"
                     required
@@ -114,7 +114,7 @@ export default {
             const apiURL = new URL(`${BASE_URL}/postNewArticle.php`);
 
             // 取得form表單元素相當於document.querySelector(".form")
-            console.log(this.$refs["article-form"]);
+            // console.log(this.$refs["article-form"]);
             // 產生formData物件，內容包含表單裡Input的value
             const formData = new FormData(this.$refs["article-form"]);
 
@@ -140,6 +140,7 @@ export default {
             })
                 .then((res) => res.json())
                 .then((status) => {
+                    // console.log(status);
                     this.confirmModal();
                 });
         },

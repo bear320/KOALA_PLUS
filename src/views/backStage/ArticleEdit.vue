@@ -123,7 +123,7 @@ export default {
         }, */
         editArticle() {
             const apiURL = new URL(`${BASE_URL}/editArticle.php`);
-            console.log(this.$refs["article-form"]);
+            // console.log(this.$refs["article-form"]);
             const formData = new FormData(this.$refs["article-form"]);
             formData.append("type", "edit");
             formData.append("news_id", this.edit.news_id);
