@@ -2317,14 +2317,14 @@ img {
     }
 
     .game_nav_money_left > img {
-        margin-top: 3%;
+        margin-top: 20%;
         width: 50px;
         height: 52px;
     }
 
     .game_nav_money_left > p {
         padding-left: 5%;
-        line-height: 62px;
+        line-height: 110px;
         font-size: 28px;
         margin: auto;
     }
@@ -2448,13 +2448,13 @@ img {
 
     .plus_talkwindow_content {
         position: relative;
-        width: 70%;
+        width: 100%;
         margin: 0% auto;
         justify-content: center;
         display: flex;
         flex-wrap: wrap;
         padding-top: 5%;
-        margin-left: 25%;
+        margin-left: -10%;
     }
 
     .plus_talkwindow_image > img {
@@ -2468,7 +2468,8 @@ img {
     .plus_talkwindow_content > p {
         width: 100%;
         color: #000;
-        font-size: 24px;
+        font-size: 16px;
+        margin-top: 10%;
         margin-left: 10%;
     }
 
@@ -2481,7 +2482,8 @@ img {
         color: #000;
         text-align: left;
         line-height: 2.5;
-        font-size: 16px;
+        font-size: 12px;
+        margin-top: 10%;
     }
 
     /* ======================================== 彈出虛擬商店 ======================================== */
@@ -2555,13 +2557,12 @@ img {
 
     .shop_talkwindow_commodity_introduce_1 {
         color: #000;
-        font-size: 14px;
+        font-size: 12px;
     }
 
     .shop_talkwindow_commodity_button {
-        width: 20%;
+        width: 100%;
         display: flex;
-        margin: 0;
         padding: 5px;
         justify-content: space-around;
         border-radius: 10px;
@@ -2584,7 +2585,7 @@ img {
 
     .shop_talkwindow_commodity_button > div > p {
         margin: 0;
-        font-size: 20px;
+        font-size: 12px;
     }
 
     .shop_talkwindow_commodity_introduce_2 {
