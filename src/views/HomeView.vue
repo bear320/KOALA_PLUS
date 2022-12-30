@@ -8,7 +8,7 @@
                 @click="scrollToSection(index)"
                 v-for="(offset, index) in offsets"
                 :key="index"
-                v-title="'Go to section ' + (index + 1)"
+                :title="'跳到第 ' + (index + 1) + ' 頁'"
             >
             </span>
         </div>
@@ -109,7 +109,6 @@
                         <teleport to="body">
                             <lightbox ref="lightbox">
                                 <template #img>
-                                    /> -->
                                     <img
                                         :src="`./images/article/${article.news_img}`"
                                         alt="公告圖片"
@@ -154,9 +153,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="page footer">
-            <Footer />
         </div>
     </div>
 </template>

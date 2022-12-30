@@ -95,21 +95,6 @@
                                 target="_blank"
                                 ><img src="@/assets/images/icon/edit.svg"
                             /></router-link>
-                            <span style="cursor: pointer" @click="modal = true">
-                                <img
-                                    src="@/assets/images/icon/delete.svg"
-                                    alt=""
-                            /></span>
-                            <Modal
-                                v-model="modal"
-                                title="刪除公告?"
-                                ok-text="確認"
-                                cancel-text="取消"
-                                @on-ok="deleteArticle(index)"
-                                @on-cancel="cancel"
-                            >
-                                <p>公告刪除後將無法回復動作，確定要刪除嗎?</p>
-                            </Modal>
                         </div>
                     </div>
                 </section>
