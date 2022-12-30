@@ -6,13 +6,14 @@ try{
     require_once("./connect_cgd103g1.php");   //DB連線設置
 
 	//sql 指令
-	$sql = "INSERT INTO `tibamefe_cgd103g1`.`employee` (`emp_account`, `emp_psw`, `emp_validation`) VALUES 
-	(:emp_account, :emp_psw, 1);";
+	$sql = "INSERT INTO `tibamefe_cgd103g1`.`employee` (`emp_account`, `emp_psw`, `emp_name`, `emp_validation`, `emp_last_login`) VALUES 
+	(:emp_account, :emp_psw, :emp_name, 1, NOW());";
 
 	//編譯, 執行
 	$products = $pdo->prepare($sql);	
 	$products->bindValue(":emp_account", $_POST["account"]);
 	$products->bindValue(":emp_psw", $_POST["password"]);
+	$products->bindValue(":emp_name", $_POST["name"]);
 	$products->execute();
 
     $msg = "註冊成功";

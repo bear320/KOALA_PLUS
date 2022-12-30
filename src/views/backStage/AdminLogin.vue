@@ -34,7 +34,7 @@ export default {
         return {
             login_account: "",
             login_password: "",
-            emp_id:0,
+            emp_id: 0,
         };
     },
     methods: {
@@ -56,9 +56,11 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     this.emp_id=json.adminInfo.emp_id;
+                    console.log(this.emp_id);
                     this.$router.push({ path: "/bs-index" });
                 })
                 .then(()=>{
+                    
                     this.updatedLastItme();
                 });
             }
