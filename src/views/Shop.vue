@@ -233,10 +233,6 @@ export default {
             this.curPage = 1;
             this.lowerLimit = "";
             this.upperLimit = "";
-            window.scrollTo({
-                top: 500,
-                behavior: "instant",
-            });
         },
         getProduct(queryParam) {
             if (!Object.keys(queryParam).length) {

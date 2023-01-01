@@ -67,14 +67,14 @@ export default {
                 this.itemQuantity += 1;
             }
             this.$store.dispatch("addToCart", {
-                memId: 1001,
+                memId: this.$store.state.user.mem_id,
                 prodId: +this.itemId,
                 cartQty: this.itemQuantity,
             });
         },
         deleteItem() {
             this.$store.dispatch("deleteCartItem", {
-                memId: 1001,
+                memId: this.$store.state.user.mem_id,
                 prodId: +this.itemId,
             });
         },
