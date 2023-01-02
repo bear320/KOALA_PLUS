@@ -249,7 +249,7 @@ h2 {
     }
     .book-form {
         width: 90%;
-        height: 78%;
+        height: 35%;
     }
     .form-group {
         text-align: left;

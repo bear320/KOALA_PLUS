@@ -150,7 +150,7 @@
                             <a href="#" @click="login_sign_up">X</a>
                             <h2>會員登入</h2>
                             <form @submit.prevent="login">
-                                <div>
+                                <div class="content_active_login_site">
                                     <p>信箱</p>
                                     <input
                                         type="text"
@@ -1020,6 +1020,10 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
+    .content_login_sign_up {
+        top: -15em;
+    }
+
     .content_sign_up_block {
         width: 100%;
     }
@@ -1066,7 +1070,7 @@ export default {
     }
 
     .content_active_login > form > div {
-        margin-top: 5%;
+        margin-top: 7.5%;
     }
 
     .content_active_login > div {
@@ -1116,15 +1120,59 @@ export default {
     .sign_up_icon_eye {
         width: 20px;
         height: 20px;
-        margin-left: 1.5%;
-        margin-top: 2.5%;
+        margin-left: 1%;
+        margin-top: 3%;
     }
 
     .login_icon_eye {
         width: 20px;
         height: 20px;
         margin-left: 1.5%;
-        margin-top: 4.5%;
+        margin-top: 6%;
+    }
+
+    .content_active_login > form > div > p {
+        display: inline-block;
+        padding-top: 6%;
+        width: 15%;
+    }
+
+    .content_active_login_moveTxt {
+        padding-left: 1%;
+    }
+
+    .content_active_login > form > div > input {
+        margin-left: 2%;
+        width: 200px;
+    }
+
+    .content_active_login > form > div > .content_active_login_move4 {
+        margin-left: 2%;
+    }
+
+    .content_active_login_site {
+        margin-right: 7%;
+    }
+
+    .content_active_forget_password > form > div > p {
+        padding-top: 6%;
+    }
+
+    .content_active_sign_up > form > div > p {
+        width: 25%;
+        padding-top: 4%;
+    }
+
+    .content_active_sign_up > form > div > .content_active_sign_up_move1 {
+        width: 200px;
+        margin-left: 0%;
+        margin-right: 8%;
+    }
+
+    #mem_account {
+        width: 200px;
+        margin-left: 0%;
+        margin-right: 8%;
     }
 }
 </style>

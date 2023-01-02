@@ -15,7 +15,7 @@
                         <input
                             id="emp_account"
                             type="text"
-                            placeholder="你的信箱或帳號"
+                            placeholder="管理員帳號"
                             v-model="sign_up_account"
                             required
                         />
@@ -30,7 +30,7 @@
                         />
                         <input
                             type="password"
-                            placeholder="Confirm Password"
+                            placeholder="管理員密碼"
                             v-model="sign_up_password"
                             required
                             v-else
@@ -44,10 +44,20 @@
                         />
                     </div>
                     <div>
+                        <p>姓名</p>
+                        <input
+                            id="emp_account"
+                            type="text"
+                            placeholder="管理員姓名"
+                            v-model="sign_up_name"
+                            required
+                        />
+                    </div>
+                    <div>
                         <button
                             class="btn_sign_up"
                             type="submit"
-                            @click="sign_up"
+                            @click="sign_up_1"
                         >
                             加入管理員
                         </button>
@@ -71,6 +81,7 @@ export default {
             login_password: "",
             sign_up_account: "",
             sign_up_password: "",
+            sign_up_name: "",
             seen_one: "",
             seen_two: "",
             seen_three: "",
@@ -123,11 +134,12 @@ export default {
         },
 
         // ======================================== 註冊會員加進資料庫 ======================================== //
-        sign_up() {
+        sign_up_1() {
             let url = `${BASE_URL}/getAdminAdd.php`;
             const signUpContent = {
                 account: this.sign_up_account,
                 password: this.sign_up_password,
+                name: this.sign_up_name,
             };
 
             fetch(url, {
@@ -135,6 +147,22 @@ export default {
                 body: new URLSearchParams(signUpContent),
             })
             .then((res) => res.json())
+            .then(() => {
+                this.open();
+            })
+            .then(() => {
+                this.$router.push({ path: "/bs-admin-list" });
+            })
+        },
+
+        // ======================================== 右上角彈窗 ======================================== //
+        open(open) {
+            this.$Notice.open({
+                title: "管理員加入成功",
+                desc: open
+                    ? ""
+                    : `將自動跳轉至全里管理頁面`,
+            });
         },
     },
 };

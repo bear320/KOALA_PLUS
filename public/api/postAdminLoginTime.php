@@ -7,7 +7,7 @@ try{
 
 	//sql 指令
     $sql = "UPDATE tibamefe_cgd103g1.employee
-    SET emp_last_login = CURDATE()
+    SET emp_last_login = NOW()
     WHERE emp_id = :emp_id";
 
 	//編譯, 執行
