@@ -85,7 +85,7 @@
                         :style="{
                             backgroundImage:
                                 'url(' +
-                                require(`./images/article/${article.news_img}`) +
+                                require(`../../public/images/article/${article.news_img}`) +
                                 ')',
                         }"
                     ></div>
