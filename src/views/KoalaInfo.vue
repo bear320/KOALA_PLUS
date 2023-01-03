@@ -317,6 +317,8 @@ export default {
             this.$refs["closeBtn"].style.display = "flex";
             this.supType = type;
             this.koalaId = id;
+            console.log(type);
+            console.log(id);
         },
         closePayBox() {
             this.$refs["closeBtn"].style.display = "none";
