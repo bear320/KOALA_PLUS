@@ -67,7 +67,7 @@ if ($http_status == 200) {
         case "0":
             // 新增資助訂單
             $sql1 = "INSERT INTO `tibamefe_cgd103g1`.`support` ( `mem_id`, `sup_date`, `koala_id`, `sup_plan`, `sup_price`,`sup_note` ) VALUES 
-            ({$mem_id}, CURDATE(), '02001', '1', '300', '');";
+            ({$mem_id}, CURDATE(), '02001', '0', '300', '');";
 
             // 更新無尾熊資助總金額
             $sql2 = "UPDATE koala
