@@ -28,10 +28,10 @@
                                 {{ couponsLists.sup_date }}
                             </td>
                             <td class="sup_plan">
-                                <span v-if="couponsLists.sup_plan === 0"
+                                <span v-if="couponsLists.sup_plan == 0"
                                     >認養</span
                                 >
-                                <span v-if="couponsLists.sup_plan === 1"
+                                <span v-if="couponsLists.sup_plan == 1"
                                     >資助</span
                                 >
                             </td>
