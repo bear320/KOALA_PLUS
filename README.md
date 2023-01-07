@@ -1,16 +1,8 @@
-# cgd103_g1
+# KOALA+
 
-## Project setup
+## 網站連結
 ```
-npm install
-```
-
-### Compiles and hot-reloads for development
-```
-npm run serve
+https://tibamef2e.com/cgd103/g1/
 ```
 
-### Compiles and minifies for production
-```
-npm run build
-```
+
