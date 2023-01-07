@@ -14,8 +14,3 @@ npm run serve
 ```
 npm run build
 ```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# cgd103_g1
-# cgd103_g1
