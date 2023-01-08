@@ -23,7 +23,7 @@
 </template>
 <script>
 export default {
-    props: ["proImg", "proName", "proPrice", "proId", "col", "path"],
+    props: ['proImg', 'proName', 'proPrice', 'proId', 'col', 'path'],
     data() {
         return {
             img: `${this.path}${this.proImg}`,
@@ -31,36 +31,42 @@ export default {
     },
     methods: {
         async addToCart() {
-            let prodIndex = this.$store.state.cart.findIndex(
-                (item) => item.prod_id === this.proId
-            );
-
-            if (prodIndex < 0) {
-                await this.$store.dispatch("addToCart", {
-                    memId: this.$store.state.user.mem_id,
-                    prodId: this.proId,
-                    cartQty: 1,
-                });
-                this.open(true, "已新增商品至購物車");
+            if (this.$store.state.user === null) {
+                this.open(true, '請登入會員 !');
             } else {
-                await this.$store.dispatch("addToCart", {
-                    memId: this.$store.state.user.mem_id,
-                    prodId: this.proId,
-                    cartQty: (this.$store.state.cart[prodIndex].cart_qty += 1),
-                });
-                this.open(true, "已更新商品數量");
+                let prodIndex = this.$store.state.cart.findIndex(
+                    (item) => item.prod_id === this.proId
+                );
+
+                if (prodIndex < 0) {
+                    await this.$store.dispatch('addToCart', {
+                        memId: this.$store.state.user.mem_id,
+                        prodId: this.proId,
+                        cartQty: 1,
+                    });
+                    this.open(true, '✔ 已新增商品至購物車');
+                } else {
+                    await this.$store.dispatch('addToCart', {
+                        memId: this.$store.state.user.mem_id,
+                        prodId: this.proId,
+                        cartQty: (this.$store.state.cart[
+                            prodIndex
+                        ].cart_qty += 1),
+                    });
+                    this.open(true, '✔ 已更新商品數量');
+                }
             }
         },
         open(nodesc, title) {
             this.$Notice.open({
-                title: `✔　${title}`,
+                title: `${title}`,
             });
         },
         scrollToProduct() {
             setTimeout(() => {
                 window.scrollTo({
                     top: 0,
-                    behavior: "smooth",
+                    behavior: 'smooth',
                 });
             }, 100);
         },
