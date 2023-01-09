@@ -1,21 +1,16 @@
-# cgd103_g1
+# KOALA+
 
-## Project setup
+## 網站目的：
+透過捐款或販售周邊商品募集無尾熊救援資金
+## 目標客群：
+欲幫助受災無尾熊者、網站管理員
+## 使用技術：
+HTML、CSS、JavaScript、VueJS、PHP、MySQL、AJAX、SASS、Webpack
+## 網站連結：
 ```
-npm install
+https://tibamef2e.com/cgd103/g1/
 ```
-
-### Compiles and hot-reloads for development
+## 系統文件：
 ```
-npm run serve
+https://drive.google.com/file/d/1HKzWwdU-RjeBvxTHdFbfbHxZIpgLE3rS/view?usp=share_link
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-# cgd103_g1
-# cgd103_g1
