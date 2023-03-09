@@ -9,10 +9,7 @@
                 <h4>方案內容：</h4>
                 <li>領養 / 資助證明 * 1</li>
                 <li>
-                    <img
-                        src="../../assets/images/support/coin.svg"
-                        alt="會員點數"
-                    />
+                    <img src="../../assets/images/support/coin.svg" alt="會員點數" />
                     {{ pPoint }}
                     點
                 </li>
@@ -29,17 +26,7 @@
 
 <script>
 export default {
-    props: [
-        "pName",
-        "pPrice",
-        "pPoint",
-        "pGift1",
-        "pGift2",
-        "pDesc",
-        "pBtn",
-        "index",
-        "supKoalaId",
-    ],
+    props: ["pName", "pPrice", "pPoint", "pGift1", "pGift2", "pDesc", "pBtn", "index", "supKoalaId"],
     data() {
         return {
             type: 0,
@@ -54,7 +41,7 @@ export default {
             } else {
                 switch (i) {
                     case 0:
-                        this.type = 0;
+                        this.type = 1;
                         this.koala_id = 2001;
                         this.$emit("show-pay-box", {
                             type: this.type,
@@ -62,7 +49,7 @@ export default {
                         });
                         break;
                     case 1:
-                        this.type = 1;
+                        this.type = 0;
                         this.koala_id = +this.supKoalaId;
                         this.$emit("show-pay-box", {
                             type: this.type,
@@ -77,9 +64,7 @@ export default {
         open(nodesc) {
             this.$Notice.open({
                 title: "請登入會員",
-                desc: nodesc
-                    ? ""
-                    : `需先登入會員方可進行資助／認養，尚未註冊會員者也可至登入頁面立即註冊！`,
+                desc: nodesc ? "" : `需先登入會員方可進行資助／認養，尚未註冊會員者也可至登入頁面立即註冊！`,
             });
         },
     },

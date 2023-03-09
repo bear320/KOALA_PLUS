@@ -407,6 +407,8 @@ export default {
                 .then((res) => res.json())
                 .then((json) => {
                     // All
+                    // 第二個陣列0前宣告
+                    // 判斷是不是陣列
                     this.dataAdopt[0].All["datasets"][0]["label"] =
                         json.adoptNameStat[0].koala_name;
                     this.dataAdopt[0].All["datasets"][0]["data"] =
